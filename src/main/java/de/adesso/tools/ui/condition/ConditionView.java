@@ -1,9 +1,13 @@
 package de.adesso.tools.ui.condition;
 
+import de.adesso.tools.ui.dialogs.Dialogs;
 import de.adesso.tools.ui.scopes.RuleScope;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
@@ -39,15 +43,14 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
         this.conditionDeclTable.setEditable(true);
         this.conditionDeclTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         this.conditionDeclTable.getSelectionModel().setCellSelectionEnabled(true);
-/*
-        this.conditionDeclTable.getFocusModel().focusedCellProperty().addListener(
-                (ObservableValue<? extends TablePosition> observable, TablePosition oldValue, TablePosition newValue) -> {
-                    if (newValue != null) {
-                        Platform.runLater(() -> this.conditionDeclTable.edit(newValue.getRow(), newValue.getTableColumn()));
-                    }
+
+        this.conditionDeclTable.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            if (oldValue && !newValue) {
+                if (!isParent(conditionDeclTable, conditionDeclTable.getScene().getFocusOwner())) {
+                    Dialogs.acceptOrDefineRuleCountDialog(10);
                 }
-        );
-*/
+            }
+        });
 
         this.conditionDeclTable.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent t) -> {
             if (this.conditionDeclTable.getEditingCell() == null && t.getCode() == KeyCode.ENTER) {
@@ -80,30 +83,6 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
                 lastKey = null;
             }
         });
-/*
-        tv.setOnKeyReleased((KeyEvent t) -> {
-            TablePosition tp;
-            switch (t.getCode()) {
-                case INSERT:
-                    items.add(new LineItem("",0d,0));//maybe try adding at position
-                    break;
-                case DELETE:
-                    tp = tv.getFocusModel().getFocusedCell();
-                    if (tp.getTableColumn() == descCol) {
-                        deletedLines.push(items.remove(tp.getRow()));
-                    } else { //maybe delete cell value
-                    }
-                    break;
-                case Z:
-                    if (t.isControlDown()) {
-                        if (!deletedLines.isEmpty()) {
-                            items.add(deletedLines.pop());
-                        }
-                    }
-            }
-        });
-*/
-
 
         List<TableColumn<ConditionDeclTableViewModel, String>> l = new ArrayList<>();
         l.add(createTableColumn("#", "lfdNr", 40, 40, 40, false,
@@ -136,5 +115,18 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
                 conditionSplitPane.getDividers().get(0).setPosition(c.doubleValue()));
     }
 
+    private boolean isParent(Parent parent, Node child) {
+        if (child == null) {
+            return false;
+        }
+        Parent curr = child.getParent();
+        while (curr != null) {
+            if (curr == parent) {
+                return true;
+            }
+            curr = curr.getParent();
+        }
+        return false;
+    }
 
 }
