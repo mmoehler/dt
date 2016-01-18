@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 
 import javax.enterprise.event.Observes;
 import javax.inject.Singleton;
+import java.util.List;
 
 @Singleton
 public class ConditionViewModel implements ViewModel {
@@ -20,6 +21,8 @@ public class ConditionViewModel implements ViewModel {
     private static final Logger LOG = LoggerFactory.getLogger(ConditionViewModel.class);
 
     private final ObservableList<ConditionDeclTableViewModel> decls = FXCollections.observableArrayList();
+
+    private final ObservableList<List<String>> defns = FXCollections.observableArrayList();
 
     @InjectScope
     private RuleScope ruleScope;
@@ -52,5 +55,9 @@ public class ConditionViewModel implements ViewModel {
         this.decls.forEach(x -> x.save());
         final String reduce = decls.stream().map(a -> a.toString()).reduce("", (a, b) -> a + '\n' + b);
         LOG.debug(reduce + '\n');
+    }
+
+    public void prepareConditionDefns(final int requestedColCount, final boolean shouldPopulateData) {
+
     }
 }

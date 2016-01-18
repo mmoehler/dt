@@ -37,21 +37,43 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
     public void initialize() {
         initializeDividerSynchronization();
         initializeConditionDeclTable();
+
     }
 
-    private void initializeConditionDeclTable() {
+    protected void initializeConditionDeclTable() {
         this.conditionDeclTable.setEditable(true);
         this.conditionDeclTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         this.conditionDeclTable.getSelectionModel().setCellSelectionEnabled(true);
 
-        this.conditionDeclTable.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-            if (oldValue && !newValue) {
-                if (!isParent(conditionDeclTable, conditionDeclTable.getScene().getFocusOwner())) {
-                    Dialogs.acceptOrDefineRuleCountDialog(10);
-                }
-            }
-        });
+        initializeConditionDeclFocusHandling();
+        initializeConditionDeclKeyboardHandling();
+        initializeConditionDeclTableColumns();
 
+        this.conditionDeclTable.getItems().clear();
+        this.conditionDeclTable.setItems(viewModel.getDecls());
+    }
+
+    private void initializeConditionDeclTableColumns() {
+        List<TableColumn<ConditionDeclTableViewModel, String>> l = new ArrayList<>();
+        l.add(createTableColumn("#", "lfdNr", 40, 40, 40, false,
+                (TableColumn.CellEditEvent<ConditionDeclTableViewModel, String> evt) -> {
+                    evt.getTableView().getItems().get(evt.getTablePosition().getRow())
+                            .lfdNrProperty().setValue(evt.getNewValue());
+                }));
+        l.add(createTableColumn("Expression", "expression", 300, 300, Integer.MAX_VALUE, true,
+                (TableColumn.CellEditEvent<ConditionDeclTableViewModel, String> evt) -> {
+                    evt.getTableView().getItems().get(evt.getTablePosition().getRow())
+                            .expressionProperty().setValue(evt.getNewValue());
+                }));
+        l.add(createTableColumn("Indicators", "possibleIndicators", 100, 100, Integer.MAX_VALUE, true,
+                (TableColumn.CellEditEvent<ConditionDeclTableViewModel, String> evt) -> {
+                    evt.getTableView().getItems().get(evt.getTablePosition().getRow())
+                            .possibleIndicatorsProperty().setValue(evt.getNewValue());
+                }));
+        l.forEach(x -> this.conditionDeclTable.getColumns().add(x));
+    }
+
+    private void initializeConditionDeclKeyboardHandling() {
         this.conditionDeclTable.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent t) -> {
             if (this.conditionDeclTable.getEditingCell() == null && t.getCode() == KeyCode.ENTER) {
                 if (t.isShiftDown()) {
@@ -83,29 +105,16 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
                 lastKey = null;
             }
         });
+    }
 
-        List<TableColumn<ConditionDeclTableViewModel, String>> l = new ArrayList<>();
-        l.add(createTableColumn("#", "lfdNr", 40, 40, 40, false,
-                (TableColumn.CellEditEvent<ConditionDeclTableViewModel, String> evt) -> {
-                    System.err.println(evt.getNewValue());
-                    evt.getTableView().getItems().get(evt.getTablePosition().getRow())
-                            .lfdNrProperty().setValue(evt.getNewValue());
-                }));
-        l.add(createTableColumn("Expression", "expression", 300, 300, Integer.MAX_VALUE, true,
-                (TableColumn.CellEditEvent<ConditionDeclTableViewModel, String> evt) -> {
-                    System.err.println(evt.getNewValue());
-                    evt.getTableView().getItems().get(evt.getTablePosition().getRow())
-                            .expressionProperty().setValue(evt.getNewValue());
-                }));
-        l.add(createTableColumn("Indicators", "possibleIndicators", 100, 100, Integer.MAX_VALUE, true,
-                (TableColumn.CellEditEvent<ConditionDeclTableViewModel, String> evt) -> {
-                    System.err.println(evt.getNewValue());
-                    evt.getTableView().getItems().get(evt.getTablePosition().getRow())
-                            .possibleIndicatorsProperty().setValue(evt.getNewValue());
-                }));
-        l.forEach(x -> this.conditionDeclTable.getColumns().add(x));
-        this.conditionDeclTable.getItems().clear();
-        this.conditionDeclTable.setItems(viewModel.getDecls());
+    private void initializeConditionDeclFocusHandling() {
+        this.conditionDeclTable.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
+            if (oldValue && !newValue) {
+                if (!isParent(conditionDeclTable, conditionDeclTable.getScene().getFocusOwner())) {
+                    Dialogs.acceptOrDefineRuleCountDialog0(10, false);
+                }
+            }
+        });
     }
 
     private void initializeDividerSynchronization() {
