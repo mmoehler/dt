@@ -2,6 +2,8 @@ package de.adesso.tools.ui.condition;
 
 import de.adesso.tools.ui.dialogs.Dialogs;
 import de.adesso.tools.ui.scopes.RuleScope;
+import de.adesso.tools.util.func.DtOps;
+import de.adesso.tools.util.tuple.Tuple2;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
 import javafx.beans.value.ObservableValue;
@@ -14,6 +16,7 @@ import javafx.scene.input.KeyEvent;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import static de.adesso.tools.ui.TableColumnOps.createTableColumn;
 
@@ -22,7 +25,7 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
     public TableView<ConditionDeclTableViewModel> conditionDeclTable;
 
     @FXML
-    public TableView conditionDefTable;
+    public TableView conditionDefnsTable;
 
     @FXML
     public SplitPane conditionSplitPane;
@@ -40,17 +43,37 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
 
     }
 
+    protected void initializeConditionDefnsTable(int countColumns, boolean shouldPopulateData) {
+        this.conditionDefnsTable.setEditable(true);
+        this.conditionDefnsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        this.conditionDefnsTable.getSelectionModel().setCellSelectionEnabled(true);
+
+        initializeTableKeyboardHandling(conditionDefnsTable);
+        initializeConditionDefnsTableColumns(countColumns, shouldPopulateData);
+
+        this.conditionDefnsTable.getItems().clear();
+        this.conditionDefnsTable.setItems(viewModel.intializeConditionDefnsData(countColumns, shouldPopulateData));
+    }
+
     protected void initializeConditionDeclTable() {
         this.conditionDeclTable.setEditable(true);
         this.conditionDeclTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         this.conditionDeclTable.getSelectionModel().setCellSelectionEnabled(true);
 
         initializeConditionDeclFocusHandling();
-        initializeConditionDeclKeyboardHandling();
+        initializeTableKeyboardHandling(conditionDeclTable);
         initializeConditionDeclTableColumns();
 
         this.conditionDeclTable.getItems().clear();
         this.conditionDeclTable.setItems(viewModel.getDecls());
+
+    }
+
+    private void initializeConditionDefnsTableColumns(int countColumns, boolean shouldPopulateData) {
+        final int cols = Math.min(DtOps.determineMaxColumns(viewModel.getDecls()), countColumns);
+        IntStream.range(0,cols)
+                .mapToObj(i -> createTableColumn(i))
+                .forEach(a -> conditionDefnsTable.getColumns().add(a));
     }
 
     private void initializeConditionDeclTableColumns() {
@@ -73,13 +96,13 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
         l.forEach(x -> this.conditionDeclTable.getColumns().add(x));
     }
 
-    private void initializeConditionDeclKeyboardHandling() {
-        this.conditionDeclTable.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent t) -> {
-            if (this.conditionDeclTable.getEditingCell() == null && t.getCode() == KeyCode.ENTER) {
+    private void initializeTableKeyboardHandling(TableView<?> table) {
+        table.addEventFilter(KeyEvent.KEY_PRESSED, (KeyEvent t) -> {
+            if (table.getEditingCell() == null && t.getCode() == KeyCode.ENTER) {
                 if (t.isShiftDown()) {
-                    this.conditionDeclTable.getSelectionModel().selectAboveCell();
+                    table.getSelectionModel().selectAboveCell();
                 } else {
-                    this.conditionDeclTable.getSelectionModel().selectBelowCell();
+                    table.getSelectionModel().selectBelowCell();
                 }
                 t.consume();
             }
@@ -87,21 +110,21 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
             //using ctrl tab for cell traversal, but arrow keys are better
             if (t.isControlDown() && t.getCode() == KeyCode.TAB) {
                 if (t.isShiftDown()) {
-                    this.conditionDeclTable.getSelectionModel().selectLeftCell();
+                    table.getSelectionModel().selectLeftCell();
                 } else {
-                    this.conditionDeclTable.getSelectionModel().selectRightCell();
+                    table.getSelectionModel().selectRightCell();
                 }
                 t.consume();
             }
         });
 
-        this.conditionDeclTable.setOnKeyPressed((KeyEvent t) -> {
+        table.setOnKeyPressed((KeyEvent t) -> {
             TablePosition tp;
             if (!t.isControlDown() &&
                     (t.getCode().isLetterKey() || t.getCode().isDigitKey())) {
                 lastKey = t.getText();
-                tp = this.conditionDeclTable.getFocusModel().getFocusedCell();
-                this.conditionDeclTable.edit(tp.getRow(), tp.getTableColumn());
+                tp = table.getFocusModel().getFocusedCell();
+                table.edit(tp.getRow(), tp.getTableColumn());
                 lastKey = null;
             }
         });
@@ -111,7 +134,11 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
         this.conditionDeclTable.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
             if (oldValue && !newValue) {
                 if (!isParent(conditionDeclTable, conditionDeclTable.getScene().getFocusOwner())) {
-                    Dialogs.acceptOrDefineRuleCountDialog0(10, false);
+                    if (this.conditionDefnsTable.getItems().isEmpty()) {
+                        Tuple2<Integer, Boolean> dlgResult = Dialogs.acceptOrDefineRuleCountDialog0(
+                                DtOps.determineMaxColumns(this.viewModel.getDecls()), false);
+                        initializeConditionDefnsTable(dlgResult._1(), dlgResult._2());
+                    }
                 }
             }
         });

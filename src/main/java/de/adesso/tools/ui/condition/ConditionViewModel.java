@@ -4,6 +4,7 @@ import de.adesso.tools.events.AddConditionDeclEvent;
 import de.adesso.tools.events.RemoveConditionDeclEvent;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.scopes.RuleScope;
+import de.adesso.tools.util.func.DtOps;
 import de.saxsys.mvvmfx.InjectScope;
 import de.saxsys.mvvmfx.ViewModel;
 import javafx.collections.FXCollections;
@@ -13,7 +14,6 @@ import org.slf4j.LoggerFactory;
 
 import javax.enterprise.event.Observes;
 import javax.inject.Singleton;
-import java.util.List;
 
 @Singleton
 public class ConditionViewModel implements ViewModel {
@@ -22,7 +22,7 @@ public class ConditionViewModel implements ViewModel {
 
     private final ObservableList<ConditionDeclTableViewModel> decls = FXCollections.observableArrayList();
 
-    private final ObservableList<List<String>> defns = FXCollections.observableArrayList();
+    private final ObservableList<ObservableList<String>> defns = FXCollections.observableArrayList();
 
     @InjectScope
     private RuleScope ruleScope;
@@ -38,6 +38,10 @@ public class ConditionViewModel implements ViewModel {
         return decls;
     }
 
+    public ObservableList<ObservableList<String>> getDefns() {
+        return defns;
+    }
+
     public void onAddConditionDecl(@Observes AddConditionDeclEvent event) {
         ObservableList<ConditionDeclTableViewModel> tmp = FXCollections.observableArrayList(this.decls);
         tmp.add(new ConditionDeclTableViewModel(new ConditionDecl()));
@@ -45,10 +49,10 @@ public class ConditionViewModel implements ViewModel {
 
         int i[] = {1};
         tmp.forEach(x -> {
-            x.lfdNrProperty().setValue(String.format("C%02d",i[0]++));
+            x.lfdNrProperty().setValue(String.format("C%02d", i[0]++));
             this.decls.add(x);
         });
-        LOG.debug("A new condition decl "+this.decls.get(0).getId()+" is added");
+        LOG.debug("A new condition decl " + this.decls.get(0).getId() + " is added");
     }
 
     public void onRemoveConditionDecl(@Observes RemoveConditionDeclEvent event) {
@@ -57,7 +61,9 @@ public class ConditionViewModel implements ViewModel {
         LOG.debug(reduce + '\n');
     }
 
-    public void prepareConditionDefns(final int requestedColCount, final boolean shouldPopulateData) {
-
+    public ObservableList<ObservableList<String>> intializeConditionDefnsData(final int requestedColCount, final boolean shouldPopulateData) {
+        final ObservableList<ObservableList<String>> data
+                = DtOps.limitedExpandConditions(this.decls, requestedColCount, !shouldPopulateData);
+        return data;
     }
 }
