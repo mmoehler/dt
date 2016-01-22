@@ -27,6 +27,7 @@ public final class TableColumnOps {
                     (t.getTableView().getItems().get(
                             t.getTablePosition().getRow())
                     ).set(t.getTablePosition().getColumn(), t.getNewValue());
+                    System.err.println("### " + t.getNewValue());
                 });
 
         tc.setCellValueFactory(
