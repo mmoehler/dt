@@ -10,7 +10,7 @@ import javafx.stage.StageStyle;
 import java.util.function.Supplier;
 
 /**
- * This class is a helper to create a dialog that will open and close itself according to a boolean property.
+ * This class is a helper to create a dialog that will open and doClose itself according to a boolean property.
  * <p>
  * This way you can define in a ViewModel when and under which conditions a dialog should be shown.
  */
@@ -20,8 +20,8 @@ public class DialogHelper {
      * Use this method to initialize the show/hide listeners for the dialog.
      *
      * @param openProperty the boolean property that defines whether the dialog should be shown or hidden. Set this property to
-     *                     <code>true</code> to open the dialog. Set it to <code>false</code> to close the dialog. When the
-     *                     dialog is closed by the user by clicking on the close-button of the window, this property will also be
+     *                     <code>true</code> to open the dialog. Set it to <code>false</code> to doClose the dialog. When the
+     *                     dialog is closed by the user by clicking on the doClose-button of the window, this property will also be
      *                     set to <code>false</code> by the dialog.
      * @param parentStage  the Stage that is used as parent to initialize the ownership of the dialog. This way modal dialogs can
      *                     be created.
@@ -53,7 +53,7 @@ public class DialogHelper {
             }
         });
 
-        // when the user clicks on the close button of the dialog window
+        // when the user clicks on the doClose button of the dialog window
         // we want to set the property to false
         dialogStage.setOnCloseRequest(event -> openProperty.set(false));
     }

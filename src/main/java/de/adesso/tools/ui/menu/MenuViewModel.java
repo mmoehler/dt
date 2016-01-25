@@ -1,8 +1,6 @@
 package de.adesso.tools.ui.menu;
 
-import de.adesso.tools.events.AddConditionDeclEvent;
-import de.adesso.tools.events.RemoveConditionDeclEvent;
-import de.adesso.tools.events.TriggerShutdownEvent;
+import de.adesso.tools.events.*;
 import de.adesso.tools.ui.scopes.RuleScope;
 import de.saxsys.mvvmfx.InjectScope;
 import de.saxsys.mvvmfx.ViewModel;
@@ -15,22 +13,21 @@ import javax.inject.Inject;
 /**
  * Created by mohler on 15.01.16.
  */
-public class MenuViewModel  implements ViewModel {
-
-    @Inject
-    private Event<TriggerShutdownEvent> shouldCloseEvent;
-
-    @Inject
-    private Event<RemoveConditionDeclEvent> removeConditionDeclEvent;
-
-    @Inject
-    private Event<AddConditionDeclEvent> addConditionDeclEvent;
-
-    @InjectScope
-    private RuleScope mdScope;
+public class MenuViewModel implements ViewModel {
 
     private final ReadOnlyBooleanWrapper removeItemDisabled = new ReadOnlyBooleanWrapper();
-
+    @Inject
+    private Event<TriggerShutdownEvent> shouldCloseEvent;
+    @Inject
+    private Event<RemoveConditionDeclEvent> removeConditionDeclEvent;
+    @Inject
+    private Event<AddConditionDeclEvent> addConditionDeclEvent;
+    @Inject
+    private Event<AddConditionDefEvent> addConditionDefEvent;
+    @Inject
+    private Event<SimpleCompletenessCheckEvent> simpleCompletenessCheckEvent;
+    @InjectScope
+    private RuleScope mdScope;
 
     public void initialize() {
         //removeItemDisabled.bind(mdScope.selectedContactProperty().isNull());
@@ -50,5 +47,13 @@ public class MenuViewModel  implements ViewModel {
 
     public void addConditionDeclAction() {
         addConditionDeclEvent.fire(new AddConditionDeclEvent());
+    }
+
+    public void addConditionDef() {
+        addConditionDefEvent.fire(new AddConditionDefEvent());
+    }
+
+    public void simpleCompletenessCheckAction() {
+        simpleCompletenessCheckEvent.fire(new SimpleCompletenessCheckEvent());
     }
 }
