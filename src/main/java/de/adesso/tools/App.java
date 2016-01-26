@@ -26,7 +26,7 @@ public class App extends MvvmfxCdiApplication {
     private ResourceBundle resourceBundle;
 
     public static void main(String... args) {
-        Locale.setDefault(Locale.ENGLISH);
+        Locale.setDefault(Locale.GERMANY);
         launch(args);
     }
 

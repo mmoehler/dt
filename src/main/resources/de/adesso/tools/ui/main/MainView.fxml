@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
 <VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="de.adesso.tools.ui.main.MainView">
     <children>
@@ -24,5 +27,14 @@
                 </AnchorPane>
             </items>
         </SplitPane>
+        <TextArea fx:id="console" editable="false" focusTraversable="false" maxHeight="-Infinity" prefHeight="200.0"
+                  prefWidth="800.0">
+            <font>
+                <Font size="12.0"/>
+            </font>
+            <padding>
+                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+            </padding>
+        </TextArea>
     </children>
 </VBox>

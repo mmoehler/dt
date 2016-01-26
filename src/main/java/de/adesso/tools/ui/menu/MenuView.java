@@ -19,7 +19,7 @@ import javax.inject.Inject;
 public class MenuView implements FxmlView<MenuViewModel> {
 
     @FXML
-    private MenuItem removeMenuItem;
+    private MenuItem removeConditionDeclMenuItem;
 
     @InjectViewModel
     private MenuViewModel viewModel;
@@ -28,30 +28,47 @@ public class MenuView implements FxmlView<MenuViewModel> {
     private Stage primaryStage;
 
     public void initialize() {
-        removeMenuItem.disableProperty().bind(viewModel.removeItemDisabledProperty());
+        removeConditionDeclMenuItem.disableProperty().bind(viewModel.removeItemDisabledProperty());
     }
 
     @FXML
-    public void close() {
+    public void doClose() {
         viewModel.closeAction();
     }
 
     @FXML
-    public void removeCondition(ActionEvent actionEvent) {
+    public void doRemoveConditionDecl(ActionEvent actionEvent) {
         viewModel.removeConditionDeclAction();
     }
 
     @FXML
-    public void addCondition(ActionEvent actionEvent) {
+    public void doAddConditionDecl(ActionEvent actionEvent) {
         viewModel.addConditionDeclAction();
     }
 
     @FXML
-    public void about() {
+    public void doRemoveConditionDef(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doAddConditionDef(ActionEvent actionEvent) {
+        viewModel.addConditionDef();
+    }
+
+    @FXML
+    public void doSimpleCompletenessCheck(ActionEvent actionEvent) {
+        viewModel.simpleCompletenessCheckAction();
+    }
+
+    @FXML
+    public void doExtendedCompletenessCheck(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doAbout() {
         Parent view = FluentViewLoader.fxmlView(AboutView.class)
                 .load().getView();
         DialogHelper.showDialog(view, primaryStage, "/contacts.css");
     }
-
 
 }

@@ -6,6 +6,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.*;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.min;
@@ -17,32 +18,43 @@ public final class DtOps {
 
     public static final String EMPTY_STRING = "";
     public static final String IRRELEVANT = "-";
+    public static final String SPLITEX = "[,;]";
+    public static final String QMARK = "?";
+
 
     private DtOps() {
     }
 
     public static int determineMaxColumns(List<ConditionDeclTableViewModel> indicators) {
         return indicators.stream()
-                .map(x -> x.possibleIndicatorsProperty().get().split("[,]").length)
+                .map(x -> determineIndicatorsCount(x))
                 .reduce(1, (y, z) -> y * z);
     }
 
     public static List<Integer> determineCountIndicatorsPerRow(List<ConditionDeclTableViewModel> indicators) {
         return indicators.stream()
-                .map(x -> x.possibleIndicatorsProperty().get().split("[,;]").length)
+                .map(x -> determineIndicatorsCount(x))
                 .collect(Collectors.toList());
     }
 
     public static List<String[]> determineIndicatorArrayPerRow(List<ConditionDeclTableViewModel> indicators) {
         return indicators.stream()
-                .map(x -> x.possibleIndicatorsProperty().get().split("[,;]"))
+                .map(x -> determineIndicators(x))
                 .collect(Collectors.toList());
     }
 
     public static List<List<String>> determineIndicatorListPerRow(List<ConditionDeclTableViewModel> indicators) {
         return indicators.stream()
-                .map(x -> Arrays.stream(x.possibleIndicatorsProperty().get().split("[,;]")).collect(Collectors.toList()))
+                .map(x -> Arrays.stream(determineIndicators(x)).collect(Collectors.toList()))
                 .collect(Collectors.toList());
+    }
+
+    private static String[] determineIndicators(ConditionDeclTableViewModel x) {
+        return x.possibleIndicatorsProperty().get().split(SPLITEX);
+    }
+
+    private static int determineIndicatorsCount(ConditionDeclTableViewModel x) {
+        return determineIndicators(x).length;
     }
 
 
@@ -58,8 +70,11 @@ public final class DtOps {
         final ObservableList<ObservableList<String>> retList = FXCollections.observableArrayList();
         final List<List<String>> rawIndicators = determineIndicatorListPerRow(indicators);
         final List<List<String>> permutations = permutations(rawIndicators);
-        final List<List<String>> transposed = returnTranspose(permutations);
-        transposed.forEach(l -> retList.add(FXCollections.observableArrayList(l)));
+        final List<List<String>> transposed = transpose(permutations);
+        transposed.forEach(l -> {
+            l.add(0,"");
+            retList.add(FXCollections.observableArrayList(l));
+        });
         return retList;
     }
 
@@ -82,39 +97,25 @@ public final class DtOps {
     public static ObservableList<ObservableList<String>> limitedExpandConditions(List<ConditionDeclTableViewModel> indicators, int countColumns, boolean dontFillWithIndicators) {
         final ObservableList<ObservableList<String>> retList = FXCollections.observableArrayList();
         final ObservableList<ObservableList<String>> fullExpanded = fullExpandConditions(indicators);
-
-        System.err.printf(">>> %s\n", fullExpanded);
-
-        final int internalCountColumns = min(determineMaxColumns(indicators), countColumns);
-
-        System.err.printf(">>> %d - %d -%d\n", determineMaxColumns(indicators), countColumns, internalCountColumns);
-
+        final int internalCountColumns = min(determineMaxColumns(indicators), countColumns) + 1; // +1 for else rule
         if (dontFillWithIndicators) {
-            fullExpanded.forEach(x -> Collections.fill(x, IRRELEVANT));
+            fullExpanded.forEach(x -> {
+                Collections.fill(x, QMARK);
+                x.set(0,EMPTY_STRING); // .. the else rule
+            });
         }
         fullExpanded.forEach(l -> {
             List<String> subList = l.subList(0, internalCountColumns);
             if (subList instanceof ObservableList) {
-                retList.add((ObservableList)subList);
+                retList.add((ObservableList) subList);
             } else {
                 retList.add(FXCollections.observableList(subList));
             }
         });
-        System.err.println(">>> "+retList);
         return retList;
     }
 
-    public static ObservableList<ObservableList<String>> initialConditions(ObservableList<ObservableList<String>> indicators) {
-        final int rows = indicators.size();
-        ObservableList<ObservableList<String>> retList = FXCollections.observableArrayList();
-        for (int r = 0; r < rows; r++) {
-            retList.add(FXCollections.observableArrayList());
-        }
-        retList.forEach(e -> e.add("-"));
-        return retList;
-    }
-
-    public static <T> List<List<T>> returnTranspose(List<List<T>> table) {
+    public static <T> List<List<T>> transpose(List<List<T>> table) {
         List<List<T>> transposedList = new ArrayList<>();
 
         final int firstListSize = table.get(0).size();
@@ -153,4 +154,47 @@ public final class DtOps {
             recursivePermutation(ori, res, d + 1, copy);
         }
     }
+
+    /**
+     * Copies a nested {@code ObservableList}
+     *
+     * @param original the ObservableList which should be copied
+     * @param <T>
+     * @return an ObservableList as copyMatrix of {@code src}
+     */
+    public static <T> ObservableList<ObservableList<T>> copyMatrix(ObservableList<ObservableList<T>> original) {
+        return original.stream()
+                .map(e -> e.stream()
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList)))
+                .collect(Collectors.toCollection(() -> FXCollections.observableArrayList()));
+    }
+
+    public static <T> ObservableList<T> copyRow(ObservableList<T> original) {
+        return original.stream()
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+    }
+
+    public static <T> ObservableList<ObservableList<T>> copyMatrixWithAddedRow(ObservableList<ObservableList<T>> original,
+                                                                               Supplier<T> valueSupplier,
+                                                                               Supplier<T> noValueSupplier) {
+        if (original.isEmpty()) {
+            return original;
+        }
+        ObservableList<ObservableList<T>> copiedMatrix = copyMatrix(original);
+        ObservableList<T> copiedRow = copyRow(original.get(0));
+        Collections.fill(copiedRow, valueSupplier.get());
+        copiedRow.set(0,noValueSupplier.get()); // the else rule
+        copiedMatrix.add(copiedRow);
+        return copiedMatrix;
+    }
+
+    public static <T> ObservableList<ObservableList<T>> copyMatrixWithAddedColumn(ObservableList<ObservableList<T>> original, Supplier<T> valueSupplier) {
+        if (original.isEmpty()) {
+            return original;
+        }
+        ObservableList<ObservableList<T>> copiedMatrix = copyMatrix(original);
+        copiedMatrix.stream().forEach(l -> l.add(valueSupplier.get()));
+        return copiedMatrix;
+    }
+
 }

@@ -1,5 +1,6 @@
 package de.adesso.tools.ui;
 
+import de.adesso.tools.ui.condition.ConditionDefnsTableCell;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.EventHandler;
 import javafx.scene.control.TableColumn;
@@ -13,21 +14,27 @@ import java.util.List;
  */
 public final class TableColumnOps {
 
+    public static final String COND_ROW_HEADER_2 = "R%02d";
+    public static final String COND_ROW_HEADER_1 = "ELSE";
+
     private TableColumnOps() {
     }
 
 
     public static TableColumn<List<String>, String> createTableColumn(int x) {
-        TableColumn<List<String>, String> tc = new TableColumn(String.format("R%02d", x + 1));
 
-        tc.setCellFactory(DtCell.forTableColumn());
+        System.err.println(">>> " + x);
+
+        String tpl = (0 == x) ? COND_ROW_HEADER_1 : COND_ROW_HEADER_2;
+        TableColumn<List<String>, String> tc = new TableColumn(String.format(tpl, x + 1));
+
+        tc.setCellFactory(ConditionDefnsTableCell.forTableColumn());
 
         tc.setOnEditCommit(
                 (t) -> {
                     (t.getTableView().getItems().get(
                             t.getTablePosition().getRow())
                     ).set(t.getTablePosition().getColumn(), t.getNewValue());
-                    System.err.println("### " + t.getNewValue());
                 });
 
         tc.setCellValueFactory(

@@ -2,11 +2,11 @@ package de.adesso.tools.ui.condition;
 
 import de.adesso.tools.ui.dialogs.Dialogs;
 import de.adesso.tools.ui.scopes.RuleScope;
-import de.adesso.tools.util.func.DtOps;
 import de.adesso.tools.util.tuple.Tuple2;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -19,8 +19,10 @@ import java.util.List;
 import java.util.stream.IntStream;
 
 import static de.adesso.tools.ui.TableColumnOps.createTableColumn;
+import static de.adesso.tools.util.func.DtOps.determineMaxColumns;
 
 public class ConditionView implements FxmlView<ConditionViewModel> {
+
     @FXML
     public TableView<ConditionDeclTableViewModel> conditionDeclTable;
 
@@ -32,6 +34,7 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
 
     @InjectViewModel
     public ConditionViewModel viewModel;
+
     private String lastKey = null;
 
     public ConditionView() {
@@ -40,7 +43,18 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
     public void initialize() {
         initializeDividerSynchronization();
         initializeConditionDeclTable();
+        initializeObservers();
 
+    }
+
+    protected void initializeObservers() {
+        this.viewModel.subscribe(ConditionViewModelNotifications.CONDITIONDEF_ADD.name(), (key, value) ->{
+            final int countColumns = conditionDefnsTable.getColumns().size();
+            conditionDefnsTable.getColumns().add(createTableColumn(countColumns));
+            final ObservableList<ObservableList<String>> newDefns = (ObservableList<ObservableList<String>>) value[0];
+            newDefns.stream().forEach(this.viewModel.getDefns()::add);
+            conditionDefnsTable.refresh();
+        });
     }
 
     protected void initializeConditionDefnsTable(int countColumns, boolean shouldPopulateData) {
@@ -49,10 +63,10 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
         this.conditionDefnsTable.getSelectionModel().setCellSelectionEnabled(true);
 
         initializeTableKeyboardHandling(conditionDefnsTable);
-        initializeConditionDefnsTableColumns(countColumns, shouldPopulateData);
+        initializeConditionDefnsTableColumns(countColumns);
 
         this.conditionDefnsTable.getItems().clear();
-        this.conditionDefnsTable.setItems(viewModel.intializeConditionDefnsData(countColumns, shouldPopulateData));
+        this.conditionDefnsTable.setItems(viewModel.initializeConditionDefnsData(countColumns, shouldPopulateData));
     }
 
     protected void initializeConditionDeclTable() {
@@ -69,11 +83,13 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
 
     }
 
-    private void initializeConditionDefnsTableColumns(int countColumns, boolean shouldPopulateData) {
-        final int cols = Math.min(DtOps.determineMaxColumns(viewModel.getDecls()), countColumns);
-        IntStream.range(0,cols)
+    private void initializeConditionDefnsTableColumns(int countColumns) {
+        conditionDefnsTable.getColumns().clear();
+        final int cols = Math.min(determineMaxColumns(viewModel.getDecls()), countColumns);
+        IntStream.rangeClosed(0,cols) // +1 column for the ELSE rule
                 .mapToObj(i -> createTableColumn(i))
                 .forEach(a -> conditionDefnsTable.getColumns().add(a));
+        conditionDefnsTable.refresh();
     }
 
     private void initializeConditionDeclTableColumns() {
@@ -106,8 +122,6 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
                 }
                 t.consume();
             }
-            //I decided not to override the default tab behavior
-            //using ctrl tab for cell traversal, but arrow keys are better
             if (t.isControlDown() && t.getCode() == KeyCode.TAB) {
                 if (t.isShiftDown()) {
                     table.getSelectionModel().selectLeftCell();
@@ -120,8 +134,7 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
 
         table.setOnKeyPressed((KeyEvent t) -> {
             TablePosition tp;
-            if (!t.isControlDown() &&
-                    (t.getCode().isLetterKey() || t.getCode().isDigitKey())) {
+            if (!t.isControlDown() && (t.getCode().isLetterKey() || t.getCode().isDigitKey() || t.getCode()== KeyCode.SLASH)) {
                 lastKey = t.getText();
                 tp = table.getFocusModel().getFocusedCell();
                 table.edit(tp.getRow(), tp.getTableColumn());
@@ -136,7 +149,7 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
                 if (!isParent(conditionDeclTable, conditionDeclTable.getScene().getFocusOwner())) {
                     if (this.conditionDefnsTable.getItems().isEmpty()) {
                         Tuple2<Integer, Boolean> dlgResult = Dialogs.acceptOrDefineRuleCountDialog0(
-                                DtOps.determineMaxColumns(this.viewModel.getDecls()), false);
+                                determineMaxColumns(this.viewModel.getDecls()), false);
                         initializeConditionDefnsTable(dlgResult._1(), dlgResult._2());
                     }
                 }

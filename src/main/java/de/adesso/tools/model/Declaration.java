@@ -16,7 +16,7 @@ public class Declaration extends Identity {
     private String expression = "";
 
     /**
-     * Possible indicators of this decl. Currently only {Y,N} are supported
+     * Possible indicators of this decl. Currently only {YES,NO} are supported
      */
     private String possibleIndicators = "";
 
