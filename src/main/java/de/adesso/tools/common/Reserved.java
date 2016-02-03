@@ -7,6 +7,10 @@ public class Reserved {
     public static final String DASH = "-";
     public static final String YES = "YES";
     public static final String NO = "NO";
+    public static final String HASH = "#";
+    public static final String QMARK = "?";
+    public static final String SPACE = " ";
+    public static final String NOTHING = "";
 
     public static boolean isDASH(String s) {
         return DASH.equals(s);
@@ -20,5 +24,7 @@ public class Reserved {
         return NO.equals(s);
     }
 
-
+    public static boolean isHASH(String s) {
+        return HASH.equals(s);
+    }
 }

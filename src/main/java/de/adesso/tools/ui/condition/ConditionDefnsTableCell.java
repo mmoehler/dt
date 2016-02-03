@@ -12,6 +12,8 @@ import javafx.scene.text.Font;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
+import static de.adesso.tools.common.Reserved.*;
+
 /**
  * Created by mohler on 16.01.16.
  */
@@ -111,21 +113,21 @@ public class ConditionDefnsTableCell<S, T> extends TableCell<S, T> {
         } else {
             final String newValue = getText();
             switch (newValue) {
-                case "?":
+                case QMARK:
                     setCellStyle("#f37c4e");
                     break;
-                case "YES":
+                case YES:
                     setCellStyle("#f3b804");
                     break;
-                case "NO":
+                case NO:
                     setCellStyle("#7fc2f3");
                     break;
-                case "-":
+                case DASH:
                     setCellStyle("#04dddd");
                     break;
-                case "" :
-                case " ":
-                    setStyle("");
+                case NOTHING :
+                case SPACE:
+                    setStyle(NOTHING);
                     break;
                 default:
                     setCellStyle("#c0c0c0");
