@@ -5,8 +5,8 @@ package de.adesso.tools.common;
  */
 public class Reserved {
     public static final String DASH = "-";
-    public static final String YES = "YES";
-    public static final String NO = "NO";
+    public static final String YES = "Y";
+    public static final String NO = "N";
     public static final String HASH = "#";
     public static final String QMARK = "?";
     public static final String SPACE = " ";

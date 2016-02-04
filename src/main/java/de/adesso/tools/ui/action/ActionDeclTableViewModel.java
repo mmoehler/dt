@@ -1,13 +1,14 @@
 package de.adesso.tools.ui.action;
 
 import de.adesso.tools.model.ActionDecl;
+import de.adesso.tools.ui.PossibleIndicatorsSupplier;
 import de.saxsys.mvvmfx.utils.mapping.ModelWrapper;
 import javafx.beans.property.StringProperty;
 
 /**
  * Created by mohler on 16.01.16.
  */
-public class ActionDeclTableViewModel {
+public class ActionDeclTableViewModel implements PossibleIndicatorsSupplier {
 
     private final String id;
 

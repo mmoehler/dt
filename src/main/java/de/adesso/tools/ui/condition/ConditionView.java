@@ -133,8 +133,9 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
         });
 
         table.setOnKeyPressed((KeyEvent t) -> {
+            System.out.println("t = " + t);
             TablePosition tp;
-            if (!t.isControlDown() && (t.getCode().isLetterKey() || t.getCode().isDigitKey() || t.getCode()== KeyCode.SLASH)) {
+            if (!t.isControlDown() && (t.getCode().isLetterKey() || t.getCode().isDigitKey() || t.getCode()==KeyCode.MINUS || t.getCode()==KeyCode.NUMBER_SIGN)) {
                 lastKey = t.getText();
                 tp = table.getFocusModel().getFocusedCell();
                 table.edit(tp.getRow(), tp.getTableColumn());

@@ -1,6 +1,7 @@
 package de.adesso.tools.util.func;
 
 import com.google.common.collect.Lists;
+import de.adesso.tools.ui.PossibleIndicatorsSupplier;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -25,35 +26,35 @@ public final class DtOps {
     private DtOps() {
     }
 
-    public static int determineMaxColumns(List<ConditionDeclTableViewModel> indicators) {
+    public static <T extends PossibleIndicatorsSupplier>  int determineMaxColumns(List<T> indicators) {
         return indicators.stream()
                 .map(x -> determineIndicatorsCount(x))
                 .reduce(1, (y, z) -> y * z);
     }
 
-    public static List<Integer> determineCountIndicatorsPerRow(List<ConditionDeclTableViewModel> indicators) {
+    public static <T extends PossibleIndicatorsSupplier>  List<Integer> determineCountIndicatorsPerRow(List<T> indicators) {
         return indicators.stream()
                 .map(x -> determineIndicatorsCount(x))
                 .collect(Collectors.toList());
     }
 
-    public static List<String[]> determineIndicatorArrayPerRow(List<ConditionDeclTableViewModel> indicators) {
+    public static <T extends PossibleIndicatorsSupplier>  List<String[]> determineIndicatorArrayPerRow(List<T> indicators) {
         return indicators.stream()
                 .map(x -> determineIndicators(x))
                 .collect(Collectors.toList());
     }
 
-    public static List<List<String>> determineIndicatorListPerRow(List<ConditionDeclTableViewModel> indicators) {
+    public static <T extends PossibleIndicatorsSupplier>  List<List<String>> determineIndicatorListPerRow(List<T> indicators) {
         return indicators.stream()
                 .map(x -> Arrays.stream(determineIndicators(x)).collect(Collectors.toList()))
                 .collect(Collectors.toList());
     }
 
-    private static String[] determineIndicators(ConditionDeclTableViewModel x) {
+    private static <T extends  PossibleIndicatorsSupplier> String[] determineIndicators(T x) {
         return x.possibleIndicatorsProperty().get().split(SPLITEX);
     }
 
-    private static int determineIndicatorsCount(ConditionDeclTableViewModel x) {
+    private static <T extends  PossibleIndicatorsSupplier> int determineIndicatorsCount(T x) {
         return determineIndicators(x).length;
     }
 
@@ -116,6 +117,11 @@ public final class DtOps {
     }
 
     public static <T> List<List<T>> transpose(List<List<T>> table) {
+
+        if(null == table) throw new IllegalArgumentException("Table to transpose is null");
+
+        if(table.isEmpty()) return table;
+
         List<List<T>> transposedList = new ArrayList<>();
 
         final int firstListSize = table.get(0).size();

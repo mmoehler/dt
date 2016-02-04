@@ -1,13 +1,14 @@
 package de.adesso.tools.ui.condition;
 
 import de.adesso.tools.model.ConditionDecl;
+import de.adesso.tools.ui.PossibleIndicatorsSupplier;
 import de.saxsys.mvvmfx.utils.mapping.ModelWrapper;
 import javafx.beans.property.StringProperty;
 
 /**
  * Created by mohler on 16.01.16.
  */
-public class ConditionDeclTableViewModel {
+public class ConditionDeclTableViewModel implements PossibleIndicatorsSupplier {
 
     private final String id;
 
