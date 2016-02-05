@@ -71,4 +71,8 @@ public class MenuView implements FxmlView<MenuViewModel> {
         DialogHelper.showDialog(view, primaryStage, "/contacts.css");
     }
 
+    @FXML
+    public void doAddActionDecl(ActionEvent actionEvent) {
+        viewModel.addActionDef();
+    }
 }

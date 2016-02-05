@@ -26,6 +26,9 @@ public class MenuViewModel implements ViewModel {
     private Event<AddConditionDefEvent> addConditionDefEvent;
     @Inject
     private Event<SimpleCompletenessCheckEvent> simpleCompletenessCheckEvent;
+    @Inject
+    private Event<AddActionDeclEvent> addActionDeclEventEvent;
+
     @InjectScope
     private RuleScope mdScope;
 
@@ -55,5 +58,9 @@ public class MenuViewModel implements ViewModel {
 
     public void simpleCompletenessCheckAction() {
         simpleCompletenessCheckEvent.fire(new SimpleCompletenessCheckEvent());
+    }
+
+    public void addActionDef() {
+        addActionDeclEventEvent.fire(new AddActionDeclEvent());
     }
 }

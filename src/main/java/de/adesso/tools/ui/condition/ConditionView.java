@@ -48,7 +48,7 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
     }
 
     protected void initializeObservers() {
-        this.viewModel.subscribe(ConditionViewModelNotifications.CONDITIONDEF_ADD.name(), (key, value) ->{
+        this.viewModel.subscribe(ConditionViewModelNotifications.CONDITIONDEF_ADD.name(), (key, value) -> {
             final int countColumns = conditionDefnsTable.getColumns().size();
             conditionDefnsTable.getColumns().add(createTableColumn(countColumns));
             final ObservableList<ObservableList<String>> newDefns = (ObservableList<ObservableList<String>>) value[0];
@@ -86,7 +86,7 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
     private void initializeConditionDefnsTableColumns(int countColumns) {
         conditionDefnsTable.getColumns().clear();
         final int cols = Math.min(determineMaxColumns(viewModel.getDecls()), countColumns);
-        IntStream.rangeClosed(0,cols) // +1 column for the ELSE rule
+        IntStream.rangeClosed(0, cols) // +1 column for the ELSE rule
                 .mapToObj(i -> createTableColumn(i))
                 .forEach(a -> conditionDefnsTable.getColumns().add(a));
         conditionDefnsTable.refresh();
@@ -135,7 +135,7 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
         table.setOnKeyPressed((KeyEvent t) -> {
             System.out.println("t = " + t);
             TablePosition tp;
-            if (!t.isControlDown() && (t.getCode().isLetterKey() || t.getCode().isDigitKey() || t.getCode()==KeyCode.MINUS || t.getCode()==KeyCode.NUMBER_SIGN)) {
+            if (!t.isControlDown() && (t.getCode().isLetterKey() || t.getCode().isDigitKey() || t.getCode() == KeyCode.MINUS || t.getCode() == KeyCode.NUMBER_SIGN)) {
                 lastKey = t.getText();
                 tp = table.getFocusModel().getFocusedCell();
                 table.edit(tp.getRow(), tp.getTableColumn());
@@ -146,13 +146,11 @@ public class ConditionView implements FxmlView<ConditionViewModel> {
 
     private void initializeConditionDeclFocusHandling() {
         this.conditionDeclTable.focusedProperty().addListener((ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) -> {
-            if (oldValue && !newValue) {
-                if (!isParent(conditionDeclTable, conditionDeclTable.getScene().getFocusOwner())) {
-                    if (this.conditionDefnsTable.getItems().isEmpty()) {
-                        Tuple2<Integer, Boolean> dlgResult = Dialogs.acceptOrDefineRuleCountDialog0(
-                                determineMaxColumns(this.viewModel.getDecls()), false);
-                        initializeConditionDefnsTable(dlgResult._1(), dlgResult._2());
-                    }
+            if(!newValue && this.conditionDefnsTable.focusedProperty().get()){
+                if (this.conditionDefnsTable.getItems().isEmpty()) {
+                    Tuple2<Integer, Boolean> dlgResult = Dialogs.acceptOrDefineRuleCountDialog0(
+                            determineMaxColumns(this.viewModel.getDecls()), false);
+                    initializeConditionDefnsTable(dlgResult._1(), dlgResult._2());
                 }
             }
         });
