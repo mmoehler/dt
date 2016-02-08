@@ -1,14 +1,19 @@
 package de.adesso.tools.ui.action;
 
 import de.adesso.tools.model.ActionDecl;
+import de.adesso.tools.ui.DeclarationTableViewModel;
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;
 import de.saxsys.mvvmfx.utils.mapping.ModelWrapper;
 import javafx.beans.property.StringProperty;
 
+import static java.util.Arrays.asList;
+
 /**
  * Created by mohler on 16.01.16.
  */
-public class ActionDeclTableViewModel implements PossibleIndicatorsSupplier {
+public class ActionDeclTableViewModel implements PossibleIndicatorsSupplier, DeclarationTableViewModel {
+
+    private final static String EMPTY_STRING = "";
 
     private final String id;
 
@@ -56,6 +61,13 @@ public class ActionDeclTableViewModel implements PossibleIndicatorsSupplier {
 
     public StringProperty possibleIndicatorsProperty() {
         return wrapper.field("possibleIndicators", ActionDecl::getPossibleIndicators, ActionDecl::setPossibleIndicators);
+    }
+
+    public boolean isValid() {
+            return asList(lfdNrProperty(), expressionProperty(), possibleIndicatorsProperty()).stream()
+                    .map(i -> i.get() != null && i.get() != EMPTY_STRING)
+                    .reduce(true, (x,y) -> x && y);
+
     }
 
 }

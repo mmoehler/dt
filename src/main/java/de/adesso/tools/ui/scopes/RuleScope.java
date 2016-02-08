@@ -6,8 +6,6 @@ import javafx.beans.property.SimpleDoubleProperty;
 
 public class RuleScope implements Scope {
 
-    public final DoubleProperty conditionDividerPos = new SimpleDoubleProperty();
-    public final DoubleProperty actionDividerPos = new SimpleDoubleProperty();
 
     public RuleScope() {
     }

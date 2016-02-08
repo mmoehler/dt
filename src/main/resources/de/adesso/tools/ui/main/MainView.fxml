@@ -1,39 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.SplitPane?>
-<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
-<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="de.adesso.tools.ui.main.MainView">
+
+<VBox prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.adesso.tools.ui.main.MainView">
     <children>
-        <fx:include source="../menu/MenuView.fxml"/>
+        <fx:include source="../menu/MenuView.fxml" />
         <SplitPane dividerPositions="0.5" orientation="VERTICAL" VBox.vgrow="ALWAYS">
             <items>
                 <AnchorPane>
                     <children>
-                        <fx:include source="../condition/ConditionView.fxml" AnchorPane.bottomAnchor="0.0"
-                                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                    AnchorPane.topAnchor="0.0"/>
+                        <SplitPane fx:id="conditionSplitPane" dividerPositions="0.5" prefHeight="160.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <items>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                    <children>
+                                        <TableView id="conditionDeclTable" fx:id="conditionDeclarationsTable" prefHeight="158.0" prefWidth="85.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                    <children>
+                                        <TableView id="conditionDefnsTable" fx:id="conditionDefinitionsTable" prefHeight="158.0" prefWidth="205.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    </children>
+                                </AnchorPane>
+                            </items>
+                        </SplitPane>
                     </children>
                 </AnchorPane>
                 <AnchorPane>
                     <children>
-                        <fx:include source="../action/ActionView.fxml" AnchorPane.bottomAnchor="0.0"
-                                    AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
-                                    AnchorPane.topAnchor="0.0"/>
+                        <SplitPane fx:id="actionSplitPane" dividerPositions="0.5" prefHeight="160.0" prefWidth="300.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                            <items>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                    <children>
+                                        <TableView id="actionDeclTable" fx:id="actionDeclarationsTable" prefHeight="158.0" prefWidth="145.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    </children>
+                                </AnchorPane>
+                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                    <children>
+                                        <TableView id="actionDefnsTable" fx:id="actionDefinitionsTable" prefHeight="158.0" prefWidth="145.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                    </children>
+                                </AnchorPane>
+                            </items>
+                        </SplitPane>
                     </children>
                 </AnchorPane>
             </items>
         </SplitPane>
-        <TextArea fx:id="console" editable="false" focusTraversable="false" maxHeight="-Infinity" prefHeight="200.0"
-                  prefWidth="800.0">
+        <TextArea fx:id="console" editable="false" focusTraversable="false" maxHeight="-Infinity" prefHeight="200.0" prefWidth="200.0">
             <font>
-                <Font size="12.0"/>
+                <Font size="12.0" />
             </font>
             <padding>
-                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </padding>
         </TextArea>
     </children>

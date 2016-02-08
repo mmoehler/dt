@@ -5,20 +5,21 @@ package de.adesso.tools.model;
  */
 public class Declaration extends Identity {
 
+    public static final String EMPTY_STRING = "";
     /**
      * sequential numbr of this dicl
      */
-    private String lfdNr = "";
+    private String lfdNr = EMPTY_STRING;
 
     /**
      * Expression of this decl. E.g. 'Partner.age > 32'
      */
-    private String expression = "";
+    private String expression = EMPTY_STRING;
 
     /**
      * Possible indicators of this decl. Currently only {YES,NO} are supported
      */
-    private String possibleIndicators = "";
+    private String possibleIndicators = EMPTY_STRING;
 
     public Declaration() {
     }

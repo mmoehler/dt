@@ -1,4 +1,4 @@
-package de.adesso.tools.ui.condition.analysis;
+package de.adesso.tools.analysis;
 
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.tools.util.tuple.Tuple;
@@ -30,7 +30,7 @@ public final class ConditionCompletenessCheck {
      */
     public static Tuple3<Boolean, Integer, Integer> isFormalComplete(ObservableList<ConditionDeclTableViewModel> decls, ObservableList<ObservableList<String>> defns) {
         final List<Integer> indicatorsPerRow = determineCountIndicatorsPerRow(decls);
-        final List<List<Integer>> list = IntStream.range(0, defns.size()).mapToObj(i -> defns.get(i).stream().skip(1).map(j -> {
+        final List<List<Integer>> list = IntStream.range(0, defns.size()).mapToObj(i -> defns.get(i).stream().map(j -> {
             if (IRRELEVANT.equals(j)) {
                 return indicatorsPerRow.get(i);
             }

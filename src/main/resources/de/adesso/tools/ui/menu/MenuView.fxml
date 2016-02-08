@@ -21,24 +21,14 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
-                        <MenuItem fx:id="removeConditionDeclMenuItem" mnemonicParsing="false" onAction="#doRemoveConditionDecl" text="Remove Condition Declaration">
-                            <accelerator>
-                                <KeyCodeCombination alt="UP" code="F8" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
-                            </accelerator>
-                        </MenuItem>
                         <MenuItem fx:id="addConditionDeclMenuItem" mnemonicParsing="false" onAction="#doAddConditionDecl" text="Add Condition Declaration">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="F8" control="UP" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="removeConditionDefsMenuItem" mnemonicParsing="false" onAction="#doRemoveConditionDef" text="Remove Condition Definition">
+                        <MenuItem fx:id="removeConditionDeclMenuItem" mnemonicParsing="false" onAction="#doRemoveConditionDecl" text="Remove Condition Declaration">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F7" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
-                            </accelerator>
-                        </MenuItem>
-                        <MenuItem fx:id="addConditionDefsMenuItem" mnemonicParsing="false" onAction="#doAddConditionDef" text="Add Condition Definition">
-                            <accelerator>
-                                <KeyCodeCombination alt="UP" code="F7" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F8" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
                         <MenuItem fx:id="addActionDeclMenuItem" mnemonicParsing="false" onAction="#doAddActionDecl" text="Add Action Declaration">
@@ -46,7 +36,26 @@
                                 <KeyCodeCombination alt="UP" code="F9" control="UP" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
-
+                        <MenuItem fx:id="removeActionDeclMenuItem" mnemonicParsing="false" onAction="#doRemoveActionDecl" text="Remove Action Declaration">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="F9" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="addConditionDefsMenuItem" mnemonicParsing="false" onAction="#doAddConditionDef" text="Add Rule">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="F7" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="removeConditionDefsMenuItem" mnemonicParsing="false" onAction="#doRemoveConditionDef" text="Remove Rule">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="F7" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="removeConditionDefsWithoutActionsMenuItem" mnemonicParsing="false" onAction="#doRemoveConditionDefsWithoutAction" text="Remove Rule without Actions">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="F7" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
                         <SeparatorMenuItem mnemonicParsing="false" />
                     </items>
                 </Menu>

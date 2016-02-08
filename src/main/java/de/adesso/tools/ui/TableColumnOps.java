@@ -1,8 +1,8 @@
 package de.adesso.tools.ui;
 
-import de.adesso.tools.ui.condition.ConditionDefnsTableCell;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellEditEvent;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -23,12 +23,10 @@ public final class TableColumnOps {
 
     public static TableColumn<List<String>, String> createTableColumn(int x) {
 
-        System.err.println(">>> " + x);
-
-        String tpl = (0 == x) ? COND_ROW_HEADER_1 : COND_ROW_HEADER_2;
+        String tpl = COND_ROW_HEADER_2;
         TableColumn<List<String>, String> tc = new TableColumn(String.format(tpl, x + 1));
 
-        tc.setCellFactory(ConditionDefnsTableCell.forTableColumn());
+        tc.setCellFactory(DefinitionsTableCell.forTableColumn());
 
         tc.setOnEditCommit(
                 (t) -> {
@@ -50,14 +48,14 @@ public final class TableColumnOps {
 
     public static <S> TableColumn<S, String> createTableColumn(String columnName, String propertyName, int prefWidth,
                                                                int minWidth, int maxWidth, boolean resizable,
-                                                               EventHandler<CellEditEvent<S,String>> value) {
+                                                               Pos alignment, EventHandler<CellEditEvent<S,String>> value) {
         TableColumn<S,String> col = new TableColumn<>(columnName);
         col.setMinWidth(minWidth);
         col.setPrefWidth(prefWidth);
         col.setMaxWidth(maxWidth);
         col.setResizable(resizable);
         col.setCellValueFactory(new PropertyValueFactory<>(propertyName));
-        col.setCellFactory(DtCell.forTableColumn());
+        col.setCellFactory(DeclarationsTableCell.forTableColumn(alignment));
         col.setOnEditCommit(value);
         return col;
     }

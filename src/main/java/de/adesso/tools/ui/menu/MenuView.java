@@ -73,6 +73,16 @@ public class MenuView implements FxmlView<MenuViewModel> {
 
     @FXML
     public void doAddActionDecl(ActionEvent actionEvent) {
-        viewModel.addActionDef();
+        viewModel.addActionDecl();
+    }
+
+    @FXML
+    public void doRemoveActionDecl(ActionEvent actionEvent) {
+        viewModel.removeActionDecl();
+    }
+
+    @FXML
+    public void doRemoveConditionDefsWithoutAction(ActionEvent actionEvent) {
+        viewModel.removeConditionDefsWithoutAction();
     }
 }

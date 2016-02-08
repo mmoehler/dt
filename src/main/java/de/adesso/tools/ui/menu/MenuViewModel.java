@@ -9,10 +9,12 @@ import javafx.beans.property.ReadOnlyBooleanWrapper;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
+import javax.inject.Singleton;
 
 /**
  * Created by mohler on 15.01.16.
  */
+@Singleton
 public class MenuViewModel implements ViewModel {
 
     private final ReadOnlyBooleanWrapper removeItemDisabled = new ReadOnlyBooleanWrapper();
@@ -27,7 +29,11 @@ public class MenuViewModel implements ViewModel {
     @Inject
     private Event<SimpleCompletenessCheckEvent> simpleCompletenessCheckEvent;
     @Inject
-    private Event<AddActionDeclEvent> addActionDeclEventEvent;
+    private Event<AddActionDeclEvent> addActionDeclEvent;
+    @Inject
+    private Event<RemoveActionDeclEvent> removeActionDeclEvent;
+    @Inject
+    private Event<RemoveConditionDefsWithoutActionsEvent> removeConditionDefsWithoutActionsEventEvent;
 
     @InjectScope
     private RuleScope mdScope;
@@ -60,7 +66,15 @@ public class MenuViewModel implements ViewModel {
         simpleCompletenessCheckEvent.fire(new SimpleCompletenessCheckEvent());
     }
 
-    public void addActionDef() {
-        addActionDeclEventEvent.fire(new AddActionDeclEvent());
+    public void addActionDecl() {
+        addActionDeclEvent.fire(new AddActionDeclEvent());
+    }
+
+    public void removeActionDecl() {
+        removeActionDeclEvent.fire(new RemoveActionDeclEvent());
+    }
+
+    public void removeConditionDefsWithoutAction() {
+        removeConditionDefsWithoutActionsEventEvent.fire(new RemoveConditionDefsWithoutActionsEvent());
     }
 }

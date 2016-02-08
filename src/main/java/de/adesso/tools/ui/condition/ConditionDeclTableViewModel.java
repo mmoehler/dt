@@ -1,14 +1,19 @@
 package de.adesso.tools.ui.condition;
 
 import de.adesso.tools.model.ConditionDecl;
+import de.adesso.tools.ui.DeclarationTableViewModel;
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;
 import de.saxsys.mvvmfx.utils.mapping.ModelWrapper;
 import javafx.beans.property.StringProperty;
 
+import static java.util.Arrays.asList;
+
 /**
  * Created by mohler on 16.01.16.
  */
-public class ConditionDeclTableViewModel implements PossibleIndicatorsSupplier {
+public class ConditionDeclTableViewModel implements PossibleIndicatorsSupplier, DeclarationTableViewModel {
+
+    private final static String EMPTY_STRING = "";
 
     private final String id;
 
@@ -26,7 +31,7 @@ public class ConditionDeclTableViewModel implements PossibleIndicatorsSupplier {
         wrapper.reset();
     }
 
-    public void reloadFromModel(){
+    public void reloadFromModel() {
         wrapper.reload();
     }
 
@@ -56,20 +61,22 @@ public class ConditionDeclTableViewModel implements PossibleIndicatorsSupplier {
         return this.getId().hashCode();
     }
 
+    @Override
     public String getId() {
         return id;
     }
 
+    @Override
     public StringProperty lfdNrProperty() {
         return wrapper.field("lfdNr", ConditionDecl::getLfdNr, ConditionDecl::setLfdNr);
     }
 
-
+    @Override
     public StringProperty expressionProperty() {
         return wrapper.field("expression", ConditionDecl::getExpression, ConditionDecl::setExpression);
     }
 
-
+    @Override
     public StringProperty possibleIndicatorsProperty() {
         return wrapper.field("possibleIndicators", ConditionDecl::getPossibleIndicators, ConditionDecl::setPossibleIndicators);
     }
@@ -78,4 +85,12 @@ public class ConditionDeclTableViewModel implements PossibleIndicatorsSupplier {
     public String toString() {
         return wrapper.get().toString();
     }
+
+    public boolean isValid() {
+        return asList(lfdNrProperty(), expressionProperty(), possibleIndicatorsProperty()).stream()
+                .map(i -> i.get() != null && i.get() != EMPTY_STRING)
+                .reduce(true, (x, y) -> x && y);
+
+    }
+
 }

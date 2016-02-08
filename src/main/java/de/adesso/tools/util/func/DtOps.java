@@ -2,6 +2,7 @@ package de.adesso.tools.util.func;
 
 import com.google.common.collect.Lists;
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;
+import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -26,35 +27,35 @@ public final class DtOps {
     private DtOps() {
     }
 
-    public static <T extends PossibleIndicatorsSupplier>  int determineMaxColumns(List<T> indicators) {
+    public static <T extends PossibleIndicatorsSupplier> int determineMaxColumns(List<T> indicators) {
         return indicators.stream()
                 .map(x -> determineIndicatorsCount(x))
                 .reduce(1, (y, z) -> y * z);
     }
 
-    public static <T extends PossibleIndicatorsSupplier>  List<Integer> determineCountIndicatorsPerRow(List<T> indicators) {
+    public static <T extends PossibleIndicatorsSupplier> List<Integer> determineCountIndicatorsPerRow(List<T> indicators) {
         return indicators.stream()
                 .map(x -> determineIndicatorsCount(x))
                 .collect(Collectors.toList());
     }
 
-    public static <T extends PossibleIndicatorsSupplier>  List<String[]> determineIndicatorArrayPerRow(List<T> indicators) {
+    public static <T extends PossibleIndicatorsSupplier> List<String[]> determineIndicatorArrayPerRow(List<T> indicators) {
         return indicators.stream()
                 .map(x -> determineIndicators(x))
                 .collect(Collectors.toList());
     }
 
-    public static <T extends PossibleIndicatorsSupplier>  List<List<String>> determineIndicatorListPerRow(List<T> indicators) {
+    public static <T extends PossibleIndicatorsSupplier> List<List<String>> determineIndicatorListPerRow(List<T> indicators) {
         return indicators.stream()
                 .map(x -> Arrays.stream(determineIndicators(x)).collect(Collectors.toList()))
                 .collect(Collectors.toList());
     }
 
-    private static <T extends  PossibleIndicatorsSupplier> String[] determineIndicators(T x) {
+    private static <T extends PossibleIndicatorsSupplier> String[] determineIndicators(T x) {
         return x.possibleIndicatorsProperty().get().split(SPLITEX);
     }
 
-    private static <T extends  PossibleIndicatorsSupplier> int determineIndicatorsCount(T x) {
+    private static <T extends PossibleIndicatorsSupplier> int determineIndicatorsCount(T x) {
         return determineIndicators(x).length;
     }
 
@@ -72,10 +73,30 @@ public final class DtOps {
         final List<List<String>> rawIndicators = determineIndicatorListPerRow(indicators);
         final List<List<String>> permutations = permutations(rawIndicators);
         final List<List<String>> transposed = transpose(permutations);
-        transposed.forEach(l -> {
-            l.add(0,"");
-            retList.add(FXCollections.observableArrayList(l));
-        });
+        transposed.forEach(l -> retList.add(FXCollections.observableArrayList(l)));
+        return retList;
+    }
+
+    public static ObservableList<ObservableList<String>> fullExpandActions(List<ActionDeclTableViewModel> indicators, int countColumns) {
+        // TODO Define Preconditions if neccessary!
+        final ObservableList<ObservableList<String>> retList = FXCollections.observableArrayList();
+        final int rowCount = indicators.size();
+
+        if (0 < rowCount) {
+
+            String[][] rawData = new String[rowCount][countColumns];
+            final List<List<String>> transposed = Arrays.stream(rawData).map(s -> {
+                Arrays.fill(s, QMARK);
+                return new ArrayList<String>(Arrays.asList(s));
+            }).collect(Collectors.toList());
+
+            transposed.forEach(l -> {
+                l.add(0, "");
+                retList.add(FXCollections.observableArrayList(l));
+            });
+
+        }
+
         return retList;
     }
 
@@ -98,11 +119,10 @@ public final class DtOps {
     public static ObservableList<ObservableList<String>> limitedExpandConditions(List<ConditionDeclTableViewModel> indicators, int countColumns, boolean dontFillWithIndicators) {
         final ObservableList<ObservableList<String>> retList = FXCollections.observableArrayList();
         final ObservableList<ObservableList<String>> fullExpanded = fullExpandConditions(indicators);
-        final int internalCountColumns = min(determineMaxColumns(indicators), countColumns) + 1; // +1 for else rule
+        final int internalCountColumns = min(determineMaxColumns(indicators), countColumns);
         if (dontFillWithIndicators) {
             fullExpanded.forEach(x -> {
                 Collections.fill(x, QMARK);
-                x.set(0,EMPTY_STRING); // .. the else rule
             });
         }
         fullExpanded.forEach(l -> {
@@ -116,11 +136,45 @@ public final class DtOps {
         return retList;
     }
 
+    public static ObservableList<ObservableList<String>> fillActions(List<ActionDeclTableViewModel> indicators, int countColumns) {
+        final ObservableList<ObservableList<String>> retList = FXCollections.observableArrayList();
+        final ObservableList<ObservableList<String>> fullExpanded = fullExpandActions(indicators, countColumns);
+        final int internalCountColumns = countColumns;
+        fullExpanded.forEach(l -> {
+            if (l instanceof ObservableList) {
+                retList.add((ObservableList) l);
+            } else {
+                retList.add(FXCollections.observableList(l));
+            }
+        });
+        return retList;
+    }
+
+    public static <T> ObservableList<ObservableList<T>> transposeObservable(ObservableList<ObservableList<T>> table) {
+
+        if (null == table) throw new IllegalArgumentException("Table to transpose is null");
+
+        if (table.isEmpty()) return table;
+
+        ObservableList<ObservableList<T>> transposedObservableList = FXCollections.observableArrayList();
+
+        final int firstObservableListSize = table.get(0).size();
+        for (int i = 0; i < firstObservableListSize; i++) {
+            ObservableList<T> tempObservableList = FXCollections.observableArrayList();
+            for (ObservableList<T> row : table) {
+                tempObservableList.add(row.get(i));
+            }
+            transposedObservableList.add(tempObservableList);
+        }
+        return transposedObservableList;
+    }
+
+
     public static <T> List<List<T>> transpose(List<List<T>> table) {
 
-        if(null == table) throw new IllegalArgumentException("Table to transpose is null");
+        if (null == table) throw new IllegalArgumentException("Table to transpose is null");
 
-        if(table.isEmpty()) return table;
+        if (table.isEmpty()) return table;
 
         List<List<T>> transposedList = new ArrayList<>();
 
@@ -181,15 +235,13 @@ public final class DtOps {
     }
 
     public static <T> ObservableList<ObservableList<T>> copyMatrixWithAddedRow(ObservableList<ObservableList<T>> original,
-                                                                               Supplier<T> valueSupplier,
-                                                                               Supplier<T> noValueSupplier) {
+                                                                               Supplier<T> valueSupplier) {
         if (original.isEmpty()) {
             return original;
         }
         ObservableList<ObservableList<T>> copiedMatrix = copyMatrix(original);
         ObservableList<T> copiedRow = copyRow(original.get(0));
         Collections.fill(copiedRow, valueSupplier.get());
-        copiedRow.set(0,noValueSupplier.get()); // the else rule
         copiedMatrix.add(copiedRow);
         return copiedMatrix;
     }
@@ -202,5 +254,29 @@ public final class DtOps {
         copiedMatrix.stream().forEach(l -> l.add(valueSupplier.get()));
         return copiedMatrix;
     }
+
+    public static <T> ObservableList<ObservableList<T>> copyMatrixWithoutColumnsWithIndex(ObservableList<ObservableList<T>> original, List<Integer> indices) {
+
+        System.err.println(">>> original = [" + original + "], indices = [" + indices + "]");
+
+        if (original.isEmpty()) {
+            return original;
+        }
+        ObservableList<ObservableList<T>> copiedMatrix = copyMatrix(original);
+
+        System.err.println(">>> copiedMatrix = " + copiedMatrix);
+
+        final ObservableList<ObservableList<T>> modifiedMatrix = copiedMatrix.stream()
+                .map(l -> indices.stream()
+                        .map(j -> l.remove(j.intValue()))
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList)))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
+        System.err.println(">>> modifiedMatrix = " + modifiedMatrix);
+
+        return modifiedMatrix;
+    }
+
+
 
 }

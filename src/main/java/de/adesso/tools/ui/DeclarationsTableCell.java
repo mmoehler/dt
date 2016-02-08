@@ -1,4 +1,4 @@
-package de.adesso.tools.ui.condition;
+package de.adesso.tools.ui;
 
 import javafx.event.Event;
 import javafx.geometry.Insets;
@@ -12,12 +12,10 @@ import javafx.scene.text.Font;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
-import static de.adesso.tools.common.Reserved.*;
-
 /**
  * Created by mohler on 16.01.16.
  */
-public class ConditionDefnsTableCell<S, T> extends TableCell<S, T> {
+public class DeclarationsTableCell<S, T> extends TableCell<S, T> {
 
     /**
      * Convenience converter that does nothing (converts Strings to themselves and vice-versa...).
@@ -43,7 +41,7 @@ public class ConditionDefnsTableCell<S, T> extends TableCell<S, T> {
     private TextField textField;
 
 
-    public ConditionDefnsTableCell(StringConverter<T> converter) {
+    public DeclarationsTableCell(StringConverter<T> converter) {
         this.converter = converter;
 
         this.textField = createTextField();
@@ -96,59 +94,26 @@ public class ConditionDefnsTableCell<S, T> extends TableCell<S, T> {
     }
 
     /**
-     * Convenience method for creating an DtCell for a String value.
+     * Convenience method for creating an DeclarationsTableCell for a String value.
      *
      * @return
      */
     public static <S> Callback<TableColumn<S, String>, TableCell<S, String>> forTableColumn() {
-        return list -> new ConditionDefnsTableCell(IDENTITY_CONVERTER);
+        return list -> new DeclarationsTableCell(IDENTITY_CONVERTER);
     }
 
-    @Override
-    protected void updateItem(T item, boolean empty) {
-        super.updateItem(item, empty);
-        if (item == null || empty) {
-            setText(null);
-            setStyle("");
-        } else {
-            final String newValue = getText();
-            switch (newValue) {
-                case QMARK:
-                    setCellStyle("#f37c4e");
-                    break;
-                case YES:
-                    setCellStyle("#f3b804");
-                    break;
-                case NO:
-                    setCellStyle("#7fc2f3");
-                    break;
-                case DASH:
-                    setCellStyle("#04dddd");
-                    break;
-                case NOTHING :
-                case SPACE:
-                    setStyle(NOTHING);
-                    break;
-                default:
-                    setCellStyle("#c0c0c0");
-                    break;
-            }
-        }
-    }
-
-    private void setCellStyle(String colorHex) {
-        setStyle(String.format(
-                "-fx-background-radius: 5em; " +
-                        "-fx-body-color: %s; " +
-                        "-fx-background-color: radial-gradient(focus-angle 254deg , focus-distance 74%% , center 50%% 50%% , radius 55%% , #ffffff, %s); " +
-                        "-fx-background-insets: 1px; " +
-                        "-fx-padding: 0px;", colorHex, colorHex));
+    public static <S> Callback<TableColumn<S, String>, TableCell<S, String>> forTableColumn(Pos position) {
+        return list -> {
+            final DeclarationsTableCell cell = new DeclarationsTableCell(IDENTITY_CONVERTER);
+            cell.setAlignment(position);
+            return cell;
+        };
     }
 
 
     private TextField createTextField() {
         textField = new TextField();
-        textField.setPadding(new Insets(1, 1, 1, 1));
+        textField.setPadding(new Insets(0, 0, 0, 2));
         textField.setBorder(Border.EMPTY);
         textField.setBackground(Background.EMPTY);
         textField.setFont(new Font(12));
