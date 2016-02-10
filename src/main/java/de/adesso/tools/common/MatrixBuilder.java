@@ -4,7 +4,6 @@ import de.adesso.tools.util.func.DtOps;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,32 +34,11 @@ public final class MatrixBuilder {
         return builder;
     }
 
-    private static <T> List<List<T>> transpose(List<List<T>> table) {
-        List<List<T>> transposedList = new ArrayList<>();
-
-        final int firstListSize = table.get(0).size();
-        for (int i = 0; i < firstListSize; i++) {
-            List<T> tempList = new ArrayList<>();
-            for (List<T> row : table) {
-                tempList.add(row.get(i));
-            }
-            transposedList.add(tempList);
-        }
-        return transposedList;
-    }
-
-    private static <T> ObservableList<ObservableList<T>> transpose(ObservableList<ObservableList<T>> table) {
-        ObservableList<ObservableList<T>> transposedList = FXCollections.observableArrayList();
-
-        final int firstListSize = table.get(0).size();
-        for (int i = 0; i < firstListSize; i++) {
-            ObservableList<T> tempList = FXCollections.observableArrayList();
-            for (ObservableList<T> row : table) {
-                tempList.add(row.get(i));
-            }
-            transposedList.add(tempList);
-        }
-        return transposedList;
+    public static <T> ObservableList<ObservableList<T>> observable(List<List<T>> l) {
+        return l.stream()
+                .map(i -> i.stream()
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList)))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     /**
@@ -90,11 +68,10 @@ public final class MatrixBuilder {
     @javax.annotation.Nonnull
     public List<List<String>> build() {
         final List<String> rawData = Arrays
-                .stream(this.data.split("[, ;]]"))
+                .stream(this.data.split("[, ;]"))
                 .collect(Collectors.toList());
 
         final int rdSize = rawData.size();
-
         final List<List<String>> partitioned =
                 IntStream.range(0, (rdSize - 1) / n + 1)
                         .mapToObj(i -> rawData.subList(i *= n,
@@ -110,20 +87,19 @@ public final class MatrixBuilder {
      * @return a {@code MatrixBuilder} built with parameters of this {@code MatrixBuilder.Builder}
      */
     @javax.annotation.Nonnull
-    public ObservableList<ObservableList<String>> buildObservable() {
-        final ObservableList<String> rawData = Arrays
-                .stream(this.data.split("[, ;]]"))
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+    public List<List<String>> buildObservable() {
+        final List<String> rawData = Arrays
+                .stream(this.data.split("[, ;]"))
+                .collect(Collectors.toList());
 
         final int rdSize = rawData.size();
-
-        final ObservableList<ObservableList<String>> partitioned =
+        List<List<String>> partitioned =
                 IntStream.range(0, (rdSize - 1) / n + 1)
-                        .mapToObj(i -> (ObservableList<String>) rawData.subList(i *= n,
+                        .mapToObj(i -> rawData.subList(i *= n,
                                 rdSize - n >= i ? i + n : rdSize))
-                        .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                        .collect(Collectors.toList());
 
-        return (transposed) ? (transpose(partitioned)) : partitioned;
+        return (transposed) ? (DtOps.transpose(partitioned)) : partitioned;
     }
 
 }

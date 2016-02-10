@@ -129,13 +129,17 @@ public class MainView implements FxmlView<MainViewModel> {
 
         // --
         if(null != value && value.length == 1) {
-            this.conditionDefinitionsTable.getItems().clear();
-            this.actionDefinitionsTable.getItems().clear();
+//            this.conditionDefinitionsTable.getItems().clear();
+//            this.actionDefinitionsTable.getItems().clear();
 
             List<Integer> indices = (List<Integer>) value[0];
-            indices.forEach(i -> {
-                conditionDefinitionsTable.getColumns().remove(i);
-                actionDefinitionsTable.getColumns().remove(i);
+            int newCols = conditionDefinitionsTable.getColumns().size() - indices.size();
+            conditionDefinitionsTable.getColumns().clear();
+            actionDefinitionsTable.getColumns().clear();
+
+            IntStream.range(0,newCols).forEach(i -> {
+                conditionDefinitionsTable.getColumns().add(createTableColumn(i));
+                actionDefinitionsTable.getColumns().add(createTableColumn(i));
             });
 
             final ObservableList<ObservableList<String>> newConDefs = copyMatrixWithoutColumnsWithIndex(viewModel.getConditionDefinitions(), indices);

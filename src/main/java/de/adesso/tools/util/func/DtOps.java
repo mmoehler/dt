@@ -257,26 +257,28 @@ public final class DtOps {
 
     public static <T> ObservableList<ObservableList<T>> copyMatrixWithoutColumnsWithIndex(ObservableList<ObservableList<T>> original, List<Integer> indices) {
 
-        System.err.println(">>> original = [" + original + "], indices = [" + indices + "]");
+        Collections.sort(indices, (a,b) -> b.intValue() - a.intValue());
 
         if (original.isEmpty()) {
             return original;
         }
-        ObservableList<ObservableList<T>> copiedMatrix = copyMatrix(original);
 
-        System.err.println(">>> copiedMatrix = " + copiedMatrix);
-
+        final ObservableList<ObservableList<T>> copiedMatrix = copyMatrix(original);
         final ObservableList<ObservableList<T>> modifiedMatrix = copiedMatrix.stream()
-                .map(l -> indices.stream()
-                        .map(j -> l.remove(j.intValue()))
-                        .collect(Collectors.toCollection(FXCollections::observableArrayList)))
+                .map(l -> removeAtIndices(l, indices))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
-
-        System.err.println(">>> modifiedMatrix = " + modifiedMatrix);
 
         return modifiedMatrix;
     }
 
-
+    public static <T> ObservableList<T> removeAtIndices(ObservableList<T> ol, List<Integer> indices) {
+        Collections.sort(indices, (a,b) -> b.intValue() - a.intValue());
+        ObservableList<T> out = FXCollections.observableArrayList();
+        for (int i = 0; i < ol.size(); i++) {
+            if(indices.contains(i)) continue;
+            out.add(ol.get(i));
+        }
+        return out;
+    }
 
 }
