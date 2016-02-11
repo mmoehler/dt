@@ -154,18 +154,14 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onRemoveConditionDefsWithoutActions(@Observes RemoveConditionDefsWithoutActionsEvent event) {
-        final List<Integer> indices = obtainOfRulesWithoutActions();
-        publish(Notifications.REM_RULES_WITHOUT_ACTIONS.name(), indices);
-    }
-
-    private List<Integer> obtainOfRulesWithoutActions() {
         final ObservableList<ObservableList<String>> transposed = transposeObservable(this.actionDefinitions);
-        final List<Integer> indices = StreamUtils.zipWithIndex(transposed.stream())
+        final List<Integer> indices1 = StreamUtils.zipWithIndex(transposed.stream())
                 .filter(i -> isBlank(i.getValue()))
                 .map(q -> Integer.valueOf((int) q.getIndex()))
                 .sorted((aa, bb) -> bb.intValue() - aa.intValue())
                 .collect(Collectors.toList());
-        return indices;
+        final List<Integer> indices = indices1;
+        publish(Notifications.REM_RULES_WITHOUT_ACTIONS.name(), indices);
     }
 
     private static boolean isBlank(ObservableList<String> ol) {

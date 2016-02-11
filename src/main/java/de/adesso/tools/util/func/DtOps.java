@@ -10,6 +10,7 @@ import javafx.collections.ObservableList;
 import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static java.lang.Math.min;
 
@@ -255,7 +256,25 @@ public final class DtOps {
         return copiedMatrix;
     }
 
-    public static <T> ObservableList<ObservableList<T>> copyMatrixWithoutColumnsWithIndex(ObservableList<ObservableList<T>> original, List<Integer> indices) {
+
+    public static <T> ObservableList<ObservableList<T>> copyMatrixWithRemovedRowAtIndices(ObservableList<ObservableList<T>> original, List<Integer> indices) {
+        if (original.isEmpty()) {
+            return original;
+        }
+        ObservableList<ObservableList<T>> out = IntStream.range(0,original.size())
+                .filter(i -> !indices.contains(i)).mapToObj(original::get)
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        return out;
+    }
+
+    public static <T> ObservableList<ObservableList<T>> copyMatrixWithRemovedRow(ObservableList<ObservableList<T>> original) {
+        ArrayList<Integer> arg = new ArrayList<>();
+        arg.add(original.size()-1);
+        return copyMatrixWithRemovedRowAtIndices(original, arg);
+    }
+
+
+    public static <T> ObservableList<ObservableList<T>> copyMatrixWithoutColumnsAtIndex(ObservableList<ObservableList<T>> original, List<Integer> indices) {
 
         Collections.sort(indices, (a,b) -> b.intValue() - a.intValue());
 
@@ -265,20 +284,38 @@ public final class DtOps {
 
         final ObservableList<ObservableList<T>> copiedMatrix = copyMatrix(original);
         final ObservableList<ObservableList<T>> modifiedMatrix = copiedMatrix.stream()
-                .map(l -> removeAtIndices(l, indices))
+                .map(l -> {
+                    Collections.sort(indices, (a, b) -> b.intValue() - a.intValue());
+                    ObservableList<T> out = FXCollections.observableArrayList();
+                    for (int i = 0; i < l.size(); i++) {
+                        if(indices.contains(i)) continue;
+                        out.add(l.get(i));
+                    }
+                    return out;
+                })
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
-
         return modifiedMatrix;
     }
 
-    public static <T> ObservableList<T> removeAtIndices(ObservableList<T> ol, List<Integer> indices) {
-        Collections.sort(indices, (a,b) -> b.intValue() - a.intValue());
-        ObservableList<T> out = FXCollections.observableArrayList();
-        for (int i = 0; i < ol.size(); i++) {
-            if(indices.contains(i)) continue;
-            out.add(ol.get(i));
-        }
-        return out;
-    }
+    public static <T> ObservableList<T> copyListRemovedElementsAtIndices(ObservableList<T> original, List<Integer> indices) {
+        ObservableList<T> out = IntStream.range(0, original.size())
+                .filter(i -> !indices.contains(i))
+                .mapToObj(k -> original.get(k))
+                .collect(Collectors.toCollection(FXCollections::observableArrayList));
 
+        /*
+
+        Collections.sort(indices, (a, b) -> b.intValue() - a.intValue());
+        ObservableList<T> out = FXCollections.observableArrayList();
+        for (int i = 0; i < original.size(); i++) {
+            if(indices.contains(i)) continue;
+            out.add(original.get(i));
+        }
+
+        */
+
+        return out;
+
+
+    }
 }

@@ -13,6 +13,7 @@ import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
@@ -24,12 +25,13 @@ import javafx.scene.input.KeyEvent;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import static de.adesso.tools.ui.TableColumnOps.createTableColumn;
-import static de.adesso.tools.util.func.DtOps.copyMatrixWithoutColumnsWithIndex;
-import static de.adesso.tools.util.func.DtOps.determineMaxColumns;
+import static de.adesso.tools.util.func.DtOps.*;
 
 public class MainView implements FxmlView<MainViewModel> {
     private final DoubleProperty conditionDividerPos = new SimpleDoubleProperty();
@@ -114,39 +116,26 @@ public class MainView implements FxmlView<MainViewModel> {
             }
 
         });
-        
-        this.viewModel.subscribe(Notifications.REM_ACTION_DECL.name(), (key, value) -> doRemActionDecl(key,value));
-        this.viewModel.subscribe(Notifications.REM_RULES_WITHOUT_ACTIONS.name(), (key, value) -> doRemRulesWithoutActions(key,value));
-        
+
+        this.viewModel.subscribe(Notifications.REM_ACTION_DECL.name(), (key, value) -> doRemActionDecl(key, value));
+        this.viewModel.subscribe(Notifications.REM_RULES_WITHOUT_ACTIONS.name(), (key, value) -> doRemRulesWithoutActions(key, value));
+
     }
 
     private void doRemRulesWithoutActions(String kk, Object[] value) {
-
-        System.err.println("key = [" + kk + "], value = [" + value[0] + "]");
-
-        System.err.println(this.viewModel.getConditionDefinitions());
-        System.err.println(this.viewModel.getActionDefinitions());
-
-        // --
-        if(null != value && value.length == 1) {
-//            this.conditionDefinitionsTable.getItems().clear();
-//            this.actionDefinitionsTable.getItems().clear();
-
+        if (null != value && value.length == 1) {
             List<Integer> indices = (List<Integer>) value[0];
             int newCols = conditionDefinitionsTable.getColumns().size() - indices.size();
             conditionDefinitionsTable.getColumns().clear();
             actionDefinitionsTable.getColumns().clear();
 
-            IntStream.range(0,newCols).forEach(i -> {
+            IntStream.range(0, newCols).forEach(i -> {
                 conditionDefinitionsTable.getColumns().add(createTableColumn(i));
                 actionDefinitionsTable.getColumns().add(createTableColumn(i));
             });
 
-            final ObservableList<ObservableList<String>> newConDefs = copyMatrixWithoutColumnsWithIndex(viewModel.getConditionDefinitions(), indices);
-            final ObservableList<ObservableList<String>> newActDefs = copyMatrixWithoutColumnsWithIndex(viewModel.getActionDefinitions(), indices);
-
-            System.err.println("newConDefs = " + newConDefs);
-            System.err.println("newActDefs = " + newActDefs);
+            final ObservableList<ObservableList<String>> newConDefs = copyMatrixWithoutColumnsAtIndex(viewModel.getConditionDefinitions(), indices);
+            final ObservableList<ObservableList<String>> newActDefs = copyMatrixWithoutColumnsAtIndex(viewModel.getActionDefinitions(), indices);
 
             viewModel.getConditionDefinitions().clear();
             newConDefs.forEach(viewModel.getConditionDefinitions()::add);
@@ -155,14 +144,50 @@ public class MainView implements FxmlView<MainViewModel> {
 
             conditionDefinitionsTable.refresh();
             actionDefinitionsTable.refresh();
-
         }
     }
 
     private void doRemActionDecl(String key, Object[] value) {
+        ObservableList<ActionDeclTableViewModel>  newActDecls = FXCollections.emptyObservableList();
+        ObservableList<ObservableList<String>> newActDefs =  FXCollections.emptyObservableList();
+        List<Integer> indices = Collections.emptyList();
+
+        if (null != value && value.length == 1) {
+            indices = (List<Integer>) value[0];
+        } else {
+            Optional<TablePosition> cellPos = getSelectedCell(this.actionDeclarationsTable);
+            indices = new ArrayList<>(1);
+            if(cellPos.isPresent()) {
+                indices.add(cellPos.get().getRow());
+            } else {
+                cellPos = getSelectedCell(this.actionDefinitionsTable);
+                if(cellPos.isPresent()) {
+                    indices.add(cellPos.get().getRow());
+                }
+            }
+        }
+
+        if(indices.isEmpty()){
+            return;
+        }
+
+        newActDecls = copyListRemovedElementsAtIndices(viewModel.getActionDeclarations(), indices);
+        newActDefs = copyMatrixWithRemovedRowAtIndices(viewModel.getActionDefinitions(), indices);
+
+        viewModel.getActionDeclarations().clear();
+        newActDecls.forEach(viewModel.getActionDeclarations()::add);
+        viewModel.getActionDefinitions().clear();
+        newActDefs.forEach(viewModel.getActionDefinitions()::add);
+
+        conditionDefinitionsTable.refresh();
+        actionDefinitionsTable.refresh();
+
     }
 
-
+    private static Optional<TablePosition> getSelectedCell(TableView<?> table) {
+        final ObservableList<TablePosition> selectedCells = table.getSelectionModel().getSelectedCells();
+        return (selectedCells.isEmpty()) ? Optional.empty(): Optional.of(selectedCells.get(0));
+    }
 
     protected void initializeConditionDefnsTable(int countColumns, boolean shouldPopulateData) {
         this.conditionDefinitionsTable.setEditable(true);
