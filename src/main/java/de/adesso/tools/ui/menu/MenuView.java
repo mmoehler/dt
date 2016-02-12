@@ -47,7 +47,8 @@ public class MenuView implements FxmlView<MenuViewModel> {
     }
 
     @FXML
-    public void doRemoveConditionDef(ActionEvent actionEvent) {
+    public void doRemoveRuleDef(ActionEvent actionEvent) {
+        viewModel.removeConditionDeclAction();
     }
 
     @FXML
@@ -82,7 +83,7 @@ public class MenuView implements FxmlView<MenuViewModel> {
     }
 
     @FXML
-    public void doRemoveConditionDefsWithoutAction(ActionEvent actionEvent) {
+    public void doRemoveRuleDefsWithoutAction(ActionEvent actionEvent) {
         viewModel.removeConditionDefsWithoutAction();
     }
 }

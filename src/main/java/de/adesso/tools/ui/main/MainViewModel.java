@@ -62,12 +62,6 @@ public class MainViewModel implements ViewModel {
         return actionDefinitions;
     }
 
-
-    public void onRemoveConditionDecl(@Observes RemoveConditionDeclEvent event) {
-        final String reduce = conditionDefinitions.stream().map(a -> a.toString()).reduce(EMPTY, (a, b) -> a + '\n' + b);
-        LOG.debug(reduce + '\n');
-    }
-
     public void onAddConditionDef(@Observes AddConditionDefEvent event) {
         ObservableList<ObservableList<String>> newDefns = copyMatrixWithAddedColumn(this.conditionDefinitions, () -> QMARK);
         this.conditionDefinitions.clear();
@@ -147,6 +141,10 @@ public class MainViewModel implements ViewModel {
         final Tuple3<Boolean, Integer, Integer> result = isFormalComplete(this.conditionDeclarations, this.conditionDefinitions);
         final String message = String.valueOf(result);
         notificationCenter.publish(Notifications.PREPARE_CONSOLE.name(), message);
+    }
+
+    public void onRemoveConditionDecl(@Observes RemoveConditionDeclEvent event) {
+        publish(Notifications.REM_CONDITION_DECL.name(), NO_ARGS);
     }
 
     public void onRemoveActionDecl(@Observes RemoveActionDeclEvent event) {

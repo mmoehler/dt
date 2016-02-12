@@ -46,12 +46,12 @@
                                 <KeyCodeCombination alt="UP" code="F7" control="UP" meta="UP" shift="UP" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="removeConditionDefsMenuItem" mnemonicParsing="false" onAction="#doRemoveConditionDef" text="Remove Rule">
+                        <MenuItem fx:id="removeRuleMenuItem" mnemonicParsing="false" onAction="#doRemoveRuleDef" text="Remove Rule">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="F7" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="removeConditionDefsWithoutActionsMenuItem" mnemonicParsing="false" onAction="#doRemoveConditionDefsWithoutAction" text="Remove Rule without Actions">
+                        <MenuItem fx:id="removeRuleDefsWithoutActionsMenuItem" mnemonicParsing="false" onAction="#doRemoveRuleDefsWithoutAction" text="Remove Rule without Actions">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="F7" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                             </accelerator>

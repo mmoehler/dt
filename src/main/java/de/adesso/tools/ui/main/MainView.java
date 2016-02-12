@@ -6,6 +6,7 @@ import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.tools.ui.dialogs.Dialogs;
 import de.adesso.tools.util.OsCheck;
+import de.adesso.tools.util.func.DtOps;
 import de.adesso.tools.util.tuple.Tuple2;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
@@ -119,6 +120,7 @@ public class MainView implements FxmlView<MainViewModel> {
 
         this.viewModel.subscribe(Notifications.REM_ACTION_DECL.name(), (key, value) -> doRemActionDecl(key, value));
         this.viewModel.subscribe(Notifications.REM_RULES_WITHOUT_ACTIONS.name(), (key, value) -> doRemRulesWithoutActions(key, value));
+        this.viewModel.subscribe(Notifications.REM_CONDITION_DECL.name(), (key, value) -> doRemConditionDecl(key, value));
 
     }
 
@@ -147,20 +149,37 @@ public class MainView implements FxmlView<MainViewModel> {
         }
     }
 
+    private void doRemConditionDecl(String key, Object[] value) {
+        doRemoveRows(this.viewModel, this.conditionDeclarationsTable, this.conditionDefinitionsTable, value);
+        // but here this is not enough! If hte count of columns after the row removal is greater thean
+        // the max possible count, than the difference of columns must also be deleted.
+        int cols = this.viewModel.getConditionDefinitions().size();
+        int start = DtOps.determineMaxColumns(viewModel.getConditionDeclarations());
+        // TODO implement >>> doRemConditionDecl(String key, Object[] value) !!
+        /* --
+        int end = Range.newBuilder().withFrom(start, end - start)
+        viewModel.removeRulesIn(Range range)
+        -- */
+    }
+
     private void doRemActionDecl(String key, Object[] value) {
-        ObservableList<ActionDeclTableViewModel>  newActDecls = FXCollections.emptyObservableList();
+        doRemoveRows(this.viewModel, this.actionDeclarationsTable, this.actionDefinitionsTable, value);
+    }
+
+    private static void doRemoveRows(MainViewModel viewModel, TableView<?> declarations, TableView<?> definitions, Object[] value) {
+        ObservableList<ActionDeclTableViewModel> newActDecls = FXCollections.emptyObservableList();
         ObservableList<ObservableList<String>> newActDefs =  FXCollections.emptyObservableList();
         List<Integer> indices = Collections.emptyList();
 
         if (null != value && value.length == 1) {
             indices = (List<Integer>) value[0];
         } else {
-            Optional<TablePosition> cellPos = getSelectedCell(this.actionDeclarationsTable);
+            Optional<TablePosition> cellPos = getSelectedCell(declarations);
             indices = new ArrayList<>(1);
             if(cellPos.isPresent()) {
                 indices.add(cellPos.get().getRow());
             } else {
-                cellPos = getSelectedCell(this.actionDefinitionsTable);
+                cellPos = getSelectedCell(definitions);
                 if(cellPos.isPresent()) {
                     indices.add(cellPos.get().getRow());
                 }
@@ -179,9 +198,8 @@ public class MainView implements FxmlView<MainViewModel> {
         viewModel.getActionDefinitions().clear();
         newActDefs.forEach(viewModel.getActionDefinitions()::add);
 
-        conditionDefinitionsTable.refresh();
-        actionDefinitionsTable.refresh();
-
+        declarations.refresh();
+        definitions.refresh();
     }
 
     private static Optional<TablePosition> getSelectedCell(TableView<?> table) {
