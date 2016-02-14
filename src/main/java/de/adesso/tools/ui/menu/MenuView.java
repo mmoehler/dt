@@ -56,14 +56,6 @@ public class MenuView implements FxmlView<MenuViewModel> {
         viewModel.addConditionDef();
     }
 
-    @FXML
-    public void doSimpleCompletenessCheck(ActionEvent actionEvent) {
-        viewModel.simpleCompletenessCheckAction();
-    }
-
-    @FXML
-    public void doExtendedCompletenessCheck(ActionEvent actionEvent) {
-    }
 
     @FXML
     public void doAbout() {
@@ -86,4 +78,14 @@ public class MenuView implements FxmlView<MenuViewModel> {
     public void doRemoveRuleDefsWithoutAction(ActionEvent actionEvent) {
         viewModel.removeConditionDefsWithoutAction();
     }
+
+    @FXML
+    public void doSimpleCompletenessCheck(ActionEvent actionEvent) {
+        viewModel.simpleCompletenessCheckAction();
+    }
+
+    @FXML
+    public void doExtendedCompletenessCheck(ActionEvent actionEvent) {
+    }
+
 }

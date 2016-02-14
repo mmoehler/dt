@@ -1,6 +1,6 @@
 package de.adesso.tools.common;
 
-import de.adesso.tools.util.func.DtOps;
+import de.adesso.tools.util.matrix.Matrix;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -26,7 +26,7 @@ public final class MatrixBuilder {
         return new MatrixBuilder(data);
     }
 
-    public static MatrixBuilder prototype(@javax.annotation.Nonnull MatrixBuilder copy) {
+    public static MatrixBuilder copy(@javax.annotation.Nonnull MatrixBuilder copy) {
         MatrixBuilder builder = new MatrixBuilder(copy.data);
         builder.n = copy.n;
         builder.m = copy.m;
@@ -78,28 +78,8 @@ public final class MatrixBuilder {
                                 rdSize - n >= i ? i + n : rdSize))
                         .collect(Collectors.toList());
 
-        return (transposed) ? (DtOps.transpose(partitioned)) : partitioned;
+        return (transposed) ? (Matrix.transpose(partitioned)) : partitioned;
     }
 
-    /**
-     * Returns a {@code MatrixBuilder} built from the parameters previously set.
-     *
-     * @return a {@code MatrixBuilder} built with parameters of this {@code MatrixBuilder.Builder}
-     */
-    @javax.annotation.Nonnull
-    public List<List<String>> buildObservable() {
-        final List<String> rawData = Arrays
-                .stream(this.data.split("[, ;]"))
-                .collect(Collectors.toList());
-
-        final int rdSize = rawData.size();
-        List<List<String>> partitioned =
-                IntStream.range(0, (rdSize - 1) / n + 1)
-                        .mapToObj(i -> rawData.subList(i *= n,
-                                rdSize - n >= i ? i + n : rdSize))
-                        .collect(Collectors.toList());
-
-        return (transposed) ? (DtOps.transpose(partitioned)) : partitioned;
-    }
 
 }

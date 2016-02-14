@@ -7,6 +7,7 @@ import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.Notifications;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
+import de.adesso.tools.util.matrix.Matrix;
 import de.adesso.tools.util.tuple.Tuple3;
 import de.saxsys.mvvmfx.ViewModel;
 import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
@@ -63,9 +64,9 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onAddConditionDef(@Observes AddConditionDefEvent event) {
-        ObservableList<ObservableList<String>> newDefns = copyMatrixWithAddedColumn(this.conditionDefinitions, () -> QMARK);
+        ObservableList<ObservableList<String>> newDefns = Matrix.addColumn(this.conditionDefinitions, () -> QMARK);
         this.conditionDefinitions.clear();
-        ObservableList<ObservableList<String>> newDefns0 = copyMatrixWithAddedColumn(this.actionDefinitions, () -> QMARK);
+        ObservableList<ObservableList<String>> newDefns0 = Matrix.addColumn(this.actionDefinitions, () -> QMARK);
         this.actionDefinitions.clear();
         publish(Notifications.CONDITIONDEF_ADD.name(), newDefns, newDefns0);
     }
@@ -100,7 +101,7 @@ public class MainViewModel implements ViewModel {
 
         // #2 If there are at least one condition defined, then this must also be updated
         if (!this.conditionDefinitions.isEmpty()) {
-            ObservableList<ObservableList<String>> newDefns = copyMatrixWithAddedRow(this.conditionDefinitions, () -> QMARK);
+            ObservableList<ObservableList<String>> newDefns = Matrix.addRow(this.conditionDefinitions, () -> QMARK);
             this.conditionDefinitions.clear();
             newDefns.stream().forEach(this.conditionDefinitions::add);
         }
@@ -129,7 +130,7 @@ public class MainViewModel implements ViewModel {
                 newDefns.add(indicators);
             }
         } else {
-            newDefns = copyMatrixWithAddedRow(this.actionDefinitions, () -> QMARK);
+            newDefns = Matrix.addRow(this.actionDefinitions, () -> QMARK);
 
         }
         this.actionDefinitions.clear();
@@ -152,7 +153,7 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onRemoveConditionDefsWithoutActions(@Observes RemoveConditionDefsWithoutActionsEvent event) {
-        final ObservableList<ObservableList<String>> transposed = transposeObservable(this.actionDefinitions);
+        final ObservableList<ObservableList<String>> transposed = Matrix.transpose/*Observable*/(this.actionDefinitions);
         final List<Integer> indices1 = StreamUtils.zipWithIndex(transposed.stream())
                 .filter(i -> isBlank(i.getValue()))
                 .map(q -> Integer.valueOf((int) q.getIndex()))

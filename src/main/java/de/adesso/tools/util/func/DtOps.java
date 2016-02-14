@@ -4,13 +4,12 @@ import com.google.common.collect.Lists;
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
+import de.adesso.tools.util.matrix.Matrix;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.*;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static java.lang.Math.min;
 
@@ -73,7 +72,7 @@ public final class DtOps {
         final ObservableList<ObservableList<String>> retList = FXCollections.observableArrayList();
         final List<List<String>> rawIndicators = determineIndicatorListPerRow(indicators);
         final List<List<String>> permutations = permutations(rawIndicators);
-        final List<List<String>> transposed = transpose(permutations);
+        final List<List<String>> transposed = Matrix.transpose(permutations);
         transposed.forEach(l -> retList.add(FXCollections.observableArrayList(l)));
         return retList;
     }
@@ -151,44 +150,6 @@ public final class DtOps {
         return retList;
     }
 
-    public static <T> ObservableList<ObservableList<T>> transposeObservable(ObservableList<ObservableList<T>> table) {
-
-        if (null == table) throw new IllegalArgumentException("Table to transpose is null");
-
-        if (table.isEmpty()) return table;
-
-        ObservableList<ObservableList<T>> transposedObservableList = FXCollections.observableArrayList();
-
-        final int firstObservableListSize = table.get(0).size();
-        for (int i = 0; i < firstObservableListSize; i++) {
-            ObservableList<T> tempObservableList = FXCollections.observableArrayList();
-            for (ObservableList<T> row : table) {
-                tempObservableList.add(row.get(i));
-            }
-            transposedObservableList.add(tempObservableList);
-        }
-        return transposedObservableList;
-    }
-
-
-    public static <T> List<List<T>> transpose(List<List<T>> table) {
-
-        if (null == table) throw new IllegalArgumentException("Table to transpose is null");
-
-        if (table.isEmpty()) return table;
-
-        List<List<T>> transposedList = new ArrayList<>();
-
-        final int firstListSize = table.get(0).size();
-        for (int i = 0; i < firstListSize; i++) {
-            List<T> tempList = new ArrayList<>();
-            for (List<T> row : table) {
-                tempList.add(row.get(i));
-            }
-            transposedList.add(tempList);
-        }
-        return transposedList;
-    }
 
     public static <T> List<List<T>> permutations(List<List<T>> collections) {
         if (collections == null || collections.isEmpty()) {
@@ -216,106 +177,5 @@ public final class DtOps {
         }
     }
 
-    /**
-     * Copies a nested {@code ObservableList}
-     *
-     * @param original the ObservableList which should be copied
-     * @param <T>
-     * @return an ObservableList as copyMatrix of {@code src}
-     */
-    public static <T> ObservableList<ObservableList<T>> copyMatrix(ObservableList<ObservableList<T>> original) {
-        return original.stream()
-                .map(e -> e.stream()
-                        .collect(Collectors.toCollection(FXCollections::observableArrayList)))
-                .collect(Collectors.toCollection(() -> FXCollections.observableArrayList()));
-    }
 
-    public static <T> ObservableList<T> copyRow(ObservableList<T> original) {
-        return original.stream()
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
-    }
-
-    public static <T> ObservableList<ObservableList<T>> copyMatrixWithAddedRow(ObservableList<ObservableList<T>> original,
-                                                                               Supplier<T> valueSupplier) {
-        if (original.isEmpty()) {
-            return original;
-        }
-        ObservableList<ObservableList<T>> copiedMatrix = copyMatrix(original);
-        ObservableList<T> copiedRow = copyRow(original.get(0));
-        Collections.fill(copiedRow, valueSupplier.get());
-        copiedMatrix.add(copiedRow);
-        return copiedMatrix;
-    }
-
-    public static <T> ObservableList<ObservableList<T>> copyMatrixWithAddedColumn(ObservableList<ObservableList<T>> original, Supplier<T> valueSupplier) {
-        if (original.isEmpty()) {
-            return original;
-        }
-        ObservableList<ObservableList<T>> copiedMatrix = copyMatrix(original);
-        copiedMatrix.stream().forEach(l -> l.add(valueSupplier.get()));
-        return copiedMatrix;
-    }
-
-
-    public static <T> ObservableList<ObservableList<T>> copyMatrixWithRemovedRowAtIndices(ObservableList<ObservableList<T>> original, List<Integer> indices) {
-        if (original.isEmpty()) {
-            return original;
-        }
-        ObservableList<ObservableList<T>> out = IntStream.range(0,original.size())
-                .filter(i -> !indices.contains(i)).mapToObj(original::get)
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
-        return out;
-    }
-
-    public static <T> ObservableList<ObservableList<T>> copyMatrixWithRemovedRow(ObservableList<ObservableList<T>> original) {
-        ArrayList<Integer> arg = new ArrayList<>();
-        arg.add(original.size()-1);
-        return copyMatrixWithRemovedRowAtIndices(original, arg);
-    }
-
-
-    public static <T> ObservableList<ObservableList<T>> copyMatrixWithoutColumnsAtIndex(ObservableList<ObservableList<T>> original, List<Integer> indices) {
-
-        Collections.sort(indices, (a,b) -> b.intValue() - a.intValue());
-
-        if (original.isEmpty()) {
-            return original;
-        }
-
-        final ObservableList<ObservableList<T>> copiedMatrix = copyMatrix(original);
-        final ObservableList<ObservableList<T>> modifiedMatrix = copiedMatrix.stream()
-                .map(l -> {
-                    Collections.sort(indices, (a, b) -> b.intValue() - a.intValue());
-                    ObservableList<T> out = FXCollections.observableArrayList();
-                    for (int i = 0; i < l.size(); i++) {
-                        if(indices.contains(i)) continue;
-                        out.add(l.get(i));
-                    }
-                    return out;
-                })
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
-        return modifiedMatrix;
-    }
-
-    public static <T> ObservableList<T> copyListRemovedElementsAtIndices(ObservableList<T> original, List<Integer> indices) {
-        ObservableList<T> out = IntStream.range(0, original.size())
-                .filter(i -> !indices.contains(i))
-                .mapToObj(k -> original.get(k))
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
-
-        /*
-
-        Collections.sort(indices, (a, b) -> b.intValue() - a.intValue());
-        ObservableList<T> out = FXCollections.observableArrayList();
-        for (int i = 0; i < original.size(); i++) {
-            if(indices.contains(i)) continue;
-            out.add(original.get(i));
-        }
-
-        */
-
-        return out;
-
-
-    }
 }

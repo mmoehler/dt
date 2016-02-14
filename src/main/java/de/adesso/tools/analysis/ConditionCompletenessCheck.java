@@ -1,6 +1,7 @@
 package de.adesso.tools.analysis;
 
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
+import de.adesso.tools.util.matrix.Matrix;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple3;
 import javafx.collections.ObservableList;
@@ -36,7 +37,7 @@ public final class ConditionCompletenessCheck {
             }
             return 1;
         }).collect(Collectors.toList())).collect(Collectors.toList());
-        List<List<Integer>> transposed = transpose(list);
+        List<List<Integer>> transposed = Matrix.transpose(list);
         final Integer reduced = transposed.stream().map(l -> l.stream().reduce(1, (a, b) -> a * b)).reduce(0, (c, d) -> c + d);
         final Integer all = determineMaxColumns(decls);
         return Tuple.of(all != reduced, all, reduced);
