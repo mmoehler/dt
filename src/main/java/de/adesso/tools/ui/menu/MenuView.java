@@ -31,9 +31,25 @@ public class MenuView implements FxmlView<MenuViewModel> {
         removeConditionDeclMenuItem.disableProperty().bind(viewModel.removeItemDisabledProperty());
     }
 
+    // General
+
     @FXML
     public void doClose() {
         viewModel.closeAction();
+    }
+
+    @FXML
+    public void doAbout() {
+        Parent view = FluentViewLoader.fxmlView(AboutView.class)
+                .load().getView();
+        DialogHelper.showDialog(view, primaryStage, "/contacts.css");
+    }
+
+    // Conditions
+
+    @FXML
+    public void doAddConditionDecl(ActionEvent actionEvent) {
+        viewModel.addConditionDeclAction();
     }
 
     @FXML
@@ -42,27 +58,11 @@ public class MenuView implements FxmlView<MenuViewModel> {
     }
 
     @FXML
-    public void doAddConditionDecl(ActionEvent actionEvent) {
-        viewModel.addConditionDeclAction();
-    }
-
-    @FXML
-    public void doRemoveRuleDef(ActionEvent actionEvent) {
-        viewModel.removeConditionDeclAction();
-    }
-
-    @FXML
-    public void doAddConditionDef(ActionEvent actionEvent) {
+    public void doAddRuleDef(ActionEvent actionEvent) {
         viewModel.addConditionDef();
     }
 
-
-    @FXML
-    public void doAbout() {
-        Parent view = FluentViewLoader.fxmlView(AboutView.class)
-                .load().getView();
-        DialogHelper.showDialog(view, primaryStage, "/contacts.css");
-    }
+    // Actions
 
     @FXML
     public void doAddActionDecl(ActionEvent actionEvent) {
@@ -73,6 +73,12 @@ public class MenuView implements FxmlView<MenuViewModel> {
     public void doRemoveActionDecl(ActionEvent actionEvent) {
         viewModel.removeActionDecl();
     }
+
+    @FXML
+    public void doRemoveRuleDef(ActionEvent actionEvent) {
+        viewModel.removeConditionDeclAction();
+    }
+
 
     @FXML
     public void doRemoveRuleDefsWithoutAction(ActionEvent actionEvent) {
@@ -88,4 +94,28 @@ public class MenuView implements FxmlView<MenuViewModel> {
     public void doExtendedCompletenessCheck(ActionEvent actionEvent) {
     }
 
+    @FXML
+    public void doInsertConditionDecl(ActionEvent actionEvent) {
+        viewModel.insertConditionDecl();
+    }
+
+    @FXML
+    public void doInsertActionDecl(ActionEvent actionEvent) {
+        viewModel.insertActionDecl();
+    }
+
+    @FXML
+    public void doInsertRuleDef(ActionEvent actionEvent) {
+        viewModel.insertRuleDef();
+    }
+
+    @FXML
+    public void doMoveDeclUp(ActionEvent actionEvent) {
+        viewModel.moveDeclUp();
+    }
+
+    @FXML
+    public void doMoveDeclDown(ActionEvent actionEvent) {
+        viewModel.moveDeclDown();
+    }
 }

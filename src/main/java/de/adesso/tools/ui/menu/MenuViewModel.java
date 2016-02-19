@@ -34,6 +34,16 @@ public class MenuViewModel implements ViewModel {
     private Event<RemoveActionDeclEvent> removeActionDeclEvent;
     @Inject
     private Event<RemoveConditionDefsWithoutActionsEvent> removeConditionDefsWithoutActionsEventEvent;
+    @Inject
+    private Event<InsertConditionDeclEvent> insertConditionDeclEvent;
+    @Inject
+    private Event<InsertActionDeclEvent> insertActionDeclEvent;
+    @Inject
+    private Event<InsertRuleDefEvent> insertRuleDefEvent;
+    @Inject
+    private Event<MoveDeclUpEvent> moveDeclUpEvent;
+    @Inject
+    private Event<MoveDeclDownEvent> moveDeclDownEvent;
 
     @InjectScope
     private RuleScope mdScope;
@@ -76,5 +86,25 @@ public class MenuViewModel implements ViewModel {
 
     public void removeConditionDefsWithoutAction() {
         removeConditionDefsWithoutActionsEventEvent.fire(new RemoveConditionDefsWithoutActionsEvent());
+    }
+
+    public void insertConditionDecl() {
+        insertConditionDeclEvent.fire(new InsertConditionDeclEvent());
+    }
+
+    public void insertActionDecl() {
+        insertActionDeclEvent.fire(new InsertActionDeclEvent());
+    }
+
+    public void insertRuleDef() {
+        insertRuleDefEvent.fire(new InsertRuleDefEvent());
+    }
+
+    public void moveDeclUp() {
+        moveDeclUpEvent.fire(new MoveDeclUpEvent());
+    }
+
+    public void moveDeclDown() {
+        moveDeclDownEvent.fire(new MoveDeclDownEvent());
     }
 }
