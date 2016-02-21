@@ -39,7 +39,7 @@ public class DialogHelper {
                 if (dialogStage.getScene() == null) {
                     // ... we create a new scene and register it in the stage.
                     Scene dialogScene = new Scene(rootSupplier.get());
-                    dialogScene.getStylesheets().add("/contacts.css");
+                    dialogScene.getStylesheets().add("/dtmg.css");
                     dialogStage.setScene(dialogScene);
                 } else {
                     // ... otherwise we simple bring the dialog to front.

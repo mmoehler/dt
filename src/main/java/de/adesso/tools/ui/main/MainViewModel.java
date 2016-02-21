@@ -7,7 +7,7 @@ import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.Notifications;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
-import de.adesso.tools.util.matrix.Matrix;
+import de.adesso.tools.functions.MatrixFunctions;
 import de.adesso.tools.util.tuple.Tuple3;
 import de.saxsys.mvvmfx.ViewModel;
 import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
@@ -24,23 +24,29 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static de.adesso.tools.analysis.ConditionCompletenessCheck.isFormalComplete;
-import static de.adesso.tools.util.func.DtOps.*;
+import static de.adesso.tools.functions.DtFunctions.fullExpandActions;
+import static de.adesso.tools.functions.DtFunctions.limitedExpandConditions;
 
 @Singleton
 public class MainViewModel implements ViewModel {
+
+    private static final Logger LOG = LoggerFactory.getLogger(MainViewModel.class);
+
     public static final String QMARK = "?";
     public static final String EMPTY = "";
-    public static final String COND_ROW_HEADER = "C%02d";
     public static final Object[] NO_ARGS = {};
-    private static final Logger LOG = LoggerFactory.getLogger(MainViewModel.class);
+
     private static final String ACT_ROW_HEADER = "A%02d";
+    public static final String COND_ROW_HEADER = "C%02d";
+
     private final ObservableList<ConditionDeclTableViewModel> conditionDeclarations = FXCollections.observableArrayList();
     private final ObservableList<ObservableList<String>> conditionDefinitions = FXCollections.observableArrayList();
     private final ObservableList<ActionDeclTableViewModel> actionDeclarations = FXCollections.observableArrayList();
     private final ObservableList<ObservableList<String>> actionDefinitions = FXCollections.observableArrayList();
+
     @Inject
     private NotificationCenter notificationCenter;
-    private AddActionDeclEvent event;
+
 
 
     public MainViewModel() {
@@ -63,12 +69,12 @@ public class MainViewModel implements ViewModel {
         return actionDefinitions;
     }
 
-    public void onAddConditionDef(@Observes AddConditionDefEvent event) {
-        ObservableList<ObservableList<String>> newDefns = Matrix.addColumn(this.conditionDefinitions, () -> QMARK);
+    public void onAddRuleDef(@Observes AddRuleDefEvent event) {
+        ObservableList<ObservableList<String>> newDefns = MatrixFunctions.addColumn(this.conditionDefinitions, () -> QMARK);
         this.conditionDefinitions.clear();
-        ObservableList<ObservableList<String>> newDefns0 = Matrix.addColumn(this.actionDefinitions, () -> QMARK);
+        ObservableList<ObservableList<String>> newDefns0 = MatrixFunctions.addColumn(this.actionDefinitions, () -> QMARK);
         this.actionDefinitions.clear();
-        publish(Notifications.CONDITIONDEF_ADD.name(), newDefns, newDefns0);
+        publish(Notifications.ADD_RULE.name(), newDefns, newDefns0);
     }
 
     public ObservableList<ObservableList<String>> initializeConditionDefnsData(final int requestedColCount, final boolean shouldPopulateData) {
@@ -101,7 +107,7 @@ public class MainViewModel implements ViewModel {
 
         // #2 If there are at least one condition defined, then this must also be updated
         if (!this.conditionDefinitions.isEmpty()) {
-            ObservableList<ObservableList<String>> newDefns = Matrix.addRow(this.conditionDefinitions, () -> QMARK);
+            ObservableList<ObservableList<String>> newDefns = MatrixFunctions.addRow(this.conditionDefinitions, () -> QMARK);
             this.conditionDefinitions.clear();
             newDefns.stream().forEach(this.conditionDefinitions::add);
         }
@@ -122,15 +128,15 @@ public class MainViewModel implements ViewModel {
         // #2 If there are at least one action defined, then this must also be updated
         ObservableList<ObservableList<String>> newDefns = FXCollections.observableArrayList();
         if (this.actionDefinitions.isEmpty()) {
-            if(!this.conditionDefinitions.isEmpty()) {
+            if (!this.conditionDefinitions.isEmpty()) {
                 final int countColumns = this.conditionDefinitions.get(0).size();
                 ObservableList<String> indicators = IntStream.range(0, countColumns)
                         .mapToObj(k -> "?")
-                                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList));
                 newDefns.add(indicators);
             }
         } else {
-            newDefns = Matrix.addRow(this.actionDefinitions, () -> QMARK);
+            newDefns = MatrixFunctions.addRow(this.actionDefinitions, () -> QMARK);
 
         }
         this.actionDefinitions.clear();
@@ -145,15 +151,15 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onRemoveConditionDecl(@Observes RemoveConditionDeclEvent event) {
-        publish(Notifications.REM_CONDITION_DECL.name(), NO_ARGS);
+        publish(Notifications.REM_CONDITION.name(), NO_ARGS);
     }
 
     public void onRemoveActionDecl(@Observes RemoveActionDeclEvent event) {
-        publish(Notifications.REM_ACTION_DECL.name(), NO_ARGS);
+        publish(Notifications.REM_ACTION.name(), NO_ARGS);
     }
 
-    public void onRemoveConditionDefsWithoutActions(@Observes RemoveConditionDefsWithoutActionsEvent event) {
-        final ObservableList<ObservableList<String>> transposed = Matrix.transpose/*Observable*/(this.actionDefinitions);
+    public void onRemoveConditionDefsWithoutActions(@Observes RemoveRulesWithoutActionsEvent event) {
+        final ObservableList<ObservableList<String>> transposed = MatrixFunctions.transpose/*Observable*/(this.actionDefinitions);
         final List<Integer> indices1 = StreamUtils.zipWithIndex(transposed.stream())
                 .filter(i -> isBlank(i.getValue()))
                 .map(q -> Integer.valueOf((int) q.getIndex()))
@@ -166,5 +172,39 @@ public class MainViewModel implements ViewModel {
     private static boolean isBlank(ObservableList<String> ol) {
         return ol.stream().allMatch(ss -> (ss.trim().length() == 0));
     }
+
+    public void onRemoveRule(@Observes RemoveRuleEvent event) {
+        publish(Notifications.REM_RULE.name(), NO_ARGS);
+    }
+
+    public void onInsertConditionDecl(@Observes InsertConditionDeclEvent event) {
+        publish(Notifications.INS_CONDITION.name(), NO_ARGS);
+    }
+
+    public void onInsertRuleDef(@Observes InsertRuleDefEvent event) {
+        publish(Notifications.INS_RULE.name(), NO_ARGS);
+    }
+
+    public void onInsertActionDecl(@Observes InsertActionDeclEvent event) {
+        publish(Notifications.INS_ACTION.name(), NO_ARGS);
+    }
+
+    public void onMoveDeclUp(@Observes MoveDeclUpEvent event) {
+
+    }
+
+    public void onMoveDeclDown(@Observes MoveDeclDownEvent event) {
+    }
+
+    public void updateRowHeader() {
+        int counter[] = {1};
+        this.conditionDeclarations
+                .forEach(d -> d.lfdNrProperty().setValue(String.format(COND_ROW_HEADER, counter[0]++)));
+        counter[0] = 1;
+        this.actionDeclarations
+                .forEach(d -> d.lfdNrProperty().setValue(String.format(ACT_ROW_HEADER, counter[0]++)));
+    }
+
+
 
 }

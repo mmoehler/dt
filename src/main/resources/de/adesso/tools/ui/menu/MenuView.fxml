@@ -29,12 +29,12 @@
                         </MenuItem>
                         <MenuItem fx:id="insertConditionDeclMenuItem" mnemonicParsing="false" onAction="#doInsertConditionDecl" text="Insert Condition Declaration">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F3" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F3" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
                         <MenuItem fx:id="removeConditionDeclMenuItem" mnemonicParsing="false" onAction="#doRemoveConditionDecl" text="Remove Condition Declaration">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F3" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F3" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
 
@@ -52,7 +52,7 @@
                         </MenuItem>
                         <MenuItem fx:id="removeActionDeclMenuItem" mnemonicParsing="false" onAction="#doRemoveActionDecl" text="Remove Action Declaration">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F4" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F4" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
 
@@ -70,7 +70,7 @@
                         </MenuItem>
                         <MenuItem fx:id="removeRuleMenuItem" mnemonicParsing="false" onAction="#doRemoveRuleDef" text="Remove Rule">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F5" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F5" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
 

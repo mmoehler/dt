@@ -40,6 +40,9 @@ public class App extends MvvmfxCdiApplication {
     @Override
     public void startMvvmfx(Stage stage) throws Exception {
         LOG.info("Starting the Application");
+
+        setUserAgentStylesheet(STYLESHEET_MODENA);
+
         MvvmFX.setGlobalResourceBundle(resourceBundle);
 
         stage.setTitle(resourceBundle.getString("window.title"));
@@ -47,11 +50,11 @@ public class App extends MvvmfxCdiApplication {
         ViewTuple<MainView, MainViewModel> main = FluentViewLoader.fxmlView(MainView.class).load();
 
 
-        Scene rootScene = new Scene(main.getView());
+        Scene scene = new Scene(main.getView());
 
-        rootScene.getStylesheets().add("/contacts.css");
+        scene.getStylesheets().add((getClass().getResource("/dtmg.css")).toExternalForm());
 
-        stage.setScene(rootScene);
+        stage.setScene(scene);
         stage.show();
     }
 

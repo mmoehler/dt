@@ -42,7 +42,7 @@ public class MenuView implements FxmlView<MenuViewModel> {
     public void doAbout() {
         Parent view = FluentViewLoader.fxmlView(AboutView.class)
                 .load().getView();
-        DialogHelper.showDialog(view, primaryStage, "/contacts.css");
+        DialogHelper.showDialog(view, primaryStage, "/dtmg.css");
     }
 
     // Conditions
@@ -54,12 +54,12 @@ public class MenuView implements FxmlView<MenuViewModel> {
 
     @FXML
     public void doRemoveConditionDecl(ActionEvent actionEvent) {
-        viewModel.removeConditionDeclAction();
+        viewModel.removeRuleAction();
     }
 
     @FXML
     public void doAddRuleDef(ActionEvent actionEvent) {
-        viewModel.addConditionDef();
+        viewModel.addRuleDef();
     }
 
     // Actions
@@ -76,13 +76,12 @@ public class MenuView implements FxmlView<MenuViewModel> {
 
     @FXML
     public void doRemoveRuleDef(ActionEvent actionEvent) {
-        viewModel.removeConditionDeclAction();
+        viewModel.removeRuleAction();
     }
-
 
     @FXML
     public void doRemoveRuleDefsWithoutAction(ActionEvent actionEvent) {
-        viewModel.removeConditionDefsWithoutAction();
+        viewModel.removeRulesWithoutAction();
     }
 
     @FXML

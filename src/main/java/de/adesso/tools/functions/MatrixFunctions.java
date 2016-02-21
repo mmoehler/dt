@@ -1,4 +1,4 @@
-package de.adesso.tools.util.matrix;
+package de.adesso.tools.functions;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -14,11 +14,11 @@ import java.util.stream.IntStream;
 /**
  * Created by mmoehler on 13.02.16.
  */
-public final class Matrix {
+public final class MatrixFunctions {
 
     public static final String QMARK = "?";
 
-    private Matrix() {
+    private MatrixFunctions() {
         super();
     }
 
@@ -100,7 +100,7 @@ public final class Matrix {
         return copiedMatrix;
     }
 
-    public static <T> ObservableList<ObservableList<T>> removeRowsAtIndices(ObservableList<ObservableList<T>> original, List<Integer> indices) {
+    public static <T> ObservableList<ObservableList<T>> removeRowsAt(ObservableList<ObservableList<T>> original, List<Integer> indices) {
         if (original.isEmpty()) {
             return original;
         }
@@ -113,10 +113,10 @@ public final class Matrix {
     public static <T> ObservableList<ObservableList<T>> removeLastRow(ObservableList<ObservableList<T>> original) {
         ArrayList<Integer> arg = new ArrayList<>();
         arg.add(original.size() - 1);
-        return removeRowsAtIndices(original, arg);
+        return removeRowsAt(original, arg);
     }
 
-    public static <T> ObservableList<ObservableList<T>> removeColumnsAtIndices(ObservableList<ObservableList<T>> original, List<Integer> indices) {
+    public static <T> ObservableList<ObservableList<T>> removeColumnsAt(ObservableList<ObservableList<T>> original, List<Integer> indices) {
 
         Collections.sort(indices, (a, b) -> b.intValue() - a.intValue());
 
@@ -138,32 +138,12 @@ public final class Matrix {
         return modifiedMatrix;
     }
 
-    public static <T> ObservableList<T> copyListWithoutElementsAtIndices(ObservableList<T> original, List<Integer> indices) {
-        ObservableList<T> out = IntStream.range(0, original.size())
-                .filter(i -> !indices.contains(i))
-                .mapToObj(k -> original.get(k))
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
-
-        /*
-
-        Collections.sort(indices, (a, b) -> b.intValue() - a.intValue());
-        ObservableList<T> out = FXCollections.observableArrayList();
-        for (int i = 0; i < original.size(); i++) {
-            if(indices.contains(i)) continue;
-            out.add(original.get(i));
-        }
-
-        */
-
-        return out;
-    }
-
     /**
      * Inserts new columns at the given indices. Does not modify the given matrix.
      * Returns a modifed copy of the given container
      *
      * @param original 2D {@code ObservableList<T>} as container to modify
-     * @param indices a {@code List<Integer>} as given indices
+     * @param indices  a {@code List<Integer>} as given indices
      * @param <T>      the general container type
      * @return a 2D {@code ObservableList<T>} as resulting matrix.
      */
@@ -171,8 +151,8 @@ public final class Matrix {
         ObservableList<ObservableList<T>> out = original.stream().map(row -> {
             Iterator<T> rowIt = row.iterator();
             return IntStream.range(0, row.size() + indices.size())
-                        .mapToObj(col -> (indices.contains(col)) ? defaultValue.get() : rowIt.next())
-                        .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                    .mapToObj(col -> (indices.contains(col)) ? defaultValue.get() : rowIt.next())
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
         }).collect(Collectors.toCollection(FXCollections::observableArrayList));
 
         return out;
@@ -202,9 +182,10 @@ public final class Matrix {
     public static <T> ObservableList<ObservableList<T>> insertRowsAt(ObservableList<ObservableList<T>> original, List<Integer> integers, Supplier<T> defaultValue) {
         final int len = original.get(0).size();
         Iterator<ObservableList<T>> it = original.iterator();
-        ObservableList<ObservableList<T>> out = IntStream.range(0, len + integers.size())
+        ObservableList<ObservableList<T>> out = IntStream.range(0, original.size() + integers.size())
                 .mapToObj(i -> (integers.contains(i)) ? (newRow(len, defaultValue)) : (it.next()))
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
         return out;
     }
+
 }

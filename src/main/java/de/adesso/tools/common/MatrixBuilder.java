@@ -1,6 +1,6 @@
 package de.adesso.tools.common;
 
-import de.adesso.tools.util.matrix.Matrix;
+import de.adesso.tools.functions.MatrixFunctions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -78,7 +78,7 @@ public final class MatrixBuilder {
                                 rdSize - n >= i ? i + n : rdSize))
                         .collect(Collectors.toList());
 
-        return (transposed) ? (Matrix.transpose(partitioned)) : partitioned;
+        return (transposed) ? (MatrixFunctions.transpose(partitioned)) : partitioned;
     }
 
 

@@ -25,7 +25,7 @@ public class MenuViewModel implements ViewModel {
     @Inject
     private Event<AddConditionDeclEvent> addConditionDeclEvent;
     @Inject
-    private Event<AddConditionDefEvent> addConditionDefEvent;
+    private Event<AddRuleDefEvent> addRuleDefEvent;
     @Inject
     private Event<SimpleCompletenessCheckEvent> simpleCompletenessCheckEvent;
     @Inject
@@ -33,7 +33,9 @@ public class MenuViewModel implements ViewModel {
     @Inject
     private Event<RemoveActionDeclEvent> removeActionDeclEvent;
     @Inject
-    private Event<RemoveConditionDefsWithoutActionsEvent> removeConditionDefsWithoutActionsEventEvent;
+    private Event<RemoveRulesWithoutActionsEvent> removeRulesWithoutActionsEvent;
+    @Inject
+    private Event<RemoveRuleEvent> removeRuleEvent;
     @Inject
     private Event<InsertConditionDeclEvent> insertConditionDeclEvent;
     @Inject
@@ -60,16 +62,16 @@ public class MenuViewModel implements ViewModel {
         shouldCloseEvent.fire(new TriggerShutdownEvent());
     }
 
-    public void removeConditionDeclAction() {
-        removeConditionDeclEvent.fire(new RemoveConditionDeclEvent());
+    public void removeRuleAction() {
+        removeRuleEvent.fire(new RemoveRuleEvent());
     }
 
     public void addConditionDeclAction() {
         addConditionDeclEvent.fire(new AddConditionDeclEvent());
     }
 
-    public void addConditionDef() {
-        addConditionDefEvent.fire(new AddConditionDefEvent());
+    public void addRuleDef() {
+        addRuleDefEvent.fire(new AddRuleDefEvent());
     }
 
     public void simpleCompletenessCheckAction() {
@@ -84,8 +86,12 @@ public class MenuViewModel implements ViewModel {
         removeActionDeclEvent.fire(new RemoveActionDeclEvent());
     }
 
-    public void removeConditionDefsWithoutAction() {
-        removeConditionDefsWithoutActionsEventEvent.fire(new RemoveConditionDefsWithoutActionsEvent());
+    public void removeRulesWithoutAction() {
+        removeRulesWithoutActionsEvent.fire(new RemoveRulesWithoutActionsEvent());
+    }
+
+    public void removeRule() {
+        removeRuleEvent.fire(new RemoveRuleEvent());
     }
 
     public void insertConditionDecl() {
