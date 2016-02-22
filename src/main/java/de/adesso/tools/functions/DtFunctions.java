@@ -19,6 +19,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.*;
 import java.util.function.Supplier;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static de.adesso.tools.functions.MatrixFunctions.*;
@@ -199,7 +200,7 @@ public final class DtFunctions {
                                            TableView actionTable,
                                            Object[] value, Supplier<T> defaultDefValue) {
 
-        final List<Integer> indices = determineIndices(conditionTable, actionTable, value);
+        final List<Integer> indices = determineRowIndices(conditionTable, actionTable, value);
         if (!indices.isEmpty()) {
 
             // first insert the TableView columns ...
@@ -233,7 +234,7 @@ public final class DtFunctions {
                                                                                    TableView<D> definitions,
                                                                                    Object[] value, Supplier<T> defaultDecl, Supplier<R> defaultDefValue) {
 
-        List<Integer> indices = determineIndices(declarations, definitions, value);
+        List<Integer> indices = determineRowIndices(declarations, definitions, value);
 
         if (!indices.isEmpty()) {
 
@@ -256,7 +257,7 @@ public final class DtFunctions {
                                               TableView<ObservableList<T>> actionTable,
                                               Object[] value) {
 
-        final List<Integer> indices = determineIndices(conditionTable, actionTable, value);
+        final List<Integer> indices = determineRowIndices(conditionTable, actionTable, value);
         if (!indices.isEmpty()) {
 
             System.out.println("indices = " + indices);
@@ -293,7 +294,7 @@ public final class DtFunctions {
                                                                                 TableView<C> declarations,
                                                                                 TableView<C> definitions, Object[] value) {
 
-        List<Integer> indices = determineIndices(declarations, definitions, value);
+        List<Integer> indices = determineRowIndices(declarations, definitions, value);
 
         if (!indices.isEmpty()) {
 
@@ -310,27 +311,37 @@ public final class DtFunctions {
         }
     }
 
-    // TODO: determineInidices is used for both coordinates but implements only row indices!!!!!
+    // TODO: determineInidices solve the values problem!!
 
+    private static <T, U> List<Integer> determineColumnIndices(TableView<T> tableView0, TableView<U> tableView1, Object[] value) {
+        List<TablePosition> indices = determineIndices(tableView0, tableView1, value);
+        return indices.stream().map(t -> t.getColumn()).collect(Collectors.toList());
+    }
 
-    private static <T, U> List<Integer> determineIndices(TableView<T> tableView0, TableView<U> tableView1, Object[] value) {
-        List<Integer> indices;
+    private static <T, U> List<Integer> determineRowIndices(TableView<T> tableView0, TableView<U> tableView1, Object[] value) {
+        List<TablePosition> indices = determineIndices(tableView0, tableView1, value);
+        return indices.stream().map(t -> t.getRow()).collect(Collectors.toList());
+    }
+
+    private static <T, U> List<TablePosition> determineIndices(TableView<T> tableView0, TableView<U> tableView1, Object[] value) {
+        List<TablePosition> indices = Collections.emptyList();
         if (null != value && value.length == 1) {
-            indices = (List<Integer>) value[0];
+            // indices = (List<Integer>) value[0];
         } else {
             Optional<TablePosition> cellPos = getSelectedCell(tableView0);
             indices = new ArrayList<>(1);
             if (cellPos.isPresent()) {
-                indices.add(cellPos.get().getRow());
+                indices.add(cellPos.get());
             } else {
                 cellPos = getSelectedCell(tableView1);
                 if (cellPos.isPresent()) {
-                    indices.add(cellPos.get().getRow());
+                    indices.add(cellPos.get());
                 }
             }
         }
         return indices;
     }
+
 
     public static <T> void updateColHeaders(TableView<T>... tables) {
         Arrays.stream(tables).forEach(t -> {
