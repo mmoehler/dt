@@ -2,12 +2,11 @@ package de.adesso.tools.ui.main;
 
 import com.codepoetics.protonpack.StreamUtils;
 import de.adesso.tools.events.*;
+import de.adesso.tools.functions.MatrixFunctions;
 import de.adesso.tools.model.ActionDecl;
 import de.adesso.tools.model.ConditionDecl;
-import de.adesso.tools.ui.Notifications;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
-import de.adesso.tools.functions.MatrixFunctions;
 import de.adesso.tools.util.tuple.Tuple3;
 import de.saxsys.mvvmfx.ViewModel;
 import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
@@ -26,6 +25,7 @@ import java.util.stream.IntStream;
 import static de.adesso.tools.analysis.ConditionCompletenessCheck.isFormalComplete;
 import static de.adesso.tools.functions.DtFunctions.fullExpandActions;
 import static de.adesso.tools.functions.DtFunctions.limitedExpandConditions;
+import static de.adesso.tools.ui.Notifications.*;
 
 @Singleton
 public class MainViewModel implements ViewModel {
@@ -74,7 +74,7 @@ public class MainViewModel implements ViewModel {
         this.conditionDefinitions.clear();
         ObservableList<ObservableList<String>> newDefns0 = MatrixFunctions.addColumn(this.actionDefinitions, () -> QMARK);
         this.actionDefinitions.clear();
-        publish(Notifications.ADD_RULE.name(), newDefns, newDefns0);
+        publish(ADD_RULE.name(), newDefns, newDefns0);
     }
 
     public ObservableList<ObservableList<String>> initializeConditionDefnsData(final int requestedColCount, final boolean shouldPopulateData) {
@@ -147,15 +147,15 @@ public class MainViewModel implements ViewModel {
     public void onSimpleCompletenessCheck(@Observes SimpleCompletenessCheckEvent event) {
         final Tuple3<Boolean, Integer, Integer> result = isFormalComplete(this.conditionDeclarations, this.conditionDefinitions);
         final String message = String.valueOf(result);
-        notificationCenter.publish(Notifications.PREPARE_CONSOLE.name(), message);
+        notificationCenter.publish(PREPARE_CONSOLE.name(), message);
     }
 
     public void onRemoveConditionDecl(@Observes RemoveConditionDeclEvent event) {
-        publish(Notifications.REM_CONDITION.name(), NO_ARGS);
+        publish(REM_CONDITION.name(), NO_ARGS);
     }
 
     public void onRemoveActionDecl(@Observes RemoveActionDeclEvent event) {
-        publish(Notifications.REM_ACTION.name(), NO_ARGS);
+        publish(REM_ACTION.name(), NO_ARGS);
     }
 
     public void onRemoveConditionDefsWithoutActions(@Observes RemoveRulesWithoutActionsEvent event) {
@@ -166,7 +166,7 @@ public class MainViewModel implements ViewModel {
                 .sorted((aa, bb) -> bb.intValue() - aa.intValue())
                 .collect(Collectors.toList());
         final List<Integer> indices = indices1;
-        publish(Notifications.REM_RULES_WITHOUT_ACTIONS.name(), indices);
+        publish(REM_RULES_WITHOUT_ACTIONS.name(), indices);
     }
 
     private static boolean isBlank(ObservableList<String> ol) {
@@ -174,27 +174,45 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onRemoveRule(@Observes RemoveRuleEvent event) {
-        publish(Notifications.REM_RULE.name(), NO_ARGS);
+        publish(REM_RULE.name(), NO_ARGS);
     }
 
     public void onInsertConditionDecl(@Observes InsertConditionDeclEvent event) {
-        publish(Notifications.INS_CONDITION.name(), NO_ARGS);
+        publish(INS_CONDITION.name(), NO_ARGS);
     }
 
     public void onInsertRuleDef(@Observes InsertRuleDefEvent event) {
-        publish(Notifications.INS_RULE.name(), NO_ARGS);
+        publish(INS_RULE.name(), NO_ARGS);
     }
 
     public void onInsertActionDecl(@Observes InsertActionDeclEvent event) {
-        publish(Notifications.INS_ACTION.name(), NO_ARGS);
+        publish(INS_ACTION.name(), NO_ARGS);
     }
 
-    public void onMoveDeclUp(@Observes MoveDeclUpEvent event) {
-
+    public void onMoveActionDeclUp(@Observes MoveActionDeclUpEvent event) {
+        publish(MOVE_ACTION_DECL_UP.name(), NO_ARGS);
     }
 
-    public void onMoveDeclDown(@Observes MoveDeclDownEvent event) {
+    public void onMoveActionDeclDown(@Observes MoveActionDeclDownEvent event) {
+        publish(MOVE_ACTION_DECL_DOWN.name(), NO_ARGS);
     }
+
+    public void onMoveConditionDeclUp(@Observes MoveConditionDeclUpEvent event) {
+        publish(MOVE_COND_DECL_UP.name(), NO_ARGS);
+    }
+
+    public void onMoveConditionDeclDown(@Observes MoveConditionDeclDownEvent event) {
+        publish(MOVE_COND_DECL_DOWN.name(), NO_ARGS);
+    }
+
+    public void onMoveRuleLeft(@Observes MoveRuleLeftEvent event) {
+        publish(MOVE_RULE_LEFT.name(), NO_ARGS);
+    }
+
+    public void onMoveRuleRight(@Observes MoveRuleRightEvent event) {
+        publish(MOVE_RULE_RIGHT.name(), NO_ARGS);
+    }
+
 
     public void updateRowHeader() {
         int counter[] = {1};

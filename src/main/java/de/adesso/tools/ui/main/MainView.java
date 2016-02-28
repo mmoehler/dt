@@ -1,5 +1,6 @@
 package de.adesso.tools.ui.main;
 
+import de.adesso.tools.functions.MatrixFunctions;
 import de.adesso.tools.model.ActionDecl;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.DeclarationTableViewModel;
@@ -8,8 +9,6 @@ import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.tools.ui.dialogs.Dialogs;
 import de.adesso.tools.util.OsCheck;
-import de.adesso.tools.functions.DtFunctions;
-import de.adesso.tools.functions.MatrixFunctions;
 import de.adesso.tools.util.tuple.Tuple2;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
@@ -31,8 +30,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
 
-import static de.adesso.tools.functions.DtFunctions.QMARK;
-import static de.adesso.tools.functions.DtFunctions.determineMaxColumns;
+import static de.adesso.tools.functions.DtFunctions.*;
 
 public class MainView implements FxmlView<MainViewModel> {
     private final DoubleProperty conditionDividerPos = new SimpleDoubleProperty();
@@ -63,17 +61,17 @@ public class MainView implements FxmlView<MainViewModel> {
 
     private static <T extends DeclarationTableViewModel> void initializeDeclTableColumns(TableView<T> table) {
         List<TableColumn<T, String>> l = new ArrayList<>();
-        l.add(DtFunctions.createTableColumn("#", "lfdNr", 40, 40, 40, false, Pos.CENTER,
+        l.add(createTableColumn("#", "lfdNr", 40, 40, 40, false, Pos.CENTER,
                 (TableColumn.CellEditEvent<T, String> evt) -> {
                     evt.getTableView().getItems().get(evt.getTablePosition().getRow())
                             .lfdNrProperty().setValue(evt.getNewValue());
                 }));
-        l.add(DtFunctions.createTableColumn("Expression", "expression", 300, 300, Integer.MAX_VALUE, true, Pos.CENTER_LEFT,
+        l.add(createTableColumn("Expression", "expression", 300, 300, Integer.MAX_VALUE, true, Pos.CENTER_LEFT,
                 (TableColumn.CellEditEvent<T, String> evt) -> {
                     evt.getTableView().getItems().get(evt.getTablePosition().getRow())
                             .expressionProperty().setValue(evt.getNewValue());
                 }));
-        l.add(DtFunctions.createTableColumn("Indicators", "possibleIndicators", 100, 100, Integer.MAX_VALUE, true, Pos.CENTER,
+        l.add(createTableColumn("Indicators", "possibleIndicators", 100, 100, Integer.MAX_VALUE, true, Pos.CENTER,
                 (TableColumn.CellEditEvent<T, String> evt) -> {
                     evt.getTableView().getItems().get(evt.getTablePosition().getRow())
                             .possibleIndicatorsProperty().setValue(evt.getNewValue());
@@ -112,17 +110,55 @@ public class MainView implements FxmlView<MainViewModel> {
         this.viewModel.subscribe(Notifications.INS_RULE.name(), (key, value) -> doInsRule(key, value));
         this.viewModel.subscribe(Notifications.INS_CONDITION.name(), (key, value) -> doInsConditionDecl(key, value));
 
+        this.viewModel.subscribe(Notifications.MOVE_ACTION_DECL_UP.name(), (key, value) -> doMoveActionDeclUp(key, value));
+        this.viewModel.subscribe(Notifications.MOVE_ACTION_DECL_DOWN.name(), (key, value) -> doMoveActionDeclDown(key, value));
+        this.viewModel.subscribe(Notifications.MOVE_COND_DECL_UP.name(), (key, value) -> doMoveConditionDeclUp(key, value));
+        this.viewModel.subscribe(Notifications.MOVE_COND_DECL_DOWN.name(), (key, value) -> doMoveConditionDeclDown(key, value));
+        this.viewModel.subscribe(Notifications.MOVE_RULE_LEFT.name(), (key, value) -> doMoveRuleLeft(key, value));
+        this.viewModel.subscribe(Notifications.MOVE_RULE_RIGHT.name(), (key, value) -> doMoveRuleRight(key, value));
 
+    }
+
+    private void doMoveConditionDeclDown(String key, Object[] value) {
+
+    }
+
+    private void doMoveConditionDeclUp(String key, Object[] value) {
+
+    }
+
+    private void doMoveActionDeclDown(String key, Object[] value) {
+        doMoveRows(this.viewModel.getConditionDefinitions(), this.viewModel.getActionDefinitions(),
+                this.conditionDefinitionsTable, this.actionDefinitionsTable, value, true);
+        viewModel.updateRowHeader();
+    }
+
+    private void doMoveActionDeclUp(String key, Object[] value) {
+        doMoveRows(this.viewModel.getConditionDefinitions(), this.viewModel.getActionDefinitions(),
+                this.conditionDefinitionsTable, this.actionDefinitionsTable, value, false);
+        viewModel.updateRowHeader();
+    }
+
+    private void doMoveRuleRight(String key, Object[] value) {
+        doMoveColumns(this.viewModel.getConditionDefinitions(), this.viewModel.getActionDefinitions(),
+                this.conditionDefinitionsTable, this.actionDefinitionsTable, value, true);
+        updateColHeaders(this.conditionDefinitionsTable, this.actionDefinitionsTable);
+    }
+
+    private void doMoveRuleLeft(String key, Object[] value) {
+        doMoveColumns(this.viewModel.getConditionDefinitions(), this.viewModel.getActionDefinitions(),
+                this.conditionDefinitionsTable, this.actionDefinitionsTable, value, false);
+        updateColHeaders(this.conditionDefinitionsTable, this.actionDefinitionsTable);
     }
 
     private void doAddRule(String key, Object[] value) {
         final int countColumns = conditionDefinitionsTable.getColumns().size();
-        conditionDefinitionsTable.getColumns().add(DtFunctions.createTableColumn(countColumns));
+        conditionDefinitionsTable.getColumns().add(createTableColumn(countColumns));
         ObservableList<ObservableList<String>> newDefns = (ObservableList<ObservableList<String>>) value[0];
         newDefns.stream().forEach(this.viewModel.getConditionDefinitions()::add);
         conditionDefinitionsTable.refresh();
 
-        actionDefinitionsTable.getColumns().add(DtFunctions.createTableColumn(countColumns));
+        actionDefinitionsTable.getColumns().add(createTableColumn(countColumns));
         if (value.length >= 2 && null != value[1]) {
             newDefns = (ObservableList<ObservableList<String>>) value[1];
             newDefns.stream().forEach(this.viewModel.getActionDefinitions()::add);
@@ -131,19 +167,19 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     private void doRemRule(String key, Object[] value) {
-        DtFunctions.doRemoveColumns(this.viewModel.getConditionDefinitions(), this.viewModel.getActionDefinitions(),
+        doRemoveColumns(this.viewModel.getConditionDefinitions(), this.viewModel.getActionDefinitions(),
                 this.conditionDefinitionsTable, this.actionDefinitionsTable, value);
-        DtFunctions.updateColHeaders(this.conditionDefinitionsTable, this.actionDefinitionsTable);
+        updateColHeaders(this.conditionDefinitionsTable, this.actionDefinitionsTable);
     }
 
     private void doInsRule(String key, Object[] value) {
-        DtFunctions.doInsertColumns(this.viewModel.getConditionDefinitions(), this.viewModel.getActionDefinitions(),
+        doInsertColumns(this.viewModel.getConditionDefinitions(), this.viewModel.getActionDefinitions(),
                 this.conditionDefinitionsTable, this.actionDefinitionsTable, value, () -> QMARK);
-        DtFunctions.updateColHeaders(this.conditionDefinitionsTable, this.actionDefinitionsTable);
+        updateColHeaders(this.conditionDefinitionsTable, this.actionDefinitionsTable);
     }
 
     private void doInsConditionDecl(String key, Object[] value) {
-        DtFunctions.doInsertRows(this.viewModel.getConditionDeclarations(), this.viewModel.getConditionDefinitions(),
+        doInsertRows(this.viewModel.getConditionDeclarations(), this.viewModel.getConditionDefinitions(),
                 this.conditionDeclarationsTable, this.conditionDefinitionsTable, value,
                 () -> new ConditionDeclTableViewModel(new ConditionDecl()),
                 () -> QMARK);
@@ -151,7 +187,7 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     private void doInsActionDecl(String key, Object[] value) {
-        DtFunctions.doInsertRows(this.viewModel.getActionDeclarations(), this.viewModel.getActionDefinitions(),
+        doInsertRows(this.viewModel.getActionDeclarations(), this.viewModel.getActionDefinitions(),
                 this.actionDeclarationsTable, this.actionDefinitionsTable, value,
                 () -> new ActionDeclTableViewModel(new ActionDecl()),
                 () -> "?");
@@ -167,8 +203,8 @@ public class MainView implements FxmlView<MainViewModel> {
             actionDefinitionsTable.getColumns().clear();
 
             IntStream.range(0, newCols).forEach(i -> {
-                conditionDefinitionsTable.getColumns().add(DtFunctions.createTableColumn(i));
-                actionDefinitionsTable.getColumns().add(DtFunctions.createTableColumn(i));
+                conditionDefinitionsTable.getColumns().add(createTableColumn(i));
+                actionDefinitionsTable.getColumns().add(createTableColumn(i));
             });
 
             final ObservableList<ObservableList<String>> newConDefs = MatrixFunctions.removeColumnsAt(viewModel.getConditionDefinitions(), indices);
@@ -185,7 +221,7 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     private void doRemConditionDecl(String key, Object[] value) {
-        DtFunctions.doRemoveRows(this.viewModel.getConditionDeclarations(),
+        doRemoveRows(this.viewModel.getConditionDeclarations(),
                 this.viewModel.getConditionDefinitions(),
                 this.conditionDeclarationsTable,
                 this.conditionDefinitionsTable, value);
@@ -193,7 +229,7 @@ public class MainView implements FxmlView<MainViewModel> {
         // but here this is not enough! If hte count of columns after the row removal is greater thean
         // the max possible count, than the difference of columns must also be deleted.
         int cols = this.viewModel.getConditionDefinitions().size();
-        int start = DtFunctions.determineMaxColumns(viewModel.getConditionDeclarations());
+        int start = determineMaxColumns(viewModel.getConditionDeclarations());
 
         // TODO implement >>> doRemConditionDecl(String key, Object[] value) !!
         /* --
@@ -205,7 +241,7 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     private void doRemActionDecl(String key, Object[] value) {
-        DtFunctions.doRemoveRows(this.viewModel.getActionDeclarations(), this.viewModel.getActionDefinitions(),
+        doRemoveRows(this.viewModel.getActionDeclarations(), this.viewModel.getActionDefinitions(),
                 this.actionDeclarationsTable, this.actionDefinitionsTable, value);
         this.viewModel.updateRowHeader();
     }
@@ -265,13 +301,13 @@ public class MainView implements FxmlView<MainViewModel> {
         conditionDefinitionsTable.getColumns().clear();
         final int cols = Math.min(determineMaxColumns(viewModel.getConditionDeclarations()), countColumns);
         IntStream.range(0, cols)
-                .mapToObj(i -> DtFunctions.createTableColumn(i))
+                .mapToObj(i -> createTableColumn(i))
                 .forEach(a -> conditionDefinitionsTable.getColumns().add(a));
         conditionDefinitionsTable.refresh();
 
         actionDefinitionsTable.getColumns().clear();
         IntStream.range(0, cols)
-                .mapToObj(i -> DtFunctions.createTableColumn(i))
+                .mapToObj(i -> createTableColumn(i))
                 .forEach(a -> actionDefinitionsTable.getColumns().add(a));
         actionDefinitionsTable.refresh();
     }

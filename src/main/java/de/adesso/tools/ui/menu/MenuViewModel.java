@@ -43,9 +43,17 @@ public class MenuViewModel implements ViewModel {
     @Inject
     private Event<InsertRuleDefEvent> insertRuleDefEvent;
     @Inject
-    private Event<MoveDeclUpEvent> moveDeclUpEvent;
+    private Event<MoveActionDeclUpEvent> moveActionDeclUpEvent;
     @Inject
-    private Event<MoveDeclDownEvent> moveDeclDownEvent;
+    private Event<MoveActionDeclDownEvent> moveActionDeclDownEvent;
+    @Inject
+    private Event<MoveConditionDeclUpEvent> moveConditionDeclUpEvent;
+    @Inject
+    private Event<MoveConditionDeclDownEvent> moveConditionDeclDownEvent;
+    @Inject
+    private Event<MoveRuleLeftEvent> moveRuleLeftEvent;
+    @Inject
+    private Event<MoveRuleRightEvent> moveRuleRightEvent;
 
     @InjectScope
     private RuleScope mdScope;
@@ -90,10 +98,6 @@ public class MenuViewModel implements ViewModel {
         removeRulesWithoutActionsEvent.fire(new RemoveRulesWithoutActionsEvent());
     }
 
-    public void removeRule() {
-        removeRuleEvent.fire(new RemoveRuleEvent());
-    }
-
     public void insertConditionDecl() {
         insertConditionDeclEvent.fire(new InsertConditionDeclEvent());
     }
@@ -106,11 +110,32 @@ public class MenuViewModel implements ViewModel {
         insertRuleDefEvent.fire(new InsertRuleDefEvent());
     }
 
-    public void moveDeclUp() {
-        moveDeclUpEvent.fire(new MoveDeclUpEvent());
+    public void removeConditionDecl() {
+        removeConditionDeclEvent.fire(new RemoveConditionDeclEvent());
     }
 
-    public void moveDeclDown() {
-        moveDeclDownEvent.fire(new MoveDeclDownEvent());
+    public void moveActionDeclUp() {
+        moveActionDeclUpEvent.fire(new MoveActionDeclUpEvent());
     }
+
+    public void moveActionDeclDown() {
+        moveActionDeclDownEvent.fire(new MoveActionDeclDownEvent());
+    }
+
+    public void moveConditionDeclUp() {
+        moveConditionDeclUpEvent.fire(new MoveConditionDeclUpEvent());
+    }
+
+    public void moveConditionDeclDown() {
+        moveConditionDeclDownEvent.fire(new MoveConditionDeclDownEvent());
+    }
+
+    public void moveRuleLeft() {
+        moveRuleLeftEvent.fire(new MoveRuleLeftEvent());
+    }
+
+    public void moveRuleRight() {
+        moveRuleRightEvent.fire(new MoveRuleRightEvent());
+    }
+
 }

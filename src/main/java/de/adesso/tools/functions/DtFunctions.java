@@ -24,7 +24,6 @@ import java.util.stream.IntStream;
 
 import static de.adesso.tools.functions.MatrixFunctions.*;
 import static java.lang.Math.min;
-import static java.util.stream.Collectors.toCollection;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -194,36 +193,34 @@ public final class DtFunctions {
     }
 
 
-    public static <T> void doInsertColumns(ObservableList<ObservableList<T>> conditionDefns,
-                                           ObservableList<ObservableList<T>> actionDefns,
-                                           TableView conditionTable,
-                                           TableView actionTable,
-                                           Object[] value, Supplier<T> defaultDefValue) {
+    public static void doInsertColumns(ObservableList<ObservableList<String>> conditionDefns,
+                                       ObservableList<ObservableList<String>> actionDefns,
+                                       TableView conditionTable,
+                                       TableView actionTable,
+                                       Object[] value, Supplier<String> defaultDefValue) {
 
-        final List<Integer> indices = determineRowIndices(conditionTable, actionTable, value);
+        final List<Integer> indices = determineColumnIndices(conditionTable, actionTable, value);
         if (!indices.isEmpty()) {
 
-            // first insert the TableView columns ...
+            int newCols = conditionTable.getColumns().size() - indices.size();
+            conditionTable.getColumns().clear();
+            actionTable.getColumns().clear();
 
-            List<TableView> tableViews = Arrays.asList(conditionTable, actionTable);
-
-            tableViews.forEach(t -> {
-                Iterator<? extends TableColumn<?, ?>> columnIterator = t.getColumns().iterator();
-                ObservableList<TableColumn<?, ?>> newCols = IntStream.range(0, t.getColumns().size() + indices.size())
-                        .mapToObj(i -> indices.contains(i) ? createTableColumn(i) : columnIterator.next())
-                        .collect(toCollection(FXCollections::observableArrayList));
-                t.getColumns().clear();
-                newCols.forEach(c -> t.getColumns().add(c));
+            IntStream.range(0, newCols).forEach(i -> {
+                conditionTable.getColumns().add(createTableColumn(i));
+                actionTable.getColumns().add(createTableColumn(i));
             });
 
-            // ... and than synchronize the model data with it
+            final ObservableList<ObservableList<String>> newConDefs = MatrixFunctions.insertColumnsAt(conditionDefns, indices, () -> "?");
+            final ObservableList<ObservableList<String>> newActDefs = MatrixFunctions.insertColumnsAt(actionDefns, indices, () -> "?");
 
-            Arrays.asList(conditionDefns, actionDefns).forEach(defns -> {
-                ObservableList<ObservableList<T>> newDefs = insertColumnsAt(defns, indices, defaultDefValue);
-                defns.clear();
-                newDefs.forEach(defns::add);
-            });
-            tableViews.forEach(TableView::refresh);
+            conditionDefns.clear();
+            newConDefs.forEach(conditionDefns::add);
+            actionDefns.clear();
+            newActDefs.forEach(actionDefns::add);
+
+            conditionTable.refresh();
+            actionTable.refresh();
         }
 
     }
@@ -251,41 +248,35 @@ public final class DtFunctions {
         }
     }
 
-    public static <T> void doRemoveColumns(ObservableList<ObservableList<T>> conditionDefns,
-                                              ObservableList<ObservableList<T>> actionDefns,
-                                              TableView<ObservableList<T>> conditionTable,
-                                              TableView<ObservableList<T>> actionTable,
-                                              Object[] value) {
+    public static void doRemoveColumns(ObservableList<ObservableList<String>> conditionDefns,
+                                       ObservableList<ObservableList<String>> actionDefns,
+                                       TableView<ObservableList<String>> conditionTable,
+                                       TableView<ObservableList<String>> actionTable,
+                                       Object[] value) {
 
-        final List<Integer> indices = determineRowIndices(conditionTable, actionTable, value);
+
+        final List<Integer> indices = determineColumnIndices(conditionTable, actionTable, value);
         if (!indices.isEmpty()) {
 
-            System.out.println("indices = " + indices);
+            int newCols = conditionTable.getColumns().size() - indices.size();
+            conditionTable.getColumns().clear();
+            actionTable.getColumns().clear();
 
-            // first remove the TableView columns ...
-
-            List<TableView<ObservableList<T>>> tableViews = Arrays.asList(conditionTable, actionTable);
-
-            tableViews.forEach(t -> {
-                int to = t.getColumns().size();
-                int from = 0;
-                IntStream.iterate(to - 1, i -> i - 1).limit(to - from).peek(s -> System.out.println(">> "+s)).forEach(i -> {
-                    if(indices.contains(i)) t.getColumns().remove(i);
-                });
+            IntStream.range(0, newCols).forEach(i -> {
+                conditionTable.getColumns().add(createTableColumn(i));
+                actionTable.getColumns().add(createTableColumn(i));
             });
 
-            // ... and than synchronize the model data with it
-            ObservableList<ObservableList<T>> defns = conditionDefns;
-            ObservableList<ObservableList<T>> newDefs = removeColumnsAt(defns, indices);
-            defns.clear();
-            newDefs.forEach(defns::add);
+            final ObservableList<ObservableList<String>> newConDefs = MatrixFunctions.removeColumnsAt(conditionDefns, indices);
+            final ObservableList<ObservableList<String>> newActDefs = MatrixFunctions.removeColumnsAt(actionDefns, indices);
 
-            defns = conditionDefns;
-            newDefs = removeColumnsAt(defns, indices);
-            defns.clear();
-            newDefs.forEach(defns::add);
+            conditionDefns.clear();
+            newConDefs.forEach(conditionDefns::add);
+            actionDefns.clear();
+            newActDefs.forEach(actionDefns::add);
 
-            tableViews.forEach(TableView::refresh);
+            conditionTable.refresh();
+            actionTable.refresh();
         }
     }
 
@@ -311,7 +302,62 @@ public final class DtFunctions {
         }
     }
 
-    // TODO: determineInidices solve the values problem!!
+    public static void doMoveColumns(ObservableList<ObservableList<String>> conditionDefinitions,
+                                     ObservableList<ObservableList<String>> actionDefinitions,
+                                     TableView conditionTable, TableView actionTable, Object[] value,
+                                     boolean toRight) {
+        final List<Integer> indices = determineColumnIndices(conditionTable, actionTable, value);
+        if (!indices.isEmpty()) {
+            final int c1Idx = indices.get(0);
+            int c2Idx = 0;
+            if (toRight) {
+                if (c1Idx < conditionTable.getColumns().size() - 1) {
+                    c2Idx = (c1Idx + 1);
+                }
+
+            } else {
+                if (c1Idx > 0) {
+                    c2Idx = (c1Idx - 1);
+                }
+            }
+            ObservableList<ObservableList<String>> newConditionDefns = swapColumnsAt(conditionDefinitions, c1Idx, c2Idx);
+            ObservableList<ObservableList<String>> newActionDefns = swapColumnsAt(actionDefinitions, c1Idx, c2Idx);
+            conditionDefinitions.clear();
+            newConditionDefns.forEach(conditionDefinitions::add);
+            actionDefinitions.clear();
+            newActionDefns.forEach(actionDefinitions::add);
+        }
+
+    }
+
+    public static void doMoveRows(ObservableList<ObservableList<String>> conditionDefinitions,
+                            ObservableList<ObservableList<String>> actionDefinitions,
+                            TableView conditionTable,
+                            TableView actionTable, Object[] value, boolean toUpper) {
+        final List<Integer> indices = determineRowIndices(conditionTable, actionTable, value);
+        if (!indices.isEmpty()) {
+            int r2Idx = 0;
+            final int r1Idx = indices.get(0);
+            if (toUpper) {
+                if (r1Idx > 0) {
+                    r2Idx = (r1Idx - 1);
+                }
+
+            } else {
+                if (r1Idx < conditionTable.getColumns().size() - 1) {
+                    r2Idx = (r1Idx + 1);
+                }
+            }
+
+            ObservableList<ObservableList<String>> newConditionDefns = swapColumnsAt(conditionDefinitions, r1Idx, r2Idx);
+            ObservableList<ObservableList<String>> newActionDefns = swapColumnsAt(actionDefinitions, r1Idx, r2Idx);
+            conditionDefinitions.clear();
+            newConditionDefns.forEach(conditionDefinitions::add);
+            actionDefinitions.clear();
+            newActionDefns.forEach(actionDefinitions::add);
+        }
+
+    }
 
     private static <T, U> List<Integer> determineColumnIndices(TableView<T> tableView0, TableView<U> tableView1, Object[] value) {
         List<TablePosition> indices = determineIndices(tableView0, tableView1, value);
@@ -355,10 +401,10 @@ public final class DtFunctions {
         return (selectedCells.isEmpty()) ? Optional.empty() : Optional.of(selectedCells.get(0));
     }
 
-    public static TableColumn<List<String>, String> createTableColumn(int x) {
+    public static TableColumn<ObservableList<String>, String> createTableColumn(int x) {
 
         String tpl = RULE_HEADER;
-        TableColumn<List<String>, String> tc = new TableColumn(String.format(tpl, x + 1));
+        TableColumn<ObservableList<String>, String> tc = new TableColumn(String.format(tpl, x + 1));
 
         tc.setCellFactory(DefinitionsTableCell.forTableColumn());
 
