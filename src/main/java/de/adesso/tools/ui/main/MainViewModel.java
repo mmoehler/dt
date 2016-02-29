@@ -213,6 +213,9 @@ public class MainViewModel implements ViewModel {
         publish(MOVE_RULE_RIGHT.name(), NO_ARGS);
     }
 
+    public void onAddElseRuleEvent(@Observes AddElseRuleEvent event) {
+        publish(ADD_ELSE_RULE.name(), NO_ARGS);
+    }
 
     public void updateRowHeader() {
         int counter[] = {1};

@@ -137,4 +137,8 @@ public class MenuView implements FxmlView<MenuViewModel> {
     public void doMoveRuleRight(ActionEvent actionEvent) {
         viewModel.moveRuleRight();
     }
+
+    public void doAddElseRule(ActionEvent actionEvent) {
+        viewModel.addElseRule();
+    }
 }

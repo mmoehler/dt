@@ -54,6 +54,8 @@ public class MenuViewModel implements ViewModel {
     private Event<MoveRuleLeftEvent> moveRuleLeftEvent;
     @Inject
     private Event<MoveRuleRightEvent> moveRuleRightEvent;
+    @Inject
+    private Event<AddElseRuleEvent> addElseRuleEvent;
 
     @InjectScope
     private RuleScope mdScope;
@@ -138,4 +140,7 @@ public class MenuViewModel implements ViewModel {
         moveRuleRightEvent.fire(new MoveRuleRightEvent());
     }
 
+    public void addElseRule() {
+        addElseRuleEvent.fire(new AddElseRuleEvent());
+    }
 }

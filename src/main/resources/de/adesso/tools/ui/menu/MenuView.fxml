@@ -103,7 +103,12 @@
                                 <KeyCodeCombination alt="UP" code="F5" control="UP" meta="DOWN" shift="DOWN" shortcut="UP" />
                             </accelerator>
                         </MenuItem>
-
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem fx:id="addElseRuleMenuItem" mnemonicParsing="false" onAction="#doAddElseRule" text="Add Else Rule">
+                            <accelerator>
+                                <KeyCodeCombination alt="DOWN" code="F5" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                            </accelerator>
+                        </MenuItem>
                     </items>
                 </Menu>
             <Menu mnemonicParsing="false" text="Formal Analysis">

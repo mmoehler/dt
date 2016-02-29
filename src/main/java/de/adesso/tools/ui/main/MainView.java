@@ -28,6 +28,7 @@ import javafx.scene.input.KeyEvent;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.IntStream;
 
 import static de.adesso.tools.functions.DtFunctions.*;
@@ -99,8 +100,6 @@ public class MainView implements FxmlView<MainViewModel> {
         notificationCenter.subscribe(Notifications.PREPARE_CONSOLE.name(), (key, value) ->
                 console.setText(String.valueOf(value[0])));
 
-        this.viewModel.subscribe(Notifications.ADD_RULE.name(), (key, value) -> doAddRule(key, value));
-
         this.viewModel.subscribe(Notifications.REM_ACTION.name(), (key, value) -> doRemActionDecl(key, value));
         this.viewModel.subscribe(Notifications.REM_RULES_WITHOUT_ACTIONS.name(), (key, value) -> doRemRulesWithoutActions(key, value));
         this.viewModel.subscribe(Notifications.REM_RULE.name(), (key, value) -> doRemRule(key, value));
@@ -110,13 +109,31 @@ public class MainView implements FxmlView<MainViewModel> {
         this.viewModel.subscribe(Notifications.INS_RULE.name(), (key, value) -> doInsRule(key, value));
         this.viewModel.subscribe(Notifications.INS_CONDITION.name(), (key, value) -> doInsConditionDecl(key, value));
 
+        this.viewModel.subscribe(Notifications.ADD_RULE.name(), (key, value) -> doAddRule(key, value));
         this.viewModel.subscribe(Notifications.MOVE_ACTION_DECL_UP.name(), (key, value) -> doMoveActionDeclUp(key, value));
         this.viewModel.subscribe(Notifications.MOVE_ACTION_DECL_DOWN.name(), (key, value) -> doMoveActionDeclDown(key, value));
         this.viewModel.subscribe(Notifications.MOVE_COND_DECL_UP.name(), (key, value) -> doMoveConditionDeclUp(key, value));
         this.viewModel.subscribe(Notifications.MOVE_COND_DECL_DOWN.name(), (key, value) -> doMoveConditionDeclDown(key, value));
         this.viewModel.subscribe(Notifications.MOVE_RULE_LEFT.name(), (key, value) -> doMoveRuleLeft(key, value));
         this.viewModel.subscribe(Notifications.MOVE_RULE_RIGHT.name(), (key, value) -> doMoveRuleRight(key, value));
+        this.viewModel.subscribe(Notifications.ADD_ELSE_RULE.name(), (key, value) -> doAddElseRule(key, value));
 
+    }
+
+    private void doAddElseRule(String key, Object[] value) {
+        final int countColumns = conditionDefinitionsTable.getColumns().size();
+        final Optional<String> name = Optional.of(ELSE_RULE_HEADER);
+        conditionDefinitionsTable.getColumns().add(createTableColumn(countColumns, name));
+        ObservableList<ObservableList<String>> newDefns = (ObservableList<ObservableList<String>>) value[0];
+        newDefns.stream().forEach(this.viewModel.getConditionDefinitions()::add);
+        conditionDefinitionsTable.refresh();
+
+        actionDefinitionsTable.getColumns().add(createTableColumn(countColumns, name));
+        if (value.length >= 2 && null != value[1]) {
+            newDefns = (ObservableList<ObservableList<String>>) value[1];
+            newDefns.stream().forEach(this.viewModel.getActionDefinitions()::add);
+            actionDefinitionsTable.refresh();
+        }
     }
 
     private void doMoveConditionDeclDown(String key, Object[] value) {

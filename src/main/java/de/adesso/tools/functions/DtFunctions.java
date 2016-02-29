@@ -202,7 +202,7 @@ public final class DtFunctions {
         final List<Integer> indices = determineColumnIndices(conditionTable, actionTable, value);
         if (!indices.isEmpty()) {
 
-            int newCols = conditionTable.getColumns().size() - indices.size();
+            int newCols = conditionTable.getColumns().size() + indices.size();
             conditionTable.getColumns().clear();
             actionTable.getColumns().clear();
 
@@ -388,11 +388,18 @@ public final class DtFunctions {
         return indices;
     }
 
+    public static boolean isElseColumn(TableColumn<?,?> tableColumn) {
+        return (null != tableColumn && ELSE_RULE_HEADER.equals(tableColumn.getText()));
+    }
 
     public static <T> void updateColHeaders(TableView<T>... tables) {
         Arrays.stream(tables).forEach(t -> {
             int counter[] = {1};
-            t.getColumns().forEach(c -> c.setText(String.format(RULE_HEADER, counter[0]++)));
+            t.getColumns().forEach(c -> {
+                if(!isElseColumn(c)) {
+                    c.setText(String.format(RULE_HEADER, counter[0]++));
+                }
+            });
         });
     }
 
@@ -401,10 +408,11 @@ public final class DtFunctions {
         return (selectedCells.isEmpty()) ? Optional.empty() : Optional.of(selectedCells.get(0));
     }
 
-    public static TableColumn<ObservableList<String>, String> createTableColumn(int x) {
-
+    public static TableColumn<ObservableList<String>, String> createTableColumn(int x, Optional<String> name) {
         String tpl = RULE_HEADER;
-        TableColumn<ObservableList<String>, String> tc = new TableColumn(String.format(tpl, x + 1));
+        final String columnHeader = (name.isPresent()) ? (name.get()) : (String.format(tpl, x + 1));
+
+        TableColumn<ObservableList<String>, String> tc = new TableColumn(columnHeader);
 
         tc.setCellFactory(DefinitionsTableCell.forTableColumn());
 
@@ -422,8 +430,11 @@ public final class DtFunctions {
         tc.setPrefWidth(40);
         tc.setMinWidth(40);
         tc.setResizable(false);
-
         return tc;
+    }
+
+    public static TableColumn<ObservableList<String>, String> createTableColumn(int x) {
+        return createTableColumn(x, Optional.empty());
     }
 
     public static <S> TableColumn<S, String> createTableColumn(String columnName, String propertyName, int prefWidth,
