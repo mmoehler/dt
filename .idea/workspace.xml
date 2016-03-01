@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b2d1880-d391-4d61-bb7f-0c8e21880d82" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/events/AddElseRuleEvent.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/Notifications.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/Notifications.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MatrixFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MatrixFunctions.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuView.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuViewModel.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuViewModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/de/adesso/tools/ui/menu/MenuView.fxml" afterPath="$PROJECT_DIR$/src/main/resources/de/adesso/tools/ui/menu/MenuView.fxml" />
     </list>
     <ignored path="dt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,29 +28,12 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainView.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="MainView.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="134" column="45" selection-start-line="134" selection-start-column="45" selection-end-line="134" selection-end-column="45" />
+            <state vertical-scroll-proportion="0.3328">
+              <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
               <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="DefaultNotificationCenter.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/de/saxsys/mvvmfx/1.5.0-SNAPSHOT/mvvmfx-1.5.0-SNAPSHOT-sources.jar!/de/saxsys/mvvmfx/utils/notifications/DefaultNotificationCenter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-              <folding>
-                <element signature="n#!!doc" expanded="false" />
-                <element signature="imports" expanded="false" />
-                <element signature="e#1822#1823#0" expanded="false" />
-                <element signature="e#1885#1886#0" expanded="false" />
-                <element signature="e#1960#1961#0" expanded="false" />
-                <element signature="e#2013#2014#0" expanded="false" />
-              </folding>
             </state>
           </provider>
         </entry>
@@ -65,12 +43,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="216" column="29" selection-start-line="216" selection-start-column="16" selection-end-line="216" selection-end-column="29" />
-              <folding>
-                <element signature="e#8878#8879#0" expanded="true" />
-                <element signature="e#8933#8934#0" expanded="true" />
-                <element signature="e#9132#9133#0" expanded="true" />
-                <element signature="e#9186#9187#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -80,14 +53,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-              <folding>
-                <element signature="e#3463#3464#0" expanded="true" />
-                <element signature="e#3528#3529#0" expanded="true" />
-                <element signature="e#4244#4245#0" expanded="true" />
-                <element signature="e#4309#4310#0" expanded="true" />
-                <element signature="e#4342#4343#0" expanded="true" />
-                <element signature="e#4403#4404#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -97,23 +63,26 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="141" column="25" selection-start-line="141" selection-start-column="25" selection-end-line="141" selection-end-column="25" />
-              <folding>
-                <element signature="e#2523#2524#0" expanded="true" />
-                <element signature="e#2564#2565#0" expanded="true" />
-                <element signature="e#3231#3232#0" expanded="true" />
-                <element signature="e#3272#3273#0" expanded="true" />
-                <element signature="e#3330#3331#0" expanded="true" />
-                <element signature="e#3369#3370#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DtFunctions.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DtFunctions.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33277592">
-              <caret line="426" column="0" selection-start-line="426" selection-start-column="0" selection-end-line="426" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="347" column="28" selection-start-line="347" selection-start-column="28" selection-end-line="347" selection-end-column="28" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ActionDeclTableViewModel.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/action/ActionDeclTableViewModel.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="13" column="102" selection-start-line="13" selection-start-column="77" selection-end-line="13" selection-end-column="102" />
               <folding />
             </state>
           </provider>
@@ -123,8 +92,10 @@
         <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MatrixFunctions.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="203" column="1" selection-start-line="203" selection-start-column="1" selection-end-line="203" selection-end-column="1" />
-              <folding />
+              <caret line="200" column="40" selection-start-line="200" selection-start-column="40" selection-end-line="200" selection-end-column="40" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -132,8 +103,8 @@
       <file leaf-file-name="MenuView.fxml" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/de/adesso/tools/ui/menu/MenuView.fxml">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-8.269231">
-              <caret line="106" column="110" selection-start-line="106" selection-start-column="110" selection-end-line="106" selection-end-column="110" />
+            <state vertical-scroll-proportion="-29.709677">
+              <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -181,14 +152,14 @@
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/ListFunctions.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/Mappers.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/IntStreamUtils.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MatrixFunctions.java" />
         <option value="$PROJECT_DIR$/src/main/resources/de/adesso/tools/ui/menu/MenuView.fxml" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuView.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuViewModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/Notifications.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MatrixFunctions.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java" />
       </list>
     </option>
   </component>
@@ -257,8 +228,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="1" />
     <option name="y" value="1" />
-    <option name="width" value="1918" />
-    <option name="height" value="982" />
+    <option name="width" value="2398" />
+    <option name="height" value="1288" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -285,7 +256,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Tests">
           <PATH>
@@ -466,12 +436,47 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="ui" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="action" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="functions" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -681,6 +686,7 @@
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu" />
     <property name="SearchEverywhereHistoryKey" value="doAddCo&#9;PSI&#9;JAVA://de.adesso.tools.ui.menu.MenuView#doAddConditionDecl&#10;addColumn&#9;PSI&#9;JAVA://de.adesso.tools.functions.MatrixFunctions#addColumn&#10;determineIndi&#9;PSI&#9;JAVA://de.adesso.tools.ui.main.MainView#determineIndices&#10;MatrixBuilder&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/tools/common/MatrixBuilder.java&#10;FXCollections&#9;PSI&#9;JAVA://javafx.collections.FXCollections&#10;MatrixBui&#9;PSI&#9;JAVA://de.adesso.tools.common.MatrixBuilder" />
+    <property name="extract.method.default.visibility" value="private" />
   </component>
   <component name="RecentsManager">
     <key name="MoveMembersDialog.RECENTS_KEY">
@@ -1313,7 +1319,7 @@
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="StructureViewFactory">
-    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR,SHOW_NON_PUBLIC" />
+    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR,SHOW_PROPERTIES" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -1330,7 +1336,10 @@
       <workItem from="1455892835124" duration="43489000" />
       <workItem from="1456497637990" duration="256000" />
       <workItem from="1456497986489" duration="31988000" />
-      <workItem from="1456726928063" duration="4040000" />
+      <workItem from="1456726928063" duration="4086000" />
+      <workItem from="1456749283213" duration="599000" />
+      <workItem from="1456811490641" duration="3920000" />
+      <workItem from="1456845869280" duration="6449000" />
     </task>
     <task id="LOCAL-00001" summary="Refactoring of Matrix functions">
       <created>1455475453269</created>
@@ -1356,7 +1365,13 @@
       <option name="project" value="LOCAL" />
       <updated>1456077880557</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="SOme TRouble with Else Rule --&gt; Solve It!!">
+      <created>1456732342926</created>
+      <option name="number" value="00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1456732342926</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1392,7 +1407,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="98673000" />
+    <option name="totallyTimeSpent" value="109687000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1404,7 +1419,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="1" width="1918" height="982" extended-state="0" />
+    <frame x="1" y="1" width="2398" height="1288" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1412,21 +1427,21 @@
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881355" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32846716" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.39963505" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25559106" sideWeight="0.50338817" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299435" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881355" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.5510949" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913843" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2497309" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25150472" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.240625" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18191604" sideWeight="0.4966118" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23936817" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18400688" sideWeight="0.4966118" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.23936817" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1435,18 +1450,18 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3299435" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913843" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.18210863" sideWeight="0.4966118" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50048405" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -1476,14 +1491,15 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Refactoring of Matrix functions" />
     <MESSAGE value="Adding additional Insert functionality" />
-    <option name="LAST_COMMIT_MESSAGE" value="Adding additional Insert functionality" />
+    <MESSAGE value="SOme TRouble with Else Rule --&gt; Solve It!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="SOme TRouble with Else Rule --&gt; Solve It!!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java</url>
-          <line>186</line>
+          <line>201</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
@@ -1507,7 +1523,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java</url>
-          <line>257</line>
+          <line>262</line>
           <properties />
           <option name="timeStamp" value="9" />
         </line-breakpoint>
@@ -1525,14 +1541,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="129" column="72" selection-start-line="129" selection-start-column="72" selection-end-line="129" selection-end-column="72" />
-          <folding>
-            <element signature="e#3463#3464#0" expanded="true" />
-            <element signature="e#3528#3529#0" expanded="true" />
-            <element signature="e#4244#4245#0" expanded="true" />
-            <element signature="e#4309#4310#0" expanded="true" />
-            <element signature="e#4342#4343#0" expanded="true" />
-            <element signature="e#4403#4404#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1540,14 +1549,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="127" column="42" selection-start-line="127" selection-start-column="42" selection-end-line="127" selection-end-column="42" />
-          <folding>
-            <element signature="e#2523#2524#0" expanded="true" />
-            <element signature="e#2564#2565#0" expanded="true" />
-            <element signature="e#3231#3232#0" expanded="true" />
-            <element signature="e#3272#3273#0" expanded="true" />
-            <element signature="e#3330#3331#0" expanded="true" />
-            <element signature="e#3369#3370#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1563,7 +1565,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="203" column="1" selection-start-line="203" selection-start-column="1" selection-end-line="203" selection-end-column="1" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1587,7 +1591,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="93" column="56" selection-start-line="93" selection-start-column="56" selection-end-line="93" selection-end-column="56" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -1630,14 +1636,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#2523#2524#0" expanded="true" />
-            <element signature="e#2564#2565#0" expanded="true" />
-            <element signature="e#3231#3232#0" expanded="true" />
-            <element signature="e#3272#3273#0" expanded="true" />
-            <element signature="e#3330#3331#0" expanded="true" />
-            <element signature="e#3369#3370#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1665,14 +1664,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#2523#2524#0" expanded="true" />
-            <element signature="e#2564#2565#0" expanded="true" />
-            <element signature="e#3231#3232#0" expanded="true" />
-            <element signature="e#3272#3273#0" expanded="true" />
-            <element signature="e#3330#3331#0" expanded="true" />
-            <element signature="e#3369#3370#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1749,13 +1741,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/action/ActionDeclTableViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="102" selection-start-line="13" selection-start-column="77" selection-end-line="13" selection-end-column="102" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/events/RemoveRuleEvent.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18072289">
@@ -1774,7 +1759,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1820,7 +1804,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1831,7 +1814,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="14.603773">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1839,22 +1821,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="33" column="28" selection-start-line="33" selection-start-column="16" selection-end-line="33" selection-end-column="42" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/saxsys/mvvmfx/1.5.0-SNAPSHOT/mvvmfx-1.5.0-SNAPSHOT-sources.jar!/de/saxsys/mvvmfx/utils/notifications/DefaultNotificationCenter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-            <element signature="imports" expanded="false" />
-            <element signature="e#1822#1823#0" expanded="false" />
-            <element signature="e#1885#1886#0" expanded="false" />
-            <element signature="e#1960#1961#0" expanded="false" />
-            <element signature="e#2013#2014#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1862,7 +1828,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1894,29 +1859,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/de/adesso/tools/ui/menu/MenuView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-8.269231">
-          <caret line="106" column="110" selection-start-line="106" selection-start-column="110" selection-end-line="106" selection-end-column="110" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuView.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="141" column="25" selection-start-line="141" selection-start-column="25" selection-end-line="141" selection-end-column="25" />
-          <folding>
-            <element signature="e#2523#2524#0" expanded="true" />
-            <element signature="e#2564#2565#0" expanded="true" />
-            <element signature="e#3231#3232#0" expanded="true" />
-            <element signature="e#3272#3273#0" expanded="true" />
-            <element signature="e#3330#3331#0" expanded="true" />
-            <element signature="e#3369#3370#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1924,7 +1871,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14214046">
           <caret line="5" column="29" selection-start-line="5" selection-start-column="29" selection-end-line="5" selection-end-column="29" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1940,21 +1886,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="56" column="0" selection-start-line="56" selection-start-column="0" selection-end-line="56" selection-end-column="0" />
-          <folding>
-            <element signature="e#3463#3464#0" expanded="true" />
-            <element signature="e#3528#3529#0" expanded="true" />
-            <element signature="e#4244#4245#0" expanded="true" />
-            <element signature="e#4309#4310#0" expanded="true" />
-            <element signature="e#4342#4343#0" expanded="true" />
-            <element signature="e#4403#4404#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MatrixFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="203" column="1" selection-start-line="203" selection-start-column="1" selection-end-line="203" selection-end-column="1" />
           <folding />
         </state>
       </provider>
@@ -1963,27 +1894,59 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="216" column="29" selection-start-line="216" selection-start-column="16" selection-end-line="216" selection-end-column="29" />
-          <folding>
-            <element signature="e#8878#8879#0" expanded="true" />
-            <element signature="e#8933#8934#0" expanded="true" />
-            <element signature="e#9132#9133#0" expanded="true" />
-            <element signature="e#9186#9187#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/de/adesso/tools/ui/menu/MenuView.fxml">
+      <provider editor-type-id="JavaFX-Scene-Builder">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-29.709677">
+          <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/de/saxsys/mvvmfx/1.5.0-SNAPSHOT/mvvmfx-1.5.0-SNAPSHOT-sources.jar!/de/saxsys/mvvmfx/utils/notifications/DefaultNotificationCenter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.020295203">
+          <caret line="92" column="0" selection-start-line="92" selection-start-column="0" selection-end-line="92" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/action/ActionDeclTableViewModel.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="134" column="45" selection-start-line="134" selection-start-column="45" selection-end-line="134" selection-end-column="45" />
+          <caret line="13" column="102" selection-start-line="13" selection-start-column="77" selection-end-line="13" selection-end-column="102" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MatrixFunctions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="200" column="40" selection-start-line="200" selection-start-column="40" selection-end-line="200" selection-end-column="40" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33277592">
-          <caret line="426" column="0" selection-start-line="426" selection-start-column="0" selection-end-line="426" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="347" column="28" selection-start-line="347" selection-start-column="28" selection-end-line="347" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3328">
+          <caret line="126" column="0" selection-start-line="126" selection-start-column="0" selection-end-line="126" selection-end-column="0" />
           <folding />
         </state>
       </provider>

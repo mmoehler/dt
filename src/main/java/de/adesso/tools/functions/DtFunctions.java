@@ -38,6 +38,11 @@ public final class DtFunctions {
     public static final String RULE_HEADER = "R%02d";
     public static final String ELSE_RULE_HEADER = "ELSE";
 
+    public static boolean DIR_DOWN = true;
+    public static boolean DIR_RIGHT = DIR_DOWN;
+    public static boolean DIR_UP = false;
+    public static boolean DIR_LEFT = DIR_UP;
+
 
     private DtFunctions() {
     }
@@ -305,21 +310,11 @@ public final class DtFunctions {
     public static void doMoveColumns(ObservableList<ObservableList<String>> conditionDefinitions,
                                      ObservableList<ObservableList<String>> actionDefinitions,
                                      TableView conditionTable, TableView actionTable, Object[] value,
-                                     boolean toRight) {
+                                     boolean direction) {
         final List<Integer> indices = determineColumnIndices(conditionTable, actionTable, value);
         if (!indices.isEmpty()) {
             final int c1Idx = indices.get(0);
-            int c2Idx = 0;
-            if (toRight) {
-                if (c1Idx < conditionTable.getColumns().size() - 1) {
-                    c2Idx = (c1Idx + 1);
-                }
-
-            } else {
-                if (c1Idx > 0) {
-                    c2Idx = (c1Idx - 1);
-                }
-            }
+            final int c2Idx = determineNextIndex(direction, c1Idx, conditionTable.getColumns().size());
             ObservableList<ObservableList<String>> newConditionDefns = swapColumnsAt(conditionDefinitions, c1Idx, c2Idx);
             ObservableList<ObservableList<String>> newActionDefns = swapColumnsAt(actionDefinitions, c1Idx, c2Idx);
             conditionDefinitions.clear();
@@ -327,34 +322,30 @@ public final class DtFunctions {
             actionDefinitions.clear();
             newActionDefns.forEach(actionDefinitions::add);
         }
-
     }
 
-    public static void doMoveRows(ObservableList<ObservableList<String>> conditionDefinitions,
-                            ObservableList<ObservableList<String>> actionDefinitions,
-                            TableView conditionTable,
-                            TableView actionTable, Object[] value, boolean toUpper) {
-        final List<Integer> indices = determineRowIndices(conditionTable, actionTable, value);
+    private static int determineNextIndex(boolean directionDownOrRight, int c1Idx, int maxExclIndex) {
+        final int c2Idx = (directionDownOrRight)
+                ? Math.min(c1Idx + 1, maxExclIndex - 1)
+                : Math.max(c1Idx - 1, 0);
+        return c2Idx;
+    }
+
+    public static <T extends DeclarationTableViewModel> void doMoveRows(ObservableList<T> declarations,
+                                  ObservableList<ObservableList<String>> definitions,
+                                  TableView table,
+                                  Object[] value, boolean direction) {
+
+        final List<Integer> indices = determineRowIndices(table, null, value);
         if (!indices.isEmpty()) {
-            int r2Idx = 0;
             final int r1Idx = indices.get(0);
-            if (toUpper) {
-                if (r1Idx > 0) {
-                    r2Idx = (r1Idx - 1);
-                }
-
-            } else {
-                if (r1Idx < conditionTable.getColumns().size() - 1) {
-                    r2Idx = (r1Idx + 1);
-                }
-            }
-
-            ObservableList<ObservableList<String>> newConditionDefns = swapColumnsAt(conditionDefinitions, r1Idx, r2Idx);
-            ObservableList<ObservableList<String>> newActionDefns = swapColumnsAt(actionDefinitions, r1Idx, r2Idx);
-            conditionDefinitions.clear();
-            newConditionDefns.forEach(conditionDefinitions::add);
-            actionDefinitions.clear();
-            newActionDefns.forEach(actionDefinitions::add);
+            final int r2Idx = determineNextIndex(direction, r1Idx, declarations.size());
+            ObservableList<T> newDecls = swapRowsAt(declarations, r1Idx, r2Idx);
+            ObservableList<ObservableList<String>> newDefns = swapRowsAt(definitions, r1Idx, r2Idx);
+            declarations.clear();
+            newDecls.forEach(declarations::add);
+            definitions.clear();
+            newDefns.forEach(definitions::add);
         }
 
     }
@@ -370,25 +361,25 @@ public final class DtFunctions {
     }
 
     private static <T, U> List<TablePosition> determineIndices(TableView<T> tableView0, TableView<U> tableView1, Object[] value) {
+
+        if(null == tableView0 && null == tableView1) {
+            throw new IllegalStateException("Missing at least one valid TableView with a selection!");
+        }
+
+        // ... together with the condition above, it is ensured, that at least one table view is usable.
         List<TablePosition> indices = Collections.emptyList();
-        if (null != value && value.length == 1) {
-            // indices = (List<Integer>) value[0];
-        } else {
-            Optional<TablePosition> cellPos = getSelectedCell(tableView0);
+        if(null == tableView0 || null == tableView1) {
+            TableView<?> tableView = (null == tableView0) ? tableView1 : tableView0;
+            Optional<TablePosition> cellPos = getSelectedCell(tableView);
             indices = new ArrayList<>(1);
             if (cellPos.isPresent()) {
                 indices.add(cellPos.get());
-            } else {
-                cellPos = getSelectedCell(tableView1);
-                if (cellPos.isPresent()) {
-                    indices.add(cellPos.get());
-                }
             }
         }
         return indices;
     }
 
-    public static boolean isElseColumn(TableColumn<?,?> tableColumn) {
+    public static boolean isElseColumn(TableColumn<?, ?> tableColumn) {
         return (null != tableColumn && ELSE_RULE_HEADER.equals(tableColumn.getText()));
     }
 
@@ -396,7 +387,7 @@ public final class DtFunctions {
         Arrays.stream(tables).forEach(t -> {
             int counter[] = {1};
             t.getColumns().forEach(c -> {
-                if(!isElseColumn(c)) {
+                if (!isElseColumn(c)) {
                     c.setText(String.format(RULE_HEADER, counter[0]++));
                 }
             });

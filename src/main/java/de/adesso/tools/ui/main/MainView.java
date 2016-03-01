@@ -137,34 +137,49 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     private void doMoveConditionDeclDown(String key, Object[] value) {
-
+        doMoveRows(this.viewModel.getConditionDeclarations(),
+                this.viewModel.getConditionDefinitions(),
+                this.conditionDefinitionsTable, value, DIR_DOWN);
+        viewModel.updateRowHeader();
     }
 
     private void doMoveConditionDeclUp(String key, Object[] value) {
-
+        doMoveRows(this.viewModel.getConditionDeclarations(),
+                this.viewModel.getConditionDefinitions(),
+                this.conditionDefinitionsTable, value, DIR_UP);
+        viewModel.updateRowHeader();
     }
 
     private void doMoveActionDeclDown(String key, Object[] value) {
-        doMoveRows(this.viewModel.getConditionDefinitions(), this.viewModel.getActionDefinitions(),
-                this.conditionDefinitionsTable, this.actionDefinitionsTable, value, true);
+        doMoveRows(this.viewModel.getActionDeclarations(),
+                this.viewModel.getActionDefinitions(),
+                this.actionDefinitionsTable, value, DIR_DOWN);
         viewModel.updateRowHeader();
     }
 
     private void doMoveActionDeclUp(String key, Object[] value) {
-        doMoveRows(this.viewModel.getConditionDefinitions(), this.viewModel.getActionDefinitions(),
-                this.conditionDefinitionsTable, this.actionDefinitionsTable, value, false);
+        doMoveRows(this.viewModel.getActionDeclarations(),
+                this.viewModel.getActionDefinitions(),
+                this.actionDefinitionsTable,
+                value, DIR_UP);
         viewModel.updateRowHeader();
     }
 
     private void doMoveRuleRight(String key, Object[] value) {
-        doMoveColumns(this.viewModel.getConditionDefinitions(), this.viewModel.getActionDefinitions(),
-                this.conditionDefinitionsTable, this.actionDefinitionsTable, value, true);
+        doMoveColumns(this.viewModel.getConditionDefinitions(),
+                this.viewModel.getActionDefinitions(),
+                this.conditionDefinitionsTable,
+                this.actionDefinitionsTable,
+                value, DIR_RIGHT);
         updateColHeaders(this.conditionDefinitionsTable, this.actionDefinitionsTable);
     }
 
     private void doMoveRuleLeft(String key, Object[] value) {
-        doMoveColumns(this.viewModel.getConditionDefinitions(), this.viewModel.getActionDefinitions(),
-                this.conditionDefinitionsTable, this.actionDefinitionsTable, value, false);
+        doMoveColumns(this.viewModel.getConditionDefinitions(),
+                this.viewModel.getActionDefinitions(),
+                this.conditionDefinitionsTable,
+                this.actionDefinitionsTable,
+                value, DIR_LEFT);
         updateColHeaders(this.conditionDefinitionsTable, this.actionDefinitionsTable);
     }
 

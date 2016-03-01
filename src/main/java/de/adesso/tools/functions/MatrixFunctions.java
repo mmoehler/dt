@@ -67,11 +67,8 @@ public final class MatrixFunctions {
      * @param <T>
      * @return an ObservableList as copy of {@code src}
      */
-    public static <T> ObservableList<ObservableList<T>> copy(ObservableList<ObservableList<T>> original) {
-        return original.stream()
-                .map(e -> e.stream()
-                        .collect(Collectors.toCollection(FXCollections::observableArrayList)))
-                .collect(Collectors.toCollection(() -> FXCollections.observableArrayList()));
+    public static <T> ObservableList<T> copy(ObservableList<T> original) {
+        return FXCollections.observableArrayList(original);
     }
 
     public static <T> ObservableList<T> copyRow(ObservableList<T> original) {
@@ -201,9 +198,9 @@ public final class MatrixFunctions {
         return out;
     }
 
-    public static <T> ObservableList<ObservableList<T>> swapRowsAt(ObservableList<ObservableList<T>> original, int row1Idx, int row2Idx) {
-        ObservableList<ObservableList<T>> copy = copy(original);
-        ObservableList<T> row1 = copy.get(row1Idx);
+    public static <T> ObservableList<T> swapRowsAt(ObservableList<T> original, int row1Idx, int row2Idx) {
+        ObservableList<T> copy = copy(original);
+        T row1 = copy.get(row1Idx);
         copy.set(row1Idx,copy.get(row2Idx));
         copy.set(row2Idx, row1);
         return copy;
