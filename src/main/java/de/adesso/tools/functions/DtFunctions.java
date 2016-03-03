@@ -14,6 +14,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
+import javafx.scene.control.TablePositionBase;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -27,6 +28,7 @@ import static java.lang.Math.min;
 import static java.util.stream.Collectors.toList;
 
 /**
+ * General Decisiontable Functions
  * Created by moehler on 11.01.2016.
  */
 public final class DtFunctions {
@@ -49,19 +51,19 @@ public final class DtFunctions {
 
     public static <T extends PossibleIndicatorsSupplier> int determineMaxColumns(List<T> indicators) {
         return indicators.stream()
-                .map(x -> determineIndicatorsCount(x))
+                .map(DtFunctions::determineIndicatorsCount)
                 .reduce(1, (y, z) -> y * z);
     }
 
     public static <T extends PossibleIndicatorsSupplier> List<Integer> determineCountIndicatorsPerRow(List<T> indicators) {
         return indicators.stream()
-                .map(x -> determineIndicatorsCount(x))
+                .map(DtFunctions::determineIndicatorsCount)
                 .collect(toList());
     }
 
     public static <T extends PossibleIndicatorsSupplier> List<String[]> determineIndicatorArrayPerRow(List<T> indicators) {
         return indicators.stream()
-                .map(x -> determineIndicators(x))
+                .map(DtFunctions::determineIndicators)
                 .collect(toList());
     }
 
@@ -107,7 +109,7 @@ public final class DtFunctions {
             String[][] rawData = new String[rowCount][countColumns];
             final List<List<String>> transposed = Arrays.stream(rawData).map(s -> {
                 Arrays.fill(s, QMARK);
-                return new ArrayList<String>(Arrays.asList(s));
+                return new ArrayList<>(Arrays.asList(s));
             }).collect(toList());
 
             transposed.forEach(l -> {
@@ -141,9 +143,7 @@ public final class DtFunctions {
         final ObservableList<ObservableList<String>> fullExpanded = fullExpandConditions(indicators);
         final int internalCountColumns = min(determineMaxColumns(indicators), countColumns);
         if (dontFillWithIndicators) {
-            fullExpanded.forEach(x -> {
-                Collections.fill(x, QMARK);
-            });
+            fullExpanded.forEach(x -> Collections.fill(x, QMARK));
         }
         fullExpanded.forEach(l -> {
             List<String> subList = l.subList(0, internalCountColumns);
@@ -157,17 +157,7 @@ public final class DtFunctions {
     }
 
     public static ObservableList<ObservableList<String>> fillActions(List<ActionDeclTableViewModel> indicators, int countColumns) {
-        final ObservableList<ObservableList<String>> retList = FXCollections.observableArrayList();
-        final ObservableList<ObservableList<String>> fullExpanded = fullExpandActions(indicators, countColumns);
-        final int internalCountColumns = countColumns;
-        fullExpanded.forEach(l -> {
-            if (l instanceof ObservableList) {
-                retList.add((ObservableList) l);
-            } else {
-                retList.add(FXCollections.observableList(l));
-            }
-        });
-        return retList;
+        return fullExpandActions(indicators, countColumns);
     }
 
 
@@ -175,8 +165,8 @@ public final class DtFunctions {
         if (collections == null || collections.isEmpty()) {
             return Collections.emptyList();
         } else {
-            List<List<T>> res = Lists.newLinkedList();
-            recursivePermutation(collections, res, 0, new LinkedList<T>());
+            List<List<T>> res = new LinkedList<>();
+            recursivePermutation(collections, res, 0, new LinkedList<>());
             return res;
         }
     }
@@ -325,10 +315,9 @@ public final class DtFunctions {
     }
 
     private static int determineNextIndex(boolean directionDownOrRight, int c1Idx, int maxExclIndex) {
-        final int c2Idx = (directionDownOrRight)
+        return (directionDownOrRight)
                 ? Math.min(c1Idx + 1, maxExclIndex - 1)
                 : Math.max(c1Idx - 1, 0);
-        return c2Idx;
     }
 
     public static <T extends DeclarationTableViewModel> void doMoveRows(ObservableList<T> declarations,
@@ -352,12 +341,12 @@ public final class DtFunctions {
 
     private static <T, U> List<Integer> determineColumnIndices(TableView<T> tableView0, TableView<U> tableView1, Object[] value) {
         List<TablePosition> indices = determineIndices(tableView0, tableView1, value);
-        return indices.stream().map(t -> t.getColumn()).collect(Collectors.toList());
+        return indices.stream().map(TablePosition::getColumn).collect(Collectors.toList());
     }
 
     private static <T, U> List<Integer> determineRowIndices(TableView<T> tableView0, TableView<U> tableView1, Object[] value) {
         List<TablePosition> indices = determineIndices(tableView0, tableView1, value);
-        return indices.stream().map(t -> t.getRow()).collect(Collectors.toList());
+        return indices.stream().map(TablePositionBase::getRow).collect(Collectors.toList());
     }
 
     private static <T, U> List<TablePosition> determineIndices(TableView<T> tableView0, TableView<U> tableView1, Object[] value) {
@@ -383,14 +372,12 @@ public final class DtFunctions {
         return (null != tableColumn && ELSE_RULE_HEADER.equals(tableColumn.getText()));
     }
 
-    public static <T> void updateColHeaders(TableView<T>... tables) {
-        Arrays.stream(tables).forEach(t -> {
-            int counter[] = {1};
-            t.getColumns().forEach(c -> {
-                if (!isElseColumn(c)) {
-                    c.setText(String.format(RULE_HEADER, counter[0]++));
-                }
-            });
+    public static <T> void updateColHeaders(TableView<T> table) {
+        int counter[] = {1};
+        table.getColumns().forEach(c -> {
+            if (!isElseColumn(c)) {
+                c.setText(String.format(RULE_HEADER, counter[0]++));
+            }
         });
     }
 
@@ -408,11 +395,9 @@ public final class DtFunctions {
         tc.setCellFactory(DefinitionsTableCell.forTableColumn());
 
         tc.setOnEditCommit(
-                (t) -> {
-                    (t.getTableView().getItems().get(
-                            t.getTablePosition().getRow())
-                    ).set(t.getTablePosition().getColumn(), t.getNewValue());
-                });
+                (t) -> (t.getTableView().getItems().get(
+                        t.getTablePosition().getRow())
+                ).set(t.getTablePosition().getColumn(), t.getNewValue()));
 
         tc.setCellValueFactory(
                 (features) -> new SimpleStringProperty((features.getValue().get(x))
