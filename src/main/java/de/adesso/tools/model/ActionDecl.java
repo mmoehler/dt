@@ -8,6 +8,10 @@ public class ActionDecl extends Declaration {
         super();
     }
 
+    public ActionDecl(String lfdNr, String expression, String possibleIndicators) {
+        super(lfdNr, expression, possibleIndicators);
+    }
+
     @Override
     public String getLfdNr() {
         return super.getLfdNr();

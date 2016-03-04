@@ -19,8 +19,10 @@
 
 package de.adesso.tools.functions;
 
+import de.adesso.tools.model.ActionDecl;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;
+import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import javafx.beans.property.ReadOnlyStringWrapper;
 
@@ -42,6 +44,11 @@ public class DtFunctionsTestData {
     public static ConditionDeclTableViewModelListBuilder conditionDeclTableViewModelListBuilder() {
         return new ConditionDeclTableViewModelListBuilder();
     }
+
+    public static ActionDeclTableViewModelListBuilder actionDeclTableViewModelListBuilder() {
+        return new ActionDeclTableViewModelListBuilder();
+    }
+
 
     static class ListOfIndicatorSuppliersBuilder {
         List<PossibleIndicatorsSupplierBuilder> builders = new LinkedList<>();
@@ -122,8 +129,56 @@ public class DtFunctionsTestData {
         }
     }
 
+    static class ActionDeclTableViewModelListBuilder  {
+        List<ActionDeclTableViewModel> list = new ArrayList<>();
+
+        public ActionDeclTableViewModelListBuilder() {
+            super();
+        }
+
+        public ActionDeclBuilder<ActionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
+            return new ActionDeclBuilder<>(number, this,
+                    (lfdNr, expression, possibleIndicators) -> _addTableViewModel(new ActionDecl(lfdNr, expression, possibleIndicators)));
+        }
+
+        protected void _addTableViewModel(ActionDecl element) {
+            list.add(new ActionDeclTableViewModel(element));
+        }
+
+        public List<ActionDeclTableViewModel> build(){
+            return list;
+        }
+    }
+
+    static class ActionDeclBuilder<T> {
+        private final String lfdNr;
+        private final T caller;
+        private final ActionDeclBuilderCallback callback;
+        private String expression;
+
+        public ActionDeclBuilder(String lfdNr, T caller, ActionDeclBuilderCallback callback) {
+            this.lfdNr = lfdNr;
+            this.caller = caller;
+            this.callback = callback;
+        }
+
+        public ActionDeclBuilder<T> withExpression(String expression) {
+            this.expression = expression;
+            return this;
+        }
+
+        public T withIndicators(String possibleIndicators) {
+            this.callback.addTableViewModel(this.lfdNr, this.expression, possibleIndicators);
+            return this.caller;
+        }
+    }
+
 }
 
 interface ConditionDeclBuilderCallback {
+    void addTableViewModel(String lfdNr, String expression, String possibleIndicators);
+}
+
+interface ActionDeclBuilderCallback {
     void addTableViewModel(String lfdNr, String expression, String possibleIndicators);
 }

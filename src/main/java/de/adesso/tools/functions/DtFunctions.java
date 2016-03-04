@@ -100,7 +100,6 @@ public final class DtFunctions {
     }
 
     public static ObservableList<ObservableList<String>> fullExpandActions(List<ActionDeclTableViewModel> indicators, int countColumns) {
-        // TODO Define Preconditions if neccessary!
         final ObservableList<ObservableList<String>> retList = FXCollections.observableArrayList();
         final int rowCount = indicators.size();
 
@@ -113,7 +112,6 @@ public final class DtFunctions {
             }).collect(toList());
 
             transposed.forEach(l -> {
-                l.add(0, "");
                 retList.add(FXCollections.observableArrayList(l));
             });
 
@@ -141,6 +139,8 @@ public final class DtFunctions {
     public static ObservableList<ObservableList<String>> limitedExpandConditions(List<ConditionDeclTableViewModel> indicators, int countColumns, boolean dontFillWithIndicators) {
         final ObservableList<ObservableList<String>> retList = FXCollections.observableArrayList();
         final ObservableList<ObservableList<String>> fullExpanded = fullExpandConditions(indicators);
+        // tolerate invalid com count. In case of errors, the contColumns is
+        // corrected to determineMaxColumns(indicators) columns.
         final int internalCountColumns = min(determineMaxColumns(indicators), countColumns);
         if (dontFillWithIndicators) {
             fullExpanded.forEach(x -> Collections.fill(x, QMARK));
@@ -155,11 +155,6 @@ public final class DtFunctions {
         });
         return retList;
     }
-
-    public static ObservableList<ObservableList<String>> fillActions(List<ActionDeclTableViewModel> indicators, int countColumns) {
-        return fullExpandActions(indicators, countColumns);
-    }
-
 
     public static <T> List<List<T>> permutations(List<List<T>> collections) {
         if (collections == null || collections.isEmpty()) {

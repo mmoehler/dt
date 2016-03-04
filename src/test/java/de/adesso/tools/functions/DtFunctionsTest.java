@@ -21,8 +21,13 @@ package de.adesso.tools.functions;
 
 import de.adesso.tools.common.MatrixBuilder;
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;
+import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
+import org.mockito.Mockito;
+import org.powermock.api.mockito.PowerMockito;
 import org.testng.annotations.Test;
 
 import java.util.Arrays;
@@ -30,9 +35,9 @@ import java.util.Iterator;
 import java.util.List;
 
 import static de.adesso.tools.common.MatrixBuilder.observable;
+import static de.adesso.tools.common.MatrixBuilder.on;
 import static de.adesso.tools.functions.DtFunctions.*;
-import static de.adesso.tools.functions.DtFunctionsTestData.conditionDeclTableViewModelListBuilder;
-import static de.adesso.tools.functions.DtFunctionsTestData.listOfIndicatorSupliersBuilder;
+import static de.adesso.tools.functions.DtFunctionsTestData.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.testng.Assert.assertEquals;
@@ -132,9 +137,9 @@ public class DtFunctionsTest {
 
 
         final String matrixCode =
-                        "Y,Y,Y,Y,Y,Y,Y,Y,N,N,N,N,N,N,N,N" +
-                        "Y,Y,Y,Y,N,N,N,N,Y,Y,Y,Y,N,N,N,N" +
-                        "Y,Y,N,N,Y,Y,N,N,Y,Y,N,N,Y,Y,N,N" +
+                        "Y,Y,Y,Y,Y,Y,Y,Y,N,N,N,N,N,N,N,N," +
+                        "Y,Y,Y,Y,N,N,N,N,Y,Y,Y,Y,N,N,N,N," +
+                        "Y,Y,N,N,Y,Y,N,N,Y,Y,N,N,Y,Y,N,N," +
                         "Y,N,Y,N,Y,N,Y,N,Y,N,Y,N,Y,N,Y,N";
 
         ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 16).build());
@@ -159,31 +164,230 @@ public class DtFunctionsTest {
     @Test
     public void testFullExpandActions() throws Exception {
 
+        List<ActionDeclTableViewModel> indicators = actionDeclTableViewModelListBuilder()
+                .addTableViewModelWithLfdNbr("0").withExpression("NOP-01").withIndicators("X")
+                .addTableViewModelWithLfdNbr("1").withExpression("NOP-02").withIndicators("X")
+                .build();
+
+        final String matrixCode =
+                "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
+                        "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?";
+
+        ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 16).build());
+        ObservableList<ObservableList<String>> actual = fullExpandActions(indicators, 16);
+
+        System.out.println("ACTUAL: -------------------------------");
+        actual.forEach(System.out::println);
+        System.out.println("EXPECTED: -----------------------------");
+        expected.forEach(System.out::println);
+
+        assertEquals(actual.size(), expected.size());
+
+        Iterator<ObservableList<String>> acIterator = actual.iterator(), exIterator = expected.iterator();
+
+        assertThat(actual.size(), equalTo(expected.size()));
+        for (; acIterator.hasNext() && exIterator.hasNext(); ) {
+            assertEquals(acIterator.next(), exIterator.next());
+        }
+
     }
 
     @Test
-    public void testLimitedExpandConditions() throws Exception {
+    public void testLimitedExpandConditionsWithIndicators() throws Exception {
+        List<ConditionDeclTableViewModel> indicators = conditionDeclTableViewModelListBuilder()
+                .addTableViewModelWithLfdNbr("0").withExpression("NOP-01").withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("1").withExpression("NOP-02").withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("2").withExpression("NOP-03").withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("3").withExpression("NOP-04").withIndicators("Y,N")
+                .build();
+
+
+        final String matrixCode =
+                "Y,Y,Y,Y,Y,Y,Y,Y," +
+                        "Y,Y,Y,Y,N,N,N,N," +
+                        "Y,Y,N,N,Y,Y,N,N," +
+                        "Y,N,Y,N,Y,N,Y,N";
+
+        ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 8).build());
+        ObservableList<ObservableList<String>> actual = limitedExpandConditions(indicators, 8);
+
+        System.out.println("ACTUAL: -------------------------------");
+        actual.forEach(System.out::println);
+        System.out.println("EXPECTED: -----------------------------");
+        expected.forEach(System.out::println);
+
+        assertEquals(actual.size(), expected.size());
+
+        Iterator<ObservableList<String>> acIterator = actual.iterator(), exIterator = expected.iterator();
+
+        assertThat(actual.size(), equalTo(expected.size()));
+        for (; acIterator.hasNext() && exIterator.hasNext(); ) {
+            assertEquals(acIterator.next(), exIterator.next());
+        }
 
     }
 
     @Test
-    public void testLimitedExpandConditions1() throws Exception {
+    public void testLimitedExpandConditionsWithoutIndicators() throws Exception {
+        List<ConditionDeclTableViewModel> indicators = conditionDeclTableViewModelListBuilder()
+                .addTableViewModelWithLfdNbr("0").withExpression("NOP-01").withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("1").withExpression("NOP-02").withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("2").withExpression("NOP-03").withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("3").withExpression("NOP-04").withIndicators("Y,N")
+                .build();
 
+
+        final String matrixCode =
+                "?,?,?,?,?,?,?,?," +
+                        "?,?,?,?,?,?,?,?," +
+                        "?,?,?,?,?,?,?,?," +
+                        "?,?,?,?,?,?,?,?";
+
+        ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 8).build());
+        ObservableList<ObservableList<String>> actual = limitedExpandConditions(indicators, 8, true);
+
+        System.out.println("ACTUAL: -------------------------------");
+        actual.forEach(System.out::println);
+        System.out.println("EXPECTED: -----------------------------");
+        expected.forEach(System.out::println);
+
+        assertEquals(actual.size(), expected.size());
+
+        Iterator<ObservableList<String>> acIterator = actual.iterator(), exIterator = expected.iterator();
+
+        assertThat(actual.size(), equalTo(expected.size()));
+        for (; acIterator.hasNext() && exIterator.hasNext(); ) {
+            assertEquals(acIterator.next(), exIterator.next());
+        }
     }
 
     @Test
-    public void testFillActions() throws Exception {
+    public void testLimitedExpandConditionsWithoutIndicatorsAndToManyColumns() throws Exception {
+        List<ConditionDeclTableViewModel> indicators = conditionDeclTableViewModelListBuilder()
+                .addTableViewModelWithLfdNbr("0").withExpression("NOP-01").withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("1").withExpression("NOP-02").withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("2").withExpression("NOP-03").withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("3").withExpression("NOP-04").withIndicators("Y,N")
+                .build();
 
+
+        final String matrixCode =
+                "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
+                        "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
+                        "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
+                        "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?";
+
+        ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 16).build());
+        ObservableList<ObservableList<String>> actual = limitedExpandConditions(indicators, 32, true);
+
+        System.out.println("ACTUAL: -------------------------------");
+        actual.forEach(System.out::println);
+        System.out.println("EXPECTED: -----------------------------");
+        expected.forEach(System.out::println);
+
+        assertEquals(actual.size(), expected.size());
+
+        Iterator<ObservableList<String>> acIterator = actual.iterator(), exIterator = expected.iterator();
+
+        assertThat(actual.size(), equalTo(expected.size()));
+        for (; acIterator.hasNext() && exIterator.hasNext(); ) {
+            assertEquals(acIterator.next(), exIterator.next());
+        }
     }
 
     @Test
     public void testPermutations() throws Exception {
+        final List<List<String>> original = Arrays.asList(
+                Arrays.asList("Y", "N"),
+                Arrays.asList("Y", "N"),
+                Arrays.asList("Y", "N"),
+                Arrays.asList("Y", "N")
+        );
+
+        List<List<String>> expected = Arrays.asList(
+                Arrays.asList("Y","Y","Y","Y"),
+                Arrays.asList("Y","Y","Y","N"),
+                Arrays.asList("Y","Y","N","Y"),
+                Arrays.asList("Y","Y","N","N"),
+                Arrays.asList("Y","N","Y","Y"),
+                Arrays.asList("Y","N","Y","N"),
+                Arrays.asList("Y","N","N","Y"),
+                Arrays.asList("Y","N","N","N"),
+                Arrays.asList("N","Y","Y","Y"),
+                Arrays.asList("N","Y","Y","N"),
+                Arrays.asList("N","Y","N","Y"),
+                Arrays.asList("N","Y","N","N"),
+                Arrays.asList("N","N","Y","Y"),
+                Arrays.asList("N","N","Y","N"),
+                Arrays.asList("N","N","N","Y"),
+                Arrays.asList("N","N","N","N")
+        );
+        List<List<String>> actual = permutations(original);
+
+        System.out.println("ACTUAL: -------------------------------");
+        actual.forEach(System.out::println);
+        System.out.println("EXPECTED: -----------------------------");
+        expected.forEach(System.out::println);
+
+        assertEquals(actual.size(), expected.size());
+
+        Iterator<List<String>> acIterator = actual.iterator();
+        Iterator<List<String>> exIterator = expected.iterator();
+
+        assertThat(actual.size(), equalTo(expected.size()));
+        for (; acIterator.hasNext() && exIterator.hasNext(); ) {
+            assertEquals(acIterator.next(), exIterator.next());
+        }
 
     }
 
     @Test
     public void testDoInsertColumns() throws Exception {
 
+
+
+
+        ObservableList<ObservableList<String>> actionDef = observable(on("X,X,X,X,X,X,X,X").dim(2, 4).build());
+        ObservableList<ObservableList<String>> conditionDef = observable(on("Y,Y,N,N,Y,N,Y,N").dim(2, 4).build());
+
+        TableView<ConditionDeclTableViewModel> conditionTab = PowerMockito.mock(TableView.class, Mockito
+                .withSettings()
+                .name("TableView")
+                .verboseLogging());
+
+        List<ConditionDeclTableViewModel> conditionIndicators = conditionDeclTableViewModelListBuilder()
+                .addTableViewModelWithLfdNbr("0").withExpression("NOP-01").withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("1").withExpression("NOP-02").withIndicators("Y,N")
+                .build();
+        conditionTab.setItems(FXCollections.observableArrayList(conditionIndicators));
+
+
+        List<ActionDeclTableViewModel> actionIndicators = actionDeclTableViewModelListBuilder()
+                .addTableViewModelWithLfdNbr("0").withExpression("NOP-01").withIndicators("X")
+                .addTableViewModelWithLfdNbr("1").withExpression("NOP-02").withIndicators("X")
+                .build();
+        TableView<ConditionDeclTableViewModel> actionTab = PowerMockito.mock(TableView.class, Mockito
+                .withSettings()
+                .name("ActionTableView")
+                .verboseLogging());
+
+        //actionTab.setItems(FXCollections.observableArrayList(actionIndicators));
+
+
+        //ObservableList<ObservableList<String>> actual = doInsertColumns(conditionDef,actionDef,conditionTab,actionTab, );
+/*
+        System.out.println("original = " + original);
+        System.out.println("expected = " + expected);
+        System.out.println("actual   = " + actual);
+
+        Iterator<ObservableList<String>> itA = actual.iterator();
+        Iterator<ObservableList<String>> itE = expected.iterator();
+
+        for (; itA.hasNext() && itE.hasNext(); ) {
+            assertThat(itA.next(), containsInAnyOrder(itE.next().toArray()));
+        }
+
+        */
     }
 
     @Test

@@ -171,7 +171,8 @@ public class MainView implements FxmlView<MainViewModel> {
                 this.conditionDefinitionsTable,
                 this.actionDefinitionsTable,
                 value, DIR_RIGHT);
-        updateColHeaders(this.conditionDefinitionsTable, this.actionDefinitionsTable);
+        updateColHeaders(this.conditionDefinitionsTable);
+        updateColHeaders(this.actionDefinitionsTable);
     }
 
     private void doMoveRuleLeft(String key, Object[] value) {
@@ -180,7 +181,8 @@ public class MainView implements FxmlView<MainViewModel> {
                 this.conditionDefinitionsTable,
                 this.actionDefinitionsTable,
                 value, DIR_LEFT);
-        updateColHeaders(this.conditionDefinitionsTable, this.actionDefinitionsTable);
+        updateColHeaders(this.conditionDefinitionsTable);
+        updateColHeaders(this.actionDefinitionsTable);
     }
 
     private void doAddRule(String key, Object[] value) {
@@ -201,13 +203,17 @@ public class MainView implements FxmlView<MainViewModel> {
     private void doRemRule(String key, Object[] value) {
         doRemoveColumns(this.viewModel.getConditionDefinitions(), this.viewModel.getActionDefinitions(),
                 this.conditionDefinitionsTable, this.actionDefinitionsTable, value);
-        updateColHeaders(this.conditionDefinitionsTable, this.actionDefinitionsTable);
+        updateColHeaders(this.conditionDefinitionsTable);
+        updateColHeaders(this.actionDefinitionsTable);
+
     }
 
     private void doInsRule(String key, Object[] value) {
         doInsertColumns(this.viewModel.getConditionDefinitions(), this.viewModel.getActionDefinitions(),
                 this.conditionDefinitionsTable, this.actionDefinitionsTable, value, () -> QMARK);
-        updateColHeaders(this.conditionDefinitionsTable, this.actionDefinitionsTable);
+        updateColHeaders(this.conditionDefinitionsTable);
+        updateColHeaders(this.actionDefinitionsTable);
+
     }
 
     private void doInsConditionDecl(String key, Object[] value) {
