@@ -25,17 +25,48 @@ import de.adesso.tools.ui.PossibleIndicatorsSupplier;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
+import javax.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.OptionalInt;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
+import static de.adesso.tools.common.MatrixBuilder.observable;
+import static de.adesso.tools.common.MatrixBuilder.on;
+import static java.lang.Math.max;
+import static java.lang.Math.min;
 
 /**
  * Test fixtures of the DtFunctionsTest's
  * Created by moehler on 02.03.2016.
  */
 public class DtFunctionsTestData {
+
+    public static Supplier<String> RANDOM_NUMBER_STRING_000_999 =
+            () -> ThreadLocalRandom.current().ints(3, 0, 9)
+                    .mapToObj(String::valueOf)
+                    .collect(Collectors.joining());
+
+    public final static String ALPHAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    public static Supplier<String> RANDOM_ALPHA_5 =
+            () -> ThreadLocalRandom.current().ints(5, 0, ALPHAS.length())
+                    .mapToObj(i -> Character.toString(ALPHAS.charAt(i)))
+                    .reduce("", (a, b) -> a + b);
+
+    public final static String ALPHA_NUMERICS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    public static Supplier<String> RANDOM_ALPHA_NUMERIC_5 =
+            () -> ThreadLocalRandom.current().ints(5, 0, ALPHA_NUMERICS.length())
+                    .mapToObj(i -> Character.toString(ALPHA_NUMERICS.charAt(i)))
+                    .reduce("", (a, b) -> a + b);
+
 
     public static ListOfIndicatorSuppliersBuilder listOfIndicatorSupliersBuilder() {
         return ListOfIndicatorSuppliersBuilder.newBuilder();
@@ -49,6 +80,75 @@ public class DtFunctionsTestData {
         return new ActionDeclTableViewModelListBuilder();
     }
 
+    public static DefinitionsTableViewBuilder definitionsTableViewBuilder() {
+        return new DefinitionsTableViewBuilder();
+    }
+
+    // -------------------------------------------------------------------------------------------------- implementation
+
+    static class DefinitionsTableViewBuilder {
+
+        private TableView<ObservableList<String>> tableView;
+        private OptionalInt selectionRow = OptionalInt.empty();
+        private OptionalInt selectionCol = OptionalInt.empty();
+
+        public DefinitionsTableViewBuilder newBuilder() {
+            return new DefinitionsTableViewBuilder();
+        }
+
+        public DefinitionsTableViewDataBuilder<DefinitionsTableViewBuilder> dim(int rows, int cols) {
+            return new DefinitionsTableViewDataBuilder<>(rows, cols, this,
+                    this::_setData);
+        }
+
+        public DefinitionsTableViewBuilder withSelectionAt(int row, int col) {
+            this.selectionRow = OptionalInt.of(row);
+            this.selectionCol = OptionalInt.of(col);
+            return this;
+        }
+
+        private void _setData(int r, int c, String d) {
+            ObservableList<ObservableList<String>> tableViewData = observable(on(d).dim(r, c).build());
+            tableView = new TableView<>(tableViewData);
+            IntStream.rangeClosed(1, c).forEach(i -> {
+                TableColumn<ObservableList<String>, String> tc = new TableColumn<>(String.format("R%02d", i));
+                tableView.getColumns().add(tc);
+            });
+        }
+
+        @Nonnull
+        public TableView<ObservableList<String>> build() {
+            // tolerate over- /underflow's.
+            if (selectionCol.isPresent() && selectionRow.isPresent()) {
+                final int column = max(0, min(tableView.getColumns().size() - 1, selectionCol.getAsInt()));
+                final int row = max(0, min(tableView.getItems().size() - 1, selectionRow.getAsInt()));
+                tableView.getSelectionModel().select(row, tableView.getColumns().get(column));
+            }
+            return tableView;
+        }
+    }
+
+    static class DefinitionsTableViewDataBuilder<T> {
+        private final int rows;
+        private final int cols;
+        private String data;
+        private final T caller;
+        private final DefinitionsTableViewDataBuilderCallback callback;
+
+        public DefinitionsTableViewDataBuilder(int rows, int cols, T caller, DefinitionsTableViewDataBuilderCallback callback) {
+            this.rows = rows;
+            this.cols = cols;
+            this.caller = caller;
+            this.callback = callback;
+        }
+
+        public T data(String data) {
+            this.data = data;
+            this.callback.setData(this.rows, this.cols, this.data);
+            return this.caller;
+
+        }
+    }
 
     static class ListOfIndicatorSuppliersBuilder {
         List<PossibleIndicatorsSupplierBuilder> builders = new LinkedList<>();
@@ -85,7 +185,7 @@ public class DtFunctionsTestData {
 
     }
 
-    static class ConditionDeclTableViewModelListBuilder  {
+    static class ConditionDeclTableViewModelListBuilder {
         List<ConditionDeclTableViewModel> list = new ArrayList<>();
 
         public ConditionDeclTableViewModelListBuilder() {
@@ -101,7 +201,7 @@ public class DtFunctionsTestData {
             list.add(new ConditionDeclTableViewModel(element));
         }
 
-        public List<ConditionDeclTableViewModel> build(){
+        public List<ConditionDeclTableViewModel> build() {
             return list;
         }
     }
@@ -129,7 +229,7 @@ public class DtFunctionsTestData {
         }
     }
 
-    static class ActionDeclTableViewModelListBuilder  {
+    static class ActionDeclTableViewModelListBuilder {
         List<ActionDeclTableViewModel> list = new ArrayList<>();
 
         public ActionDeclTableViewModelListBuilder() {
@@ -145,7 +245,7 @@ public class DtFunctionsTestData {
             list.add(new ActionDeclTableViewModel(element));
         }
 
-        public List<ActionDeclTableViewModel> build(){
+        public List<ActionDeclTableViewModel> build() {
             return list;
         }
     }
@@ -173,6 +273,12 @@ public class DtFunctionsTestData {
         }
     }
 
+    public static void main(String[] args) {
+        for (int i = 0; i < 20; i++) {
+            System.out.println(RANDOM_ALPHA_5.get());
+        }
+    }
+
 }
 
 interface ConditionDeclBuilderCallback {
@@ -181,4 +287,8 @@ interface ConditionDeclBuilderCallback {
 
 interface ActionDeclBuilderCallback {
     void addTableViewModel(String lfdNr, String expression, String possibleIndicators);
+}
+
+interface DefinitionsTableViewDataBuilderCallback {
+    void setData(int rows, int cols, String data);
 }

@@ -23,16 +23,19 @@ import de.adesso.tools.common.MatrixBuilder;
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.TableView;
-import org.mockito.Mockito;
-import org.powermock.api.mockito.PowerMockito;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import javax.swing.*;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.OptionalInt;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import static de.adesso.tools.common.MatrixBuilder.observable;
 import static de.adesso.tools.common.MatrixBuilder.on;
@@ -47,6 +50,21 @@ import static org.testng.Assert.assertEquals;
  * Created by moehler on 02.03.2016.
  */
 public class DtFunctionsTest {
+
+    @BeforeClass
+    public void initToolkit()
+            throws InterruptedException
+    {
+        final CountDownLatch latch = new CountDownLatch(1);
+        SwingUtilities.invokeLater(() -> {
+            new JFXPanel(); // initializes JavaFX environment
+            latch.countDown();
+        });
+
+        // That's a pretty reasonable delay... Right?
+        if (!latch.await(5L, TimeUnit.SECONDS))
+            throw new ExceptionInInitializerError();
+    }
 
     @Test
     public void testDetermineMaxColumns() throws Exception {
@@ -145,11 +163,6 @@ public class DtFunctionsTest {
         ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 16).build());
         ObservableList<ObservableList<String>> actual = fullExpandConditions(indicators);
 
-        System.out.println("ACTUAL: -------------------------------");
-        actual.forEach(System.out::println);
-        System.out.println("EXPECTED: -----------------------------");
-        expected.forEach(System.out::println);
-
         assertEquals(actual.size(), expected.size());
 
         Iterator<ObservableList<String>> acIterator = actual.iterator(), exIterator = expected.iterator();
@@ -175,11 +188,6 @@ public class DtFunctionsTest {
 
         ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 16).build());
         ObservableList<ObservableList<String>> actual = fullExpandActions(indicators, 16);
-
-        System.out.println("ACTUAL: -------------------------------");
-        actual.forEach(System.out::println);
-        System.out.println("EXPECTED: -----------------------------");
-        expected.forEach(System.out::println);
 
         assertEquals(actual.size(), expected.size());
 
@@ -211,11 +219,6 @@ public class DtFunctionsTest {
         ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 8).build());
         ObservableList<ObservableList<String>> actual = limitedExpandConditions(indicators, 8);
 
-        System.out.println("ACTUAL: -------------------------------");
-        actual.forEach(System.out::println);
-        System.out.println("EXPECTED: -----------------------------");
-        expected.forEach(System.out::println);
-
         assertEquals(actual.size(), expected.size());
 
         Iterator<ObservableList<String>> acIterator = actual.iterator(), exIterator = expected.iterator();
@@ -246,11 +249,6 @@ public class DtFunctionsTest {
         ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 8).build());
         ObservableList<ObservableList<String>> actual = limitedExpandConditions(indicators, 8, true);
 
-        System.out.println("ACTUAL: -------------------------------");
-        actual.forEach(System.out::println);
-        System.out.println("EXPECTED: -----------------------------");
-        expected.forEach(System.out::println);
-
         assertEquals(actual.size(), expected.size());
 
         Iterator<ObservableList<String>> acIterator = actual.iterator(), exIterator = expected.iterator();
@@ -279,11 +277,6 @@ public class DtFunctionsTest {
 
         ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 16).build());
         ObservableList<ObservableList<String>> actual = limitedExpandConditions(indicators, 32, true);
-
-        System.out.println("ACTUAL: -------------------------------");
-        actual.forEach(System.out::println);
-        System.out.println("EXPECTED: -----------------------------");
-        expected.forEach(System.out::println);
 
         assertEquals(actual.size(), expected.size());
 
@@ -324,11 +317,6 @@ public class DtFunctionsTest {
         );
         List<List<String>> actual = permutations(original);
 
-        System.out.println("ACTUAL: -------------------------------");
-        actual.forEach(System.out::println);
-        System.out.println("EXPECTED: -----------------------------");
-        expected.forEach(System.out::println);
-
         assertEquals(actual.size(), expected.size());
 
         Iterator<List<String>> acIterator = actual.iterator();
@@ -344,50 +332,87 @@ public class DtFunctionsTest {
     @Test
     public void testDoInsertColumns() throws Exception {
 
-
-
-
-        ObservableList<ObservableList<String>> actionDef = observable(on("X,X,X,X,X,X,X,X").dim(2, 4).build());
-        ObservableList<ObservableList<String>> conditionDef = observable(on("Y,Y,N,N,Y,N,Y,N").dim(2, 4).build());
-
-        TableView<ConditionDeclTableViewModel> conditionTab = PowerMockito.mock(TableView.class, Mockito
-                .withSettings()
-                .name("TableView")
-                .verboseLogging());
-
-        List<ConditionDeclTableViewModel> conditionIndicators = conditionDeclTableViewModelListBuilder()
-                .addTableViewModelWithLfdNbr("0").withExpression("NOP-01").withIndicators("Y,N")
-                .addTableViewModelWithLfdNbr("1").withExpression("NOP-02").withIndicators("Y,N")
+        TableView<ObservableList<String>> conditionDefTab = definitionsTableViewBuilder()
+                .dim(2, 4)
+                .data("Y,Y,N,N,Y,N,Y,N")
+                .withSelectionAt(1,3)
                 .build();
-        conditionTab.setItems(FXCollections.observableArrayList(conditionIndicators));
 
-
-        List<ActionDeclTableViewModel> actionIndicators = actionDeclTableViewModelListBuilder()
-                .addTableViewModelWithLfdNbr("0").withExpression("NOP-01").withIndicators("X")
-                .addTableViewModelWithLfdNbr("1").withExpression("NOP-02").withIndicators("X")
+        TableView<ObservableList<String>> actionDefTab = definitionsTableViewBuilder()
+                .dim(2, 4)
+                .data("X,X,X,X,X,X,X,X")
                 .build();
-        TableView<ConditionDeclTableViewModel> actionTab = PowerMockito.mock(TableView.class, Mockito
-                .withSettings()
-                .name("ActionTableView")
-                .verboseLogging());
-
-        //actionTab.setItems(FXCollections.observableArrayList(actionIndicators));
 
 
-        //ObservableList<ObservableList<String>> actual = doInsertColumns(conditionDef,actionDef,conditionTab,actionTab, );
-/*
-        System.out.println("original = " + original);
-        System.out.println("expected = " + expected);
-        System.out.println("actual   = " + actual);
+        doInsertColumns(/*conditionDef,actionDef,*/conditionDefTab,actionDefTab, OptionalInt.empty(), QMARK_SUPPLIER);
 
-        Iterator<ObservableList<String>> itA = actual.iterator();
-        Iterator<ObservableList<String>> itE = expected.iterator();
 
-        for (; itA.hasNext() && itE.hasNext(); ) {
-            assertThat(itA.next(), containsInAnyOrder(itE.next().toArray()));
-        }
+        ObservableList<ObservableList<String>> expConditionDef = observable(on("Y,Y,N,?,N,Y,N,Y,?,N").dim(2, 5).build());
+        assertEquals(conditionDefTab.getItems(),expConditionDef);
 
-        */
+        ObservableList<ObservableList<String>> expActionDef = observable(on("X,X,X,?,X,X,X,X,?,X").dim(2, 5).build());
+        assertEquals(actionDefTab.getItems(),expActionDef);
+    }
+
+    public static void dumpTableItems(String msg, TableView<?> table) {
+        System.out.println(String.format("%s >>>>>>>>>>",msg));
+        table.getItems().forEach(i -> System.out.println("\t"+i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    @Test
+    public void testDoRemoveColumns() throws Exception {
+        TableView<ObservableList<String>> conditionDefTab = definitionsTableViewBuilder()
+                .dim(2, 4)
+                .data("Y,Y,N,N,Y,N,Y,N")
+                .withSelectionAt(1,2)
+                .build();
+
+        TableView<ObservableList<String>> actionDefTab = definitionsTableViewBuilder()
+                .dim(2, 4)
+                .data("X,X,X,X,X,X,X,X")
+                .build();
+
+
+        doRemoveColumns(conditionDefTab,actionDefTab, OptionalInt.empty());
+
+
+        ObservableList<ObservableList<String>> expConditionDef = observable(on("Y,Y,N,Y,N,N").dim(2, 3).build());
+        assertEquals(conditionDefTab.getItems(),expConditionDef);
+
+        ObservableList<ObservableList<String>> expActionDef = observable(on("X,X,X,X,X,X").dim(2, 3).build());
+        assertEquals(actionDefTab.getItems(),expActionDef);
+    }
+
+    @Test
+    public void testDoMoveColumns() throws Exception {
+
+        TableView<ObservableList<String>> conditionDefTab = definitionsTableViewBuilder()
+                .dim(2, 4)
+                .data("Y,Y,N,Y,Y,Y,N,Y")
+                .withSelectionAt(1,2)
+                .build();
+        dumpTableItems("Conditions before", conditionDefTab);
+
+
+        TableView<ObservableList<String>> actionDefTab = definitionsTableViewBuilder()
+                .dim(2, 4)
+                .data("X,X,,X,X,X,,X")
+                .build();
+
+        dumpTableItems("Actions before", actionDefTab);
+
+        doMoveColumns(conditionDefTab,actionDefTab, OptionalInt.empty(), DIR_LEFT);
+
+        dumpTableItems("Conditions after", conditionDefTab);
+        dumpTableItems("Actions after", actionDefTab);
+
+        ObservableList<ObservableList<String>> expConditionDef = observable(on("Y,N,Y,Y,Y,N,Y,Y").dim(2, 4).build());
+        assertEquals(conditionDefTab.getItems(),expConditionDef);
+
+        ObservableList<ObservableList<String>> expActionDef = observable(on("X,,X,X,X,,X,X").dim(2, 4).build());
+        assertEquals(actionDefTab.getItems(),expActionDef);
+
     }
 
     @Test
@@ -396,17 +421,7 @@ public class DtFunctionsTest {
     }
 
     @Test
-    public void testDoRemoveColumns() throws Exception {
-
-    }
-
-    @Test
     public void testDoRemoveRows() throws Exception {
-
-    }
-
-    @Test
-    public void testDoMoveColumns() throws Exception {
 
     }
 

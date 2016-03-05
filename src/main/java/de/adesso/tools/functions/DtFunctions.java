@@ -1,7 +1,6 @@
 package de.adesso.tools.functions;
 
 import com.google.common.collect.Lists;
-import de.adesso.tools.ui.DeclarationTableViewModel;
 import de.adesso.tools.ui.DeclarationsTableCell;
 import de.adesso.tools.ui.DefinitionsTableCell;
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;
@@ -14,13 +13,11 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
-import javafx.scene.control.TablePositionBase;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.util.*;
 import java.util.function.Supplier;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static de.adesso.tools.functions.MatrixFunctions.*;
@@ -39,6 +36,7 @@ public final class DtFunctions {
     public static final String QMARK = "?";
     public static final String RULE_HEADER = "R%02d";
     public static final String ELSE_RULE_HEADER = "ELSE";
+    public static final Supplier<String> QMARK_SUPPLIER = () -> "?";
 
     public static boolean DIR_DOWN = true;
     public static boolean DIR_RIGHT = DIR_DOWN;
@@ -111,9 +109,7 @@ public final class DtFunctions {
                 return new ArrayList<>(Arrays.asList(s));
             }).collect(toList());
 
-            transposed.forEach(l -> {
-                retList.add(FXCollections.observableArrayList(l));
-            });
+            transposed.forEach(l -> retList.add(FXCollections.observableArrayList(l)));
 
         }
 
@@ -183,16 +179,18 @@ public final class DtFunctions {
     }
 
 
-    public static void doInsertColumns(ObservableList<ObservableList<String>> conditionDefns,
-                                       ObservableList<ObservableList<String>> actionDefns,
-                                       TableView conditionTable,
+    public static void doInsertColumns(TableView conditionTable,
                                        TableView actionTable,
-                                       Object[] value, Supplier<String> defaultDefValue) {
+                                       OptionalInt value,
+                                       Supplier<String> defaultDefValue) {
 
-        final List<Integer> indices = determineColumnIndices(conditionTable, actionTable, value);
-        if (!indices.isEmpty()) {
+        final OptionalInt index = determineColumnIndex(conditionTable, actionTable, value);
+        if (index.isPresent()) {
 
-            int newCols = conditionTable.getColumns().size() + indices.size();
+            final ObservableList<ObservableList<String>> oldConDefs = conditionTable.getItems();
+            final ObservableList<ObservableList<String>> oldActDefs = actionTable.getItems();
+
+            int newCols = conditionTable.getColumns().size() + 1;
             conditionTable.getColumns().clear();
             actionTable.getColumns().clear();
 
@@ -201,13 +199,13 @@ public final class DtFunctions {
                 actionTable.getColumns().add(createTableColumn(i));
             });
 
-            final ObservableList<ObservableList<String>> newConDefs = MatrixFunctions.insertColumnsAt(conditionDefns, indices, () -> "?");
-            final ObservableList<ObservableList<String>> newActDefs = MatrixFunctions.insertColumnsAt(actionDefns, indices, () -> "?");
+            final ObservableList<ObservableList<String>> newConDefs = MatrixFunctions.insertColumnsAt(oldConDefs, index.getAsInt(), defaultDefValue);
+            final ObservableList<ObservableList<String>> newActDefs = MatrixFunctions.insertColumnsAt(oldActDefs, index.getAsInt(), defaultDefValue);
 
-            conditionDefns.clear();
-            newConDefs.forEach(conditionDefns::add);
-            actionDefns.clear();
-            newActDefs.forEach(actionDefns::add);
+            oldConDefs.clear();
+            newConDefs.forEach(oldConDefs::add);
+            oldActDefs.clear();
+            newActDefs.forEach(oldActDefs::add);
 
             conditionTable.refresh();
             actionTable.refresh();
@@ -215,18 +213,19 @@ public final class DtFunctions {
 
     }
 
-    public static <T extends DeclarationTableViewModel, R, C, D> void doInsertRows(ObservableList<T> decls,
-                                                                                   ObservableList<ObservableList<R>> defns,
-                                                                                   TableView<C> declarations,
-                                                                                   TableView<D> definitions,
-                                                                                   Object[] value, Supplier<T> defaultDecl, Supplier<R> defaultDefValue) {
+    public static void doInsertRows(ObservableList decls,
+                                    ObservableList defns,
+                                    TableView<?> declarations,
+                                    TableView<?> definitions,
+                                    OptionalInt value,
+                                    Supplier defaultDecl, Supplier defaultDefValue) {
 
-        List<Integer> indices = determineRowIndices(declarations, definitions, value);
+        OptionalInt index = determineRowIndices(declarations, definitions, value);
 
-        if (!indices.isEmpty()) {
+        if (index.isPresent()) {
 
-            ObservableList<T> newDecls = ListFunctions.insertElementsAt(decls, indices, defaultDecl);
-            ObservableList<ObservableList<R>> newDefs = insertRowsAt(defns, indices, defaultDefValue);
+            ObservableList newDecls = ListFunctions.insertElementsAt(decls, index.getAsInt(), defaultDecl);
+            ObservableList<ObservableList<String>> newDefs = insertRowsAt(defns, index.getAsInt(), defaultDefValue);
 
             decls.clear();
             newDecls.forEach(decls::add);
@@ -238,17 +237,18 @@ public final class DtFunctions {
         }
     }
 
-    public static void doRemoveColumns(ObservableList<ObservableList<String>> conditionDefns,
-                                       ObservableList<ObservableList<String>> actionDefns,
-                                       TableView<ObservableList<String>> conditionTable,
+    public static void doRemoveColumns(TableView<ObservableList<String>> conditionTable,
                                        TableView<ObservableList<String>> actionTable,
-                                       Object[] value) {
+                                       OptionalInt value) {
 
 
-        final List<Integer> indices = determineColumnIndices(conditionTable, actionTable, value);
-        if (!indices.isEmpty()) {
+        final OptionalInt index = determineColumnIndex(conditionTable, actionTable, value);
+        if (index.isPresent()) {
 
-            int newCols = conditionTable.getColumns().size() - indices.size();
+            ObservableList<ObservableList<String>> conditionDefns = conditionTable.getItems();
+            ObservableList<ObservableList<String>> actionDefns = actionTable.getItems();
+            final int newCols = conditionTable.getColumns().size() - 1;
+
             conditionTable.getColumns().clear();
             actionTable.getColumns().clear();
 
@@ -257,8 +257,8 @@ public final class DtFunctions {
                 actionTable.getColumns().add(createTableColumn(i));
             });
 
-            final ObservableList<ObservableList<String>> newConDefs = MatrixFunctions.removeColumnsAt(conditionDefns, indices);
-            final ObservableList<ObservableList<String>> newActDefs = MatrixFunctions.removeColumnsAt(actionDefns, indices);
+            final ObservableList<ObservableList<String>> newConDefs = MatrixFunctions.removeColumnsAt(conditionDefns, index.getAsInt());
+            final ObservableList<ObservableList<String>> newActDefs = MatrixFunctions.removeColumnsAt(actionDefns, index.getAsInt());
 
             conditionDefns.clear();
             newConDefs.forEach(conditionDefns::add);
@@ -270,17 +270,17 @@ public final class DtFunctions {
         }
     }
 
-    public static <T extends DeclarationTableViewModel, R, C> void doRemoveRows(ObservableList<T> decls,
-                                                                                ObservableList<ObservableList<R>> defns,
-                                                                                TableView<C> declarations,
-                                                                                TableView<C> definitions, Object[] value) {
+    public static void doRemoveRows(ObservableList decls,
+                                    ObservableList defns,
+                                    TableView declarations,
+                                    TableView definitions, OptionalInt value) {
 
-        List<Integer> indices = determineRowIndices(declarations, definitions, value);
+        OptionalInt index = determineRowIndices(declarations, definitions, value);
 
-        if (!indices.isEmpty()) {
+        if (index.isPresent()) {
 
-            ObservableList<T> newDecls = ListFunctions.removeElementsAt(decls, indices);
-            ObservableList<ObservableList<R>> newDefs = removeRowsAt(defns, indices);
+            ObservableList newDecls = ListFunctions.removeElementsAt(decls, index.getAsInt());
+            ObservableList newDefs = removeRowsAt(defns, index.getAsInt());
 
             decls.clear();
             newDecls.forEach(decls::add);
@@ -292,16 +292,17 @@ public final class DtFunctions {
         }
     }
 
-    public static void doMoveColumns(ObservableList<ObservableList<String>> conditionDefinitions,
-                                     ObservableList<ObservableList<String>> actionDefinitions,
-                                     TableView conditionTable, TableView actionTable, Object[] value,
-                                     boolean direction) {
-        final List<Integer> indices = determineColumnIndices(conditionTable, actionTable, value);
-        if (!indices.isEmpty()) {
-            final int c1Idx = indices.get(0);
+    public static void doMoveColumns(TableView conditionTable, TableView actionTable, OptionalInt value, boolean direction) {
+        final OptionalInt index = determineColumnIndex(conditionTable, actionTable, value);
+        if (index.isPresent()) {
+            final int c1Idx = index.getAsInt();
             final int c2Idx = determineNextIndex(direction, c1Idx, conditionTable.getColumns().size());
+            ObservableList<ObservableList<String>> conditionDefinitions = conditionTable.getItems();
+            ObservableList<ObservableList<String>> actionDefinitions = actionTable.getItems();
+
             ObservableList<ObservableList<String>> newConditionDefns = swapColumnsAt(conditionDefinitions, c1Idx, c2Idx);
             ObservableList<ObservableList<String>> newActionDefns = swapColumnsAt(actionDefinitions, c1Idx, c2Idx);
+
             conditionDefinitions.clear();
             newConditionDefns.forEach(conditionDefinitions::add);
             actionDefinitions.clear();
@@ -315,16 +316,16 @@ public final class DtFunctions {
                 : Math.max(c1Idx - 1, 0);
     }
 
-    public static <T extends DeclarationTableViewModel> void doMoveRows(ObservableList<T> declarations,
-                                  ObservableList<ObservableList<String>> definitions,
+    public static void doMoveRows(ObservableList declarations,
+                                  ObservableList definitions,
                                   TableView table,
-                                  Object[] value, boolean direction) {
+                                  OptionalInt value, boolean direction) {
 
-        final List<Integer> indices = determineRowIndices(table, null, value);
-        if (!indices.isEmpty()) {
-            final int r1Idx = indices.get(0);
+        final OptionalInt index = determineRowIndices(table, null, value);
+        if (index.isPresent()) {
+            final int r1Idx = index.getAsInt();
             final int r2Idx = determineNextIndex(direction, r1Idx, declarations.size());
-            ObservableList<T> newDecls = swapRowsAt(declarations, r1Idx, r2Idx);
+            ObservableList newDecls = swapRowsAt(declarations, r1Idx, r2Idx);
             ObservableList<ObservableList<String>> newDefns = swapRowsAt(definitions, r1Idx, r2Idx);
             declarations.clear();
             newDecls.forEach(declarations::add);
@@ -334,33 +335,56 @@ public final class DtFunctions {
 
     }
 
-    private static <T, U> List<Integer> determineColumnIndices(TableView<T> tableView0, TableView<U> tableView1, Object[] value) {
-        List<TablePosition> indices = determineIndices(tableView0, tableView1, value);
-        return indices.stream().map(TablePosition::getColumn).collect(Collectors.toList());
-    }
-
-    private static <T, U> List<Integer> determineRowIndices(TableView<T> tableView0, TableView<U> tableView1, Object[] value) {
-        List<TablePosition> indices = determineIndices(tableView0, tableView1, value);
-        return indices.stream().map(TablePositionBase::getRow).collect(Collectors.toList());
-    }
-
-    private static <T, U> List<TablePosition> determineIndices(TableView<T> tableView0, TableView<U> tableView1, Object[] value) {
-
-        if(null == tableView0 && null == tableView1) {
-            throw new IllegalStateException("Missing at least one valid TableView with a selection!");
-        }
-
-        // ... together with the condition above, it is ensured, that at least one table view is usable.
-        List<TablePosition> indices = Collections.emptyList();
-        if(null == tableView0 || null == tableView1) {
-            TableView<?> tableView = (null == tableView0) ? tableView1 : tableView0;
-            Optional<TablePosition> cellPos = getSelectedCell(tableView);
-            indices = new ArrayList<>(1);
-            if (cellPos.isPresent()) {
-                indices.add(cellPos.get());
+    private static <T, U> OptionalInt determineColumnIndex(TableView<T> tableView0, TableView<U> tableView1, OptionalInt externalIndex) {
+        OptionalInt index = OptionalInt.empty();
+        if (externalIndex.isPresent()) {
+            index = externalIndex;
+        } else {
+            Optional<TablePosition> selectionPos = determineSelectedCellPosition(tableView0, tableView1);
+            if (selectionPos.isPresent()) {
+                index = OptionalInt.of(selectionPos.get().getColumn());
             }
         }
-        return indices;
+        return index;
+    }
+
+    // FIXME !!
+    private static <T, U> OptionalInt determineRowIndices(TableView<T> tableView0, TableView<U> tableView1, OptionalInt externalIndex) {
+        Optional<TablePosition> index = determineSelectedCellPosition(tableView0, tableView1);
+        return OptionalInt.empty();
+    }
+
+    /**
+     * Determines a {@link TablePosition} from the given {@link TableView} instances by using the following
+     * Algorithm:
+     * <pre>
+     *     Conditions                               R1 R2 R3 R4
+     *     -----------------------------------------------------
+     *     C01 tableView0 isNull                     Y  Y  N  N
+     *     C02 tableView1 isNull                     Y  N  Y  N
+     *     -----------------------------------------------------
+     *     Actions
+     *     A01 return tableView0.getSelectedCell()   X  X
+     *     A02 return tableView1.getSelectedCell()         X
+     *     A03 return &empty;                                       X
+     *     -----------------------------------------------------
+     * </pre>
+     *
+     * @param tableView0 a nullable {@link TableView} which can contain a selection
+     * @param tableView1 a nullable {@link TableView} which can contain a selection
+     * @param <T>        Type of the first {@link TableView}
+     * @param <U>        Type of the second {@link TableView}
+     * @return an {@link Optional} which is present, when a {@link TablePosition} was determined, otherwise
+     * an {@link Optional#empty()} is returned.
+     */
+    private static <T, U> Optional<TablePosition> determineSelectedCellPosition(TableView<T> tableView0, TableView<U> tableView1) {
+        Optional<TablePosition> index = Optional.empty();
+        // ... together with the condition above, it is ensured, that at least one table view is usable.
+        if (null != tableView0 || null != tableView1) {
+            TableView<?> tableView = (null != tableView0) ? tableView0 : tableView1;
+            index = getSelectedCell(tableView);
+        }
+        return index;
     }
 
     public static boolean isElseColumn(TableColumn<?, ?> tableColumn) {

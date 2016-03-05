@@ -9,6 +9,7 @@ import javafx.beans.property.StringProperty;
 import static java.util.Arrays.asList;
 
 /**
+ * The {@link ActionDeclTableViewModel} of the actions part of the decisionTable
  * Created by mohler on 16.01.16.
  */
 public class ActionDeclTableViewModel implements PossibleIndicatorsSupplier, DeclarationTableViewModel {
@@ -63,9 +64,15 @@ public class ActionDeclTableViewModel implements PossibleIndicatorsSupplier, Dec
         return wrapper.field("possibleIndicators", ActionDecl::getPossibleIndicators, ActionDecl::setPossibleIndicators);
     }
 
+    @Override
+    public String toString() {
+        return wrapper.get().toString();
+    }
+
+
     public boolean isValid() {
             return asList(lfdNrProperty(), expressionProperty(), possibleIndicatorsProperty()).stream()
-                    .map(i -> i.get() != null && i.get() != EMPTY_STRING)
+                    .map(i -> i.get() != null && !EMPTY_STRING.equals(i.get()))
                     .reduce(true, (x,y) -> x && y);
 
     }

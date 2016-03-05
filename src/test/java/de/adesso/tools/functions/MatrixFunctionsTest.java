@@ -25,10 +25,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.testng.annotations.Test;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
@@ -62,7 +59,8 @@ public class MatrixFunctionsTest {
     public void testRemoveColumnsAtIndices() throws Exception {
         ObservableList<ObservableList<String>> original = observable(on("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N").dim(3, 4).build());
         ObservableList<ObservableList<String>> expected = observable(on("Y,Y,Y,N,Y,Y").dim(3, 2).build());
-        ObservableList<ObservableList<String>> actual = removeColumnsAt(original, Arrays.asList(1, 3));
+        ObservableList<ObservableList<String>> actual = removeColumnsAt(original, 3);
+        actual = removeColumnsAt(actual, 1);
         assertEquals(actual.size(), expected.size());
 
         System.out.println("original = " + original);
@@ -102,8 +100,8 @@ public class MatrixFunctionsTest {
     public void testInsertColumnsAt() throws Exception {
         ObservableList<ObservableList<String>> expected = observable(on("1,?,1,2,?,2,3,?,3").dim(3, 3).build());
         ObservableList<ObservableList<String>> original = observable(on("1,1,2,2,3,3").dim(3, 2).build());
-        final Integer[] indices = {1};
-        ObservableList<ObservableList<String>> actual = MatrixFunctions.insertColumnsAt(original, Arrays.asList(indices), () -> QMARK);
+
+        ObservableList<ObservableList<String>> actual = MatrixFunctions.insertColumnsAt(original, 1, () -> QMARK);
 
         System.out.println("original = " + original);
         System.out.println("expected = " + expected);
@@ -121,7 +119,9 @@ public class MatrixFunctionsTest {
     public void testRemoveRowsAtIndices() throws Exception {
         ObservableList<ObservableList<String>> original = MatrixBuilder.observable(on("1,1,1,2,2,2,3,3,3,4,4,4,5,5,5").dim(5, 3).build());
         ObservableList<ObservableList<String>> expected = MatrixBuilder.observable(on("2,2,2,4,4,4").dim(2, 3).build());
-        ObservableList<ObservableList<String>> actual = MatrixFunctions.removeRowsAt(original, Arrays.asList(0, 2, 4));
+        ObservableList<ObservableList<String>> actual = MatrixFunctions.removeRowsAt(original, 4);
+        actual = MatrixFunctions.removeRowsAt(actual, 2);
+        actual = MatrixFunctions.removeRowsAt(actual, 0);
         assertEquals(actual.size(), expected.size());
 
         System.out.println("original = " + original);
@@ -159,7 +159,8 @@ public class MatrixFunctionsTest {
     public void testInsertRowsAt() throws Exception {
         ObservableList<ObservableList<String>> original = observable(on("1,2,3,4,5,6,7,8,9").dim(3, 3).build());
         ObservableList<ObservableList<String>> expected = observable(on("1,2,3,?,?,?,4,5,6,?,?,?,7,8,9").dim(5, 3).build());
-        ObservableList<ObservableList<String>> actual = MatrixFunctions.insertRowsAt(original, Arrays.asList(1, 3), () -> QMARK);
+        ObservableList<ObservableList<String>> actual = MatrixFunctions.insertRowsAt(original, 1, () -> QMARK);
+        actual = MatrixFunctions.insertRowsAt(actual, 3, () -> QMARK);
 
         System.out.println("original = " + original);
         System.out.println("expected = " + expected);
@@ -202,7 +203,8 @@ public class MatrixFunctionsTest {
     public void testCopyListRemovedElementsAtIndices() throws Exception {
         ObservableList<String> original = FXCollections.observableArrayList("0", "1", "2", "3", "4", "5");
         ObservableList<String> expected = FXCollections.observableArrayList("0", "2", "3", "5");
-        ObservableList<String> actual = ListFunctions.removeElementsAt(original, Arrays.asList(1, 4));
+        ObservableList<String> actual = ListFunctions.removeElementsAt(original, 4);
+        actual = ListFunctions.removeElementsAt(actual, 1);
 
         System.out.println("original = " + original);
         System.out.println("expected = " + expected);

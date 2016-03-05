@@ -10,15 +10,20 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 /**
+ * A List2D builder
+ * A List2D builder
  * Created by mohler on 25.01.16.
  */
-public final class MatrixBuilder {
+public class MatrixBuilder {
     private String data;
     private int n;
     private int m;
     private boolean transposed;
 
-    private MatrixBuilder(String data) {
+    protected MatrixBuilder() {
+    }
+
+    protected MatrixBuilder(String data) {
         this.data = data;
     }
 
