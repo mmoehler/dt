@@ -51,6 +51,11 @@ public class DtFunctionsTestData {
         return ListOfIndicatorSuppliersBuilder.newBuilder();
     }
 
+    public static ConditionDeclTableViewBuilder conditionDeclTableViewBuilder() {
+        return new ConditionDeclTableViewBuilder();
+    }
+
+
     public static ConditionDeclTableViewModelListBuilder conditionDeclTableViewModelListBuilder() {
         return new ConditionDeclTableViewModelListBuilder();
     }

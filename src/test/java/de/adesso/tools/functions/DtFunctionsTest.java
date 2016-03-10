@@ -417,6 +417,19 @@ public class DtFunctionsTest {
 
     @Test
     public void testDoInsertRows() throws Exception {
+        TableView<ConditionDeclTableViewModel> conditionDeclTab = conditionDeclTableViewBuilder()
+                .addTableViewModelWithLfdNbr("01").withExpression("EXP-01").withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("02").withExpression("EXP-02").withIndicators("Y,N")
+                .withSelectionAt(1,1)
+                .build();
+        dumpTableItems("Conditions Declarations before", conditionDeclTab);
+
+        TableView<ObservableList<String>> conditionDefTab = definitionsTableViewBuilder()
+                .dim(2, 4)
+                .data("Y,Y,N,Y,Y,Y,N,Y")
+                .withSelectionAt(1,2)
+                .build();
+        dumpTableItems("Condition Definitions before", conditionDefTab);
 
     }
 

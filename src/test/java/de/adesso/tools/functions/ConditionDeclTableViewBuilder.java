@@ -19,29 +19,44 @@
 
 package de.adesso.tools.functions;
 
+import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import javax.annotation.Nonnull;
 import java.util.List;
+import java.util.stream.IntStream;
 
 /**
  * Created by mmoehler on 06.03.16.
  */
 public class ConditionDeclTableViewBuilder extends DeclarationsTableViewBuilder<ConditionDeclTableViewModel> {
 
+    final List<ConditionDeclTableViewModel> items = FXCollections.observableArrayList();
+
+    public ConditionDeclTableViewBuilder() {
+    }
+
+    public ConditionDeclBuilder<ConditionDeclTableViewBuilder> addTableViewModelWithLfdNbr(String number) {
+        return new ConditionDeclBuilder<>(number, this,
+                (lfdNr, expression, possibleIndicators) -> internHandleCallback(new ConditionDecl(lfdNr, expression, possibleIndicators)));
+    }
+
+
     @Override
     public TableViewBuilder withSelectionAt(int row, int col) {
         return super.withSelectionAt(row, col);
     }
 
-    public ConditionDeclTableViewModelListBuilder<ConditionDeclTableViewBuilder> listOfConditionDecls() {
-        return new ConditionDeclTableViewModelListBuilder<ConditionDeclTableViewBuilder>(this, conditionDecls -> internHandleCallback(conditionDecls));
-    }
 
-    private void internHandleCallback(List<ConditionDeclTableViewModel> conditionDecls) {
-        tableView = new TableView<>(FXCollections.observableArrayList(conditionDecls));
+    private void internHandleCallback(ConditionDecl decl) {
+        if(null == this.tableView) {
+            this.tableView = new TableView<>(FXCollections.observableArrayList());
+        }
+        tableView.getItems().add(new ConditionDeclTableViewModel(decl));
     }
 
     @Nonnull
@@ -52,14 +67,13 @@ public class ConditionDeclTableViewBuilder extends DeclarationsTableViewBuilder<
 
     @Override
     protected void buildResult(int r, int c, String d) {
-        /*
-        ObservableList<ConditionDeclTableViewModel> tableViewData = observable(on(d).dim(r, c).build());
+        ObservableList<ConditionDeclTableViewModel> tableViewData = FXCollections.observableArrayList();
         tableView = new TableView<>(tableViewData);
         IntStream.rangeClosed(1, c).forEach(i -> {
-            TableColumn<ObservableList<String>, String> tc = new TableColumn<>(String.format("R%02d", i));
+            TableColumn<ConditionDeclTableViewModel, String> tc = new TableColumn<>(String.format("R%02d", i));
             tableView.getColumns().add(tc);
         });
-        */
+
     }
 
     public interface Callback {
