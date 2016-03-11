@@ -17,11 +17,27 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.chainded;
+
+import com.sun.javafx.geom.Line2D;
 
 /**
- * Created by moehler on 10.03.2016.
+ * Created by moehler on 11.03.2016.
  */
-public interface Callback<T extends Builder> {
-    void call(T t);
+public class SampleMain {
+    public static void main(String[] args) {
+        Line2D line = new SampleOuterBuilder()
+                .startPointX(12.00f).y(12.00f)
+                .endPointX(24.00f).y(24.00f)
+                .build();
+        line2DAsString(line);
+    }
+
+    public static void line2DAsString(Line2D l) {
+        final String s = String.format("[%f;%f] -> [%f;%f]", l.x1,l.y1,l.x2,l.y2);
+        System.out.println(s);
+    }
+
+
+
 }

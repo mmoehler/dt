@@ -19,6 +19,8 @@
 
 package de.adesso.tools.functions;
 
+import de.adesso.tools.functions.chainded.Builder;
+import de.adesso.tools.functions.chainded.Callback;
 import de.adesso.tools.ui.DeclarationsTableCell;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;

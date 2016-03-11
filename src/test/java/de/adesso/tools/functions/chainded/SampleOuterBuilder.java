@@ -17,11 +17,40 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.chainded;
+
+
+import com.sun.javafx.geom.Line2D;
+import com.sun.javafx.geom.Point2D;
+
 
 /**
- * Created by moehler on 10.03.2016.
+ * Created by moehler on 11.03.2016.
  */
-public interface Builder<T> {
-    T build();
+public class SampleOuterBuilder implements Builder<Line2D> {
+
+    Point2D start;
+    Point2D end;
+
+    public SampleInnerBuilder<SampleOuterBuilder> startPointX(float number) {
+        return new SampleInnerBuilder<>(number, this, (p) -> callStart(p));
+    }
+
+    public SampleInnerBuilder<SampleOuterBuilder> endPointX(float number) {
+        return new SampleInnerBuilder<>(number, this, (p) -> callEnd(p));
+    }
+
+
+    private void callStart(Point2D p) {
+        start = p;
+    }
+
+    private void callEnd(Point2D p) {
+        end = p;
+    }
+
+    @Override
+    public Line2D build() {
+        return new Line2D(start,end);
+    }
 }
