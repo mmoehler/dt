@@ -20,34 +20,23 @@
 package de.adesso.tools.functions;
 
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import javax.annotation.Nonnull;
-import java.util.stream.IntStream;
-
-import static de.adesso.tools.common.MatrixBuilder.*;
 
 /**
 * Created by mmoehler on 06.03.16.
 */
 class DefinitionsTableViewBuilder extends TableViewBuilder<ObservableList<String>> {
 
-    public static DefinitionsTableViewBuilder newBuilder() {
-        return new DefinitionsTableViewBuilder();
-    }
-
-    private DefinitionsTableViewBuilder() {
+    public DefinitionsTableViewBuilder() {
     }
 
     public DefinitionsTableViewDataBuilder<DefinitionsTableViewBuilder> dim(int rows, int cols) {
-        return new DefinitionsTableViewDataBuilder<>(rows, cols, this,
-                this::buildResult);
-    }
-
-    @Override
-    public TableViewBuilder withSelectionAt(int row, int col) {
-        return super.withSelectionAt(row, col);
+        return new DefinitionsTableViewDataBuilder<>(rows, cols, this, (c) -> {
+            tableView.getItems().clear();
+            c.forEach(tableView.getItems()::add);
+        });
     }
 
     @Nonnull
@@ -57,13 +46,8 @@ class DefinitionsTableViewBuilder extends TableViewBuilder<ObservableList<String
     }
 
     @Override
-    protected void buildResult(int r, int c, String d) {
-        ObservableList<ObservableList<String>> tableViewData = observable(on(d).dim(r, c).build());
-        tableView = new TableView<>(tableViewData);
-        IntStream.rangeClosed(1, c).forEach(i -> {
-            TableColumn<ObservableList<String>, String> tc = new TableColumn<>(String.format("R%02d", i));
-            tableView.getColumns().add(tc);
-        });
+    protected int getColCount() {
+        return tableView.getItems().get(0).size();
     }
 }
 

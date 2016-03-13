@@ -19,31 +19,36 @@
 
 package de.adesso.tools.functions;
 
+import de.adesso.tools.functions.chainded.AbstractSubBuilder;
+import de.adesso.tools.functions.chainded.Callback;
+import javafx.collections.ObservableList;
+
+import static de.adesso.tools.common.MatrixBuilder.observable;
+import static de.adesso.tools.common.MatrixBuilder.on;
+
 /**
  * Created by mmoehler on 06.03.16.
  */
-class DefinitionsTableViewDataBuilder<T> {
+class DefinitionsTableViewDataBuilder<C> extends AbstractSubBuilder<ObservableList<ObservableList<String>>, C> {
     private final int rows;
     private final int cols;
     private String data;
-    private final T caller;
-    private final Callback callback;
 
-    public DefinitionsTableViewDataBuilder(int rows, int cols, T caller, Callback callback) {
+    public DefinitionsTableViewDataBuilder(int rows, int cols, C caller, Callback<ObservableList<ObservableList<String>>> callback) {
+        super(caller, callback);
         this.rows = rows;
         this.cols = cols;
-        this.caller = caller;
-        this.callback = callback;
     }
 
-    public T data(String data) {
+    public C data(String data) {
         this.data = data;
-        this.callback.handleCallback(this.rows, this.cols, this.data);
+        getCallback().call(build());
         return this.caller;
-
     }
 
-    interface Callback {
-        void handleCallback(int rows, int cols, String data);
+    @Override
+    public ObservableList<ObservableList<String>> build() {
+        ObservableList<ObservableList<String>> tableViewData = observable(on(data).dim(rows, cols).build());
+        return tableViewData;
     }
 }

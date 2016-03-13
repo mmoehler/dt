@@ -17,25 +17,27 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
-
-import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
+package de.adesso.tools.functions.chainded;
 
 /**
- * Created by mmoehler on 06.03.16.
+ * Created by mmoehler on 11.03.16.
  */
-public class ConditionDeclTableViewBuilder extends TableViewBuilder<ConditionDeclTableViewModel> {
+public abstract class AbstractSubBuilder<R, C> implements SubBuilder<R, C> {
+    protected final C caller;
+    protected final Callback<R> callback;
 
-    public ConditionDeclTableViewBuilder() {
-    }
-
-    public ConditionDeclBuilder<ConditionDeclTableViewBuilder> addModelWithLfdNbr(String number) {
-        return new ConditionDeclBuilder<>(number, this,
-                (c) -> tableView.getItems().add(new ConditionDeclTableViewModel(c)));
+    public AbstractSubBuilder(C caller, Callback<R> callback) {
+        this.callback = callback;
+        this.caller = caller;
     }
 
     @Override
-    protected int getColCount() {
-        return 4;
+    public C getCaller() {
+        return this.caller;
+    }
+
+    @Override
+    public Callback<R> getCallback() {
+        return this.callback;
     }
 }

@@ -19,11 +19,8 @@
 
 package de.adesso.tools.functions;
 
-import de.adesso.tools.functions.chainded.Builder;
+import de.adesso.tools.functions.chainded.AbstractSubBuilder;
 import de.adesso.tools.functions.chainded.Callback;
-import de.adesso.tools.ui.DeclarationsTableCell;
-import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -36,25 +33,16 @@ import javax.annotation.Nonnull;
 /**
  * {@code TableColumnBuilder} TableColumnBuilder static inner class.
  */
-public class TableColumnBuilder<S,C> implements Builder<TableColumn> {
+public class TableColumnBuilder<C> extends AbstractSubBuilder<TableColumn, C> {
     private String columnName;
     private String propertyName;
-    private int prefWidth;
-    private int minWidth;
-    private int maxWidth;
-    private boolean resizable;
-    private Pos alignment;
-    private EventHandler<TableColumn.CellEditEvent<S, String>> value;
     private C caller;
     private Callback<TableColumnBuilder> callback;
 
-    public TableColumnBuilder() {
-    }
 
-    public TableColumnBuilder(String columnName, C caller, Callback<TableColumnBuilder> callback) {
+    public TableColumnBuilder(String columnName, C caller, Callback<TableColumn> callback) {
+        super(caller, callback);
         this.columnName = columnName;
-        this.caller = caller;
-        this.callback = callback;
     }
 
     /**
@@ -76,82 +64,13 @@ public class TableColumnBuilder<S,C> implements Builder<TableColumn> {
      * @return a reference to this TableColumnBuilder
      */
     @Nonnull
-    public TableColumnBuilder propertyName(@Nonnull String val) {
+    public C propertyName(@Nonnull String val) {
         propertyName = val;
-        return this;
+        getCallback().call(build());
+        return getCaller();
+
     }
 
-    /**
-     * Sets the {@code prefWidth} and returns a reference to this TableColumnBuilder so that the methods can be chained together.
-     *
-     * @param val the {@code prefWidth} to set
-     * @return a reference to this TableColumnBuilder
-     */
-    @Nonnull
-    public TableColumnBuilder prefWidth(int val) {
-        prefWidth = val;
-        return this;
-    }
-
-    /**
-     * Sets the {@code minWidth} and returns a reference to this TableColumnBuilder so that the methods can be chained together.
-     *
-     * @param val the {@code minWidth} to set
-     * @return a reference to this TableColumnBuilder
-     */
-    @Nonnull
-    public TableColumnBuilder minWidth(int val) {
-        minWidth = val;
-        return this;
-    }
-
-    /**
-     * Sets the {@code maxWidth} and returns a reference to this TableColumnBuilder so that the methods can be chained together.
-     *
-     * @param val the {@code maxWidth} to set
-     * @return a reference to this TableColumnBuilder
-     */
-    @Nonnull
-    public TableColumnBuilder maxWidth(int val) {
-        maxWidth = val;
-        return this;
-    }
-
-    /**
-     * Sets the {@code resizable} and returns a reference to this TableColumnBuilder so that the methods can be chained together.
-     *
-     * @param val the {@code resizable} to set
-     * @return a reference to this TableColumnBuilder
-     */
-    @Nonnull
-    public TableColumnBuilder resizable(boolean val) {
-        resizable = val;
-        return this;
-    }
-
-    /**
-     * Sets the {@code alignment} and returns a reference to this TableColumnBuilder so that the methods can be chained together.
-     *
-     * @param val the {@code alignment} to set
-     * @return a reference to this TableColumnBuilder
-     */
-    @Nonnull
-    public TableColumnBuilder alignment(@Nonnull Pos val) {
-        alignment = val;
-        return this;
-    }
-
-    /**
-     * Sets the {@code value} and returns a reference to this TableColumnBuilder so that the methods can be chained together.
-     *
-     * @param val the {@code value} to set
-     * @return a reference to this TableColumnBuilder
-     */
-    @Nonnull
-    public TableColumnBuilder value(@Nonnull EventHandler<TableColumn.CellEditEvent<S, String>> val) {
-        value = val;
-        return this;
-    }
 
     /**
      * Returns a {@code TableColumnBuilder} built from the parameters previously set.
@@ -159,15 +78,9 @@ public class TableColumnBuilder<S,C> implements Builder<TableColumn> {
      * @return a {@code TableColumnBuilder} built with parameters of this {@code TableColumnBuilder.TableColumnBuilder}
      */
     @Nonnull
-    public TableColumn<S, String> build() {
-        TableColumn<S, String> col = new TableColumn<>(columnName);
-        col.setMinWidth(minWidth);
-        col.setPrefWidth(prefWidth);
-        col.setMaxWidth(maxWidth);
-        col.setResizable(resizable);
-        col.setCellValueFactory(new PropertyValueFactory<>(propertyName));
-        col.setCellFactory(DeclarationsTableCell.forTableColumn(alignment));
-        col.setOnEditCommit(value);
+    public TableColumn build() {
+        TableColumn col = new TableColumn<>(columnName);
+        if (null != propertyName) col.setCellValueFactory(new PropertyValueFactory<>(propertyName));
         return col;
     }
 }

@@ -19,6 +19,7 @@
 
 package de.adesso.tools.functions;
 
+import de.adesso.tools.functions.chainded.Builder;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 
@@ -28,7 +29,7 @@ import java.util.List;
 /**
  * Created by mmoehler on 06.03.16.
  */
-class ConditionDeclTableViewModelListBuilder {
+class ConditionDeclTableViewModelListBuilder implements Builder<List<ConditionDeclTableViewModel>> {
     List<ConditionDeclTableViewModel> list = new ArrayList<>();
 
     public ConditionDeclTableViewModelListBuilder() {
@@ -37,19 +38,11 @@ class ConditionDeclTableViewModelListBuilder {
 
     public ConditionDeclBuilder<ConditionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
         return new ConditionDeclBuilder<>(number, this,
-                (lfdNr, expression, possibleIndicators) -> internalHandleCallback(new ConditionDecl(lfdNr, expression, possibleIndicators)));
-    }
-
-    protected void internalHandleCallback(ConditionDecl element) {
-        list.add(new ConditionDeclTableViewModel(element));
+                (ConditionDecl c) -> list.add(new ConditionDeclTableViewModel(c)));
     }
 
     public List<ConditionDeclTableViewModel> build() {
         return list;
-    }
-
-    interface Callback {
-        void handleCallback(String lfdNr, String expression, String possibleIndicators);
     }
 
 }

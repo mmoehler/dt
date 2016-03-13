@@ -33,24 +33,15 @@ public class SampleOuterBuilder implements Builder<Line2D> {
     Point2D end;
 
     public SampleInnerBuilder<SampleOuterBuilder> startPointX(float number) {
-        return new SampleInnerBuilder<>(number, this, (p) -> callStart(p));
+        return new SampleInnerBuilder<>(number, this, (p) -> start = p);
     }
 
     public SampleInnerBuilder<SampleOuterBuilder> endPointX(float number) {
-        return new SampleInnerBuilder<>(number, this, (p) -> callEnd(p));
-    }
-
-
-    private void callStart(Point2D p) {
-        start = p;
-    }
-
-    private void callEnd(Point2D p) {
-        end = p;
+        return new SampleInnerBuilder<>(number, this, (p) -> end = p);
     }
 
     @Override
     public Line2D build() {
-        return new Line2D(start,end);
+        return new Line2D(start, end);
     }
 }

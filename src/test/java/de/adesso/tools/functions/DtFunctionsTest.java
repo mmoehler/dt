@@ -20,9 +20,11 @@
 package de.adesso.tools.functions;
 
 import de.adesso.tools.common.MatrixBuilder;
+import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
+import de.adesso.tools.util.matchers.Matchers;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.TableView;
@@ -51,10 +53,15 @@ import static org.testng.Assert.assertEquals;
  */
 public class DtFunctionsTest {
 
+    public static void dumpTableItems(String msg, TableView<?> table) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        table.getItems().forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
     @BeforeClass
     public void initToolkit()
-            throws InterruptedException
-    {
+            throws InterruptedException {
         final CountDownLatch latch = new CountDownLatch(1);
         SwingUtilities.invokeLater(() -> {
             new JFXPanel(); // initializes JavaFX environment
@@ -80,7 +87,6 @@ public class DtFunctionsTest {
 
         assertThat(actual, equalTo(expected));
     }
-
 
     @Test
     public void testDetermineCountIndicatorsPerRow() throws Exception {
@@ -155,7 +161,7 @@ public class DtFunctionsTest {
 
 
         final String matrixCode =
-                        "Y,Y,Y,Y,Y,Y,Y,Y,N,N,N,N,N,N,N,N," +
+                "Y,Y,Y,Y,Y,Y,Y,Y,N,N,N,N,N,N,N,N," +
                         "Y,Y,Y,Y,N,N,N,N,Y,Y,Y,Y,N,N,N,N," +
                         "Y,Y,N,N,Y,Y,N,N,Y,Y,N,N,Y,Y,N,N," +
                         "Y,N,Y,N,Y,N,Y,N,Y,N,Y,N,Y,N,Y,N";
@@ -298,22 +304,22 @@ public class DtFunctionsTest {
         );
 
         List<List<String>> expected = Arrays.asList(
-                Arrays.asList("Y","Y","Y","Y"),
-                Arrays.asList("Y","Y","Y","N"),
-                Arrays.asList("Y","Y","N","Y"),
-                Arrays.asList("Y","Y","N","N"),
-                Arrays.asList("Y","N","Y","Y"),
-                Arrays.asList("Y","N","Y","N"),
-                Arrays.asList("Y","N","N","Y"),
-                Arrays.asList("Y","N","N","N"),
-                Arrays.asList("N","Y","Y","Y"),
-                Arrays.asList("N","Y","Y","N"),
-                Arrays.asList("N","Y","N","Y"),
-                Arrays.asList("N","Y","N","N"),
-                Arrays.asList("N","N","Y","Y"),
-                Arrays.asList("N","N","Y","N"),
-                Arrays.asList("N","N","N","Y"),
-                Arrays.asList("N","N","N","N")
+                Arrays.asList("Y", "Y", "Y", "Y"),
+                Arrays.asList("Y", "Y", "Y", "N"),
+                Arrays.asList("Y", "Y", "N", "Y"),
+                Arrays.asList("Y", "Y", "N", "N"),
+                Arrays.asList("Y", "N", "Y", "Y"),
+                Arrays.asList("Y", "N", "Y", "N"),
+                Arrays.asList("Y", "N", "N", "Y"),
+                Arrays.asList("Y", "N", "N", "N"),
+                Arrays.asList("N", "Y", "Y", "Y"),
+                Arrays.asList("N", "Y", "Y", "N"),
+                Arrays.asList("N", "Y", "N", "Y"),
+                Arrays.asList("N", "Y", "N", "N"),
+                Arrays.asList("N", "N", "Y", "Y"),
+                Arrays.asList("N", "N", "Y", "N"),
+                Arrays.asList("N", "N", "N", "Y"),
+                Arrays.asList("N", "N", "N", "N")
         );
         List<List<String>> actual = permutations(original);
 
@@ -335,7 +341,7 @@ public class DtFunctionsTest {
         TableView<ObservableList<String>> conditionDefTab = definitionsTableViewBuilder()
                 .dim(2, 4)
                 .data("Y,Y,N,N,Y,N,Y,N")
-                .withSelectionAt(1,3)
+                .withSelectionAt(1, 3)
                 .build();
 
         TableView<ObservableList<String>> actionDefTab = definitionsTableViewBuilder()
@@ -344,44 +350,45 @@ public class DtFunctionsTest {
                 .build();
 
 
-        doInsertColumns(/*conditionDef,actionDef,*/conditionDefTab,actionDefTab, OptionalInt.empty(), QMARK_SUPPLIER);
+        doInsertColumns(/*conditionDef,actionDef,*/conditionDefTab, actionDefTab, OptionalInt.empty(), QMARK_SUPPLIER);
 
 
         ObservableList<ObservableList<String>> expConditionDef = observable(on("Y,Y,N,?,N,Y,N,Y,?,N").dim(2, 5).build());
-        assertEquals(conditionDefTab.getItems(),expConditionDef);
+        assertEquals(conditionDefTab.getItems(), expConditionDef);
 
         ObservableList<ObservableList<String>> expActionDef = observable(on("X,X,X,?,X,X,X,X,?,X").dim(2, 5).build());
-        assertEquals(actionDefTab.getItems(),expActionDef);
-    }
-
-    public static void dumpTableItems(String msg, TableView<?> table) {
-        System.out.println(String.format("%s >>>>>>>>>>",msg));
-        table.getItems().forEach(i -> System.out.println("\t"+i));
-        System.out.println("<<<<<<<<<<\n");
+        assertEquals(actionDefTab.getItems(), expActionDef);
     }
 
     @Test
     public void testDoRemoveColumns() throws Exception {
         TableView<ObservableList<String>> conditionDefTab = definitionsTableViewBuilder()
                 .dim(2, 4)
-                .data("Y,Y,N,N,Y,N,Y,N")
-                .withSelectionAt(1,2)
+                .data(
+                        "Y,Y,N,N," +
+                                "Y,N,Y,N")
+                .withSelectionAt(1, 2)
                 .build();
+        dumpTableItems("Conditions before", conditionDefTab);
 
         TableView<ObservableList<String>> actionDefTab = definitionsTableViewBuilder()
                 .dim(2, 4)
                 .data("X,X,X,X,X,X,X,X")
                 .build();
+        dumpTableItems("Actions before", actionDefTab);
 
+        doRemoveColumns(conditionDefTab, actionDefTab, OptionalInt.empty());
 
-        doRemoveColumns(conditionDefTab,actionDefTab, OptionalInt.empty());
+        dumpTableItems("Conditions after", conditionDefTab);
+        dumpTableItems("Actions after", actionDefTab);
 
-
-        ObservableList<ObservableList<String>> expConditionDef = observable(on("Y,Y,N,Y,N,N").dim(2, 3).build());
-        assertEquals(conditionDefTab.getItems(),expConditionDef);
+        ObservableList<ObservableList<String>> expConditionDef = observable(on(
+                "Y,Y,N," +
+                        "Y,N,N").dim(2, 3).build());
+        assertEquals(conditionDefTab.getItems(), expConditionDef);
 
         ObservableList<ObservableList<String>> expActionDef = observable(on("X,X,X,X,X,X").dim(2, 3).build());
-        assertEquals(actionDefTab.getItems(),expActionDef);
+        assertEquals(actionDefTab.getItems(), expActionDef);
     }
 
     @Test
@@ -390,7 +397,7 @@ public class DtFunctionsTest {
         TableView<ObservableList<String>> conditionDefTab = definitionsTableViewBuilder()
                 .dim(2, 4)
                 .data("Y,Y,N,Y,Y,Y,N,Y")
-                .withSelectionAt(1,2)
+                .withSelectionAt(1, 2)
                 .build();
         dumpTableItems("Conditions before", conditionDefTab);
 
@@ -402,35 +409,59 @@ public class DtFunctionsTest {
 
         dumpTableItems("Actions before", actionDefTab);
 
-        doMoveColumns(conditionDefTab,actionDefTab, OptionalInt.empty(), DIR_LEFT);
+        doMoveColumns(conditionDefTab, actionDefTab, OptionalInt.empty(), DIR_LEFT);
 
         dumpTableItems("Conditions after", conditionDefTab);
         dumpTableItems("Actions after", actionDefTab);
 
         ObservableList<ObservableList<String>> expConditionDef = observable(on("Y,N,Y,Y,Y,N,Y,Y").dim(2, 4).build());
-        assertEquals(conditionDefTab.getItems(),expConditionDef);
+        assertEquals(conditionDefTab.getItems(), expConditionDef);
 
         ObservableList<ObservableList<String>> expActionDef = observable(on("X,,X,X,X,,X,X").dim(2, 4).build());
-        assertEquals(actionDefTab.getItems(),expActionDef);
+        assertEquals(actionDefTab.getItems(), expActionDef);
 
     }
 
     @Test
     public void testDoInsertRows() throws Exception {
         TableView<ConditionDeclTableViewModel> conditionDeclTab = conditionDeclTableViewBuilder()
-                .addTableViewModelWithLfdNbr("01").withExpression("EXP-01").withIndicators("Y,N")
-                .addTableViewModelWithLfdNbr("02").withExpression("EXP-02").withIndicators("Y,N")
-                .withSelectionAt(1,1)
+                .addModelWithLfdNbr("01").withExpression("EXP-01").withIndicators("Y,N")
+                .addModelWithLfdNbr("02").withExpression("EXP-02").withIndicators("Y,N")
                 .build();
-        dumpTableItems("Conditions Declarations before", conditionDeclTab);
 
         TableView<ObservableList<String>> conditionDefTab = definitionsTableViewBuilder()
                 .dim(2, 4)
                 .data("Y,Y,N,Y,Y,Y,N,Y")
-                .withSelectionAt(1,2)
+                .withSelectionAt(1, 2)
                 .build();
-        dumpTableItems("Condition Definitions before", conditionDefTab);
 
+        TableView<ConditionDeclTableViewModel> expectedDeclTab = conditionDeclTableViewBuilder()
+                .addModelWithLfdNbr("01").withExpression("EXP-01").withIndicators("Y,N")
+                .addModelWithLfdNbr("02").withExpression("").withIndicators("")
+                .addModelWithLfdNbr("03").withExpression("EXP-02").withIndicators("Y,N")
+                .build();
+
+        TableView<ObservableList<String>> expectedDefTab = definitionsTableViewBuilder()
+                .dim(2, 4)
+                .data("Y,Y,N,Y,?,?,?,?,Y,Y,N,Y")
+                .withSelectionAt(1, 2)
+                .build();
+
+
+        doInsertRows(conditionDeclTab, conditionDefTab, OptionalInt.empty(),
+                () -> new ConditionDeclTableViewModel(new ConditionDecl()),
+                () -> "?", () -> "%02d");
+
+
+        Iterator<ConditionDeclTableViewModel> ci = conditionDeclTab.getItems().iterator();
+        Iterator<ConditionDeclTableViewModel> ei = expectedDeclTab.getItems().iterator();
+
+        assertEquals(conditionDeclTab.getItems().size(), expectedDeclTab.getItems().size());
+        for (; ci.hasNext() && ei.hasNext(); ) {
+            assertThat(ci.next(), Matchers.conditionDeclTableViewModelEquals(ei.next()));
+        }
+
+        assertEquals(conditionDefTab.getItems(), expectedDefTab.getItems());
     }
 
     @Test

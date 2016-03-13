@@ -19,33 +19,37 @@
 
 package de.adesso.tools.functions;
 
+import de.adesso.tools.functions.chainded.AbstractSubBuilder;
+import de.adesso.tools.functions.chainded.Callback;
+import de.adesso.tools.model.ConditionDecl;
+
 /**
  * Created by mmoehler on 06.03.16.
  */
-class ConditionDeclBuilder<T> {
-        private final String lfdNr;
-        private final T caller;
-        private final Callback callback;
-        private String expression;
+class ConditionDeclBuilder<C> extends AbstractSubBuilder<ConditionDecl, C> {
+    private final String lfdNr;
+    private String expression;
+    private String indicators;
 
-        public ConditionDeclBuilder(String lfdNr, T caller, Callback callback) {
-            this.lfdNr = lfdNr;
-            this.caller = caller;
-            this.callback = callback;
-        }
-
-        public ConditionDeclBuilder<T> withExpression(String expression) {
-            this.expression = expression;
-            return this;
-        }
-
-        public T withIndicators(String possibleIndicators) {
-            this.callback.handleCallback(this.lfdNr, this.expression, possibleIndicators);
-            return this.caller;
-        }
-
-        interface Callback {
-            void handleCallback(String lfdNr, String expression, String indicators);
-        }
-
+    public ConditionDeclBuilder(String lfdnr, C caller, Callback<ConditionDecl> callback) {
+        super(caller, callback);
+        this.lfdNr = lfdnr;
     }
+
+    @Override
+    public ConditionDecl build() {
+        return new ConditionDecl(lfdNr, expression, indicators);
+    }
+
+    public ConditionDeclBuilder<C> withExpression(String expression) {
+        this.expression = expression;
+        return this;
+    }
+
+    public C withIndicators(String possibleIndicators) {
+        this.indicators = possibleIndicators;
+        getCallback().call(build());
+        return getCaller();
+    }
+
+}

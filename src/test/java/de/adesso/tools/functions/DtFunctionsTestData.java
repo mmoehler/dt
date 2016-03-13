@@ -29,18 +29,16 @@ import java.util.stream.Collectors;
  */
 public class DtFunctionsTestData {
 
+    public final static String ALPHAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+    public final static String ALPHA_NUMERICS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     public static Supplier<String> RANDOM_NUMBER_STRING_000_999 =
             () -> ThreadLocalRandom.current().ints(3, 0, 9)
                     .mapToObj(String::valueOf)
                     .collect(Collectors.joining());
-
-    public final static String ALPHAS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
     public static Supplier<String> RANDOM_ALPHA_5 =
             () -> ThreadLocalRandom.current().ints(5, 0, ALPHAS.length())
                     .mapToObj(i -> Character.toString(ALPHAS.charAt(i)))
                     .reduce("", (a, b) -> a + b);
-
-    public final static String ALPHA_NUMERICS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
     public static Supplier<String> RANDOM_ALPHA_NUMERIC_5 =
             () -> ThreadLocalRandom.current().ints(5, 0, ALPHA_NUMERICS.length())
                     .mapToObj(i -> Character.toString(ALPHA_NUMERICS.charAt(i)))
@@ -65,6 +63,6 @@ public class DtFunctionsTestData {
     }
 
     public static DefinitionsTableViewBuilder definitionsTableViewBuilder() {
-        return DefinitionsTableViewBuilder.newBuilder();
+        return new DefinitionsTableViewBuilder();
     }
 }

@@ -19,6 +19,7 @@
 
 package de.adesso.tools.functions;
 
+import de.adesso.tools.functions.chainded.Builder;
 import de.adesso.tools.model.ActionDecl;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 
@@ -28,28 +29,16 @@ import java.util.List;
 /**
  * Created by mmoehler on 06.03.16.
  */
-class ActionDeclTableViewModelListBuilder {
-    List<ActionDeclTableViewModel> list = new ArrayList<>();
+class ActionDeclTableViewModelListBuilder implements Builder<List<ActionDeclTableViewModel>> {
 
-    public ActionDeclTableViewModelListBuilder() {
-        super();
-    }
+    private final List<ActionDeclTableViewModel> list = new ArrayList<>();
 
     public ActionDeclBuilder<ActionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
-        return new ActionDeclBuilder<>(number, this,
-                (lfdNr, expression, possibleIndicators) -> _addTableViewModel(new ActionDecl(lfdNr, expression, possibleIndicators)));
+        return new ActionDeclBuilder<>(number, this, (ActionDecl a) -> list.add(new ActionDeclTableViewModel(a)));
     }
 
-    protected void _addTableViewModel(ActionDecl element) {
-        list.add(new ActionDeclTableViewModel(element));
-    }
-
+    @Override
     public List<ActionDeclTableViewModel> build() {
-        return list;
+        return new ArrayList<>(list);
     }
-
-    interface Callback {
-        void handleCallback(String lfdNr, String expression, String possibleIndicators);
-    }
-
 }

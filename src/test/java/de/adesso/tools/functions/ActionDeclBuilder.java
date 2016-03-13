@@ -19,29 +19,49 @@
 
 package de.adesso.tools.functions;
 
+import de.adesso.tools.functions.chainded.AbstractSubBuilder;
+import de.adesso.tools.functions.chainded.Callback;
+import de.adesso.tools.model.ActionDecl;
+
 /**
  * Created by mmoehler on 06.03.16.
  */
-class ActionDeclBuilder<T> {
+class ActionDeclBuilder<C> extends AbstractSubBuilder<ActionDecl, C> {
     private final String lfdNr;
-    private final T caller;
-    private final ActionDeclTableViewModelListBuilder.Callback callback;
     private String expression;
+    private String indicators;
 
-    public ActionDeclBuilder(String lfdNr, T caller, ActionDeclTableViewModelListBuilder.Callback callback) {
+
+    public ActionDeclBuilder(String lfdNr, C caller, Callback<ActionDecl> callback) {
+        super(caller, callback);
         this.lfdNr = lfdNr;
-        this.caller = caller;
-        this.callback = callback;
     }
 
-    public ActionDeclBuilder<T> withExpression(String expression) {
+
+    public ActionDeclBuilder<C> withExpression(String expression) {
         this.expression = expression;
         return this;
     }
 
-    public T withIndicators(String possibleIndicators) {
-        this.callback.handleCallback(this.lfdNr, this.expression, possibleIndicators);
+    public C withIndicators(String possibleIndicators) {
+        this.indicators = possibleIndicators;
+        getCallback().call(build());
         return this.caller;
+    }
+
+    @Override
+    public C getCaller() {
+        return super.getCaller();
+    }
+
+    @Override
+    public Callback<ActionDecl> getCallback() {
+        return super.getCallback();
+    }
+
+    @Override
+    public ActionDecl build() {
+        return new ActionDecl(lfdNr, expression, indicators);
     }
 }
 

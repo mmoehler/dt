@@ -1,3 +1,22 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
 package de.adesso.tools.ui.main;
 
 import de.adesso.tools.functions.DtFunctions;
@@ -214,18 +233,16 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     private void doInsConditionDecl(String key, Object[] value) {
-        doInsertRows(this.viewModel.getConditionDeclarations(), this.viewModel.getConditionDefinitions(),
-                this.conditionDeclarationsTable, this.conditionDefinitionsTable, getIndex(value),
+        doInsertRows(this.conditionDeclarationsTable, this.conditionDefinitionsTable, getIndex(value),
                 () -> new ConditionDeclTableViewModel(new ConditionDecl()),
-                QMARK_SUPPLIER);
+                QMARK_SUPPLIER, () -> "C%02d");
         this.viewModel.updateRowHeader();
     }
 
     private void doInsActionDecl(String key, Object[] value) {
-        doInsertRows(this.viewModel.getActionDeclarations(), this.viewModel.getActionDefinitions(),
-                this.actionDeclarationsTable, this.actionDefinitionsTable, getIndex(value),
+        doInsertRows(this.actionDeclarationsTable, this.actionDefinitionsTable, getIndex(value),
                 () -> new ActionDeclTableViewModel(new ActionDecl()),
-                QMARK_SUPPLIER);
+                QMARK_SUPPLIER, () -> "A%02d");
         this.viewModel.updateRowHeader();
     }
 

@@ -17,25 +17,37 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.util.matchers;
 
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
+import org.hamcrest.BaseMatcher;
+import org.hamcrest.Description;
 
 /**
- * Created by mmoehler on 06.03.16.
+ * Created by mmoehler on 13.03.16.
  */
-public class ConditionDeclTableViewBuilder extends TableViewBuilder<ConditionDeclTableViewModel> {
+public class ConditionDeclTableViewModelEquals extends BaseMatcher<ConditionDeclTableViewModel> {
 
-    public ConditionDeclTableViewBuilder() {
-    }
+    final ConditionDeclTableViewModel expected;
 
-    public ConditionDeclBuilder<ConditionDeclTableViewBuilder> addModelWithLfdNbr(String number) {
-        return new ConditionDeclBuilder<>(number, this,
-                (c) -> tableView.getItems().add(new ConditionDeclTableViewModel(c)));
+
+    public ConditionDeclTableViewModelEquals(ConditionDeclTableViewModel expected) {
+        this.expected = expected;
     }
 
     @Override
-    protected int getColCount() {
-        return 4;
+    public boolean matches(Object o) {
+        ConditionDeclTableViewModel m = (ConditionDeclTableViewModel) o;
+        return m.getModel().equals(expected.getModel());
+    }
+
+    @Override
+    public void describeTo(Description description) {
+        description.appendText("expected ").appendValue(expected);
+    }
+
+    @Override
+    public void describeMismatch(final Object item, final Description description) {
+        description.appendText("was").appendValue((item));
     }
 }

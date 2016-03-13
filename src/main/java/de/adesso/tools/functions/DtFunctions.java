@@ -1,6 +1,26 @@
+/*
+ * Licensed to the Apache Software Foundation (ASF) under one
+ * or more contributor license agreements.  See the NOTICE file
+ * distributed with this work for additional information
+ * regarding copyright ownership.  The ASF licenses this file
+ * to you under the Apache License, Version 2.0 (the
+ * "License"); you may not use this file except in compliance
+ * with the License.  You may obtain a copy of the License at
+ *
+ *   http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing,
+ * software distributed under the License is distributed on an
+ * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ * KIND, either express or implied.  See the License for the
+ * specific language governing permissions and limitations
+ * under the License.
+ */
+
 package de.adesso.tools.functions;
 
 import com.google.common.collect.Lists;
+import de.adesso.tools.ui.DeclarationTableViewModel;
 import de.adesso.tools.ui.DeclarationsTableCell;
 import de.adesso.tools.ui.DefinitionsTableCell;
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;
@@ -213,24 +233,23 @@ public final class DtFunctions {
 
     }
 
-    public static void doInsertRows(ObservableList decls,
-                                    ObservableList defns,
-                                    TableView<?> declarations,
-                                    TableView<?> definitions,
-                                    OptionalInt value,
-                                    Supplier defaultDecl, Supplier defaultDefValue) {
+    public static <T extends DeclarationTableViewModel> void doInsertRows(TableView<T> declarations,
+                                                                          TableView<ObservableList<String>> definitions,
+                                                                          OptionalInt value,
+                                                                          Supplier<T> defaultDecl, Supplier<String> defaultDefValue, Supplier<String> rowHeaderTemplate) {
 
         OptionalInt index = determineRowIndices(declarations, definitions, value);
 
         if (index.isPresent()) {
+            ObservableList<T> newDecls = ListFunctions.insertElementsAt(declarations.getItems(), index.getAsInt(), defaultDecl);
+            ObservableList<ObservableList<String>> newDefs = insertRowsAt(definitions.getItems(), index.getAsInt(), defaultDefValue);
 
-            ObservableList newDecls = ListFunctions.insertElementsAt(decls, index.getAsInt(), defaultDecl);
-            ObservableList<ObservableList<String>> newDefs = insertRowsAt(defns, index.getAsInt(), defaultDefValue);
+            declarations.getItems().clear();
+            newDecls.forEach(declarations.getItems()::add);
+            updateRowHeaders(declarations, rowHeaderTemplate);
 
-            decls.clear();
-            newDecls.forEach(decls::add);
-            defns.clear();
-            newDefs.forEach(defns::add);
+            definitions.getItems().clear();
+            newDefs.forEach(definitions.getItems()::add);
 
             declarations.refresh();
             definitions.refresh();
@@ -350,8 +369,16 @@ public final class DtFunctions {
 
     // FIXME !!
     private static <T, U> OptionalInt determineRowIndices(TableView<T> tableView0, TableView<U> tableView1, OptionalInt externalIndex) {
-        Optional<TablePosition> index = determineSelectedCellPosition(tableView0, tableView1);
-        return OptionalInt.empty();
+        OptionalInt index = OptionalInt.empty();
+        if (externalIndex.isPresent()) {
+            index = externalIndex;
+        } else {
+            Optional<TablePosition> selectionPos = determineSelectedCellPosition(tableView0, tableView1);
+            if (selectionPos.isPresent()) {
+                index = OptionalInt.of(selectionPos.get().getRow());
+            }
+        }
+        return index;
     }
 
     /**
@@ -360,13 +387,13 @@ public final class DtFunctions {
      * <pre>
      *     Conditions                               R1 R2 R3 R4
      *     -----------------------------------------------------
-     *     C01 tableView0 isNull                     Y  Y  N  N
-     *     C02 tableView1 isNull                     Y  N  Y  N
+     *     C01 tableView0 notNull                    Y  N  N
+     *     C02 tableView1 notNull                    -  Y  N
      *     -----------------------------------------------------
      *     Actions
-     *     A01 return tableView0.getSelectedCell()   X  X
-     *     A02 return tableView1.getSelectedCell()         X
-     *     A03 return &empty;                                       X
+     *     A01 return tableView0.getSelectedCell()   X
+     *     A02 return tableView1.getSelectedCell()      X
+     *     A03 return &empty;                              X
      *     -----------------------------------------------------
      * </pre>
      *
@@ -380,11 +407,17 @@ public final class DtFunctions {
     private static <T, U> Optional<TablePosition> determineSelectedCellPosition(TableView<T> tableView0, TableView<U> tableView1) {
         Optional<TablePosition> index = Optional.empty();
         // ... together with the condition above, it is ensured, that at least one table view is usable.
-        if (null != tableView0 || null != tableView1) {
-            TableView<?> tableView = (null != tableView0) ? tableView0 : tableView1;
-            index = getSelectedCell(tableView);
+        if (null != tableView0 && hasSelectedCells(tableView0)) {
+            index = getSelectedCell(tableView0);
+        } else if (null != tableView1 && hasSelectedCells(tableView1)) {
+            index = getSelectedCell(tableView1);
         }
         return index;
+
+    }
+
+    private static boolean hasSelectedCells(TableView<?> t) {
+        return !t.getSelectionModel().getSelectedCells().isEmpty();
     }
 
     public static boolean isElseColumn(TableColumn<?, ?> tableColumn) {
@@ -399,6 +432,15 @@ public final class DtFunctions {
             }
         });
     }
+
+    public static <T extends DeclarationTableViewModel> void updateRowHeaders(TableView<T> table, Supplier<String> template) {
+        int counter[] = {1};
+        table.getItems().forEach(c -> {
+            c.lfdNrProperty().set(String.format(template.get(), counter[0]++));
+            c.save();
+        });
+    }
+
 
     public static <C> Optional<TablePosition> getSelectedCell(TableView<C> table) {
         final ObservableList<TablePosition> selectedCells = table.getSelectionModel().getSelectedCells();
