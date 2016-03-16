@@ -54,6 +54,10 @@ import java.util.stream.IntStream;
 import static de.adesso.tools.functions.DtFunctions.*;
 
 public class MainView implements FxmlView<MainViewModel> {
+
+    private static final String ACT_ROW_HEADER = "A%02d";
+    public static final String COND_ROW_HEADER = "C%02d";
+
     private final DoubleProperty conditionDividerPos = new SimpleDoubleProperty();
     private final DoubleProperty actionDividerPos = new SimpleDoubleProperty();
     @FXML
@@ -159,32 +163,23 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     private void doMoveConditionDeclDown(String key, Object[] value) {
-        doMoveRows(this.viewModel.getConditionDeclarations(),
-                this.viewModel.getConditionDefinitions(),
-                this.conditionDefinitionsTable, getIndex(value), DIR_DOWN);
-        viewModel.updateRowHeader();
+        doMoveRows(this.conditionDeclarationsTable,this.conditionDefinitionsTable, getIndex(value), DIR_DOWN);
+        updateRowHeader();
     }
 
     private void doMoveConditionDeclUp(String key, Object[] value) {
-        doMoveRows(this.viewModel.getConditionDeclarations(),
-                this.viewModel.getConditionDefinitions(),
-                this.conditionDefinitionsTable, getIndex(value), DIR_UP);
-        viewModel.updateRowHeader();
+        doMoveRows(this.conditionDeclarationsTable, this.conditionDefinitionsTable, getIndex(value), DIR_UP);
+        updateRowHeader();
     }
 
     private void doMoveActionDeclDown(String key, Object[] value) {
-        doMoveRows(this.viewModel.getActionDeclarations(),
-                this.viewModel.getActionDefinitions(),
-                this.actionDefinitionsTable, getIndex(value), DIR_DOWN);
-        viewModel.updateRowHeader();
+        doMoveRows(this.actionDeclarationsTable, this.actionDefinitionsTable, getIndex(value), DIR_DOWN);
+        updateRowHeader();
     }
 
     private void doMoveActionDeclUp(String key, Object[] value) {
-        doMoveRows(this.viewModel.getActionDeclarations(),
-                this.viewModel.getActionDefinitions(),
-                this.actionDefinitionsTable,
-                getIndex(value), DIR_UP);
-        viewModel.updateRowHeader();
+        doMoveRows(this.actionDeclarationsTable, this.actionDefinitionsTable, getIndex(value), DIR_UP);
+        updateRowHeader();
     }
 
     private void doMoveRuleRight(String key, Object[] value) {
@@ -275,29 +270,30 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     private void doRemConditionDecl(String key, Object[] value) {
-        doRemoveRows(this.viewModel.getConditionDeclarations(),
-                this.viewModel.getConditionDefinitions(),
-                this.conditionDeclarationsTable,
-                this.conditionDefinitionsTable, getIndex(value));
+        doRemoveRows(this.conditionDeclarationsTable, this.conditionDefinitionsTable, getIndex(value));
+        updateRowHeader();
 
-        // but here this is not enough! If hte count of columns after the row removal is greater thean
-        // the max possible count, than the difference of columns must also be deleted.
-        int cols = this.viewModel.getConditionDefinitions().size();
-        int start = determineMaxColumns(viewModel.getConditionDeclarations());
-
-        // TODO implement >>> doRemConditionDecl(String key, Object[] value) !!
-        /* --
-        int end = Range.newBuilder().withFrom(start, end - start)
-        viewModel.removeRulesIn(Range range)
-        -- */
-
-        this.viewModel.updateRowHeader();
     }
 
     private void doRemActionDecl(String key, Object[] value) {
-        doRemoveRows(this.viewModel.getActionDeclarations(), this.viewModel.getActionDefinitions(),
-                this.actionDeclarationsTable, this.actionDefinitionsTable, getIndex(value));
-        this.viewModel.updateRowHeader();
+        doRemoveRows(this.actionDeclarationsTable, this.actionDefinitionsTable, getIndex(value));
+        updateRowHeader();
+    }
+
+
+    public void updateRowHeader() {
+        int counter[] = {1};
+        this.conditionDeclarationsTable.getItems()
+                .forEach(d -> {
+                    d.lfdNrProperty().setValue(String.format(COND_ROW_HEADER, counter[0]++));
+                    d.save();
+                });
+        counter[0] = 1;
+        this.actionDeclarationsTable.getItems()
+                .forEach(d -> {
+                    d.lfdNrProperty().setValue(String.format(ACT_ROW_HEADER, counter[0]++));
+                    d.save();
+                });
     }
 
 

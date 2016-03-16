@@ -22,6 +22,7 @@ package de.adesso.tools.functions.chainded;
 /**
  * Created by moehler on 11.03.2016.
  */
+@FunctionalInterface
 public interface Callback<O> {
     void call(O o);
 }

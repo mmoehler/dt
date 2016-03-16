@@ -188,9 +188,9 @@ public final class MatrixFunctions {
                 .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
-    public static ObservableList<ObservableList<String>> swapRowsAt(ObservableList<ObservableList<String>> original, int row1Idx, int row2Idx) {
-        ObservableList<ObservableList<String>> copy = copy(original);
-        ObservableList<String> row1 = copy.get(row1Idx);
+    public static <T> ObservableList<T> swapRowsAt(ObservableList<T> original, int row1Idx, int row2Idx) {
+        ObservableList<T> copy = FXCollections.observableList(original);
+        T row1 = copy.get(row1Idx);
         copy.set(row1Idx, copy.get(row2Idx));
         copy.set(row2Idx, row1);
         return copy;

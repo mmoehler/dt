@@ -437,8 +437,8 @@ public class DtFunctionsTest {
 
         TableView<ConditionDeclTableViewModel> expectedDeclTab = conditionDeclTableViewBuilder()
                 .addModelWithLfdNbr("01").withExpression("EXP-01").withIndicators("Y,N")
-                .addModelWithLfdNbr("02").withExpression("").withIndicators("")
-                .addModelWithLfdNbr("03").withExpression("EXP-02").withIndicators("Y,N")
+                .addModelWithLfdNbr("").withExpression("").withIndicators("")
+                .addModelWithLfdNbr("02").withExpression("EXP-02").withIndicators("Y,N")
                 .build();
 
         TableView<ObservableList<String>> expectedDefTab = definitionsTableViewBuilder()
@@ -466,41 +466,104 @@ public class DtFunctionsTest {
 
     @Test
     public void testDoRemoveRows() throws Exception {
+        TableView<ConditionDeclTableViewModel> conditionDeclTab = conditionDeclTableViewBuilder()
+                .addModelWithLfdNbr("C01").withExpression("EXP-01").withIndicators("Y,N")
+                .addModelWithLfdNbr("C02").withExpression("EXP-02").withIndicators("Y,N")
+                .addModelWithLfdNbr("C03").withExpression("EXP-03").withIndicators("Y,N")
+                .build();
+        dumpTableItems("DECL BEFORE", conditionDeclTab);
 
+
+        TableView<ObservableList<String>> conditionDefTab = definitionsTableViewBuilder()
+                .dim(3, 4)
+                .data("Y,Y,Y,Y,N,N,N,N,Y,Y,Y,Y")
+                .withSelectionAt(1, 2)
+                .build();
+        dumpTableItems("DEFN BEFORE", conditionDefTab);
+
+        TableView<ConditionDeclTableViewModel> expectedDeclTab = conditionDeclTableViewBuilder()
+                .addModelWithLfdNbr("C01").withExpression("EXP-01").withIndicators("Y,N")
+                .addModelWithLfdNbr("C03").withExpression("EXP-03").withIndicators("Y,N")
+                .build();
+
+
+        TableView<ObservableList<String>> expectedDefTab = definitionsTableViewBuilder()
+                .dim(2, 4)
+                .data("Y,Y,Y,Y,Y,Y,Y,Y")
+                .build();
+
+
+        doRemoveRows(conditionDeclTab, conditionDefTab, OptionalInt.empty());
+
+        dumpTableItems("DECL AFTER", conditionDeclTab);
+        dumpTableItems("DEFN AFTER", conditionDefTab);
+
+        Iterator<ConditionDeclTableViewModel> ci = conditionDeclTab.getItems().iterator();
+        Iterator<ConditionDeclTableViewModel> ei = expectedDeclTab.getItems().iterator();
+
+        assertEquals(conditionDeclTab.getItems().size(), expectedDeclTab.getItems().size());
+        for (; ci.hasNext() && ei.hasNext(); ) {
+            assertThat(ci.next(), Matchers.conditionDeclTableViewModelEquals(ei.next()));
+        }
+
+        assertEquals(conditionDefTab.getItems(), expectedDefTab.getItems());
     }
 
     @Test
     public void testDoMoveRows() throws Exception {
+        TableView<ConditionDeclTableViewModel> conditionDeclTab = conditionDeclTableViewBuilder()
+                .addModelWithLfdNbr("C01").withExpression("EXP-01").withIndicators("Y,N")
+                .addModelWithLfdNbr("C02").withExpression("EXP-02").withIndicators("Y,N")
+                .addModelWithLfdNbr("C03").withExpression("EXP-03").withIndicators("Y,N")
+                .build();
+        dumpTableItems("DECL BEFORE", conditionDeclTab);
 
+
+        TableView<ObservableList<String>> conditionDefTab = definitionsTableViewBuilder()
+                .dim(3, 4)
+                .data("Y,Y,Y,Y,N,N,N,N,Y,Y,Y,Y")
+                .withSelectionAt(1, 2)
+                .build();
+        dumpTableItems("DEFN BEFORE", conditionDefTab);
+
+        TableView<ConditionDeclTableViewModel> expectedDeclTab = conditionDeclTableViewBuilder()
+                .addModelWithLfdNbr("C02").withExpression("EXP-02").withIndicators("Y,N")
+                .addModelWithLfdNbr("C01").withExpression("EXP-01").withIndicators("Y,N")
+                .addModelWithLfdNbr("C03").withExpression("EXP-03").withIndicators("Y,N")
+                .build();
+
+
+        TableView<ObservableList<String>> expectedDefTab = definitionsTableViewBuilder()
+                .dim(2, 4)
+                .data("N,N,N,N,Y,Y,Y,Y,Y,Y,Y,Y")
+                .build();
+
+
+        doMoveRows(conditionDeclTab, conditionDefTab, OptionalInt.empty(),DIR_UP);
+
+        dumpTableItems("DECL AFTER", conditionDeclTab);
+        dumpTableItems("DEFN AFTER", conditionDefTab);
+
+        Iterator<ConditionDeclTableViewModel> ci = conditionDeclTab.getItems().iterator();
+        Iterator<ConditionDeclTableViewModel> ei = expectedDeclTab.getItems().iterator();
+
+        assertEquals(conditionDeclTab.getItems().size(), expectedDeclTab.getItems().size());
+        for (; ci.hasNext() && ei.hasNext(); ) {
+            assertThat(ci.next(), Matchers.conditionDeclTableViewModelEquals(ei.next()));
+        }
+
+        assertEquals(conditionDefTab.getItems(), expectedDefTab.getItems());
     }
 
     @Test
     public void testIsElseColumn() throws Exception {
-
+        TableColumnBuilder<String> tb= new TableColumnBuilder<>("ELSE", null, null);
+        assertEquals(isElseColumn(tb.build()), true);
     }
 
     @Test
-    public void testUpdateColHeaders() throws Exception {
-
-    }
-
-    @Test
-    public void testGetSelectedCell() throws Exception {
-
-    }
-
-    @Test
-    public void testCreateTableColumn() throws Exception {
-
-    }
-
-    @Test
-    public void testCreateTableColumn1() throws Exception {
-
-    }
-
-    @Test
-    public void testCreateTableColumn2() throws Exception {
-
+    public void testIsElseColumnFail() throws Exception {
+        TableColumnBuilder<String> tb= new TableColumnBuilder<>("ELFRIEDE", null, null);
+        assertEquals(isElseColumn(tb.build()), false);
     }
 }

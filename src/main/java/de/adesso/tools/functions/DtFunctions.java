@@ -246,7 +246,7 @@ public final class DtFunctions {
 
             declarations.getItems().clear();
             newDecls.forEach(declarations.getItems()::add);
-            updateRowHeaders(declarations, rowHeaderTemplate);
+  //          updateRowHeaders(declarations, rowHeaderTemplate);
 
             definitions.getItems().clear();
             newDefs.forEach(definitions.getItems()::add);
@@ -289,22 +289,20 @@ public final class DtFunctions {
         }
     }
 
-    public static void doRemoveRows(ObservableList decls,
-                                    ObservableList defns,
-                                    TableView declarations,
+    public static void doRemoveRows(TableView declarations,
                                     TableView definitions, OptionalInt value) {
 
         OptionalInt index = determineRowIndices(declarations, definitions, value);
 
         if (index.isPresent()) {
 
-            ObservableList newDecls = ListFunctions.removeElementsAt(decls, index.getAsInt());
-            ObservableList newDefs = removeRowsAt(defns, index.getAsInt());
+            ObservableList newDecls = ListFunctions.removeElementsAt(declarations.getItems(), index.getAsInt());
+            ObservableList newDefs = removeRowsAt(definitions.getItems(), index.getAsInt());
 
-            decls.clear();
-            newDecls.forEach(decls::add);
-            defns.clear();
-            newDefs.forEach(defns::add);
+            declarations.getItems().clear();
+            newDecls.forEach(declarations.getItems()::add);
+            definitions.getItems().clear();
+            newDefs.forEach(definitions.getItems()::add);
 
             Arrays.asList(declarations, definitions).forEach(TableView::refresh);
 
@@ -335,21 +333,22 @@ public final class DtFunctions {
                 : Math.max(c1Idx - 1, 0);
     }
 
-    public static void doMoveRows(ObservableList declarations,
-                                  ObservableList definitions,
-                                  TableView table,
+    public static void doMoveRows(TableView declarations,
+                                  TableView definitions,
                                   OptionalInt value, boolean direction) {
 
-        final OptionalInt index = determineRowIndices(table, null, value);
+        final OptionalInt index = determineRowIndices(declarations, definitions, value);
         if (index.isPresent()) {
             final int r1Idx = index.getAsInt();
-            final int r2Idx = determineNextIndex(direction, r1Idx, declarations.size());
-            ObservableList newDecls = swapRowsAt(declarations, r1Idx, r2Idx);
-            ObservableList<ObservableList<String>> newDefns = swapRowsAt(definitions, r1Idx, r2Idx);
-            declarations.clear();
-            newDecls.forEach(declarations::add);
-            definitions.clear();
-            newDefns.forEach(definitions::add);
+            final int r2Idx = determineNextIndex(direction, r1Idx, declarations.getItems().size());
+            ObservableList newDecls = swapRowsAt(declarations.getItems(), r1Idx, r2Idx);
+            ObservableList<ObservableList<String>> newDefns = swapRowsAt(definitions.getItems(), r1Idx, r2Idx);
+/*
+            declarations.getItems().clear();
+            newDecls.forEach(declarations.getItems()::add);
+            definitions.getItems().clear();
+            newDefns.forEach(definitions.getItems()::add);
+*/
         }
 
     }
@@ -433,6 +432,7 @@ public final class DtFunctions {
         });
     }
 
+    /*
     public static <T extends DeclarationTableViewModel> void updateRowHeaders(TableView<T> table, Supplier<String> template) {
         int counter[] = {1};
         table.getItems().forEach(c -> {
@@ -440,7 +440,7 @@ public final class DtFunctions {
             c.save();
         });
     }
-
+*/
 
     public static <C> Optional<TablePosition> getSelectedCell(TableView<C> table) {
         final ObservableList<TablePosition> selectedCells = table.getSelectionModel().getSelectedCells();
