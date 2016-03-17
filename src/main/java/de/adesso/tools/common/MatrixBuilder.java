@@ -5,6 +5,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -16,20 +17,28 @@ import java.util.stream.IntStream;
  */
 public class MatrixBuilder {
     private String data;
+    private List<String> dataList;
     private int n;
     private int m;
     private boolean transposed;
-
-    protected MatrixBuilder() {
-    }
 
     protected MatrixBuilder(String data) {
         this.data = data;
     }
 
+    protected MatrixBuilder(List<String> data) {
+        this.dataList = data;
+    }
+
+
     public static MatrixBuilder on(@javax.annotation.Nonnull String data) {
         return new MatrixBuilder(data);
     }
+
+    public static MatrixBuilder on(@javax.annotation.Nonnull List<String> data) {
+        return new MatrixBuilder(data);
+    }
+
 
     public static MatrixBuilder copy(@javax.annotation.Nonnull MatrixBuilder copy) {
         MatrixBuilder builder = new MatrixBuilder(copy.data);
@@ -72,19 +81,39 @@ public class MatrixBuilder {
      */
     @javax.annotation.Nonnull
     public List<List<String>> build() {
+        List<List<String>> result = Collections.emptyList();
+        if(null != data) {
+            result = buildFromStringData();
+        } else if(null != dataList && !dataList.isEmpty()) {
+            result = buildFromStringListData();
+        }
+        return result;
+    }
+
+    private List<List<String>> buildFromStringData() {
+        List<List<String>> result;
         final List<String> rawData = Arrays
                 .stream(this.data.split("[, ;]"))
                 .collect(Collectors.toList());
+        return partitionIt(rawData);
+    }
 
+    private List<List<String>> buildFromStringListData() {
+        List<List<String>> result;
+        final List<String> rawData = this.dataList;
+        return partitionIt(rawData);
+    }
+
+    private List<List<String>> partitionIt(List<String> rawData) {
+        List<List<String>> result;
         final int rdSize = rawData.size();
         final List<List<String>> partitioned =
                 IntStream.range(0, (rdSize - 1) / n + 1)
                         .mapToObj(i -> rawData.subList(i *= n,
                                 rdSize - n >= i ? i + n : rdSize))
                         .collect(Collectors.toList());
-
-        return (transposed) ? (MatrixFunctions.transpose(partitioned)) : partitioned;
+        result = (transposed) ? (MatrixFunctions.transpose(partitioned)) : partitioned;
+        return result;
     }
-
 
 }

@@ -23,6 +23,11 @@ public final class ListBuilder {
         return new ListBuilder(data);
     }
 
+
+    public static ListBuilder on(@javax.annotation.Nonnull int[] hints) {
+        throw new UnsupportedOperationException("ListBuilder on(@javax.annotation.Nonnull int[]");
+    }
+
     public static ListBuilder copy(@javax.annotation.Nonnull ListBuilder other) {
         ListBuilder builder = new ListBuilder(other.data);
         builder.len = other.len;

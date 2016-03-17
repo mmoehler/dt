@@ -1,8 +1,10 @@
 package de.adesso.tools.util;
 
 import com.codepoetics.protonpack.StreamUtils;
+import de.adesso.tools.common.ListBuilder;
 import de.adesso.tools.common.MatrixBuilder;
 import de.adesso.tools.common.Reserved;
+import de.adesso.tools.functions.ListFunctions;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 
@@ -60,8 +62,8 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
             hints[h++] = applyB3(prototype);
             hints[h++] = applyB4(prototype);
 
-            final List<String> mask = List<String>.newBuilder().data(hints).build();
-            List<List<String>> multiplied = M.stream().map(m -> and(m, mask)).collect(Collectors.toCollection(List<List<String>>::new));
+            final List<String> mask = ListBuilder.on(hints).build();
+            List<List<String>> multiplied = M.stream().map(m -> and(m, mask)).collect(Collectors.toList());
 
 
 
@@ -87,7 +89,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
 
             return applied;
 
-        }).reduce(MatrixBuilder.emptyList(), (k, l) -> combine(k, l));
+        }).reduce(new ArrayList<>(), (k, l) -> combine(k, l));
 
         return reduced;
 
@@ -141,7 +143,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
         return D;
     }
 
-    private static List<Integer> and(List<Integer> a, List<Integer> b) {
+    private static List<Integer> and(List<String> a, List<String> b) {
         List<Integer> condition = StreamUtils.zip(a.stream(), b.stream(), (x, y) -> x * y)
                 .collect(Collectors.toList());
         return condition;
@@ -153,7 +155,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
      * @param prototype
      * @return
      */
-    private static int applyB3(final List<Tuple2<Integer, Integer>> prototype) {
+    private static int applyB3(final List<Tuple2<String, String>> prototype) {
         final long count = applyForCount(prototype);
         return count > 0L ? 1 : 0;
     }
@@ -164,7 +166,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
      * @param prototype
      * @return
      */
-    private static int applyB4(final List<Tuple2<Integer, Integer>> prototype) {
+    private static int applyB4(final List<Tuple2<String, String>> prototype) {
         final long count = applyForCount(prototype);
         return count > 1L ? 1 : 0;
     }
@@ -207,7 +209,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
         @Override
         public List<List<String>> apply(List<String> t, List<String> u) {
             System.out.println(String.format("A1 invoked with %s, %s!", t, u));
-            MatrixBuilder builder = List<List<String>>.newBuilder().dim(t.size(), 1).addColumn(t);
+            MatrixBuilder builder = MatrixBuilder.on(t).dim(t.size(), 1);
             return builder.build();
         }
     }
@@ -244,7 +246,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
                         return v;
                 }
             }).collect(Collectors.toList());
-            MatrixBuilder builder = MatrixBuilder.newBuilder().addColumn(processed);
+            MatrixBuilder builder = MatrixBuilder.on(processed).dim(processed.size(),1);
             return builder.build();
         }
     }
@@ -299,10 +301,10 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
 
     public static void main(String[] args) {
         Symbols symbols = new Symbols();
-        List<List<String>> given = List<List<String>>.newBuilder().dim(3, 4).data("YES,YES,NO,NO,YES,YES,YES,NO,NO,-,NO,YES", symbols).build();
 
-        List<List<String>> interimResult = List<List<String>>.newBuilder().dim(3,1).dashed().build();
+        List<List<String>> given = MatrixBuilder.on("YES,YES,NO,NO,YES,YES,YES,NO,NO,-,NO,YES").dim(3,4).build()
 
+        List<List<String>> interimResult = MatrixBuilder.on("-,-,-").dim(3,1).build();
 
         List<List<String>> missingList<List<String>> = given.stream().map(x -> new List<List<String>>(x)).reduce(interimResult, DT.diff());
 
