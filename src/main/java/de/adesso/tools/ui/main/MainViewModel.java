@@ -213,8 +213,12 @@ public class MainViewModel implements ViewModel {
         publish(MOVE_RULE_RIGHT.name(), NO_ARGS);
     }
 
-    public void onAddElseRuleEvent(@Observes AddElseRuleEvent event) {
-        publish(ADD_ELSE_RULE.name(), NO_ARGS);
+    public void onAddElseRule(@Observes AddElseRuleEvent event) {
+        ObservableList<ObservableList<String>> newDefns = MatrixFunctions.addColumn(this.conditionDefinitions, () -> QMARK);
+        this.conditionDefinitions.clear();
+        ObservableList<ObservableList<String>> newDefns0 = MatrixFunctions.addColumn(this.actionDefinitions, () -> QMARK);
+        this.actionDefinitions.clear();
+        publish(ADD_ELSE_RULE.name(), newDefns, newDefns0);
     }
 
     public void updateRowHeader() {

@@ -140,13 +140,13 @@ public class MainView implements FxmlView<MainViewModel> {
 
     private void doAddElseRule(String key, Object[] value) {
         final int countColumns = conditionDefinitionsTable.getColumns().size();
-        final Optional<String> name = Optional.of(ELSE_RULE_HEADER);
-        conditionDefinitionsTable.getColumns().add(createTableColumn(countColumns, name));
+        final Optional<String> elseRuleName = Optional.of(ELSE_RULE_HEADER);
+        conditionDefinitionsTable.getColumns().add(createTableColumn(countColumns, elseRuleName));
         ObservableList<ObservableList<String>> newDefns = (ObservableList<ObservableList<String>>) value[0];
         newDefns.stream().forEach(this.viewModel.getConditionDefinitions()::add);
         conditionDefinitionsTable.refresh();
 
-        actionDefinitionsTable.getColumns().add(createTableColumn(countColumns, name));
+        actionDefinitionsTable.getColumns().add(createTableColumn(countColumns, elseRuleName));
         if (value.length >= 2 && null != value[1]) {
             newDefns = (ObservableList<ObservableList<String>>) value[1];
             newDefns.stream().forEach(this.viewModel.getActionDefinitions()::add);
