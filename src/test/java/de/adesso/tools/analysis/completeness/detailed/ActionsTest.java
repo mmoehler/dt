@@ -20,12 +20,12 @@
 package de.adesso.tools.analysis.completeness.detailed;
 
 import de.adesso.tools.common.MatrixBuilder;
-import de.adesso.tools.functions.MatrixFunctions;
 import javafx.collections.ObservableList;
 import org.testng.annotations.Test;
 
-import java.util.*;
-import java.util.stream.IntStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import static de.adesso.tools.common.Reserved.*;
 
@@ -115,8 +115,9 @@ public class ActionsTest {
 
     @Test
     public void testA5Consolidate() {
-        List<List<String>> conditions = MatrixBuilder.on("N,N,Y,N,Y,N,-,Y,-").dim(3, 3).build();
-        ObservableList<ObservableList<String>>[] observables = new ObservableList[]{MatrixBuilder.observable(conditions)};
+        ObservableList<ObservableList<String>> conditions = MatrixBuilder.observable(MatrixBuilder.on("N,N,Y,N,Y,N,-,Y,-").dim(3, 3).build());
+        ObservableList<ObservableList<String>>[] observables = new ObservableList[]{conditions};
+        /*
         for (int i = 0; i < conditions.size(); i++) {
             ObservableList<ObservableList<String>> tmp = MatrixFunctions.removeRowsAt(observables[0],i);
             ObservableList<ObservableList<String>> cur = MatrixFunctions.transpose(tmp);
@@ -136,7 +137,11 @@ public class ActionsTest {
                             }
                         }
                     });
-        }
+        }*/
+
+        observables[0] = Functions.consolidate().apply(observables[0]);
+
+
         dumpTableItems("RESULT-1", observables[0]);
     }
 

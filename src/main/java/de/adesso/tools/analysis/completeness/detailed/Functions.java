@@ -19,7 +19,6 @@
 
 package de.adesso.tools.analysis.completeness.detailed;
 
-import de.adesso.tools.common.MatrixBuilder;
 import de.adesso.tools.functions.MatrixFunctions;
 import javafx.collections.ObservableList;
 
@@ -39,7 +38,7 @@ public class Functions {
         return new RulesDifferenceOperator();
     }
 
-    public static Function<List<List<String>>,List<List<String>>> consolidate() {
+    public static Function<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> consolidate() {
         return new ConditionsConsolidateOperator();
     }
 
@@ -57,27 +56,27 @@ class RulesDifferenceOperator implements BinaryOperator<List<List<String>>> {
 }
 
 
-
-class ConditionsConsolidateOperator implements Function<List<List<String>>,List<List<String>>> {
+class ConditionsConsolidateOperator implements Function<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> {
     public ConditionsConsolidateOperator() {
     }
 
     @Override
-    public List<List<String>> apply(List<List<String>> conditions) {
-        ObservableList<ObservableList<String>>[] observables = new ObservableList[]{MatrixBuilder.observable(conditions)};
+    public ObservableList<ObservableList<String>> apply(ObservableList<ObservableList<String>> conditions) {
+
+        ObservableList<ObservableList<String>>[] observables = new ObservableList[]{MatrixFunctions.copy(conditions)};
         for (int i = 0; i < conditions.size(); i++) {
-            ObservableList<ObservableList<String>> tmp = MatrixFunctions.removeRowsAt(observables[0],i);
+            ObservableList<ObservableList<String>> tmp = MatrixFunctions.removeRowsAt(observables[0], i);
             ObservableList<ObservableList<String>> cur = MatrixFunctions.transpose(tmp);
             Map<ObservableList<String>, List<Integer>> map = new HashMap<>();
-            IntStream.range(0,cur.size()).forEach(j -> map
-                    .compute(cur.get(j), (k, v) -> (v == null) ? newWithValue(j) : addValue(v,j)));
+            IntStream.range(0, cur.size()).forEach(j -> map
+                    .compute(cur.get(j), (k, v) -> (v == null) ? newWithValue(j) : addValue(v, j)));
             final int row = i;
             map.entrySet().stream().filter(e -> e.getValue().size() > 1)
                     .forEach(f -> {
                         List<Integer> indices = f.getValue();
                         Collections.sort(indices, (a, b) -> (-1));
-                        for (int r = 0; r<indices.size() ; r++) {
-                            if(r==indices.size()-1) {
+                        for (int r = 0; r < indices.size(); r++) {
+                            if (r == indices.size() - 1) {
                                 observables[0].get(row).set(indices.get(r), DASH);
                             } else {
                                 observables[0] = MatrixFunctions.removeColumnsAt(observables[0], indices.get(r));
@@ -85,17 +84,18 @@ class ConditionsConsolidateOperator implements Function<List<List<String>>,List<
                         }
                     });
         }
+        return observables[0];
 
-        public List<Integer> newWithValue(int value) {
-            List<Integer> result = new ArrayList<>();
-            result.add(value);
-            return result;
-        }
+    }
 
-        private     List<Integer> addValue(List<Integer> l, int value) {
-            l.add(value);
-            return l;
-        }
+    private List<Integer> newWithValue(int value) {
+        List<Integer> result = new ArrayList<>();
+        result.add(value);
+        return result;
+    }
 
+    private List<Integer> addValue(List<Integer> l, int value) {
+        l.add(value);
+        return l;
     }
 }
