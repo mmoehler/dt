@@ -285,9 +285,11 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
     }
 
     public interface DT extends BinaryOperator<List<List<String>>> {
-        public static BinaryOperator<List<List<String>>> diff() {
+        public static BinaryOperator<List<List<String>>> difference() {
             return (a, b) -> new MissingConditions().apply(a, b);
         }
+
+
     }
 
     public static void main(String[] args) {
@@ -295,7 +297,9 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
 
         List<List<String>> interimResult = MatrixBuilder.on("-,-,-").dim(3, 1).build();
 
-        List<List<String>> missingList = given.stream().map(x -> MatrixBuilder.on(x).dim(x.size(),1).build()).reduce(interimResult, DT.diff());
+        List<List<String>> missingList = given.stream().map(x -> MatrixBuilder.on(x).dim(x.size(),1).build()).reduce(interimResult, DT.difference());
+
+
 
         System.out.println("MISSING => " + missingList);
 
