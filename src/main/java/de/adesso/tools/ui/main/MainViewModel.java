@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static de.adesso.tools.analysis.ConditionCompletenessCheck.isFormalComplete;
+import static de.adesso.tools.analysis.completeness.simple.ConditionCompletenessCheck.isFormalComplete;
 import static de.adesso.tools.functions.DtFunctions.fullExpandActions;
 import static de.adesso.tools.functions.DtFunctions.limitedExpandConditions;
 import static de.adesso.tools.ui.Notifications.*;

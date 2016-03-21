@@ -27,12 +27,31 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.IntStream;
 
-import static de.adesso.tools.common.Reserved.DASH;
+import static de.adesso.tools.common.Reserved.*;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by mmoehler on 20.03.16.
  */
 public class Functions {
+
+    public static Function<String, Integer> maskMatrixMapper = s -> {
+        if (isDASH(s)) {
+            return 0;
+        } else if (isYES(s) || isNO(s)) {
+            return 1;
+        }
+        throw new IllegalStateException("Illegal code: " + s + "!");
+    };
+
+    public static Function<String, Integer> decisionMatrixMapper = s -> {
+        if (isDASH(s) || isNO(s)) {
+            return 0;
+        } else if (isYES(s)) {
+            return 1;
+        }
+        throw new IllegalStateException("Illegal code: " + s + "!");
+    };
 
     public static BinaryOperator<List<List<String>>> difference() {
         return new RulesDifferenceOperator();
@@ -40,6 +59,18 @@ public class Functions {
 
     public static Function<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> consolidate() {
         return new ConditionsConsolidateOperator();
+    }
+
+    // -- Pactories ----------------------------------------------------------------------------------------------------
+
+    public static List<List<Integer>> makeMaskMatrix(List<List<String>> conditions) {
+        List<List<Integer>> M = conditions.stream().map(a -> a.stream().map(maskMatrixMapper).collect(toList())).collect(toList());
+        return M;
+    }
+
+    public static List<List<Integer>> makeDecisionMatrix(List<List<String>> conditions) {
+        List<List<Integer>> M = conditions.stream().map(a -> a.stream().map(decisionMatrixMapper).collect(toList())).collect(toList());
+        return M;
     }
 
 

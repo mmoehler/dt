@@ -10,11 +10,11 @@ import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static de.adesso.tools.common.Reserved.*;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by mohler on 25.01.16.
@@ -53,16 +53,16 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
         final List<List<String>> reduced = xi.stream().map(a -> {
             int h = 0;
             List<Tuple2<String, String>> prototype = StreamUtils
-                    .zip(a.stream(), condition.get(0).stream(), (x, y) -> Tuple.of(x, y)).collect(Collectors.toList());
+                    .zip(a.stream(), condition.get(0).stream(), (x, y) -> Tuple.of(x, y)).collect(toList());
 
             hints[h++] = applyB1(prototype);
             hints[h++] = applyB2(prototype);
             hints[h++] = applyB3(prototype);
             hints[h++] = applyB4(prototype);
 
-            final List<Integer> mask = Arrays.stream(hints).boxed().collect(Collectors.toList());
+            final List<Integer> mask = Arrays.stream(hints).boxed().collect(toList());
 
-            List<List<Integer>> multiplied = M.stream().map(m -> and(m, mask)).collect(Collectors.toList());
+            List<List<Integer>> multiplied = M.stream().map(m -> and(m, mask)).collect(toList());
 
             List<Integer> indices = StreamUtils
                     .zip(multiplied.stream(), StreamUtils.zipWithIndex(D.stream()), (aa, bb) -> {
@@ -72,7 +72,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
                         return -1;
                     })
                     // .peek(xyz -> System.out.println(xyz))
-                    .map(qq -> qq.intValue()).filter(vv -> vv >= 0).collect(Collectors.toList());
+                    .map(qq -> qq.intValue()).filter(vv -> vv >= 0).collect(toList());
 
             if (indices.size() != 1) {
                 throw new IllegalStateException("Used DT is ambigous!");
@@ -82,14 +82,10 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
 
             return applied;
 
-        }).reduce(new ArrayList<>(), (k, l) -> combine(k, l));
+        }).reduce(new ArrayList<>(), (k, l) -> Stream.concat(k.stream(), l.stream()).distinct().collect(toList()));
 
         return reduced;
 
-    }
-
-    static List<List<String>> combine(List<List<String>> l, List<List<String>> r) {
-        return Stream.concat(l.stream(), r.stream()).distinct().collect(Collectors.toList());
     }
 
     /**
@@ -109,7 +105,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
                 default:
                     throw new IllegalStateException("Illegal code: " + b + "!");
             }
-        }).collect(Collectors.toList())).collect(Collectors.toList());
+        }).collect(toList())).collect(toList());
         return M;
     }
 
@@ -130,13 +126,13 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
                 default:
                     throw new IllegalStateException("Illegal code: " + b + "!");
             }
-        }).collect(Collectors.toList())).collect(Collectors.toList());
+        }).collect(toList())).collect(toList());
         return D;
     }
 
     private static List<Integer> and(List<Integer> a, List<Integer> b) {
         List<Integer> condition = StreamUtils.zip(a.stream(), b.stream(), (x, y) -> x * y)
-                .collect(Collectors.toList());
+                .collect(toList());
         return condition;
     }
 
@@ -236,7 +232,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
                     default:
                         return v;
                 }
-            }).collect(Collectors.toList());
+            }).collect(toList());
             MatrixBuilder builder = MatrixBuilder.on(processed).dim(processed.size(),1);
             return builder.build();
         }
