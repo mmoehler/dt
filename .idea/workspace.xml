@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="6b2d1880-d391-4d61-bb7f-0c8e21880d82" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/MissingConditions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/MissingConditions.java" />
     </list>
     <ignored path="dt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1608,7 +1606,7 @@
       <workItem from="1458540616212" duration="2747000" />
       <workItem from="1458551552287" duration="1760000" />
       <workItem from="1458556307885" duration="14000" />
-      <workItem from="1458626064208" duration="9838000" />
+      <workItem from="1458626064208" duration="9873000" />
     </task>
     <task id="LOCAL-00001" summary="Refactoring of Matrix functions">
       <created>1455475453269</created>
@@ -1694,7 +1692,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458544263886</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Worked at MissingConditions -&gt; Not Finished!!">
+      <created>1458671968766</created>
+      <option name="number" value="00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1458671968766</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1730,7 +1734,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="286167000" />
+    <option name="totallyTimeSpent" value="286202000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1797,7 +1801,8 @@
     <MESSAGE value="start implementation detailed completeness check and condition consolidation" />
     <MESSAGE value="functions (with errors!) implemented" />
     <MESSAGE value="functions errors corrected and enhanced" />
-    <option name="LAST_COMMIT_MESSAGE" value="functions errors corrected and enhanced" />
+    <MESSAGE value="Worked at MissingConditions -&gt; Not Finished!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Worked at MissingConditions -&gt; Not Finished!!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
