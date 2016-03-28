@@ -21,16 +21,13 @@ package de.adesso.tools.analysis.completeness.detailed;
 
 import com.codepoetics.protonpack.StreamUtils;
 import de.adesso.tools.common.MatrixBuilder;
-import de.adesso.tools.common.Reserved;
 
-import java.util.*;
+import java.util.Collections;
+import java.util.List;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import static de.adesso.tools.common.Reserved.*;
-import static de.adesso.tools.common.Reserved.isDASH;
-import static de.adesso.tools.common.Reserved.isYES;
 
 /**
  * Created by mmoehler on 19.03.16.
@@ -39,12 +36,10 @@ public class Actions {
 
 
     public static BiFunction<List<String>, List<String>, List<List<String>>> A1 =
-            new BiFunction<List<String>, List<String>, List<List<String>>>() {
-                @Override
-                public List<List<String>> apply(List<String> t, List<String> u) {
-                    System.out.println(String.format("A1 invoked with %s, %s!", t, u));
-                    return MatrixBuilder.on(t).dim(t.size(), 1).build();
-                }
+            (t, u) -> {
+                System.out.println(String.format("A1 invoked with %s, %s!", t, u));
+                List<List<String>> ret = MatrixBuilder.on(t).dim(1,t.size()).transposed().build();
+                return ret;
             };
 
     public static BiFunction<List<String>, List<String>, List<List<String>>> A2 =
@@ -67,8 +62,9 @@ public class Actions {
                         case DASH:
                             switch (w) {
                                 case NO:
+                                    return YES;
                                 case YES:
-                                    return w;
+                                    return NO;
                             }
                         default:
                             return v;
@@ -81,45 +77,52 @@ public class Actions {
             (rf, ri) -> {
                 System.out.println(String.format("A5 invoked with %s, %s!", rf, ri));
 
-                // Counting the indicator combinations - / Y and - / N.
-                // The count defines the column size of the resulting 2D array
+                // counting dashes
+                long dashCount = rf.stream().filter(s -> isDASH(s)).count();
 
-                long dashes = rf.stream().filter(Reserved::isDASH).count();
-                String[] d = new String[rf.size() * (int) dashes];
-                Arrays.fill(d, SPACE);
-                List<List<String>> ret = MatrixBuilder.on(d).dim(rf.size(), (int) dashes).build();
+                List<List<String>> result = MatrixBuilder.empty().dim(rf.size(), (int) dashCount).build();
 
+                int countDashesSeen = 0;
 
-                int dashpos = 0;
-                for (int row = 0; row < rf.size(); row++) {
-                    String rl = rf.get(row);
-                    String rr = ri.get(row);
-                    if (rl.equals(rr)) {
-                        final int xr = row;
-                        ret.stream().forEach(x -> x.set(xr, rr));
-                    } else if (isDASH(rl)) {
-                        final int xr = row;
-                        int pos = dashpos++;
-                        System.out.println(pos);
-                        List<String> ll = new ArrayList<>();
-                        IntStream.range(0, (int) dashes).forEach(i -> {
-                            if (i == pos) {
-                                if (isYES(rr)) {
-                                    ll.add(NO);
-                                } else {
-                                    ll.add(YES);
-                                }
-                            } else if (i < pos) {
-                                ll.add(DASH);
-                            } else {
-                                ll.add(rr);
+                for (int i = 0; i < rf.size(); i++) {
+                    String l = rf.get(i);
+                    String r = ri.get(i);
+                    if (isDASH(l)) {
+                        if (countDashesSeen > 0) {
+                            for (int j = 0; j < countDashesSeen; j++) {
+                                result.get(i).add(DASH);
                             }
-                        });
-                        Iterator<String> it = ll.iterator();
-                        ret.stream().forEach(x -> x.set(xr, it.next()));
+                            for (int j = 0; j < i; j++) {
+                                result.get(j).add(ri.get(j));
+                            }
+                        }
+                        String s = new String();
+                        switch (r) {
+                            case YES:
+                                s = NO;
+                                break;
+                            case NO:
+                                s = YES;
+                                break;
+                            case DASH:
+                                s = DASH;
+                                break;
+                            default:
+                                // nop
+                                ;
+                        }
+                        result.get(i).add(s);
+                        countDashesSeen++;
+                    } else {
+                        result.get(i).add(l);
                     }
                 }
-                return ret;
+                return result;
             };
 
+    public static <T> void dumpTableItems(String msg, List<List<T>> list2D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list2D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
 }

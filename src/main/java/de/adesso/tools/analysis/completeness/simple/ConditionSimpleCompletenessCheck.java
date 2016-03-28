@@ -34,11 +34,11 @@ import static de.adesso.tools.functions.DtFunctions.*;
 /**
  * Created by mohler on 24.01.16.
  */
-public final class ConditionCompletenessCheck {
+public final class ConditionSimpleCompletenessCheck {
 
     public static final String IRRELEVANT = "-";
 
-    private ConditionCompletenessCheck() {
+    private ConditionSimpleCompletenessCheck() {
         super();
     }
 
@@ -59,7 +59,7 @@ public final class ConditionCompletenessCheck {
         List<List<Integer>> transposed = MatrixFunctions.transpose(list);
         final Integer reduced = transposed.stream().map(l -> l.stream().reduce(1, (a, b) -> a * b)).reduce(0, (c, d) -> c + d);
         final Integer all = determineMaxColumns(decls);
-        return Tuple.of(all != reduced, all, reduced);
+        return Tuple.of(all == reduced, all, reduced);
     }
 
 

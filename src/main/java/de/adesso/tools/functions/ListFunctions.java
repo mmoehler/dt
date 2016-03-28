@@ -1,9 +1,7 @@
 package de.adesso.tools.functions;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
 import java.util.Iterator;
+import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -14,18 +12,18 @@ import java.util.stream.Stream;
  * Created by mmoehler on 20.02.16.
  */
 public class ListFunctions {
-    public static <T> ObservableList<T> insertElementsAt(ObservableList<T> original, int index, Supplier<T> defaultValue) {
+    public static <T> List<T> insertElementsAt(List<T> original, int index, Supplier<T> defaultValue) {
         Iterator<T> it = original.iterator();
         return IntStream.range(0, original.size() + 1)
                 .mapToObj(k -> (k == index) ? defaultValue.get() : it.next())
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                .collect(Collectors.toList());
     }
 
-    public static <T> ObservableList<T> removeElementsAt(ObservableList<T> original, int index) {
+    public static <T> List<T> removeElementsAt(List<T> original, int index) {
         return IntStream.range(0, original.size())
                 .filter(i -> index != i)
                 .mapToObj(original::get)
-                .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                .collect(Collectors.toList());
     }
 
     @SuppressWarnings("unchecked")

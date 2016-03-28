@@ -54,6 +54,9 @@ public class Conditions {
     public static Function<List<Tuple2<String, String>>,Integer> B2 = new Function<List<Tuple2<String, String>>, Integer>() {
         @Override
         public Integer apply(List<Tuple2<String, String>> pairs) {
+            if(pairs.stream().map(p -> p._1()).filter(s -> s.equals("-")).findFirst().isPresent()) {
+                return 0;
+            }
             return pairs.stream().allMatch(Predicate.isEqual(pairs.get(0))) ? 1 : 0;
         }
     };

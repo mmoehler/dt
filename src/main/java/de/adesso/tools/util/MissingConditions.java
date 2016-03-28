@@ -17,7 +17,9 @@ import java.util.stream.Stream;
 
 import static de.adesso.tools.analysis.completeness.detailed.Actions.*;
 import static de.adesso.tools.analysis.completeness.detailed.Conditions.*;
-import static de.adesso.tools.common.Reserved.*;
+import static de.adesso.tools.analysis.completeness.detailed.Functions.makeDecisionMatrix;
+import static de.adesso.tools.analysis.completeness.detailed.Functions.makeMaskMatrix;
+import static de.adesso.tools.functions.MatrixFunctions.transpose;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -30,7 +32,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
     private final List<List<String>> internalList;
 
     public MissingConditions() {
-        this.internalList = MatrixBuilder.on("Y,-,-,-,N,Y,-,-,N,N,N,-,N,N,Y,N,N,N,Y,Y").dim(4, 5).build();
+        this.internalList = MatrixBuilder.on("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
         this.ACTIONS = new BiFunction[]{A1, A2, A3, A4, A5};
         this.CONDITIONS = new Function[]{B1, B2, B3, B4};
     }
@@ -38,28 +40,32 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
     @Override
     public List<List<String>> apply(List<List<String>> xi, List<List<String>> condition) {
 
-        dumpTableItems("LEFT", xi);
-        dumpTableItems("RIGHT", condition);
+        List<List<Integer>> D = transpose(makeDecisionMatrix(internalList));
+        List<List<Integer>> M = transpose(makeMaskMatrix(internalList));
 
+        //dumpList2DItems("D",D);
+        //dumpList2DItems("M",M);
 
-
-        List<List<Integer>> D = makeDecisionMatrix(internalList);
-        List<List<Integer>> M = makeMaskMatrix(internalList);
-
-
-        final List<List<String>> reduced = xi.stream().map(a -> {
+        List<List<String>> reduced = xi.stream().map(a -> {
 
             List<Tuple2<String, String>> prototype = StreamUtils
                     .zip(a.stream(), condition.get(0).stream(), (x, y) -> Tuple.of(x, y))
                     .collect(toList());
+
+            //dumpList1DItems("PROTO",prototype);
+
 
             // evaluate the condition and build the requested mask for the futher processing
             final List<Integer> mask = Arrays.stream(CONDITIONS)
                     .map(c -> c.apply(prototype))
                     .collect(Collectors.toList());
 
+            //dumpList1DItems("MASK",mask);
+
             // perform a logical and for each Maskmatrix column (m) and the rsulting mask
             List<List<Integer>> multiplied = M.stream().map(m -> logicalAnd(m, mask)).collect(toList());
+
+            //dumpList1DItems("MUL",multiplied);
 
             //return the index of the Decisionmatrix colum where the column equals the result of the
             // multiplication process above. Exactly one indexis expected!
@@ -73,6 +79,8 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
                     // .peek(xyz -> System.out.println(xyz))
                     .map(qq -> qq.intValue()).filter(vv -> vv >= 0).collect(Collectors.toList());
 
+            //dumpList1DItems("IDX",indices);
+
             if (indices.size() != 1) {
                 throw new IllegalStateException("Used DT is ambigous!");
             }
@@ -81,57 +89,15 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
             List<List<String>> applied = ACTIONS[indices.get(0).intValue()].apply(a, condition.get(0));
 
             // ... return the resulting matrix
-            dumpTableItems("APPLIED", applied);
+            applied = transpose(applied);
+            dumpList2DItems("APL", applied);
             return applied;
 
-        }).reduce(new ArrayList<>(), (k, l) -> Stream.concat(k.stream(), l.stream()).distinct().collect(toList()));
-
-        dumpTableItems("REDUCED", reduced);
-
+        }).reduce(new ArrayList<>(), (k, l) -> Stream.concat(k.stream(), l.stream())
+                .collect(toList()));
+        dumpList2DItems("REDUCED", reduced);
         return reduced;
 
-    }
-
-    /**
-     * Creates the Mask-Matrix
-     *
-     * @param conditions - the internalList<List<String>> block of the internalList<List<String>> of a given decision table
-     * @return a {@link List<List<String>>} container as Mask-Matrix
-     */
-    private static List<List<Integer>> makeMaskMatrix(List<List<String>> conditions) {
-        List<List<Integer>> M = conditions.stream().map(a -> a.stream().map(b -> {
-            switch (b) {
-                case DASH:
-                    return 0;
-                case YES:
-                case NO:
-                    return 1;
-                default:
-                    throw new IllegalStateException("Illegal code: " + b + "!");
-            }
-        }).collect(toList())).collect(toList());
-        return M;
-    }
-
-    /**
-     * Creates the Decisionmatrix
-     *
-     * @param conditions - the internalList<List<String>> block of the internalList<List<String>> of a given decision table
-     * @return a {@link List<List<String>>} container as Decisionmatrix
-     */
-    private static List<List<Integer>> makeDecisionMatrix(List<List<String>> conditions) {
-        List<List<Integer>> D = conditions.stream().map(a -> a.stream().map(b -> {
-            switch (b) {
-                case DASH:
-                case NO:
-                    return 0;
-                case YES:
-                    return 1;
-                default:
-                    throw new IllegalStateException("Illegal code: " + b + "!");
-            }
-        }).collect(toList())).collect(toList());
-        return D;
     }
 
     private static List<Integer> logicalAnd(List<Integer> a, List<Integer> b) {
@@ -148,13 +114,20 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
 
     }
 
-    public static <T> void dumpTableItems(String msg, List<List<T>> list2D) {
+    public static <T> void dumpList2DItems(String msg, List<List<T>> list2D) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
         list2D.forEach(i -> System.out.println("\t" + i));
         System.out.println("<<<<<<<<<<\n");
     }
 
-    public static void dumpTableItems(String msg, ObservableList<ObservableList<String>> list2D) {
+    public static <T> void dumpList1DItems(String msg, List<T> list1D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list1D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+
+    public static void dumpList2DItems(String msg, ObservableList<ObservableList<String>> list2D) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
         list2D.forEach(i -> System.out.println("\t" + i));
         System.out.println("<<<<<<<<<<\n");
@@ -164,13 +137,13 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
     public static void main(String[] args) {
         List<List<String>> given = MatrixBuilder.on("Y,Y,N,N,Y,Y,Y,N,N,-,N,Y").dim(3, 4).transposed().build();
 
-        dumpTableItems("INPUT", given);
+        List<List<String>> interimResult = MatrixBuilder.on("-,-,-").dim(1, 3).build();
 
-        List<List<String>> interimResult = MatrixBuilder.on("-,-,-").dim(3, 1).build();
+        List<List<String>> missingList = given.stream()
+                .map(x -> MatrixBuilder.on(x).dim(1,x.size()).build())
+                .reduce(interimResult, DT.difference());
 
-        List<List<String>> missingList = given.stream().map(x -> MatrixBuilder.on(x).dim(x.size(),1).build()).reduce(interimResult, DT.difference());
-
-        dumpTableItems("RESULT", missingList);
+        dumpList2DItems("RESULT", missingList);
 
     }
 

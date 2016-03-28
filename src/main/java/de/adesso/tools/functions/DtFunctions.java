@@ -40,6 +40,7 @@ import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
+import static de.adesso.tools.functions.Adapters.Matrix.*;
 import static de.adesso.tools.functions.MatrixFunctions.*;
 import static java.lang.Math.min;
 import static java.util.stream.Collectors.toList;
@@ -207,8 +208,8 @@ public final class DtFunctions {
         final OptionalInt index = determineColumnIndex(conditionTable, actionTable, value);
         if (index.isPresent()) {
 
-            final ObservableList<ObservableList<String>> oldConDefs = conditionTable.getItems();
-            final ObservableList<ObservableList<String>> oldActDefs = actionTable.getItems();
+            final List<List<String>> oldConDefs = conditionTable.getItems();
+            final List<List<String>> oldActDefs = actionTable.getItems();
 
             int newCols = conditionTable.getColumns().size() + 1;
             conditionTable.getColumns().clear();
@@ -219,8 +220,10 @@ public final class DtFunctions {
                 actionTable.getColumns().add(createTableColumn(i));
             });
 
-            final ObservableList<ObservableList<String>> newConDefs = MatrixFunctions.insertColumnsAt(oldConDefs, index.getAsInt(), defaultDefValue);
-            final ObservableList<ObservableList<String>> newActDefs = MatrixFunctions.insertColumnsAt(oldActDefs, index.getAsInt(), defaultDefValue);
+            final List<? extends List<String>> newConDefs =
+                    insertColumnsAt(oldConDefs, index.getAsInt(), defaultDefValue);
+            final List<? extends List<String>> newActDefs =
+                    insertColumnsAt(oldActDefs, index.getAsInt(), defaultDefValue);
 
             oldConDefs.clear();
             newConDefs.forEach(oldConDefs::add);
@@ -241,15 +244,15 @@ public final class DtFunctions {
         OptionalInt index = determineRowIndices(declarations, definitions, value);
 
         if (index.isPresent()) {
-            ObservableList<T> newDecls = ListFunctions.insertElementsAt(declarations.getItems(), index.getAsInt(), defaultDecl);
-            ObservableList<ObservableList<String>> newDefs = insertRowsAt(definitions.getItems(), index.getAsInt(), defaultDefValue);
+            List<T> newDecls = ListFunctions.insertElementsAt(declarations.getItems(), index.getAsInt(), defaultDecl);
+            List<List<String>> newDefs = insertRowsAt(adapt(definitions.getItems()), index.getAsInt(), defaultDefValue);
 
             declarations.getItems().clear();
             newDecls.forEach(declarations.getItems()::add);
   //          updateRowHeaders(declarations, rowHeaderTemplate);
 
             definitions.getItems().clear();
-            newDefs.forEach(definitions.getItems()::add);
+            newDefs.stream().map(s -> FXCollections.observableArrayList(s)).forEach(definitions.getItems()::add);
 
             declarations.refresh();
             definitions.refresh();
@@ -276,13 +279,13 @@ public final class DtFunctions {
                 actionTable.getColumns().add(createTableColumn(i));
             });
 
-            final ObservableList<ObservableList<String>> newConDefs = MatrixFunctions.removeColumnsAt(conditionDefns, index.getAsInt());
-            final ObservableList<ObservableList<String>> newActDefs = MatrixFunctions.removeColumnsAt(actionDefns, index.getAsInt());
+            final List<List<String>> newConDefs = removeColumnsAt(adapt(conditionDefns), index.getAsInt());
+            final List<List<String>> newActDefs = removeColumnsAt(adapt(actionDefns), index.getAsInt());
 
             conditionDefns.clear();
-            newConDefs.forEach(conditionDefns::add);
+            newConDefs.stream().map(s -> FXCollections.observableArrayList(s)).forEach(conditionDefns::add);
             actionDefns.clear();
-            newActDefs.forEach(actionDefns::add);
+            newActDefs.stream().map(s -> FXCollections.observableArrayList(s)).forEach(actionDefns::add);
 
             conditionTable.refresh();
             actionTable.refresh();
@@ -296,8 +299,8 @@ public final class DtFunctions {
 
         if (index.isPresent()) {
 
-            ObservableList newDecls = ListFunctions.removeElementsAt(declarations.getItems(), index.getAsInt());
-            ObservableList newDefs = removeRowsAt(definitions.getItems(), index.getAsInt());
+            List newDecls = ListFunctions.removeElementsAt(declarations.getItems(), index.getAsInt());
+            List newDefs = removeRowsAt(definitions.getItems(), index.getAsInt());
 
             declarations.getItems().clear();
             newDecls.forEach(declarations.getItems()::add);
@@ -317,13 +320,13 @@ public final class DtFunctions {
             ObservableList<ObservableList<String>> conditionDefinitions = conditionTable.getItems();
             ObservableList<ObservableList<String>> actionDefinitions = actionTable.getItems();
 
-            ObservableList<ObservableList<String>> newConditionDefns = swapColumnsAt(conditionDefinitions, c1Idx, c2Idx);
-            ObservableList<ObservableList<String>> newActionDefns = swapColumnsAt(actionDefinitions, c1Idx, c2Idx);
+            List<List<String>> newConditionDefns = swapColumnsAt(adapt(conditionDefinitions), c1Idx, c2Idx);
+            List<List<String>> newActionDefns = swapColumnsAt(adapt(actionDefinitions), c1Idx, c2Idx);
 
             conditionDefinitions.clear();
-            newConditionDefns.forEach(conditionDefinitions::add);
+            newConditionDefns.stream().map(s -> FXCollections.observableArrayList(s)).forEach(conditionDefinitions::add);
             actionDefinitions.clear();
-            newActionDefns.forEach(actionDefinitions::add);
+            newActionDefns.stream().map(s -> FXCollections.observableArrayList(s)).forEach(actionDefinitions::add);
         }
     }
 
@@ -341,8 +344,8 @@ public final class DtFunctions {
         if (index.isPresent()) {
             final int r1Idx = index.getAsInt();
             final int r2Idx = determineNextIndex(direction, r1Idx, declarations.getItems().size());
-            ObservableList newDecls = swapRowsAt(declarations.getItems(), r1Idx, r2Idx);
-            ObservableList<ObservableList<String>> newDefns = swapRowsAt(definitions.getItems(), r1Idx, r2Idx);
+            swapRowsAt(declarations.getItems(), r1Idx, r2Idx);
+            swapRowsAt(definitions.getItems(), r1Idx, r2Idx);
 /*
             declarations.getItems().clear();
             newDecls.forEach(declarations.getItems()::add);

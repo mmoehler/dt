@@ -19,15 +19,24 @@
 
 package de.adesso.tools.analysis.completeness.detailed;
 
+
+import com.codepoetics.protonpack.StreamUtils;
 import de.adesso.tools.common.MatrixBuilder;
+import de.adesso.tools.util.tuple.Tuple;
+import de.adesso.tools.util.tuple.Tuple2;
 import javafx.collections.ObservableList;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-import static de.adesso.tools.common.Reserved.*;
+import static de.adesso.tools.analysis.completeness.detailed.Actions.*;
+import static de.adesso.tools.analysis.completeness.detailed.Conditions.*;
+import static de.adesso.tools.functions.Adapters.Matrix.adapt;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by mmoehler on 19.03.16.
@@ -39,7 +48,7 @@ public class ActionsTest {
         List<String> rf = StringListBuilder.on("N,N,Y,Y,N,Y").build();
         List<String> ri = StringListBuilder.on("N,N,Y,Y,N,N").build();
 
-        List<List<String>> actual = Actions.A1.apply(rf, ri);
+        List<List<String>> actual = A1.apply(rf, ri);
 
         dumpTableItems("ACTUAL", actual);
 
@@ -53,7 +62,7 @@ public class ActionsTest {
         List<String> rf = StringListBuilder.on("N,N,Y,Y,N,Y").build();
         List<String> ri = StringListBuilder.on("N,N,Y,Y,N,Y").build();
 
-        List<List<String>> actual = Actions.A2.apply(rf, ri);
+        List<List<String>> actual = A2.apply(rf, ri);
 
         dumpTableItems("ACTUAL", actual);
 
@@ -64,10 +73,10 @@ public class ActionsTest {
     @Test
     public void testA3OK() {
         int expected = 0;
-        List<String> rf = StringListBuilder.on("N,N,Y,Y,N,Y").build();
+        List<String> rf = StringListBuilder.on("N,N,Y,-,N,Y").build();
         List<String> ri = StringListBuilder.on("N,N,Y,Y,N,Y").build();
 
-        List<List<String>> actual = Actions.A3.apply(rf, ri);
+        List<List<String>> actual = A3.apply(rf, ri);
 
         dumpTableItems("ACTUAL", actual);
 
@@ -78,10 +87,10 @@ public class ActionsTest {
     @Test
     public void testA4OK() {
         int expected = 0;
-        List<String> rf = StringListBuilder.on("N,-,Y,Y,-,Y").build();
-        List<String> ri = StringListBuilder.on("N,N,N,Y,Y,Y").build();
+        List<String> rf = StringListBuilder.on("N,N,Y,-,N,Y").build();
+        List<String> ri = StringListBuilder.on("N,N,Y,Y,N,Y").build();
 
-        List<List<String>> actual = Actions.A4.apply(rf, ri);
+        List<List<String>> actual = A4.apply(rf, ri);
 
         dumpTableItems("ACTUAL", actual);
 
@@ -94,13 +103,14 @@ public class ActionsTest {
         List<String> rf = StringListBuilder.on("N,-,-").build();
         List<String> ri = StringListBuilder.on("N,Y,N").build();
 
-        List<List<String>> actual = Actions.A5.apply(rf, ri);
+        List<List<String>> actual = A5.apply(rf, ri);
 
         dumpTableItems("ACTUAL", actual);
 
         //assertThat(actual, equalTo(expected));
     }
 
+    /*
     static List<Integer> newWithValue(int value) {
         List<Integer> result = new ArrayList<>();
         result.add(value);
@@ -111,11 +121,38 @@ public class ActionsTest {
         l.add(value);
         return l;
     }
+    */
+
+    @Test
+    public void testCreateMask() {
+        List<String> rf = StringListBuilder.on("Y,N,-").build();
+        List<String> ri = StringListBuilder.on("N,Y,N").build();
+
+        Function<List<Tuple2<String, String>>,Integer>[] conditions = new Function[]{
+                B1,B2,B3,B4
+        };
+
+        List<Tuple2<String, String>> prototype = StreamUtils
+                .zip(rf.stream(), ri.stream(), (x, y) -> Tuple.of(x, y))
+                .collect(toList());
+
+
+
+
+        final List<Integer> mask = Arrays.stream(conditions)
+                .map(c -> c.apply(prototype))
+                .collect(Collectors.toList());
+
+        dumpList1DItems("MASK", mask);
+
+
+
+    }
 
 
     @Test
     public void testA5Consolidate() {
-        ObservableList<ObservableList<String>> conditions = MatrixBuilder.observable(MatrixBuilder.on("N,N,Y,N,Y,N,-,Y,-").dim(3, 3).build());
+        ObservableList<ObservableList<String>> conditions = adapt(MatrixBuilder.on("N,N,Y,N,Y,N,-,Y,-").dim(3, 3).build());
         ObservableList<ObservableList<String>>[] observables = new ObservableList[]{conditions};
         /*
         for (int i = 0; i < conditions.size(); i++) {
@@ -139,60 +176,14 @@ public class ActionsTest {
                     });
         }*/
 
-        observables[0] = Functions.consolidate().apply(observables[0]);
+        ObservableList<ObservableList<String>> observableLists = observables[0];
+        List<List<String>> lists = adapt(observableLists);
+        List<List<String>> actual = Functions.consolidate().apply(lists);
 
 
         dumpTableItems("RESULT-1", observables[0]);
     }
 
-    @Test
-    public void testA5Design() {
-        int expected = 0;
-        List<String> rf = StringListBuilder.on("-,N,-").build();
-        List<String> ri = StringListBuilder.on("N,N,Y").build();
-
-        // counting dashes
-        long dashCount = rf.stream().filter(s -> isDASH(s)).count();
-
-        List<List<String>> result = MatrixBuilder.empty().dim(rf.size(), (int) dashCount).build();
-
-        int countDashesSeen = 0;
-
-        for (int i = 0; i < rf.size(); i++) {
-            String l = rf.get(i);
-            String r = ri.get(i);
-            if (isDASH(l)) {
-                String s = "??";
-                if (countDashesSeen > 0) {
-                    for (int j = 0; j < countDashesSeen; j++) {
-                        result.get(i).add(DASH);
-                    }
-                    for (int j = 0; j < i; j++) {
-                        result.get(j).add(ri.get(j));
-                    }
-                }
-                switch (r) {
-                    case YES:
-                        s = NO;
-                        break;
-                    case NO:
-                        s = YES;
-                        break;
-                    case DASH:
-                        s = DASH;
-                        break;
-                    default:
-                        ;
-                }
-                result.get(i).add(s);
-                countDashesSeen++;
-            } else {
-                result.get(i).add(l);
-            }
-        }
-
-        dumpTableItems("RESULT", result);
-    }
 
 
     public static void dumpTableItems(String msg, List<List<String>> list2D) {
@@ -212,5 +203,12 @@ public class ActionsTest {
         map.forEach((k,v) -> System.out.println("\t" + k + " -> " + v));
         System.out.println("<<<<<<<<<<\n");
     }
+
+    public static <T> void dumpList1DItems(String msg, List<T> list1D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list1D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
 
 }

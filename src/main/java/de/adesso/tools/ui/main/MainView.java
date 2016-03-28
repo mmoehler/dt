@@ -43,6 +43,8 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -435,6 +437,9 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     private void initializeDividerSynchronization() {
+
+        this.console.setFont(Font.font("Courier", FontWeight.BOLD, 12));
+
         this.conditionDividerPos.bind(conditionSplitPane.getDividers().get(0).positionProperty());
         this.actionDividerPos.addListener((a, b, c) ->
                 conditionSplitPane.getDividers().get(0).setPosition(c.doubleValue()));
