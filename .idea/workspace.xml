@@ -2,23 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b2d1880-d391-4d61-bb7f-0c8e21880d82" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/Dump.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ConditionDetailedCompletenessCheck.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/Adapters.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/FunctionsTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/simple/ConditionCompletenessCheck.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/simple/ConditionSimpleCompletenessCheck.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Conditions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Conditions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Functions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Functions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/ListFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/ListFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MatrixFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MatrixFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/MissingConditions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/MissingConditions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ActionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ActionsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/MatrixFunctionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/MatrixFunctionsTest.java" />
     </list>
     <ignored path="dt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1772,7 +1756,7 @@
       <workItem from="1458551552287" duration="1760000" />
       <workItem from="1458556307885" duration="14000" />
       <workItem from="1458626064208" duration="9873000" />
-      <workItem from="1458828943086" duration="74568000" />
+      <workItem from="1458828943086" duration="74642000" />
     </task>
     <task id="LOCAL-00001" summary="Refactoring of Matrix functions">
       <created>1455475453269</created>
@@ -1864,7 +1848,13 @@
       <option name="project" value="LOCAL" />
       <updated>1458671968766</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="Formal Completeness Check ( extended ) integrated. Needs Rework!!">
+      <created>1459185625147</created>
+      <option name="number" value="00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1459185625147</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1900,7 +1890,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="360770000" />
+    <option name="totallyTimeSpent" value="360844000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1968,7 +1958,8 @@
     <MESSAGE value="functions (with errors!) implemented" />
     <MESSAGE value="functions errors corrected and enhanced" />
     <MESSAGE value="Worked at MissingConditions -&gt; Not Finished!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Worked at MissingConditions -&gt; Not Finished!!" />
+    <MESSAGE value="Formal Completeness Check ( extended ) integrated. Needs Rework!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Formal Completeness Check ( extended ) integrated. Needs Rework!!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
