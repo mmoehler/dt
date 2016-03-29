@@ -24,37 +24,27 @@ import java.util.function.BinaryOperator;
 /**
  * Created by moehler on 29.03.2016.
  */
-public enum ComparisonIndicatorConditions  implements BinaryOperator<ComparisonIndicatorConditions>,ComparisonIndicators {
+public enum ComparisonIndicatorActions implements BinaryOperator<ComparisonIndicatorActions>,ComparisonIndicators {
     // @formatter:off
-        EQ(0,"\u003D"),
-        NE(1,"\u2260"),
-        LO(2,"\u003C"),
-        GT(3,"\u003E"),
-        XX(4,"\u0058"),
-        NI(5,"\u2262"),
-        AS(6,"\u002A"),
-        MI(7,"\u002D"),
-        RR(8,"\u0052"),
-        CC(9,"\u0043");
-        // @formatter:on
+    EQ(0,"\u003D"),
+    NE(1,"\u2260");
+    // @formatter:on
 
-    private final static ComparisonIndicatorConditions[][] JOIN_RULES = {
-            // @formatter:off
-                //EQ,NE,LO,GT
-                //------------------
-                 {EQ,LO,GT,NE},// EQ
-                 {NE,NI,NI,NI},// NE
-                 {LO,LO,XX,NI},// LO
-                 {GT,XX,GT,NI},// GT
-                 {XX,XX,XX,NI},// XX
-                 {NI,NI,NI,NI},// NI
-                // @formatter:on
+
+    private final static ComparisonIndicatorActions[][] JOIN_RULES = {
+        // @formatter:off
+        //EQ,NE
+        //------------------
+         {EQ,NE},// EQ
+         {NE,NE},// NE
+        //------------------
+        // @formatter:on
     };
 
     private final int id;
     private final String code;
 
-    ComparisonIndicatorConditions(int id, String code) {
+    ComparisonIndicatorActions(int id, String code) {
         this.id= id;
         this.code = code;
     }
@@ -68,7 +58,7 @@ public enum ComparisonIndicatorConditions  implements BinaryOperator<ComparisonI
     }
 
     @Override
-    public ComparisonIndicatorConditions apply(ComparisonIndicatorConditions left, ComparisonIndicatorConditions right) {
+    public ComparisonIndicatorActions apply(ComparisonIndicatorActions left, ComparisonIndicatorActions right) {
         return JOIN_RULES[left.id][right.id];
     }
 }

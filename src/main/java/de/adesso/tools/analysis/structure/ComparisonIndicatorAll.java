@@ -24,7 +24,7 @@ import java.util.function.BinaryOperator;
 /**
  * Created by moehler on 29.03.2016.
  */
-public enum ComparisonIndicatorConditions  implements BinaryOperator<ComparisonIndicatorConditions>,ComparisonIndicators {
+public enum ComparisonIndicatorAll implements BinaryOperator<ComparisonIndicatorAll>,ComparisonIndicators {
     // @formatter:off
         EQ(0,"\u003D"),
         NE(1,"\u2260"),
@@ -38,37 +38,35 @@ public enum ComparisonIndicatorConditions  implements BinaryOperator<ComparisonI
         CC(9,"\u0043");
         // @formatter:on
 
-    private final static ComparisonIndicatorConditions[][] JOIN_RULES = {
+    private final static ComparisonIndicatorAll[][] JOIN_RULES = {
             // @formatter:off
-                //EQ,NE,LO,GT
+                //EQ,NE,LO,GT,XX,NI
                 //------------------
-                 {EQ,LO,GT,NE},// EQ
-                 {NE,NI,NI,NI},// NE
-                 {LO,LO,XX,NI},// LO
-                 {GT,XX,GT,NI},// GT
-                 {XX,XX,XX,NI},// XX
-                 {NI,NI,NI,NI},// NI
+                 {RR,AS,AS,AS,XX,MI},// EQ
+                 {CC,MI,LO,GT,XX,MI},// NE
                 // @formatter:on
     };
 
     private final int id;
     private final String code;
 
-    ComparisonIndicatorConditions(int id, String code) {
+    ComparisonIndicatorAll(int id, String code) {
         this.id= id;
         this.code = code;
     }
 
+    @Override
     public String getCode() {
         return code;
     }
 
+    @Override
     public int getId() {
         return id;
     }
 
     @Override
-    public ComparisonIndicatorConditions apply(ComparisonIndicatorConditions left, ComparisonIndicatorConditions right) {
+    public ComparisonIndicatorAll apply(ComparisonIndicatorAll left, ComparisonIndicatorAll right) {
         return JOIN_RULES[left.id][right.id];
     }
 }
