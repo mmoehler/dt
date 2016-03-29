@@ -17,20 +17,15 @@
  * under the License.
  */
 
-package de.adesso.tools.common;
-
-import org.testng.annotations.Test;
+package de.adesso.tools.analysis.structure;
 
 import java.util.function.BinaryOperator;
 
 /**
  * Created by moehler on 29.03.2016.
  */
-public class UnicodeTest {
-
-
-    enum ComparisonIndicatorConditions implements BinaryOperator<ComparisonIndicatorConditions>{
-        // @formatter:off
+public enum ComparisonIndicatorConditions  implements BinaryOperator<ComparisonIndicatorConditions> {
+    // @formatter:off
         EQ(0,"\u003D"),
         NE(1,"\u2260"),
         LO(2,"\u003C"),
@@ -43,8 +38,8 @@ public class UnicodeTest {
         CC(9,"\u0043");
         // @formatter:on
 
-        private final static ComparisonIndicatorConditions[][] JOIN_RULES_CONDITION = {
-                // @formatter:off
+    private final static ComparisonIndicatorConditions[][] JOIN_RULES_CONDITION = {
+            // @formatter:off
                 //EQ,NE,LO,GT
                 //------------------
                  {EQ,LO,GT,NE},// EQ
@@ -54,51 +49,36 @@ public class UnicodeTest {
                  {XX,XX,XX,NI},// XX
                  {NI,NI,NI,NI},// NI
                 // @formatter:on
-        };
+    };
 
-        private final static ComparisonIndicatorConditions[][] JOIN_RULES_ACTIONS = {
-                // @formatter:off
+    private final static ComparisonIndicatorConditions[][] JOIN_RULES_ACTIONS = {
+            // @formatter:off
                 //EQ,NE
                 //------------------
                  {EQ,NE},// EQ
                  {NE,NE},// NE
                 // @formatter:on
-        };
+    };
 
 
-        private final int id;
-        private final String code;
+    private final int id;
+    private final String code;
 
-        ComparisonIndicatorConditions(int id, String code) {
-            this.id= id;
-            this.code = code;
-        }
-
-        public String getCode() {
-            return code;
-        }
-
-        public int getId() {
-            return id;
-        }
-
-        @Override
-        public ComparisonIndicatorConditions apply(ComparisonIndicatorConditions left, ComparisonIndicatorConditions right) {
-            return JOIN_RULES_CONDITION[left.id][right.id];
-        }
+    ComparisonIndicatorConditions(int id, String code) {
+        this.id= id;
+        this.code = code;
     }
 
-    @Test
-    public void testPrintUnicode() {
-        System.out.println("\u2260"); // NE
-        System.out.println("\u2262"); // NI
-        System.out.println("\u003C"); // LO
-        System.out.println("\u003E"); // GT
-        System.out.println("\u003D"); // EQ
-        System.out.println("\u002A"); // AS
-        System.out.println("\u002D"); // MI
-        System.out.println("\u0058"); // XX
-        System.out.println("\u0052"); // RR
-        System.out.println("\u0043"); // CC
+    public String getCode() {
+        return code;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    @Override
+    public ComparisonIndicatorConditions apply(ComparisonIndicatorConditions left, ComparisonIndicatorConditions right) {
+        return JOIN_RULES_CONDITION[left.id][right.id];
     }
 }
