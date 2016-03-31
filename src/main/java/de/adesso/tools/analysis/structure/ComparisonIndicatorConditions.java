@@ -19,12 +19,10 @@
 
 package de.adesso.tools.analysis.structure;
 
-import java.util.function.BinaryOperator;
-
 /**
  * Created by moehler on 29.03.2016.
  */
-public enum ComparisonIndicatorConditions  implements BinaryOperator<ComparisonIndicatorConditions>,ComparisonIndicators {
+public enum ComparisonIndicatorConditions  implements Indicator {
     // @formatter:off
         EQ(0,"\u003D"),
         NE(1,"\u2260"),
@@ -32,10 +30,7 @@ public enum ComparisonIndicatorConditions  implements BinaryOperator<ComparisonI
         GT(3,"\u003E"),
         XX(4,"\u0058"),
         NI(5,"\u2262"),
-        AS(6,"\u002A"),
-        MI(7,"\u002D"),
-        RR(8,"\u0052"),
-        CC(9,"\u0043");
+        AS(6,"\u002A");
         // @formatter:on
 
     private final static ComparisonIndicatorConditions[][] JOIN_RULES = {
@@ -68,7 +63,13 @@ public enum ComparisonIndicatorConditions  implements BinaryOperator<ComparisonI
     }
 
     @Override
-    public ComparisonIndicatorConditions apply(ComparisonIndicatorConditions left, ComparisonIndicatorConditions right) {
-        return JOIN_RULES[left.id][right.id];
+    public Indicator apply(Indicator other) {
+        return JOIN_RULES[this.getId()][other.getId()];
+    }
+
+
+    @Override
+    public String toString() {
+        return getCode();
     }
 }

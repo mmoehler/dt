@@ -19,11 +19,12 @@
 
 package de.adesso.tools.analysis.structure;
 
+import java.util.function.Function;
+
 /**
  * Created by moehler on 29.03.2016.
  */
-public interface ComparisonIndicators {
+public interface Indicator extends Function<Indicator,Indicator> {
     String getCode();
-
     int getId();
 }
