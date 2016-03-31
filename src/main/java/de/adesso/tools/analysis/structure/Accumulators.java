@@ -19,17 +19,16 @@
 
 package de.adesso.tools.analysis.structure;
 
+import java.util.function.BinaryOperator;
+
 /**
- * Created by moehler on 29.03.2016.
+ * Created by moehler on 31.03.2016.
  */
-public interface Indicator {
+public class Accumulators {
+    public Accumulators() {
+    }
 
-    Indicator NOOP = new Indicator() {
-        @Override
-        public String getCode() {
-            return "NOP";
-        }
-    };
-
-    String getCode();
+    public static BinaryOperator<Indicator> combinationResult() {
+        return new CombinationResultAccumulator();
+    }
 }

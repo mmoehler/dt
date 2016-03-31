@@ -19,53 +19,44 @@
 
 package de.adesso.tools.analysis.structure;
 
+import java.util.Arrays;
+import java.util.Optional;
+
 /**
- * Created by moehler on 29.03.2016.
+ * Created by moehler on 31.03.2016.
  */
-public enum ComparisonIndicatorAll implements Indicator {
+public enum Indicators implements Indicator {
     // @formatter:off
-        EQ(0,"\u003D"),
-        NE(1,"\u2260"),
-        LO(2,"\u003C"),
-        GT(3,"\u003E"),
-        XX(4,"\u0058"),
-        NI(5,"\u2262"),
-        AS(6,"\u002A"),
-        MI(7,"\u002D"),
-        RR(8,"\u0052"),
-        CC(9,"\u0043");
-        // @formatter:on
+        EQ("\u003D"),
+        NE("\u2260"),
+        LO("\u003C"),
+        GT("\u003E"),
+        XX("\u0058"),
+        NI("\u2262"),
+        AS("\u002A"),
+        YY("\u0059"),
+        NN("\u004E"),
+        MI("\u002D"),
+        RR("\u0052"),
+        CC("\u0043");
+    // @formatter:on
 
-    private final static ComparisonIndicatorAll[][] JOIN_RULES = {
-            // @formatter:off
-                //EQ,NE,LO,GT,XX,NI
-                //------------------
-                 {RR,AS,AS,AS,XX,MI},// EQ
-                 {CC,MI,LO,GT,XX,MI},// NE
-                // @formatter:on
-    };
-
-    private final int id;
     private final String code;
 
-    ComparisonIndicatorAll(int id, String code) {
-        this.id= id;
+    Indicators(String code) {
         this.code = code;
     }
 
-    @Override
+
     public String getCode() {
         return code;
     }
 
-    @Override
-    public int getId() {
-        return id;
+    public static Indicator lookup(String code) {
+        final Optional<Indicators> found = Arrays.stream(Indicators.values()).filter((i) -> i.code.equals(code)).findFirst();
+        if (found.isPresent()) {
+            return found.get();
+        }
+        throw new IllegalArgumentException(String.format("No indicator for code=%s", code));
     }
-
-    @Override
-    public Indicator apply(Indicator other) {
-        return JOIN_RULES[this.getId()][other.getId()];
-    }
-
 }

@@ -19,17 +19,20 @@
 
 package de.adesso.tools.analysis.structure;
 
+import java.util.function.BinaryOperator;
+
 /**
- * Created by moehler on 29.03.2016.
+ * Created by moehler on 31.03.2016.
  */
-public interface Indicator {
+public final class Combiners {
+    public Combiners() {
+    }
 
-    Indicator NOOP = new Indicator() {
-        @Override
-        public String getCode() {
-            return "NOP";
-        }
-    };
+    public static BinaryOperator<Indicator> conditionComparisonResult() {
+        return new ConditionComparisonResultCombiner();
+    }
 
-    String getCode();
+    public static BinaryOperator<Indicator> actionComparisonResult() {
+        return new ActionComparisonResultCombiner();
+    }
 }
