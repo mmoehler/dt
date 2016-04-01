@@ -27,13 +27,11 @@ public class MenuViewModel implements ViewModel {
     @Inject
     private Event<AddRuleDefEvent> addRuleDefEvent;
     @Inject
-    private Event<SimpleCompletenessCheckEvent> simpleCompletenessCheckEvent;
+    private Event<FormalCompletenessCheckEvent> formalCompletenessCheckEvent;
     @Inject
     private Event<AddActionDeclEvent> addActionDeclEvent;
     @Inject
     private Event<RemoveActionDeclEvent> removeActionDeclEvent;
-    @Inject
-    private Event<RemoveRulesWithoutActionsEvent> removeRulesWithoutActionsEvent;
     @Inject
     private Event<RemoveRuleEvent> removeRuleEvent;
     @Inject
@@ -56,6 +54,12 @@ public class MenuViewModel implements ViewModel {
     private Event<MoveRuleRightEvent> moveRuleRightEvent;
     @Inject
     private Event<AddElseRuleEvent> addElseRuleEvent;
+    @Inject
+    private Event<ConsolidateRulesEvent> consolidateRulesEvent;
+    @Inject
+    private Event<CompleteReportEvent> completeReportEvent;
+    @Inject
+    private Event<StructuralAnalysisEvent> structuralAnalysisEvent;
 
     @InjectScope
     private RuleScope mdScope;
@@ -84,20 +88,12 @@ public class MenuViewModel implements ViewModel {
         addRuleDefEvent.fire(new AddRuleDefEvent());
     }
 
-    public void simpleCompletenessCheckAction() {
-        simpleCompletenessCheckEvent.fire(new SimpleCompletenessCheckEvent());
-    }
-
     public void addActionDecl() {
         addActionDeclEvent.fire(new AddActionDeclEvent());
     }
 
     public void removeActionDecl() {
         removeActionDeclEvent.fire(new RemoveActionDeclEvent());
-    }
-
-    public void removeRulesWithoutAction() {
-        removeRulesWithoutActionsEvent.fire(new RemoveRulesWithoutActionsEvent());
     }
 
     public void insertConditionDecl() {
@@ -142,5 +138,21 @@ public class MenuViewModel implements ViewModel {
 
     public void addElseRule() {
         addElseRuleEvent.fire(new AddElseRuleEvent());
+    }
+
+    public void formalCompletenessCheckAction() {
+        formalCompletenessCheckEvent.fire(new FormalCompletenessCheckEvent());
+    }
+
+    public void consolidateRulesAction() {
+        consolidateRulesEvent.fire(new ConsolidateRulesEvent());
+    }
+
+    public void completeReportAction() {
+        completeReportEvent.fire(new CompleteReportEvent());
+    }
+
+    public void structuralAnalysisAction() {
+        structuralAnalysisEvent.fire(new StructuralAnalysisEvent());
     }
 }

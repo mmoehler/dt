@@ -28,6 +28,7 @@ import java.util.concurrent.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static java.util.concurrent.TimeUnit.SECONDS;
 
@@ -36,9 +37,50 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  */
 public class StructuralAnalysis implements BiFunction<List<List<String>>, List<List<String>>, List<Indicator>> {
 
-    final static Function<List<List<String>>, List<Indicator>> conditionProcessor = (in) -> new ArrayList<>();
+    final static Function<List<List<String>>, List<Indicator>> conditionProcessor = (inConditions) -> {
+        final List<List<Indicator>> outConditions = new ArrayList<>();
 
-    final static Function<List<List<String>>, List<Indicator>> actionProcessor = (in) -> new ArrayList<>();
+        for (int i = 0; i < inConditions.size()-1; i++) {
+            for (int j = 1; j < inConditions.size(); j++) {
+                if(j>i) {
+                    final Stream<Indicator> leftStream = inConditions.get(i).stream().map(a -> Indicators.lookup(a));
+                    final Stream<Indicator> rightStream = inConditions.get(j).stream().map(a -> Indicators.lookup(a));
+                    final List<Indicator> collected = StreamUtils
+                            .zip(leftStream, rightStream, Operators.conditionComparison())
+                            .collect(Collectors.toList());
+                    outConditions.add(collected);
+                }
+            }
+        }
+        final List<Indicator> reducedConditionIndicators = outConditions.stream()
+                .map(c -> c.stream()
+                        .reduce(Combiners.conditionComparisonResult()))
+                .map(r -> r.get())
+                .collect(Collectors.toList());
+
+        return reducedConditionIndicators;
+    };
+
+    final static Function<List<List<String>>, List<Indicator>> actionProcessor = (inActions) -> {
+        final List<List<Indicator>> outActions = new ArrayList<>();
+        for (int i = 0; i < inActions.size()-1; i++) {
+            for (int j = 1; j < inActions.size(); j++) {
+                if(j>i) {
+                    final Stream<Indicator> leftStream = inActions.get(i).stream().map(Indicators::lookup);
+                    final Stream<Indicator> rightStream = inActions.get(j).stream().map(Indicators::lookup);
+                    final List<Indicator> collected = StreamUtils.zip(leftStream, rightStream, Operators.actionComparison() ).collect(Collectors.toList());
+                    outActions.add(collected);
+                }
+            }
+        }
+        final List<Indicator> reducedActionIndicators = outActions.stream()
+                .map(c -> c.stream()
+                        .reduce(Combiners.actionComparisonResult()))
+                .map(r -> r.get())
+                .collect(Collectors.toList());
+
+        return reducedActionIndicators;
+    };
 
     private final ExecutorService pool = Executors.newFixedThreadPool(2);
 
@@ -59,7 +101,7 @@ public class StructuralAnalysis implements BiFunction<List<List<String>>, List<L
         }
 
         final List<Indicator> result = StreamUtils
-                .zip(conditionResults.stream(), actionResults.stream(), Accumulators.combinationResult())
+                .zip(actionResults.stream(), conditionResults.stream(), Accumulators.combinationResult())
                 .collect(Collectors.toList());
 
         return result;

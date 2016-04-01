@@ -31,26 +31,39 @@ import static de.adesso.tools.ui.Notifications.*;
 @Singleton
 public class MainViewModel implements ViewModel {
 
-    private static final Logger LOG = LoggerFactory.getLogger(MainViewModel.class);
-
     public static final String QMARK = "?";
     public static final String EMPTY = "";
     public static final Object[] NO_ARGS = {};
-
-    private static final String ACT_ROW_HEADER = "A%02d";
     public static final String COND_ROW_HEADER = "C%02d";
-
+    private static final Logger LOG = LoggerFactory.getLogger(MainViewModel.class);
+    private static final String ACT_ROW_HEADER = "A%02d";
+    private static String TPL2 = "RULE %04d NOT DEFINED %s";
     private final ObservableList<ConditionDeclTableViewModel> conditionDeclarations = FXCollections.observableArrayList();
     private final ObservableList<ObservableList<String>> conditionDefinitions = FXCollections.observableArrayList();
     private final ObservableList<ActionDeclTableViewModel> actionDeclarations = FXCollections.observableArrayList();
     private final ObservableList<ObservableList<String>> actionDefinitions = FXCollections.observableArrayList();
-
     @Inject
     private NotificationCenter notificationCenter;
 
-
     public MainViewModel() {
         super();
+    }
+
+    /*
+    public void onRemoveConditionDefsWithoutActions(@Observes RemoveRulesWithoutActionsEvent event) {
+
+        final List<List<String>> transposed = MatrixFunctions.transpose(adapt(this.actionDefinitions));
+        final List<Integer> indices1 = StreamUtils.zipWithIndex(transposed.stream())
+                .filter(i -> isBlank(i.getValue()))
+                .map(q -> Integer.valueOf((int) q.getIndex()))
+                .sorted((aa, bb) -> bb.intValue() - aa.intValue())
+                .collect(Collectors.toList());
+        final List<Integer> indices = indices1;
+        publish(REM_RULES_WITHOUT_ACTIONS.name(), indices);
+    }
+*/
+    private static boolean isBlank(ObservableList<String> ol) {
+        return ol.stream().allMatch(ss -> (ss.trim().length() == 0));
     }
 
     public ObservableList<ConditionDeclTableViewModel> getConditionDeclarations() {
@@ -147,9 +160,7 @@ public class MainViewModel implements ViewModel {
 
     }
 
-    private static String TPL2 = "RULE %04d NOT DEFINED %s";
-
-    public void onSimpleCompletenessCheck(@Observes SimpleCompletenessCheckEvent event) {
+    public void onSimpleCompletenessCheck(@Observes FormalCompletenessCheckEvent event) {
         final List<Indexed<List<String>>> result = isFormalComplete(this.conditionDeclarations, this.conditionDefinitions);
         final StringBuilder message = new StringBuilder();
         result.forEach(i -> message.append(String.format(TPL2, i.getIndex(), String.join(",", i.getValue()))).append(System.lineSeparator()));
@@ -162,23 +173,6 @@ public class MainViewModel implements ViewModel {
 
     public void onRemoveActionDecl(@Observes RemoveActionDeclEvent event) {
         publish(REM_ACTION.name(), NO_ARGS);
-    }
-
-    public void onRemoveConditionDefsWithoutActions(@Observes RemoveRulesWithoutActionsEvent event) {
-        /*
-        final List<List<String>> transposed = MatrixFunctions.transpose(adapt(this.actionDefinitions));
-        final List<Integer> indices1 = StreamUtils.zipWithIndex(transposed.stream())
-                .filter(i -> isBlank(i.getValue()))
-                .map(q -> Integer.valueOf((int) q.getIndex()))
-                .sorted((aa, bb) -> bb.intValue() - aa.intValue())
-                .collect(Collectors.toList());
-        final List<Integer> indices = indices1;
-        publish(REM_RULES_WITHOUT_ACTIONS.name(), indices);
-        */
-    }
-
-    private static boolean isBlank(ObservableList<String> ol) {
-        return ol.stream().allMatch(ss -> (ss.trim().length() == 0));
     }
 
     public void onRemoveRule(@Observes RemoveRuleEvent event) {
@@ -238,5 +232,19 @@ public class MainViewModel implements ViewModel {
                 .forEach(d -> d.lfdNrProperty().setValue(String.format(ACT_ROW_HEADER, counter[0]++)));
     }
 
+    public void onFormalCompletenessCheckAction(@Observes FormalCompletenessCheckEvent event) {
 
+    }
+
+    public void onConsolidateRulesAction(@Observes ConsolidateRulesEvent event) {
+
+    }
+
+    public void onCompleteReportAction(@Observes CompleteReportEvent event) {
+
+    }
+
+    public void onStructuralAnalysisAction(@Observes StructuralAnalysisEvent event) {
+
+    }
 }

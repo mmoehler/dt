@@ -45,8 +45,6 @@ public class MenuView implements FxmlView<MenuViewModel> {
         DialogHelper.showDialog(view, primaryStage, "/dtmg.css");
     }
 
-    // Conditions
-
     @FXML
     public void doAddConditionDecl(ActionEvent actionEvent) {
         viewModel.addConditionDeclAction();
@@ -62,8 +60,6 @@ public class MenuView implements FxmlView<MenuViewModel> {
         viewModel.addRuleDef();
     }
 
-    // Actions
-
     @FXML
     public void doAddActionDecl(ActionEvent actionEvent) {
         viewModel.addActionDecl();
@@ -77,20 +73,6 @@ public class MenuView implements FxmlView<MenuViewModel> {
     @FXML
     public void doRemoveRuleDef(ActionEvent actionEvent) {
         viewModel.removeRuleAction();
-    }
-
-    @FXML
-    public void doRemoveRuleDefsWithoutAction(ActionEvent actionEvent) {
-        viewModel.removeRulesWithoutAction();
-    }
-
-    @FXML
-    public void doSimpleCompletenessCheck(ActionEvent actionEvent) {
-        viewModel.simpleCompletenessCheckAction();
-    }
-
-    @FXML
-    public void doExtendedCompletenessCheck(ActionEvent actionEvent) {
     }
 
     @FXML
@@ -138,7 +120,44 @@ public class MenuView implements FxmlView<MenuViewModel> {
         viewModel.moveRuleRight();
     }
 
+    @FXML
     public void doAddElseRule(ActionEvent actionEvent) {
         viewModel.addElseRule();
+    }
+
+    @FXML
+    public void doFileNew(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doFileOpen(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doFileSave(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doFileSaveAs(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    public void doConsolidateRules(ActionEvent actionEvent) {
+        viewModel.consolidateRulesAction();
+    }
+
+    @FXML
+    public void doFormalCompletenessCheck(ActionEvent actionEvent) {
+        viewModel.formalCompletenessCheckAction();
+    }
+
+    @FXML
+    public void doStructuralAnalysis(ActionEvent actionEvent) {
+        viewModel.structuralAnalysisAction();
+    }
+
+    @FXML
+    public void doCompleteReport(ActionEvent actionEvent) {
+        viewModel.completeReportAction();
     }
 }
