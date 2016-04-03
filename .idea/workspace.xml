@@ -1,40 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6b2d1880-d391-4d61-bb7f-0c8e21880d82" name="Default" comment="Formal Completeness Check ( extended ) integrated. Needs Rework!!">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/AnalysisResultEmitter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DefaultAnalysisResultEmitter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DefaultStructuralAnalysis.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/StructuralAnalysisResultEmitter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/events/FileNewEvent.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/events/FileOpenEvent.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/events/FileSaveAsEvent.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/events/FileSaveEvent.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/exception/ExceptionHandler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/exception/IOExceptionSmuggler.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/exception/LambdaExceptionUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MoreCollectors.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/DTDataPacket.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/Storer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/StructuralAnalysisResultEmitterTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ActionDeclTableViewBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/io/DTDataPacketTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/io/StorerTest.java" />
+    <list default="true" id="6b2d1880-d391-4d61-bb7f-0c8e21880d82" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/zip/ZipUtils.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/StructuralAnalysis.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/StructuralAnalysis.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/Adapters.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/Adapters.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/Notifications.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/Notifications.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/action/ActionDeclTableViewModel.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/action/ActionDeclTableViewModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuView.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuViewModel.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuViewModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/CollectorTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/CollectorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ActionDeclBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ActionDeclBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ConditionDeclBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ConditionDeclBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DtFunctionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DtFunctionsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DtFunctionsTestData.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DtFunctionsTestData.java" />
     </list>
     <ignored path="dt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -119,15 +88,25 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DTDataPacket.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="DTDataPacket.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/io/DTDataPacket.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.43396226">
+            <state vertical-scroll-proportion="0.0">
               <caret line="86" column="45" selection-start-line="86" selection-start-column="45" selection-end-line="86" selection-end-column="45" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#7652#7653#0" expanded="true" />
-                <element signature="e#7699#7700#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ZipUtils.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/io/zip/ZipUtils.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.17927822">
+              <caret line="167" column="26" selection-start-line="167" selection-start-column="26" selection-end-line="167" selection-end-column="26" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -181,7 +160,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ActionsTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/Dump.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/Dump.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/simple/ConditionCompletenessCheck.java" />
@@ -232,6 +210,7 @@
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/DTDataPacket.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/zip/ZipUtils.java" />
       </list>
     </option>
   </component>
@@ -370,7 +349,54 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
+      <pane id="Scope">
+        <subPane subId="Tests">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="dt">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src/test/java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="de/adesso/tools">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="util/func">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="dt">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src/test/java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="de/adesso/tools">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="common">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -567,54 +593,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Tests">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="dt">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src/test/java">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="de/adesso/tools">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="util/func">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="dt">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src/test/java">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="de/adesso/tools">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="common">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -981,7 +960,41 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="exception" />
+              <option name="myItemId" value="io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="io" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zip" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1641,7 +1654,8 @@
       <workItem from="1458828943086" duration="75257000" />
       <workItem from="1459512309752" duration="1738000" />
       <workItem from="1459514098388" duration="25603000" />
-      <workItem from="1459576114051" duration="46972000" />
+      <workItem from="1459576114051" duration="47051000" />
+      <workItem from="1459707565669" duration="1054000" />
     </task>
     <task id="LOCAL-00001" summary="Refactoring of Matrix functions">
       <created>1455475453269</created>
@@ -1745,7 +1759,13 @@
       <option name="project" value="LOCAL" />
       <updated>1459185642585</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="FileOpen and FileSaveAs implemented -&gt; Externalization does not work as expected!!">
+      <created>1459704316627</created>
+      <option name="number" value="00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1459704316627</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -1781,7 +1801,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="435772000" />
+    <option name="totallyTimeSpent" value="436905000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1798,32 +1818,32 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32316384" sideWeight="0.49573562" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55011135" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.240625" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32768363" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42937854" sideWeight="0.49413645" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299435" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24227902" sideWeight="0.4966118" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32468995" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31256655" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25559106" sideWeight="0.50338817" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40338984" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40338984" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32316384" sideWeight="0.49573562" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42937854" sideWeight="0.49413645" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32468995" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1850,7 +1870,8 @@
     <MESSAGE value="functions errors corrected and enhanced" />
     <MESSAGE value="Worked at MissingConditions -&gt; Not Finished!!" />
     <MESSAGE value="Formal Completeness Check ( extended ) integrated. Needs Rework!!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Formal Completeness Check ( extended ) integrated. Needs Rework!!" />
+    <MESSAGE value="FileOpen and FileSaveAs implemented -&gt; Externalization does not work as expected!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="FileOpen and FileSaveAs implemented -&gt; Externalization does not work as expected!!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -1952,23 +1973,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/exception/LambdaExceptionUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="99" column="5" selection-start-line="99" selection-start-column="5" selection-end-line="99" selection-end-column="5" />
-          <folding>
-            <element signature="e#5353#5383#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/io/Storer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1976,7 +1984,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="10" column="13" selection-start-line="10" selection-start-column="13" selection-end-line="10" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1984,7 +1991,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="31" column="25" selection-start-line="31" selection-start-column="17" selection-end-line="31" selection-end-column="35" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1992,7 +1998,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="32" column="6" selection-start-line="32" selection-start-column="6" selection-end-line="32" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2000,7 +2005,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="25" column="3" selection-start-line="25" selection-start-column="3" selection-end-line="25" selection-end-column="3" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2008,7 +2012,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="42" column="10" selection-start-line="42" selection-start-column="10" selection-end-line="42" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2016,7 +2019,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="41" column="13" selection-start-line="41" selection-start-column="13" selection-end-line="41" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2024,7 +2026,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.7068702">
           <caret line="165" column="21" selection-start-line="165" selection-start-column="21" selection-end-line="165" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2032,9 +2033,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="30" column="22" selection-start-line="30" selection-start-column="22" selection-end-line="30" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2042,9 +2040,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="19" column="164" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="164" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2052,7 +2047,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="31" column="10" selection-start-line="31" selection-start-column="10" selection-end-line="31" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2068,7 +2062,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.3333333">
           <caret line="11" column="22" selection-start-line="11" selection-start-column="17" selection-end-line="11" selection-end-column="32" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2076,7 +2069,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.4351146">
           <caret line="33" column="19" selection-start-line="33" selection-start-column="19" selection-end-line="33" selection-end-column="19" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2084,7 +2076,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.109970674">
           <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2092,9 +2083,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#966#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2102,7 +2090,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2110,7 +2097,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2118,7 +2104,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2153,7 +2138,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.48387095">
           <caret line="38" column="27" selection-start-line="38" selection-start-column="27" selection-end-line="38" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2161,7 +2145,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5498534">
           <caret line="39" column="69" selection-start-line="39" selection-start-column="69" selection-end-line="39" selection-end-column="69" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2169,7 +2152,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="93" column="30" selection-start-line="93" selection-start-column="30" selection-end-line="93" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2177,7 +2159,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2185,7 +2166,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5718475">
           <caret line="57" column="38" selection-start-line="57" selection-start-column="38" selection-end-line="57" selection-end-column="38" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2193,7 +2173,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="113" column="95" selection-start-line="113" selection-start-column="42" selection-end-line="113" selection-end-column="95" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2201,9 +2180,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="38" column="22" selection-start-line="38" selection-start-column="22" selection-end-line="38" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2211,7 +2187,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="76" column="17" selection-start-line="76" selection-start-column="17" selection-end-line="76" selection-end-column="17" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2219,7 +2194,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2235,7 +2209,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2243,7 +2216,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2344,7 +2316,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33333334">
           <caret line="45" column="22" selection-start-line="45" selection-start-column="22" selection-end-line="45" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2352,7 +2323,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.36477986">
           <caret line="162" column="21" selection-start-line="162" selection-start-column="21" selection-end-line="162" selection-end-column="21" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2398,12 +2368,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/io/DTDataPacket.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43396226">
+        <state vertical-scroll-proportion="0.0">
           <caret line="86" column="45" selection-start-line="86" selection-start-column="45" selection-end-line="86" selection-end-column="45" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#7652#7653#0" expanded="true" />
-            <element signature="e#7699#7700#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/io/zip/ZipUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.17927822">
+          <caret line="167" column="26" selection-start-line="167" selection-start-column="26" selection-end-line="167" selection-end-column="26" />
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
