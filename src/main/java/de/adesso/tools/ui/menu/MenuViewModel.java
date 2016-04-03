@@ -60,9 +60,19 @@ public class MenuViewModel implements ViewModel {
     private Event<CompleteReportEvent> completeReportEvent;
     @Inject
     private Event<StructuralAnalysisEvent> structuralAnalysisEvent;
+    @Inject
+    private Event<FileNewEvent> fileNewEvent;
+    @Inject
+    private Event<FileOpenEvent> fileOpenEvent;
+    @Inject
+    private Event<FileSaveAsEvent> fileSaveAsEvent;
+    @Inject
+    private Event<FileSaveEvent> fileSaveEvent;
+
 
     @InjectScope
     private RuleScope mdScope;
+
 
     public void initialize() {
         //removeItemDisabled.bind(mdScope.selectedContactProperty().isNull());
@@ -154,5 +164,21 @@ public class MenuViewModel implements ViewModel {
 
     public void structuralAnalysisAction() {
         structuralAnalysisEvent.fire(new StructuralAnalysisEvent());
+    }
+
+    public void fileNew() {
+        fileNewEvent.fire(new FileNewEvent());
+    }
+
+    public void fileOpen() {
+        fileOpenEvent.fire(new FileOpenEvent());
+    }
+
+    public void fileSave() {
+        fileSaveEvent.fire(new FileSaveEvent());
+    }
+
+    public void fileSaveAs() {
+        fileSaveAsEvent.fire(new FileSaveAsEvent());
     }
 }

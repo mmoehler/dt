@@ -127,18 +127,22 @@ public class MenuView implements FxmlView<MenuViewModel> {
 
     @FXML
     public void doFileNew(ActionEvent actionEvent) {
+        viewModel.fileNew();
     }
 
     @FXML
     public void doFileOpen(ActionEvent actionEvent) {
+        viewModel.fileOpen();
     }
 
     @FXML
     public void doFileSave(ActionEvent actionEvent) {
+        viewModel.fileSave();
     }
 
     @FXML
     public void doFileSaveAs(ActionEvent actionEvent) {
+        viewModel.fileSaveAs();
     }
 
     @FXML

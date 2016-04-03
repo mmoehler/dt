@@ -19,6 +19,7 @@
 
 package de.adesso.tools.ui.main;
 
+import de.adesso.tools.exception.ExceptionHandler;
 import de.adesso.tools.functions.DtFunctions;
 import de.adesso.tools.model.ActionDecl;
 import de.adesso.tools.model.ConditionDecl;
@@ -45,8 +46,11 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.stage.FileChooser;
 
 import javax.inject.Inject;
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -74,13 +78,17 @@ public class MainView implements FxmlView<MainViewModel> {
     public TableView<ActionDeclTableViewModel> actionDeclarationsTable;
     @FXML
     public TableView actionDefinitionsTable;
-    @Inject
-    private NotificationCenter notificationCenter;
     @FXML
     private TextArea console;
     @InjectViewModel
     private MainViewModel viewModel;
+    @Inject
+    private NotificationCenter notificationCenter;
+    @Inject
+    private ExceptionHandler exceptionHandler;
+
     private String lastKey = null;
+    private FileChooser fileChooser;
 
     public MainView() {
         super();
@@ -112,7 +120,7 @@ public class MainView implements FxmlView<MainViewModel> {
     public void initialize() {
         initializeDividerSynchronization();
         intializeTableViewScrolling();
-        initializeConditionDeclTable();
+        initializeDeclTables();
         initializeObservers();
     }
 
@@ -138,6 +146,52 @@ public class MainView implements FxmlView<MainViewModel> {
         this.viewModel.subscribe(Notifications.MOVE_RULE_RIGHT.name(), this::doMoveRuleRight);
         this.viewModel.subscribe(Notifications.ADD_ELSE_RULE.name(), this::doAddElseRule);
 
+        this.viewModel.subscribe(Notifications.FILE_OPEN.name(), this::doFileOpen);
+        this.viewModel.subscribe(Notifications.FILE_SAVE_AS.name(), this::doFileSaveAs);
+
+    }
+
+    public FileChooser getFileChooser() {
+        if (this.fileChooser == null) {
+            this.fileChooser = new FileChooser();
+        }
+        return fileChooser;
+    }
+
+    private void doFileOpen(String key, Object[] value) {
+        configureFileChooser(getFileChooser(), "Open DTMG File");
+        File file = getFileChooser().showOpenDialog(this.actionSplitPane.getScene().getWindow());
+        if (file != null) {
+            if (file != null) {
+                try {
+                    viewModel.openFile(file);
+                } catch (IOException | ClassNotFoundException e) {
+                    exceptionHandler.showAndWaitAlert(e);
+                    return;
+                }
+            }
+
+        }
+    }
+
+    private void doFileSaveAs(String key, Object[] value) {
+        configureFileChooser(getFileChooser(), "Save DTMG File");
+        File file = getFileChooser().showSaveDialog(this.actionSplitPane.getScene().getWindow());
+        if (file != null) {
+            try {
+                viewModel.saveFile(file);
+            } catch (IOException e) {
+                exceptionHandler.showAndWaitAlert(e);
+                return;
+            }
+        }
+    }
+
+    private static void configureFileChooser(final FileChooser fileChooser, String title) {
+        fileChooser.setTitle(title);
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        FileChooser.ExtensionFilter dtmExtFilter = new FileChooser.ExtensionFilter("DTMG files (*.dtm)", "*.dtm");
+        fileChooser.getExtensionFilters().add(dtmExtFilter);
     }
 
     private void doAddElseRule(String key, Object[] value) {
@@ -158,14 +212,14 @@ public class MainView implements FxmlView<MainViewModel> {
 
     private OptionalInt getIndex(Object[] o) {
         OptionalInt index = OptionalInt.empty();
-        if(null != o && o.length > 0) {
-            index = OptionalInt.of((Integer)o[0]);
+        if (null != o && o.length > 0) {
+            index = OptionalInt.of((Integer) o[0]);
         }
         return index;
     }
 
     private void doMoveConditionDeclDown(String key, Object[] value) {
-        doMoveRows(this.conditionDeclarationsTable,this.conditionDefinitionsTable, getIndex(value), DIR_DOWN);
+        doMoveRows(this.conditionDeclarationsTable, this.conditionDefinitionsTable, getIndex(value), DIR_DOWN);
         updateRowHeader();
     }
 
@@ -223,7 +277,7 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     private void doInsRule(String key, Object[] value) {
-        doInsertColumns(this.conditionDefinitionsTable, this.actionDefinitionsTable, getIndex(value), QMARK_SUPPLIER);
+        doInsertColumns(this.conditionDefinitionsTable, this.actionDefinitionsTable, getIndex(value), QMARK_SUPPLIER, DASH_SUPPLIER);
         updateColHeaders(this.conditionDefinitionsTable);
         updateColHeaders(this.actionDefinitionsTable);
 
@@ -323,7 +377,7 @@ public class MainView implements FxmlView<MainViewModel> {
         this.actionDefinitionsTable.setItems(viewModel.initializeActionDefnsData(countColumns));
     }
 
-    protected void initializeConditionDeclTable() {
+    protected void initializeDeclTables() {
         this.conditionDeclarationsTable.setEditable(true);
         this.conditionDeclarationsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         this.conditionDeclarationsTable.getSelectionModel().setCellSelectionEnabled(true);

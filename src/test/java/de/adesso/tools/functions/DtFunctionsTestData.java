@@ -53,6 +53,10 @@ public class DtFunctionsTestData {
         return new ConditionDeclTableViewBuilder();
     }
 
+    public static ActionDeclTableViewBuilder actionDeclTableViewBuilder() {
+        return new ActionDeclTableViewBuilder();
+    }
+
 
     public static ConditionDeclTableViewModelListBuilder conditionDeclTableViewModelListBuilder() {
         return new ConditionDeclTableViewModelListBuilder();

@@ -17,13 +17,38 @@
  * under the License.
  */
 
-package de.adesso.tools.analysis.structure;
+package de.adesso.tools.exception;
 
-import java.util.List;
+import java.io.IOException;
 
 /**
  * Created by mmoehler on 02.04.16.
  */
-public interface StructuralAnalysis {
-    List<Indicator> apply(List<List<String>> conditions, List<List<String>> actions);
+public final class IOExceptionSmuggler extends RuntimeException {
+
+    private static final long serialVersionUID = 8097255748374438402L;
+
+    private IOException target;
+
+    private IOExceptionSmuggler() {
+        super((Throwable) null);  // Disallow initCause
+    }
+
+    public IOExceptionSmuggler(IOException target) {
+        super((IOException) null);  // Disallow initCause
+        this.target = target;
+    }
+
+    public IOExceptionSmuggler(IOException target, String s) {
+        super(s, null);  // Disallow initCause
+        this.target = target;
+    }
+
+    public IOException getTargetException() {
+        return target;
+    }
+
+    public IOException getCause() {
+        return target;
+    }
 }

@@ -26,17 +26,20 @@ import de.adesso.tools.model.ActionDecl;
 /**
  * Created by mmoehler on 06.03.16.
  */
-class ActionDeclBuilder<C> extends AbstractSubBuilder<ActionDecl, C> {
+public class ActionDeclBuilder<C> extends AbstractSubBuilder<ActionDecl, C> {
     private final String lfdNr;
     private String expression;
     private String indicators;
-
 
     public ActionDeclBuilder(String lfdNr, C caller, Callback<ActionDecl> callback) {
         super(caller, callback);
         this.lfdNr = lfdNr;
     }
 
+    @Override
+    public ActionDecl build() {
+        return new ActionDecl(lfdNr, expression, indicators);
+    }
 
     public ActionDeclBuilder<C> withExpression(String expression) {
         this.expression = expression;
@@ -46,22 +49,7 @@ class ActionDeclBuilder<C> extends AbstractSubBuilder<ActionDecl, C> {
     public C withIndicators(String possibleIndicators) {
         this.indicators = possibleIndicators;
         getCallback().call(build());
-        return this.caller;
+        return getCaller();
     }
 
-    @Override
-    public C getCaller() {
-        return super.getCaller();
-    }
-
-    @Override
-    public Callback<ActionDecl> getCallback() {
-        return super.getCallback();
-    }
-
-    @Override
-    public ActionDecl build() {
-        return new ActionDecl(lfdNr, expression, indicators);
-    }
 }
-

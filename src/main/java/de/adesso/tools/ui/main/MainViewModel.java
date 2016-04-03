@@ -1,9 +1,12 @@
 package de.adesso.tools.ui.main;
 
 import com.codepoetics.protonpack.Indexed;
-import de.adesso.tools.Dump;
+import de.adesso.tools.analysis.structure.AnalysisResultEmitter;
+import de.adesso.tools.analysis.structure.Indicator;
+import de.adesso.tools.analysis.structure.StructuralAnalysis;
 import de.adesso.tools.events.*;
 import de.adesso.tools.functions.MatrixFunctions;
+import de.adesso.tools.io.DTDataPacket;
 import de.adesso.tools.model.ActionDecl;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
@@ -18,6 +21,7 @@ import org.slf4j.LoggerFactory;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.io.*;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -32,9 +36,9 @@ import static de.adesso.tools.ui.Notifications.*;
 public class MainViewModel implements ViewModel {
 
     public static final String QMARK = "?";
-    public static final String EMPTY = "";
     public static final Object[] NO_ARGS = {};
     public static final String COND_ROW_HEADER = "C%02d";
+    public static final String DASH = "-";
     private static final Logger LOG = LoggerFactory.getLogger(MainViewModel.class);
     private static final String ACT_ROW_HEADER = "A%02d";
     private static String TPL2 = "RULE %04d NOT DEFINED %s";
@@ -42,8 +46,17 @@ public class MainViewModel implements ViewModel {
     private final ObservableList<ObservableList<String>> conditionDefinitions = FXCollections.observableArrayList();
     private final ObservableList<ActionDeclTableViewModel> actionDeclarations = FXCollections.observableArrayList();
     private final ObservableList<ObservableList<String>> actionDefinitions = FXCollections.observableArrayList();
+    private final DTDataPacket data = new DTDataPacket(conditionDeclarations,conditionDefinitions,actionDeclarations,actionDefinitions);
+
+
     @Inject
     private NotificationCenter notificationCenter;
+
+    @Inject
+    private StructuralAnalysis structuralAnalysis;
+
+    @Inject
+    private AnalysisResultEmitter resultEmitter;
 
     public MainViewModel() {
         super();
@@ -85,7 +98,7 @@ public class MainViewModel implements ViewModel {
     public void onAddRuleDef(@Observes AddRuleDefEvent event) {
         List<List<String>> newDefns = MatrixFunctions.addColumn(adapt(this.conditionDefinitions), () -> QMARK);
         this.conditionDefinitions.clear();
-        List<List<String>> newDefns0 = MatrixFunctions.addColumn(adapt(this.actionDefinitions), () -> QMARK);
+        List<List<String>> newDefns0 = MatrixFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
         this.actionDefinitions.clear();
         publish(ADD_RULE.name(), adapt(newDefns), adapt(newDefns0));
     }
@@ -144,27 +157,16 @@ public class MainViewModel implements ViewModel {
             if (!this.conditionDefinitions.isEmpty()) {
                 final int countColumns = this.conditionDefinitions.get(0).size();
                 List<String> indicators = IntStream.range(0, countColumns)
-                        .mapToObj(k -> "?")
+                        .mapToObj(k -> DASH)
                         .collect(Collectors.toList());
                 newDefns.add(indicators);
             }
         } else {
-            newDefns = MatrixFunctions.addRow(adapt(this.actionDefinitions), () -> QMARK);
+            newDefns = MatrixFunctions.addRow(adapt(this.actionDefinitions), () -> DASH);
 
         }
         this.actionDefinitions.clear();
         adapt(newDefns).stream().forEach(this.actionDefinitions::add);
-
-        Dump.dumpTableItems("CON", this.conditionDefinitions);
-        Dump.dumpTableItems("ACT", this.actionDefinitions);
-
-    }
-
-    public void onSimpleCompletenessCheck(@Observes FormalCompletenessCheckEvent event) {
-        final List<Indexed<List<String>>> result = isFormalComplete(this.conditionDeclarations, this.conditionDefinitions);
-        final StringBuilder message = new StringBuilder();
-        result.forEach(i -> message.append(String.format(TPL2, i.getIndex(), String.join(",", i.getValue()))).append(System.lineSeparator()));
-        notificationCenter.publish(PREPARE_CONSOLE.name(), message.toString());
     }
 
     public void onRemoveConditionDecl(@Observes RemoveConditionDeclEvent event) {
@@ -218,7 +220,7 @@ public class MainViewModel implements ViewModel {
     public void onAddElseRule(@Observes AddElseRuleEvent event) {
         List<List<String>> newDefns = MatrixFunctions.addColumn(adapt(this.conditionDefinitions), () -> QMARK);
         this.conditionDefinitions.clear();
-        List<List<String>> newDefns0 = MatrixFunctions.addColumn(adapt(this.actionDefinitions), () -> QMARK);
+        List<List<String>> newDefns0 = MatrixFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
         this.actionDefinitions.clear();
         publish(ADD_ELSE_RULE.name(), adapt(newDefns), adapt(newDefns0));
     }
@@ -233,7 +235,12 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onFormalCompletenessCheckAction(@Observes FormalCompletenessCheckEvent event) {
+        notificationCenter.publish(PREPARE_CONSOLE.name(), internalFormalCompletenessCheck());
+    }
 
+    private String internalFormalCompletenessCheck() {
+        final List<Indexed<List<String>>> result = isFormalComplete(this.conditionDeclarations, this.conditionDefinitions);
+        return resultEmitter.emitFormalCompletenessCheckResults().apply(result);
     }
 
     public void onConsolidateRulesAction(@Observes ConsolidateRulesEvent event) {
@@ -241,10 +248,46 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onCompleteReportAction(@Observes CompleteReportEvent event) {
-
+        final String part1 = internalStructuralAnalysis();
+        final String part2 = internalFormalCompletenessCheck();
+        notificationCenter.publish(PREPARE_CONSOLE.name(), part1 + System.lineSeparator() + part2);
     }
 
     public void onStructuralAnalysisAction(@Observes StructuralAnalysisEvent event) {
+        notificationCenter.publish(PREPARE_CONSOLE.name(), internalStructuralAnalysis());
+    }
 
+    private String internalStructuralAnalysis() {
+        List<Indicator> result = structuralAnalysis.apply(adapt(this.conditionDefinitions), adapt(this.actionDefinitions));
+        return resultEmitter.emitStructuralAnalysisResult().apply(result, this.conditionDefinitions.get(0).size());
+    }
+
+    public void onFileNewAction(@Observes FileNewEvent event) {
+
+    }
+
+    public void onFileOpenAction(@Observes FileOpenEvent event) {
+        publish(FILE_OPEN.name(), NO_ARGS);
+    }
+
+    public void onFileSaveAsAction(@Observes FileSaveAsEvent event) {
+        publish(FILE_SAVE_AS.name(), NO_ARGS);
+    }
+
+    public void onFileSaveAction(@Observes FileSaveEvent event) {
+
+    }
+
+    public void openFile(File file) throws IOException, ClassNotFoundException {
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))){
+            this.data.readExternal(in);
+        }
+    }
+
+    public void saveFile(File file) throws IOException {
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))){
+            this.data.writeExternal(out);
+            out.flush();
+        }
     }
 }

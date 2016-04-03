@@ -17,13 +17,10 @@
  * under the License.
  */
 
-package de.adesso.tools.analysis.structure;
-
-import java.util.List;
+package de.adesso.tools.events;
 
 /**
- * Created by mmoehler on 02.04.16.
+ * CDI event class that is used to indicate that a contact was updated/added/removed.
  */
-public interface StructuralAnalysis {
-    List<Indicator> apply(List<List<String>> conditions, List<List<String>> actions);
+public class FileOpenEvent {
 }

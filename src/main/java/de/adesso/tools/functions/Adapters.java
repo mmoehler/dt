@@ -56,11 +56,11 @@ public class Adapters {
 
     public static class Lists {
 
-        public static List<String> adapt(ObservableList<String> adaptee) {
+        public static <T> List<T> adapt(ObservableList<T> adaptee) {
             return adaptee.stream().collect(Collectors.toList());
         }
 
-        public static ObservableList<String> adapt(List<String> adaptee) {
+        public static <T> ObservableList<T> adapt(List<T> adaptee) {
             return adaptee.stream().collect(Collectors.toCollection(FXCollections::observableArrayList));
         }
 

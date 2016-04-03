@@ -19,11 +19,22 @@
 
 package de.adesso.tools.analysis.structure;
 
+import org.testng.annotations.Test;
+
+import java.util.Arrays;
 import java.util.List;
 
+import static de.adesso.tools.analysis.structure.Indicators.*;
+
 /**
- * Created by mmoehler on 02.04.16.
+ * Created by mmoehler on 01.04.16.
  */
-public interface StructuralAnalysis {
-    List<Indicator> apply(List<List<String>> conditions, List<List<String>> actions);
+public class StructuralAnalysisResultEmitterTest {
+
+    @Test
+    public void testApply() throws Exception {
+        final  List<Indicator> result = Arrays.asList(GT,MI,MI,AS,MI,XX);
+        String message = new StructuralAnalysisResultEmitter().apply(result, 4);
+        System.out.println(message);
+    }
 }

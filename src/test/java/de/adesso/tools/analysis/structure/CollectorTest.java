@@ -69,6 +69,9 @@ public class CollectorTest {
         // -- Condition comparison ---------------------------------
 
         final List<List<String>> inConditions = MatrixBuilder.on("Y,Y,Y,-,-,N,N,N,-,-,-,N,Y,Y,N,N").dim(4, 4).transposed().build();
+
+        Dump.dumpTableItems("conditions = ", inConditions);
+
         final List<List<Indicator>> outConditions = new ArrayList<>();
 
         for (int i = 0; i < inConditions.size() - 1; i++) {
@@ -148,12 +151,19 @@ public class CollectorTest {
 
     @Test
     public void comparisonCollectorTest() {
-        final List<List<String>> inConditions = MatrixBuilder.on("Y,Y,Y,-,-,N,N,N,-,-,-,N,Y,Y,N,N").dim(4, 4).transposed().build();
-        final List<List<String>> inActions = MatrixBuilder.on("-,-,-,-,X,X,X,-,X,-,-,X,-,X,X,-").dim(4, 4).transposed().build();
-        final List<Indicator> result = new StructuralAnalysis().apply(inConditions, inActions);
+        final List<List<String>> inConditions = MatrixBuilder
+                .on("Y,Y,Y,-,-,N,N,N,-,-,-,N,Y,Y,N,N")
+                .dim(4, 4)
+                .build();
 
-        Dump.dumpList1DItems("RESULT", result);
-        dumpResult(result);
+        final List<List<String>> inActions = MatrixBuilder
+                .on("-,-,-,-,X,X,X,-,X,-,-,X,-,X,X,-")
+                .dim(4, 4)
+                .build();
+
+        //final List<Indicator> result = DefaultStructuralAnalysis.INSTANCE.apply(inConditions, inActions);
+
+        //dumpResult(result);
 
     }
 

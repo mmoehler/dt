@@ -51,13 +51,14 @@ import static java.util.stream.Collectors.toList;
  */
 public final class DtFunctions {
 
-    public static final String EMPTY_STRING = "";
-    public static final String IRRELEVANT = "-";
     public static final String SPLITEX = "[,;]";
     public static final String QMARK = "?";
+    public static final String DASH = "-";
     public static final String RULE_HEADER = "R%02d";
     public static final String ELSE_RULE_HEADER = "ELSE";
-    public static final Supplier<String> QMARK_SUPPLIER = () -> "?";
+    public static final Supplier<String> QMARK_SUPPLIER = () -> QMARK;
+    public static final Supplier<String> DASH_SUPPLIER = () -> DASH;
+
 
     public static boolean DIR_DOWN = true;
     public static boolean DIR_RIGHT = DIR_DOWN;
@@ -203,7 +204,8 @@ public final class DtFunctions {
     public static void doInsertColumns(TableView conditionTable,
                                        TableView actionTable,
                                        OptionalInt value,
-                                       Supplier<String> defaultDefValue) {
+                                       Supplier<String> conditionDefValue,
+                                       Supplier<String> actionDefValue) {
 
         final OptionalInt index = determineColumnIndex(conditionTable, actionTable, value);
         if (index.isPresent()) {
@@ -221,9 +223,9 @@ public final class DtFunctions {
             });
 
             final List<? extends List<String>> newConDefs =
-                    insertColumnsAt(oldConDefs, index.getAsInt(), defaultDefValue);
+                    insertColumnsAt(oldConDefs, index.getAsInt(), conditionDefValue);
             final List<? extends List<String>> newActDefs =
-                    insertColumnsAt(oldActDefs, index.getAsInt(), defaultDefValue);
+                    insertColumnsAt(oldActDefs, index.getAsInt(), actionDefValue);
 
             oldConDefs.clear();
             newConDefs.forEach(oldConDefs::add);

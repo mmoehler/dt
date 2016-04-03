@@ -350,7 +350,7 @@ public class DtFunctionsTest {
                 .build();
 
 
-        doInsertColumns(/*conditionDef,actionDef,*/conditionDefTab, actionDefTab, OptionalInt.empty(), QMARK_SUPPLIER);
+        doInsertColumns(/*conditionDef,actionDef,*/conditionDefTab, actionDefTab, OptionalInt.empty(), QMARK_SUPPLIER, DASH_SUPPLIER);
 
 
         ObservableList<ObservableList<String>> expConditionDef = observable(on("Y,Y,N,?,N,Y,N,Y,?,N").dim(2, 5).build());

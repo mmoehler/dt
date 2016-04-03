@@ -101,4 +101,8 @@ public class ActionDeclTableViewModel implements PossibleIndicatorsSupplier, Dec
 
     }
 
+    public ActionDecl getModel() {
+        return this.wrapper.get();
+    }
+
 }

@@ -19,11 +19,19 @@
 
 package de.adesso.tools.analysis.structure;
 
+import com.codepoetics.protonpack.Indexed;
+
 import java.util.List;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 /**
  * Created by mmoehler on 02.04.16.
  */
-public interface StructuralAnalysis {
-    List<Indicator> apply(List<List<String>> conditions, List<List<String>> actions);
+public interface AnalysisResultEmitter {
+
+    BiFunction<List<Indicator>, Integer, String> emitStructuralAnalysisResult();
+
+    Function<List<Indexed<List<String>>>, String> emitFormalCompletenessCheckResults();
+
 }

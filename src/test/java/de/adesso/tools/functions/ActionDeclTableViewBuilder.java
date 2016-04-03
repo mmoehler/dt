@@ -19,37 +19,23 @@
 
 package de.adesso.tools.functions;
 
-import de.adesso.tools.functions.chainded.AbstractSubBuilder;
-import de.adesso.tools.functions.chainded.Callback;
-import de.adesso.tools.model.ConditionDecl;
+import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 
 /**
  * Created by mmoehler on 06.03.16.
  */
-public class ConditionDeclBuilder<C> extends AbstractSubBuilder<ConditionDecl, C> {
-    private final String lfdNr;
-    private String expression;
-    private String indicators;
+public class ActionDeclTableViewBuilder extends TableViewBuilder<ActionDeclTableViewModel> {
 
-    public ConditionDeclBuilder(String lfdNr, C caller, Callback<ConditionDecl> callback) {
-        super(caller, callback);
-        this.lfdNr = lfdNr;
+    public ActionDeclTableViewBuilder() {
+    }
+
+    public ActionDeclBuilder<ActionDeclTableViewBuilder> addModelWithLfdNbr(String number) {
+        return new ActionDeclBuilder<>(number, this,
+                (c) -> tableView.getItems().add(new ActionDeclTableViewModel(c)));
     }
 
     @Override
-    public ConditionDecl build() {
-        return new ConditionDecl(lfdNr, expression, indicators);
+    protected int getColCount() {
+        return 4;
     }
-
-    public ConditionDeclBuilder<C> withExpression(String expression) {
-        this.expression = expression;
-        return this;
-    }
-
-    public C withIndicators(String possibleIndicators) {
-        this.indicators = possibleIndicators;
-        getCallback().call(build());
-        return getCaller();
-    }
-
 }

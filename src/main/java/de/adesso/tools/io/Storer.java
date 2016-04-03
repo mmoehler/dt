@@ -17,13 +17,23 @@
  * under the License.
  */
 
-package de.adesso.tools.analysis.structure;
+package de.adesso.tools.io;
 
+import java.beans.XMLEncoder;
+import java.io.ByteArrayOutputStream;
+import java.io.OutputStream;
 import java.util.List;
 
 /**
- * Created by mmoehler on 02.04.16.
+ * Created by mmoehler on 01.04.16.
  */
-public interface StructuralAnalysis {
-    List<Indicator> apply(List<List<String>> conditions, List<List<String>> actions);
+public class Storer {
+    public void store(List<List<String>> conditionDefns) {
+        OutputStream os = new ByteArrayOutputStream(1024);
+        XMLEncoder encoder = new XMLEncoder(os);
+        encoder.writeObject(conditionDefns);
+    }
+
+
+
 }
