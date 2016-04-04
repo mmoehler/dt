@@ -46,8 +46,9 @@ public class ActionDeclTableViewModel implements PossibleIndicatorsSupplier, Dec
     }
 
     @Override
-    public void save() {
+    public ActionDeclTableViewModel save() {
         this.wrapper.commit();
+        return this;
     }
 
     @Override

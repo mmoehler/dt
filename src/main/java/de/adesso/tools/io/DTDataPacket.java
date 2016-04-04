@@ -78,13 +78,44 @@ public class DTDataPacket implements Externalizable {
     }
 
     @Override
+    public void writeExternal(ObjectOutput out) throws IOException {
+        final int crows = conditionDefinitions.size();
+        final int arows = actionDefinitions.size();
+        final int cols = conditionDefinitions.get(0).size();
+
+        out.writeInt(crows);
+        out.writeInt(arows);
+        out.writeInt(cols);
+
+        writeConditionsExternal(out, crows, cols);
+        writeActionsExternal(out, arows, cols);
+    }
+
+
+    @Override
     public void readExternal(ObjectInput in) throws IOException, ClassNotFoundException {
-        final int arows = in.readInt();
         final int crows = in.readInt();
+        final int arows = in.readInt();
         final int cols = in.readInt();
 
         readConditionsExternal(in, crows, cols);
         readActionsExternal(in, arows, cols);
+    }
+
+    private void writeConditionsExternal(ObjectOutput out, int rows, int cols) throws IOException {
+
+        IntStream.range(0, rows).forEach(rethrowIntConsumer(i -> {
+            ConditionDecl model = conditionDeclarations.get(i).save().getModel();
+            out.writeUTF(model.getLfdNr());
+            out.writeUTF(model.getExpression());
+            out.writeUTF(model.getPossibleIndicators());
+        }));
+
+        IntStream.range(0, rows)
+                .forEach(rethrowIntConsumer(i -> IntStream.range(0, cols)
+                        .forEach(rethrowIntConsumer(j -> {
+                            out.writeUTF(conditionDefinitions.get(i).get(j));
+                        }))));
     }
 
     private void readConditionsExternal(ObjectInput in, int rows, int cols) throws IOException {
@@ -106,6 +137,7 @@ public class DTDataPacket implements Externalizable {
             final String lfdnr = in.readUTF();
             final String expr = in.readUTF();
             final String posind = in.readUTF();
+
             return new ActionDeclTableViewModel(new ActionDecl(lfdnr, expr, posind));
         })).forEach(k -> actionDeclarations.add(k));
 
@@ -116,41 +148,10 @@ public class DTDataPacket implements Externalizable {
         }));
     }
 
-
-    @Override
-    public void writeExternal(ObjectOutput out) throws IOException {
-        final int crows = conditionDefinitions.size();
-        final int arows = actionDefinitions.size();
-        final int cols = conditionDefinitions.get(0).size();
-
-        out.writeInt(crows);
-        out.writeInt(arows);
-        out.writeInt(cols);
-
-        writeConditionsExternal(out, crows, cols);
-        writeActionsExternal(out, arows, cols);
-    }
-
-    private void writeConditionsExternal(ObjectOutput out, int rows, int cols) throws IOException {
-
-        IntStream.range(0, rows).forEach(rethrowIntConsumer(i -> {
-            ConditionDecl model = conditionDeclarations.get(i).getModel();
-            out.writeUTF(model.getLfdNr());
-            out.writeUTF(model.getExpression());
-            out.writeUTF(model.getPossibleIndicators());
-        }));
-
-        IntStream.range(0, rows)
-                .forEach(rethrowIntConsumer(i -> IntStream.range(0, cols)
-                        .forEach(rethrowIntConsumer(j -> {
-                            out.writeUTF(conditionDefinitions.get(i).get(j));
-                        }))));
-    }
-
     private void writeActionsExternal(ObjectOutput out, int rows, int cols) throws IOException {
 
         IntStream.range(0, rows).forEach(rethrowIntConsumer(i -> {
-            ActionDecl model = actionDeclarations.get(i).getModel();
+            ActionDecl model = actionDeclarations.get(i).save().getModel();
             out.writeUTF(model.getLfdNr());
             out.writeUTF(model.getExpression());
             out.writeUTF(model.getPossibleIndicators());
@@ -162,7 +163,6 @@ public class DTDataPacket implements Externalizable {
                             out.writeUTF(actionDefinitions.get(i).get(j));
                         }))));
     }
-
 
     public ObservableList<ObservableList<String>> getConditionDefinitions() {
         return conditionDefinitions;
@@ -182,6 +182,17 @@ public class DTDataPacket implements Externalizable {
 
     public void reset() {
         allData.forEach(d -> d.clear());
+    }
+
+    public void become(DTDataPacket other) {
+        this.conditionDeclarations.clear();
+        other.conditionDeclarations.forEach(this.conditionDeclarations::add);
+        this.conditionDefinitions.clear();
+        other.conditionDefinitions.forEach(this.conditionDefinitions::add);
+        this.actionDeclarations.clear();
+        other.actionDeclarations.forEach(this.actionDeclarations::add);
+        this.actionDefinitions.clear();
+        other.actionDefinitions.forEach(this.actionDefinitions::add);
     }
 
 }

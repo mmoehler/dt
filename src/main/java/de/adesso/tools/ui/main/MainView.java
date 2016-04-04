@@ -148,7 +148,17 @@ public class MainView implements FxmlView<MainViewModel> {
 
         this.viewModel.subscribe(Notifications.FILE_OPEN.name(), this::doFileOpen);
         this.viewModel.subscribe(Notifications.FILE_SAVE_AS.name(), this::doFileSaveAs);
+        //this.viewModel.subscribe(Notifications.PREPARE_COLUMNS_AFTER_LOAD.name(), this::doPrepareColumnsDuringFileOpen);
 
+    }
+
+    private void doPrepareColumnsDuringFileOpen(String s, Object... objects) {
+        int countColumns = ((Integer)objects[0]).intValue();
+        initializeConditionDefinitionTableColumns(countColumns);
+        this.conditionDefinitionsTable.getItems().clear();
+
+        //initializeActionDefinitionTableColumns(countColumns);
+        this.actionDefinitionsTable.getItems().clear();
     }
 
     public FileChooser getFileChooser() {
@@ -164,13 +174,28 @@ public class MainView implements FxmlView<MainViewModel> {
         if (file != null) {
             if (file != null) {
                 try {
-                    viewModel.openFile(file);
+                    final int countColumns = viewModel.openFile(file);
+
+                    conditionDefinitionsTable.getColumns().clear();
+                    final int cols = Math.min(determineMaxColumns(viewModel.getConditionDeclarations()), countColumns);
+                    IntStream.range(0, cols)
+                            .mapToObj(DtFunctions::createTableColumn)
+                            .forEach(a -> conditionDefinitionsTable.getColumns().add(a));
+                    conditionDefinitionsTable.refresh();
+
+                    actionDefinitionsTable.getColumns().clear();
+                    IntStream.range(0, cols)
+                            .mapToObj(DtFunctions::createTableColumn)
+                            .forEach(a -> actionDefinitionsTable.getColumns().add(a));
+                    actionDefinitionsTable.refresh();
+
+                    viewModel.refreshData();
+
                 } catch (IOException | ClassNotFoundException e) {
                     exceptionHandler.showAndWaitAlert(e);
                     return;
                 }
             }
-
         }
     }
 

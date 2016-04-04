@@ -35,5 +35,5 @@ public interface DeclarationTableViewModel {
 
     boolean isValid();
 
-    void save();
+    DeclarationTableViewModel save();
 }

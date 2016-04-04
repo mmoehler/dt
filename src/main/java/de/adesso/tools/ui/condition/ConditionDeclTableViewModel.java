@@ -55,10 +55,11 @@ public class ConditionDeclTableViewModel implements PossibleIndicatorsSupplier, 
     }
 
     @Override
-    public void save() {
+    public ConditionDeclTableViewModel save() {
         if (someValidation) {
             wrapper.commit();
         }
+        return this;
     }
 
     @Override
