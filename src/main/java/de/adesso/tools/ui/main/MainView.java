@@ -55,15 +55,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
+import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 import static de.adesso.tools.functions.DtFunctions.*;
 
 public class MainView implements FxmlView<MainViewModel> {
 
-    private static final String ACT_ROW_HEADER = "A%02d";
     public static final String COND_ROW_HEADER = "C%02d";
-
+    private static final String ACT_ROW_HEADER = "A%02d";
     private final DoubleProperty conditionDividerPos = new SimpleDoubleProperty();
     private final DoubleProperty actionDividerPos = new SimpleDoubleProperty();
     @FXML
@@ -94,7 +94,7 @@ public class MainView implements FxmlView<MainViewModel> {
         super();
     }
 
-    private static <T extends DeclarationTableViewModel> void initializeDeclTableColumns(TableView<T> table) {
+    private static <T extends DeclarationTableViewModel> void initializeDeclarationTablesColumns(TableView<T> table) {
         List<TableColumn<T, String>> l = new ArrayList<>();
         l.add(createTableColumn("#", "lfdNr", 40, 40, 40, false, Pos.CENTER,
                 (TableColumn.CellEditEvent<T, String> evt) -> evt.getTableView().getItems().get(evt.getTablePosition().getRow())
@@ -117,10 +117,17 @@ public class MainView implements FxmlView<MainViewModel> {
         return true;
     }
 
+    private static void configureFileChooser(final FileChooser fileChooser, String title) {
+        fileChooser.setTitle(title);
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        FileChooser.ExtensionFilter dtmExtFilter = new FileChooser.ExtensionFilter("DTMG files (*.dtm)", "*.dtm");
+        fileChooser.getExtensionFilters().add(dtmExtFilter);
+    }
+
     public void initialize() {
         initializeDividerSynchronization();
         intializeTableViewScrolling();
-        initializeDeclTables();
+        initializeDeclarationTables();
         initializeObservers();
     }
 
@@ -148,20 +155,9 @@ public class MainView implements FxmlView<MainViewModel> {
 
         this.viewModel.subscribe(Notifications.FILE_OPEN.name(), this::doFileOpen);
         this.viewModel.subscribe(Notifications.FILE_SAVE_AS.name(), this::doFileSaveAs);
-        //this.viewModel.subscribe(Notifications.PREPARE_COLUMNS_AFTER_LOAD.name(), this::doPrepareColumnsDuringFileOpen);
-
     }
 
-    private void doPrepareColumnsDuringFileOpen(String s, Object... objects) {
-        int countColumns = ((Integer)objects[0]).intValue();
-        initializeConditionDefinitionTableColumns(countColumns);
-        this.conditionDefinitionsTable.getItems().clear();
-
-        //initializeActionDefinitionTableColumns(countColumns);
-        this.actionDefinitionsTable.getItems().clear();
-    }
-
-    public FileChooser getFileChooser() {
+    private FileChooser getFileChooser() {
         if (this.fileChooser == null) {
             this.fileChooser = new FileChooser();
         }
@@ -175,22 +171,8 @@ public class MainView implements FxmlView<MainViewModel> {
             if (file != null) {
                 try {
                     final int countColumns = viewModel.openFile(file);
-
-                    conditionDefinitionsTable.getColumns().clear();
-                    final int cols = Math.min(determineMaxColumns(viewModel.getConditionDeclarations()), countColumns);
-                    IntStream.range(0, cols)
-                            .mapToObj(DtFunctions::createTableColumn)
-                            .forEach(a -> conditionDefinitionsTable.getColumns().add(a));
-                    conditionDefinitionsTable.refresh();
-
-                    actionDefinitionsTable.getColumns().clear();
-                    IntStream.range(0, cols)
-                            .mapToObj(DtFunctions::createTableColumn)
-                            .forEach(a -> actionDefinitionsTable.getColumns().add(a));
-                    actionDefinitionsTable.refresh();
-
-                    viewModel.refreshData();
-
+                    prepareDefinitionsTables4NewData(countColumns);
+                    viewModel.populateLoadedData();
                 } catch (IOException | ClassNotFoundException e) {
                     exceptionHandler.showAndWaitAlert(e);
                     return;
@@ -210,13 +192,6 @@ public class MainView implements FxmlView<MainViewModel> {
                 return;
             }
         }
-    }
-
-    private static void configureFileChooser(final FileChooser fileChooser, String title) {
-        fileChooser.setTitle(title);
-        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        FileChooser.ExtensionFilter dtmExtFilter = new FileChooser.ExtensionFilter("DTMG files (*.dtm)", "*.dtm");
-        fileChooser.getExtensionFilters().add(dtmExtFilter);
     }
 
     private void doAddElseRule(String key, Object[] value) {
@@ -377,14 +352,41 @@ public class MainView implements FxmlView<MainViewModel> {
                 });
     }
 
-
-    protected void initializeConditionDefnsTable(int countColumns, boolean shouldPopulateData) {
+    /**
+     * Initializes the definition parts of the decision table. At the end of the processing of this method,
+     * Tables are ready for an actualization with new data during a load or reload of decision table data.
+     *
+     * @param countColumns an {@code int} as count of columns which should be created
+     *                     during the initialization process
+     */
+    protected void prepareDefinitionsTables4NewData(int countColumns) {
         this.conditionDefinitionsTable.setEditable(true);
         this.conditionDefinitionsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         this.conditionDefinitionsTable.getSelectionModel().setCellSelectionEnabled(true);
 
         initializeTableKeyboardHandling(conditionDefinitionsTable);
-        initializeConditionDefinitionTableColumns(countColumns);
+        initializeDefinitionTableColumns(() -> countColumns);
+
+        conditionDefinitionsTable.setItems(viewModel.getConditionDefinitions());
+
+
+        this.actionDefinitionsTable.setEditable(true);
+        this.actionDefinitionsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        this.actionDefinitionsTable.getSelectionModel().setCellSelectionEnabled(true);
+
+        initializeTableKeyboardHandling(actionDefinitionsTable);
+
+        actionDefinitionsTable.setItems(viewModel.getActionDefinitions());
+
+    }
+
+    protected void prepareDefinitionsTables4NewData(int countColumns, boolean shouldPopulateData) {
+        this.conditionDefinitionsTable.setEditable(true);
+        this.conditionDefinitionsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+        this.conditionDefinitionsTable.getSelectionModel().setCellSelectionEnabled(true);
+
+        initializeTableKeyboardHandling(conditionDefinitionsTable);
+        initializeDefinitionTableColumns(() -> Math.min(determineMaxColumns(viewModel.getConditionDeclarations()), countColumns));
 
         this.conditionDefinitionsTable.getItems().clear();
         this.conditionDefinitionsTable.setItems(viewModel.initializeConditionDefnsData(countColumns, shouldPopulateData));
@@ -402,16 +404,15 @@ public class MainView implements FxmlView<MainViewModel> {
         this.actionDefinitionsTable.setItems(viewModel.initializeActionDefnsData(countColumns));
     }
 
-    protected void initializeDeclTables() {
+    // TODO #100 Base Template for TableInitialization of Declarations
+    protected void initializeDeclarationTables() {
         this.conditionDeclarationsTable.setEditable(true);
         this.conditionDeclarationsTable.getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         this.conditionDeclarationsTable.getSelectionModel().setCellSelectionEnabled(true);
 
         initializeConditionDeclFocusHandling();
         initializeTableKeyboardHandling(conditionDeclarationsTable);
-
-        initializeDeclTableColumns(this.conditionDeclarationsTable);
-
+        initializeDeclarationTablesColumns(this.conditionDeclarationsTable);
 
         this.conditionDeclarationsTable.getItems().clear();
         this.conditionDeclarationsTable.setItems(viewModel.getConditionDeclarations());
@@ -421,16 +422,16 @@ public class MainView implements FxmlView<MainViewModel> {
         this.actionDeclarationsTable.getSelectionModel().setCellSelectionEnabled(true);
 
         initializeTableKeyboardHandling(actionDeclarationsTable);
-        initializeDeclTableColumns(this.actionDeclarationsTable);
+        initializeDeclarationTablesColumns(this.actionDeclarationsTable);
 
         this.actionDeclarationsTable.getItems().clear();
         this.actionDeclarationsTable.setItems(viewModel.getActionDeclarations());
 
     }
 
-    private void initializeConditionDefinitionTableColumns(int countColumns) {
+    private void initializeDefinitionTableColumns(Supplier<Integer> countColumnsSupplier) {
         conditionDefinitionsTable.getColumns().clear();
-        final int cols = Math.min(determineMaxColumns(viewModel.getConditionDeclarations()), countColumns);
+        final int cols = countColumnsSupplier.get();
         IntStream.range(0, cols)
                 .mapToObj(DtFunctions::createTableColumn)
                 .forEach(a -> conditionDefinitionsTable.getColumns().add(a));
@@ -509,7 +510,7 @@ public class MainView implements FxmlView<MainViewModel> {
                 if (this.conditionDefinitionsTable.getItems().isEmpty() && isValid(this.conditionDeclarationsTable.getItems())) {
                     Tuple2<Integer, Boolean> dlgResult = Dialogs.acceptOrDefineRuleCountDialog0(
                             determineMaxColumns(this.viewModel.getConditionDeclarations()), false);
-                    initializeConditionDefnsTable(dlgResult._1(), dlgResult._2());
+                    prepareDefinitionsTables4NewData(dlgResult._1(), dlgResult._2());
                 }
             }
         });
@@ -517,7 +518,7 @@ public class MainView implements FxmlView<MainViewModel> {
 
     private void initializeDividerSynchronization() {
 
-        this.console.setFont(Font.font("Courier", FontWeight.BOLD, 12));
+        this.console.setFont(Font.font("Courier New", FontWeight.BOLD, 12));
 
         this.conditionDividerPos.bind(conditionSplitPane.getDividers().get(0).positionProperty());
         this.actionDividerPos.addListener((a, b, c) ->

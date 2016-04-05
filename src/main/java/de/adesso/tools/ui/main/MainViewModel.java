@@ -278,16 +278,16 @@ public class MainViewModel implements ViewModel {
 
     }
 
-    DTDataPacket newDP = null;
+    private DTDataPacket loadedData = null;
     public int openFile(File file) throws IOException, ClassNotFoundException {
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))){
-            newDP = ((DTDataPacket) in.readObject());
-            return newDP.getConditionDefinitions().get(0).size();
+            loadedData = ((DTDataPacket) in.readObject());
+            return loadedData.getConditionDefinitions().get(0).size();
         }
     }
 
-    public void refreshData() {
-        this.data.become(newDP);
+    public void populateLoadedData() {
+        this.data.become(loadedData);
     }
 
     public void saveFile(File file) throws IOException {
