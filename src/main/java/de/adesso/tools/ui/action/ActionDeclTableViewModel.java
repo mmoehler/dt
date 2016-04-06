@@ -96,9 +96,9 @@ public class ActionDeclTableViewModel implements PossibleIndicatorsSupplier, Dec
 
 
     public boolean isValid() {
-            return asList(lfdNrProperty(), expressionProperty(), possibleIndicatorsProperty()).stream()
-                    .map(i -> i.get() != null && !EMPTY_STRING.equals(i.get()))
-                    .reduce(true, (x,y) -> x && y);
+        return asList(lfdNrProperty(), expressionProperty(), possibleIndicatorsProperty()).stream()
+                .map(i -> i.get() != null && !EMPTY_STRING.equals(i.get()))
+                .reduce(true, (x, y) -> x && y);
 
     }
 

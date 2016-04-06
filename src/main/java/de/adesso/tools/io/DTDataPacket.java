@@ -27,7 +27,10 @@ import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.io.*;
+import java.io.Externalizable;
+import java.io.IOException;
+import java.io.ObjectInput;
+import java.io.ObjectOutput;
 import java.util.stream.IntStream;
 
 import static de.adesso.tools.exception.LambdaExceptionUtil.rethrowIntConsumer;
@@ -35,28 +38,26 @@ import static de.adesso.tools.exception.LambdaExceptionUtil.rethrowIntFunction;
 
 /**
  * TODO Need a special state for the right processing of this data during the use cases new-, load- and save-file aand close app and ... ??
- *
+ * <p>
  * Created by mmoehler on 01.04.16.
  */
 public class DTDataPacket implements Externalizable {
 
 
     private static final long serialVersionUID = -2022916876266547636L;
-
+    transient private final ImmutableList<ObservableList> allData;
     transient private boolean dirty;
-
     private ObservableList<ObservableList<String>> conditionDefinitions;
     private ObservableList<ObservableList<String>> actionDefinitions;
     private ObservableList<ConditionDeclTableViewModel> conditionDeclarations;
     private ObservableList<ActionDeclTableViewModel> actionDeclarations;
-    transient private final ImmutableList<ObservableList> allData;
 
     public DTDataPacket() {
         this.conditionDefinitions = FXCollections.observableArrayList();
         this.conditionDeclarations = FXCollections.observableArrayList();
         this.actionDeclarations = FXCollections.observableArrayList();
         this.actionDefinitions = FXCollections.observableArrayList();
-        allData = ImmutableList.of(conditionDeclarations, conditionDefinitions,actionDeclarations,actionDefinitions);
+        allData = ImmutableList.of(conditionDeclarations, conditionDefinitions, actionDeclarations, actionDefinitions);
     }
 
     public DTDataPacket(
@@ -68,7 +69,7 @@ public class DTDataPacket implements Externalizable {
         initConditionsData(conditionDeclarations, conditionDefinitions);
         initActionsData(actionDeclarations, actionDefinitions);
 
-        allData = ImmutableList.of(conditionDeclarations, conditionDefinitions,actionDeclarations,actionDefinitions);
+        allData = ImmutableList.of(conditionDeclarations, conditionDefinitions, actionDeclarations, actionDefinitions);
     }
 
     private void initActionsData(ObservableList<ActionDeclTableViewModel> actionDeclarations, ObservableList<ObservableList<String>> actionDefinitions) {

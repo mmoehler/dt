@@ -33,8 +33,8 @@ public class StructuralAnalysisResultEmitterTest {
 
     @Test
     public void testApply() throws Exception {
-        final  List<Indicator> result = Arrays.asList(GT,MI,MI,AS,MI,XX);
-        String message = new StructuralAnalysisResultEmitter().apply(result, 4);
+        final List<Indicator> result = Arrays.asList(GT, MI, MI, AS, MI, XX);
+        String message = (new StructuralAnalysisResultEmitter().apply(result, 4))._1();
         System.out.println(message);
     }
 }

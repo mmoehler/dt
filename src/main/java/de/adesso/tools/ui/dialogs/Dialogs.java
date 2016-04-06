@@ -35,8 +35,8 @@ public final class Dialogs {
         final String s3 = "Note: Additional condition combination columns can be defined later!\n";
         dialog.setHeaderText(s1 + '\n' + s2 + '\n' + s3);
         dialog.setContentText("Please enter your number of combinations:");
-        Optional<Tuple2<Integer,Boolean>> result = dialog.showAndWait();
-        return result.orElse(Tuple.<Integer,Boolean>of(10,false)); // TODO Make the count in case of errors configurable!
+        Optional<Tuple2<Integer, Boolean>> result = dialog.showAndWait();
+        return result.orElse(Tuple.<Integer, Boolean>of(10, false)); // TODO Make the count in case of errors configurable!
     }
 
 }

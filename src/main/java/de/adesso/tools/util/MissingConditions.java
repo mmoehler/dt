@@ -37,6 +37,43 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
         this.CONDITIONS = new Function[]{B1, B2, B3, B4};
     }
 
+    private static List<Integer> logicalAnd(List<Integer> a, List<Integer> b) {
+        List<Integer> condition = StreamUtils.zip(a.stream(), b.stream(), (x, y) -> x * y)
+                .collect(toList());
+        return condition;
+    }
+
+    public static <T> void dumpList2DItems(String msg, List<List<T>> list2D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list2D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    public static <T> void dumpList1DItems(String msg, List<T> list1D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list1D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    public static void dumpList2DItems(String msg, ObservableList<ObservableList<String>> list2D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list2D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    public static void main(String[] args) {
+        List<List<String>> given = MatrixBuilder.on("Y,Y,N,N,Y,Y,Y,N,N,-,N,Y").dim(3, 4).transposed().build();
+
+        List<List<String>> interimResult = MatrixBuilder.on("-,-,-").dim(1, 3).build();
+
+        List<List<String>> missingList = given.stream()
+                .map(x -> MatrixBuilder.on(x).dim(1, x.size()).build())
+                .reduce(interimResult, DT.difference());
+
+        dumpList2DItems("RESULT", missingList);
+
+    }
+
     @Override
     public List<List<String>> apply(List<List<String>> xi, List<List<String>> condition) {
 
@@ -100,50 +137,12 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
 
     }
 
-    private static List<Integer> logicalAnd(List<Integer> a, List<Integer> b) {
-        List<Integer> condition = StreamUtils.zip(a.stream(), b.stream(), (x, y) -> x * y)
-                .collect(toList());
-        return condition;
-    }
 
     public interface DT extends BinaryOperator<List<List<String>>> {
         public static BinaryOperator<List<List<String>>> difference() {
             return (a, b) -> new MissingConditions().apply(a, b);
         }
 
-
-    }
-
-    public static <T> void dumpList2DItems(String msg, List<List<T>> list2D) {
-        System.out.println(String.format("%s >>>>>>>>>>", msg));
-        list2D.forEach(i -> System.out.println("\t" + i));
-        System.out.println("<<<<<<<<<<\n");
-    }
-
-    public static <T> void dumpList1DItems(String msg, List<T> list1D) {
-        System.out.println(String.format("%s >>>>>>>>>>", msg));
-        list1D.forEach(i -> System.out.println("\t" + i));
-        System.out.println("<<<<<<<<<<\n");
-    }
-
-
-    public static void dumpList2DItems(String msg, ObservableList<ObservableList<String>> list2D) {
-        System.out.println(String.format("%s >>>>>>>>>>", msg));
-        list2D.forEach(i -> System.out.println("\t" + i));
-        System.out.println("<<<<<<<<<<\n");
-    }
-
-
-    public static void main(String[] args) {
-        List<List<String>> given = MatrixBuilder.on("Y,Y,N,N,Y,Y,Y,N,N,-,N,Y").dim(3, 4).transposed().build();
-
-        List<List<String>> interimResult = MatrixBuilder.on("-,-,-").dim(1, 3).build();
-
-        List<List<String>> missingList = given.stream()
-                .map(x -> MatrixBuilder.on(x).dim(1,x.size()).build())
-                .reduce(interimResult, DT.difference());
-
-        dumpList2DItems("RESULT", missingList);
 
     }
 

@@ -277,11 +277,11 @@ public class MatrixFunctionsTest {
     @org.junit.Test
     public void testSwapColumnsAt() throws Exception {
         List<List<String>> original = (on(
-                        "A,B,C,D," +
+                "A,B,C,D," +
                         "A,B,C,D," +
                         "A,B,C,D").dim(3, 4).build());
         List<List<String>> expected = (on(
-                        "A,D,C,B," +
+                "A,D,C,B," +
                         "A,D,C,B," +
                         "A,D,C,B").dim(3, 4).build());
 

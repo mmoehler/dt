@@ -539,7 +539,7 @@ public class DtFunctionsTest {
                 .build();
 
 
-        doMoveRows(conditionDeclTab, conditionDefTab, OptionalInt.empty(),DIR_UP);
+        doMoveRows(conditionDeclTab, conditionDefTab, OptionalInt.empty(), DIR_UP);
 
         dumpTableItems("DECL AFTER", conditionDeclTab);
         dumpTableItems("DEFN AFTER", conditionDefTab);
@@ -557,13 +557,13 @@ public class DtFunctionsTest {
 
     @Test
     public void testIsElseColumn() throws Exception {
-        TableColumnBuilder<String> tb= new TableColumnBuilder<>("ELSE", null, null);
+        TableColumnBuilder<String> tb = new TableColumnBuilder<>("ELSE", null, null);
         assertEquals(isElseColumn(tb.build()), true);
     }
 
     @Test
     public void testIsElseColumnFail() throws Exception {
-        TableColumnBuilder<String> tb= new TableColumnBuilder<>("ELFRIEDE", null, null);
+        TableColumnBuilder<String> tb = new TableColumnBuilder<>("ELFRIEDE", null, null);
         assertEquals(isElseColumn(tb.build()), false);
     }
 }

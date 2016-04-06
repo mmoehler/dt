@@ -5,6 +5,7 @@ package de.adesso.tools.events;
  */
 public class ConditionDefnsTableInitializedEvent {
     private final Integer columnCount;
+
     public ConditionDefnsTableInitializedEvent(Integer columnCount) {
         super();
         this.columnCount = columnCount;

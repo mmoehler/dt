@@ -34,10 +34,9 @@ public class SampleMain {
     }
 
     public static void line2DAsString(Line2D l) {
-        final String s = String.format("[%f;%f] -> [%f;%f]", l.x1,l.y1,l.x2,l.y2);
+        final String s = String.format("[%f;%f] -> [%f;%f]", l.x1, l.y1, l.x2, l.y2);
         System.out.println(s);
     }
-
 
 
 }

@@ -47,37 +47,10 @@ public class Functions {
     private static final BiFunction<List<String>, List<String>, List<List<String>>>[] ACTIONS = new BiFunction[]{A1, A2, A3, A4, A5};
     private static final Function<List<Tuple2<String, String>>, Integer>[] CONDITIONS = new Function[]{B1, B2, B3, B4};
     private static final List<List<String>> INTERNAL = MatrixBuilder.on("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
-
     private static Function<String, Integer> maskMatrixMapper = s -> (isDASH(s)) ? 0 : 1;
-    private static Function<String, Integer> decisionMatrixMapper = s -> (isYES(s)) ? 1 : 0;
-
-    public static List<List<Integer>> makeMaskMatrix(List<List<String>> conditions) {
-        List<List<Integer>> M = conditions.stream().map(a -> a.stream().map(maskMatrixMapper).collect(toList())).collect(toList());
-        return M;
-    }
-
-    public static List<List<Integer>> makeDecisionMatrix(List<List<String>> conditions) {
-        List<List<Integer>> M = conditions.stream().map(a -> a.stream().map(decisionMatrixMapper).collect(toList())).collect(toList());
-        return M;
-    }
-
-    private static final List<? extends List<Integer>> D = transpose(makeDecisionMatrix(INTERNAL));
     private static final List<? extends List<Integer>> M = transpose(makeMaskMatrix(INTERNAL));
-
-
-    public static Function<List<List<String>>, List<List<String>>> difference() {
-        return new RulesDifferenceOperator();
-    }
-
-    public static Function<List<List<String>>, List<List<String>>> consolidate() {
-        return new ConditionsConsolidateOperator();
-    }
-
-    private static List<Integer> logicalAnd(List<Integer> a, List<Integer> b) {
-        List<Integer> condition = StreamUtils.zip(a.stream(), b.stream(), (x, y) -> x * y)
-                .collect(toList());
-        return condition;
-    }
+    private static Function<String, Integer> decisionMatrixMapper = s -> (isYES(s)) ? 1 : 0;
+    private static final List<? extends List<Integer>> D = transpose(makeDecisionMatrix(INTERNAL));
 
     public static BiFunction<List<String>, List<String>, List<List<String>>> columnDifference = (left, right) -> {
 
@@ -114,6 +87,30 @@ public class Functions {
         return transpose(applied);
 
     };
+
+    public static List<List<Integer>> makeMaskMatrix(List<List<String>> conditions) {
+        List<List<Integer>> M = conditions.stream().map(a -> a.stream().map(maskMatrixMapper).collect(toList())).collect(toList());
+        return M;
+    }
+
+    public static List<List<Integer>> makeDecisionMatrix(List<List<String>> conditions) {
+        List<List<Integer>> M = conditions.stream().map(a -> a.stream().map(decisionMatrixMapper).collect(toList())).collect(toList());
+        return M;
+    }
+
+    public static Function<List<List<String>>, List<List<String>>> difference() {
+        return new RulesDifferenceOperator();
+    }
+
+    public static Function<List<List<String>>, List<List<String>>> consolidate() {
+        return new ConditionsConsolidateOperator();
+    }
+
+    private static List<Integer> logicalAnd(List<Integer> a, List<Integer> b) {
+        List<Integer> condition = StreamUtils.zip(a.stream(), b.stream(), (x, y) -> x * y)
+                .collect(toList());
+        return condition;
+    }
 
     // -- Pactories ----------------------------------------------------------------------------------------------------
 

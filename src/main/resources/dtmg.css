@@ -5,20 +5,20 @@
     -fx-padding: 1;
 }
 
-.table-view:focused{
+.table-view:focused {
     -fx-base: white;
     -fx-control-inner-background: white;
     -fx-background-color: -fx-focus-color;
 }
 
-.table-view .table-cell{
+.table-view .table-cell {
     -fx-padding: 1;
     -fx-text-fill: black;
 }
 
 .table-view .table-cell:focused {
     -fx-padding: 1;
-    -fx-border-color:-fx-focus-color;
+    -fx-border-color: -fx-focus-color;
     -fx-text-fill: -fx-focus-color;
     -fx-background-color: white;
 }

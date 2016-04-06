@@ -47,16 +47,15 @@ public enum Indicators implements Indicator {
         this.code = code;
     }
 
-
-    public String getCode() {
-        return code;
-    }
-
     public static Indicator lookup(String code) {
         final Optional<Indicators> found = Arrays.stream(Indicators.values()).filter((i) -> i.code.equals(code)).findFirst();
         if (found.isPresent()) {
             return found.get();
         }
         throw new IllegalArgumentException(String.format("No indicator for code=%s", code));
+    }
+
+    public String getCode() {
+        return code;
     }
 }

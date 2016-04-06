@@ -6,10 +6,28 @@ import java.util.Iterator;
 /**
  * Created by moehler on 12.02.2016.
  */
-public class Range  implements Iterable<Integer>, Iterator<Integer> {
+public class Range implements Iterable<Integer>, Iterator<Integer> {
     private final Integer from;
     private final Integer to;
     private Integer next;
+
+    private Range(Builder builder) {
+        from = builder.from;
+        to = builder.to;
+        next = to;
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
+    }
+
+    public static Builder newBuilder(@Nonnull Range copy) {
+        Builder builder = new Builder();
+        builder.from = copy.from;
+        builder.to = copy.to;
+
+        return builder;
+    }
 
     @Override
     public Iterator<Integer> iterator() {
@@ -45,31 +63,13 @@ public class Range  implements Iterable<Integer>, Iterator<Integer> {
         return result;
     }
 
-    private Range(Builder builder) {
-        from = builder.from;
-        to = builder.to;
-        next = to;
-    }
-
-    public static Builder newBuilder() {
-        return new Builder();
-    }
-
-    public static Builder newBuilder(@Nonnull Range copy) {
-        Builder builder = new Builder();
-        builder.from = copy.from;
-        builder.to = copy.to;
-
-        return builder;
-    }
-
-
     /**
      * {@code Range} builder static inner class.
      */
     public static final class Builder {
         private Integer from;
         private Integer to;
+
         private Builder() {
         }
 

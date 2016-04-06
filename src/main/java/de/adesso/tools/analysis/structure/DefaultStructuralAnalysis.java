@@ -41,16 +41,16 @@ import static java.util.concurrent.TimeUnit.SECONDS;
  * Created by moehler on 31.03.2016.
  */
 @Singleton
-public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>, List<List<String>>, List<Indicator>>,StructuralAnalysis {
+public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>, List<List<String>>, List<Indicator>>, StructuralAnalysis {
 
     final static Function<List<List<String>>, List<Indicator>> conditionProcessor = (conditions) -> {
         final List<List<Indicator>> outConditions = new ArrayList<>();
 
         List<List<String>> inConditions = transpose(conditions);
 
-        for (int i = 0; i < inConditions.size()-1; i++) {
+        for (int i = 0; i < inConditions.size() - 1; i++) {
             for (int j = 1; j < inConditions.size(); j++) {
-                if(j>i) {
+                if (j > i) {
                     final Stream<Indicator> leftStream = inConditions.get(i).stream().map(a -> Indicators.lookup(a));
                     final Stream<Indicator> rightStream = inConditions.get(j).stream().map(a -> Indicators.lookup(a));
                     final List<Indicator> collected = StreamUtils
@@ -75,12 +75,12 @@ public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>,
 
         List<List<String>> inActions = transpose(actions);
 
-        for (int i = 0; i < inActions.size()-1; i++) {
+        for (int i = 0; i < inActions.size() - 1; i++) {
             for (int j = 1; j < inActions.size(); j++) {
-                if(j>i) {
+                if (j > i) {
                     final Stream<Indicator> leftStream = inActions.get(i).stream().map(Indicators::lookup);
                     final Stream<Indicator> rightStream = inActions.get(j).stream().map(Indicators::lookup);
-                    final List<Indicator> collected = StreamUtils.zip(leftStream, rightStream, Operators.actionComparison() ).collect(Collectors.toList());
+                    final List<Indicator> collected = StreamUtils.zip(leftStream, rightStream, Operators.actionComparison()).collect(Collectors.toList());
                     outActions.add(collected);
                 }
             }
@@ -98,13 +98,13 @@ public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>,
     private static ExecutorService pool;
 
     @PostConstruct
-    public  void postConstruct() {
+    public void postConstruct() {
         pool = Executors.newCachedThreadPool();
     }
 
     @PreDestroy
-    public  void preDestroy() {
-        if(null != pool) {
+    public void preDestroy() {
+        if (null != pool) {
             pool.shutdownNow();
             pool = null;
         }

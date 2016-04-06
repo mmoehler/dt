@@ -40,7 +40,7 @@ import java.util.*;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
-import static de.adesso.tools.functions.Adapters.Matrix.*;
+import static de.adesso.tools.functions.Adapters.Matrix.adapt;
 import static de.adesso.tools.functions.MatrixFunctions.*;
 import static java.lang.Math.min;
 import static java.util.stream.Collectors.toList;
@@ -251,7 +251,7 @@ public final class DtFunctions {
 
             declarations.getItems().clear();
             newDecls.forEach(declarations.getItems()::add);
-  //          updateRowHeaders(declarations, rowHeaderTemplate);
+            //          updateRowHeaders(declarations, rowHeaderTemplate);
 
             definitions.getItems().clear();
             newDefs.stream().map(s -> FXCollections.observableArrayList(s)).forEach(definitions.getItems()::add);

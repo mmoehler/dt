@@ -17,30 +17,10 @@
  * under the License.
  */
 
-package de.adesso.tools.functions.chainded;
-
-import com.sun.javafx.geom.Point2D;
+package de.adesso.tools.events;
 
 /**
- * Created by moehler on 11.03.2016.
+ * CDI event class that is used to indicate that a contact was updated/added/removed.
  */
-public class SampleInnerBuilder<C> extends AbstractSubBuilder<Point2D, C> {
-    private final float x;
-    private float y;
-
-    public SampleInnerBuilder(float value, C caller, Callback<Point2D> callback) {
-        super(caller, callback);
-        this.x = value;
-    }
-
-    public C y(float val) {
-        this.y = val;
-        getCallback().call(this.build());
-        return getCaller();
-    }
-
-    @Override
-    public Point2D build() {
-        return new Point2D(x, y);
-    }
+public class DeleteRedundantRulesEvent {
 }

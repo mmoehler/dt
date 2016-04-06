@@ -41,9 +41,9 @@ public class Dump {
         System.out.println("<<<<<<<<<<\n");
     }
 
-    public static void dumpMap(String msg, Map<?,?> map) {
+    public static void dumpMap(String msg, Map<?, ?> map) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
-        map.forEach((k,v) -> System.out.println("\t" + k + " -> " + v));
+        map.forEach((k, v) -> System.out.println("\t" + k + " -> " + v));
         System.out.println("<<<<<<<<<<\n");
     }
 

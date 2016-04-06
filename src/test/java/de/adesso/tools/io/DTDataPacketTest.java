@@ -50,8 +50,8 @@ public class DTDataPacketTest {
     public void testReadExternal() throws Exception {
         System.out.println("READ");
 
-        try(FileInputStream inputStream = new FileInputStream(OUTPUT_FILE);
-            ObjectInputStream objectInputStream = new ObjectInputStream(inputStream)){
+        try (FileInputStream inputStream = new FileInputStream(OUTPUT_FILE);
+             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream)) {
 
             DTDataPacket dp = new DTDataPacket();
             dp.reset();
@@ -67,14 +67,14 @@ public class DTDataPacketTest {
     public void testWriteExternal() throws Exception {
         System.out.println("WRITE");
 
-        try(FileOutputStream outputStream = new FileOutputStream(OUTPUT_FILE);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream)) {
+        try (FileOutputStream outputStream = new FileOutputStream(OUTPUT_FILE);
+             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream)) {
 
-            Tuple4<ObservableList<ConditionDeclTableViewModel>,ObservableList<ObservableList<String>>,
-            ObservableList<ActionDeclTableViewModel>,ObservableList<ObservableList<String>>> data
-            = testData();
+            Tuple4<ObservableList<ConditionDeclTableViewModel>, ObservableList<ObservableList<String>>,
+                    ObservableList<ActionDeclTableViewModel>, ObservableList<ObservableList<String>>> data
+                    = testData();
 
-            DTDataPacket dp = new DTDataPacket(data._1(), data._2(),data._3(),data._4());
+            DTDataPacket dp = new DTDataPacket(data._1(), data._2(), data._3(), data._4());
 
             dp.writeExternal(objectOutputStream);
 

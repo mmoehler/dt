@@ -33,6 +33,17 @@ public class Adapters {
 
     public static class Matrix {
 
+        public static Function<ObservableList<ObservableList<String>>, List<List<String>>> adaptObservableList2List =
+                (observableLists) -> observableLists.stream()
+                        .map(l -> l.stream()
+                                .collect(Collectors.toList()))
+                        .collect(Collectors.toList());
+        public static Function<List<List<String>>, ObservableList<ObservableList<String>>> adaptList2ObservableList =
+                (lists) -> lists.stream()
+                        .map(l -> l.stream()
+                                .collect(Collectors.toCollection(FXCollections::observableArrayList)))
+                        .collect(Collectors.toCollection(FXCollections::observableArrayList));
+
         public static List<List<String>> adapt(ObservableList<ObservableList<String>> adaptee) {
             return adaptObservableList2List.apply(adaptee);
         }
@@ -40,18 +51,6 @@ public class Adapters {
         public static ObservableList<ObservableList<String>> adapt(List<List<String>> adaptee) {
             return adaptList2ObservableList.apply(adaptee);
         }
-
-        public static Function<ObservableList<ObservableList<String>>, List<List<String>>> adaptObservableList2List =
-                (observableLists) -> observableLists.stream()
-                        .map(l -> l.stream()
-                                .collect(Collectors.toList()))
-                        .collect(Collectors.toList());
-
-        public static Function<List<List<String>>, ObservableList<ObservableList<String>>> adaptList2ObservableList =
-                (lists) -> lists.stream()
-                        .map(l -> l.stream()
-                                .collect(Collectors.toCollection(FXCollections::observableArrayList)))
-                        .collect(Collectors.toCollection(FXCollections::observableArrayList));
     }
 
     public static class Lists {

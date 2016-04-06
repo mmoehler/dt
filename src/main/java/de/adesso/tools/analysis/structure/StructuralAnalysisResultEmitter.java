@@ -22,6 +22,8 @@ package de.adesso.tools.analysis.structure;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
+import de.adesso.tools.util.tuple.Tuple;
+import de.adesso.tools.util.tuple.Tuple3;
 
 import javax.inject.Singleton;
 import java.util.ArrayList;
@@ -37,30 +39,15 @@ import static com.google.common.base.Strings.repeat;
  * Created by mmoehler on 01.04.16.
  */
 @Singleton
-public class StructuralAnalysisResultEmitter implements BiFunction<List<Indicator>, Integer, String> {
+public class StructuralAnalysisResultEmitter implements BiFunction<List<Indicator>, Integer, Tuple3<String, Multimap<Integer, Integer>, Multimap<Integer, Integer>>> {
 
     public static final String STRUCTURE_ANALYSIS_RULE = "STRUCTURE ANALYSIS RULE %2s ";
 
-    private static final ThreadLocal<Multimap<Integer,Integer>> compresableRules =
-            new ThreadLocal<Multimap<Integer,Integer>>() {
-                @Override protected Multimap<Integer,Integer> initialValue() {
-                    return Multimaps.newListMultimap(new HashMap<>(), ArrayList::new);
-                }
-            };
-
-    private static final ThreadLocal<Multimap<Integer,Integer>> redundantRules =
-            new ThreadLocal<Multimap<Integer,Integer>>() {
-                @Override protected Multimap<Integer,Integer> initialValue() {
-                    return Multimaps.newListMultimap(new HashMap<>(), ArrayList::new);
-                }
-            };
-
-
     @Override
-    public String apply(List<Indicator> analysisResult, Integer countRules) {
+    public Tuple3<String, Multimap<Integer, Integer>, Multimap<Integer, Integer>> apply(List<Indicator> analysisResult, Integer countRules) {
 
-        compresableRules.get().clear();
-        redundantRules.get().clear();
+        Multimap<Integer, Integer> compressibleRules = Multimaps.newListMultimap(new HashMap<>(), ArrayList::new);
+        Multimap<Integer, Integer> redundantRules = Multimaps.newListMultimap(new HashMap<>(), ArrayList::new);
 
         P p = new P();
         Iterator<Indicator> indics = analysisResult.iterator();
@@ -68,16 +55,16 @@ public class StructuralAnalysisResultEmitter implements BiFunction<List<Indicato
                 .mapToObj(i -> Strings.padStart(String.valueOf(i), 2, ' '))
                 .reduce("", (a, b) -> a + b);
 
-        p.prlnps(header, STRUCTURE_ANALYSIS_RULE.length()+header.length()-2, ' ');
-        for (int i = 0; i < countRules-1; i++) {
-            p.prf(STRUCTURE_ANALYSIS_RULE, ((i + 1)%10));
+        p.prlnps(header, STRUCTURE_ANALYSIS_RULE.length() + header.length() - 2, ' ');
+        for (int i = 0; i < countRules - 1; i++) {
+            p.prf(STRUCTURE_ANALYSIS_RULE, ((i + 1) % 10));
             for (int j = 0; j < countRules; j++) {
                 if (j > i) {
                     final Indicator c = indics.next();
-                    if(Indicators.AS.equals(c)) {
-                        compresableRules.get().put(i,j);
-                    } else if(Indicators.RR.equals(c)) {
-                        redundantRules.get().put(i,j);
+                    if (Indicators.AS.equals(c)) {
+                        compressibleRules.put(i, j);
+                    } else if (Indicators.RR.equals(c)) {
+                        redundantRules.put(i, j);
                     }
                     p.pr(c.getCode() + " ");
                 } else {
@@ -97,7 +84,7 @@ public class StructuralAnalysisResultEmitter implements BiFunction<List<Indicato
         p.prln("-----------------------------------------------");
         p.crlf();
 
-        return p.toString();
+        return Tuple.of(String.valueOf(p), compressibleRules, redundantRules);
     }
 
     static class P {

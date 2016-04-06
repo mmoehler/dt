@@ -34,7 +34,7 @@ import java.io.StringWriter;
  */
 @Singleton
 public class ExceptionHandler {
-    public void showAndWaitAlert(Exception error){
+    public void showAndWaitAlert(Exception error) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle("DTMG Exception Dialog");
         alert.setHeaderText(String.format("A(n) %s was occurred!", error.getClass().getSimpleName()));

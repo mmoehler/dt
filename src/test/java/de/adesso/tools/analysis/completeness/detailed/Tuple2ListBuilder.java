@@ -34,13 +34,13 @@ class Tuple2ListBuilder {
     private final MatrixBuilder internalBulder;
 
 
+    protected Tuple2ListBuilder(@Nonnull String data) {
+        this.internalBulder = MatrixBuilder.on(data);
+    }
+
     @Nonnull
     public static Tuple2ListBuilder on(@Nonnull String data) {
         return new Tuple2ListBuilder(data);
-    }
-
-    protected Tuple2ListBuilder(@Nonnull String data) {
-        this.internalBulder = MatrixBuilder.on(data);
     }
 
     @Nonnull

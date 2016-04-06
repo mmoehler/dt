@@ -38,7 +38,7 @@ public class Actions {
     public static BiFunction<List<String>, List<String>, List<List<String>>> A1 =
             (t, u) -> {
                 System.out.println(String.format("A1 invoked with %s, %s!", t, u));
-                List<List<String>> ret = MatrixBuilder.on(t).dim(1,t.size()).transposed().build();
+                List<List<String>> ret = MatrixBuilder.on(t).dim(1, t.size()).transposed().build();
                 return ret;
             };
 
@@ -70,7 +70,7 @@ public class Actions {
                             return v;
                     }
                 }).collect(Collectors.toList());
-                return MatrixBuilder.on(processed).dim(processed.size(),1).build();
+                return MatrixBuilder.on(processed).dim(processed.size(), 1).build();
             };
 
     public static BiFunction<List<String>, List<String>, List<List<String>>> A5 =

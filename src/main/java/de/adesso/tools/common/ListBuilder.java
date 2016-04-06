@@ -8,12 +8,11 @@ import java.util.stream.Collectors;
  * Created by moehler on 10.02.2016.
  */
 public final class ListBuilder {
-    private ListBuilder() {
-    }
-
     private String data;
     private int len;
     private boolean reversed;
+    private ListBuilder() {
+    }
 
     private ListBuilder(String data) {
         this.data = data;
@@ -51,7 +50,7 @@ public final class ListBuilder {
                 .stream(this.data.split("[, ;]"))
                 .collect(Collectors.toList());
         return (reversed)
-                ? (out.stream().sorted((x,y)-> -1).collect(Collectors.toList()))
+                ? (out.stream().sorted((x, y) -> -1).collect(Collectors.toList()))
                 : out;
     }
 

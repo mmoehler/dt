@@ -41,17 +41,17 @@ public class ActionComparisonResultCombiner implements BinaryOperator<Indicator>
                     .put(NE, NE, NE)
                     .build();
 
-    @Override
-    public Indicator apply(Indicator left, Indicator right) {
-        checkIndicators(left,right);
-        return RULES.get(left, right);
-    }
-
     private static void checkIndicators(Indicator... indicators) {
         for (Indicator i : indicators) {
             if (!INDICATORS.contains(i)) {
                 throw new IllegalArgumentException(String.format("Illegal indicator: %s!", i.getCode()));
             }
         }
+    }
+
+    @Override
+    public Indicator apply(Indicator left, Indicator right) {
+        checkIndicators(left, right);
+        return RULES.get(left, right);
     }
 }

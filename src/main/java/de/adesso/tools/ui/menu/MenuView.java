@@ -20,6 +20,18 @@ public class MenuView implements FxmlView<MenuViewModel> {
 
     @FXML
     private MenuItem removeConditionDeclMenuItem;
+    @FXML
+    private MenuItem formalCompleteness;
+    @FXML
+    private MenuItem addMissingRules;
+    @FXML
+    private MenuItem structuralAnalysis;
+    @FXML
+    private MenuItem consolidateRules;
+    @FXML
+    private MenuItem deleteRedundantRules;
+    @FXML
+    private MenuItem completeReport;
 
     @InjectViewModel
     private MenuViewModel viewModel;
@@ -28,7 +40,9 @@ public class MenuView implements FxmlView<MenuViewModel> {
     private Stage primaryStage;
 
     public void initialize() {
-        removeConditionDeclMenuItem.disableProperty().bind(viewModel.removeItemDisabledProperty());
+        consolidateRules.disableProperty().bind(viewModel.consolidateRulesProperty());
+        deleteRedundantRules.disableProperty().bind(viewModel.removeDuplicateRulesProperty());
+        addMissingRules.disableProperty().bind(viewModel.missingRulesProperty());
     }
 
     // General
@@ -163,5 +177,13 @@ public class MenuView implements FxmlView<MenuViewModel> {
     @FXML
     public void doCompleteReport(ActionEvent actionEvent) {
         viewModel.completeReportAction();
+    }
+
+    public void doAddMissingRules(ActionEvent actionEvent) {
+        viewModel.addMissingRules();
+    }
+
+    public void doDeleteRedundantRules(ActionEvent actionEvent) {
+        viewModel.deleteRedundantRules();
     }
 }

@@ -32,18 +32,18 @@ public class StringListBuilder {
     public final static String pattern = "[; ,]";
     private final String data;
 
-    public static StringListBuilder on(String data) {
-        return new StringListBuilder(data);
-    }
-
     private StringListBuilder(@Nonnull String data) {
         this.data = data;
+    }
+
+    public static StringListBuilder on(String data) {
+        return new StringListBuilder(data);
     }
 
     @Nonnull
     public List<String> build() {
         List<String> result = Collections.emptyList();
-        if(null != data) {
+        if (null != data) {
             final String[] rawData = data.split(pattern);
             result = Arrays.stream(rawData).collect(Collectors.toList());
         }

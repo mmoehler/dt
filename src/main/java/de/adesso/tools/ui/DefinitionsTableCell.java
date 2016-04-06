@@ -125,7 +125,7 @@ public class DefinitionsTableCell<S, T> extends TableCell<S, T> {
                 case DASH:
                     setCellStyle("#04dddd");
                     break;
-                case NOTHING :
+                case NOTHING:
                 case SPACE:
                     setStyle(NOTHING);
                     break;

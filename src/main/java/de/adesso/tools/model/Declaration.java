@@ -75,9 +75,9 @@ public class Declaration extends Identity {
     }
 
     public int getPossibleIndicatorSize() {
-        return (null == this.possibleIndicators || this.possibleIndicators.trim().length()==0)
-        ? 0
-        : this.possibleIndicators.split("[,;]]").length;
+        return (null == this.possibleIndicators || this.possibleIndicators.trim().length() == 0)
+                ? 0
+                : this.possibleIndicators.split("[,;]]").length;
     }
 
     @Override

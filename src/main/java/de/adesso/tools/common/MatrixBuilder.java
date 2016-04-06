@@ -34,7 +34,9 @@ public class MatrixBuilder {
         this.dataList = data;
     }
 
-    public static MatrixBuilder empty() { return new MatrixBuilder(); }
+    public static MatrixBuilder empty() {
+        return new MatrixBuilder();
+    }
 
     public static MatrixBuilder on(@javax.annotation.Nonnull String data) {
         return new MatrixBuilder(data);
@@ -90,7 +92,7 @@ public class MatrixBuilder {
      */
     @javax.annotation.Nonnull
     public List<List<String>> build() {
-        if(null == data & null == dataList) {
+        if (null == data & null == dataList) {
             return emptyMatrix(m);
         }
         final List<List<String>> partitioned = (null == this.dataList) ? build4DataString() : build4DataList();

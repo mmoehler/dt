@@ -19,8 +19,8 @@
 
 package de.adesso.tools.analysis.completeness.simple;
 
-import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.tools.functions.MatrixFunctions;
+import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple3;
 import javafx.collections.ObservableList;
@@ -29,7 +29,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static de.adesso.tools.functions.DtFunctions.*;
+import static de.adesso.tools.functions.DtFunctions.determineCountIndicatorsPerRow;
+import static de.adesso.tools.functions.DtFunctions.determineMaxColumns;
 
 /**
  * Created by mohler on 24.01.16.
@@ -43,7 +44,8 @@ public final class ConditionSimpleCompletenessCheck {
     }
 
     /**
-     * Cmpleteness I - 
+     * Cmpleteness I -
+     *
      * @param decls
      * @param defns
      * @return
@@ -61,8 +63,6 @@ public final class ConditionSimpleCompletenessCheck {
         final Integer all = determineMaxColumns(decls);
         return Tuple.of(all == reduced, all, reduced);
     }
-
-
 
 
 }

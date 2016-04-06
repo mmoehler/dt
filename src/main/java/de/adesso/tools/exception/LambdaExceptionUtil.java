@@ -26,41 +26,6 @@ import java.util.function.*;
  */
 public final class LambdaExceptionUtil {
 
-    @FunctionalInterface
-    public interface Consumer_WithExceptions<T, E extends Exception> {
-        void accept(T t) throws E;
-    }
-
-    @FunctionalInterface
-    public interface IntConsumer_WithExceptions<E extends Exception> {
-        void accept(int value) throws E;
-    }
-
-    @FunctionalInterface
-    public interface BiConsumer_WithExceptions<T, U, E extends Exception> {
-        void accept(T t, U u) throws E;
-    }
-
-    @FunctionalInterface
-    public interface Function_WithExceptions<T, R, E extends Exception> {
-        R apply(T t) throws E;
-    }
-
-    @FunctionalInterface
-    public interface Supplier_WithExceptions<T, E extends Exception> {
-        T get() throws E;
-    }
-
-    @FunctionalInterface
-    public interface Runnable_WithExceptions<E extends Exception> {
-        void run() throws E;
-    }
-
-    @FunctionalInterface
-    public interface IntFunction_WithExceptions<R, E extends Exception> {
-        R apply(int value) throws E;
-    }
-
     /**
      * .mapToObj(rethrowIntFunction(in -> in.readUTF()));
      */
@@ -74,7 +39,6 @@ public final class LambdaExceptionUtil {
             }
         };
     }
-
 
     /**
      * .forEach(rethrowConsumer(name -> System.out.println(Class.forName(name)))); or .forEach(rethrowConsumer(ClassNameUtil::println));
@@ -98,7 +62,6 @@ public final class LambdaExceptionUtil {
             }
         };
     }
-
 
     public static <T, U, E extends Exception> BiConsumer<T, U> rethrowBiConsumer(BiConsumer_WithExceptions<T, U, E> biConsumer) {
         return (t, u) -> {
@@ -176,6 +139,42 @@ public final class LambdaExceptionUtil {
     @SuppressWarnings("unchecked")
     private static <E extends Throwable> void throwAsUnchecked(Exception exception) throws E {
         throw (E) exception;
+    }
+
+
+    @FunctionalInterface
+    public interface Consumer_WithExceptions<T, E extends Exception> {
+        void accept(T t) throws E;
+    }
+
+    @FunctionalInterface
+    public interface IntConsumer_WithExceptions<E extends Exception> {
+        void accept(int value) throws E;
+    }
+
+    @FunctionalInterface
+    public interface BiConsumer_WithExceptions<T, U, E extends Exception> {
+        void accept(T t, U u) throws E;
+    }
+
+    @FunctionalInterface
+    public interface Function_WithExceptions<T, R, E extends Exception> {
+        R apply(T t) throws E;
+    }
+
+    @FunctionalInterface
+    public interface Supplier_WithExceptions<T, E extends Exception> {
+        T get() throws E;
+    }
+
+    @FunctionalInterface
+    public interface Runnable_WithExceptions<E extends Exception> {
+        void run() throws E;
+    }
+
+    @FunctionalInterface
+    public interface IntFunction_WithExceptions<R, E extends Exception> {
+        R apply(int value) throws E;
     }
 
 }

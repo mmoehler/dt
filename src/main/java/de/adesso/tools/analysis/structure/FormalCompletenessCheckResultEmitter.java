@@ -20,21 +20,30 @@
 package de.adesso.tools.analysis.structure;
 
 import com.codepoetics.protonpack.Indexed;
-import com.google.common.collect.Multimap;
+import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
-import de.adesso.tools.util.tuple.Tuple3;
 
 import java.util.List;
-import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
- * Created by mmoehler on 02.04.16.
+ * Created by moehler on 06.04.2016.
  */
-public interface AnalysisResultEmitter {
+public class FormalCompletenessCheckResultEmitter implements Function<List<Indexed<List<String>>>, Tuple2<String, List<String>>> {
+    private static String TPL2 = "RULE %04d NOT DEFINED %s";
+    @Override
+    public Tuple2<String, List<String>> apply(List<Indexed<List<String>>> indexeds) {
 
-    BiFunction<List<Indicator>, Integer, Tuple3<String, Multimap<Integer, Integer>, Multimap<Integer, Integer>>> emitStructuralAnalysisResult();
+        final String message = indexeds.stream()
+                .map(i -> String.format(TPL2, i.getIndex(), String.join(",", i.getValue())))
+                .reduce("", (a, b) -> a += (System.lineSeparator() + b));
 
-    Function<List<Indexed<List<String>>>, Tuple2<String, List<String>>> emitFormalCompletenessCheckResults();
+        final List<String> missings = indexeds.stream()
+                .map(i -> String.join(",", i.getValue()))
+                .collect(Collectors.toList());
 
+        Tuple2<String, List<String>> ret = Tuple.of(message, missings);
+        return ret;
+    }
 }

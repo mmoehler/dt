@@ -4,8 +4,8 @@ import de.adesso.tools.events.*;
 import de.adesso.tools.ui.scopes.RuleScope;
 import de.saxsys.mvvmfx.InjectScope;
 import de.saxsys.mvvmfx.ViewModel;
-import javafx.beans.property.ReadOnlyBooleanProperty;
-import javafx.beans.property.ReadOnlyBooleanWrapper;
+import javafx.beans.property.SimpleBooleanProperty;
+import javafx.beans.value.ObservableValue;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -17,7 +17,10 @@ import javax.inject.Singleton;
 @Singleton
 public class MenuViewModel implements ViewModel {
 
-    private final ReadOnlyBooleanWrapper removeItemDisabled = new ReadOnlyBooleanWrapper();
+    private final SimpleBooleanProperty consolidateRules = new SimpleBooleanProperty(true);
+    private final SimpleBooleanProperty removeDuplicateRules = new SimpleBooleanProperty(true);
+    private final SimpleBooleanProperty missingRules = new SimpleBooleanProperty(true);
+
     @Inject
     private Event<TriggerShutdownEvent> shouldCloseEvent;
     @Inject
@@ -68,18 +71,42 @@ public class MenuViewModel implements ViewModel {
     private Event<FileSaveAsEvent> fileSaveAsEvent;
     @Inject
     private Event<FileSaveEvent> fileSaveEvent;
-
+    @Inject
+    private Event<AddMissingRulesEvent> addMissingRulesEvent;
+    @Inject
+    private Event<DeleteRedundantRulesEvent> deleteRedundantRulesEvent;
 
     @InjectScope
     private RuleScope mdScope;
 
-
     public void initialize() {
-        //removeItemDisabled.bind(mdScope.selectedContactProperty().isNull());
+        consolidateRules.bind(mdScope.consolidateRulesProperty());
+        removeDuplicateRules.bind(mdScope.removeDuplicateRulesProperty());
+        missingRules.bind(mdScope.missingRulesProperty());
     }
 
-    public ReadOnlyBooleanProperty removeItemDisabledProperty() {
-        return removeItemDisabled.getReadOnlyProperty();
+    public boolean getConsolidateRules() {
+        return consolidateRules.get();
+    }
+
+    public SimpleBooleanProperty consolidateRulesProperty() {
+        return consolidateRules;
+    }
+
+    public boolean getRemoveDuplicateRules() {
+        return removeDuplicateRules.get();
+    }
+
+    public SimpleBooleanProperty removeDuplicateRulesProperty() {
+        return removeDuplicateRules;
+    }
+
+    public boolean getMissingRules() {
+        return missingRules.get();
+    }
+
+    public SimpleBooleanProperty missingRulesProperty() {
+        return missingRules;
     }
 
     public void closeAction() {
@@ -180,5 +207,17 @@ public class MenuViewModel implements ViewModel {
 
     public void fileSaveAs() {
         fileSaveAsEvent.fire(new FileSaveAsEvent());
+    }
+
+    public void addMissingRules() {
+        addMissingRulesEvent.fire(new AddMissingRulesEvent());
+    }
+
+    public void deleteRedundantRules() {
+        deleteRedundantRulesEvent.fire(new DeleteRedundantRulesEvent());
+    }
+
+    public ObservableValue<? extends Boolean> consolidateRules() {
+        return consolidateRules;
     }
 }

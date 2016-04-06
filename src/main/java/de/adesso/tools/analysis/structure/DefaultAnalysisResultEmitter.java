@@ -20,6 +20,9 @@
 package de.adesso.tools.analysis.structure;
 
 import com.codepoetics.protonpack.Indexed;
+import com.google.common.collect.Multimap;
+import de.adesso.tools.util.tuple.Tuple2;
+import de.adesso.tools.util.tuple.Tuple3;
 
 import javax.inject.Singleton;
 import java.util.List;
@@ -31,12 +34,11 @@ import java.util.function.Function;
  */
 @Singleton
 public class DefaultAnalysisResultEmitter implements AnalysisResultEmitter {
-    private static String TPL2 = "RULE %04d NOT DEFINED %s";
-    private BiFunction<List<Indicator>, Integer, String> structuralAnalysisResultEmitter;
-    private Function<List<Indexed<List<String>>>, String>  formalCompletenessCheckResultEmitter;
+    private BiFunction<List<Indicator>, Integer, Tuple3<String, Multimap<Integer, Integer>, Multimap<Integer, Integer>>> structuralAnalysisResultEmitter;
+    private Function<List<Indexed<List<String>>>, Tuple2<String, List<String>>> formalCompletenessCheckResultEmitter;
 
     @Override
-    public BiFunction<List<Indicator>, Integer, String> emitStructuralAnalysisResult() {
+    public BiFunction<List<Indicator>, Integer, Tuple3<String, Multimap<Integer, Integer>, Multimap<Integer, Integer>>> emitStructuralAnalysisResult() {
         if (structuralAnalysisResultEmitter == null) {
             structuralAnalysisResultEmitter = new StructuralAnalysisResultEmitter();
         }
@@ -44,12 +46,9 @@ public class DefaultAnalysisResultEmitter implements AnalysisResultEmitter {
     }
 
     @Override
-    public Function<List<Indexed<List<String>>>, String> emitFormalCompletenessCheckResults() {
+    public Function<List<Indexed<List<String>>>, Tuple2<String, List<String>>> emitFormalCompletenessCheckResults() {
         if (null == formalCompletenessCheckResultEmitter) {
-            formalCompletenessCheckResultEmitter = (l) ->
-                    l.stream()
-                            .map(i -> String.format(TPL2, i.getIndex(), String.join(",", i.getValue())))
-                            .reduce("", (a, b) -> a += (System.lineSeparator() + b));
+            formalCompletenessCheckResultEmitter = new FormalCompletenessCheckResultEmitter();
         }
         return formalCompletenessCheckResultEmitter;
     }

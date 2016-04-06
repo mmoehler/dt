@@ -1,40 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
-
-<AnchorPane maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.adesso.tools.ui.menu.MenuView">
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" xmlns="http://javafx.com/javafx/8"
+            fx:controller="de.adesso.tools.ui.menu.MenuView">
     <children>
-        <MenuBar AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+        <MenuBar AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+                 AnchorPane.topAnchor="0.0">
             <menus>
                 <Menu mnemonicParsing="false" text="File">
                     <items>
                         <MenuItem fx:id="fileNew" mnemonicParsing="false" onAction="#doFileNew" text="New">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="N" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
                         <MenuItem fx:id="fileOpen" mnemonicParsing="false" onAction="#doFileOpen" text="Open...">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="O" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
                         <MenuItem fx:id="fileSave" mnemonicParsing="false" onAction="#doFileSave" text="Save">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
                         <MenuItem fx:id="fileSaveAs" mnemonicParsing="false" onAction="#doFileSaveAs" text="Save As...">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <SeparatorMenuItem mnemonicParsing="false"/>
                         <MenuItem mnemonicParsing="false" onAction="#doClose" text="Quit DTMG">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="Q" control="UP" meta="DOWN" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="Q" control="UP" meta="DOWN" shift="UP"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
                     </items>
@@ -42,119 +48,175 @@
                 <Menu mnemonicParsing="false" text="Edit">
                     <items>
                         <!-- ### Conditions ### -->
-                        <MenuItem fx:id="addConditionDeclMenuItem" mnemonicParsing="false" onAction="#doAddConditionDecl" text="Add Condition Declaration">
+                        <MenuItem fx:id="addConditionDeclMenuItem" mnemonicParsing="false"
+                                  onAction="#doAddConditionDecl" text="Add Condition Declaration">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F3" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F3" control="UP" meta="UP" shift="UP" shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="insertConditionDeclMenuItem" mnemonicParsing="false" onAction="#doInsertConditionDecl" text="Insert Condition Declaration">
+                        <MenuItem fx:id="insertConditionDeclMenuItem" mnemonicParsing="false"
+                                  onAction="#doInsertConditionDecl" text="Insert Condition Declaration">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F3" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F3" control="UP" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="removeConditionDeclMenuItem" mnemonicParsing="false" onAction="#doRemoveConditionDecl" text="Remove Condition Declaration">
+                        <MenuItem fx:id="removeConditionDeclMenuItem" mnemonicParsing="false"
+                                  onAction="#doRemoveConditionDecl" text="Remove Condition Declaration">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F3" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F3" control="DOWN" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="moveUpConditionDeclMenuItem" mnemonicParsing="false" onAction="#doMoveConditionDeclUp" text="Move Condition Declaration Up">
+                        <MenuItem fx:id="moveUpConditionDeclMenuItem" mnemonicParsing="false"
+                                  onAction="#doMoveConditionDeclUp" text="Move Condition Declaration Up">
                             <accelerator>
-                                <KeyCodeCombination alt="DOWN" code="F3" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="DOWN" code="F3" control="UP" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="moveDownConditionDeclMenuItem" mnemonicParsing="false" onAction="#doMoveConditionDeclDown" text="Move Condition Declaration Down">
+                        <MenuItem fx:id="moveDownConditionDeclMenuItem" mnemonicParsing="false"
+                                  onAction="#doMoveConditionDeclDown" text="Move Condition Declaration Down">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F3" control="UP" meta="DOWN" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F3" control="UP" meta="DOWN" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
 
                         <!-- ### Actions ### -->
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="addActionDeclMenuItem" mnemonicParsing="false" onAction="#doAddActionDecl" text="Add Action Declaration">
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem fx:id="addActionDeclMenuItem" mnemonicParsing="false" onAction="#doAddActionDecl"
+                                  text="Add Action Declaration">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F4" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F4" control="UP" meta="UP" shift="UP" shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="insertActionDeclMenuItem" mnemonicParsing="false" onAction="#doInsertActionDecl" text="Insert Action Declaration">
+                        <MenuItem fx:id="insertActionDeclMenuItem" mnemonicParsing="false"
+                                  onAction="#doInsertActionDecl" text="Insert Action Declaration">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F4" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F4" control="UP" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="removeActionDeclMenuItem" mnemonicParsing="false" onAction="#doRemoveActionDecl" text="Remove Action Declaration">
+                        <MenuItem fx:id="removeActionDeclMenuItem" mnemonicParsing="false"
+                                  onAction="#doRemoveActionDecl" text="Remove Action Declaration">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F4" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F4" control="DOWN" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="moveUpActionDeclMenuItem" mnemonicParsing="false" onAction="#doMoveActionDeclUp" text="Move Action Declaration Up">
+                        <MenuItem fx:id="moveUpActionDeclMenuItem" mnemonicParsing="false"
+                                  onAction="#doMoveActionDeclUp" text="Move Action Declaration Up">
                             <accelerator>
-                                <KeyCodeCombination alt="DOWN" code="F4" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="DOWN" code="F4" control="UP" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="moveDownActionDeclMenuItem" mnemonicParsing="false" onAction="#doMoveActionDeclDown" text="Move Action Declaration Down">
+                        <MenuItem fx:id="moveDownActionDeclMenuItem" mnemonicParsing="false"
+                                  onAction="#doMoveActionDeclDown" text="Move Action Declaration Down">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F4" control="UP" meta="DOWN" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F4" control="UP" meta="DOWN" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
 
                         <!-- ### Rules ### -->
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="addRuleMenuItem" mnemonicParsing="false" onAction="#doAddRuleDef" text="Add Rule">
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem fx:id="addRuleMenuItem" mnemonicParsing="false" onAction="#doAddRuleDef"
+                                  text="Add Rule">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F5" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F5" control="UP" meta="UP" shift="UP" shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="addElseRuleMenuItem" mnemonicParsing="false" onAction="#doAddElseRule" text="Add Else Rule">
+                        <MenuItem fx:id="addElseRuleMenuItem" mnemonicParsing="false" onAction="#doAddElseRule"
+                                  text="Add Else Rule">
                             <accelerator>
-                                <KeyCodeCombination alt="DOWN" code="F5" control="DOWN" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="DOWN" code="F5" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="insertRuleMenuItem" mnemonicParsing="false" onAction="#doInsertRuleDef" text="Insert Rule">
+                        <MenuItem fx:id="insertRuleMenuItem" mnemonicParsing="false" onAction="#doInsertRuleDef"
+                                  text="Insert Rule">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F5" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F5" control="UP" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="removeRuleMenuItem" mnemonicParsing="false" onAction="#doRemoveRuleDef" text="Remove Rule">
+                        <MenuItem fx:id="removeRuleMenuItem" mnemonicParsing="false" onAction="#doRemoveRuleDef"
+                                  text="Remove Rule">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F5" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F5" control="DOWN" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="moveRuleLeftMenuItem" mnemonicParsing="false" onAction="#doMoveRuleLeft" text="Move Rule to left">
+                        <MenuItem fx:id="moveRuleLeftMenuItem" mnemonicParsing="false" onAction="#doMoveRuleLeft"
+                                  text="Move Rule to left">
                             <accelerator>
-                                <KeyCodeCombination alt="DOWN" code="F5" control="UP" meta="UP" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="DOWN" code="F5" control="UP" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="moveRuleRightMenuItem" mnemonicParsing="false" onAction="#doMoveRuleRight" text="Move Rule to right">
+                        <MenuItem fx:id="moveRuleRightMenuItem" mnemonicParsing="false" onAction="#doMoveRuleRight"
+                                  text="Move Rule to right">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F5" control="UP" meta="DOWN" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F5" control="UP" meta="DOWN" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="consolidateRules" mnemonicParsing="false" onAction="#doConsolidateRules" text="Consolidate Rules" />
+
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Formal Analysis">
                     <items>
-                        <MenuItem fx:id="formalCompleteness" mnemonicParsing="false" onAction="#doFormalCompletenessCheck" text="Formal Completeness">
+                        <MenuItem fx:id="formalCompleteness" mnemonicParsing="false"
+                                  onAction="#doFormalCompletenessCheck" text="Formal Completeness">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F11" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F11" control="UP" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="structuralAnalysis" mnemonicParsing="false" onAction="#doStructuralAnalysis" text="Structural Analysis">
+                        <MenuItem fx:id="addMissingRules" mnemonicParsing="false" onAction="#doAddMissingRules"
+                                  text="Add Missing Rules">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F12" control="UP" meta="UP" shift="UP" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F11" control="UP" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem fx:id="completeReport" mnemonicParsing="false" onAction="#doCompleteReport" text="Complete Report">
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem fx:id="structuralAnalysis" mnemonicParsing="false" onAction="#doStructuralAnalysis"
+                                  text="Structural Analysis">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="F9" control="DOWN" meta="UP" shift="DOWN" shortcut="UP" />
+                                <KeyCodeCombination alt="UP" code="F12" control="UP" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="consolidateRules" mnemonicParsing="false" onAction="#doConsolidateRules"
+                                  text="Consolidate Rules">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="F12" control="UP" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="deleteRedundantRules" mnemonicParsing="false"
+                                  onAction="#doDeleteRedundantRules" text="Delete Redundant Rules">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="F12" control="DOWN" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem fx:id="completeReport" mnemonicParsing="false" onAction="#doCompleteReport"
+                                  text="Complete Report">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="F9" control="DOWN" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#doAbout" text="About" />
+                        <MenuItem mnemonicParsing="false" onAction="#doAbout" text="About"/>
                     </items>
                 </Menu>
             </menus>

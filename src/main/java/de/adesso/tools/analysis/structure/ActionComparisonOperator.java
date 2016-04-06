@@ -31,7 +31,7 @@ import static de.adesso.tools.analysis.structure.Indicators.*;
  * Created by moehler on 31.03.2016.
  */
 public class ActionComparisonOperator implements BinaryOperator<Indicator> {
-    private static final EnumSet<Indicators> INDICATORS = EnumSet.of(XX,MI);
+    private static final EnumSet<Indicators> INDICATORS = EnumSet.of(XX, MI);
     private static final ImmutableTable<Indicator, Indicator, Indicator> RULES =
             new ImmutableTable.Builder<Indicator, Indicator, Indicator>()
                     .put(XX, XX, EQ)
@@ -40,17 +40,17 @@ public class ActionComparisonOperator implements BinaryOperator<Indicator> {
                     .put(MI, MI, EQ)
                     .build();
 
-    @Override
-    public Indicator apply(Indicator left, Indicator right) {
-        checkIndicators(left,right);
-        return RULES.get(left,right);
-    }
-
-    private static void checkIndicators(Indicator...indicators) {
+    private static void checkIndicators(Indicator... indicators) {
         for (Indicator i : indicators) {
-            if(!INDICATORS.contains(i)) {
+            if (!INDICATORS.contains(i)) {
                 throw new IllegalArgumentException(String.format("Illegal indicator: %s!", i.getCode()));
             }
         }
+    }
+
+    @Override
+    public Indicator apply(Indicator left, Indicator right) {
+        checkIndicators(left, right);
+        return RULES.get(left, right);
     }
 }

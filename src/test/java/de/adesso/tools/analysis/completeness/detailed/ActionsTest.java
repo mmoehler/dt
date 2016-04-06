@@ -42,6 +42,30 @@ import static java.util.stream.Collectors.toList;
  * Created by mmoehler on 19.03.16.
  */
 public class ActionsTest {
+    public static void dumpTableItems(String msg, List<List<String>> list2D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list2D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    public static void dumpTableItems(String msg, ObservableList<ObservableList<String>> list2D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list2D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    public static void dumpMap(String msg, Map<?, ?> map) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        map.forEach((k, v) -> System.out.println("\t" + k + " -> " + v));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    public static <T> void dumpList1DItems(String msg, List<T> list1D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list1D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
     @Test
     public void testA1OK() {
         int expected = 0;
@@ -55,6 +79,19 @@ public class ActionsTest {
         //assertThat(actual, equalTo(expected));
 
     }
+
+    /*
+    static List<Integer> newWithValue(int value) {
+        List<Integer> result = new ArrayList<>();
+        result.add(value);
+        return result;
+    }
+
+    static List<Integer> addValue(List<Integer> l, int value) {
+        l.add(value);
+        return l;
+    }
+    */
 
     @Test
     public void testA2OK() {
@@ -110,33 +147,18 @@ public class ActionsTest {
         //assertThat(actual, equalTo(expected));
     }
 
-    /*
-    static List<Integer> newWithValue(int value) {
-        List<Integer> result = new ArrayList<>();
-        result.add(value);
-        return result;
-    }
-
-    static List<Integer> addValue(List<Integer> l, int value) {
-        l.add(value);
-        return l;
-    }
-    */
-
     @Test
     public void testCreateMask() {
         List<String> rf = StringListBuilder.on("Y,N,-").build();
         List<String> ri = StringListBuilder.on("N,Y,N").build();
 
-        Function<List<Tuple2<String, String>>,Integer>[] conditions = new Function[]{
-                B1,B2,B3,B4
+        Function<List<Tuple2<String, String>>, Integer>[] conditions = new Function[]{
+                B1, B2, B3, B4
         };
 
         List<Tuple2<String, String>> prototype = StreamUtils
                 .zip(rf.stream(), ri.stream(), (x, y) -> Tuple.of(x, y))
                 .collect(toList());
-
-
 
 
         final List<Integer> mask = Arrays.stream(conditions)
@@ -146,9 +168,7 @@ public class ActionsTest {
         dumpList1DItems("MASK", mask);
 
 
-
     }
-
 
     @Test
     public void testA5Consolidate() {
@@ -182,32 +202,6 @@ public class ActionsTest {
 
 
         dumpTableItems("RESULT-1", observables[0]);
-    }
-
-
-
-    public static void dumpTableItems(String msg, List<List<String>> list2D) {
-        System.out.println(String.format("%s >>>>>>>>>>", msg));
-        list2D.forEach(i -> System.out.println("\t" + i));
-        System.out.println("<<<<<<<<<<\n");
-    }
-
-    public static void dumpTableItems(String msg, ObservableList<ObservableList<String>> list2D) {
-        System.out.println(String.format("%s >>>>>>>>>>", msg));
-        list2D.forEach(i -> System.out.println("\t" + i));
-        System.out.println("<<<<<<<<<<\n");
-    }
-
-    public static void dumpMap(String msg, Map<?,?> map) {
-        System.out.println(String.format("%s >>>>>>>>>>", msg));
-        map.forEach((k,v) -> System.out.println("\t" + k + " -> " + v));
-        System.out.println("<<<<<<<<<<\n");
-    }
-
-    public static <T> void dumpList1DItems(String msg, List<T> list1D) {
-        System.out.println(String.format("%s >>>>>>>>>>", msg));
-        list1D.forEach(i -> System.out.println("\t" + i));
-        System.out.println("<<<<<<<<<<\n");
     }
 
 

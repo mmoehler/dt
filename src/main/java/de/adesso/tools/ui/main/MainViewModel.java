@@ -1,6 +1,7 @@
 package de.adesso.tools.ui.main;
 
 import com.codepoetics.protonpack.Indexed;
+import com.google.common.collect.Multimap;
 import de.adesso.tools.analysis.structure.AnalysisResultEmitter;
 import de.adesso.tools.analysis.structure.Indicator;
 import de.adesso.tools.analysis.structure.StructuralAnalysis;
@@ -11,12 +12,14 @@ import de.adesso.tools.model.ActionDecl;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
+import de.adesso.tools.ui.scopes.RuleScope;
+import de.adesso.tools.util.tuple.Tuple2;
+import de.adesso.tools.util.tuple.Tuple3;
+import de.saxsys.mvvmfx.InjectScope;
 import de.saxsys.mvvmfx.ViewModel;
 import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
@@ -26,11 +29,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import static com.google.common.collect.Multimaps0.emptyMultimap;
 import static de.adesso.tools.analysis.completeness.detailed.ConditionDetailedCompletenessCheck.isFormalComplete;
 import static de.adesso.tools.functions.Adapters.Matrix.adapt;
 import static de.adesso.tools.functions.DtFunctions.fullExpandActions;
 import static de.adesso.tools.functions.DtFunctions.limitedExpandConditions;
 import static de.adesso.tools.ui.Notifications.*;
+import static java.util.Collections.emptyList;
 
 @Singleton
 public class MainViewModel implements ViewModel {
@@ -39,15 +44,15 @@ public class MainViewModel implements ViewModel {
     public static final Object[] NO_ARGS = {};
     public static final String COND_ROW_HEADER = "C%02d";
     public static final String DASH = "-";
-    private static final Logger LOG = LoggerFactory.getLogger(MainViewModel.class);
     private static final String ACT_ROW_HEADER = "A%02d";
-    private static String TPL2 = "RULE %04d NOT DEFINED %s";
     private final ObservableList<ConditionDeclTableViewModel> conditionDeclarations = FXCollections.observableArrayList();
     private final ObservableList<ObservableList<String>> conditionDefinitions = FXCollections.observableArrayList();
     private final ObservableList<ActionDeclTableViewModel> actionDeclarations = FXCollections.observableArrayList();
     private final ObservableList<ObservableList<String>> actionDefinitions = FXCollections.observableArrayList();
-    private final DTDataPacket data = new DTDataPacket(conditionDeclarations,conditionDefinitions,actionDeclarations,actionDefinitions);
+    private final DTDataPacket data = new DTDataPacket(conditionDeclarations, conditionDefinitions, actionDeclarations, actionDefinitions);
 
+    @InjectScope
+    private RuleScope mdScope;
 
     @Inject
     private NotificationCenter notificationCenter;
@@ -57,24 +62,15 @@ public class MainViewModel implements ViewModel {
 
     @Inject
     private AnalysisResultEmitter resultEmitter;
+    private List<String> missingRules = emptyList();
+    private Multimap<Integer, Integer> compressibleRules = emptyMultimap();
+    private Multimap<Integer, Integer> dupplicateRules = emptyMultimap();
+    private DTDataPacket loadedData = null;
 
     public MainViewModel() {
         super();
     }
 
-    /*
-    public void onRemoveConditionDefsWithoutActions(@Observes RemoveRulesWithoutActionsEvent event) {
-
-        final List<List<String>> transposed = MatrixFunctions.transpose(adapt(this.actionDefinitions));
-        final List<Integer> indices1 = StreamUtils.zipWithIndex(transposed.stream())
-                .filter(i -> isBlank(i.getValue()))
-                .map(q -> Integer.valueOf((int) q.getIndex()))
-                .sorted((aa, bb) -> bb.intValue() - aa.intValue())
-                .collect(Collectors.toList());
-        final List<Integer> indices = indices1;
-        publish(REM_RULES_WITHOUT_ACTIONS.name(), indices);
-    }
-*/
     private static boolean isBlank(ObservableList<String> ol) {
         return ol.stream().allMatch(ss -> (ss.trim().length() == 0));
     }
@@ -236,34 +232,74 @@ public class MainViewModel implements ViewModel {
 
     public void onFormalCompletenessCheckAction(@Observes FormalCompletenessCheckEvent event) {
         notificationCenter.publish(PREPARE_CONSOLE.name(), internalFormalCompletenessCheck());
+        notifyMissingRulesCleared();
     }
 
     private String internalFormalCompletenessCheck() {
         final List<Indexed<List<String>>> result = isFormalComplete(this.conditionDeclarations, this.conditionDefinitions);
-        return resultEmitter.emitFormalCompletenessCheckResults().apply(result);
-    }
-
-    public void onConsolidateRulesAction(@Observes ConsolidateRulesEvent event) {
-
+        Tuple2<String, List<String>> tuple2 = resultEmitter.emitFormalCompletenessCheckResults().apply(result);
+        missingRules = tuple2._2();
+        return tuple2._1();
     }
 
     public void onCompleteReportAction(@Observes CompleteReportEvent event) {
         final String part1 = internalStructuralAnalysis();
         final String part2 = internalFormalCompletenessCheck();
         notificationCenter.publish(PREPARE_CONSOLE.name(), part1 + System.lineSeparator() + part2);
+        notifyMissingRulesCleared();
+        notifyRulesConsolidated();
+        notifyRuleDuplicatesCleared();
     }
 
     public void onStructuralAnalysisAction(@Observes StructuralAnalysisEvent event) {
         notificationCenter.publish(PREPARE_CONSOLE.name(), internalStructuralAnalysis());
+        notifyRulesConsolidated();
+        notifyRuleDuplicatesCleared();
     }
 
+    // TODO Validation!! PRE: all table containers must not be empty!!
     private String internalStructuralAnalysis() {
         List<Indicator> result = structuralAnalysis.apply(adapt(this.conditionDefinitions), adapt(this.actionDefinitions));
-        return resultEmitter.emitStructuralAnalysisResult().apply(result, this.conditionDefinitions.get(0).size());
+
+        final Tuple3<String, Multimap<Integer, Integer>, Multimap<Integer, Integer>> tuple3 =
+                resultEmitter.emitStructuralAnalysisResult().apply(result, this.conditionDefinitions.get(0).size());
+
+        compressibleRules = tuple3._2();
+        dupplicateRules = tuple3._3();
+        return tuple3._1();
     }
 
     public void onFileNewAction(@Observes FileNewEvent event) {
 
+    }
+
+    public void onConsolidateRulesAction(@Observes ConsolidateRulesEvent event) {
+        // TODO implement it!!
+        compressibleRules.clear();
+        notifyRulesConsolidated();
+        dupplicateRules.clear();
+        notifyRuleDuplicatesCleared();
+    }
+
+    public void onAddMissingRules(@Observes AddMissingRulesEvent event) {
+        // TODO implementit!!
+        missingRules.clear();
+    }
+
+    public void onDeleteRedundantRules(@Observes DeleteRedundantRulesEvent event) {
+
+    }
+
+    private void notifyRulesConsolidated() {
+        mdScope.consolidateRulesProperty().set(compressibleRules.isEmpty());
+    }
+
+    private void notifyMissingRulesCleared() {
+        mdScope.missingRulesProperty().set(missingRules.isEmpty());
+    }
+
+    private void notifyRuleDuplicatesCleared() {
+        mdScope.removeDuplicateRulesProperty().set(dupplicateRules.isEmpty());
     }
 
     public void onFileOpenAction(@Observes FileOpenEvent event) {
@@ -278,9 +314,8 @@ public class MainViewModel implements ViewModel {
 
     }
 
-    private DTDataPacket loadedData = null;
     public int openFile(File file) throws IOException, ClassNotFoundException {
-        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))){
+        try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(file))) {
             loadedData = ((DTDataPacket) in.readObject());
             return loadedData.getConditionDefinitions().get(0).size();
         }
@@ -291,9 +326,10 @@ public class MainViewModel implements ViewModel {
     }
 
     public void saveFile(File file) throws IOException {
-        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))){
+        try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(file))) {
             out.writeObject(this.data);
             out.flush();
         }
     }
+
 }
