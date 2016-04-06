@@ -20,10 +20,12 @@
 package de.adesso.tools.analysis.structure;
 
 import com.google.common.base.Strings;
-import de.adesso.tools.Dump;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 
 import javax.inject.Singleton;
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.BiFunction;
@@ -39,11 +41,26 @@ public class StructuralAnalysisResultEmitter implements BiFunction<List<Indicato
 
     public static final String STRUCTURE_ANALYSIS_RULE = "STRUCTURE ANALYSIS RULE %2s ";
 
+    private static final ThreadLocal<Multimap<Integer,Integer>> compresableRules =
+            new ThreadLocal<Multimap<Integer,Integer>>() {
+                @Override protected Multimap<Integer,Integer> initialValue() {
+                    return Multimaps.newListMultimap(new HashMap<>(), ArrayList::new);
+                }
+            };
+
+    private static final ThreadLocal<Multimap<Integer,Integer>> redundantRules =
+            new ThreadLocal<Multimap<Integer,Integer>>() {
+                @Override protected Multimap<Integer,Integer> initialValue() {
+                    return Multimaps.newListMultimap(new HashMap<>(), ArrayList::new);
+                }
+            };
+
+
     @Override
     public String apply(List<Indicator> analysisResult, Integer countRules) {
 
-        Dump.dumpList1DItems("ANALYSIS-RESULTS", analysisResult);
-        Dump.dumpList1DItems("COUNT-RULES", Arrays.asList(String.valueOf(countRules)));
+        compresableRules.get().clear();
+        redundantRules.get().clear();
 
         P p = new P();
         Iterator<Indicator> indics = analysisResult.iterator();
@@ -56,7 +73,13 @@ public class StructuralAnalysisResultEmitter implements BiFunction<List<Indicato
             p.prf(STRUCTURE_ANALYSIS_RULE, ((i + 1)%10));
             for (int j = 0; j < countRules; j++) {
                 if (j > i) {
-                    p.pr(indics.next().getCode() + " ");
+                    final Indicator c = indics.next();
+                    if(Indicators.AS.equals(c)) {
+                        compresableRules.get().put(i,j);
+                    } else if(Indicators.RR.equals(c)) {
+                        redundantRules.get().put(i,j);
+                    }
+                    p.pr(c.getCode() + " ");
                 } else {
                     p.pr(". ");
                 }

@@ -20,9 +20,9 @@
 package de.adesso.tools.analysis.structure;
 
 import com.codepoetics.protonpack.StreamUtils;
-import de.adesso.tools.Dump;
-import de.adesso.tools.functions.MatrixFunctions;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -48,9 +48,6 @@ public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>,
 
         List<List<String>> inConditions = transpose(conditions);
 
-        Dump.dumpTableItems("conditions = ", inConditions);
-
-
         for (int i = 0; i < inConditions.size()-1; i++) {
             for (int j = 1; j < inConditions.size(); j++) {
                 if(j>i) {
@@ -64,15 +61,11 @@ public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>,
             }
         }
 
-        Dump.dumpTableItems("collected = ", MatrixFunctions.transpose(outConditions));
-
         final List<Indicator> reducedConditionIndicators = outConditions.stream()
                 .map(c -> c.stream()
                         .reduce(Combiners.conditionComparisonResult()))
                 .map(r -> r.get())
                 .collect(Collectors.toList());
-
-        Dump.dumpList1DItems("reduced = ", reducedConditionIndicators);
 
         return reducedConditionIndicators;
     };
@@ -81,8 +74,6 @@ public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>,
         final List<List<Indicator>> outActions = new ArrayList<>();
 
         List<List<String>> inActions = transpose(actions);
-
-        Dump.dumpTableItems("actions = ", inActions);
 
         for (int i = 0; i < inActions.size()-1; i++) {
             for (int j = 1; j < inActions.size(); j++) {
@@ -95,20 +86,29 @@ public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>,
             }
         }
 
-        Dump.dumpTableItems("collected = ", MatrixFunctions.transpose(outActions));
-
         final List<Indicator> reducedActionIndicators = outActions.stream()
                 .map(c -> c.stream()
                         .reduce(Combiners.actionComparisonResult()))
                 .map(r -> r.get())
                 .collect(Collectors.toList());
 
-        Dump.dumpList1DItems("reduced = ", reducedActionIndicators);
-
         return reducedActionIndicators;
     };
 
-    private final static ExecutorService pool = Executors.newCachedThreadPool();
+    private static ExecutorService pool;
+
+    @PostConstruct
+    public  void postConstruct() {
+        pool = Executors.newCachedThreadPool();
+    }
+
+    @PreDestroy
+    public  void preDestroy() {
+        if(null != pool) {
+            pool.shutdownNow();
+            pool = null;
+        }
+    }
 
     @Override
     public List<Indicator> apply(List<List<String>> conditions, List<List<String>> actions) {
@@ -129,8 +129,6 @@ public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>,
         final List<Indicator> result = StreamUtils
                 .zip(actionResults.stream(), conditionResults.stream(), Accumulators.combinationResult())
                 .collect(Collectors.toList());
-
-        Dump.dumpList1DItems("RESULT", result);
 
         return result;
     }
