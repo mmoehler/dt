@@ -492,4 +492,18 @@ public final class DtFunctions {
         col.setOnEditCommit(value);
         return col;
     }
+
+    public static void doReplaceRuleConditions(TableView<ObservableList<String>> conditionTable, OptionalInt index, List<String> newData) {
+        if (index.isPresent()) {
+
+            final ObservableList<ObservableList<String>> oldConDefs = (conditionTable.getItems());
+
+            final ObservableList<ObservableList<String>> newConDefs =
+                    Adapters.Matrix.adapt(replaceColumnsAt(Adapters.Matrix.adapt(oldConDefs), index.getAsInt(), newData));
+
+            oldConDefs.clear();
+            newConDefs.forEach(oldConDefs::add);
+            conditionTable.refresh();
+        }
+    }
 }

@@ -43,7 +43,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 @Singleton
 public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>, List<List<String>>, List<Indicator>>, StructuralAnalysis {
 
-    final static Function<List<List<String>>, List<Indicator>> conditionProcessor = (conditions) -> {
+    private final static Function<List<List<String>>, List<Indicator>> conditionProcessor = (conditions) -> {
         final List<List<Indicator>> outConditions = new ArrayList<>();
 
         List<List<String>> inConditions = transpose(conditions);
@@ -70,7 +70,7 @@ public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>,
         return reducedConditionIndicators;
     };
 
-    final static Function<List<List<String>>, List<Indicator>> actionProcessor = (actions) -> {
+    private final static Function<List<List<String>>, List<Indicator>> actionProcessor = (actions) -> {
         final List<List<Indicator>> outActions = new ArrayList<>();
 
         List<List<String>> inActions = transpose(actions);

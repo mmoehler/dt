@@ -139,6 +139,30 @@ public final class MatrixFunctions {
         return modifiedMatrix;
     }
 
+    public static List<List<String>> replaceColumnsAt(List<List<String>> original, int index, List<String> newData) {
+
+        List<List<String>> modifiedMatrix = FXCollections.emptyObservableList();
+
+        if (!original.isEmpty()) {
+            Iterator<String> newDataIterator = newData.iterator();
+            final List<List<String>> copiedMatrix = copy(original);
+            modifiedMatrix = copiedMatrix.stream()
+                    .map(l -> {
+                        List<String> out = FXCollections.observableArrayList();
+                        for (int i = 0; i < l.size(); i++) {
+                            if (index == i) {
+                                out.add(newDataIterator.next());
+                            }
+                            out.add(l.get(i));
+                        }
+                        return out;
+                    })
+                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
+        }
+        return modifiedMatrix;
+    }
+
+
     public static List<String> newRow(int len, Supplier<String> defaultValue) {
         if (len < 0) {
             throw new IllegalStateException("len < 0!");
