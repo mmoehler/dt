@@ -265,7 +265,6 @@ public final class DtFunctions {
                                        TableView<ObservableList<String>> actionTable,
                                        OptionalInt value) {
 
-
         final OptionalInt index = determineColumnIndex(conditionTable, actionTable, value);
         if (index.isPresent()) {
 
@@ -293,6 +292,7 @@ public final class DtFunctions {
             actionTable.refresh();
         }
     }
+
 
     public static void doRemoveRows(TableView declarations,
                                     TableView definitions, OptionalInt value) {
@@ -493,17 +493,12 @@ public final class DtFunctions {
         return col;
     }
 
-    public static void doReplaceRuleConditions(TableView<ObservableList<String>> conditionTable, OptionalInt index, List<String> newData) {
-        if (index.isPresent()) {
-
-            final ObservableList<ObservableList<String>> oldConDefs = (conditionTable.getItems());
-
-            final ObservableList<ObservableList<String>> newConDefs =
-                    Adapters.Matrix.adapt(replaceColumnsAt(Adapters.Matrix.adapt(oldConDefs), index.getAsInt(), newData));
-
-            oldConDefs.clear();
-            newConDefs.forEach(oldConDefs::add);
-            conditionTable.refresh();
+    public static void doReplaceRuleConditions(ObservableList<ObservableList<String>> conditionDefinitions, OptionalInt index, List<String> newData) {
+        if (index.isPresent() && !conditionDefinitions.isEmpty()) {
+            final int col = index.getAsInt();
+            final Iterator<String> it = newData.iterator();
+            final int rows = conditionDefinitions.size();
+            IntStream.range(0, rows).forEach(i -> conditionDefinitions.get(i).set(col, it.next()));
         }
     }
 }

@@ -274,19 +274,22 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onConsolidateRulesAction(@Observes ConsolidateRulesEvent event) {
-        // TODO implement it!!
+        publish(EV_CONSOLIDATE_RULES.name(), compressibleRules);
         compressibleRules.clear();
         notifyRulesConsolidated();
-        dupplicateRules.clear();
-        notifyRuleDuplicatesCleared();
+
     }
 
     public void onAddMissingRules(@Observes AddMissingRulesEvent event) {
-        // TODO implementit!!
         missingRules.clear();
+        notifyMissingRulesCleared();
+        throw new UnsupportedOperationException("Not implemented yet!!");
     }
 
     public void onDeleteRedundantRules(@Observes DeleteRedundantRulesEvent event) {
+        dupplicateRules.clear();
+        notifyRuleDuplicatesCleared();
+        throw new UnsupportedOperationException("Not implemented yet!!");
 
     }
 

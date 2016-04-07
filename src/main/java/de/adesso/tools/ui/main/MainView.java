@@ -19,6 +19,8 @@
 
 package de.adesso.tools.ui.main;
 
+import com.google.common.collect.Multimap;
+import de.adesso.tools.analysis.structure.Operators;
 import de.adesso.tools.exception.ExceptionHandler;
 import de.adesso.tools.functions.DtFunctions;
 import de.adesso.tools.model.ActionDecl;
@@ -29,6 +31,7 @@ import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.tools.ui.dialogs.Dialogs;
 import de.adesso.tools.util.OsCheck;
+import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
@@ -59,6 +62,7 @@ import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 import static de.adesso.tools.functions.DtFunctions.*;
+import static de.adesso.tools.ui.Notifications.EV_CONSOLIDATE_RULES;
 
 public class MainView implements FxmlView<MainViewModel> {
 
@@ -155,6 +159,13 @@ public class MainView implements FxmlView<MainViewModel> {
 
         this.viewModel.subscribe(Notifications.FILE_OPEN.name(), this::doFileOpen);
         this.viewModel.subscribe(Notifications.FILE_SAVE_AS.name(), this::doFileSaveAs);
+
+        this.viewModel.subscribe(EV_CONSOLIDATE_RULES.name(), this::doConsolidateRules);
+    }
+
+    private void doConsolidateRules(String s, Object... objects) {
+        Multimap<Integer, Integer> compressibleRules = (Multimap<Integer, Integer>)objects[0];
+        Operators.rulesConsolidation().accept(compressibleRules, Tuple.of(conditionDefinitionsTable, actionDefinitionsTable));
     }
 
     private FileChooser getFileChooser() {

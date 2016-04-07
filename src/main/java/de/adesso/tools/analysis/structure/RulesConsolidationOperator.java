@@ -22,7 +22,6 @@ package de.adesso.tools.analysis.structure;
 import com.google.common.collect.Multimap;
 import de.adesso.tools.analysis.completeness.detailed.Functions;
 import de.adesso.tools.functions.DtFunctions;
-import de.adesso.tools.io.DTDataPacket;
 import de.adesso.tools.util.tuple.Tuple2;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
@@ -35,7 +34,6 @@ import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 import static de.adesso.tools.functions.Adapters.Matrix.adapt;
-import static de.adesso.tools.functions.MatrixFunctions.transpose;
 
 /**
  * Created by moehler on 07.04.2016.
@@ -43,7 +41,7 @@ import static de.adesso.tools.functions.MatrixFunctions.transpose;
 public class RulesConsolidationOperator implements BiConsumer<Multimap<Integer, Integer>, Tuple2<TableView<ObservableList<String>>,TableView<ObservableList<String>>>> {
     @Override
     public void accept(Multimap<Integer, Integer> analysisResult, Tuple2<TableView<ObservableList<String>>,TableView<ObservableList<String>>> data) {
-        List<List<String>> condCols = transpose(adapt(data._1().getItems()));
+        List<List<String>> condCols = adapt(data._1().getItems());
 
         analysisResult.keySet().forEach(k ->{
             LinkedList<Integer> controlItems = new LinkedList<>();
@@ -55,7 +53,7 @@ public class RulesConsolidationOperator implements BiConsumer<Multimap<Integer, 
 
             controlItems.forEach(i -> {
                 if(i == controlItems.getLast()) {
-                    DtFunctions.doReplaceRuleConditions(data._1(), OptionalInt.of(i), consolidated.get(0));
+                    DtFunctions.doReplaceRuleConditions(data._1().getItems(), OptionalInt.of(i), consolidated.get(0));
                 } else {
                     DtFunctions.doRemoveColumns(data._1(), data._2(), OptionalInt.of(i));
                 }

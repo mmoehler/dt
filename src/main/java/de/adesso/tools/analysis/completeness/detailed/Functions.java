@@ -47,11 +47,6 @@ public class Functions {
     private static final BiFunction<List<String>, List<String>, List<List<String>>>[] ACTIONS = new BiFunction[]{A1, A2, A3, A4, A5};
     private static final Function<List<Tuple2<String, String>>, Integer>[] CONDITIONS = new Function[]{B1, B2, B3, B4};
     private static final List<List<String>> INTERNAL = MatrixBuilder.on("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
-    private static Function<String, Integer> maskMatrixMapper = s -> (isDASH(s)) ? 0 : 1;
-    private static final List<? extends List<Integer>> M = transpose(makeMaskMatrix(INTERNAL));
-    private static Function<String, Integer> decisionMatrixMapper = s -> (isYES(s)) ? 1 : 0;
-    private static final List<? extends List<Integer>> D = transpose(makeDecisionMatrix(INTERNAL));
-
     public static BiFunction<List<String>, List<String>, List<List<String>>> columnDifference = (left, right) -> {
 
         List<Tuple2<String, String>> prototype = StreamUtils
@@ -87,6 +82,10 @@ public class Functions {
         return transpose(applied);
 
     };
+    private static Function<String, Integer> maskMatrixMapper = s -> (isDASH(s)) ? 0 : 1;
+    private static final List<? extends List<Integer>> M = transpose(makeMaskMatrix(INTERNAL));
+    private static Function<String, Integer> decisionMatrixMapper = s -> (isYES(s)) ? 1 : 0;
+    private static final List<? extends List<Integer>> D = transpose(makeDecisionMatrix(INTERNAL));
 
     public static List<List<Integer>> makeMaskMatrix(List<List<String>> conditions) {
         List<List<Integer>> M = conditions.stream().map(a -> a.stream().map(maskMatrixMapper).collect(toList())).collect(toList());
@@ -165,7 +164,7 @@ class ConditionsConsolidateOperator implements Function<List<List<String>>, List
             map.entrySet().stream().filter(e -> e.getValue().size() > 1)
                     .forEach(f -> {
                         List<Integer> indices = f.getValue();
-                        Collections.sort(indices, (a, b) -> (-1));
+                        Collections.sort(indices, (a, b) -> b - a);
                         for (int r = 0; r < indices.size(); r++) {
                             if (r == indices.size() - 1) {
                                 observables[0].get(row).set(indices.get(r), DASH);

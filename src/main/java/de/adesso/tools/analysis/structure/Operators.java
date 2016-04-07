@@ -19,6 +19,12 @@
 
 package de.adesso.tools.analysis.structure;
 
+import com.google.common.collect.Multimap;
+import de.adesso.tools.util.tuple.Tuple2;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
+
+import java.util.function.BiConsumer;
 import java.util.function.BinaryOperator;
 
 /**
@@ -34,6 +40,10 @@ public final class Operators {
 
     public static BinaryOperator<Indicator> conditionComparison() {
         return new ConditionComparisonOperator();
+    }
+
+    public static BiConsumer<Multimap<Integer, Integer>, Tuple2<TableView<ObservableList<String>>,TableView<ObservableList<String>>>> rulesConsolidation(){
+        return new RulesConsolidationOperator();
     }
 
 }
