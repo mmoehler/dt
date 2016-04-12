@@ -19,6 +19,7 @@
 
 package de.adesso.tools.functions;
 
+import de.adesso.tools.common.ListBuilder;
 import de.adesso.tools.common.MatrixBuilder;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;
@@ -356,7 +357,7 @@ public class DtFunctionsTest {
         ObservableList<ObservableList<String>> expConditionDef = observable(on("Y,Y,N,?,N,Y,N,Y,?,N").dim(2, 5).build());
         assertEquals(conditionDefTab.getItems(), expConditionDef);
 
-        ObservableList<ObservableList<String>> expActionDef = observable(on("X,X,X,?,X,X,X,X,?,X").dim(2, 5).build());
+        ObservableList<ObservableList<String>> expActionDef = observable(on("X,X,X,-,X,X,X,X,-,X").dim(2, 5).build());
         assertEquals(actionDefTab.getItems(), expActionDef);
     }
 
@@ -554,6 +555,39 @@ public class DtFunctionsTest {
 
         assertEquals(conditionDefTab.getItems(), expectedDefTab.getItems());
     }
+
+    @Test
+    public void testDoReplaceColumns() throws Exception {
+
+
+        TableView<ObservableList<String>> conditionDefTab = definitionsTableViewBuilder()
+                .dim(3, 4)
+                .data(
+                                "N,N,N,N," +
+                                "N,N,N,N," +
+                                "N,N,N,N")
+                .withSelectionAt(1, 2)
+                .build();
+        dumpTableItems("DEFN BEFORE", conditionDefTab);
+
+        List<String> rplcol = ListBuilder.on("-,-,-").build();
+
+        doReplaceRuleConditions(conditionDefTab.getItems(),OptionalInt.of(2),rplcol);
+
+        TableView<ObservableList<String>> expectedDefTab = definitionsTableViewBuilder()
+                .dim(2, 4)
+                .data(
+                        "N,N,-,N," +
+                        "N,N,-,N," +
+                        "N,N,-,N")
+                .build();
+
+        dumpTableItems("DEFN AFTER", conditionDefTab);
+
+        assertEquals(conditionDefTab.getItems(), expectedDefTab.getItems());
+    }
+
+
 
     @Test
     public void testIsElseColumn() throws Exception {

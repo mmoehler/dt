@@ -20,17 +20,25 @@
 package de.adesso.tools.analysis.structure;
 
 import com.codepoetics.protonpack.StreamUtils;
+import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import de.adesso.tools.Dump;
 import de.adesso.tools.common.MatrixBuilder;
 import de.adesso.tools.functions.MatrixFunctions;
+import de.adesso.tools.util.tuple.Tuple;
+import de.adesso.tools.util.tuple.Tuple2;
+import javafx.collections.ObservableList;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
+
+import static de.adesso.tools.functions.MatrixFunctions.removeColumnsAt;
+import static de.adesso.tools.functions.MatrixFunctions.transpose;
 
 /**
  * Created by moehler on 31.03.2016.
@@ -86,7 +94,7 @@ public class CollectorTest {
             }
         }
 
-        Dump.dumpTableItems("collected = ", MatrixFunctions.transpose(outConditions));
+        Dump.dumpTableItems("collected = ", transpose(outConditions));
 
         // -- Action comparison ---------------------------------
 
@@ -105,7 +113,7 @@ public class CollectorTest {
         }
 
 
-        Dump.dumpTableItems("collected = ", MatrixFunctions.transpose(outActions));
+        Dump.dumpTableItems("collected = ", transpose(outActions));
 
 
         // first for the last comparison result do the reduction
@@ -167,5 +175,175 @@ public class CollectorTest {
 
     }
 
+    @Test
+    public void consolidateTest() {
+        final ObservableList<ObservableList<String>> _conditions = MatrixBuilder.observable(MatrixBuilder.on(
+                "Y,Y,Y,Y,N,N,N,N,"
+                        + "Y,Y,N,N,Y,Y,N,N,"
+                        + "Y,N,Y,N,Y,N,Y,N,").dim(3, 8).build());
 
+        final List<List<String>> conditions = MatrixBuilder.on(
+                "Y,Y,N,N,"
+                        + "Y,N,Y,N").dim(2, 4).build();
+
+        final List<List<String>> __conditions = MatrixBuilder.on(
+                "-,-,"
+                        + "Y,N").dim(2, 2).build();
+
+        List<List<String>>[] R = new List[]{new ArrayList(conditions)};
+
+        IntStream.range(0, R[0].size()).forEach(row -> {
+
+            List<List<String>> copy = new ArrayList<>(R[0]);
+
+            copy.remove(row);
+
+            List<List<String>> C = transpose(copy);
+
+            dumpTableItems(String.format("Prepared for %d. loop", row), C);
+
+
+            List<Integer> D = new ArrayList<>();
+            List<Integer> U = new ArrayList<>();
+            Multimap<List<String>, Integer> _M = Multimaps.newListMultimap(new HashMap<>(), LinkedList::new);
+            IntStream.range(0, C.size()).forEach(l -> {
+                if (_M.containsKey(C.get(l))) {
+                    _M.get(C.get(l)).add(l);
+                    D.add(l);
+                } else {
+                    _M.put(C.get(l), l);
+                    U.add(l);
+                }
+            });
+            LinkedListMultimap<List<String>, Integer> M = LinkedListMultimap.create(_M);
+
+            System.out.println("M = " + M);
+            System.out.println("U = " + U);
+            Collections.sort(D, (a, b) -> (-1));
+            System.out.println("D = " + D);
+
+//            final List<List<String>> R[] = new List[]{conditions};
+            U.forEach(i -> conditions.get(row).set(i, "-"));
+            D.forEach(i -> {
+                R[0] = removeColumnsAt(R[0], i);
+            });
+
+            //List<List<String>> consolidated = Functions.consolidate().apply(adapt(conditions));
+
+            dumpTableItems("Result", R[0]);
+        });
+
+
+    }
+
+    static Tuple2<List<Integer>, List<Integer>> split(Collection<Integer> data, BiPredicate<Collection<Integer>, Integer> rule) {
+        Tuple2<List<Integer>, List<Integer>> ret = Tuple.of(new ArrayList<>(), new ArrayList<>());
+        data.forEach(i -> {
+            ((rule.test(data, i)) ? (ret._1()) : (ret._2())).add(i);
+        });
+        return ret;
+
+
+    }
+
+
+    public static <T> void dumpTableItems(String msg, List<List<T>> list2D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list2D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    public static void dumpTableItems(String msg, ObservableList<ObservableList<String>> list2D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list2D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    public static void dumpMap(String msg, Map<?, ?> map) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        map.forEach((k, v) -> System.out.println("\t" + k + " -> " + v));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    public static <T> void dumpList1DItems(String msg, List<T> list1D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list1D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    @Test
+    public void testConsolidateStrunz() {
+
+        final List<List<String>> conditions = MatrixBuilder.on(
+                "Y,Y,N,N,"
+                        + "Y,N,Y,N").dim(2, 4).build();
+
+        dumpTableItems("INPUT",conditions);
+
+        final List<List<String>> copy = MatrixFunctions.copy(conditions);
+
+        // Explizite Präsenz der Bedingungsanzeiger
+        // In jeder Zeile können jeweils alle Bedingungsanzeiger ermittelt werden.
+        // Alle Bedingungszeilen werden gekennzeichnet.
+
+        List<Boolean> indicatorsComplete = IntStream.range(0, conditions.get(0).size())
+                .mapToObj(i -> (conditions.get(0).containsAll(Arrays.asList("Y", "N"))))
+                .collect(Collectors.toList());
+
+        dumpList1DItems("INDICATOR-COMPLETENESS",indicatorsComplete);
+
+        //Minimierungsanalyse auf der Basis der Bedingungszeile B1
+        int row = 0;
+
+        List<Integer> dashedIndices = IntStream.range(0, conditions.get(0).size())
+                .filter(i -> conditions.get(0).get(i).equals("-"))
+                .boxed()
+                .collect(Collectors.toList());
+
+        dumpList1DItems("INDICES-OF-DASHED-CONDITIONS",dashedIndices);
+
+        // Spalten mit DASH werden nicht berücksichtigt!
+
+        if(indicatorsComplete.get(row)) {
+            List<List<String>> step01Rows = MatrixFunctions.removeRowsAt(copy, 0);
+            for(int i : dashedIndices) {
+                step01Rows = removeColumnsAt(step01Rows, i);
+            }
+
+            dumpTableItems("INPUT-WITHOUT-ROW",step01Rows);
+
+            List<List<String>> step01Cols = transpose(step01Rows);
+
+            dumpTableItems("INPUT-WITHOUT-ROW_TRANSPOSED",step01Cols);
+
+            LinkedListMultimap<List<String>, Integer> counter = LinkedListMultimap.create();
+            IntStream.range(0,step01Cols.size()).forEach(i -> counter.put(step01Cols.get(i),i));
+
+            dumpMap("COUNT OF DUPS", counter.asMap());
+
+            Map<Boolean, List<Integer>> partitioned = step01Cols.stream().map(e -> {
+                List<Integer> l = counter.get(e);
+                Map<Boolean, List<Integer>> partitions = l.stream().collect(Collectors.partitioningBy(i -> l.indexOf(i) == 0));
+                return partitions;
+            }).reduce(Collections.emptyMap(), (m1,m2) -> {
+                return Stream.concat(m1.entrySet().stream(), m2.entrySet().stream())
+                        .collect(Collectors.toMap(Map.Entry::getKey,
+                                e -> {
+                                    List<Integer> v = new ArrayList<>();
+                                    if(!v.contains(e.getValue()))
+                                        v.addAll(e.getValue());
+                                    return v;
+                                },
+                                (a, b) -> {
+                                    List<Integer> merged = new ArrayList<>(a);
+                                    merged.addAll(b);
+                                    return merged;
+                                }));
+            });
+
+            dumpMap("PARTITIONED DUPS", partitioned);
+        }
+
+
+    }
 }

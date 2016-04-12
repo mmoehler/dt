@@ -20,20 +20,15 @@
 package de.adesso.tools.analysis.structure;
 
 import com.google.common.collect.Multimap;
-import de.adesso.tools.analysis.completeness.detailed.Functions;
-import de.adesso.tools.functions.DtFunctions;
 import de.adesso.tools.util.tuple.Tuple2;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
 
-import java.util.Collections;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.OptionalInt;
 import java.util.function.BiConsumer;
-import java.util.stream.Collectors;
 
 import static de.adesso.tools.functions.Adapters.Matrix.adapt;
+import static de.adesso.tools.functions.MatrixFunctions.transpose;
 
 /**
  * Created by moehler on 07.04.2016.
@@ -41,18 +36,90 @@ import static de.adesso.tools.functions.Adapters.Matrix.adapt;
 public class RulesConsolidationOperator implements BiConsumer<Multimap<Integer, Integer>, Tuple2<TableView<ObservableList<String>>,TableView<ObservableList<String>>>> {
     @Override
     public void accept(Multimap<Integer, Integer> analysisResult, Tuple2<TableView<ObservableList<String>>,TableView<ObservableList<String>>> data) {
-        List<List<String>> condCols = adapt(data._1().getItems());
+        List<List<String>> conditionColumns = transpose(adapt(data._1().getItems()));
+
+        // Transformation of the analysisresult Multimap into 2 Lists one with the indices of the columns
+
+        /*
+        given:  a) Conditiondefinitions initialized as follows:
+
+                                          1 2 3 4 5 6
+                                          Y Y Y Y Y Y
+                                          Y Y Y Y N N
+                                          Y Y N N Y Y
+                                          Y N Y N Y N
+
+                b) REsult of the Structural Analsysis is:
+
+                                           1 2 3 4 5 6
+                STRUCTURE ANALYSIS RULE  1 . - * - * -
+                STRUCTURE ANALYSIS RULE  2 . . - * - *
+                STRUCTURE ANALYSIS RULE  3 . . . - - -
+                STRUCTURE ANALYSIS RULE  4 . . . . - -
+                STRUCTURE ANALYSIS RULE  5 . . . . . -
+
+
+
+
+
+
+        List<Integer> index = analysisResult.asMap().entrySet().stream()
+                .flatMap(k -> Stream.concat(k.getValue().stream(), Stream.<Integer>builder().add(k.getKey()).build()))
+                .collect(Collectors.toList());
+
+
+        // { 1 = [3,5] } -> columns 1,3 and 5 can be consolidated.
+
+
+        // transform { 1 = [3,5] } to a list
+
+        Function<Map.Entry<Integer, Collection<Integer>>, List<Integer>> flatEntry = (e) ->
+                Stream.concat(e.getValue().stream(), Stream.<Integer>builder().add(e.getKey())
+                        .build())
+                        .collect(Collectors.toList());
+
+        // transform the indices to a list of columns with the given indices
+
+        BiFunction<List<List<String>>, List<Integer>, List<List<String>>> mapToConditionDefinitions = (a,i,r) ->
+                i.stream().map(i -> a.get(i)).collect(Collectors.toList());
+
+        // consolidate it!
+        final List<List<String>> consolidated = Functions.consolidate().apply(conditions2consolidate);
+
+        // populate it
+
+
+        // -------------------
+
+        List<List<String>> columns = analysisResult.asMap().entrySet().stream()
+                .map(flatEntry).flatMap(e -> e.stream()).map(conditionColumns::get).collect(Collectors.toList());
+
+        List<List<String>> rows = transpose(columns);
+
+        IntStream.range(0,rows.size()).mapToObj(i -> {
+                    List<List<String>> curdata = removeRowsAt(rows, i);
+                    List<List<String>> cols = transpose(curdata);
+                    return cols;
+                });
+
+
+
+
+
+        // -------------------
+
 
         analysisResult.keySet().forEach(k ->{
-            LinkedList<Integer> controlItems = new LinkedList<>();
-            controlItems.add(k);
-            controlItems.addAll(analysisResult.get(k));
-            Collections.sort(controlItems, (a,b) -> b-a);
-            List<List<String>> conditions2consolidate =  controlItems.stream().map(i -> condCols.get(i)).collect(Collectors.toList());
+            LinkedList<Integer> items2Change = new LinkedList<>();
+            LinkedList<Integer> items2Remove = new LinkedList<>();
+            items2Change.add(k);
+            items2Remove.addAll(analysisResult.get(k));
+            Collections.sort(items2Change, (a,b) -> b-a);
+            List<List<String>> conditions2consolidate =  items2Change.stream().map(i -> conditionColumns.get(i)).collect(Collectors.toList());
             final List<List<String>> consolidated = Functions.consolidate().apply(conditions2consolidate);
 
-            controlItems.forEach(i -> {
-                if(i == controlItems.getLast()) {
+            items2Change.forEach(i -> {
+                if(i == items2Change.getLast()) {
                     DtFunctions.doReplaceRuleConditions(data._1().getItems(), OptionalInt.of(i), consolidated.get(0));
                 } else {
                     DtFunctions.doRemoveColumns(data._1(), data._2(), OptionalInt.of(i));
@@ -60,5 +127,6 @@ public class RulesConsolidationOperator implements BiConsumer<Multimap<Integer, 
             });
 
         });
+        */
     }
 }
