@@ -33,6 +33,7 @@ import org.testng.annotations.Test;
 
 import java.util.*;
 import java.util.function.BiPredicate;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -44,6 +45,8 @@ import static de.adesso.tools.functions.MatrixFunctions.transpose;
  * Created by moehler on 31.03.2016.
  */
 public class CollectorTest {
+
+    public static final List<String> POSSIBLE_INDICATORS = Arrays.asList("Y", "N");
 
     private static void dumpResult(List<Indicator> result) {
         Iterator<Indicator> indics = result.iterator();
@@ -271,79 +274,227 @@ public class CollectorTest {
         System.out.println("<<<<<<<<<<\n");
     }
 
+    static class ConsolidateConditions implements Function<List<List<String>>, List<List<String>>> {
+        @Override
+        public List<List<String>> apply(List<List<String>> conditions) {
+            List<Boolean> indicatorsComplete = rowsWithAllPossibleIndicators(conditions);
+            List<List<String>> copy = MatrixFunctions.copy(conditions);
+            List<List<String>> _copy[] = new List[]{copy};
+            for (int currentRow = 0; currentRow < conditions.size(); currentRow++) {
+                List<Integer> indicesOfDashedIndicators = determineIndicesOfDashedIndicators(_copy[0],currentRow);
+                if (indicatorsComplete.get(currentRow)) {
+                    List<List<String>> conditionRows = cleanupConditions(_copy[0], currentRow, indicesOfDashedIndicators);
+                    List<List<String>> conditionColumns = transpose(conditionRows);
+                    LinkedListMultimap<List<String>, Integer> duplicateRules = determineCountOfDuplicateRules(conditionColumns);
+
+                    if (!duplicateRules.isEmpty()) {
+                        Map<Boolean, List<Integer>> partitioned = groupDuplicatesAccordingToTheirIndices(duplicateRules, conditionColumns);
+                        final int cr = currentRow;
+                        partitioned.forEach((k, v) -> {
+                            v.forEach(c -> {
+                                if (k) {
+                                    _copy[0].get(cr).set(c, "-");
+                                } else {
+                                    _copy[0] = removeColumnsAt(_copy[0], c);
+                                }
+                            });
+                        });
+                        updateRowsWithAllPossibleIndicators(currentRow, indicatorsComplete, _copy[0]);
+                    }
+                }
+            }
+            return(_copy[0]);
+        }
+
+        private List<List<String>> cleanupConditions(List<List<String>> original, int currentRow, List<Integer> indicesOfDashedIndicators) {
+            List<List<String>> conditionRows = MatrixFunctions.removeRowsAt(original, currentRow);
+            for (int ii : indicesOfDashedIndicators) {
+                conditionRows = removeColumnsAt(conditionRows, ii);
+            }
+            return conditionRows;
+        }
+
+        private Map<Boolean, List<Integer>> groupDuplicatesAccordingToTheirIndices(LinkedListMultimap<List<String>, Integer> dupplicateRules, List<List<String>> step01Cols) {
+            return step01Cols.stream().map(e -> {
+                List<Integer> l = dupplicateRules.get(e);
+                Map<Boolean, List<Integer>> partitions = l.stream().collect(Collectors.partitioningBy(k -> l.indexOf(k) == 0));
+                return partitions;
+            }).reduce(Collections.emptyMap(), (m1, m2) -> Stream.concat(m1.entrySet().stream(), m2.entrySet().stream())
+                    .collect(Collectors.toMap(Map.Entry::getKey,
+                            e -> {
+                                List<Integer> v = new ArrayList<>();
+                                if (!v.containsAll(e.getValue()))
+                                    v.addAll(e.getValue());
+                                Collections.sort(v, (l, r) -> r - l);
+                                return v;
+                            },
+                            (a, b) -> {
+                                List<Integer> merged = new ArrayList<>(a);
+                                if (!a.containsAll(b))
+                                    merged.addAll(b);
+                                return merged;
+                            })));
+        }
+
+        private LinkedListMultimap<List<String>, Integer> determineCountOfDuplicateRules(List<List<String>> step01Cols) {
+            LinkedListMultimap<List<String>, Integer> counter = LinkedListMultimap.create();
+            IntStream.range(0, step01Cols.size()).forEach(j -> counter.put(step01Cols.get(j), j));
+            // remove all entries with values size is 1
+            for (Iterator<Map.Entry<List<String>,Collection<Integer>>> it = counter.asMap().entrySet().iterator(); it.hasNext();)
+                if(it.next().getValue().size()==1)
+                    it.remove();
+            return counter;
+        }
+
+        private List<Integer> determineIndicesOfDashedIndicators(List<List<String>> conditions, int row) {
+            return IntStream.range(0, conditions.get(row).size())
+                    .filter(i -> conditions.get(row).get(i).equals("-"))
+                    .boxed()
+                    .collect(Collectors.toList());
+        }
+
+        private List<Boolean> rowsWithAllPossibleIndicators(List<List<String>> conditions) {
+            return IntStream.range(0, conditions.size())
+                    .mapToObj(i -> (conditions.get(i).containsAll(POSSIBLE_INDICATORS)))
+                    .collect(Collectors.toList());
+        }
+
+        private void updateRowsWithAllPossibleIndicators(int row, List<Boolean> completeness, List<List<String>> conditions) {
+            completeness.set(row, conditions.get(row).containsAll(POSSIBLE_INDICATORS));
+        }
+    }
+
+
     @Test
     public void testConsolidateStrunz() {
 
         final List<List<String>> conditions = MatrixBuilder.on(
-                "Y,Y,N,N,"
-                        + "Y,N,Y,N").dim(2, 4).build();
+                 "Y,Y,Y,"
+                +"Y,Y,N,"
+                +"Y,N,Y,"
+                +"Y,Y,Y").dim(4, 3).build();
 
-        dumpTableItems("INPUT",conditions);
-
-        final List<List<String>> copy = MatrixFunctions.copy(conditions);
-
+        /*
+                "Y,N,N,"
+                        + "N,Y,N").dim(2, 3).build();
+         */
         // Explizite Präsenz der Bedingungsanzeiger
         // In jeder Zeile können jeweils alle Bedingungsanzeiger ermittelt werden.
         // Alle Bedingungszeilen werden gekennzeichnet.
 
-        List<Boolean> indicatorsComplete = IntStream.range(0, conditions.get(0).size())
-                .mapToObj(i -> (conditions.get(0).containsAll(Arrays.asList("Y", "N"))))
-                .collect(Collectors.toList());
+        List<Boolean> indicatorsComplete = rowsWithAllPossibleIndicators(conditions);
+        dumpList1DItems("INDICATOR-COMPLETENESS", indicatorsComplete);
 
-        dumpList1DItems("INDICATOR-COMPLETENESS",indicatorsComplete);
+        List<List<String>> copy = MatrixFunctions.copy(conditions);
+        List<List<String>> _copy[] = new List[]{copy};
 
-        //Minimierungsanalyse auf der Basis der Bedingungszeile B1
-        int row = 0;
+        for (int i = 0; i < conditions.size(); i++) {
 
-        List<Integer> dashedIndices = IntStream.range(0, conditions.get(0).size())
-                .filter(i -> conditions.get(0).get(i).equals("-"))
-                .boxed()
-                .collect(Collectors.toList());
+            int ROW = i;
+            System.out.println("ROW = " + ROW);
+            dumpTableItems("INPUT", _copy[0]);
 
-        dumpList1DItems("INDICES-OF-DASHED-CONDITIONS",dashedIndices);
+            List<Integer> indicesOfDashedIndicators = determineIndicesOfDashedIndicators(_copy[0],ROW);
+            dumpList1DItems("INDICES-OF-DASHED-CONDITIONS", indicesOfDashedIndicators);
 
-        // Spalten mit DASH werden nicht berücksichtigt!
+            // Spalten mit DASH werden nicht berücksichtigt!
+            if (indicatorsComplete.get(ROW)) {
 
-        if(indicatorsComplete.get(row)) {
-            List<List<String>> step01Rows = MatrixFunctions.removeRowsAt(copy, 0);
-            for(int i : dashedIndices) {
-                step01Rows = removeColumnsAt(step01Rows, i);
+                List<List<String>> conditionRows = cleanupConditions(_copy[0], ROW, indicesOfDashedIndicators);
+
+                dumpTableItems("INPUT-WITHOUT-ROW", conditionRows);
+
+                List<List<String>> conditionColumns = transpose(conditionRows);
+
+                dumpTableItems("INPUT-WITHOUT-ROW_TRANSPOSED", conditionColumns);
+
+                LinkedListMultimap<List<String>, Integer> dupplicateRules = determineCountOfDuplicateRules(conditionColumns);
+
+
+                dumpMap("COUNT OF DUPS", dupplicateRules.asMap());
+
+                if(dupplicateRules.isEmpty())
+                    continue;
+
+                Map<Boolean, List<Integer>> partitioned = groupDuplicatesAccordingToTheirIndices(dupplicateRules, conditionColumns);
+
+                dumpMap("PARTITIONED DUPS", partitioned);
+
+                partitioned.forEach((k, v) -> {
+                    v.forEach(c -> {
+                        if (k) {
+                            _copy[0].get(ROW).set(c, "-");
+                        } else {
+                            _copy[0] = removeColumnsAt(_copy[0], c);
+                        }
+                    });
+                });
+
+                controlRowsWithAllPossibleIndicators(ROW, indicatorsComplete, _copy[0]);
+
+                dumpList1DItems("INDICATOR-COMPLETENESS", indicatorsComplete);
+
+                dumpTableItems("RESULT LOOP", _copy[0]);
             }
-
-            dumpTableItems("INPUT-WITHOUT-ROW",step01Rows);
-
-            List<List<String>> step01Cols = transpose(step01Rows);
-
-            dumpTableItems("INPUT-WITHOUT-ROW_TRANSPOSED",step01Cols);
-
-            LinkedListMultimap<List<String>, Integer> counter = LinkedListMultimap.create();
-            IntStream.range(0,step01Cols.size()).forEach(i -> counter.put(step01Cols.get(i),i));
-
-            dumpMap("COUNT OF DUPS", counter.asMap());
-
-            Map<Boolean, List<Integer>> partitioned = step01Cols.stream().map(e -> {
-                List<Integer> l = counter.get(e);
-                Map<Boolean, List<Integer>> partitions = l.stream().collect(Collectors.partitioningBy(i -> l.indexOf(i) == 0));
-                return partitions;
-            }).reduce(Collections.emptyMap(), (m1,m2) -> {
-                return Stream.concat(m1.entrySet().stream(), m2.entrySet().stream())
-                        .collect(Collectors.toMap(Map.Entry::getKey,
-                                e -> {
-                                    List<Integer> v = new ArrayList<>();
-                                    if(!v.contains(e.getValue()))
-                                        v.addAll(e.getValue());
-                                    return v;
-                                },
-                                (a, b) -> {
-                                    List<Integer> merged = new ArrayList<>(a);
-                                    merged.addAll(b);
-                                    return merged;
-                                }));
-            });
-
-            dumpMap("PARTITIONED DUPS", partitioned);
         }
 
+        dumpTableItems("---> RESULT", _copy[0]);
+    }
 
+    private List<List<String>> cleanupConditions(List<List<String>> original, int currentRow, List<Integer> indicesOfDashedIndicators) {
+        List<List<String>> conditionRows = MatrixFunctions.removeRowsAt(original, currentRow);
+        for (int ii : indicesOfDashedIndicators) {
+            conditionRows = removeColumnsAt(conditionRows, ii);
+        }
+        return conditionRows;
+    }
+
+    private Map<Boolean, List<Integer>> groupDuplicatesAccordingToTheirIndices(LinkedListMultimap<List<String>, Integer> dupplicateRules, List<List<String>> step01Cols) {
+        return step01Cols.stream().map(e -> {
+                        List<Integer> l = dupplicateRules.get(e);
+                        Map<Boolean, List<Integer>> partitions = l.stream().collect(Collectors.partitioningBy(k -> l.indexOf(k) == 0));
+                        return partitions;
+                    }).reduce(Collections.emptyMap(), (m1, m2) -> Stream.concat(m1.entrySet().stream(), m2.entrySet().stream())
+                            .collect(Collectors.toMap(Map.Entry::getKey,
+                                    e -> {
+                                        List<Integer> v = new ArrayList<>();
+                                        if (!v.containsAll(e.getValue()))
+                                            v.addAll(e.getValue());
+                                        Collections.sort(v, (l, r) -> r - l);
+                                        return v;
+                                    },
+                                    (a, b) -> {
+                                        List<Integer> merged = new ArrayList<>(a);
+                                        if (!a.containsAll(b))
+                                            merged.addAll(b);
+                                        return merged;
+                                    })));
+    }
+
+    private LinkedListMultimap<List<String>, Integer> determineCountOfDuplicateRules(List<List<String>> step01Cols) {
+        LinkedListMultimap<List<String>, Integer> counter = LinkedListMultimap.create();
+        IntStream.range(0, step01Cols.size()).forEach(j -> counter.put(step01Cols.get(j), j));
+        // remove all entries with values size is 1
+        for (Iterator<Map.Entry<List<String>,Collection<Integer>>> it = counter.asMap().entrySet().iterator(); it.hasNext();)
+            if(it.next().getValue().size()==1)
+                it.remove();
+        return counter;
+    }
+
+    private List<Integer> determineIndicesOfDashedIndicators(List<List<String>> conditions, int row) {
+        return IntStream.range(0, conditions.get(row).size())
+                .filter(i -> conditions.get(row).get(i).equals("-"))
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    private List<Boolean> rowsWithAllPossibleIndicators(List<List<String>> conditions) {
+        return IntStream.range(0, conditions.size())
+                .mapToObj(i -> (conditions.get(i).containsAll(POSSIBLE_INDICATORS)))
+                .collect(Collectors.toList());
+    }
+
+    private void controlRowsWithAllPossibleIndicators(int row, List<Boolean> completeness, List<List<String>> conditions) {
+        completeness.set(row, conditions.get(row).containsAll(POSSIBLE_INDICATORS));
     }
 }
