@@ -151,7 +151,8 @@ class RulesDifferenceOperator implements Function<List<List<String>>, List<List<
     }
 }
 
-
+// TODO: Replace this implementation with the implementation from CollectorTest !!
+@Deprecated
 class ConditionsConsolidateOperator implements Function<List<List<String>>, List<List<String>>> {
     public ConditionsConsolidateOperator() {
     }
