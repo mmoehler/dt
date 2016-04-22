@@ -19,8 +19,10 @@
 
 package de.adesso.tools.analysis.structure;
 
+import com.codepoetics.protonpack.Indexed;
 import com.codepoetics.protonpack.StreamUtils;
 import com.google.common.collect.LinkedListMultimap;
+import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import de.adesso.tools.Dump;
@@ -365,19 +367,104 @@ public class CollectorTest {
     }
 
 
-    @Test
-    public void testConsolidateStrunz() {
+    static Function<List<List<String>>, List<List<Integer>>> indicesOfDuplicateActions() {
+        return (t) -> {
+            final ListMultimap<List<String>, Integer> tmp =
+                    Multimaps.newListMultimap(new HashMap<List<String>, Collection<Integer>>(), () -> new LinkedList<Integer>());
 
+            IntStream.range(0,t.size()).forEach(i -> tmp.put(t.get(i), i));
+            tmp.asMap().entrySet().removeIf(entry -> entry.getValue().size()<2);
+
+            return tmp.asMap().values().stream()
+                    .map(o -> o.stream().collect(Collectors.toList()))
+                    .collect(Collectors.toList());
+        };
+    }
+
+    static <T> /*Multimap<Integer,Integer>*/ void indicesOfDupplicates(List<T> l) {
+        final ListMultimap<Integer, Integer> result =
+                Multimaps.newListMultimap(new HashMap<Integer, Collection<Integer>>(), () -> new LinkedList<Integer>());
+
+        final ListMultimap<T, Integer> tmp =
+                Multimaps.newListMultimap(new HashMap<T, Collection<Integer>>(), () -> new LinkedList<Integer>());
+
+        IntStream.range(0,l.size()).forEach(i -> tmp.put(l.get(i), i));
+        tmp.asMap().entrySet().removeIf(entry -> entry.getValue().size()<2);
+
+        final Map<T, List<Indexed<T>>> map = tmp.asMap().entrySet().stream()
+                .collect(Collectors
+                        .toMap(e -> e.getKey(), e -> e.getValue().stream()
+                                        .map(v -> Indexed.index(v, e.getKey())).collect(Collectors.toList())
+                        ));
+
+
+        Dump.dumpMap("INDICES", tmp.asMap());
+
+        map.entrySet().forEach(e ->{
+            for(Indexed<T> i : e.getValue()) {
+                System.out.println(String.format("K: %s - V: %s", e.getKey(), ""+i.getIndex()+":"+i.getValue()));
+            }
+        });
+
+        //
+
+        //return result
+    };
+
+
+
+    @Test
+    public void testGroupActions(){
         final List<List<String>> conditions = MatrixBuilder.on(
-                 "Y,Y,Y,"
-                +"Y,Y,N,"
-                +"Y,N,Y,"
-                +"Y,Y,Y").dim(4, 3).build();
+                         "X,X,X,X,X,X,-,"
+                        +"X,-,X,X,-,-,X,"
+                        +"-,-,-,-,X,-,-,"
+                        +"X,X,X,X,X,X,X").dim(4, 7).build();
+
+        final List<List<String>> transposed = transpose(conditions);
+
+        final List<List<Integer>> collect = Stream.of(transposed).map(indicesOfDuplicateActions()).reduce(new LinkedList<>(), (a,b) -> {
+            a.addAll(b);
+            return a;
+        });
+
+        dumpTableItems("INDICES", collect);
+
+        //indicesOfDupplicates(transposed);
+
+
+
+        //final Stream<Indexed<List<String>>> transposeIndexed = StreamUtils.zipWithIndex(transposed.stream());
+
 
         /*
-                "Y,N,N,"
-                        + "N,Y,N").dim(2, 3).build();
-         */
+        final Map<List<String>, List<Integer>> map = transposed.stream().collect(Collectors.toMap(Function.identity(), p -> {
+            List<Integer> indices = new ArrayList<>();
+            indices.add(transposed.indexOf(p));
+            return indices;
+        }, (l, r) -> {
+            l.addAll(r);
+            return l;
+        }));
+        */
+
+//        dumpMap("INDICES", map);
+    }
+
+    @Test
+    public void testConsolidateStrunz() {
+/*
+        final List<List<String>> conditions = MatrixBuilder.on(
+                 "Y,Y,Y,Y,Y,Y,N,"
+                +"Y,Y,Y,Y,N,N,Y,"
+                +"Y,Y,N,N,Y,N,N,"
+                +"Y,N,Y,N,Y,Y,Y").dim(4, 7).build();
+*/
+        final List<List<String>> conditions = MatrixBuilder.on(
+                          "Y,Y,Y,"
+                        + "Y,N,N,"
+                        + "Y,Y,N").dim(3, 3).build();
+
         // Explizite Präsenz der Bedingungsanzeiger
         // In jeder Zeile können jeweils alle Bedingungsanzeiger ermittelt werden.
         // Alle Bedingungszeilen werden gekennzeichnet.

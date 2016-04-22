@@ -20,6 +20,7 @@
 package de.adesso.tools.analysis.structure;
 
 import com.google.common.collect.Multimap;
+import de.adesso.tools.Dump;
 import de.adesso.tools.util.tuple.Tuple2;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
@@ -36,6 +37,10 @@ import static de.adesso.tools.functions.MatrixFunctions.transpose;
 public class RulesConsolidationOperator implements BiConsumer<Multimap<Integer, Integer>, Tuple2<TableView<ObservableList<String>>,TableView<ObservableList<String>>>> {
     @Override
     public void accept(Multimap<Integer, Integer> analysisResult, Tuple2<TableView<ObservableList<String>>,TableView<ObservableList<String>>> data) {
+
+        Dump.dumpMap("ANALYSISRESULT", analysisResult.asMap());
+
+
         List<List<String>> conditionColumns = transpose(adapt(data._1().getItems()));
 
         // Transformation of the analysisresult Multimap into 2 Lists one with the indices of the columns

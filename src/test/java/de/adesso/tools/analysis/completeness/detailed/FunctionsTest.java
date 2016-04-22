@@ -20,7 +20,6 @@
 package de.adesso.tools.analysis.completeness.detailed;
 
 import de.adesso.tools.common.ListBuilder;
-import de.adesso.tools.common.MatrixBuilder;
 import javafx.collections.ObservableList;
 import org.testng.annotations.Test;
 
@@ -28,6 +27,8 @@ import java.util.*;
 import java.util.function.BinaryOperator;
 
 import static de.adesso.tools.analysis.completeness.detailed.Functions.*;
+import static de.adesso.tools.common.MatrixBuilder.observable;
+import static de.adesso.tools.common.MatrixBuilder.on;
 import static de.adesso.tools.functions.Adapters.Matrix.adapt;
 import static de.adesso.tools.functions.MatrixFunctions.transpose;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -68,28 +69,30 @@ public class FunctionsTest {
 
     @Test
     public void consolidateTest() {
-        ObservableList<ObservableList<String>> conditions = MatrixBuilder.observable(MatrixBuilder.on("N,N,Y,N,Y,N,-,Y,-").dim(3, 3).build());
-        List<List<String>> consolidated = Functions.consolidate().apply(adapt(conditions));
+        ObservableList<ObservableList<String>> conditions = observable(on("N,N,Y,N,Y,N,-,Y,-").dim(3, 3).build());
+        List<List<String>> consolidated = consolidate().apply(adapt(conditions));
         dumpTableItems("CONS", consolidated);
+        ObservableList<ObservableList<String>> expected = observable(on("-,N,N,Y,-,Y").dim(3, 2).build());
+        assertThat(consolidated,equalTo(expected));
     }
 
     @Test
     public void decisionMatrixTest() {
-        List<List<String>> conditions = MatrixBuilder.on("Y,Y,N,N,-,Y,Y,-,Y,N,-,-").dim(3, 4).build();
+        List<List<String>> conditions = on("Y,Y,N,N,-,Y,Y,-,Y,N,-,-").dim(3, 4).build();
         List<List<Integer>> decisionMatrix = makeDecisionMatrix(conditions);
         dumpTableItems("D", decisionMatrix);
     }
 
     @Test
     public void decisionMatrix2Test() {
-        List<List<String>> conditions = MatrixBuilder.on("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
+        List<List<String>> conditions = on("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
         List<List<Integer>> decisionMatrix = makeDecisionMatrix(conditions);
         dumpTableItems("D", decisionMatrix);
     }
 
     @Test
     public void bothTest() {
-        List<List<String>> conditions = MatrixBuilder.on("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
+        List<List<String>> conditions = on("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
         List<List<Integer>> decisionMatrix = makeDecisionMatrix(conditions);
         List<List<Integer>> maskMatrix = makeMaskMatrix(conditions);
         dumpTableItems("D", decisionMatrix);
@@ -98,7 +101,7 @@ public class FunctionsTest {
 
     @Test
     public void bothTransformedTest() {
-        List<List<String>> conditions = MatrixBuilder.on("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
+        List<List<String>> conditions = on("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
         List<List<Integer>> decisionMatrix = transpose(makeDecisionMatrix(conditions));
         List<List<Integer>> maskMatrix = transpose(makeMaskMatrix(conditions));
         dumpTableItems("D", decisionMatrix);
@@ -107,7 +110,7 @@ public class FunctionsTest {
 
     @Test
     public void maskMatrixTest() {
-        List<List<String>> conditions = MatrixBuilder.on("Y,Y,N,N,-,Y,Y,-,Y,N,-,-").dim(3, 4).build();
+        List<List<String>> conditions = on("Y,Y,N,N,-,Y,Y,-,Y,N,-,-").dim(3, 4).build();
         List<List<Integer>> maskMatrix = makeMaskMatrix(conditions);
         dumpTableItems("M", maskMatrix);
     }
@@ -116,14 +119,14 @@ public class FunctionsTest {
 
     @Test
     public void maskMatrix2Test() {
-        List<List<String>> conditions = MatrixBuilder.on("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
+        List<List<String>> conditions = on("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
         List<List<Integer>> maskMatrix = makeMaskMatrix(conditions);
         dumpTableItems("M", maskMatrix);
     }
 
     @Test
     public void parameterBuilder2Test() {
-        List<List<String>> lefts = MatrixBuilder.on("N,-,-,-").dim(3, 1).transposed().build();
+        List<List<String>> lefts = on("N,-,-,-").dim(3, 1).transposed().build();
         List<String> right = ListBuilder.on("Y,Y,Y,N").build();
 
         Optional<List<List<String>>> actual = lefts.stream()
@@ -137,8 +140,8 @@ public class FunctionsTest {
 
     @Test
     public void parameterBuilder4Test() {
-        final List<List<String>> rights = MatrixBuilder.on("Y,Y,N,N,Y,Y,Y,N,N,-,N,Y").dim(3, 4).transposed().build();
-        List<List<String>> tmp = MatrixBuilder.on("-,-,-").dim(3, 1).transposed().build();
+        final List<List<String>> rights = on("Y,Y,N,N,Y,Y,Y,N,N,-,N,Y").dim(3, 4).transposed().build();
+        List<List<String>> tmp = on("-,-,-").dim(3, 1).transposed().build();
         final List<List<String>>[] lefts = new List[]{tmp};
         for (List<String> right : rights) {
             lefts[0] = lefts[0].stream()
@@ -149,7 +152,7 @@ public class FunctionsTest {
         List<List<String>> actual = transpose(lefts[0]);
         dumpTableItems("ACTUAL", actual);
 
-        final List<List<String>> expected = MatrixBuilder.on("Y,N,N,N,N,Y,-,N,Y").dim(3, 3).build();
+        final List<List<String>> expected = on("Y,N,N,N,N,Y,-,N,Y").dim(3, 3).build();
 
         Iterator<List<String>> aIt = actual.iterator();
         Iterator<List<String>> eIt = expected.iterator();
@@ -161,8 +164,8 @@ public class FunctionsTest {
 
     @Test
     public void parameterBuilder5Test() {
-        final List<List<String>> rights = MatrixBuilder.on("Y,Y,Y,Y,Y,Y,Y,Y,Y,N,Y,Y,N,N,Y,Y,N,Y,N,Y").dim(4, 5).transposed().build();
-        List<List<String>> tmp = MatrixBuilder.on("-,-,-,-").dim(4, 1).transposed().build();
+        final List<List<String>> rights = on("Y,Y,Y,Y,Y,Y,Y,Y,Y,N,Y,Y,N,N,Y,Y,N,Y,N,Y").dim(4, 5).transposed().build();
+        List<List<String>> tmp = on("-,-,-,-").dim(4, 1).transposed().build();
         final List<List<String>>[] lefts = new List[]{tmp};
         for (List<String> right : rights) {
             lefts[0] = lefts[0].stream()
