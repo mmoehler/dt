@@ -19,10 +19,11 @@
 
 package de.adesso.tools.ui.main;
 
-import com.google.common.collect.Multimap;
+import de.adesso.tools.Dump;
 import de.adesso.tools.analysis.structure.Operators;
 import de.adesso.tools.exception.ExceptionHandler;
 import de.adesso.tools.functions.DtFunctions;
+import de.adesso.tools.functions.MoreCollectors;
 import de.adesso.tools.model.ActionDecl;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.DeclarationTableViewModel;
@@ -39,6 +40,7 @@ import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
@@ -60,6 +62,7 @@ import java.util.Optional;
 import java.util.OptionalInt;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static de.adesso.tools.functions.DtFunctions.*;
 import static de.adesso.tools.ui.Notifications.EV_CONSOLIDATE_RULES;
@@ -164,8 +167,40 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     private void doConsolidateRules(String s, Object... objects) {
-        Multimap<Integer, Integer> compressibleRules = (Multimap<Integer, Integer>)objects[0];
-        Operators.rulesConsolidation().accept(compressibleRules, Tuple.of(conditionDefinitionsTable, actionDefinitionsTable));
+        List<List<String>> conditions = conditionDefinitionsTable.getItems();
+        List<List<String>> actions = actionDefinitionsTable.getItems();
+
+        Dump.dumpTableItems("OLD CODITIONS", conditions);
+        Dump.dumpTableItems("OLD ACTIONS", actions);
+
+        Tuple2<List<List<String>>, List<List<String>>> consolidated = Stream.of(Tuple.of(conditions, actions))
+                .map(Operators.consolidateRules())
+                .collect(MoreCollectors.toSingleObject());
+
+        Dump.dumpTableItems("NEW CODITIONS", consolidated._1());
+        Dump.dumpTableItems("NEW ACTIONS", consolidated._2());
+
+        List<List<String>> newConditions = consolidated._1();
+        List<List<String>> newActions = consolidated._2();
+
+        final int newCols = newConditions.get(0).size();
+        System.out.println("newCols = " + newCols);
+
+        conditionDefinitionsTable.getColumns().clear();
+        actionDefinitionsTable.getColumns().clear();
+
+        IntStream.range(0, newCols).forEach(i -> {
+            conditionDefinitionsTable.getColumns().add(createTableColumn(i));
+            actionDefinitionsTable.getColumns().add(createTableColumn(i));
+        });
+
+        conditionDefinitionsTable.getItems().clear();
+        newConditions.stream().map(row -> FXCollections.observableArrayList(row)).forEach(conditionDefinitionsTable.getItems()::add);
+        actionDefinitionsTable.getItems().clear();
+        newActions.stream().map(row -> FXCollections.observableArrayList(row)).forEach(actionDefinitionsTable.getItems()::add);
+
+        conditionDefinitionsTable.refresh();
+        actionDefinitionsTable.refresh();
     }
 
     private FileChooser getFileChooser() {

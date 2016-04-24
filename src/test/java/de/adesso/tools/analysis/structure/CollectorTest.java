@@ -26,8 +26,10 @@ import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import de.adesso.tools.Dump;
+import de.adesso.tools.analysis.completeness.detailed.Functions;
 import de.adesso.tools.common.MatrixBuilder;
 import de.adesso.tools.functions.MatrixFunctions;
+import de.adesso.tools.functions.MoreCollectors;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 import javafx.collections.ObservableList;
@@ -40,6 +42,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
+import static de.adesso.tools.functions.MatrixFunctions.*;
 import static de.adesso.tools.functions.MatrixFunctions.removeColumnsAt;
 import static de.adesso.tools.functions.MatrixFunctions.transpose;
 
@@ -280,7 +283,7 @@ public class CollectorTest {
         @Override
         public List<List<String>> apply(List<List<String>> conditions) {
             List<Boolean> indicatorsComplete = rowsWithAllPossibleIndicators(conditions);
-            List<List<String>> copy = MatrixFunctions.copy(conditions);
+            List<List<String>> copy = copy(conditions);
             List<List<String>> _copy[] = new List[]{copy};
             for (int currentRow = 0; currentRow < conditions.size(); currentRow++) {
                 List<Integer> indicesOfDashedIndicators = determineIndicesOfDashedIndicators(_copy[0],currentRow);
@@ -309,7 +312,7 @@ public class CollectorTest {
         }
 
         private List<List<String>> cleanupConditions(List<List<String>> original, int currentRow, List<Integer> indicesOfDashedIndicators) {
-            List<List<String>> conditionRows = MatrixFunctions.removeRowsAt(original, currentRow);
+            List<List<String>> conditionRows = removeRowsAt(original, currentRow);
             for (int ii : indicesOfDashedIndicators) {
                 conditionRows = removeColumnsAt(conditionRows, ii);
             }
@@ -367,16 +370,21 @@ public class CollectorTest {
     }
 
 
+
+
     static Function<List<List<String>>, List<List<Integer>>> indicesOfDuplicateActions() {
-        return (t) -> {
+
+        return (actions) -> {
             final ListMultimap<List<String>, Integer> tmp =
                     Multimaps.newListMultimap(new HashMap<List<String>, Collection<Integer>>(), () -> new LinkedList<Integer>());
 
-            IntStream.range(0,t.size()).forEach(i -> tmp.put(t.get(i), i));
+            IntStream.range(0,actions.size()).forEach(i -> tmp.put(actions.get(i), i));
             tmp.asMap().entrySet().removeIf(entry -> entry.getValue().size()<2);
 
             return tmp.asMap().values().stream()
-                    .map(o -> o.stream().collect(Collectors.toList()))
+                    .map(o -> o.stream()
+                            .peek(System.out::println)
+                            .collect(Collectors.toList()))
                     .collect(Collectors.toList());
         };
     }
@@ -415,41 +423,145 @@ public class CollectorTest {
 
     @Test
     public void testGroupActions(){
+        final List<List<String>> actions = MatrixBuilder.on(
+                         "-,-,X,X,X,-,-,-,-,"
+                        +"X,X,X,-,-,-,-,-,-,"
+                        +"X,-,X,X,X,X,X,X,X").dim(3, 9).build();
+
         final List<List<String>> conditions = MatrixBuilder.on(
-                         "X,X,X,X,X,X,-,"
-                        +"X,-,X,X,-,-,X,"
-                        +"-,-,-,-,X,-,-,"
-                        +"X,X,X,X,X,X,X").dim(4, 7).build();
-
-        final List<List<String>> transposed = transpose(conditions);
-
-        final List<List<Integer>> collect = Stream.of(transposed).map(indicesOfDuplicateActions()).reduce(new LinkedList<>(), (a,b) -> {
-            a.addAll(b);
-            return a;
-        });
-
-        dumpTableItems("INDICES", collect);
-
-        //indicesOfDupplicates(transposed);
+                         "Y,Y,Y,Y,Y,N,N,N,N,"
+                        +"Y,Y,N,-,-,-,-,-,-,"
+                        +"Y,N,-,Y,N,Y,Y,N,N,"
+                        +"Y,Y,Y,N,N,Y,N,Y,N").dim(4, 9).build();
 
 
+        Dump.dumpTableItems("OLD CODITIONS", conditions);
+        Dump.dumpTableItems("OLD ACTIONS", actions);
 
-        //final Stream<Indexed<List<String>>> transposeIndexed = StreamUtils.zipWithIndex(transposed.stream());
+        Tuple2<List<List<String>>, List<List<String>>> consolidated = Stream.of(Tuple.of(conditions, actions))
+                .map(Operators.consolidateRules())
+                .collect(MoreCollectors.toSingleObject());
+
+        Dump.dumpTableItems("NEW CODITIONS", consolidated._1());
+        Dump.dumpTableItems("NEW ACTIONS", consolidated._2());
 
 
-        /*
-        final Map<List<String>, List<Integer>> map = transposed.stream().collect(Collectors.toMap(Function.identity(), p -> {
-            List<Integer> indices = new ArrayList<>();
-            indices.add(transposed.indexOf(p));
-            return indices;
-        }, (l, r) -> {
-            l.addAll(r);
-            return l;
-        }));
-        */
-
-//        dumpMap("INDICES", map);
     }
+
+    @Test
+    public void testGroupActions0(){
+        final List<List<String>> actions = MatrixBuilder.on(
+                "X,X,X,X,X,X,-," +
+                        "X,-,X,X,-,-,X," +
+                        "-,-,-,-,X,-,-," +
+                        "X,X,X,X,X,X,X").dim(4, 7).build();
+
+        final List<List<String>> conditions = MatrixBuilder.on(
+                "Y,Y,Y,Y,N,N,N," +
+                        "Y,Y,N,N,Y,Y,N," +
+                        "Y,N,Y,N,Y,N,Y"
+        ).dim(3, 7).build();
+
+
+        Dump.dumpTableItems("OLD CODITIONS", conditions);
+        Dump.dumpTableItems("OLD ACTIONS", actions);
+
+        Tuple2<List<List<String>>, List<List<String>>> consolidated = Stream.of(Tuple.of(conditions, actions))
+                .map(Operators.consolidateRules())
+                .collect(MoreCollectors.toSingleObject());
+
+        Dump.dumpTableItems("NEW CODITIONS", consolidated._1());
+        Dump.dumpTableItems("NEW ACTIONS", consolidated._2());
+
+
+    }
+
+
+    private void consolidate(List<List<String>> actions, List<List<String>> conditions) {
+        final List<List<String>> transposedActions = transpose(actions);
+        final List<List<String>> transposedConditions = transpose(conditions);
+
+
+        // detecting indices of dupplicate action combination
+        List<List<Integer>> indices = Stream.of(transposedActions)
+                .map(indicesOfDuplicateActions())
+                .reduce(new LinkedList<List<Integer>>(), (l, r) -> {
+                    l.addAll(r);
+                    return l;
+                });
+
+        dumpTableItems("INDICES", indices);
+
+        // map indices of actions to their conditions
+        List<List<List<String>>> parts = indices.stream()
+                .map(c -> c.stream()
+                        .map(i -> transposedConditions.get(i))
+                        .collect(Collectors.toList()))
+                .collect(Collectors.toList());
+
+        dumpTableItems("PARTS", parts);
+
+        // consolidate the mapped conditions for each block
+        List<List<List<String>>> consolidated = parts.stream()
+                .map(MatrixFunctions::transpose)
+                .map(Functions.consolidate())
+                .collect(Collectors.toList());
+
+        consolidated.forEach(m -> Dump.dumpTableItems("CONSOLIDATED", m));
+
+        // merge the original state with the consolidated state
+
+        populateResult(conditions,actions,consolidated,indices);
+
+        Dump.dumpTableItems("NEW CODITIONS", conditions);
+        Dump.dumpTableItems("NEW ACTIONS", actions);
+    }
+
+    // This must be a
+    private void populateResult(
+            List<List<String>> originalConditions,
+            List<List<String>> originalActions,
+            List<List<List<String>>> consolidatedConditions,
+            List<List<Integer>> indicesOfConsolidationsConditions) {
+
+        TreeSet<Integer> toDelete = new TreeSet<>((a,b) -> b-a);
+        List<Integer> toReplace = new LinkedList<>();
+        Iterator<List<List<String>>> consConIt = consolidatedConditions.iterator();
+        Iterator<List<Integer>> inxConsConIt = indicesOfConsolidationsConditions.iterator();
+        List<List<String>> _originalConditions[] = new List[]{originalConditions};
+        List<List<String>> _originalActions[] = new List[]{originalActions};
+
+        Dump.dumpTableItems("CODITIONS BEFORE POPULATE", _originalConditions[0]);
+
+        for(;consConIt.hasNext() && inxConsConIt.hasNext();) {
+            Iterator<List<String>> curConsConIt = transpose(consConIt.next()).iterator();
+            Iterator<Integer> curInxConsConIt = inxConsConIt.next().iterator();
+
+            for(;curInxConsConIt.hasNext();) {
+                Integer idx = curInxConsConIt.next();
+                if(curConsConIt.hasNext()) {
+                    _originalConditions[0] = replaceColumnsAt(_originalConditions[0],idx,curConsConIt.next());
+                    toReplace.add(idx);
+                } else {
+                    toDelete.add(idx);
+                }
+            }
+        }
+        Dump.dumpTableItems("CODITIONS BEFORE DELETE", _originalConditions[0]);
+        Dump.dumpList1DItems("TO REPLACE", new LinkedList<>(toReplace));
+        Dump.dumpList1DItems("TO DOELETE", new LinkedList<>(toDelete));
+
+        for(int idx : toDelete) {
+            _originalConditions[0] = removeColumnsAt(_originalConditions[0], idx);
+            _originalActions[0] = removeColumnsAt(_originalActions[0], idx);
+        }
+
+        originalConditions.clear();
+        _originalConditions[0].forEach(originalConditions::add);
+        originalActions.clear();
+        _originalActions[0].forEach(originalActions::add);
+    }
+
 
     @Test
     public void testConsolidateStrunz() {
@@ -460,6 +572,7 @@ public class CollectorTest {
                 +"Y,Y,N,N,Y,N,N,"
                 +"Y,N,Y,N,Y,Y,Y").dim(4, 7).build();
 */
+
         final List<List<String>> conditions = MatrixBuilder.on(
                           "Y,Y,Y,"
                         + "Y,N,N,"
@@ -472,7 +585,7 @@ public class CollectorTest {
         List<Boolean> indicatorsComplete = rowsWithAllPossibleIndicators(conditions);
         dumpList1DItems("INDICATOR-COMPLETENESS", indicatorsComplete);
 
-        List<List<String>> copy = MatrixFunctions.copy(conditions);
+        List<List<String>> copy = copy(conditions);
         List<List<String>> _copy[] = new List[]{copy};
 
         for (int i = 0; i < conditions.size(); i++) {
@@ -529,7 +642,7 @@ public class CollectorTest {
     }
 
     private List<List<String>> cleanupConditions(List<List<String>> original, int currentRow, List<Integer> indicesOfDashedIndicators) {
-        List<List<String>> conditionRows = MatrixFunctions.removeRowsAt(original, currentRow);
+        List<List<String>> conditionRows = removeRowsAt(original, currentRow);
         for (int ii : indicesOfDashedIndicators) {
             conditionRows = removeColumnsAt(conditionRows, ii);
         }

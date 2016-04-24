@@ -1,7 +1,10 @@
 package de.adesso.tools.functions;
 
-import java.util.Iterator;
-import java.util.List;
+import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Multimaps;
+
+import java.util.*;
+import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -12,6 +15,25 @@ import java.util.stream.Stream;
  * Created by mmoehler on 20.02.16.
  */
 public class ListFunctions {
+
+    public static Function<List<List<String>>, List<List<Integer>>> indicesOfDuplicateActions() {
+
+        return (actions) -> {
+            final ListMultimap<List<String>, Integer> tmp =
+                    Multimaps.newListMultimap(new HashMap<List<String>, Collection<Integer>>(), () -> new LinkedList<Integer>());
+
+            IntStream.range(0,actions.size()).forEach(i -> tmp.put(actions.get(i), i));
+            tmp.asMap().entrySet().removeIf(entry -> entry.getValue().size()<2);
+
+            return tmp.asMap().values().stream()
+                    .map(o -> o.stream()
+                            .peek(System.out::println)
+                            .collect(Collectors.toList()))
+                    .collect(Collectors.toList());
+        };
+    }
+
+
     public static <T> List<T> insertElementsAt(List<T> original, int index, Supplier<T> defaultValue) {
         Iterator<T> it = original.iterator();
         return IntStream.range(0, original.size() + 1)

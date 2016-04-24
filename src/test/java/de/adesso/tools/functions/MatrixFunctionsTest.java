@@ -289,4 +289,38 @@ public class MatrixFunctionsTest {
 
         assertThat(actual, equalTo(expected));
     }
+
+    @Test
+    public void testCopy() throws Exception {
+
+    }
+
+    @Test
+    public void testRemoveRowsAt() throws Exception {
+
+    }
+
+    @Test
+    public void testRemoveColumnsAt() throws Exception {
+
+    }
+
+    @Test
+    public void testReplaceColumnsAt() throws Exception {
+        List<List<String>> original = (on(
+                "A,B,C,D," +
+                        "A,B,C,D," +
+                        "A,B,C,D").dim(3, 4).build());
+        List<List<String>> expected = (on(
+                "A,E,C,D," +
+                        "A,E,C,D," +
+                        "A,E,C,D").dim(3, 4).build());
+
+        List<String> newColumn = ListBuilder.on("E,E,E").build();
+
+
+        List<List<String>> actual = replaceColumnsAt(original, 1, newColumn);
+
+        assertThat(actual, equalTo(expected));
+    }
 }

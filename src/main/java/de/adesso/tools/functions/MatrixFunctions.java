@@ -141,25 +141,18 @@ public final class MatrixFunctions {
 
     public static List<List<String>> replaceColumnsAt(List<List<String>> original, int index, List<String> newData) {
 
-        List<List<String>> modifiedMatrix = FXCollections.emptyObservableList();
+        List<List<String>> modifiedMatrix = FXCollections.observableArrayList();
 
-        if (!original.isEmpty()) {
-            Iterator<String> newDataIterator = newData.iterator();
-            final List<List<String>> copiedMatrix = copy(original);
-            modifiedMatrix = copiedMatrix.stream()
-                    .map(l -> {
-                        List<String> out = FXCollections.observableArrayList();
-                        for (int i = 0; i < l.size(); i++) {
-                            if (index == i) {
-                                out.add(newDataIterator.next());
-                            }
-                            out.add(l.get(i));
-                        }
-                        return out;
-                    })
-                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
-        }
-        return modifiedMatrix;
+        List<List<String>> transposed = transpose(original);
+
+        IntStream.range(0,transposed.size()).forEach(i ->{
+            if(i == index) {
+                modifiedMatrix.add(newData);
+            } else {
+                modifiedMatrix.add(transposed.get(i));
+            }
+        });
+        return transpose(modifiedMatrix);
     }
 
 
