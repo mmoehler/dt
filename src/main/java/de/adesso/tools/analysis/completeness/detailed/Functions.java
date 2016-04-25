@@ -25,6 +25,8 @@ import de.adesso.tools.common.MatrixBuilder;
 import de.adesso.tools.functions.MatrixFunctions;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.function.BiFunction;
@@ -38,8 +40,10 @@ import static de.adesso.tools.analysis.completeness.detailed.Actions.*;
 import static de.adesso.tools.analysis.completeness.detailed.Conditions.*;
 import static de.adesso.tools.analysis.completeness.detailed.Functions.columnDifference;
 import static de.adesso.tools.analysis.completeness.detailed.Functions.consolidate;
-import static de.adesso.tools.common.Reserved.*;
-import static de.adesso.tools.functions.MatrixFunctions.*;
+import static de.adesso.tools.common.Reserved.isDASH;
+import static de.adesso.tools.common.Reserved.isYES;
+import static de.adesso.tools.functions.MatrixFunctions.removeColumnsAt;
+import static de.adesso.tools.functions.MatrixFunctions.transpose;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -79,7 +83,6 @@ public class Functions {
                     }
                     return -1;
                 })
-                // .peek(xyz -> System.out.println(xyz))
                 .map(qq -> qq.intValue()).filter(vv -> vv >= 0).collect(Collectors.toList());
 
         //dumpList1DItems("IDX",indices);
@@ -155,6 +158,7 @@ class RulesDifferenceOperator implements Function<List<List<String>>, List<List<
 }
 
 class ConditionsConsolidateOperator0 implements Function<List<List<String>>, List<List<String>>> {
+    final static Logger LOGGER = LoggerFactory.getLogger(ConditionsConsolidateOperator0.class);
     public static final List<String> POSSIBLE_INDICATORS = Arrays.asList("Y", "N");
     public ConditionsConsolidateOperator0() {
     }
@@ -173,13 +177,16 @@ class ConditionsConsolidateOperator0 implements Function<List<List<String>>, Lis
 
                 if (!duplicateRules.isEmpty()) {
                     Map<Boolean, List<Integer>> partitioned = groupDuplicatesAccordingToTheirIndices(duplicateRules, conditionColumns);
+                    LOGGER.debug("partitioned = " + partitioned);
                     final int cr = currentRow;
                     partitioned.forEach((k, v) -> {
                         v.forEach(c -> {
                             if (k) {
                                 _copy[0].get(cr).set(c, "-");
+                                LOGGER.debug("replaceColumnsAt = " + c);
                             } else {
                                 _copy[0] = removeColumnsAt(_copy[0], c);
+                                LOGGER.debug("removeColumnsAt = " + c);
                             }
                         });
                     });
