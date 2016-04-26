@@ -124,7 +124,6 @@ public class RuleConsolidator implements Function<Tuple2<List<List<String>>, Lis
 
             return tmp.asMap().values().stream()
                     .map(o -> o.stream()
-                            .peek(System.out::println)
                             .collect(Collectors.toList()))
                     .collect(Collectors.toList());
         };

@@ -54,17 +54,14 @@ public class Functions {
     private static final BiFunction<List<String>, List<String>, List<List<String>>>[] ACTIONS = new BiFunction[]{A1, A2, A3, A4, A5};
     private static final Function<List<Tuple2<String, String>>, Integer>[] CONDITIONS = new Function[]{B1, B2, B3, B4};
     private static final List<List<String>> INTERNAL = MatrixBuilder.on("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
-
     private static Function<String, Integer> maskMatrixMapper = s -> (isDASH(s)) ? 0 : 1;
     private static final List<? extends List<Integer>> M = transpose(makeMaskMatrix(INTERNAL));
     private static Function<String, Integer> decisionMatrixMapper = s -> (isYES(s)) ? 1 : 0;
-    private static final List<? extends List<Integer>> D = transpose(makeDecisionMatrix(INTERNAL));
     // @formatter::on
-
+    private static final List<? extends List<Integer>> D = transpose(makeDecisionMatrix(INTERNAL));
 
 
     public static BiFunction<List<String>, List<String>, List<List<String>>> columnDifference = (left, right) -> {
-
 
         List<Tuple2<String, String>> prototype = StreamUtils
                 .zip(left.stream(), right.stream(), (x, y) -> Tuple.of(x, y))
@@ -158,8 +155,9 @@ class RulesDifferenceOperator implements Function<List<List<String>>, List<List<
 }
 
 class ConditionsConsolidateOperator0 implements Function<List<List<String>>, List<List<String>>> {
-    final static Logger LOGGER = LoggerFactory.getLogger(ConditionsConsolidateOperator0.class);
     public static final List<String> POSSIBLE_INDICATORS = Arrays.asList("Y", "N");
+    final static Logger LOGGER = LoggerFactory.getLogger(ConditionsConsolidateOperator0.class);
+
     public ConditionsConsolidateOperator0() {
     }
 
@@ -169,13 +167,14 @@ class ConditionsConsolidateOperator0 implements Function<List<List<String>>, Lis
         List<List<String>> copy = MatrixFunctions.copy(conditions);
         List<List<String>> _copy[] = new List[]{copy};
         for (int currentRow = 0; currentRow < conditions.size(); currentRow++) {
-            List<Integer> indicesOfDashedIndicators = determineIndicesOfDashedIndicators(_copy[0],currentRow);
+            List<Integer> indicesOfDashedIndicators = determineIndicesOfDashedIndicators(_copy[0], currentRow);
             if (indicatorsComplete.get(currentRow)) {
                 List<List<String>> conditionRows = cleanupConditions(_copy[0], currentRow, indicesOfDashedIndicators);
                 List<List<String>> conditionColumns = transpose(conditionRows);
                 LinkedListMultimap<List<String>, Integer> duplicateRules = determineCountOfDuplicateRules(conditionColumns);
 
                 if (!duplicateRules.isEmpty()) {
+                    List<Integer> toDelete = new ArrayList<>();
                     Map<Boolean, List<Integer>> partitioned = groupDuplicatesAccordingToTheirIndices(duplicateRules, conditionColumns);
                     LOGGER.debug("partitioned = " + partitioned);
                     final int cr = currentRow;
@@ -185,16 +184,22 @@ class ConditionsConsolidateOperator0 implements Function<List<List<String>>, Lis
                                 _copy[0].get(cr).set(c, "-");
                                 LOGGER.debug("replaceColumnsAt = " + c);
                             } else {
-                                _copy[0] = removeColumnsAt(_copy[0], c);
-                                LOGGER.debug("removeColumnsAt = " + c);
+                                toDelete.add(c);
                             }
                         });
                     });
+
+                    LOGGER.debug("removeColumnsAt (unordered) = " + toDelete);
+                    toDelete.stream()
+                            .sorted((a, b) -> b - a)
+                            .peek(x -> LOGGER.debug("removeColumnsAt (ordered) = %d", x))
+                            .forEach(i -> _copy[0] = removeColumnsAt(_copy[0], i));
+
                     updateRowsWithAllPossibleIndicators(currentRow, indicatorsComplete, _copy[0]);
                 }
             }
         }
-        return(_copy[0]);
+        return (_copy[0]);
     }
 
     private List<List<String>> cleanupConditions(List<List<String>> original, int currentRow, List<Integer> indicesOfDashedIndicators) {
@@ -231,8 +236,8 @@ class ConditionsConsolidateOperator0 implements Function<List<List<String>>, Lis
         LinkedListMultimap<List<String>, Integer> counter = LinkedListMultimap.create();
         IntStream.range(0, step01Cols.size()).forEach(j -> counter.put(step01Cols.get(j), j));
         // remove all entries with values size is 1
-        for (Iterator<Map.Entry<List<String>,Collection<Integer>>> it = counter.asMap().entrySet().iterator(); it.hasNext();)
-            if(it.next().getValue().size()==1)
+        for (Iterator<Map.Entry<List<String>, Collection<Integer>>> it = counter.asMap().entrySet().iterator(); it.hasNext(); )
+            if (it.next().getValue().size() == 1)
                 it.remove();
         return counter;
     }
