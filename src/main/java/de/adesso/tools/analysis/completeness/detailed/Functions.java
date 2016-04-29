@@ -189,10 +189,10 @@ class ConditionsConsolidateOperator0 implements Function<List<List<String>>, Lis
                         });
                     });
 
-                    LOGGER.debug("removeColumnsAt (unordered) = " + toDelete);
+                    LOGGER.debug("removeColumnsAt (unordered) = {}",toDelete);
                     toDelete.stream()
                             .sorted((a, b) -> b - a)
-                            .peek(x -> LOGGER.debug("removeColumnsAt (ordered) = %d", x))
+                            .peek(x -> LOGGER.debug("removeColumnsAt (ordered) = {}", x))
                             .forEach(i -> _copy[0] = removeColumnsAt(_copy[0], i));
 
                     updateRowsWithAllPossibleIndicators(currentRow, indicatorsComplete, _copy[0]);

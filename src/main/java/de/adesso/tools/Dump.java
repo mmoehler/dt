@@ -24,6 +24,7 @@ import javafx.collections.ObservableList;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Created by mmoehler on 27.03.16.
@@ -53,6 +54,13 @@ public class Dump {
         list1D.forEach(i -> System.out.println("\t" + i));
         System.out.println("<<<<<<<<<<\n");
     }
+
+    public static <T> void dumpSet1DItems(String msg, Set<T> set1D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        set1D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
 
     public static <T> void indexed(String msg, Indexed<T> i) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));

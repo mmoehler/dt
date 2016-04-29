@@ -512,7 +512,6 @@ public class MainView implements FxmlView<MainViewModel> {
 
         OsCheck.OSType ostype = OsCheck.getOperatingSystemType();
         table.setOnKeyPressed((KeyEvent t) -> {
-            System.out.println("t = " + t);
             switch (ostype) {
                 case MAC_OS:
                     handleMacOSSpecific(table, t);

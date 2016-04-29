@@ -50,12 +50,21 @@ public class StructuralAnalysisResultEmitter implements BiFunction<List<Indicato
         Multimap<Integer, Integer> redundantRules = Multimaps.newListMultimap(new HashMap<>(), ArrayList::new);
 
         P p = new P();
+
         Iterator<Indicator> indics = analysisResult.iterator();
         String header = IntStream.rangeClosed(1, countRules)
-                .mapToObj(i -> Strings.padStart(String.valueOf(i), 2, ' '))
+                .mapToObj(i -> Strings.padStart((i>9 && i%10==0)?(String.valueOf((int)i/10)):(" "), 2, ' '))
                 .reduce("", (a, b) -> a + b);
 
         p.prlnps(header, STRUCTURE_ANALYSIS_RULE.length() + header.length() - 2, ' ');
+
+        indics = analysisResult.iterator();
+        header = IntStream.rangeClosed(1, countRules)
+                .mapToObj(i -> Strings.padStart(String.valueOf(i%10), 2, ' '))
+                .reduce("", (a, b) -> a + b);
+
+        p.prlnps(header, STRUCTURE_ANALYSIS_RULE.length() + header.length() - 2, ' ');
+
         for (int i = 0; i < countRules - 1; i++) {
             p.prf(STRUCTURE_ANALYSIS_RULE, ((i + 1) % 10));
             for (int j = 0; j < countRules; j++) {
