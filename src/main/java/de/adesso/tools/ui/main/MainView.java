@@ -167,40 +167,45 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     private void doConsolidateRules(String s, Object... objects) {
-        List<List<String>> conditions = conditionDefinitionsTable.getItems();
-        List<List<String>> actions = actionDefinitionsTable.getItems();
+        try {
+            List<List<String>> conditions = conditionDefinitionsTable.getItems();
+            List<List<String>> actions = actionDefinitionsTable.getItems();
 
-        Dump.dumpTableItems("OLD CODITIONS", conditions);
-        Dump.dumpTableItems("OLD ACTIONS", actions);
+            Dump.dumpTableItems("OLD CODITIONS", conditions);
+            Dump.dumpTableItems("OLD ACTIONS", actions);
 
-        Tuple2<List<List<String>>, List<List<String>>> consolidated = Stream.of(Tuple.of(conditions, actions))
-                .map(Operators.consolidateRules())
-                .collect(MoreCollectors.toSingleObject());
+            Tuple2<List<List<String>>, List<List<String>>> consolidated = Stream.of(Tuple.of(conditions, actions))
+                    .map(Operators.consolidateRules())
+                    .collect(MoreCollectors.toSingleObject());
 
-        Dump.dumpTableItems("NEW CODITIONS", consolidated._1());
-        Dump.dumpTableItems("NEW ACTIONS", consolidated._2());
+            Dump.dumpTableItems("NEW CODITIONS", consolidated._1());
+            Dump.dumpTableItems("NEW ACTIONS", consolidated._2());
 
-        List<List<String>> newConditions = consolidated._1();
-        List<List<String>> newActions = consolidated._2();
+            List<List<String>> newConditions = consolidated._1();
+            List<List<String>> newActions = consolidated._2();
 
-        final int newCols = newConditions.get(0).size();
-        System.out.println("newCols = " + newCols);
+            final int newCols = newConditions.get(0).size();
+            System.out.println("newCols = " + newCols);
 
-        conditionDefinitionsTable.getColumns().clear();
-        actionDefinitionsTable.getColumns().clear();
+            conditionDefinitionsTable.getColumns().clear();
+            actionDefinitionsTable.getColumns().clear();
 
-        IntStream.range(0, newCols).forEach(i -> {
-            conditionDefinitionsTable.getColumns().add(createTableColumn(i));
-            actionDefinitionsTable.getColumns().add(createTableColumn(i));
-        });
+            IntStream.range(0, newCols).forEach(i -> {
+                conditionDefinitionsTable.getColumns().add(createTableColumn(i));
+                actionDefinitionsTable.getColumns().add(createTableColumn(i));
+            });
 
-        conditionDefinitionsTable.getItems().clear();
-        newConditions.stream().map(row -> FXCollections.observableArrayList(row)).forEach(conditionDefinitionsTable.getItems()::add);
-        actionDefinitionsTable.getItems().clear();
-        newActions.stream().map(row -> FXCollections.observableArrayList(row)).forEach(actionDefinitionsTable.getItems()::add);
+            conditionDefinitionsTable.getItems().clear();
+            newConditions.stream().map(row -> FXCollections.observableArrayList(row)).forEach(conditionDefinitionsTable.getItems()::add);
+            actionDefinitionsTable.getItems().clear();
+            newActions.stream().map(row -> FXCollections.observableArrayList(row)).forEach(actionDefinitionsTable.getItems()::add);
 
-        conditionDefinitionsTable.refresh();
-        actionDefinitionsTable.refresh();
+            conditionDefinitionsTable.refresh();
+            actionDefinitionsTable.refresh();
+        } catch (Exception e) {
+            exceptionHandler.showAndWaitAlert(e);
+            return;
+        }
     }
 
     private FileChooser getFileChooser() {
@@ -323,7 +328,38 @@ public class MainView implements FxmlView<MainViewModel> {
     }
 
     private void doInsRule(String key, Object[] value) {
-        doInsertColumns(this.conditionDefinitionsTable, this.actionDefinitionsTable, getIndex(value), QMARK_SUPPLIER, DASH_SUPPLIER);
+
+        final OptionalInt index = determineColumnIndex(this.conditionDefinitionsTable, this.actionDefinitionsTable, getIndex(value));
+
+        if (index.isPresent()) {
+
+            // -------
+
+            // -------
+
+            int newCols = this.conditionDefinitionsTable.getColumns().size() + 1;
+            this.conditionDefinitionsTable.getColumns().clear();
+            this.actionDefinitionsTable.getColumns().clear();
+
+            IntStream.range(0, newCols).forEach(i -> {
+                this.conditionDefinitionsTable.getColumns().add(createTableColumn(i));
+                this.actionDefinitionsTable.getColumns().add(createTableColumn(i));
+            });
+
+            Tuple2<ObservableList, ObservableList> oldDefs = Tuple.of(this.conditionDefinitionsTable.getItems(), this.actionDefinitionsTable.getItems());
+
+
+            Tuple2<List<? extends List<String>>, List<? extends List<String>>> newDefs = viewModel.doInsRule(index, oldDefs);
+
+            oldDefs._1().clear();
+            newDefs._1().forEach(oldDefs.$1()::add);
+            oldDefs._2().clear();
+            newDefs._2().forEach(oldDefs._2()::add);
+
+            this.conditionDefinitionsTable.refresh();
+            this.actionDefinitionsTable.refresh();
+        }
+
         updateColHeaders(this.conditionDefinitionsTable);
         updateColHeaders(this.actionDefinitionsTable);
 

@@ -163,43 +163,26 @@ public class DtFunctionsTestData {
         return Tuple.of(conditions,actions);
     }
 
-    static class P {
-        Integer i;
-        String s;
 
-        public P(Integer i, String s) {
-            this.i = i;
-            this.s = s;
-        }
-
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) return true;
-            if (o == null || getClass() != o.getClass()) return false;
-
-            P p = (P) o;
-
-            if (i != null ? !i.equals(p.i) : p.i != null) return false;
-            return s != null ? s.equals(p.s) : p.s == null;
-
-        }
-
-        @Override
-        public int hashCode() {
-            int result = i != null ? i.hashCode() : 0;
-            result = 31 * result + (s != null ? s.hashCode() : 0);
-            return result;
-        }
+    static <T> Set<Integer> indicesOfAllDuplicates(List<T> l) {
+        final int sz = l.size() - 1;
+        return IntStream.range(0, sz)
+                .mapToObj(idx -> indicesOf(l.subList(idx + 1, sz), l.get(idx), idx + 1))
+                .reduce(new TreeSet<Integer>((x,y)-> y - x), (a, b) -> {
+                    a.addAll(b);
+                    return a;
+                });
     }
+
+    static <T> Set<Integer> indicesOf(List<T> l, T t, int offset) {
+        return IntStream.range(0,l.size())
+                .filter(i -> (l.get(i).equals(t)))
+                .mapToObj(i -> (i + offset))
+                .collect(Collectors.toSet());
+    }
+
 
     public static void main(String argsd[]) {
-        P p0 = new P(null,null);
-        P p1 = new P(null,null);
-        final boolean b = p0.equals(p1);
-        System.out.println("b = " + b);
-    }
-
-    public static void main1(String argsd[]) {
 
         final int cols = 8;
         final int crows = 2;
@@ -226,23 +209,6 @@ public class DtFunctionsTestData {
 
     }
 
-
-    static <T> Set<Integer> indicesOfAllDuplicates(List<T> l) {
-        final int sz = l.size() - 1;
-        return IntStream.range(0, sz)
-                .mapToObj(idx -> indicesOf(l.subList(idx + 1, sz), l.get(idx), idx + 1))
-                .reduce(new TreeSet<Integer>((x,y)-> y - x), (a, b) -> {
-                    a.addAll(b);
-                    return a;
-                });
-    }
-
-    static <T> Set<Integer> indicesOf(List<T> l, T t, int offset) {
-        return IntStream.range(0,l.size())
-                .filter(i -> (l.get(i).equals(t)))
-                .mapToObj(i -> (i + offset))
-                .collect(Collectors.toSet());
-    }
 
 
     public static void main66(String argsd[]) {

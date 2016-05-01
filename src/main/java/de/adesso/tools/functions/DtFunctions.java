@@ -201,43 +201,6 @@ public final class DtFunctions {
     }
 
 
-    public static void doInsertColumns(TableView conditionTable,
-                                       TableView actionTable,
-                                       OptionalInt value,
-                                       Supplier<String> conditionDefValue,
-                                       Supplier<String> actionDefValue) {
-
-        final OptionalInt index = determineColumnIndex(conditionTable, actionTable, value);
-        if (index.isPresent()) {
-
-            final List<List<String>> oldConDefs = conditionTable.getItems();
-            final List<List<String>> oldActDefs = actionTable.getItems();
-
-            int newCols = conditionTable.getColumns().size() + 1;
-            conditionTable.getColumns().clear();
-            actionTable.getColumns().clear();
-
-            IntStream.range(0, newCols).forEach(i -> {
-                conditionTable.getColumns().add(createTableColumn(i));
-                actionTable.getColumns().add(createTableColumn(i));
-            });
-
-            final List<? extends List<String>> newConDefs =
-                    insertColumnsAt(oldConDefs, index.getAsInt(), conditionDefValue);
-            final List<? extends List<String>> newActDefs =
-                    insertColumnsAt(oldActDefs, index.getAsInt(), actionDefValue);
-
-            oldConDefs.clear();
-            newConDefs.forEach(oldConDefs::add);
-            oldActDefs.clear();
-            newActDefs.forEach(oldActDefs::add);
-
-            conditionTable.refresh();
-            actionTable.refresh();
-        }
-
-    }
-
     public static <T extends DeclarationTableViewModel> void doInsertRows(TableView<T> declarations,
                                                                           TableView<ObservableList<String>> definitions,
                                                                           OptionalInt value,
@@ -358,7 +321,7 @@ public final class DtFunctions {
 
     }
 
-    private static <T, U> OptionalInt determineColumnIndex(TableView<T> tableView0, TableView<U> tableView1, OptionalInt externalIndex) {
+    public static <T, U> OptionalInt determineColumnIndex(TableView<T> tableView0, TableView<U> tableView1, OptionalInt externalIndex) {
         OptionalInt index = OptionalInt.empty();
         if (externalIndex.isPresent()) {
             index = externalIndex;

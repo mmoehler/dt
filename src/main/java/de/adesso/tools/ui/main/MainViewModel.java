@@ -1,18 +1,24 @@
 package de.adesso.tools.ui.main;
 
 import com.codepoetics.protonpack.Indexed;
+import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
 import de.adesso.tools.analysis.structure.AnalysisResultEmitter;
 import de.adesso.tools.analysis.structure.Indicator;
+import de.adesso.tools.analysis.structure.Operators;
 import de.adesso.tools.analysis.structure.StructuralAnalysis;
 import de.adesso.tools.events.*;
+import de.adesso.tools.exception.ExceptionHandler;
+import de.adesso.tools.functions.DtFunctions;
 import de.adesso.tools.functions.MatrixFunctions;
+import de.adesso.tools.functions.MoreCollectors;
 import de.adesso.tools.io.DTDataPacket;
 import de.adesso.tools.model.ActionDecl;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.tools.ui.scopes.RuleScope;
+import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 import de.adesso.tools.util.tuple.Tuple3;
 import de.saxsys.mvvmfx.InjectScope;
@@ -26,14 +32,17 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.*;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import static com.google.common.collect.Multimaps0.emptyMultimap;
 import static de.adesso.tools.analysis.completeness.detailed.ConditionDetailedCompletenessCheck.isFormalComplete;
 import static de.adesso.tools.functions.Adapters.Matrix.adapt;
-import static de.adesso.tools.functions.DtFunctions.fullExpandActions;
-import static de.adesso.tools.functions.DtFunctions.limitedExpandConditions;
+import static de.adesso.tools.functions.DtFunctions.*;
+import static de.adesso.tools.functions.MatrixFunctions.insertColumnsAt;
 import static de.adesso.tools.ui.Notifications.*;
 import static java.util.Collections.emptyList;
 
@@ -59,6 +68,9 @@ public class MainViewModel implements ViewModel {
 
     @Inject
     private StructuralAnalysis structuralAnalysis;
+
+    @Inject
+    private ExceptionHandler exceptionHandler;
 
     @Inject
     private AnalysisResultEmitter resultEmitter;
@@ -231,42 +243,76 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onFormalCompletenessCheckAction(@Observes FormalCompletenessCheckEvent event) {
-        notificationCenter.publish(PREPARE_CONSOLE.name(), internalFormalCompletenessCheck());
-        notifyMissingRulesCleared();
+        Optional<String> s = internalFormalCompletenessCheck();
+        if(s.isPresent()) {
+            notificationCenter.publish(PREPARE_CONSOLE.name(), s.get());
+            notifyMissingRulesCleared();
+        }
     }
 
-    private String internalFormalCompletenessCheck() {
-        final List<Indexed<List<String>>> result = isFormalComplete(this.conditionDeclarations, this.conditionDefinitions);
-        Tuple2<String, List<String>> tuple2 = resultEmitter.emitFormalCompletenessCheckResults().apply(result);
-        missingRules = tuple2._2();
-        return tuple2._1();
+    private Optional<String> internalFormalCompletenessCheck() {
+        String ret = null;
+        try {
+            final List<Indexed<List<String>>> result = isFormalComplete(this.conditionDeclarations, this.conditionDefinitions);
+            Tuple2<String, List<String>> tuple2 = resultEmitter.emitFormalCompletenessCheckResults().apply(result);
+            missingRules = tuple2._2();
+            ret = tuple2._1();
+            ret = (Strings.isNullOrEmpty(ret)) ? "RULES COMPLETE" : ret;
+        } catch (Exception e) {
+            exceptionHandler.showAndWaitAlert(e);
+        }
+        return Optional.ofNullable(ret);
     }
 
     public void onCompleteReportAction(@Observes CompleteReportEvent event) {
-        final String part1 = internalStructuralAnalysis();
-        final String part2 = internalFormalCompletenessCheck();
-        notificationCenter.publish(PREPARE_CONSOLE.name(), part1 + System.lineSeparator() + part2);
+        final Optional<String> part1 = internalStructuralAnalysis();
+        final Optional<String> part2 = internalFormalCompletenessCheck();
+
+        String message;
+        if(part1.isPresent() && part2.isPresent()) {
+            message = part1.get() + System.lineSeparator() + part2.get();
+        } else {
+            message = (part1.isPresent())
+                    ? part1.get()
+                    : (part2.isPresent()
+                    ? part2.get()
+                    : "");
+        }
+
+        notificationCenter.publish(PREPARE_CONSOLE.name(), message);
         notifyMissingRulesCleared();
         notifyRulesConsolidated();
         notifyRuleDuplicatesCleared();
     }
 
     public void onStructuralAnalysisAction(@Observes StructuralAnalysisEvent event) {
-        notificationCenter.publish(PREPARE_CONSOLE.name(), internalStructuralAnalysis());
-        notifyRulesConsolidated();
-        notifyRuleDuplicatesCleared();
+        Optional<String> s = internalStructuralAnalysis();
+        if(s.isPresent()) {
+            notificationCenter.publish(PREPARE_CONSOLE.name(), s.get());
+            notifyRulesConsolidated();
+            notifyRuleDuplicatesCleared();
+        }
     }
 
     // TODO Validation!! PRE: all table containers must not be empty!!
-    private String internalStructuralAnalysis() {
-        List<Indicator> result = structuralAnalysis.apply(adapt(this.conditionDefinitions), adapt(this.actionDefinitions));
+    private Optional<String> internalStructuralAnalysis() {
+        String ret = null;
+        try {
 
-        final Tuple3<String, Multimap<Integer, Integer>, Multimap<Integer, Integer>> tuple3 =
-                resultEmitter.emitStructuralAnalysisResult().apply(result, this.conditionDefinitions.get(0).size());
+            List<Indicator> result = structuralAnalysis.apply(adapt(this.conditionDefinitions), adapt(this.actionDefinitions));
 
-        compressibleRules = tuple3._2();
-        dupplicateRules = tuple3._3();
-        return tuple3._1();
+            final Tuple3<String, Multimap<Integer, Integer>, Multimap<Integer, Integer>> tuple3 =
+                    resultEmitter.emitStructuralAnalysisResult().apply(result, this.conditionDefinitions.get(0).size());
+
+            compressibleRules = tuple3._2();
+            dupplicateRules = tuple3._3();
+            ret = tuple3._1();
+
+        } catch (Exception e) {
+            exceptionHandler.showAndWaitAlert(e);
+        }
+
+        return Optional.ofNullable(ret);
     }
 
     public void onFileNewAction(@Observes FileNewEvent event) {
@@ -287,6 +333,13 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onDeleteRedundantRules(@Observes DeleteRedundantRulesEvent event) {
+        Stream<Tuple2<List<List<String>>, List<List<String>>>> dt
+                = Stream.of(Tuple.of(adapt(getConditionDefinitions()), adapt(getActionDefinitions())));
+        Tuple2<List<List<String>>, List<List<String>>> clearedDt
+                = dt.map(Operators.rejectDupplicateRules()).collect(MoreCollectors.toSingleObject());
+
+
+
         dupplicateRules.clear();
         notifyRuleDuplicatesCleared();
         throw new UnsupportedOperationException("Not implemented yet!!");
@@ -335,4 +388,13 @@ public class MainViewModel implements ViewModel {
         }
     }
 
+    public Tuple2<List<? extends  List<String>>, List<? extends List<String>>>
+    doInsRule(OptionalInt index, Tuple2<ObservableList, ObservableList> oldDefs) {
+
+        final List<? extends List<String>> newConDefs =
+                insertColumnsAt(oldDefs._1(), index.getAsInt(), () -> DtFunctions.QMARK);
+        final List<? extends List<String>> newActDefs =
+                insertColumnsAt(oldDefs._2(), index.getAsInt(), () -> DtFunctions.DASH);
+        return Tuple.of(newConDefs, newActDefs);
+    }
 }

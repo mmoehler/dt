@@ -26,6 +26,7 @@ import de.adesso.tools.ui.PossibleIndicatorsSupplier;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.tools.util.matchers.Matchers;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.TableView;
@@ -39,11 +40,14 @@ import java.util.List;
 import java.util.OptionalInt;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 import static de.adesso.tools.common.MatrixBuilder.observable;
 import static de.adesso.tools.common.MatrixBuilder.on;
+import static de.adesso.tools.functions.Adapters.Matrix.*;
 import static de.adesso.tools.functions.DtFunctions.*;
 import static de.adesso.tools.functions.DtFunctionsTestData.*;
+import static de.adesso.tools.functions.MatrixFunctions.insertColumnsAt;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.testng.Assert.assertEquals;
@@ -351,7 +355,35 @@ public class DtFunctionsTest {
                 .build();
 
 
-        doInsertColumns(/*conditionDef,actionDef,*/conditionDefTab, actionDefTab, OptionalInt.empty(), QMARK_SUPPLIER, DASH_SUPPLIER);
+        final OptionalInt index = determineColumnIndex(conditionDefTab, actionDefTab, OptionalInt.empty());
+        if (index.isPresent()) {
+
+
+            int newCols = conditionDefTab.getColumns().size() + 1;
+            conditionDefTab.getColumns().clear();
+            actionDefTab.getColumns().clear();
+
+            IntStream.range(0, newCols).forEach(i -> {
+                conditionDefTab.getColumns().add(createTableColumn(i));
+                actionDefTab.getColumns().add(createTableColumn(i));
+            });
+
+            List<List<String>> oldConDefs = adapt(conditionDefTab.getItems());
+            List<List<String>> oldActDefs = adapt(actionDefTab.getItems());
+
+            final List<List<String>> newConDefs =
+                    insertColumnsAt(oldConDefs, index.getAsInt(), QMARK_SUPPLIER);
+            final List<List<String>> newActDefs =
+                    insertColumnsAt(oldActDefs, index.getAsInt(), DASH_SUPPLIER);
+
+            oldConDefs.clear();
+            newConDefs.stream().map(FXCollections::observableArrayList).forEach(oldConDefs::add);
+            oldActDefs.clear();
+            newActDefs.stream().map(FXCollections::observableArrayList).forEach(oldActDefs::add);
+
+            conditionDefTab.refresh();
+            actionDefTab.refresh();
+        }
 
 
         ObservableList<ObservableList<String>> expConditionDef = observable(on("Y,Y,N,?,N,Y,N,Y,?,N").dim(2, 5).build());

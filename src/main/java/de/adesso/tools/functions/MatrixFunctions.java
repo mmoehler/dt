@@ -1,6 +1,7 @@
 package de.adesso.tools.functions;
 
 import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -22,7 +23,6 @@ public final class MatrixFunctions {
     }
 
     public static <T> List<List<T>> transpose(List<List<T>> table) {
-
         if (null == table) throw new IllegalArgumentException("Table to transpose is null");
         if (table.isEmpty()) return table;
         List<List<T>> transposedList = new ArrayList<>();
@@ -125,7 +125,7 @@ public final class MatrixFunctions {
             final List<List<String>> copiedMatrix = copy(original);
             modifiedMatrix = copiedMatrix.stream()
                     .map(l -> {
-                        List<String> out = FXCollections.observableArrayList();
+                        ObservableList<String> out = FXCollections.observableArrayList();
                         for (int i = 0; i < l.size(); i++) {
                             if (index == i) {
                                 out.add(defaultValue.get());
@@ -134,7 +134,7 @@ public final class MatrixFunctions {
                         }
                         return out;
                     })
-                    .collect(Collectors.toCollection(FXCollections::observableArrayList));
+                    .collect(Collectors.toList());
         }
         return modifiedMatrix;
     }

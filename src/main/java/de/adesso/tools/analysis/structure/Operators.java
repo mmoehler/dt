@@ -44,4 +44,9 @@ public final class Operators {
         return new RuleConsolidator();
     }
 
+    public static Function<Tuple2<List<List<String>>, List<List<String>>>, Tuple2<List<List<String>>, List<List<String>>>> rejectDupplicateRules(){
+        return new DuplicateRulesRejector();
+    }
+
 }
+
