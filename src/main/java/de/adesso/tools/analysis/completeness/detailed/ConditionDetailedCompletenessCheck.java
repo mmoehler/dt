@@ -31,7 +31,7 @@ import static de.adesso.tools.functions.Adapters.Matrix.adapt;
 import static de.adesso.tools.functions.MatrixFunctions.transpose;
 
 /**
- * Created by mmoehler on 28.03.16.
+ * Created by mmoehler ofList 28.03.16.
  */
 public class ConditionDetailedCompletenessCheck {
     public ConditionDetailedCompletenessCheck() {

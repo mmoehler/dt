@@ -13,7 +13,7 @@ import javafx.util.Callback;
 import javafx.util.StringConverter;
 
 /**
- * Created by mohler on 16.01.16.
+ * Created by mohler ofList 16.01.16.
  */
 public class DeclarationsTableCell<S, T> extends TableCell<S, T> {
 
@@ -140,7 +140,7 @@ public class DeclarationsTableCell<S, T> extends TableCell<S, T> {
     @Override
     public void commitEdit(T item) {
 
-        // This block is necessary to support commit on losing focus, because the baked-in mechanism
+        // This block is necessary to support commit ofList losing focus, because the baked-in mechanism
         // sets our editing state to false before we can intercept the loss of focus.
         // The default commitEdit(...) method simply bails if we are not editing...
         if (!isEditing() && !item.equals(getItem())) {

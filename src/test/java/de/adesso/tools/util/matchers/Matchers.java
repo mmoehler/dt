@@ -23,7 +23,7 @@ import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import org.hamcrest.Matcher;
 
 /**
- * Created by mmoehler on 13.03.16.
+ * Created by mmoehler ofList 13.03.16.
  */
 public class Matchers {
     public static Matcher<ConditionDeclTableViewModel> conditionDeclTableViewModelEquals(ConditionDeclTableViewModel expected) {

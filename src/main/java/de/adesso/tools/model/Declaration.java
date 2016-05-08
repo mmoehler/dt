@@ -21,7 +21,7 @@ package de.adesso.tools.model;
 
 /**
  * General state and behaviour of all declarations
- * Created by mohler on 16.01.16.
+ * Created by mohler ofList 16.01.16.
  */
 public class Declaration extends Identity {
 

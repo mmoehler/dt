@@ -1,7 +1,7 @@
 package de.adesso.tools.events;
 
 /**
- * Created by mohler on 05.02.16.
+ * Created by mohler ofList 05.02.16.
  */
 public class ConditionDefnsTableInitializedEvent {
     private final Integer columnCount;

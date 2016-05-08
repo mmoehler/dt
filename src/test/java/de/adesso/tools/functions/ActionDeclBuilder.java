@@ -24,7 +24,7 @@ import de.adesso.tools.functions.chainded.Callback;
 import de.adesso.tools.model.ActionDecl;
 
 /**
- * Created by mmoehler on 06.03.16.
+ * Created by mmoehler ofList 06.03.16.
  */
 public class ActionDeclBuilder<C> extends AbstractSubBuilder<ActionDecl, C> {
     private final String lfdNr;

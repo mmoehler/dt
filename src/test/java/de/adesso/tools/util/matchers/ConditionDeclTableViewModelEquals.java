@@ -24,7 +24,7 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 
 /**
- * Created by mmoehler on 13.03.16.
+ * Created by mmoehler ofList 13.03.16.
  */
 public class ConditionDeclTableViewModelEquals extends BaseMatcher<ConditionDeclTableViewModel> {
 

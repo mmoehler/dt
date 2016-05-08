@@ -3,7 +3,7 @@ package de.adesso.tools.util.tuple.mutable;
 import java.lang.reflect.Method;
 
 /**
- * Created by mohler on 04.12.15.
+ * Created by mohler ofList 04.12.15.
  */
 public class ImmutableHandler extends AbstractInvocationHandler {
     private final Object delegate;

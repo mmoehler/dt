@@ -24,7 +24,6 @@ import com.google.common.collect.Sets;
 import de.adesso.tools.Dump;
 import de.adesso.tools.analysis.structure.DefaultStructuralAnalysis;
 import de.adesso.tools.analysis.structure.Indicator;
-import de.adesso.tools.analysis.structure.Operators;
 import de.adesso.tools.analysis.structure.StructuralAnalysisResultEmitter;
 import de.adesso.tools.common.MatrixBuilder;
 import de.adesso.tools.util.tuple.Tuple;
@@ -37,7 +36,6 @@ import java.util.concurrent.ThreadLocalRandom;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static de.adesso.tools.functions.DtFunctions.permutations;
 import static de.adesso.tools.functions.MatrixFunctions.removeColumnsAt;
@@ -45,7 +43,7 @@ import static de.adesso.tools.functions.MatrixFunctions.transpose;
 
 /**
  * Test fixtures of the DtFunctionsTest's
- * Created by moehler on 02.03.2016.
+ * Created by moehler ofList 02.03.2016.
  */
 public class DtFunctionsTestData {
 
@@ -99,8 +97,8 @@ public class DtFunctionsTestData {
         final String[] conditionsData = rndDefinitions(condRows, cols, CONDITIONS);
         final String[] actionsData = rndDefinitions(actRows, cols, ACTIONS);
 
-        final MatrixBuilder conditions = MatrixBuilder.on(conditionsData).dim(condRows, cols);
-        final MatrixBuilder actions = MatrixBuilder.on(actionsData).dim(actRows, cols);
+        final MatrixBuilder conditions = MatrixBuilder.matrixOf(conditionsData).dim(condRows, cols);
+        final MatrixBuilder actions = MatrixBuilder.matrixOf(actionsData).dim(actRows, cols);
 
 
         final Tuple2<List<List<String>>, List<List<String>>> dt = Tuple.of(conditions.build(), actions.build());
@@ -121,7 +119,7 @@ public class DtFunctionsTestData {
 
         final List<List<String>> conditions = fullExpandConditions(IND, condRows);
         final String[] actionsData = rndDefinitions(actRows, cols, ACTIONS);
-        final List<List<String>> actions = MatrixBuilder.on(actionsData).dim(actRows, cols).build();
+        final List<List<String>> actions = MatrixBuilder.matrixOf(actionsData).dim(actRows, cols).build();
 
         Dump.dumpTableItems("CONDITIONS-BEFORE-REMOVE", conditions);
         Dump.dumpTableItems("ACTIONS-BEFORE-REMOVE", actions);
@@ -182,75 +180,6 @@ public class DtFunctionsTestData {
     }
 
 
-    public static void main(String argsd[]) {
-
-        final int cols = 8;
-        final int crows = 2;
-
-        final List<List<String>> conditions = MatrixBuilder.on(
-                        "a,b,a,c,a,b,a,e," +
-                        "a,b,a,c,a,b,a,e"
-        ).dim(crows, cols).transposed().build();
-
-        Dump.dumpTableItems("CONDITIONS (TRANSPOSED)", conditions);
-
-        int sidx = 0;
-        int ofs = sidx + 1;
-        int eidx = conditions.size();
-
-        final Set<Integer> indices = indicesOf(conditions.subList(ofs, eidx), conditions.get(sidx), ofs);
-
-        Dump.dumpSet1DItems("INDICES OF [Y,Y]", indices);
-
-
-        final Set<Integer> indicesOfAllDuplicates = indicesOfAllDuplicates(conditions);
-
-        Dump.dumpSet1DItems("INDICES OF ALL DUPS", indicesOfAllDuplicates);
-
-    }
-
-
-
-    public static void main66(String argsd[]) {
-        final String separator = "---------------------------------------------";
-        for (int i = 0; i < 5; i++) {
-            Tuple2<List<List<String>>, List<List<String>>> dt = rndDT2();
-            Dump.dumpTableItems(String.format("CONDITIONS-%02d", i), dt._1());
-            Dump.dumpTableItems(String.format("ACTIONS-%02d", i), dt._2());
-
-            dt = rmDuplicateRules(dt);
-
-            Dump.dumpTableItems(String.format("CONDITIONS-%02d WITHOUT DUPS", i), dt._1());
-            Dump.dumpTableItems(String.format("ACTIONS-%02d WITHOUT DUPS", i), dt._2());
-
-
-            if (!doStructuralAnalysis(dt)) {
-                System.out.println(">>>>>>>>>> NO CONSOLIDATION POSSIBLE! <<<<<<<<<<\n");
-                System.out.println(separator);
-                continue;
-            }
-
-            //--
-
-            List<List<String>> conditions = dt._1();
-            List<List<String>> actions = dt._2();
-
-            Tuple2<List<List<String>>, List<List<String>>> consolidated = Stream.of(Tuple.of(conditions, actions))
-                    .map(Operators.consolidateRules())
-                    .collect(MoreCollectors.toSingleObject());
-
-            List<List<String>> cconditions = consolidated._1().isEmpty() ? conditions : consolidated._1();
-            List<List<String>> cactions = consolidated._2().isEmpty() ? actions : consolidated._2();
-
-            Dump.dumpTableItems(String.format("CONSOLIDATED CONDITIONS-%02d", i), cconditions);
-            Dump.dumpTableItems(String.format("CONSOLIDATED ACTIONS-%02d", i), cactions);
-
-            doStructuralAnalysis(consolidated);
-
-            System.out.println(separator);
-        }
-
-    }
 
     private static boolean doStructuralAnalysis(Tuple2<List<List<String>>, List<List<String>>> dt) {
         DefaultStructuralAnalysis analysis = null;

@@ -14,7 +14,7 @@ import javafx.stage.Stage;
 import javax.inject.Inject;
 
 /**
- * Created by mohler on 15.01.16.
+ * Created by mohler ofList 15.01.16.
  */
 public class MenuView implements FxmlView<MenuViewModel> {
 

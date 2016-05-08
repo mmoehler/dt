@@ -20,7 +20,7 @@
 package de.adesso.tools.functions.chainded;
 
 /**
- * Created by mmoehler on 11.03.16.
+ * Created by mmoehler ofList 11.03.16.
  */
 interface SubBuilder<R, C> extends Builder<R> {
     C getCaller();

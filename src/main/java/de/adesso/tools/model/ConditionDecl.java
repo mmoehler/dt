@@ -23,7 +23,7 @@ import javax.annotation.Nonnull;
 
 /**
  * Raw declaration of the condition of a rule
- * Created by mohler on 15.01.16.
+ * Created by mohler ofList 15.01.16.
  */
 public class ConditionDecl extends Declaration {
 

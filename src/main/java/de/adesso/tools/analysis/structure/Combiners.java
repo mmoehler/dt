@@ -22,7 +22,7 @@ package de.adesso.tools.analysis.structure;
 import java.util.function.BinaryOperator;
 
 /**
- * Created by moehler on 31.03.2016.
+ * Created by moehler ofList 31.03.2016.
  */
 public final class Combiners {
     public Combiners() {

@@ -29,7 +29,7 @@ import java.util.function.Predicate;
 import static de.adesso.tools.common.Reserved.*;
 
 /**
- * Created by mmoehler on 19.03.16.
+ * Created by mmoehler ofList 19.03.16.
  */
 public class Conditions {
 

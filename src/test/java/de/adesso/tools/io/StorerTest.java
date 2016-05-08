@@ -40,7 +40,7 @@ import static de.adesso.tools.exception.LambdaExceptionUtil.rethrowIntFunction;
 import static de.adesso.tools.functions.DtFunctionsTestData.conditionDeclTableViewBuilder;
 
 /**
- * Created by mmoehler on 01.04.16.
+ * Created by mmoehler ofList 01.04.16.
  */
 public class StorerTest {
 
@@ -51,7 +51,7 @@ public class StorerTest {
 
     @Test
     public void testStore() throws Exception {
-        final List<List<String>> inConditions = MatrixBuilder.on("Y,Y,Y,-,-,N,N,N,-,-,-,N,Y,Y,N,N").dim(4, 4).build();
+        final List<List<String>> inConditions = MatrixBuilder.matrixOf("Y,Y,Y,-,-,N,N,N,-,-,-,N,Y,Y,N,N").dim(4, 4).build();
 
         TableView<ConditionDeclTableViewModel> conditionDeclTab = conditionDeclTableViewBuilder()
                 .addModelWithLfdNbr("01").withExpression("EXP-01").withIndicators("Y,N")

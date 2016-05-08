@@ -20,7 +20,7 @@
 package de.adesso.tools.analysis.structure;
 
 /**
- * Created by moehler on 29.03.2016.
+ * Created by moehler ofList 29.03.2016.
  */
 public interface Indicator {
 

@@ -34,7 +34,7 @@ import java.util.stream.IntStream;
 import static de.adesso.tools.functions.MatrixFunctions.removeColumnsAt;
 
 /**
- * Created by mmoehler on 30.04.16.
+ * Created by mmoehler ofList 30.04.16.
  */
 public class DuplicateRulesRejector implements Function<Tuple2<List<List<String>>, List<List<String>>>, Tuple2<List<List<String>>, List<List<String>>>> {
 

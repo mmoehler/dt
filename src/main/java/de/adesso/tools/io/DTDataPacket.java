@@ -39,7 +39,7 @@ import static de.adesso.tools.exception.LambdaExceptionUtil.rethrowIntFunction;
 /**
  * TODO Need a special state for the right processing of this data during the use cases new-, load- and save-file aand close app and ... ??
  * <p>
- * Created by mmoehler on 01.04.16.
+ * Created by mmoehler ofList 01.04.16.
  */
 public class DTDataPacket implements Externalizable {
 

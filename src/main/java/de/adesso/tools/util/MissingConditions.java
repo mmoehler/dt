@@ -23,7 +23,7 @@ import static de.adesso.tools.functions.MatrixFunctions.transpose;
 import static java.util.stream.Collectors.toList;
 
 /**
- * Created by mohler on 25.01.16.
+ * Created by mohler ofList 25.01.16.
  */
 public class MissingConditions implements BinaryOperator<List<List<String>>> {
 
@@ -32,7 +32,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
     private final List<List<String>> internalList;
 
     public MissingConditions() {
-        this.internalList = MatrixBuilder.on("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
+        this.internalList = MatrixBuilder.matrixOf("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
         this.ACTIONS = new BiFunction[]{A1, A2, A3, A4, A5};
         this.CONDITIONS = new Function[]{B1, B2, B3, B4};
     }
@@ -62,12 +62,12 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
     }
 
     public static void main(String[] args) {
-        List<List<String>> given = MatrixBuilder.on("Y,Y,N,N,Y,Y,Y,N,N,-,N,Y").dim(3, 4).transposed().build();
+        List<List<String>> given = MatrixBuilder.matrixOf("Y,Y,N,N,Y,Y,Y,N,N,-,N,Y").dim(3, 4).transposed().build();
 
-        List<List<String>> interimResult = MatrixBuilder.on("-,-,-").dim(1, 3).build();
+        List<List<String>> interimResult = MatrixBuilder.matrixOf("-,-,-").dim(1, 3).build();
 
         List<List<String>> missingList = given.stream()
-                .map(x -> MatrixBuilder.on(x).dim(1, x.size()).build())
+                .map(x -> MatrixBuilder.matrixOf(x).dim(1, x.size()).build())
                 .reduce(interimResult, DT.difference());
 
         dumpList2DItems("RESULT", missingList);

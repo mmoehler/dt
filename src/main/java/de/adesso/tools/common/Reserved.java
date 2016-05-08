@@ -1,7 +1,7 @@
 package de.adesso.tools.common;
 
 /**
- * Created by mohler on 25.01.16.
+ * Created by mohler ofList 25.01.16.
  */
 public class Reserved {
     public static final String DASH = "-";

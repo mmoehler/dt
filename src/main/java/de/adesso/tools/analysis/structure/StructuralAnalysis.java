@@ -22,7 +22,7 @@ package de.adesso.tools.analysis.structure;
 import java.util.List;
 
 /**
- * Created by mmoehler on 02.04.16.
+ * Created by mmoehler ofList 02.04.16.
  */
 public interface StructuralAnalysis {
     List<Indicator> apply(List<List<String>> conditions, List<List<String>> actions);

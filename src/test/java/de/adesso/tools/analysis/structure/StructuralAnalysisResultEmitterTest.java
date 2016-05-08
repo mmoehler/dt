@@ -27,7 +27,7 @@ import java.util.List;
 import static de.adesso.tools.analysis.structure.Indicators.*;
 
 /**
- * Created by mmoehler on 01.04.16.
+ * Created by mmoehler ofList 01.04.16.
  */
 public class StructuralAnalysisResultEmitterTest {
 

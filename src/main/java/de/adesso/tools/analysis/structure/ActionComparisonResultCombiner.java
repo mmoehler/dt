@@ -28,7 +28,7 @@ import static de.adesso.tools.analysis.structure.Indicators.EQ;
 import static de.adesso.tools.analysis.structure.Indicators.NE;
 
 /**
- * Created by moehler on 29.03.2016.
+ * Created by moehler ofList 29.03.2016.
  */
 public class ActionComparisonResultCombiner implements BinaryOperator<Indicator> {
 

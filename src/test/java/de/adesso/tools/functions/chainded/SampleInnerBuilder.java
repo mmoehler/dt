@@ -22,7 +22,7 @@ package de.adesso.tools.functions.chainded;
 import com.sun.javafx.geom.Point2D;
 
 /**
- * Created by moehler on 11.03.2016.
+ * Created by moehler ofList 11.03.2016.
  */
 public class SampleInnerBuilder<C> extends AbstractSubBuilder<Point2D, C> {
     private final float x;

@@ -10,7 +10,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.containsInAnyOrder;
 
 /**
- * Created by moehler on 10.02.2016.
+ * Created by moehler ofList 10.02.2016.
  */
 public class ListBuilderTest {
 
@@ -22,7 +22,7 @@ public class ListBuilderTest {
         String data = "Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N";
         List<String> expected = new ArrayList<>(Arrays.asList(Y, Y, Y, Y, Y, Y, N, N, Y, N, Y, N));
         System.out.println("expected = " + expected);
-        List<String> actual = ListBuilder.on(data).build();
+        List<String> actual = ListBuilder.ofList(data).build();
         System.out.println("actual   = " + actual);
         assertThat(actual, containsInAnyOrder(expected.toArray()));
     }

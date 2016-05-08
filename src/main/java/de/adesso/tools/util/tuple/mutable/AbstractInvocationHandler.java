@@ -79,7 +79,7 @@ public abstract class AbstractInvocationHandler implements InvocationHandler {
     }
 
     /**
-     * {@link #invoke} delegates to this method upon any method invocation on the proxy instance,
+     * {@link #invoke} delegates to this method upon any method invocation ofList the proxy instance,
      * except {@link Object#equals}, {@link Object#hashCode} and {@link Object#toString}. The result
      * will be returned as the proxied method's return value.
      * <p>

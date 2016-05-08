@@ -25,7 +25,7 @@ import javafx.scene.control.TableView;
 import javax.annotation.Nonnull;
 
 /**
- * Created by mmoehler on 06.03.16.
+ * Created by mmoehler ofList 06.03.16.
  */
 class DefinitionsTableViewBuilder extends TableViewBuilder<ObservableList<String>> {
 

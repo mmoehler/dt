@@ -21,50 +21,75 @@ package de.adesso.tools.analysis.structure;
 
 import com.google.common.collect.ListMultimap;
 import com.google.common.collect.Multimaps;
-import de.adesso.tools.analysis.completeness.detailed.Functions;
-import de.adesso.tools.functions.MatrixFunctions;
+import de.adesso.tools.Dump;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 import de.adesso.tools.util.tuple.Tuple4;
+import javafx.collections.ObservableList;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.TreeSet;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static de.adesso.tools.functions.MatrixFunctions.*;
-import static de.adesso.tools.functions.MoreCollectors.*;
+import static de.adesso.tools.functions.MoreCollectors.toObservableList;
+import static de.adesso.tools.functions.MoreCollectors.toSingleObject;
+import static de.adesso.tools.functions.ObservableList2DFunctions.*;
 
 /**
- * Created by moehler on 07.04.2016.
+ * Created by moehler ofList 07.04.2016.
  */
-public class RuleConsolidator implements Function<Tuple2<List<List<String>>, List<List<String>>>, Tuple2<List<List<String>>, List<List<String>>>> {
+public class RuleConsolidator implements Function<Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>>, Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>>> {
 
     @Override
-    public Tuple2<List<List<String>>, List<List<String>>> apply(Tuple2<List<List<String>>, List<List<String>>> decisionTable) {
-        final List<List<String>> conditions = decisionTable._1();
-        final List<List<String>> actions = decisionTable._2();
-        final List<List<String>> transposedActions = transpose(actions);
-        final List<List<String>> transposedConditions = transpose(conditions);
+    public Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> apply(Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> decisionTable) {
+        final ObservableList<ObservableList<String>> conditions = decisionTable._1();
+        final ObservableList<ObservableList<String>> actions = decisionTable._2();
+
+        final ObservableList<ObservableList<String>> transposedActions = Stream.of(actions)
+                .map(transpose())
+                .collect(toSingleObject());
+        Dump.dumpTableItems("TRANSPOSED ACTIONS", transposedActions);
+
+        final ObservableList<ObservableList<String>> transposedConditions = Stream.of(conditions)
+                .map(transpose())
+                .collect(toSingleObject());
+        Dump.dumpTableItems("TRANSPOSED CONDITIONS", transposedConditions);
+
 
         // detecting indices of dupplicate action combination
-        List<List<Integer>> indices = Stream.of(transposedActions)
+        ObservableList<ObservableList<Integer>> indices = Stream.of(transposedActions)
                 .map(indicesOfDuplicateActions())
                 .collect(toSingleObject());
 
+        Dump.dumpTableItems("INDICES", indices);
+
+
         // map indices of actions to their conditions
-        List<List<List<String>>> parts = indices.stream()
+        ObservableList<ObservableList<ObservableList<String>>> parts = indices.stream()
                 .map(c -> c.stream()
                         .map(i -> transposedConditions.get(i))
-                        .collect(Collectors.toList()))
-                .collect(Collectors.toList());
+                        .collect(toObservableList()))
+                .collect(toObservableList());
+
+        for(ObservableList<ObservableList<String>> p : parts) {
+            Dump.dumpTableItems("PART", p);
+        }
+
 
         // consolidate the mapped conditions for each block
-        List<List<List<String>>> consolidated = parts.stream()
-                .map(MatrixFunctions::transpose)
-                .map(Functions.consolidate())
-                .collect(Collectors.toList());
+        ObservableList<ObservableList<ObservableList<String>>> consolidated = parts.stream()
+                .map(transpose())
+                //.map(Functions.consolidate())
+                .collect(toObservableList());
+
+        for(ObservableList<ObservableList<String>> p : consolidated) {
+            Dump.dumpTableItems("CONSOLIDATED PART", p);
+        }
+
 
         // merge the original state with the consolidated state
         return Stream.of(Tuple.of(conditions,actions,consolidated,indices))
@@ -73,35 +98,55 @@ public class RuleConsolidator implements Function<Tuple2<List<List<String>>, Lis
 
     }
 
-    private static Function<Tuple4<List<List<String>>,List<List<String>>,List<List<List<String>>>,List<List<Integer>>>, Tuple2<List<List<String>>, List<List<String>>>> merge() {
-            return (tuple) -> {
-                List<List<String>> originalConditions = tuple._1();
-                List<List<String>> originalActions = tuple._2();
-                List<List<List<String>>> consolidatedConditions = tuple._3();
-                List<List<Integer>> indicesOfConsolidationsConditions = tuple._4();
+    private static Function<Tuple4<ObservableList<ObservableList<String>>,ObservableList<ObservableList<String>>,
+            ObservableList<ObservableList<ObservableList<String>>>,ObservableList<ObservableList<Integer>>>,
+            Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>>> merge() {
+
+        return (tuple) -> {
+                ObservableList<ObservableList<String>> originalConditions = tuple._1();
+            Dump.dumpTableItems("_1", originalConditions);
+                ObservableList<ObservableList<String>> originalActions = tuple._2();
+            Dump.dumpTableItems("_1", originalActions);
+                ObservableList<ObservableList<ObservableList<String>>> consolidatedConditions = tuple._3();
+            Dump.dumpTableItems("_3", consolidatedConditions);
+                ObservableList<ObservableList<Integer>> indicesOfConsolidationsConditions = tuple._4();
+            Dump.dumpTableItems("_4", indicesOfConsolidationsConditions);
 
                 TreeSet<Integer> toDelete = new TreeSet<>((a, b) -> b-a);
-                Iterator<List<List<String>>> consConIt = consolidatedConditions.iterator();
-                Iterator<List<Integer>> inxConsConIt = indicesOfConsolidationsConditions.iterator();
-                List<List<String>> _originalConditions[] = new List[]{originalConditions};
-                List<List<String>> _originalActions[] = new List[]{originalActions};
+                Iterator<ObservableList<ObservableList<String>>> consConIt = consolidatedConditions.iterator();
+                Iterator<ObservableList<Integer>> inxConsConIt = indicesOfConsolidationsConditions.iterator();
+                ObservableList<ObservableList<String>> _originalConditions[] = new ObservableList[]{originalConditions};
+                ObservableList<ObservableList<String>> _originalActions[] = new ObservableList[]{originalActions};
 
                 for(;consConIt.hasNext() && inxConsConIt.hasNext();) {
-                    Iterator<List<String>> curConsConIt = transpose(consConIt.next()).iterator();
+
+                    //Iterator<ObservableList<String>> curConsConIt = transpose(consConIt.next()).iterator();
+                    Iterator<ObservableList<String>> curConsConIt = Stream.of(consConIt.next())
+                            .map(transpose())
+                            .collect(toSingleObject())
+                            .iterator();
+
                     Iterator<Integer> curInxConsConIt = inxConsConIt.next().iterator();
 
                     for(;curInxConsConIt.hasNext();) {
                         Integer idx = curInxConsConIt.next();
                         if(curConsConIt.hasNext()) {
-                            _originalConditions[0] = replaceColumnsAt(_originalConditions[0],idx,curConsConIt.next());
+                            _originalConditions[0] = _originalConditions[0].stream()
+                                    .map(replaceColumn(curConsConIt.next(),idx))
+                                    .collect(toObservableList());
                         } else {
                             toDelete.add(idx);
                         }
                     }
                 }
                 for(int idx : toDelete) {
-                    _originalConditions[0] = removeColumnsAt(_originalConditions[0], idx);
-                    _originalActions[0] = removeColumnsAt(_originalActions[0], idx);
+                    _originalConditions[0] = _originalConditions[0].stream()
+                            .map(removeColumn(idx))
+                            .collect(toObservableList());
+
+                    _originalActions[0] = _originalActions[0]
+                            .stream().map(removeColumn(idx))
+                            .collect(toObservableList());
                 }
 
                 originalConditions.clear();
@@ -114,18 +159,18 @@ public class RuleConsolidator implements Function<Tuple2<List<List<String>>, Lis
 
 
 
-    private final static Function<List<List<String>>, List<List<Integer>>> indicesOfDuplicateActions() {
+    private final static Function<ObservableList<ObservableList<String>>, ObservableList<ObservableList<Integer>>> indicesOfDuplicateActions() {
         return (actions) -> {
-            final ListMultimap<List<String>, Integer> tmp =
-                    Multimaps.newListMultimap(new HashMap<List<String>, Collection<Integer>>(), () -> new LinkedList<Integer>());
+            final ListMultimap<ObservableList<String>, Integer> tmp =
+                    Multimaps.newListMultimap(new HashMap<>(), () -> new LinkedList<Integer>());
 
             IntStream.range(0,actions.size()).forEach(i -> tmp.put(actions.get(i), i));
             tmp.asMap().entrySet().removeIf(entry -> entry.getValue().size()<2);
 
             return tmp.asMap().values().stream()
                     .map(o -> o.stream()
-                            .collect(Collectors.toList()))
-                    .collect(Collectors.toList());
+                            .collect(toObservableList()))
+                    .collect(toObservableList());
         };
     }
 

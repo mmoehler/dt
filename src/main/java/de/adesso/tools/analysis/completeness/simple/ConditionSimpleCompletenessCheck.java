@@ -33,7 +33,7 @@ import static de.adesso.tools.functions.DtFunctions.determineCountIndicatorsPerR
 import static de.adesso.tools.functions.DtFunctions.determineMaxColumns;
 
 /**
- * Created by mohler on 24.01.16.
+ * Created by mohler ofList 24.01.16.
  */
 public final class ConditionSimpleCompletenessCheck {
 

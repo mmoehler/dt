@@ -4,7 +4,7 @@ import javax.annotation.Nonnull;
 import java.util.Iterator;
 
 /**
- * Created by moehler on 12.02.2016.
+ * Created by moehler ofList 12.02.2016.
  */
 public class Range implements Iterable<Integer>, Iterator<Integer> {
     private final Integer from;

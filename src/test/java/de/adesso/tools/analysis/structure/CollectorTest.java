@@ -24,11 +24,10 @@ import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import de.adesso.tools.Dump;
-import de.adesso.tools.analysis.completeness.detailed.Functions;
-import de.adesso.tools.common.MatrixBuilder;
-import de.adesso.tools.functions.MoreCollectors;
+import de.adesso.tools.common.ObservableList2DBuilder;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.testng.annotations.Test;
 
@@ -38,10 +37,14 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static de.adesso.tools.functions.MatrixFunctions.*;
+import static de.adesso.tools.functions.MatrixFunctions.transpose;
+import static de.adesso.tools.functions.MoreCollectors.toObservableList;
+import static de.adesso.tools.functions.MoreCollectors.toSingleObject;
+import static de.adesso.tools.functions.ObservableList2DFunctions.removeColumn;
+import static de.adesso.tools.functions.ObservableList2DFunctions.transpose;
 
 /**
- * Created by moehler on 31.03.2016.
+ * Created by moehler ofList 31.03.2016.
  */
 public class CollectorTest {
 
@@ -78,7 +81,7 @@ public class CollectorTest {
 
         // -- Condition comparison ---------------------------------
 
-        final List<List<String>> inConditions = MatrixBuilder.on("Y,Y,Y,-,-,N,N,N,-,-,-,N,Y,Y,N,N").dim(4, 4).transposed().build();
+        final ObservableList<ObservableList<String>> inConditions = ObservableList2DBuilder.observable2DOf("Y,Y,Y,-,-,N,N,N,-,-,-,N,Y,Y,N,N").dim(4, 4).transposed().build();
 
         Dump.dumpTableItems("conditions = ", inConditions);
 
@@ -100,7 +103,7 @@ public class CollectorTest {
 
         // -- Action comparison ---------------------------------
 
-        final List<List<String>> inActions = MatrixBuilder.on("-,-,-,-,X,X,X,-,X,-,-,X,-,X,X,-").dim(4, 4).transposed().build();
+        final ObservableList<ObservableList<String>> inActions = ObservableList2DBuilder.observable2DOf("-,-,-,-,X,X,X,-,X,-,-,X,-,X,X,-").dim(4, 4).transposed().build();
         final List<List<Indicator>> outActions = new ArrayList<>();
         for (int i = 0; i < inActions.size() - 1; i++) {
             for (int j = 1; j < inActions.size(); j++) {
@@ -161,13 +164,13 @@ public class CollectorTest {
 
     @Test
     public void comparisonCollectorTest() {
-        final List<List<String>> inConditions = MatrixBuilder
-                .on("Y,Y,Y,-,-,N,N,N,-,-,-,N,Y,Y,N,N")
+        final ObservableList<ObservableList<String>> inConditions = ObservableList2DBuilder
+                .observable2DOf("Y,Y,Y,-,-,N,N,N,-,-,-,N,Y,Y,N,N")
                 .dim(4, 4)
                 .build();
 
-        final List<List<String>> inActions = MatrixBuilder
-                .on("-,-,-,-,X,X,X,-,X,-,-,X,-,X,X,-")
+        final ObservableList<ObservableList<String>> inActions = ObservableList2DBuilder
+                .observable2DOf("-,-,-,-,X,X,X,-,X,-,-,X,-,X,X,-")
                 .dim(4, 4)
                 .build();
 
@@ -179,28 +182,30 @@ public class CollectorTest {
 
     @Test
     public void consolidateTest() {
-        final ObservableList<ObservableList<String>> _conditions = MatrixBuilder.observable(MatrixBuilder.on(
+        final ObservableList<ObservableList<String>> _conditions = ObservableList2DBuilder.observable2DOf(
                 "Y,Y,Y,Y,N,N,N,N,"
                         + "Y,Y,N,N,Y,Y,N,N,"
-                        + "Y,N,Y,N,Y,N,Y,N,").dim(3, 8).build());
+                        + "Y,N,Y,N,Y,N,Y,N,").dim(3, 8).build();
 
-        final List<List<String>> conditions = MatrixBuilder.on(
+        final ObservableList<ObservableList<String>> conditions = ObservableList2DBuilder.observable2DOf(
                 "Y,Y,N,N,"
                         + "Y,N,Y,N").dim(2, 4).build();
 
-        final List<List<String>> __conditions = MatrixBuilder.on(
+        final ObservableList<ObservableList<String>> __conditions = ObservableList2DBuilder.observable2DOf(
                 "-,-,"
                         + "Y,N").dim(2, 2).build();
 
-        List<List<String>>[] R = new List[]{new ArrayList(conditions)};
+        ObservableList<ObservableList<String>>[] R = new ObservableList[]{FXCollections.observableArrayList(conditions)};
 
         IntStream.range(0, R[0].size()).forEach(row -> {
 
-            List<List<String>> copy = new ArrayList<>(R[0]);
+            ObservableList<ObservableList<String>> copy = FXCollections.observableArrayList(R[0]);
 
             copy.remove(row);
 
-            List<List<String>> C = transpose(copy);
+            ObservableList<ObservableList<String>> C = Stream.of(copy)
+                    .map(transpose())
+                    .collect(toSingleObject());
 
             dumpTableItems(String.format("Prepared for %d. loop", row), C);
 
@@ -224,13 +229,13 @@ public class CollectorTest {
             Collections.sort(D, (a, b) -> (-1));
             System.out.println("D = " + D);
 
-//            final List<List<String>> R[] = new List[]{conditions};
+//            final ObservableList<ObservableList<String>> R[] = new List[]{conditions};
             U.forEach(i -> conditions.get(row).set(i, "-"));
             D.forEach(i -> {
-                R[0] = removeColumnsAt(R[0], i);
+                R[0] = R[0].stream().map(removeColumn(i)).collect(toObservableList());
             });
 
-            //List<List<String>> consolidated = Functions.consolidate().apply(adapt(conditions));
+            //ObservableList<ObservableList<String>> consolidated = Functions.consolidate().apply(adapt(conditions));
 
             dumpTableItems("Result", R[0]);
         });
@@ -275,12 +280,12 @@ public class CollectorTest {
 
     @Test
     public void testGroupActions(){
-        final List<List<String>> actions = MatrixBuilder.on(
+        final ObservableList<ObservableList<String>> actions = ObservableList2DBuilder.observable2DOf(
                          "-,-,X,X,X,-,-,-,-,"
                         +"X,X,X,-,-,-,-,-,-,"
                         +"X,-,X,X,X,X,X,X,X").dim(3, 9).build();
 
-        final List<List<String>> conditions = MatrixBuilder.on(
+        final ObservableList<ObservableList<String>> conditions = ObservableList2DBuilder.observable2DOf(
                          "Y,Y,Y,Y,Y,N,N,N,N,"
                         +"Y,Y,N,-,-,-,-,-,-,"
                         +"Y,N,-,Y,N,Y,Y,N,N,"
@@ -290,9 +295,9 @@ public class CollectorTest {
         Dump.dumpTableItems("OLD CODITIONS", conditions);
         Dump.dumpTableItems("OLD ACTIONS", actions);
 
-        Tuple2<List<List<String>>, List<List<String>>> consolidated = Stream.of(Tuple.of(conditions, actions))
+        Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> consolidated = Stream.of(Tuple.of(conditions, actions))
                 .map(Operators.consolidateRules())
-                .collect(MoreCollectors.toSingleObject());
+                .collect(toSingleObject());
 
         Dump.dumpTableItems("NEW CODITIONS", consolidated._1());
         Dump.dumpTableItems("NEW ACTIONS", consolidated._2());
@@ -302,13 +307,13 @@ public class CollectorTest {
 
     @Test
     public void testGroupActions0(){
-        final List<List<String>> actions = MatrixBuilder.on(
+        final ObservableList<ObservableList<String>> actions = ObservableList2DBuilder.observable2DOf(
                 "X,X,X,X,X,X,-," +
                         "X,-,X,X,-,-,X," +
                         "-,-,-,-,X,-,-," +
                         "X,X,X,X,X,X,X").dim(4, 7).build();
 
-        final List<List<String>> conditions = MatrixBuilder.on(
+        final ObservableList<ObservableList<String>> conditions = ObservableList2DBuilder.observable2DOf(
                 "Y,Y,Y,Y,N,N,N," +
                         "Y,Y,N,N,Y,Y,N," +
                         "Y,N,Y,N,Y,N,Y"
@@ -318,9 +323,9 @@ public class CollectorTest {
         Dump.dumpTableItems("OLD CODITIONS", conditions);
         Dump.dumpTableItems("OLD ACTIONS", actions);
 
-        Tuple2<List<List<String>>, List<List<String>>> consolidated = Stream.of(Tuple.of(conditions, actions))
+        Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> consolidated = Stream.of(Tuple.of(conditions, actions))
                 .map(Operators.consolidateRules())
-                .collect(MoreCollectors.toSingleObject());
+                .collect(toSingleObject());
 
         Dump.dumpTableItems("NEW CODITIONS", consolidated._1());
         Dump.dumpTableItems("NEW ACTIONS", consolidated._2());
@@ -330,23 +335,23 @@ public class CollectorTest {
     @Test
     public void testConsolidateStrunz() {
 /*
-        final List<List<String>> conditions = MatrixBuilder.on(
+        final ObservableList<ObservableList<String>> conditions = ObservableList2DBuilder.ofList(
                  "Y,Y,Y,Y,Y,Y,N,"
                 +"Y,Y,Y,Y,N,N,Y,"
                 +"Y,Y,N,N,Y,N,N,"
                 +"Y,N,Y,N,Y,Y,Y").dim(4, 7).build();
 */
 
-        final List<List<String>> conditions = MatrixBuilder.on(
+        final ObservableList<ObservableList<String>> conditions = ObservableList2DBuilder.observable2DOf(
                           "Y,Y,Y,"
                         + "Y,N,N,"
                         + "Y,Y,N").dim(3, 3).build();
 
         Dump.dumpTableItems("OLD CODITIONS", conditions);
 
-        final List<List<String>> consolidated = Stream.of(conditions)
-                .map(Functions.consolidate())
-                .collect(MoreCollectors.toSingleObject());
+        final ObservableList<ObservableList<String>> consolidated = Stream.of(conditions)
+                //.map(Functions.consolidateObservableList2D())
+                .collect(toSingleObject());
 
         Dump.dumpTableItems("NEW CODITIONS", consolidated);
     }

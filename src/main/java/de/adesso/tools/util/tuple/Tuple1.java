@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Objects;
 
 /**
- * Created by mohler on 15.11.15.
+ * Created by mohler ofList 15.11.15.
  */
 public final class Tuple1<T1> implements Tuple, Comparable<Tuple1<T1>>, Serializable {
 

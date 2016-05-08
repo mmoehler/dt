@@ -22,7 +22,7 @@ package de.adesso.tools.common;
 import java.util.ArrayList;
 
 /**
- * Created by mmoehler on 19.03.16.
+ * Created by mmoehler ofList 19.03.16.
  */
 public class Column<T> extends ArrayList<T> {
 }

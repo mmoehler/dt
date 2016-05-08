@@ -1,7 +1,7 @@
 package de.adesso.tools.events;
 
 /**
- * Created by mmoehler on 28.02.16.
+ * Created by mmoehler ofList 28.02.16.
  */
 public class MoveConditionDeclDownEvent {
 }

@@ -40,7 +40,7 @@ import static de.adesso.tools.functions.DtFunctionsTestData.actionDeclTableViewB
 import static de.adesso.tools.functions.DtFunctionsTestData.conditionDeclTableViewBuilder;
 
 /**
- * Created by mmoehler on 03.04.16.
+ * Created by mmoehler ofList 03.04.16.
  */
 public class DTDataPacketTest {
     public final static JFXPanel fxPanel = new JFXPanel();
@@ -94,7 +94,7 @@ public class DTDataPacketTest {
         final ObservableList<ConditionDeclTableViewModel> conditionDeclarations = conditionDeclTab.getItems();
 
         final List<List<String>> inConditions = MatrixBuilder
-                .on("Y,Y,Y,-,-,N,N,N,-,-,-,N,Y,Y,N,N")
+                .matrixOf("Y,Y,Y,-,-,N,N,N,-,-,-,N,Y,Y,N,N")
                 .dim(4, 4)
                 .build();
         final ObservableList<ObservableList<String>> conditionDefinitions = Adapters.Matrix.adapt(inConditions);
@@ -108,7 +108,7 @@ public class DTDataPacketTest {
         final ObservableList<ActionDeclTableViewModel> actionDeclarations = actionDeclTab.getItems();
 
         final List<List<String>> inActions = MatrixBuilder
-                .on("-,-,-,-,X,X,X,-,X,-,-,X,-,X,X,-")
+                .matrixOf("-,-,-,-,X,X,X,-,X,-,-,X,-,X,X,-")
                 .dim(4, 4)
                 .build();
         final ObservableList<ObservableList<String>> actionDefinitions = Adapters.Matrix.adapt(inActions);

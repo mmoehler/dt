@@ -27,7 +27,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javax.annotation.Nonnull;
 
 /**
- * Created by moehler on 10.03.2016.
+ * Created by moehler ofList 10.03.2016.
  */
 
 /**

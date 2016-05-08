@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by mmoehler on 19.03.16.
+ * Created by mmoehler ofList 19.03.16.
  */
 public class StringListBuilder {
     public final static String pattern = "[; ,]";

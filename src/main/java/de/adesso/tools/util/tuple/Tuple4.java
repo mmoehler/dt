@@ -6,7 +6,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 
-public final class Tuple4<T1, T2, T3, T4> implements Tuple, Comparable<Tuple4<T1, T2, T3, T4>>, Serializable {
+public class Tuple4<T1, T2, T3, T4> implements Tuple, Comparable<Tuple4<T1, T2, T3, T4>>, Serializable {
 
     private static final long serialVersionUID = 1L;
 

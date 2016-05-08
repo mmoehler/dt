@@ -26,7 +26,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by mmoehler on 06.03.16.
+ * Created by mmoehler ofList 06.03.16.
  */
 class ListOfIndicatorSuppliersBuilder {
     List<PossibleIndicatorsSupplierBuilder> builders = new LinkedList<>();

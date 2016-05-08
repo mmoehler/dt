@@ -13,7 +13,7 @@ import java.util.stream.IntStream;
 /**
  * A List2D builder
  * A List2D builder
- * Created by mohler on 25.01.16.
+ * Created by mohler ofList 25.01.16.
  */
 public class MatrixBuilder {
     private String data;
@@ -38,15 +38,15 @@ public class MatrixBuilder {
         return new MatrixBuilder();
     }
 
-    public static MatrixBuilder on(@javax.annotation.Nonnull String data) {
+    public static MatrixBuilder matrixOf(@javax.annotation.Nonnull String data) {
         return new MatrixBuilder(data);
     }
 
-    public static MatrixBuilder on(@javax.annotation.Nonnull List<String> data) {
+    public static MatrixBuilder matrixOf(@javax.annotation.Nonnull List<String> data) {
         return new MatrixBuilder(data);
     }
 
-    public static MatrixBuilder on(@javax.annotation.Nonnull String[] data) {
+    public static MatrixBuilder matrixOf(@javax.annotation.Nonnull String[] data) {
         List<String> dataList = Arrays.stream(data).collect(Collectors.toList());
         return new MatrixBuilder(dataList);
     }

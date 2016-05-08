@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 /**
- * Created by mohler on 15.01.16.
+ * Created by mohler ofList 15.01.16.
  */
 @Singleton
 public class MenuViewModel implements ViewModel {

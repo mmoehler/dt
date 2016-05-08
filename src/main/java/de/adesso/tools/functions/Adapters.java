@@ -27,7 +27,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Created by mmoehler on 27.03.16.
+ * Created by mmoehler ofList 27.03.16.
  */
 public class Adapters {
 

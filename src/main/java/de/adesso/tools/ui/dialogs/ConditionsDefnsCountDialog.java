@@ -12,7 +12,7 @@ import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 
 /**
- * Created by mohler on 18.01.16.
+ * Created by mohler ofList 18.01.16.
  */
 public class ConditionsDefnsCountDialog extends Dialog<Tuple2<Integer, Boolean>> {
 

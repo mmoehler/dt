@@ -21,7 +21,7 @@ public class DialogHelper {
      *
      * @param openProperty the boolean property that defines whether the dialog should be shown or hidden. Set this property to
      *                     <code>true</code> to open the dialog. Set it to <code>false</code> to doClose the dialog. When the
-     *                     dialog is closed by the user by clicking on the doClose-button of the window, this property will also be
+     *                     dialog is closed by the user by clicking ofList the doClose-button of the window, this property will also be
      *                     set to <code>false</code> by the dialog.
      * @param parentStage  the Stage that is used as parent to initialize the ownership of the dialog. This way modal dialogs can
      *                     be created.
@@ -53,7 +53,7 @@ public class DialogHelper {
             }
         });
 
-        // when the user clicks on the doClose button of the dialog window
+        // when the user clicks ofList the doClose button of the dialog window
         // we want to set the property to false
         dialogStage.setOnCloseRequest(event -> openProperty.set(false));
     }

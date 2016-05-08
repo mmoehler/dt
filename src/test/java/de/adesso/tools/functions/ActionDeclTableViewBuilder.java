@@ -22,7 +22,7 @@ package de.adesso.tools.functions;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 
 /**
- * Created by mmoehler on 06.03.16.
+ * Created by mmoehler ofList 06.03.16.
  */
 public class ActionDeclTableViewBuilder extends TableViewBuilder<ActionDeclTableViewModel> {
 

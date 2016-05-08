@@ -19,10 +19,23 @@
 
 package de.adesso.tools.functions;
 
-import de.adesso.tools.ui.DeclarationTableViewModel;
+import javafx.collections.ObservableList;
+
+import java.util.Arrays;
+import java.util.function.UnaryOperator;
 
 /**
- * Created by mmoehler ofList 06.03.16.
+ * Created by mmoehler ofList 05.05.16.
  */
-abstract class DeclarationsTableViewBuilder<T extends DeclarationTableViewModel> extends TableViewBuilder<T> {
+public abstract class AbstractList2DOperator implements UnaryOperator<ObservableList<String>> {
+    protected final static int[] EMPTY_INT_ARRAY = {};
+    protected final int[] positions;
+
+    public AbstractList2DOperator(int pos) {
+        this.positions = new int[]{pos};
+    }
+
+    public AbstractList2DOperator(int...pos) {
+        this.positions = Arrays.copyOf(pos,pos.length);
+    }
 }

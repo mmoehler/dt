@@ -22,7 +22,7 @@ package de.adesso.tools.exception;
 import java.io.IOException;
 
 /**
- * Created by mmoehler on 02.04.16.
+ * Created by mmoehler ofList 02.04.16.
  */
 public final class IOExceptionSmuggler extends RuntimeException {
 

@@ -23,7 +23,7 @@ import de.adesso.tools.ui.PossibleIndicatorsSupplier;
 import javafx.beans.property.ReadOnlyStringWrapper;
 
 /**
- * Created by mmoehler on 06.03.16.
+ * Created by mmoehler ofList 06.03.16.
  */
 class PossibleIndicatorsSupplierBuilder {
     private String indicatorsString;

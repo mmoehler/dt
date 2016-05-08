@@ -3,7 +3,7 @@ package de.adesso.tools.util;
 import java.util.Locale;
 
 /**
- * Created by mohler on 07.02.16.
+ * Created by mohler ofList 07.02.16.
  */
 public final class OsCheck {
     // cached result of OS detection

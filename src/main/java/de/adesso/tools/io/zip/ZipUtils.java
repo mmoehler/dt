@@ -30,7 +30,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Created by mmoehler on 03.04.16.
+ * Created by mmoehler ofList 03.04.16.
  */
 public class ZipUtils {
 

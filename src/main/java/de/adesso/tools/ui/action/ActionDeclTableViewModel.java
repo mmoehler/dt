@@ -29,7 +29,7 @@ import static java.util.Arrays.asList;
 
 /**
  * The {@link ActionDeclTableViewModel} of the actions part of the decisionTable
- * Created by mohler on 16.01.16.
+ * Created by mohler ofList 16.01.16.
  */
 public class ActionDeclTableViewModel implements PossibleIndicatorsSupplier, DeclarationTableViewModel {
 

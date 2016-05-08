@@ -1,7 +1,7 @@
 package de.adesso.tools.ui;
 
 /**
- * Created by mohler on 23.01.16.
+ * Created by mohler ofList 23.01.16.
  */
 public enum Notifications {
 

@@ -25,7 +25,7 @@ import java.io.OutputStream;
 import java.util.List;
 
 /**
- * Created by mmoehler on 01.04.16.
+ * Created by mmoehler ofList 01.04.16.
  */
 public class Storer {
     public void store(List<List<String>> conditionDefns) {

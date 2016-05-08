@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
 import java.util.function.BinaryOperator;
 
 /**
- * Created by moehler on 29.03.2016.
+ * Created by moehler ofList 29.03.2016.
  */
 public class UnicodeTest {
 
@@ -55,7 +55,7 @@ public class UnicodeTest {
         MI(7,"\u002D"),
         RR(8,"\u0052"),
         CC(9,"\u0043");
-        // @formatter:on
+        // @formatter:ofList
 
         private final static ComparisonIndicatorConditions[][] JOIN_RULES_CONDITION = {
                 // @formatter:off
@@ -67,7 +67,7 @@ public class UnicodeTest {
                  {GT,XX,GT,NI},// GT
                  {XX,XX,XX,NI},// XX
                  {NI,NI,NI,NI},// NI
-                // @formatter:on
+                // @formatter:ofList
         };
 
         private final static ComparisonIndicatorConditions[][] JOIN_RULES_ACTIONS = {
@@ -76,7 +76,7 @@ public class UnicodeTest {
                 //------------------
                  {EQ,NE},// EQ
                  {NE,NE},// NE
-                // @formatter:on
+                // @formatter:ofList
         };
 
 

@@ -27,7 +27,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Created by mmoehler on 06.03.16.
+ * Created by mmoehler ofList 06.03.16.
  */
 class ActionDeclTableViewModelListBuilder implements Builder<List<ActionDeclTableViewModel>> {
 

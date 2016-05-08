@@ -26,7 +26,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 /**
- * Created by moehler on 06.04.2016.
+ * Created by moehler ofList 06.04.2016.
  */
 public final class Multimaps0 {
 

@@ -47,17 +47,17 @@ import static de.adesso.tools.functions.MatrixFunctions.transpose;
 import static java.util.stream.Collectors.toList;
 
 /**
- * Created by mmoehler on 20.03.16.
+ * Created by mmoehler ofList 20.03.16.
  */
 public class Functions {
     // @formatter::off
     private static final BiFunction<List<String>, List<String>, List<List<String>>>[] ACTIONS = new BiFunction[]{A1, A2, A3, A4, A5};
     private static final Function<List<Tuple2<String, String>>, Integer>[] CONDITIONS = new Function[]{B1, B2, B3, B4};
-    private static final List<List<String>> INTERNAL = MatrixBuilder.on("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
+    private static final List<List<String>> INTERNAL = MatrixBuilder.matrixOf("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
     private static Function<String, Integer> maskMatrixMapper = s -> (isDASH(s)) ? 0 : 1;
     private static final List<? extends List<Integer>> M = transpose(makeMaskMatrix(INTERNAL));
     private static Function<String, Integer> decisionMatrixMapper = s -> (isYES(s)) ? 1 : 0;
-    // @formatter::on
+    // @formatter::ofList
     private static final List<? extends List<Integer>> D = transpose(makeDecisionMatrix(INTERNAL));
 
 
@@ -111,7 +111,7 @@ public class Functions {
     }
 
     public static Function<List<List<String>>, List<List<String>>> consolidate() {
-        return new ConditionsConsolidateOperator0();
+        return new ConsolidateRules0();
     }
 
     private static List<Integer> logicalAnd(List<Integer> a, List<Integer> b) {
@@ -137,12 +137,12 @@ class RulesDifferenceOperator implements Function<List<List<String>>, List<List<
 
     @Override
     public List<List<String>> apply(List<List<String>> conditions) {
-        //final List<List<String>> rights = MatrixBuilder.on("Y,Y,N,N,Y,Y,Y,N,N,-,N,Y").dim(3,4).transposed().build();
+        //final List<List<String>> rights = MatrixBuilder.ofList("Y,Y,N,N,Y,Y,Y,N,N,-,N,Y").dim(3,4).transposed().build();
         List<List<String>> rights = transpose(conditions);
         String s[] = new String[conditions.size()];
         Arrays.fill(s, "-");
         String joined = String.join(",", s);
-        List<List<String>> tmp = MatrixBuilder.on(joined).dim(rights.size(), 1).transposed().build();
+        List<List<String>> tmp = MatrixBuilder.matrixOf(joined).dim(rights.size(), 1).transposed().build();
         final List<List<String>>[] lefts = new List[]{tmp};
         for (List<String> right : rights) {
             lefts[0] = lefts[0].stream()
@@ -154,11 +154,11 @@ class RulesDifferenceOperator implements Function<List<List<String>>, List<List<
     }
 }
 
-class ConditionsConsolidateOperator0 implements Function<List<List<String>>, List<List<String>>> {
+class ConsolidateRules0 implements Function<List<List<String>>, List<List<String>>> {
     public static final List<String> POSSIBLE_INDICATORS = Arrays.asList("Y", "N");
-    final static Logger LOGGER = LoggerFactory.getLogger(ConditionsConsolidateOperator0.class);
+    final static Logger LOGGER = LoggerFactory.getLogger(ConsolidateRules0.class);
 
-    public ConditionsConsolidateOperator0() {
+    public ConsolidateRules0() {
     }
 
     @Override

@@ -38,7 +38,7 @@ import static de.adesso.tools.functions.MatrixFunctions.transpose;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**
- * Created by moehler on 31.03.2016.
+ * Created by moehler ofList 31.03.2016.
  */
 @Singleton
 public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>, List<List<String>>, List<Indicator>>, StructuralAnalysis {

@@ -20,13 +20,14 @@
 package de.adesso.tools.analysis.structure;
 
 import de.adesso.tools.util.tuple.Tuple2;
+import javafx.collections.ObservableList;
 
 import java.util.List;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
 
 /**
- * Created by moehler on 31.03.2016.
+ * Created by moehler ofList 31.03.2016.
  */
 public final class Operators {
     private Operators() {
@@ -40,7 +41,8 @@ public final class Operators {
         return new ConditionComparisonOperator();
     }
 
-    public static Function<Tuple2<List<List<String>>, List<List<String>>>, Tuple2<List<List<String>>, List<List<String>>>> consolidateRules(){
+    public static Function<Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>>,
+            Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>>> consolidateRules(){
         return new RuleConsolidator();
     }
 

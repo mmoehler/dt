@@ -36,7 +36,7 @@ import java.util.stream.IntStream;
 import static com.google.common.base.Strings.repeat;
 
 /**
- * Created by mmoehler on 01.04.16.
+ * Created by mmoehler ofList 01.04.16.
  */
 @Singleton
 public class StructuralAnalysisResultEmitter implements BiFunction<List<Indicator>, Integer, Tuple3<String, Multimap<Integer, Integer>, Multimap<Integer, Integer>>> {

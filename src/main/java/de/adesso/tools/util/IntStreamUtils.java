@@ -3,7 +3,7 @@ package de.adesso.tools.util;
 import java.util.stream.IntStream;
 
 /**
- * Created by mmoehler on 21.02.16.
+ * Created by mmoehler ofList 21.02.16.
  */
 public final class IntStreamUtils {
     private IntStreamUtils() {

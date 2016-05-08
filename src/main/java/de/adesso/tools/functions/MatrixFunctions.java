@@ -12,7 +12,7 @@ import java.util.stream.IntStream;
 
 /**
  * All List2D relevant functions
- * Created by mmoehler on 13.02.16.
+ * Created by mmoehler ofList 13.02.16.
  */
 public final class MatrixFunctions {
 
@@ -36,6 +36,22 @@ public final class MatrixFunctions {
         }
         return transposedList;
     }
+
+    public static <T> ObservableList<ObservableList<T>> transposeObservableList2D(ObservableList<ObservableList<T>> table) {
+        if (null == table) throw new IllegalArgumentException("Table to transpose is null");
+        if (table.isEmpty()) return table;
+        ObservableList<ObservableList<T>> transposedList = FXCollections.observableArrayList();
+        final int firstListSize = table.get(0).size();
+        for (int i = 0; i < firstListSize; i++) {
+            ObservableList<T> tempList = FXCollections.observableArrayList();
+            for (List<T> row : table) {
+                tempList.add(row.get(i));
+            }
+            transposedList.add(tempList);
+        }
+        return transposedList;
+    }
+
 
     /**
      * Copies a nested {@code List}
@@ -139,6 +155,7 @@ public final class MatrixFunctions {
         return modifiedMatrix;
     }
 
+
     public static List<List<String>> replaceColumnsAt(List<List<String>> original, int index, List<String> newData) {
 
         List<List<String>> modifiedMatrix = FXCollections.observableArrayList();
@@ -199,4 +216,7 @@ public final class MatrixFunctions {
         copy.set(col2Idx, col1);
         return transpose(copy);
     }
+
+
+
 }

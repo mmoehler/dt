@@ -47,7 +47,7 @@ import static java.util.stream.Collectors.toList;
 
 /**
  * General Decisiontable Functions
- * Created by moehler on 11.01.2016.
+ * Created by moehler ofList 11.01.2016.
  */
 public final class DtFunctions {
 

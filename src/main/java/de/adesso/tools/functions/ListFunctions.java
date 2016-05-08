@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 
 /**
  * All additional List functions used in this program
- * Created by mmoehler on 20.02.16.
+ * Created by mmoehler ofList 20.02.16.
  */
 public class ListFunctions {
 

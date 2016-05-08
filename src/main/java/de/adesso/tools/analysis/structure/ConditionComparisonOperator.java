@@ -27,7 +27,7 @@ import java.util.function.BinaryOperator;
 import static de.adesso.tools.analysis.structure.Indicators.*;
 
 /**
- * Created by moehler on 31.03.2016.
+ * Created by moehler ofList 31.03.2016.
  */
 public class ConditionComparisonOperator implements BinaryOperator<Indicator> {
     private static final EnumSet<Indicators> INDICATORS = EnumSet.of(YY, NN, MI);

@@ -28,7 +28,7 @@ import java.util.function.BinaryOperator;
 import static de.adesso.tools.analysis.structure.Indicators.*;
 
 /**
- * Created by moehler on 31.03.2016.
+ * Created by moehler ofList 31.03.2016.
  */
 public class CombinationResultAccumulator implements BinaryOperator<Indicator> {
     private static final ImmutableTable<Indicator, Indicator, Indicator> RULES =

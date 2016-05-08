@@ -25,7 +25,7 @@ import com.sun.javafx.geom.Point2D;
 
 
 /**
- * Created by moehler on 11.03.2016.
+ * Created by moehler ofList 11.03.2016.
  */
 public class SampleOuterBuilder implements Builder<Line2D> {
 

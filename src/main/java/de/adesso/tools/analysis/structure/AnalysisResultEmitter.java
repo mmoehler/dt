@@ -29,7 +29,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 /**
- * Created by mmoehler on 02.04.16.
+ * Created by mmoehler ofList 02.04.16.
  */
 public interface AnalysisResultEmitter {
 

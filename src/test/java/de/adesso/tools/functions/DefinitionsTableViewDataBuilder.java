@@ -19,15 +19,15 @@
 
 package de.adesso.tools.functions;
 
+import de.adesso.tools.common.MatrixBuilder;
 import de.adesso.tools.functions.chainded.AbstractSubBuilder;
 import de.adesso.tools.functions.chainded.Callback;
 import javafx.collections.ObservableList;
 
 import static de.adesso.tools.common.MatrixBuilder.observable;
-import static de.adesso.tools.common.MatrixBuilder.on;
 
 /**
- * Created by mmoehler on 06.03.16.
+ * Created by mmoehler ofList 06.03.16.
  */
 class DefinitionsTableViewDataBuilder<C> extends AbstractSubBuilder<ObservableList<ObservableList<String>>, C> {
     private final int rows;
@@ -48,7 +48,7 @@ class DefinitionsTableViewDataBuilder<C> extends AbstractSubBuilder<ObservableLi
 
     @Override
     public ObservableList<ObservableList<String>> build() {
-        ObservableList<ObservableList<String>> tableViewData = observable(on(data).dim(rows, cols).build());
+        ObservableList<ObservableList<String>> tableViewData = observable(MatrixBuilder.matrixOf(data).dim(rows, cols).build());
         return tableViewData;
     }
 }

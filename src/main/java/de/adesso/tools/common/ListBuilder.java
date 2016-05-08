@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by moehler on 10.02.2016.
+ * Created by moehler ofList 10.02.2016.
  */
 public final class ListBuilder {
     private String data;
@@ -18,13 +18,13 @@ public final class ListBuilder {
         this.data = data;
     }
 
-    public static ListBuilder on(@javax.annotation.Nonnull String data) {
+    public static ListBuilder ofList(@javax.annotation.Nonnull String data) {
         return new ListBuilder(data);
     }
 
 
-    public static ListBuilder on(@javax.annotation.Nonnull int[] hints) {
-        throw new UnsupportedOperationException("ListBuilder on(@javax.annotation.Nonnull int[]");
+    public static ListBuilder ofList(@javax.annotation.Nonnull int[] hints) {
+        throw new UnsupportedOperationException("ListBuilder ofList(@javax.annotation.Nonnull int[]");
     }
 
     public static ListBuilder copy(@javax.annotation.Nonnull ListBuilder other) {

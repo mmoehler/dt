@@ -22,7 +22,7 @@ package de.adesso.tools.functions.chainded;
 import com.sun.javafx.geom.Line2D;
 
 /**
- * Created by moehler on 11.03.2016.
+ * Created by moehler ofList 11.03.2016.
  */
 public class SampleMain {
     public static void main(String[] args) {

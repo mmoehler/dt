@@ -28,7 +28,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.core.IsEqual.equalTo;
 
 /**
- * Created by mmoehler on 19.03.16.
+ * Created by mmoehler ofList 19.03.16.
  */
 public class ConditionsTest {
     @Test

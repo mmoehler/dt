@@ -30,7 +30,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 /**
- * Created by mmoehler on 03.04.16.
+ * Created by mmoehler ofList 03.04.16.
  */
 @Singleton
 public class ExceptionHandler {

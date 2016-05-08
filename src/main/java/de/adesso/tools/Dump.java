@@ -27,7 +27,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Created by mmoehler on 27.03.16.
+ * Created by mmoehler ofList 27.03.16.
  */
 public class Dump {
     public static <T> void dumpTableItems(String msg, List<List<T>> list2D) {
@@ -37,7 +37,7 @@ public class Dump {
     }
 
 
-    public static void dumpTableItems(String msg, ObservableList<ObservableList<String>> list2D) {
+    public static <T> void dumpTableItems(String msg, ObservableList<ObservableList<T>> list2D) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
         list2D.forEach(i -> System.out.println("\t" + i));
         System.out.println("<<<<<<<<<<\n");

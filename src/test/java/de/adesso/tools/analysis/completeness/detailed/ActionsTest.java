@@ -39,7 +39,7 @@ import static de.adesso.tools.functions.Adapters.Matrix.adapt;
 import static java.util.stream.Collectors.toList;
 
 /**
- * Created by mmoehler on 19.03.16.
+ * Created by mmoehler ofList 19.03.16.
  */
 public class ActionsTest {
     public static void dumpTableItems(String msg, List<List<String>> list2D) {
@@ -172,7 +172,7 @@ public class ActionsTest {
 
     @Test
     public void testA5Consolidate() {
-        ObservableList<ObservableList<String>> conditions = adapt(MatrixBuilder.on("N,N,Y,N,Y,N,-,Y,-").dim(3, 3).build());
+        ObservableList<ObservableList<String>> conditions = adapt(MatrixBuilder.matrixOf("N,N,Y,N,Y,N,-,Y,-").dim(3, 3).build());
         ObservableList<ObservableList<String>>[] observables = new ObservableList[]{conditions};
         /*
         for (int i = 0; i < conditions.size(); i++) {

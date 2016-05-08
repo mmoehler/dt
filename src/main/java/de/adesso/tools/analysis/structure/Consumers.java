@@ -20,7 +20,7 @@
 package de.adesso.tools.analysis.structure;
 
 /**
- * Created by mmoehler on 01.05.16.
+ * Created by mmoehler ofList 01.05.16.
  */
 public class Consumers {
 }

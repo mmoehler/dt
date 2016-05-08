@@ -32,7 +32,7 @@ import static java.lang.Math.max;
 import static java.lang.Math.min;
 
 /**
- * Created by mmoehler on 06.03.16.
+ * Created by mmoehler ofList 06.03.16.
  */
 public abstract class TableViewBuilder<S> implements Builder<TableView<S>> {
     protected TableView<S> tableView = new TableView<>(FXCollections.observableArrayList());

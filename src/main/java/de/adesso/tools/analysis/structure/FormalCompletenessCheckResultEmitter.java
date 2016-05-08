@@ -28,7 +28,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
- * Created by moehler on 06.04.2016.
+ * Created by moehler ofList 06.04.2016.
  */
 public class FormalCompletenessCheckResultEmitter implements Function<List<Indexed<List<String>>>, Tuple2<String, List<String>>> {
     private static String TPL2 = "RULE %04d NOT DEFINED %s";

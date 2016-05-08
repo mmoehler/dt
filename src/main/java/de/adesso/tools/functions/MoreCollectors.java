@@ -32,7 +32,7 @@ import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 /**
- * Created by mmoehler on 02.04.16.
+ * Created by mmoehler ofList 02.04.16.
  */
 public class MoreCollectors {
 

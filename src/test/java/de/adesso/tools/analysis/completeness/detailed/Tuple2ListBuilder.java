@@ -28,14 +28,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Created by mmoehler on 19.03.16.
+ * Created by mmoehler ofList 19.03.16.
  */
 class Tuple2ListBuilder {
     private final MatrixBuilder internalBulder;
 
 
     protected Tuple2ListBuilder(@Nonnull String data) {
-        this.internalBulder = MatrixBuilder.on(data);
+        this.internalBulder = MatrixBuilder.matrixOf(data);
     }
 
     @Nonnull

@@ -23,7 +23,7 @@ import java.util.Arrays;
 import java.util.Optional;
 
 /**
- * Created by moehler on 31.03.2016.
+ * Created by moehler ofList 31.03.2016.
  */
 public enum Indicators implements Indicator {
     // @formatter:off
@@ -39,7 +39,7 @@ public enum Indicators implements Indicator {
         MI("\u002D"),
         RR("\u0052"),
         CC("\u0043");
-    // @formatter:on
+    // @formatter:ofList
 
     private final String code;
 

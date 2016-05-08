@@ -7,7 +7,7 @@ import javafx.scene.control.TextInputDialog;
 import java.util.Optional;
 
 /**
- * Created by mohler on 18.01.16.
+ * Created by mohler ofList 18.01.16.
  */
 public final class Dialogs {
     private Dialogs() {

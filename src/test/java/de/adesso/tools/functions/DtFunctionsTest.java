@@ -19,14 +19,15 @@
 
 package de.adesso.tools.functions;
 
+import de.adesso.tools.Dump;
 import de.adesso.tools.common.ListBuilder;
-import de.adesso.tools.common.MatrixBuilder;
+import de.adesso.tools.common.ObservableList2DBuilder;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;
+import de.adesso.tools.ui.UpdateDefinitionTable;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.tools.util.matchers.Matchers;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.TableView;
@@ -40,21 +41,21 @@ import java.util.List;
 import java.util.OptionalInt;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
-import static de.adesso.tools.common.MatrixBuilder.observable;
-import static de.adesso.tools.common.MatrixBuilder.on;
-import static de.adesso.tools.functions.Adapters.Matrix.*;
 import static de.adesso.tools.functions.DtFunctions.*;
+import static de.adesso.tools.functions.DtFunctions.fullExpandConditions;
 import static de.adesso.tools.functions.DtFunctionsTestData.*;
-import static de.adesso.tools.functions.MatrixFunctions.insertColumnsAt;
+import static de.adesso.tools.functions.MoreCollectors.toObservableList;
+import static de.adesso.tools.functions.ObservableList2DFunctions.insertColumn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.testng.Assert.assertEquals;
+import static org.testng.Assert.assertTrue;
 
 /**
  * TEsts of the DtFunctions library
- * Created by moehler on 02.03.2016.
+ * Created by moehler ofList 02.03.2016.
  */
 public class DtFunctionsTest {
 
@@ -171,7 +172,9 @@ public class DtFunctionsTest {
                         "Y,Y,N,N,Y,Y,N,N,Y,Y,N,N,Y,Y,N,N," +
                         "Y,N,Y,N,Y,N,Y,N,Y,N,Y,N,Y,N,Y,N";
 
-        ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 16).build());
+        ObservableList<ObservableList<String>> expected = ObservableList2DBuilder.observable2DOf(matrixCode).dim(4, 16).build();
+
+        // TODO create function for fullexpand conditions!!
         ObservableList<ObservableList<String>> actual = fullExpandConditions(indicators);
 
         assertEquals(actual.size(), expected.size());
@@ -197,7 +200,7 @@ public class DtFunctionsTest {
                 "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
                         "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?";
 
-        ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 16).build());
+        ObservableList<ObservableList<String>> expected = ObservableList2DBuilder.observable2DOf(matrixCode).dim(4, 16).build();
         ObservableList<ObservableList<String>> actual = fullExpandActions(indicators, 16);
 
         assertEquals(actual.size(), expected.size());
@@ -227,7 +230,8 @@ public class DtFunctionsTest {
                         "Y,Y,N,N,Y,Y,N,N," +
                         "Y,N,Y,N,Y,N,Y,N";
 
-        ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 8).build());
+        ObservableList<ObservableList<String>> expected = ObservableList2DBuilder.observable2DOf(matrixCode).dim(4, 8).build();
+        // TODO create function for limited expand conditions
         ObservableList<ObservableList<String>> actual = limitedExpandConditions(indicators, 8);
 
         assertEquals(actual.size(), expected.size());
@@ -257,7 +261,7 @@ public class DtFunctionsTest {
                         "?,?,?,?,?,?,?,?," +
                         "?,?,?,?,?,?,?,?";
 
-        ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 8).build());
+        ObservableList<ObservableList<String>> expected = ObservableList2DBuilder.observable2DOf(matrixCode).dim(4, 8).build();
         ObservableList<ObservableList<String>> actual = limitedExpandConditions(indicators, 8, true);
 
         assertEquals(actual.size(), expected.size());
@@ -286,7 +290,7 @@ public class DtFunctionsTest {
                         "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?," +
                         "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?";
 
-        ObservableList<ObservableList<String>> expected = observable(MatrixBuilder.on(matrixCode).dim(4, 16).build());
+        ObservableList<ObservableList<String>> expected = ObservableList2DBuilder.observable2DOf(matrixCode).dim(4, 16).build();
         ObservableList<ObservableList<String>> actual = limitedExpandConditions(indicators, 32, true);
 
         assertEquals(actual.size(), expected.size());
@@ -326,6 +330,7 @@ public class DtFunctionsTest {
                 Arrays.asList("N", "N", "N", "Y"),
                 Arrays.asList("N", "N", "N", "N")
         );
+        // TODO create function for permutations!!
         List<List<String>> actual = permutations(original);
 
         assertEquals(actual.size(), expected.size());
@@ -356,40 +361,44 @@ public class DtFunctionsTest {
 
 
         final OptionalInt index = determineColumnIndex(conditionDefTab, actionDefTab, OptionalInt.empty());
+
+        assertTrue(index.isPresent());
+        assertEquals(index.getAsInt(),3);
+
         if (index.isPresent()) {
+            ObservableList<ObservableList<String>> tmp = conditionDefTab.getItems();
+            ObservableList<ObservableList<String>> oldConDefs = tmp.stream()
+                    .map(i -> i.stream().collect(toObservableList()))
+                    .collect(toObservableList());
+            ObservableList<ObservableList<String>> newConDefs = oldConDefs.stream()
+                    .map(insertColumn("?", index.getAsInt()))
+                    .collect(toObservableList());
+
+            tmp = actionDefTab.getItems();
+            ObservableList<ObservableList<String>> oldActDefs = tmp.stream()
+                    .map(i -> i.stream().collect(toObservableList()))
+                    .collect(toObservableList());
+            ObservableList<ObservableList<String>> newActDefs = oldActDefs.stream()
+                    .map(insertColumn("-", index.getAsInt()))
+                    .collect(toObservableList());
+
+            Dump.dumpTableItems("Conditions", newConDefs);
+            Dump.dumpTableItems("Actions", newActDefs);
+
+            Stream.of(newConDefs).forEach(new UpdateDefinitionTable(conditionDefTab));
+            Stream.of(newActDefs).forEach(new UpdateDefinitionTable(actionDefTab));
+
+            Dump.dumpTableItems("Conditions", conditionDefTab.getItems());
+            Dump.dumpTableItems("Actions", actionDefTab.getItems());
 
 
-            int newCols = conditionDefTab.getColumns().size() + 1;
-            conditionDefTab.getColumns().clear();
-            actionDefTab.getColumns().clear();
-
-            IntStream.range(0, newCols).forEach(i -> {
-                conditionDefTab.getColumns().add(createTableColumn(i));
-                actionDefTab.getColumns().add(createTableColumn(i));
-            });
-
-            List<List<String>> oldConDefs = adapt(conditionDefTab.getItems());
-            List<List<String>> oldActDefs = adapt(actionDefTab.getItems());
-
-            final List<List<String>> newConDefs =
-                    insertColumnsAt(oldConDefs, index.getAsInt(), QMARK_SUPPLIER);
-            final List<List<String>> newActDefs =
-                    insertColumnsAt(oldActDefs, index.getAsInt(), DASH_SUPPLIER);
-
-            oldConDefs.clear();
-            newConDefs.stream().map(FXCollections::observableArrayList).forEach(oldConDefs::add);
-            oldActDefs.clear();
-            newActDefs.stream().map(FXCollections::observableArrayList).forEach(oldActDefs::add);
-
-            conditionDefTab.refresh();
-            actionDefTab.refresh();
         }
 
 
-        ObservableList<ObservableList<String>> expConditionDef = observable(on("Y,Y,N,?,N,Y,N,Y,?,N").dim(2, 5).build());
+        ObservableList<ObservableList<String>> expConditionDef = ObservableList2DBuilder.observable2DOf("Y,Y,N,?,N,Y,N,Y,?,N").dim(2, 5).build();
         assertEquals(conditionDefTab.getItems(), expConditionDef);
 
-        ObservableList<ObservableList<String>> expActionDef = observable(on("X,X,X,-,X,X,X,X,-,X").dim(2, 5).build());
+        ObservableList<ObservableList<String>> expActionDef = ObservableList2DBuilder.observable2DOf("X,X,X,-,X,X,X,X,-,X").dim(2, 5).build();
         assertEquals(actionDefTab.getItems(), expActionDef);
     }
 
@@ -415,12 +424,12 @@ public class DtFunctionsTest {
         dumpTableItems("Conditions after", conditionDefTab);
         dumpTableItems("Actions after", actionDefTab);
 
-        ObservableList<ObservableList<String>> expConditionDef = observable(on(
+        ObservableList<ObservableList<String>> expConditionDef = ObservableList2DBuilder.observable2DOf(
                 "Y,Y,N," +
-                        "Y,N,N").dim(2, 3).build());
+                        "Y,N,N").dim(2, 3).build();
         assertEquals(conditionDefTab.getItems(), expConditionDef);
 
-        ObservableList<ObservableList<String>> expActionDef = observable(on("X,X,X,X,X,X").dim(2, 3).build());
+        ObservableList<ObservableList<String>> expActionDef = ObservableList2DBuilder.observable2DOf("X,X,X,X,X,X").dim(2, 3).build();
         assertEquals(actionDefTab.getItems(), expActionDef);
     }
 
@@ -447,10 +456,10 @@ public class DtFunctionsTest {
         dumpTableItems("Conditions after", conditionDefTab);
         dumpTableItems("Actions after", actionDefTab);
 
-        ObservableList<ObservableList<String>> expConditionDef = observable(on("Y,N,Y,Y,Y,N,Y,Y").dim(2, 4).build());
+        ObservableList<ObservableList<String>> expConditionDef = ObservableList2DBuilder.observable2DOf("Y,N,Y,Y,Y,N,Y,Y").dim(2, 4).build();
         assertEquals(conditionDefTab.getItems(), expConditionDef);
 
-        ObservableList<ObservableList<String>> expActionDef = observable(on("X,,X,X,X,,X,X").dim(2, 4).build());
+        ObservableList<ObservableList<String>> expActionDef = ObservableList2DBuilder.observable2DOf("X,,X,X,X,,X,X").dim(2, 4).build();
         assertEquals(actionDefTab.getItems(), expActionDef);
 
     }
@@ -602,7 +611,7 @@ public class DtFunctionsTest {
                 .build();
         dumpTableItems("DEFN BEFORE", conditionDefTab);
 
-        List<String> rplcol = ListBuilder.on("-,-,-").build();
+        List<String> rplcol = ListBuilder.ofList("-,-,-").build();
 
         doReplaceRuleConditions(conditionDefTab.getItems(),OptionalInt.of(2),rplcol);
 

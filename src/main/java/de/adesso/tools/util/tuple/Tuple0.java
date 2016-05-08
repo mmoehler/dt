@@ -55,7 +55,7 @@ public final class Tuple0 implements Tuple, Comparable<Tuple0>, Serializable {
     /**
      * Transforms this tuple to an arbitrary object (which may be also a tuple of same or different arity).
      *
-     * @param f   Transformation which creates a new object of type U based on this tuple's contents.
+     * @param f   Transformation which creates a new object of type U based ofList this tuple's contents.
      * @param <U> New type
      * @return An object of type U
      * @throws NullPointerException if {@code f} is null
