@@ -19,12 +19,19 @@
 
 package de.adesso.tools.analysis.completeness.detailed;
 
+import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import de.adesso.tools.common.ObservableList2DBuilder;
+import javafx.collections.ObservableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+
+import static de.adesso.tools.analysis.completeness.detailed.ConsolidateRules.consolidateRules;
 
 /**
  * Created by mmoehler on 08.05.16.
@@ -33,12 +40,19 @@ public class ConsolidateRulesTest {
 
     @Test
     public void testApply() throws Exception {
-
+        ObservableList2DBuilder input = ObservableList2DBuilder.observable2DOf("Y,Y,N,N,N,Y").dim(2, 3);
+        final ObservableList<ObservableList<String>> actual = consolidateRules().apply(input.build());
+        System.out.println("actual = " + actual);
     }
 
     @Test
     public void testDetermineCountOfDuplicateRules() throws Exception {
-
+        ObservableList2DBuilder input = ObservableList2DBuilder.observable2DOf("Y,-,N,N,Y,-,N,N").dim(4, 2);
+        Map<List<String>,List<Integer>> expected = Maps.newHashMap();
+        expected.put(Lists.newArrayList("Y","-"), Lists.newArrayList(0,2));
+        expected.put(Lists.newArrayList("N","N"), Lists.newArrayList(1,3));
+        final LinkedListMultimap<List<String>, Integer> actual = ConsolidateRules.determineCountOfDuplicateRules(input.build());
+        Assert.assertEquals(actual.asMap(),expected);
     }
 
     @Test
@@ -60,6 +74,20 @@ public class ConsolidateRulesTest {
 
     @Test
     public void testUpdateRowsWithAllPossibleIndicators() throws Exception {
+
+    }
+
+    @Test
+    public void testConsolidateRules() throws Exception {
+
+    }
+
+    @Test
+    public void testCleanupConditions() throws Exception {
+        ObservableList2DBuilder input = ObservableList2DBuilder.observable2DOf("Y,Y,N,N,Y,N,Y,N").dim(2, 4);
+        final ObservableList<ObservableList<String>> actual =
+                consolidateRules().cleanupConditions(input.build(),0, Collections.emptyList());
+        System.out.println("actual = " + actual);
 
     }
 }

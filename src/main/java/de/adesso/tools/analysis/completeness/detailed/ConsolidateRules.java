@@ -56,6 +56,8 @@ public class ConsolidateRules implements Function<ObservableList<ObservableList<
 
         List<Boolean> indicatorsComplete = rowsWithAllPossibleIndicators(conditions);
 
+        System.out.println("indicatorsComplete = " + indicatorsComplete);
+
         ObservableList<ObservableList<String>> copy = conditions.stream()
                 .map(l -> l.stream()
                         .collect(toObservableList()))
@@ -104,6 +106,7 @@ public class ConsolidateRules implements Function<ObservableList<ObservableList<
                 }
             }
         }
+        Dump.dumpTableItems("004 (consolidated)", _copy[0]);
         return (_copy[0]);
     }
 
@@ -115,14 +118,16 @@ public class ConsolidateRules implements Function<ObservableList<ObservableList<
                 .collect(toObservableList());
         final ObservableList<ObservableList<String>>[] conditionRows = new ObservableList[]{r};
 
+        if(!indicesOfDashedIndicators.isEmpty()) {
 
-        conditionRows[0] = indicesOfDashedIndicators.stream()
-                .sorted((a, b) -> b - a)
-                .map(i -> conditionRows[0].stream()
-                        .filter(k -> !k.equals(conditionRows[0].get(i)))
-                        .collect(toSingleObject()))
-                .collect(toObservableList());
+            conditionRows[0] = indicesOfDashedIndicators.stream()
+                    .sorted((a, b) -> b - a)
+                    .map(i -> conditionRows[0].stream()
+                            .filter(k -> !k.equals(conditionRows[0].get(i)))
+                            .collect(toSingleObject()))
+                    .collect(toObservableList());
 
+        }
 /*
         for (int ii : indicesOfDashedIndicators) {
             conditionRows = removeColumnsAt(conditionRows, ii);
