@@ -17,13 +17,15 @@
  * under the License.
  */
 
-package de.adesso.tools.functions.chainded;
+package de.adesso.tools.functions.chained.second;
 
 /**
- * Created by mmoehler ofList 11.03.16.
+ * Created by moehler on 11.05.2016.
  */
-interface SubBuilder<R, C> extends Builder<R> {
-    C getCaller();
+public class Child22 extends Model {
+    public Child22(String name) {
+        super(name);
+    }
 
-    Callback<R> getCallback();
+
 }

@@ -17,30 +17,24 @@
  * under the License.
  */
 
-package de.adesso.tools.functions.chainded;
-
-import com.sun.javafx.geom.Point2D;
+package de.adesso.tools.functions.chained.third;
 
 /**
- * Created by moehler ofList 11.03.2016.
+ * Created by moehler on 12.05.2016.
  */
-public class SampleInnerBuilder<C> extends AbstractSubBuilder<Point2D, C> {
-    private final float x;
-    private float y;
+public abstract class AbstractNestable<P,O> implements Nestable<P,O> {
 
-    public SampleInnerBuilder(float value, C caller, Callback<Point2D> callback) {
-        super(caller, callback);
-        this.x = value;
-    }
+    private final P parent;
+    private final Callback<P,O> callback;
 
-    public C y(float val) {
-        this.y = val;
-        getCallback().call(this.build());
-        return getCaller();
+    public AbstractNestable(P parent, Callback<P, O> callback) {
+        this.parent = parent;
+        this.callback = callback;
     }
 
     @Override
-    public Point2D build() {
-        return new Point2D(x, y);
+    public P done() {
+        callback.call(this.build());
+        return parent;
     }
 }

@@ -17,28 +17,31 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.chained.first;
 
-import de.adesso.tools.functions.chained.first.Builder;
-import de.adesso.tools.model.ActionDecl;
-import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 
-import java.util.ArrayList;
-import java.util.List;
+import com.sun.javafx.geom.Line2D;
+import com.sun.javafx.geom.Point2D;
+
 
 /**
- * Created by mmoehler ofList 06.03.16.
+ * Created by moehler ofList 11.03.2016.
  */
-class ActionDeclTableViewModelListBuilder implements Builder<List<ActionDeclTableViewModel>> {
+public class SampleOuterBuilder implements Builder<Line2D> {
 
-    private final List<ActionDeclTableViewModel> list = new ArrayList<>();
+    Point2D start;
+    Point2D end;
 
-    public ActionDeclBuilder<ActionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
-        return new ActionDeclBuilder<>(number, this, (ActionDecl a) -> list.add(new ActionDeclTableViewModel(a)));
+    public SampleInnerBuilder<SampleOuterBuilder> startPointX(float number) {
+        return new SampleInnerBuilder<>(number, this, (p) -> start = p);
+    }
+
+    public SampleInnerBuilder<SampleOuterBuilder> endPointX(float number) {
+        return new SampleInnerBuilder<>(number, this, (p) -> end = p);
     }
 
     @Override
-    public List<ActionDeclTableViewModel> build() {
-        return new ArrayList<>(list);
+    public Line2D build() {
+        return new Line2D(start, end);
     }
 }

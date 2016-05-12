@@ -17,28 +17,35 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.chained.second;
 
-import de.adesso.tools.functions.chained.first.Builder;
-import de.adesso.tools.model.ActionDecl;
-import de.adesso.tools.ui.action.ActionDeclTableViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.UUID;
 
 /**
- * Created by mmoehler ofList 06.03.16.
+ * Created by moehler on 11.05.2016.
  */
-class ActionDeclTableViewModelListBuilder implements Builder<List<ActionDeclTableViewModel>> {
+public abstract class Model {
+    final public String name;
+    final public String oid;
 
-    private final List<ActionDeclTableViewModel> list = new ArrayList<>();
+    public Model(String name) {
+        this.name = name;
+        this.oid = String.valueOf(UUID.randomUUID());
+    }
 
-    public ActionDeclBuilder<ActionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
-        return new ActionDeclBuilder<>(number, this, (ActionDecl a) -> list.add(new ActionDeclTableViewModel(a)));
+    public String getName() {
+        return name;
+    }
+
+    public String getOid() {
+        return oid;
     }
 
     @Override
-    public List<ActionDeclTableViewModel> build() {
-        return new ArrayList<>(list);
+    public String toString() {
+        return getClass().getSimpleName()+"{" +
+                "name='" + name + '\'' +
+                ", oid='" + oid + '\'' +
+                '}';
     }
 }

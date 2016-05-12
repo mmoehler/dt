@@ -17,27 +17,20 @@
  * under the License.
  */
 
-package de.adesso.tools.functions.chainded;
+package de.adesso.tools.functions.chained.second;
 
 /**
- * Created by mmoehler ofList 11.03.16.
+ * Created by moehler on 12.05.2016.
  */
-public abstract class AbstractSubBuilder<R, C> implements SubBuilder<R, C> {
-    protected final C caller;
-    protected final Callback<R> callback;
+public class Main {
+    public static void main(String[] args) {
+        final Root root = Root.newBuilder()
+                .withName("100")
+                .withChild10().withName("110").done()
+                .withChild20().withName("120").done()
+                .build();
 
-    public AbstractSubBuilder(C caller, Callback<R> callback) {
-        this.callback = callback;
-        this.caller = caller;
+        System.out.println("root = " + root);
     }
 
-    @Override
-    public C getCaller() {
-        return this.caller;
-    }
-
-    @Override
-    public Callback<R> getCallback() {
-        return this.callback;
-    }
 }

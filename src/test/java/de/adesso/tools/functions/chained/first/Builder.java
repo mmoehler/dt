@@ -17,12 +17,11 @@
  * under the License.
  */
 
-package de.adesso.tools.functions.chainded;
+package de.adesso.tools.functions.chained.first;
 
 /**
  * Created by moehler ofList 11.03.2016.
  */
-@FunctionalInterface
-public interface Callback<O> {
-    void call(O o);
+public interface Builder<T> {
+    T build();
 }

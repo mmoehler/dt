@@ -106,7 +106,7 @@ public class RuleConsolidator implements Function<Tuple2<ObservableList<Observab
                 ObservableList<ObservableList<String>> originalConditions = tuple._1();
             Dump.dumpTableItems("_1", originalConditions);
                 ObservableList<ObservableList<String>> originalActions = tuple._2();
-            Dump.dumpTableItems("_1", originalActions);
+            Dump.dumpTableItems("_2", originalActions);
                 ObservableList<ObservableList<ObservableList<String>>> consolidatedConditions = tuple._3();
             Dump.dumpTableItems("_3", consolidatedConditions);
                 ObservableList<ObservableList<Integer>> indicesOfConsolidationsConditions = tuple._4();
@@ -153,6 +153,10 @@ public class RuleConsolidator implements Function<Tuple2<ObservableList<Observab
                 _originalConditions[0].forEach(originalConditions::add);
                 originalActions.clear();
                 _originalActions[0].forEach(originalActions::add);
+
+            Dump.dumpTableItems("_10", originalConditions);
+            Dump.dumpTableItems("_11", originalActions);
+
                 return Tuple.of(_originalConditions[0],_originalActions[0]);
             };
     }

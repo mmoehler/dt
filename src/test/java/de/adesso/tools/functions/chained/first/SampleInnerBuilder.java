@@ -17,28 +17,30 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.chained.first;
 
-import de.adesso.tools.functions.chained.first.Builder;
-import de.adesso.tools.model.ActionDecl;
-import de.adesso.tools.ui.action.ActionDeclTableViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.sun.javafx.geom.Point2D;
 
 /**
- * Created by mmoehler ofList 06.03.16.
+ * Created by moehler ofList 11.03.2016.
  */
-class ActionDeclTableViewModelListBuilder implements Builder<List<ActionDeclTableViewModel>> {
+public class SampleInnerBuilder<C> extends AbstractSubBuilder<Point2D, C> {
+    private final float x;
+    private float y;
 
-    private final List<ActionDeclTableViewModel> list = new ArrayList<>();
+    public SampleInnerBuilder(float value, C caller, Callback<Point2D> callback) {
+        super(caller, callback);
+        this.x = value;
+    }
 
-    public ActionDeclBuilder<ActionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
-        return new ActionDeclBuilder<>(number, this, (ActionDecl a) -> list.add(new ActionDeclTableViewModel(a)));
+    public C y(float val) {
+        this.y = val;
+        getCallback().call(this.build());
+        return getCaller();
     }
 
     @Override
-    public List<ActionDeclTableViewModel> build() {
-        return new ArrayList<>(list);
+    public Point2D build() {
+        return new Point2D(x, y);
     }
 }

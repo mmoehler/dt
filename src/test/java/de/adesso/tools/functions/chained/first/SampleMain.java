@@ -17,28 +17,26 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.chained.first;
 
-import de.adesso.tools.functions.chained.first.Builder;
-import de.adesso.tools.model.ActionDecl;
-import de.adesso.tools.ui.action.ActionDeclTableViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
+import com.sun.javafx.geom.Line2D;
 
 /**
- * Created by mmoehler ofList 06.03.16.
+ * Created by moehler ofList 11.03.2016.
  */
-class ActionDeclTableViewModelListBuilder implements Builder<List<ActionDeclTableViewModel>> {
-
-    private final List<ActionDeclTableViewModel> list = new ArrayList<>();
-
-    public ActionDeclBuilder<ActionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
-        return new ActionDeclBuilder<>(number, this, (ActionDecl a) -> list.add(new ActionDeclTableViewModel(a)));
+public class SampleMain {
+    public static void main(String[] args) {
+        Line2D line = new SampleOuterBuilder()
+                .startPointX(12.00f).y(12.00f)
+                .endPointX(24.00f).y(24.00f)
+                .build();
+        line2DAsString(line);
     }
 
-    @Override
-    public List<ActionDeclTableViewModel> build() {
-        return new ArrayList<>(list);
+    public static void line2DAsString(Line2D l) {
+        final String s = String.format("[%f;%f] -> [%f;%f]", l.x1, l.y1, l.x2, l.y2);
+        System.out.println(s);
     }
+
+
 }

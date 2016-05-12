@@ -19,7 +19,7 @@
 
 package de.adesso.tools.functions;
 
-import de.adesso.tools.functions.chainded.Builder;
+import de.adesso.tools.functions.chained.first.Builder;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 

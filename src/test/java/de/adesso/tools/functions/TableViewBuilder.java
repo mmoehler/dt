@@ -19,7 +19,7 @@
 
 package de.adesso.tools.functions;
 
-import de.adesso.tools.functions.chainded.Builder;
+import de.adesso.tools.functions.chained.first.Builder;
 import javafx.collections.FXCollections;
 import javafx.scene.control.SelectionMode;
 import javafx.scene.control.TableColumn;

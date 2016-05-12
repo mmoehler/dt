@@ -17,26 +17,12 @@
  * under the License.
  */
 
-package de.adesso.tools.functions.chainded;
-
-import com.sun.javafx.geom.Line2D;
+package de.adesso.tools.functions.chained.third;
 
 /**
- * Created by moehler ofList 11.03.2016.
+ * Created by moehler on 12.05.2016.
  */
-public class SampleMain {
-    public static void main(String[] args) {
-        Line2D line = new SampleOuterBuilder()
-                .startPointX(12.00f).y(12.00f)
-                .endPointX(24.00f).y(24.00f)
-                .build();
-        line2DAsString(line);
-    }
-
-    public static void line2DAsString(Line2D l) {
-        final String s = String.format("[%f;%f] -> [%f;%f]", l.x1, l.y1, l.x2, l.y2);
-        System.out.println(s);
-    }
-
-
+public interface Nestable<P,O> {
+    public P done();
+    public O build();
 }

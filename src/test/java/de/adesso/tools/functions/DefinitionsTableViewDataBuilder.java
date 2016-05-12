@@ -20,8 +20,8 @@
 package de.adesso.tools.functions;
 
 import de.adesso.tools.common.MatrixBuilder;
-import de.adesso.tools.functions.chainded.AbstractSubBuilder;
-import de.adesso.tools.functions.chainded.Callback;
+import de.adesso.tools.functions.chained.first.AbstractSubBuilder;
+import de.adesso.tools.functions.chained.first.Callback;
 import javafx.collections.ObservableList;
 
 import static de.adesso.tools.common.MatrixBuilder.observable;

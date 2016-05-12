@@ -17,28 +17,12 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
-
-import de.adesso.tools.functions.chained.first.Builder;
-import de.adesso.tools.model.ActionDecl;
-import de.adesso.tools.ui.action.ActionDeclTableViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
+package de.adesso.tools.functions.chained.first;
 
 /**
- * Created by mmoehler ofList 06.03.16.
+ * Created by moehler ofList 11.03.2016.
  */
-class ActionDeclTableViewModelListBuilder implements Builder<List<ActionDeclTableViewModel>> {
-
-    private final List<ActionDeclTableViewModel> list = new ArrayList<>();
-
-    public ActionDeclBuilder<ActionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
-        return new ActionDeclBuilder<>(number, this, (ActionDecl a) -> list.add(new ActionDeclTableViewModel(a)));
-    }
-
-    @Override
-    public List<ActionDeclTableViewModel> build() {
-        return new ArrayList<>(list);
-    }
+@FunctionalInterface
+public interface Callback<O> {
+    void call(O o);
 }

@@ -19,8 +19,8 @@
 
 package de.adesso.tools.functions;
 
-import de.adesso.tools.functions.chainded.AbstractSubBuilder;
-import de.adesso.tools.functions.chainded.Callback;
+import de.adesso.tools.functions.chained.first.AbstractSubBuilder;
+import de.adesso.tools.functions.chained.first.Callback;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.cell.PropertyValueFactory;
 

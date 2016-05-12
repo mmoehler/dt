@@ -17,11 +17,30 @@
  * under the License.
  */
 
-package de.adesso.tools.functions.chainded;
+package de.adesso.tools.functions.chained.third;
 
 /**
- * Created by moehler ofList 11.03.2016.
+ * Created by moehler on 12.05.2016.
  */
-public interface Builder<T> {
-    T build();
+public class Main {
+    public static void main(String[] args) {
+        final Root300 root = Root300.newBuilder()
+                .withName("100")
+                .withChild310()
+                    .withName("110")
+                .done()
+                .withChild320()
+                    .withName("120")
+                .done()
+                .build();
+
+        System.out.println("root = " + root);
+
+        final Child320 child320 = Child320.newBuilder()
+                .withName("KNUDEL")
+                .build();
+
+        System.out.println("child320 = " + child320);
+
+    }
 }
