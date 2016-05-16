@@ -2,55 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b2d1880-d391-4d61-bb7f-0c8e21880d82" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ColumnDifference.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/RulesDifferenceOperator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/AbstractObservableList2DOperator.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/RuleConsolidatorTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ConsolidateRules.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ConsolidateConditions.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/MatrixBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/List2DBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MatrixFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/List2DFunctions.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ConsolidateRulesTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ConsolidateConditionsTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ActionDeclBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/ActionDeclBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ActionDeclTableViewBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/ActionDeclTableViewBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ActionDeclTableViewModelListBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/ActionDeclTableViewModelListBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ConditionDeclBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/ConditionDeclBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ConditionDeclTableViewBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/ConditionDeclTableViewBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ConditionDeclTableViewModelListBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/ConditionDeclTableViewModelListBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DeclarationsTableViewBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/DeclarationsTableViewBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DefinitionsTableViewBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/DefinitionsTableViewBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DefinitionsTableViewDataBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/DefinitionsTableViewDataBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DtFunctionsTestData.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/DtFunctionsTestData.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ListOfIndicatorSuppliersBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/ListOfIndicatorSuppliersBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/MatrixFunctionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/List2DFunctionsTest.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/PossibleIndicatorsSupplierBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/PossibleIndicatorsSupplierBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/TableColumnBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/TableColumnBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/TableViewBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/TableViewBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/mmoehler.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/mmoehler.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ConditionDetailedCompletenessCheck.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ConditionDetailedCompletenessCheck.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Functions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Functions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/simple/ConditionSimpleCompletenessCheck.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/simple/ConditionSimpleCompletenessCheck.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DefaultStructuralAnalysis.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DefaultStructuralAnalysis.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DuplicateRulesRejector.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DuplicateRulesRejector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/RuleConsolidator.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/RuleConsolidator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/ListBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/ListBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/ObservableList2DBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/ObservableList2DBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/AbstractList2DOperator.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/AbstractList2DOperator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/ObservableList2DFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/ObservableList2DFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/UpdateDefinitionTable.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/UpdateDefinitionTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/MissingConditions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/MissingConditions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ActionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ActionsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/FunctionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/FunctionsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/Tuple2ListBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/Tuple2ListBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/CollectorTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/CollectorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DtFunctionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DtFunctionsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ObservableList2DFunctionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ObservableList2DFunctionsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/io/DTDataPacketTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/io/DTDataPacketTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/io/StorerTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/io/StorerTest.java" />
     </list>
     <ignored path="dt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -1823,7 +1775,7 @@
       <workItem from="1462112317070" duration="102000" />
       <workItem from="1462367064108" duration="61480000" />
       <workItem from="1463131895195" duration="27000" />
-      <workItem from="1463131970730" duration="38451000" />
+      <workItem from="1463131970730" duration="39806000" />
     </task>
     <task id="LOCAL-00001" summary="Refactoring of Matrix functions">
       <created>1455475453269</created>
@@ -1981,7 +1933,13 @@
       <option name="project" value="LOCAL" />
       <updated>1462728966554</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="General Refactoring for konsequent use of java8 features">
+      <created>1463387914126</created>
+      <option name="number" value="00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1463387914126</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2017,7 +1975,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="674087000" />
+    <option name="totallyTimeSpent" value="675442000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2030,7 +1988,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="977" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -2494,10 +2452,10 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="31" column="7" selection-start-line="31" selection-start-column="7" selection-end-line="31" selection-end-column="7" />
           <folding>
-            <element signature="e#1345#1346#0" expanded="true" />
-            <element signature="e#1368#1369#0" expanded="true" />
-            <element signature="e#1688#1689#0" expanded="true" />
-            <element signature="e#1715#1716#0" expanded="true" />
+            <element signature="e#1345#1346#0" expanded="false" />
+            <element signature="e#1368#1369#0" expanded="false" />
+            <element signature="e#1688#1689#0" expanded="false" />
+            <element signature="e#1715#1716#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -2515,8 +2473,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="29" column="7" selection-start-line="29" selection-start-column="7" selection-end-line="29" selection-end-column="7" />
           <folding>
-            <element signature="e#1530#1531#0" expanded="true" />
-            <element signature="e#1566#1567#0" expanded="true" />
+            <element signature="e#1530#1531#0" expanded="false" />
+            <element signature="e#1566#1567#0" expanded="false" />
           </folding>
         </state>
       </provider>
