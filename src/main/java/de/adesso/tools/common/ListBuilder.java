@@ -40,9 +40,9 @@ public final class ListBuilder {
     }
 
     /**
-     * Returns a {@code MatrixBuilder} built from the parameters previously set.
+     * Returns a {@code List2DBuilder} built from the parameters previously set.
      *
-     * @return a {@code MatrixBuilder} built with parameters of this {@code MatrixBuilder.Builder}
+     * @return a {@code List2DBuilder} built with parameters of this {@code List2DBuilder.Builder}
      */
     @javax.annotation.Nonnull
     public List<String> build() {

@@ -17,21 +17,21 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.fixtures;
 
-import de.adesso.tools.ui.action.ActionDeclTableViewModel;
+import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 
 /**
  * Created by mmoehler ofList 06.03.16.
  */
-public class ActionDeclTableViewBuilder extends TableViewBuilder<ActionDeclTableViewModel> {
+public class ConditionDeclTableViewBuilder extends TableViewBuilder<ConditionDeclTableViewModel> {
 
-    public ActionDeclTableViewBuilder() {
+    public ConditionDeclTableViewBuilder() {
     }
 
-    public ActionDeclBuilder<ActionDeclTableViewBuilder> addModelWithLfdNbr(String number) {
-        return new ActionDeclBuilder<>(number, this,
-                (c) -> tableView.getItems().add(new ActionDeclTableViewModel(c)));
+    public ConditionDeclBuilder<ConditionDeclTableViewBuilder> addModelWithLfdNbr(String number) {
+        return new ConditionDeclBuilder<>(number, this,
+                (c) -> tableView.getItems().add(new ConditionDeclTableViewModel(c)));
     }
 
     @Override

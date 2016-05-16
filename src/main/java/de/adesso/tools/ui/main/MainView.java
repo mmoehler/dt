@@ -19,7 +19,6 @@
 
 package de.adesso.tools.ui.main;
 
-import de.adesso.tools.Dump;
 import de.adesso.tools.exception.ExceptionHandler;
 import de.adesso.tools.functions.DtFunctions;
 import de.adesso.tools.model.ActionDecl;
@@ -171,15 +170,9 @@ public class MainView implements FxmlView<MainViewModel> {
             ObservableList<ObservableList<String>> conditions = conditionDefinitionsTable.getItems();
             ObservableList<ObservableList<String>> actions = actionDefinitionsTable.getItems();
 
-            Dump.dumpTableItems("OLD CODITIONS", conditions);
-            Dump.dumpTableItems("OLD ACTIONS", actions);
-
             Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> consolidated = Stream.of(Tuple.of(conditions, actions))
                     .map(consolidateRules())
                     .collect(toSingleObject());
-
-            Dump.dumpTableItems("NEW CODITIONS", consolidated._1());
-            Dump.dumpTableItems("NEW ACTIONS", consolidated._2());
 
             ObservableList<ObservableList<String>> newConditions = consolidated._1();
             ObservableList<ObservableList<String>> newActions = consolidated._2();
@@ -187,25 +180,6 @@ public class MainView implements FxmlView<MainViewModel> {
             Stream.of(newConditions).forEach(new UpdateDefinitionTable(conditionDefinitionsTable));
             Stream.of(newActions).forEach(new UpdateDefinitionTable(actionDefinitionsTable));
 
-            /*
-
-            conditionDefinitionsTable.getColumns().clear();
-            actionDefinitionsTable.getColumns().clear();
-
-            IntStream.range(0, newCols).forEach(i -> {
-                conditionDefinitionsTable.getColumns().add(createTableColumn(i));
-                actionDefinitionsTable.getColumns().add(createTableColumn(i));
-            });
-
-            conditionDefinitionsTable.getItems().clear();
-            newConditions.stream().map(row -> FXCollections.observableArrayList(row)).forEach(conditionDefinitionsTable.getItems()::add);
-            actionDefinitionsTable.getItems().clear();
-            newActions.stream().map(row -> FXCollections.observableArrayList(row)).forEach(actionDefinitionsTable.getItems()::add);
-
-            conditionDefinitionsTable.refresh();
-            actionDefinitionsTable.refresh();
-
-            */
         } catch (Exception e) {
             exceptionHandler.showAndWaitAlert(e);
             return;
@@ -397,8 +371,8 @@ public class MainView implements FxmlView<MainViewModel> {
                 actionDefinitionsTable.getColumns().add(createTableColumn(i));
             });
 
-            final ObservableList<ObservableList<String>> newConDefs = MatrixFunctions.removeColumnsAt(viewModel.getConditionDefinitions(), indices);
-            final ObservableList<ObservableList<String>> newActDefs = MatrixFunctions.removeColumnsAt(viewModel.getActionDefinitions(), indices);
+            final ObservableList<ObservableList<String>> newConDefs = List2DFunctions.removeColumnsAt(viewModel.getConditionDefinitions(), indices);
+            final ObservableList<ObservableList<String>> newActDefs = List2DFunctions.removeColumnsAt(viewModel.getActionDefinitions(), indices);
 
             viewModel.getConditionDefinitions().clear();
             newConDefs.forEach(viewModel.getConditionDefinitions()::add);

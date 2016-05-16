@@ -21,8 +21,8 @@ package de.adesso.tools.analysis.completeness.detailed;
 
 import com.codepoetics.protonpack.StreamUtils;
 import com.google.common.collect.LinkedListMultimap;
-import de.adesso.tools.common.MatrixBuilder;
-import de.adesso.tools.functions.MatrixFunctions;
+import de.adesso.tools.common.List2DBuilder;
+import de.adesso.tools.functions.List2DFunctions;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 import org.slf4j.Logger;
@@ -30,7 +30,6 @@ import org.slf4j.LoggerFactory;
 
 import java.util.*;
 import java.util.function.BiFunction;
-import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -38,12 +37,10 @@ import java.util.stream.Stream;
 
 import static de.adesso.tools.analysis.completeness.detailed.Actions.*;
 import static de.adesso.tools.analysis.completeness.detailed.Conditions.*;
-import static de.adesso.tools.analysis.completeness.detailed.Functions.columnDifference;
-import static de.adesso.tools.analysis.completeness.detailed.Functions.consolidate;
 import static de.adesso.tools.common.Reserved.isDASH;
 import static de.adesso.tools.common.Reserved.isYES;
-import static de.adesso.tools.functions.MatrixFunctions.removeColumnsAt;
-import static de.adesso.tools.functions.MatrixFunctions.transpose;
+import static de.adesso.tools.functions.List2DFunctions.removeColumnsAt;
+import static de.adesso.tools.functions.List2DFunctions.transpose;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -53,7 +50,7 @@ public class Functions {
     // @formatter::off
     private static final BiFunction<List<String>, List<String>, List<List<String>>>[] ACTIONS = new BiFunction[]{A1, A2, A3, A4, A5};
     private static final Function<List<Tuple2<String, String>>, Integer>[] CONDITIONS = new Function[]{B1, B2, B3, B4};
-    private static final List<List<String>> INTERNAL = MatrixBuilder.matrixOf("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
+    private static final List<List<String>> INTERNAL = List2DBuilder.matrixOf("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
     private static Function<String, Integer> maskMatrixMapper = s -> (isDASH(s)) ? 0 : 1;
     private static final List<? extends List<Integer>> M = transpose(makeMaskMatrix(INTERNAL));
     private static Function<String, Integer> decisionMatrixMapper = s -> (isYES(s)) ? 1 : 0;
@@ -125,35 +122,6 @@ public class Functions {
 
 }
 
-class RulesDifferenceOperator implements Function<List<List<String>>, List<List<String>>> {
-
-    private final BinaryOperator<List<List<String>>> merge = (l, r) -> {
-        r.forEach(l::add);
-        return l;
-    };
-
-    public RulesDifferenceOperator() {
-    }
-
-    @Override
-    public List<List<String>> apply(List<List<String>> conditions) {
-        //final List<List<String>> rights = MatrixBuilder.ofList("Y,Y,N,N,Y,Y,Y,N,N,-,N,Y").dim(3,4).transposed().build();
-        List<List<String>> rights = transpose(conditions);
-        String s[] = new String[conditions.size()];
-        Arrays.fill(s, "-");
-        String joined = String.join(",", s);
-        List<List<String>> tmp = MatrixBuilder.matrixOf(joined).dim(rights.size(), 1).transposed().build();
-        final List<List<String>>[] lefts = new List[]{tmp};
-        for (List<String> right : rights) {
-            lefts[0] = lefts[0].stream()
-                    .map(l -> columnDifference.apply(l, right))
-                    .reduce(new ArrayList<>(), merge);
-            lefts[0] = transpose(consolidate().apply(transpose(lefts[0])));
-        }
-        return transpose(lefts[0]);
-    }
-}
-
 class ConsolidateRules0 implements Function<List<List<String>>, List<List<String>>> {
     public static final List<String> POSSIBLE_INDICATORS = Arrays.asList("Y", "N");
     final static Logger LOGGER = LoggerFactory.getLogger(ConsolidateRules0.class);
@@ -164,7 +132,7 @@ class ConsolidateRules0 implements Function<List<List<String>>, List<List<String
     @Override
     public List<List<String>> apply(List<List<String>> conditions) {
         List<Boolean> indicatorsComplete = rowsWithAllPossibleIndicators(conditions);
-        List<List<String>> copy = MatrixFunctions.copy(conditions);
+        List<List<String>> copy = List2DFunctions.copy(conditions);
         List<List<String>> _copy[] = new List[]{copy};
         for (int currentRow = 0; currentRow < conditions.size(); currentRow++) {
             List<Integer> indicesOfDashedIndicators = determineIndicesOfDashedIndicators(_copy[0], currentRow);
@@ -203,7 +171,7 @@ class ConsolidateRules0 implements Function<List<List<String>>, List<List<String
     }
 
     private List<List<String>> cleanupConditions(List<List<String>> original, int currentRow, List<Integer> indicesOfDashedIndicators) {
-        List<List<String>> conditionRows = MatrixFunctions.removeRowsAt(original, currentRow);
+        List<List<String>> conditionRows = List2DFunctions.removeRowsAt(original, currentRow);
         for (int ii : indicesOfDashedIndicators) {
             conditionRows = removeColumnsAt(conditionRows, ii);
         }

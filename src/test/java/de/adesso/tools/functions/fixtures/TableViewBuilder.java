@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.fixtures;
 
 import de.adesso.tools.functions.chained.first.Builder;
 import javafx.collections.FXCollections;

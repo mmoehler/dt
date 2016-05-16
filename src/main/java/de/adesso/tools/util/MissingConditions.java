@@ -1,7 +1,7 @@
 package de.adesso.tools.util;
 
 import com.codepoetics.protonpack.StreamUtils;
-import de.adesso.tools.common.MatrixBuilder;
+import de.adesso.tools.common.List2DBuilder;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 import javafx.collections.ObservableList;
@@ -19,7 +19,7 @@ import static de.adesso.tools.analysis.completeness.detailed.Actions.*;
 import static de.adesso.tools.analysis.completeness.detailed.Conditions.*;
 import static de.adesso.tools.analysis.completeness.detailed.Functions.makeDecisionMatrix;
 import static de.adesso.tools.analysis.completeness.detailed.Functions.makeMaskMatrix;
-import static de.adesso.tools.functions.MatrixFunctions.transpose;
+import static de.adesso.tools.functions.List2DFunctions.transpose;
 import static java.util.stream.Collectors.toList;
 
 /**
@@ -32,7 +32,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
     private final List<List<String>> internalList;
 
     public MissingConditions() {
-        this.internalList = MatrixBuilder.matrixOf("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
+        this.internalList = List2DBuilder.matrixOf("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
         this.ACTIONS = new BiFunction[]{A1, A2, A3, A4, A5};
         this.CONDITIONS = new Function[]{B1, B2, B3, B4};
     }
@@ -62,12 +62,12 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
     }
 
     public static void main(String[] args) {
-        List<List<String>> given = MatrixBuilder.matrixOf("Y,Y,N,N,Y,Y,Y,N,N,-,N,Y").dim(3, 4).transposed().build();
+        List<List<String>> given = List2DBuilder.matrixOf("Y,Y,N,N,Y,Y,Y,N,N,-,N,Y").dim(3, 4).transposed().build();
 
-        List<List<String>> interimResult = MatrixBuilder.matrixOf("-,-,-").dim(1, 3).build();
+        List<List<String>> interimResult = List2DBuilder.matrixOf("-,-,-").dim(1, 3).build();
 
         List<List<String>> missingList = given.stream()
-                .map(x -> MatrixBuilder.matrixOf(x).dim(1, x.size()).build())
+                .map(x -> List2DBuilder.matrixOf(x).dim(1, x.size()).build())
                 .reduce(interimResult, DT.difference());
 
         dumpList2DItems("RESULT", missingList);

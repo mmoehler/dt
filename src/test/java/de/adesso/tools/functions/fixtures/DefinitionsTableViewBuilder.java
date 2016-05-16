@@ -17,25 +17,40 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.fixtures;
 
-import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
+import javafx.collections.ObservableList;
+import javafx.scene.control.TableView;
+
+import javax.annotation.Nonnull;
 
 /**
  * Created by mmoehler ofList 06.03.16.
  */
-public class ConditionDeclTableViewBuilder extends TableViewBuilder<ConditionDeclTableViewModel> {
+public class DefinitionsTableViewBuilder extends TableViewBuilder<ObservableList<String>> {
 
-    public ConditionDeclTableViewBuilder() {
+    public DefinitionsTableViewBuilder() {
     }
 
-    public ConditionDeclBuilder<ConditionDeclTableViewBuilder> addModelWithLfdNbr(String number) {
-        return new ConditionDeclBuilder<>(number, this,
-                (c) -> tableView.getItems().add(new ConditionDeclTableViewModel(c)));
+    public DefinitionsTableViewDataBuilder<DefinitionsTableViewBuilder> dim(int rows, int cols) {
+        return new DefinitionsTableViewDataBuilder<>(rows, cols, this, (c) -> {
+            tableView.getItems().clear();
+            c.forEach(tableView.getItems()::add);
+        });
+    }
+
+    @Nonnull
+    @Override
+    public TableView<ObservableList<String>> build() {
+        return super.build();
     }
 
     @Override
     protected int getColCount() {
-        return 4;
+        return tableView.getItems().get(0).size();
     }
 }
+
+
+
+

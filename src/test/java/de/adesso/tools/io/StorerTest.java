@@ -20,7 +20,7 @@
 package de.adesso.tools.io;
 
 import de.adesso.tools.Dump;
-import de.adesso.tools.common.MatrixBuilder;
+import de.adesso.tools.common.List2DBuilder;
 import de.adesso.tools.exception.IOExceptionSmuggler;
 import de.adesso.tools.functions.Adapters;
 import de.adesso.tools.model.ConditionDecl;
@@ -37,7 +37,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static de.adesso.tools.exception.LambdaExceptionUtil.rethrowIntFunction;
-import static de.adesso.tools.functions.DtFunctionsTestData.conditionDeclTableViewBuilder;
+import static de.adesso.tools.functions.fixtures.DtFunctionsTestData.conditionDeclTableViewBuilder;
 
 /**
  * Created by mmoehler ofList 01.04.16.
@@ -51,7 +51,7 @@ public class StorerTest {
 
     @Test
     public void testStore() throws Exception {
-        final List<List<String>> inConditions = MatrixBuilder.matrixOf("Y,Y,Y,-,-,N,N,N,-,-,-,N,Y,Y,N,N").dim(4, 4).build();
+        final List<List<String>> inConditions = List2DBuilder.matrixOf("Y,Y,Y,-,-,N,N,N,-,-,-,N,Y,Y,N,N").dim(4, 4).build();
 
         TableView<ConditionDeclTableViewModel> conditionDeclTab = conditionDeclTableViewBuilder()
                 .addModelWithLfdNbr("01").withExpression("EXP-01").withIndicators("Y,N")

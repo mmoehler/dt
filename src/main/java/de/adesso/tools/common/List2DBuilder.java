@@ -1,6 +1,6 @@
 package de.adesso.tools.common;
 
-import de.adesso.tools.functions.MatrixFunctions;
+import de.adesso.tools.functions.List2DFunctions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -15,44 +15,44 @@ import java.util.stream.IntStream;
  * A List2D builder
  * Created by mohler ofList 25.01.16.
  */
-public class MatrixBuilder {
+public class List2DBuilder {
     private String data;
     private List<String> dataList;
     private int n;
     private int m;
     private boolean transposed;
 
-    protected MatrixBuilder() {
+    protected List2DBuilder() {
         ;
     }
 
-    protected MatrixBuilder(String data) {
+    protected List2DBuilder(String data) {
         this.data = data;
     }
 
-    protected MatrixBuilder(List<String> data) {
+    protected List2DBuilder(List<String> data) {
         this.dataList = data;
     }
 
-    public static MatrixBuilder empty() {
-        return new MatrixBuilder();
+    public static List2DBuilder empty() {
+        return new List2DBuilder();
     }
 
-    public static MatrixBuilder matrixOf(@javax.annotation.Nonnull String data) {
-        return new MatrixBuilder(data);
+    public static List2DBuilder matrixOf(@javax.annotation.Nonnull String data) {
+        return new List2DBuilder(data);
     }
 
-    public static MatrixBuilder matrixOf(@javax.annotation.Nonnull List<String> data) {
-        return new MatrixBuilder(data);
+    public static List2DBuilder matrixOf(@javax.annotation.Nonnull List<String> data) {
+        return new List2DBuilder(data);
     }
 
-    public static MatrixBuilder matrixOf(@javax.annotation.Nonnull String[] data) {
+    public static List2DBuilder matrixOf(@javax.annotation.Nonnull String[] data) {
         List<String> dataList = Arrays.stream(data).collect(Collectors.toList());
-        return new MatrixBuilder(dataList);
+        return new List2DBuilder(dataList);
     }
 
-    public static MatrixBuilder copy(@javax.annotation.Nonnull MatrixBuilder copy) {
-        MatrixBuilder builder = (copy.dataList == null) ? new MatrixBuilder(copy.data) : new MatrixBuilder(copy.dataList);
+    public static List2DBuilder copy(@javax.annotation.Nonnull List2DBuilder copy) {
+        List2DBuilder builder = (copy.dataList == null) ? new List2DBuilder(copy.data) : new List2DBuilder(copy.dataList);
         builder.n = copy.n;
         builder.m = copy.m;
         builder.transposed = copy.transposed;
@@ -74,21 +74,21 @@ public class MatrixBuilder {
      * @return a reference to this Builder
      */
     @javax.annotation.Nonnull
-    public MatrixBuilder dim(int rows, int cols) {
+    public List2DBuilder dim(int rows, int cols) {
         this.m = rows;
         this.n = cols;
         return this;
     }
 
-    public MatrixBuilder transposed() {
+    public List2DBuilder transposed() {
         this.transposed = true;
         return this;
     }
 
     /**
-     * Returns a {@code MatrixBuilder} built from the parameters previously set.
+     * Returns a {@code List2DBuilder} built from the parameters previously set.
      *
-     * @return a {@code MatrixBuilder} built with parameters of this {@code MatrixBuilder.Builder}
+     * @return a {@code List2DBuilder} built with parameters of this {@code List2DBuilder.Builder}
      */
     @javax.annotation.Nonnull
     public List<List<String>> build() {
@@ -96,7 +96,7 @@ public class MatrixBuilder {
             return emptyMatrix(m);
         }
         final List<List<String>> partitioned = (null == this.dataList) ? build4DataString() : build4DataList();
-        return (transposed) ? (MatrixFunctions.transpose(partitioned)) : partitioned;
+        return (transposed) ? (List2DFunctions.transpose(partitioned)) : partitioned;
     }
 
     private List<List<String>> emptyMatrix(int rows) {

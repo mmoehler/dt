@@ -17,32 +17,25 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.fixtures;
 
-import de.adesso.tools.functions.chained.first.Builder;
-import de.adesso.tools.model.ConditionDecl;
-import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
+import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 
 /**
  * Created by mmoehler ofList 06.03.16.
  */
-class ConditionDeclTableViewModelListBuilder implements Builder<List<ConditionDeclTableViewModel>> {
-    List<ConditionDeclTableViewModel> list = new ArrayList<>();
+public class ActionDeclTableViewBuilder extends TableViewBuilder<ActionDeclTableViewModel> {
 
-    public ConditionDeclTableViewModelListBuilder() {
-        super();
+    public ActionDeclTableViewBuilder() {
     }
 
-    public ConditionDeclBuilder<ConditionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
-        return new ConditionDeclBuilder<>(number, this,
-                (ConditionDecl c) -> list.add(new ConditionDeclTableViewModel(c)));
+    public ActionDeclBuilder<ActionDeclTableViewBuilder> addModelWithLfdNbr(String number) {
+        return new ActionDeclBuilder<>(number, this,
+                (c) -> tableView.getItems().add(new ActionDeclTableViewModel(c)));
     }
 
-    public List<ConditionDeclTableViewModel> build() {
-        return list;
+    @Override
+    protected int getColCount() {
+        return 4;
     }
-
 }

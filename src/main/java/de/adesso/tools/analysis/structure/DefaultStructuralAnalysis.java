@@ -34,7 +34,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static de.adesso.tools.functions.MatrixFunctions.transpose;
+import static de.adesso.tools.functions.List2DFunctions.transpose;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**

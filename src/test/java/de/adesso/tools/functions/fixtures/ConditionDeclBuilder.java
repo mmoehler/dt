@@ -17,31 +17,31 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.fixtures;
 
 import de.adesso.tools.functions.chained.first.AbstractSubBuilder;
 import de.adesso.tools.functions.chained.first.Callback;
-import de.adesso.tools.model.ActionDecl;
+import de.adesso.tools.model.ConditionDecl;
 
 /**
  * Created by mmoehler ofList 06.03.16.
  */
-public class ActionDeclBuilder<C> extends AbstractSubBuilder<ActionDecl, C> {
+public class ConditionDeclBuilder<C> extends AbstractSubBuilder<ConditionDecl, C> {
     private final String lfdNr;
     private String expression;
     private String indicators;
 
-    public ActionDeclBuilder(String lfdNr, C caller, Callback<ActionDecl> callback) {
+    public ConditionDeclBuilder(String lfdNr, C caller, Callback<ConditionDecl> callback) {
         super(caller, callback);
         this.lfdNr = lfdNr;
     }
 
     @Override
-    public ActionDecl build() {
-        return new ActionDecl(lfdNr, expression, indicators);
+    public ConditionDecl build() {
+        return new ConditionDecl(lfdNr, expression, indicators);
     }
 
-    public ActionDeclBuilder<C> withExpression(String expression) {
+    public ConditionDeclBuilder<C> withExpression(String expression) {
         this.expression = expression;
         return this;
     }

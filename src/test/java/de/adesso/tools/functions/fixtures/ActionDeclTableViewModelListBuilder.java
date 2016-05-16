@@ -17,28 +17,28 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.fixtures;
 
-import de.adesso.tools.ui.PossibleIndicatorsSupplier;
-import javafx.beans.property.ReadOnlyStringWrapper;
+import de.adesso.tools.functions.chained.first.Builder;
+import de.adesso.tools.model.ActionDecl;
+import de.adesso.tools.ui.action.ActionDeclTableViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mmoehler ofList 06.03.16.
  */
-class PossibleIndicatorsSupplierBuilder {
-    private String indicatorsString;
+public class ActionDeclTableViewModelListBuilder implements Builder<List<ActionDeclTableViewModel>> {
 
-    public static PossibleIndicatorsSupplierBuilder newBuilder() {
-        return new PossibleIndicatorsSupplierBuilder();
+    private final List<ActionDeclTableViewModel> list = new ArrayList<>();
+
+    public ActionDeclBuilder<ActionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
+        return new ActionDeclBuilder<>(number, this, (ActionDecl a) -> list.add(new ActionDeclTableViewModel(a)));
     }
 
-    public PossibleIndicatorsSupplierBuilder withIndicators(String indicators) {
-        this.indicatorsString = indicators;
-        return this;
+    @Override
+    public List<ActionDeclTableViewModel> build() {
+        return new ArrayList<>(list);
     }
-
-    public PossibleIndicatorsSupplier build() {
-        return () -> new ReadOnlyStringWrapper(indicatorsString);
-    }
-
 }

@@ -19,7 +19,7 @@
 
 package de.adesso.tools.io;
 
-import de.adesso.tools.common.MatrixBuilder;
+import de.adesso.tools.common.List2DBuilder;
 import de.adesso.tools.functions.Adapters;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
@@ -36,8 +36,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.List;
 
-import static de.adesso.tools.functions.DtFunctionsTestData.actionDeclTableViewBuilder;
-import static de.adesso.tools.functions.DtFunctionsTestData.conditionDeclTableViewBuilder;
+import static de.adesso.tools.functions.fixtures.DtFunctionsTestData.actionDeclTableViewBuilder;
+import static de.adesso.tools.functions.fixtures.DtFunctionsTestData.conditionDeclTableViewBuilder;
 
 /**
  * Created by mmoehler ofList 03.04.16.
@@ -93,7 +93,7 @@ public class DTDataPacketTest {
                 .build();
         final ObservableList<ConditionDeclTableViewModel> conditionDeclarations = conditionDeclTab.getItems();
 
-        final List<List<String>> inConditions = MatrixBuilder
+        final List<List<String>> inConditions = List2DBuilder
                 .matrixOf("Y,Y,Y,-,-,N,N,N,-,-,-,N,Y,Y,N,N")
                 .dim(4, 4)
                 .build();
@@ -107,7 +107,7 @@ public class DTDataPacketTest {
                 .build();
         final ObservableList<ActionDeclTableViewModel> actionDeclarations = actionDeclTab.getItems();
 
-        final List<List<String>> inActions = MatrixBuilder
+        final List<List<String>> inActions = List2DBuilder
                 .matrixOf("-,-,-,-,X,X,X,-,X,-,-,X,-,X,X,-")
                 .dim(4, 4)
                 .build();

@@ -19,6 +19,8 @@
 
 package de.adesso.tools.common;
 
+import de.adesso.tools.functions.MoreCollectors;
+import de.adesso.tools.functions.ObservableList2DFunctions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -29,8 +31,6 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static de.adesso.tools.functions.MoreCollectors.toObservableList;
-import static de.adesso.tools.functions.MoreCollectors.toSingleObject;
-import static de.adesso.tools.functions.ObservableList2DFunctions.transpose;
 
 /**
  * A List2D builder
@@ -101,9 +101,9 @@ public class ObservableList2DBuilder {
     }
 
     /**
-     * Returns a {@code MatrixBuilder} built from the parameters previously set.
+     * Returns a {@code List2DBuilder} built from the parameters previously set.
      *
-     * @return a {@code MatrixBuilder} built with parameters of this {@code MatrixBuilder.Builder}
+     * @return a {@code List2DBuilder} built with parameters of this {@code List2DBuilder.Builder}
      */
     @javax.annotation.Nonnull
     public ObservableList<ObservableList<String>> build() {
@@ -111,10 +111,6 @@ public class ObservableList2DBuilder {
             return FXCollections.emptyObservableList();
         }
         ObservableList<ObservableList<String>> partitioned = (null == this.dataList) ? build4DataString() : build4DataList();
-
-        if (transposed) {
-            partitioned = Stream.of(partitioned).map(transpose()).collect(toSingleObject());
-        }
 
         return partitioned;
     }
@@ -133,9 +129,17 @@ public class ObservableList2DBuilder {
 
     private ObservableList<ObservableList<String>> partitionIt(List<String> rawData) {
         final int rdSize = rawData.size();
-        return IntStream.range(0, (rdSize - 1) / n + 1)
+
+        ObservableList<ObservableList<String>> lists = IntStream.range(0, (rdSize - 1) / n + 1)
                 .mapToObj(i -> FXCollections.observableArrayList(rawData.subList(i *= n,
                         rdSize - n >= i ? i + n : rdSize)))
                 .collect(toObservableList());
+
+        if (transposed) {
+            lists = Stream.of(lists).map(ObservableList2DFunctions.transpose()).collect(MoreCollectors.toSingleObject());
+        }
+
+        return lists;
+
     }
 }

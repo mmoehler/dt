@@ -17,30 +17,28 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.fixtures;
 
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.stream.Collectors;
+import javafx.beans.property.ReadOnlyStringWrapper;
 
 /**
  * Created by mmoehler ofList 06.03.16.
  */
-class ListOfIndicatorSuppliersBuilder {
-    List<PossibleIndicatorsSupplierBuilder> builders = new LinkedList<>();
+class PossibleIndicatorsSupplierBuilder {
+    private String indicatorsString;
 
-    public static ListOfIndicatorSuppliersBuilder newBuilder() {
-        return new ListOfIndicatorSuppliersBuilder();
+    public static PossibleIndicatorsSupplierBuilder newBuilder() {
+        return new PossibleIndicatorsSupplierBuilder();
     }
 
-    public ListOfIndicatorSuppliersBuilder add(String indicators) {
-        builders.add(PossibleIndicatorsSupplierBuilder.newBuilder().withIndicators(indicators));
+    public PossibleIndicatorsSupplierBuilder withIndicators(String indicators) {
+        this.indicatorsString = indicators;
         return this;
     }
 
-    public List<PossibleIndicatorsSupplier> build() {
-        return builders.stream().map(PossibleIndicatorsSupplierBuilder::build).collect(Collectors.toList());
+    public PossibleIndicatorsSupplier build() {
+        return () -> new ReadOnlyStringWrapper(indicatorsString);
     }
+
 }

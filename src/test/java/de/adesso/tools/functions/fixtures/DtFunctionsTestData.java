@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.fixtures;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
@@ -25,7 +25,9 @@ import de.adesso.tools.Dump;
 import de.adesso.tools.analysis.structure.DefaultStructuralAnalysis;
 import de.adesso.tools.analysis.structure.Indicator;
 import de.adesso.tools.analysis.structure.StructuralAnalysisResultEmitter;
-import de.adesso.tools.common.MatrixBuilder;
+import de.adesso.tools.common.List2DBuilder;
+import de.adesso.tools.functions.List2DFunctions;
+import de.adesso.tools.functions.MoreCollectors;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 import de.adesso.tools.util.tuple.Tuple3;
@@ -38,8 +40,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static de.adesso.tools.functions.DtFunctions.permutations;
-import static de.adesso.tools.functions.MatrixFunctions.removeColumnsAt;
-import static de.adesso.tools.functions.MatrixFunctions.transpose;
+import static de.adesso.tools.functions.List2DFunctions.removeColumnsAt;
+import static de.adesso.tools.functions.List2DFunctions.transpose;
 
 /**
  * Test fixtures of the DtFunctionsTest's
@@ -97,8 +99,8 @@ public class DtFunctionsTestData {
         final String[] conditionsData = rndDefinitions(condRows, cols, CONDITIONS);
         final String[] actionsData = rndDefinitions(actRows, cols, ACTIONS);
 
-        final MatrixBuilder conditions = MatrixBuilder.matrixOf(conditionsData).dim(condRows, cols);
-        final MatrixBuilder actions = MatrixBuilder.matrixOf(actionsData).dim(actRows, cols);
+        final List2DBuilder conditions = List2DBuilder.matrixOf(conditionsData).dim(condRows, cols);
+        final List2DBuilder actions = List2DBuilder.matrixOf(actionsData).dim(actRows, cols);
 
 
         final Tuple2<List<List<String>>, List<List<String>>> dt = Tuple.of(conditions.build(), actions.build());
@@ -119,14 +121,14 @@ public class DtFunctionsTestData {
 
         final List<List<String>> conditions = fullExpandConditions(IND, condRows);
         final String[] actionsData = rndDefinitions(actRows, cols, ACTIONS);
-        final List<List<String>> actions = MatrixBuilder.matrixOf(actionsData).dim(actRows, cols).build();
+        final List<List<String>> actions = List2DBuilder.matrixOf(actionsData).dim(actRows, cols).build();
 
         Dump.dumpTableItems("CONDITIONS-BEFORE-REMOVE", conditions);
         Dump.dumpTableItems("ACTIONS-BEFORE-REMOVE", actions);
 
         // TODO do some reference magic in the 2statements below!!
-        toDelete.forEach(i -> MatrixFunctions.removeColumnsAt(conditions, i));
-        toDelete.forEach(i -> MatrixFunctions.removeColumnsAt(actions, i));
+        toDelete.forEach(i -> List2DFunctions.removeColumnsAt(conditions, i));
+        toDelete.forEach(i -> List2DFunctions.removeColumnsAt(actions, i));
 
         final Tuple2<List<List<String>>, List<List<String>>> dt = Tuple.of(conditions, actions);
 

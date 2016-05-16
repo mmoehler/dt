@@ -28,7 +28,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import static de.adesso.tools.functions.Adapters.Matrix.adapt;
-import static de.adesso.tools.functions.MatrixFunctions.transpose;
+import static de.adesso.tools.functions.List2DFunctions.transpose;
 
 /**
  * Created by mmoehler ofList 28.03.16.

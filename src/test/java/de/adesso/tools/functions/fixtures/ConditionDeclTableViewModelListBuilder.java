@@ -17,39 +17,32 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.fixtures;
 
-import de.adesso.tools.functions.chained.first.AbstractSubBuilder;
-import de.adesso.tools.functions.chained.first.Callback;
+import de.adesso.tools.functions.chained.first.Builder;
 import de.adesso.tools.model.ConditionDecl;
+import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by mmoehler ofList 06.03.16.
  */
-public class ConditionDeclBuilder<C> extends AbstractSubBuilder<ConditionDecl, C> {
-    private final String lfdNr;
-    private String expression;
-    private String indicators;
+public class ConditionDeclTableViewModelListBuilder implements Builder<List<ConditionDeclTableViewModel>> {
+    List<ConditionDeclTableViewModel> list = new ArrayList<>();
 
-    public ConditionDeclBuilder(String lfdNr, C caller, Callback<ConditionDecl> callback) {
-        super(caller, callback);
-        this.lfdNr = lfdNr;
+    public ConditionDeclTableViewModelListBuilder() {
+        super();
     }
 
-    @Override
-    public ConditionDecl build() {
-        return new ConditionDecl(lfdNr, expression, indicators);
+    public ConditionDeclBuilder<ConditionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
+        return new ConditionDeclBuilder<>(number, this,
+                (ConditionDecl c) -> list.add(new ConditionDeclTableViewModel(c)));
     }
 
-    public ConditionDeclBuilder<C> withExpression(String expression) {
-        this.expression = expression;
-        return this;
-    }
-
-    public C withIndicators(String possibleIndicators) {
-        this.indicators = possibleIndicators;
-        getCallback().call(build());
-        return getCaller();
+    public List<ConditionDeclTableViewModel> build() {
+        return list;
     }
 
 }

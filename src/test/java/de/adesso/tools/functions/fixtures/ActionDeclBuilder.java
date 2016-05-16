@@ -17,28 +17,39 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.fixtures;
 
-import de.adesso.tools.functions.chained.first.Builder;
+import de.adesso.tools.functions.chained.first.AbstractSubBuilder;
+import de.adesso.tools.functions.chained.first.Callback;
 import de.adesso.tools.model.ActionDecl;
-import de.adesso.tools.ui.action.ActionDeclTableViewModel;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by mmoehler ofList 06.03.16.
  */
-class ActionDeclTableViewModelListBuilder implements Builder<List<ActionDeclTableViewModel>> {
+public class ActionDeclBuilder<C> extends AbstractSubBuilder<ActionDecl, C> {
+    private final String lfdNr;
+    private String expression;
+    private String indicators;
 
-    private final List<ActionDeclTableViewModel> list = new ArrayList<>();
-
-    public ActionDeclBuilder<ActionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
-        return new ActionDeclBuilder<>(number, this, (ActionDecl a) -> list.add(new ActionDeclTableViewModel(a)));
+    public ActionDeclBuilder(String lfdNr, C caller, Callback<ActionDecl> callback) {
+        super(caller, callback);
+        this.lfdNr = lfdNr;
     }
 
     @Override
-    public List<ActionDeclTableViewModel> build() {
-        return new ArrayList<>(list);
+    public ActionDecl build() {
+        return new ActionDecl(lfdNr, expression, indicators);
     }
+
+    public ActionDeclBuilder<C> withExpression(String expression) {
+        this.expression = expression;
+        return this;
+    }
+
+    public C withIndicators(String possibleIndicators) {
+        this.indicators = possibleIndicators;
+        getCallback().call(build());
+        return getCaller();
+    }
+
 }

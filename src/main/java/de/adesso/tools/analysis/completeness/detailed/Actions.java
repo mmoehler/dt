@@ -20,7 +20,7 @@
 package de.adesso.tools.analysis.completeness.detailed;
 
 import com.codepoetics.protonpack.StreamUtils;
-import de.adesso.tools.common.MatrixBuilder;
+import de.adesso.tools.common.List2DBuilder;
 
 import java.util.Collections;
 import java.util.List;
@@ -38,7 +38,7 @@ public class Actions {
     public static BiFunction<List<String>, List<String>, List<List<String>>> A1 =
             (t, u) -> {
                 System.out.println(String.format("A1 invoked with %s, %s!", t, u));
-                List<List<String>> ret = MatrixBuilder.matrixOf(t).dim(1, t.size()).transposed().build();
+                List<List<String>> ret = List2DBuilder.matrixOf(t).dim(1, t.size()).transposed().build();
                 return ret;
             };
 
@@ -70,7 +70,7 @@ public class Actions {
                             return v;
                     }
                 }).collect(Collectors.toList());
-                return MatrixBuilder.matrixOf(processed).dim(processed.size(), 1).build();
+                return List2DBuilder.matrixOf(processed).dim(processed.size(), 1).build();
             };
 
     public static BiFunction<List<String>, List<String>, List<List<String>>> A5 =
@@ -80,7 +80,7 @@ public class Actions {
                 // counting dashes
                 long dashCount = rf.stream().filter(s -> isDASH(s)).count();
 
-                List<List<String>> result = MatrixBuilder.empty().dim(rf.size(), (int) dashCount).build();
+                List<List<String>> result = List2DBuilder.empty().dim(rf.size(), (int) dashCount).build();
 
                 int countDashesSeen = 0;
 

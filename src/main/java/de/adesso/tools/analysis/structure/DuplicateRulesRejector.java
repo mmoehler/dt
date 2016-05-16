@@ -31,7 +31,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static de.adesso.tools.functions.MatrixFunctions.removeColumnsAt;
+import static de.adesso.tools.functions.List2DFunctions.removeColumnsAt;
 
 /**
  * Created by mmoehler ofList 30.04.16.

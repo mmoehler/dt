@@ -37,15 +37,15 @@ import static de.adesso.tools.functions.MoreCollectors.toSingleObject;
 /**
  * Created by mmoehler on 08.05.16.
  */
-public class ConsolidateRules implements Function<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> {
+public class ConsolidateConditions implements Function<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> {
     public static final List<String> POSSIBLE_INDICATORS = Arrays.asList("Y", "N");
 
-    public static ConsolidateRules consolidateRules() {
-        return new ConsolidateRules();
+    public static ConsolidateConditions consolidateConditions() {
+        return new ConsolidateConditions();
     }
 
 
-    private ConsolidateRules() {
+    private ConsolidateConditions() {
     }
 
     @Override
@@ -111,7 +111,7 @@ public class ConsolidateRules implements Function<ObservableList<ObservableList<
     }
 
     public ObservableList<ObservableList<String>> cleanupConditions(ObservableList<ObservableList<String>> original, int currentRow, List<Integer> indicesOfDashedIndicators) {
-        //ObservableList<ObservableList<String>> conditionRows = MatrixFunctions.removeRowsAt(original, currentRow);
+        //ObservableList<ObservableList<String>> conditionRows = List2DFunctions.removeRowsAt(original, currentRow);
         ObservableList<ObservableList<String>> r = IntStream.range(0, original.size())
                 .filter(i -> i != currentRow)
                 .mapToObj(j -> FXCollections.observableList(original.get(j)))

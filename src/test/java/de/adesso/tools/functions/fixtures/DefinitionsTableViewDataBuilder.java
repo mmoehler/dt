@@ -17,19 +17,19 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.fixtures;
 
-import de.adesso.tools.common.MatrixBuilder;
+import de.adesso.tools.common.List2DBuilder;
 import de.adesso.tools.functions.chained.first.AbstractSubBuilder;
 import de.adesso.tools.functions.chained.first.Callback;
 import javafx.collections.ObservableList;
 
-import static de.adesso.tools.common.MatrixBuilder.observable;
+import static de.adesso.tools.common.List2DBuilder.observable;
 
 /**
  * Created by mmoehler ofList 06.03.16.
- */
-class DefinitionsTableViewDataBuilder<C> extends AbstractSubBuilder<ObservableList<ObservableList<String>>, C> {
+public  */
+public class DefinitionsTableViewDataBuilder<C> extends AbstractSubBuilder<ObservableList<ObservableList<String>>, C> {
     private final int rows;
     private final int cols;
     private String data;
@@ -48,7 +48,7 @@ class DefinitionsTableViewDataBuilder<C> extends AbstractSubBuilder<ObservableLi
 
     @Override
     public ObservableList<ObservableList<String>> build() {
-        ObservableList<ObservableList<String>> tableViewData = observable(MatrixBuilder.matrixOf(data).dim(rows, cols).build());
+        ObservableList<ObservableList<String>> tableViewData = observable(List2DBuilder.matrixOf(data).dim(rows, cols).build());
         return tableViewData;
     }
 }

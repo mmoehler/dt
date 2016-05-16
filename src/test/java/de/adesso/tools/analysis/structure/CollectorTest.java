@@ -25,6 +25,7 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import de.adesso.tools.Dump;
 import de.adesso.tools.common.ObservableList2DBuilder;
+import de.adesso.tools.functions.ObservableList2DFunctions;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 import javafx.collections.FXCollections;
@@ -37,11 +38,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static de.adesso.tools.functions.MatrixFunctions.transpose;
+import static de.adesso.tools.functions.List2DFunctions.transpose;
 import static de.adesso.tools.functions.MoreCollectors.toObservableList;
 import static de.adesso.tools.functions.MoreCollectors.toSingleObject;
 import static de.adesso.tools.functions.ObservableList2DFunctions.removeColumn;
-import static de.adesso.tools.functions.ObservableList2DFunctions.transpose;
 
 /**
  * Created by moehler ofList 31.03.2016.
@@ -204,7 +204,7 @@ public class CollectorTest {
             copy.remove(row);
 
             ObservableList<ObservableList<String>> C = Stream.of(copy)
-                    .map(transpose())
+                    .map(ObservableList2DFunctions.transpose())
                     .collect(toSingleObject());
 
             dumpTableItems(String.format("Prepared for %d. loop", row), C);

@@ -22,6 +22,7 @@ package de.adesso.tools.functions;
 import de.adesso.tools.Dump;
 import de.adesso.tools.common.ListBuilder;
 import de.adesso.tools.common.ObservableList2DBuilder;
+import de.adesso.tools.functions.fixtures.TableColumnBuilder;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;
 import de.adesso.tools.ui.UpdateDefinitionTable;
@@ -45,7 +46,7 @@ import java.util.stream.Stream;
 
 import static de.adesso.tools.functions.DtFunctions.*;
 import static de.adesso.tools.functions.DtFunctions.fullExpandConditions;
-import static de.adesso.tools.functions.DtFunctionsTestData.*;
+import static de.adesso.tools.functions.fixtures.DtFunctionsTestData.*;
 import static de.adesso.tools.functions.MoreCollectors.toObservableList;
 import static de.adesso.tools.functions.ObservableList2DFunctions.insertColumn;
 import static org.hamcrest.MatcherAssert.assertThat;

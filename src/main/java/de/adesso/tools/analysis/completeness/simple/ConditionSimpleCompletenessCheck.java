@@ -19,7 +19,7 @@
 
 package de.adesso.tools.analysis.completeness.simple;
 
-import de.adesso.tools.functions.MatrixFunctions;
+import de.adesso.tools.functions.List2DFunctions;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple3;
@@ -58,7 +58,7 @@ public final class ConditionSimpleCompletenessCheck {
             }
             return 1;
         }).collect(Collectors.toList())).collect(Collectors.toList());
-        List<List<Integer>> transposed = MatrixFunctions.transpose(list);
+        List<List<Integer>> transposed = List2DFunctions.transpose(list);
         final Integer reduced = transposed.stream().map(l -> l.stream().reduce(1, (a, b) -> a * b)).reduce(0, (c, d) -> c + d);
         final Integer all = determineMaxColumns(decls);
         return Tuple.of(all == reduced, all, reduced);

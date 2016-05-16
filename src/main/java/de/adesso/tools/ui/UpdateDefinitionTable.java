@@ -19,6 +19,7 @@
 
 package de.adesso.tools.ui;
 
+import de.adesso.tools.Dump;
 import de.adesso.tools.functions.DtFunctions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -54,8 +55,10 @@ public class UpdateDefinitionTable implements Consumer<ObservableList<Observable
 
         if (newLen != oldLen) {
             table.getColumns().clear();
-            IntStream.range(0, newItems.size()).mapToObj(makeColumn()).forEach(table.getColumns()::add);
+            IntStream.range(0, newItems.get(0).size()).mapToObj(makeColumn()).forEach(table.getColumns()::add);
         }
+
+        Dump.dumpTableItems("NEW ITEMS", newItems);
 
         newItems.forEach(table.getItems()::add);
         table.refresh();

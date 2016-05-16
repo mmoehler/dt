@@ -19,8 +19,8 @@
 
 package de.adesso.tools.functions;
 
+import de.adesso.tools.common.List2DBuilder;
 import de.adesso.tools.common.ListBuilder;
-import de.adesso.tools.common.MatrixBuilder;
 import javafx.collections.FXCollections;
 import org.testng.annotations.Test;
 
@@ -30,7 +30,7 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static de.adesso.tools.functions.MatrixFunctions.*;
+import static de.adesso.tools.functions.List2DFunctions.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
@@ -40,7 +40,7 @@ import static org.testng.Assert.assertEquals;
  * Functionality Tests for the Matrix operations
  * Created by moehler ofList 09.02.2016.
  */
-public class MatrixFunctionsTest {
+public class List2DFunctionsTest {
     public final static String Y = "Y";
     public final static String N = "N";
     public static final String QMARK = "?";
@@ -49,15 +49,15 @@ public class MatrixFunctionsTest {
 
     @org.testng.annotations.Test
     public void testCopyMatrix() throws Exception {
-        List<List<String>> original = (MatrixBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N").dim(3, 4).build());
+        List<List<String>> original = (List2DBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N").dim(3, 4).build());
         List<List<String>> actual = copy(original);
         assertThat(original, equalTo(actual));
     }
 
     @org.testng.annotations.Test
     public void testRemoveColumnsAtIndices() throws Exception {
-        List<List<String>> original = (MatrixBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N").dim(3, 4).build());
-        List<List<String>> expected = (MatrixBuilder.matrixOf("Y,Y,Y,N,Y,Y").dim(3, 2).build());
+        List<List<String>> original = (List2DBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N").dim(3, 4).build());
+        List<List<String>> expected = (List2DBuilder.matrixOf("Y,Y,Y,N,Y,Y").dim(3, 2).build());
         List<List<String>> actual = removeColumnsAt(original, 3);
         actual = removeColumnsAt(actual, 1);
         assertEquals(actual.size(), expected.size());
@@ -77,9 +77,9 @@ public class MatrixFunctionsTest {
 
     @Test
     public void testRemoveLastColumn() throws Exception {
-        List<List<String>> original = (MatrixBuilder.matrixOf("1,2,3,4,1,2,3,4,1,2,3,4").dim(3, 4).build());
-        List<List<String>> expected = (MatrixBuilder.matrixOf("1,2,3,1,2,3,1,2,3").dim(3, 3).build());
-        List<List<String>> actual = MatrixFunctions.removeLastColumn(original);
+        List<List<String>> original = (List2DBuilder.matrixOf("1,2,3,4,1,2,3,4,1,2,3,4").dim(3, 4).build());
+        List<List<String>> expected = (List2DBuilder.matrixOf("1,2,3,1,2,3,1,2,3").dim(3, 3).build());
+        List<List<String>> actual = List2DFunctions.removeLastColumn(original);
         assertEquals(actual.size(), expected.size());
 
         System.out.println("original = " + original);
@@ -97,10 +97,10 @@ public class MatrixFunctionsTest {
 
     @Test
     public void testInsertColumnsAt() throws Exception {
-        List<List<String>> expected = (MatrixBuilder.matrixOf("1,?,1,2,?,2,3,?,3").dim(3, 3).build());
-        List<List<String>> original = (MatrixBuilder.matrixOf("1,1,2,2,3,3").dim(3, 2).build());
+        List<List<String>> expected = (List2DBuilder.matrixOf("1,?,1,2,?,2,3,?,3").dim(3, 3).build());
+        List<List<String>> original = (List2DBuilder.matrixOf("1,1,2,2,3,3").dim(3, 2).build());
 
-        List<List<String>> actual = MatrixFunctions.insertColumnsAt(original, 1, () -> QMARK);
+        List<List<String>> actual = List2DFunctions.insertColumnsAt(original, 1, () -> QMARK);
 
         System.out.println("original = " + original);
         System.out.println("expected = " + expected);
@@ -116,11 +116,11 @@ public class MatrixFunctionsTest {
 
     @Test
     public void testRemoveRowsAtIndices() throws Exception {
-        List<List<String>> original = (MatrixBuilder.matrixOf("1,1,1,2,2,2,3,3,3,4,4,4,5,5,5").dim(5, 3).build());
-        List<List<String>> expected = (MatrixBuilder.matrixOf("2,2,2,4,4,4").dim(2, 3).build());
-        List<List<String>> actual = MatrixFunctions.removeRowsAt(original, 4);
-        actual = MatrixFunctions.removeRowsAt(actual, 2);
-        actual = MatrixFunctions.removeRowsAt(actual, 0);
+        List<List<String>> original = (List2DBuilder.matrixOf("1,1,1,2,2,2,3,3,3,4,4,4,5,5,5").dim(5, 3).build());
+        List<List<String>> expected = (List2DBuilder.matrixOf("2,2,2,4,4,4").dim(2, 3).build());
+        List<List<String>> actual = List2DFunctions.removeRowsAt(original, 4);
+        actual = List2DFunctions.removeRowsAt(actual, 2);
+        actual = List2DFunctions.removeRowsAt(actual, 0);
         assertEquals(actual.size(), expected.size());
 
         System.out.println("original = " + original);
@@ -137,9 +137,9 @@ public class MatrixFunctionsTest {
 
     @Test
     public void testRemoveLastRow() throws Exception {
-        List<List<String>> original = (MatrixBuilder.matrixOf("y,y,y,n,n,n,y,y,y").dim(3, 3).build());
-        List<List<String>> expected = (MatrixBuilder.matrixOf("y,y,y,n,n,n").dim(2, 3).build());
-        List<List<String>> actual = MatrixFunctions.removeLastRow(original);
+        List<List<String>> original = (List2DBuilder.matrixOf("y,y,y,n,n,n,y,y,y").dim(3, 3).build());
+        List<List<String>> expected = (List2DBuilder.matrixOf("y,y,y,n,n,n").dim(2, 3).build());
+        List<List<String>> actual = List2DFunctions.removeLastRow(original);
         assertEquals(actual.size(), expected.size());
 
         System.out.println("original = " + original);
@@ -156,10 +156,10 @@ public class MatrixFunctionsTest {
 
     @Test
     public void testInsertRowsAt() throws Exception {
-        List<List<String>> original = (MatrixBuilder.matrixOf("1,2,3,4,5,6,7,8,9").dim(3, 3).build());
-        List<List<String>> expected = (MatrixBuilder.matrixOf("1,2,3,?,?,?,4,5,6,?,?,?,7,8,9").dim(5, 3).build());
-        List<List<String>> actual = MatrixFunctions.insertRowsAt(original, 1, () -> QMARK);
-        actual = MatrixFunctions.insertRowsAt(actual, 3, () -> QMARK);
+        List<List<String>> original = (List2DBuilder.matrixOf("1,2,3,4,5,6,7,8,9").dim(3, 3).build());
+        List<List<String>> expected = (List2DBuilder.matrixOf("1,2,3,?,?,?,4,5,6,?,?,?,7,8,9").dim(5, 3).build());
+        List<List<String>> actual = List2DFunctions.insertRowsAt(original, 1, () -> QMARK);
+        actual = List2DFunctions.insertRowsAt(actual, 3, () -> QMARK);
 
         System.out.println("original = " + original);
         System.out.println("expected = " + expected);
@@ -177,9 +177,9 @@ public class MatrixFunctionsTest {
 
     @Test
     public void testTranspose() throws Exception {
-        List<List<String>> expected = (MatrixBuilder.matrixOf("1,2,3,1,2,3,1,2,3").dim(3, 3).build());
-        List<List<String>> original = (MatrixBuilder.matrixOf("1,2,3,?,?,?,1,2,3,?,?,?,1,2,3").dim(5, 3).build());
-        List<List<String>> actual = MatrixFunctions.transpose(original);
+        List<List<String>> expected = (List2DBuilder.matrixOf("1,2,3,1,2,3,1,2,3").dim(3, 3).build());
+        List<List<String>> original = (List2DBuilder.matrixOf("1,2,3,?,?,?,1,2,3,?,?,?,1,2,3").dim(5, 3).build());
+        List<List<String>> actual = List2DFunctions.transpose(original);
         //assertEquals(actual.size(), expected.size());
 
         System.out.println("original = " + original);
@@ -190,7 +190,7 @@ public class MatrixFunctionsTest {
 
         System.out.println("actual   = " + actual);
 
-        actual = MatrixFunctions.transpose(actual);
+        actual = List2DFunctions.transpose(actual);
 
         System.out.println("actual   = " + actual);
     }
@@ -214,7 +214,7 @@ public class MatrixFunctionsTest {
 
     @org.junit.Test
     public void testCopyRow() throws Exception {
-        List<List<String>> original = (MatrixBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N").dim(3, 4).build());
+        List<List<String>> original = (List2DBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N").dim(3, 4).build());
         List<String> actual = copyRow(original.get(2));
         List<String> expected = original.get(2);
         assertThat(actual, not(sameInstance(expected)));
@@ -223,8 +223,8 @@ public class MatrixFunctionsTest {
 
     @org.junit.Test
     public void testAddRow() throws Exception {
-        List<List<String>> original = (MatrixBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N").dim(3, 4).build());
-        List<List<String>> expected = (MatrixBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N,?,?,?,?").dim(4, 4).build());
+        List<List<String>> original = (List2DBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N").dim(3, 4).build());
+        List<List<String>> expected = (List2DBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N,?,?,?,?").dim(4, 4).build());
         List<String> expectedAddedRow = ListBuilder.ofList("?,?,?,?").build();
 
         List<List<String>> actual = addRow(original, QMARKS);
@@ -237,8 +237,8 @@ public class MatrixFunctionsTest {
 
     @org.junit.Test
     public void testAddColumn() throws Exception {
-        List<List<String>> original = (MatrixBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N").dim(3, 4).build());
-        List<List<String>> expected = (MatrixBuilder.matrixOf("Y,Y,Y,Y,?,Y,Y,N,N,?,Y,N,Y,N,?").dim(3, 5).build());
+        List<List<String>> original = (List2DBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N").dim(3, 4).build());
+        List<List<String>> expected = (List2DBuilder.matrixOf("Y,Y,Y,Y,?,Y,Y,N,N,?,Y,N,Y,N,?").dim(3, 5).build());
 
         List<List<String>> actual = addColumn(original, QMARKS);
 
@@ -266,8 +266,8 @@ public class MatrixFunctionsTest {
 
     @org.junit.Test
     public void testSwapRowsAt() throws Exception {
-        List<List<String>> original = (MatrixBuilder.matrixOf("A,A,A,A,B,B,B,B,C,C,C,C").dim(3, 4).build());
-        List<List<String>> expected = (MatrixBuilder.matrixOf("A,A,A,A,C,C,C,C,B,B,B,B").dim(3, 4).build());
+        List<List<String>> original = (List2DBuilder.matrixOf("A,A,A,A,B,B,B,B,C,C,C,C").dim(3, 4).build());
+        List<List<String>> expected = (List2DBuilder.matrixOf("A,A,A,A,C,C,C,C,B,B,B,B").dim(3, 4).build());
 
         List<List<String>> actual = swapRowsAt(original, 1, 2);
 
@@ -276,11 +276,11 @@ public class MatrixFunctionsTest {
 
     @org.junit.Test
     public void testSwapColumnsAt() throws Exception {
-        List<List<String>> original = (MatrixBuilder.matrixOf(
+        List<List<String>> original = (List2DBuilder.matrixOf(
                 "A,B,C,D," +
                         "A,B,C,D," +
                         "A,B,C,D").dim(3, 4).build());
-        List<List<String>> expected = (MatrixBuilder.matrixOf(
+        List<List<String>> expected = (List2DBuilder.matrixOf(
                 "A,D,C,B," +
                         "A,D,C,B," +
                         "A,D,C,B").dim(3, 4).build());
@@ -307,11 +307,11 @@ public class MatrixFunctionsTest {
 
     @Test
     public void testReplaceColumnsAt() throws Exception {
-        List<List<String>> original = (MatrixBuilder.matrixOf(
+        List<List<String>> original = (List2DBuilder.matrixOf(
                 "A,B,C,D," +
                         "A,B,C,D," +
                         "A,B,C,D").dim(3, 4).build());
-        List<List<String>> expected = (MatrixBuilder.matrixOf(
+        List<List<String>> expected = (List2DBuilder.matrixOf(
                 "A,E,C,D," +
                         "A,E,C,D," +
                         "A,E,C,D").dim(3, 4).build());

@@ -21,7 +21,7 @@ package de.adesso.tools.analysis.completeness.detailed;
 
 
 import com.codepoetics.protonpack.StreamUtils;
-import de.adesso.tools.common.MatrixBuilder;
+import de.adesso.tools.common.List2DBuilder;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 import javafx.collections.ObservableList;
@@ -137,8 +137,12 @@ public class ActionsTest {
     @Test
     public void testA5OK() {
         int expected = 0;
-        List<String> rf = StringListBuilder.on("N,-,-").build();
-        List<String> ri = StringListBuilder.on("N,Y,N").build();
+//        List<String> rf = StringListBuilder.on("N,-,-").build();
+//        List<String> ri = StringListBuilder.on("N,Y,N").build();
+
+        List<String> rf = StringListBuilder.on("-,Y,-,Y").build();
+        List<String> ri = StringListBuilder.on("N,Y,Y,Y").build();
+
 
         List<List<String>> actual = A5.apply(rf, ri);
 
@@ -172,12 +176,12 @@ public class ActionsTest {
 
     @Test
     public void testA5Consolidate() {
-        ObservableList<ObservableList<String>> conditions = adapt(MatrixBuilder.matrixOf("N,N,Y,N,Y,N,-,Y,-").dim(3, 3).build());
+        ObservableList<ObservableList<String>> conditions = adapt(List2DBuilder.matrixOf("N,N,Y,N,Y,N,-,Y,-").dim(3, 3).build());
         ObservableList<ObservableList<String>>[] observables = new ObservableList[]{conditions};
         /*
         for (int i = 0; i < conditions.size(); i++) {
-            ObservableList<ObservableList<String>> tmp = MatrixFunctions.removeRowsAt(observables[0],i);
-            ObservableList<ObservableList<String>> cur = MatrixFunctions.transpose(tmp);
+            ObservableList<ObservableList<String>> tmp = List2DFunctions.removeRowsAt(observables[0],i);
+            ObservableList<ObservableList<String>> cur = List2DFunctions.transpose(tmp);
             Map<ObservableList<String>, List<Integer>> map = new HashMap<>();
             IntStream.range(0,cur.size()).forEach(j -> map
                     .compute(cur.get(j), (k, v) -> (v == null) ? newWithValue(j) : addValue(v,j)));
@@ -190,7 +194,7 @@ public class ActionsTest {
                             if(r==indices.size()-1) {
                                 observables[0].get(row).set(indices.get(r), DASH);
                             } else {
-                                observables[0] = MatrixFunctions.removeColumnsAt(observables[0], indices.get(r));
+                                observables[0] = List2DFunctions.removeColumnsAt(observables[0], indices.get(r));
                             }
                         }
                     });

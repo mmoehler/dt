@@ -41,7 +41,7 @@ import java.util.function.Supplier;
 import java.util.stream.IntStream;
 
 import static de.adesso.tools.functions.Adapters.Matrix.adapt;
-import static de.adesso.tools.functions.MatrixFunctions.*;
+import static de.adesso.tools.functions.List2DFunctions.*;
 import static java.lang.Math.min;
 import static java.util.stream.Collectors.toList;
 

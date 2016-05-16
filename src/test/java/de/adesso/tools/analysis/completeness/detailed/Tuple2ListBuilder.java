@@ -19,7 +19,7 @@
 
 package de.adesso.tools.analysis.completeness.detailed;
 
-import de.adesso.tools.common.MatrixBuilder;
+import de.adesso.tools.common.List2DBuilder;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 
@@ -31,11 +31,11 @@ import java.util.stream.Collectors;
  * Created by mmoehler ofList 19.03.16.
  */
 class Tuple2ListBuilder {
-    private final MatrixBuilder internalBulder;
+    private final List2DBuilder internalBulder;
 
 
     protected Tuple2ListBuilder(@Nonnull String data) {
-        this.internalBulder = MatrixBuilder.matrixOf(data);
+        this.internalBulder = List2DBuilder.matrixOf(data);
     }
 
     @Nonnull

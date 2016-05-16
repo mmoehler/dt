@@ -31,17 +31,17 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
-import static de.adesso.tools.analysis.completeness.detailed.ConsolidateRules.consolidateRules;
+import static de.adesso.tools.analysis.completeness.detailed.ConsolidateConditions.consolidateConditions;
 
 /**
  * Created by mmoehler on 08.05.16.
  */
-public class ConsolidateRulesTest {
+public class ConsolidateConditionsTest {
 
     @Test
     public void testApply() throws Exception {
         ObservableList2DBuilder input = ObservableList2DBuilder.observable2DOf("Y,Y,N,N,N,Y").dim(2, 3);
-        final ObservableList<ObservableList<String>> actual = consolidateRules().apply(input.build());
+        final ObservableList<ObservableList<String>> actual = consolidateConditions().apply(input.build());
         System.out.println("actual = " + actual);
     }
 
@@ -51,7 +51,7 @@ public class ConsolidateRulesTest {
         Map<List<String>,List<Integer>> expected = Maps.newHashMap();
         expected.put(Lists.newArrayList("Y","-"), Lists.newArrayList(0,2));
         expected.put(Lists.newArrayList("N","N"), Lists.newArrayList(1,3));
-        final LinkedListMultimap<List<String>, Integer> actual = ConsolidateRules.determineCountOfDuplicateRules(input.build());
+        final LinkedListMultimap<List<String>, Integer> actual = ConsolidateConditions.determineCountOfDuplicateRules(input.build());
         Assert.assertEquals(actual.asMap(),expected);
     }
 
@@ -59,7 +59,7 @@ public class ConsolidateRulesTest {
     public void testDetermineIndicesOfDashedIndicators() throws Exception {
         ObservableList2DBuilder input = ObservableList2DBuilder.observable2DOf("Y,-,N,N,Y,N,N,-").dim(4, 2);
         List<Integer> expected = Lists.newArrayList(1);
-        List<Integer> actual = ConsolidateRules.determineIndicesOfDashedIndicators(input.build(),3);
+        List<Integer> actual = ConsolidateConditions.determineIndicesOfDashedIndicators(input.build(),3);
         Assert.assertEquals(actual,expected);
 
     }
@@ -68,7 +68,7 @@ public class ConsolidateRulesTest {
     public void testRowsWithAllPossibleIndicators() throws Exception {
         ObservableList2DBuilder input = ObservableList2DBuilder.observable2DOf("Y,Y,N,N,Y,N,N,N").dim(4, 2);
         List<Boolean> expected = Lists.newArrayList(false, false, true, false);
-        List<Boolean> actual = ConsolidateRules.rowsWithAllPossibleIndicators(input.build());
+        List<Boolean> actual = ConsolidateConditions.rowsWithAllPossibleIndicators(input.build());
         Assert.assertEquals(actual,expected);
     }
 
@@ -86,7 +86,7 @@ public class ConsolidateRulesTest {
     public void testCleanupConditions() throws Exception {
         ObservableList2DBuilder input = ObservableList2DBuilder.observable2DOf("Y,Y,N,N,Y,N,Y,N").dim(2, 4);
         final ObservableList<ObservableList<String>> actual =
-                consolidateRules().cleanupConditions(input.build(),0, Collections.emptyList());
+                consolidateConditions().cleanupConditions(input.build(),0, Collections.emptyList());
         System.out.println("actual = " + actual);
 
     }

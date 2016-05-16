@@ -17,24 +17,12 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.fixtures;
 
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.UnaryOperator;
+import de.adesso.tools.ui.DeclarationTableViewModel;
 
 /**
- * Created by mmoehler ofList 05.05.16.
+ * Created by mmoehler ofList 06.03.16.
  */
-public abstract class AbstractList2DOperator implements UnaryOperator<List<String>> {
-    protected final static int[] EMPTY_INT_ARRAY = {};
-    protected final int[] positions;
-
-    public AbstractList2DOperator(int pos) {
-        this.positions = new int[]{pos};
-    }
-
-    public AbstractList2DOperator(int...pos) {
-        this.positions = Arrays.copyOf(pos,pos.length);
-    }
+abstract class DeclarationsTableViewBuilder<T extends DeclarationTableViewModel> extends TableViewBuilder<T> {
 }

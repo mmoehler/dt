@@ -23,10 +23,7 @@ import de.adesso.tools.Dump;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
@@ -70,12 +67,11 @@ public class ObservableList2DFunctions {
     }
 
     public static Function<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> transpose() {
-        return m -> range(0, m.get(0).size())
-                .mapToObj(r ->
-                        range(0, m.size())
-                                .mapToObj(c -> m.get(c).get(r))
-                                .collect(toObservableList()))
-                .collect(toObservableList());
+        return m -> {
+            return range(0, m.get(0).size()).mapToObj(r ->
+                    range(0, m.size()).mapToObj(c -> m.get(c).get(r)).collect(toObservableList())
+            ).collect(toObservableList());
+        };
     }
 
 
@@ -83,7 +79,7 @@ public class ObservableList2DFunctions {
 
     // -----------------
 
-    static class AddColumn extends AbstractList2DOperator {
+    static class AddColumn extends AbstractObservableList2DOperator {
 
         public AddColumn() {
             super(0);
@@ -98,7 +94,7 @@ public class ObservableList2DFunctions {
     }
 
 
-    static class MoveColumn extends AbstractList2DOperator {
+    static class MoveColumn extends AbstractObservableList2DOperator {
 
         private final int newPos;
 
@@ -115,7 +111,7 @@ public class ObservableList2DFunctions {
         }
     }
 
-    static class RemoveColumn extends AbstractList2DOperator {
+    static class RemoveColumn extends AbstractObservableList2DOperator {
 
         public RemoveColumn(int... morePos) {
             super(morePos);
@@ -134,7 +130,7 @@ public class ObservableList2DFunctions {
     }
 
 
-    static class InsertColumn extends AbstractList2DOperator {
+    static class InsertColumn extends AbstractObservableList2DOperator {
 
         private final String defaultData;
 
@@ -151,7 +147,7 @@ public class ObservableList2DFunctions {
         }
     }
 
-    static class ReplaceColumn extends AbstractList2DOperator {
+    static class ReplaceColumn extends AbstractObservableList2DOperator {
 
         private final Iterator<String> newData;
 

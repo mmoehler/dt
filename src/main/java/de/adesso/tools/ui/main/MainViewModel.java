@@ -10,7 +10,7 @@ import de.adesso.tools.analysis.structure.StructuralAnalysis;
 import de.adesso.tools.events.*;
 import de.adesso.tools.exception.ExceptionHandler;
 import de.adesso.tools.functions.DtFunctions;
-import de.adesso.tools.functions.MatrixFunctions;
+import de.adesso.tools.functions.List2DFunctions;
 import de.adesso.tools.functions.MoreCollectors;
 import de.adesso.tools.io.DTDataPacket;
 import de.adesso.tools.model.ActionDecl;
@@ -42,7 +42,7 @@ import static com.google.common.collect.Multimaps0.emptyMultimap;
 import static de.adesso.tools.analysis.completeness.detailed.ConditionDetailedCompletenessCheck.isFormalComplete;
 import static de.adesso.tools.functions.Adapters.Matrix.adapt;
 import static de.adesso.tools.functions.DtFunctions.*;
-import static de.adesso.tools.functions.MatrixFunctions.insertColumnsAt;
+import static de.adesso.tools.functions.List2DFunctions.insertColumnsAt;
 import static de.adesso.tools.ui.Notifications.*;
 import static java.util.Collections.emptyList;
 
@@ -104,9 +104,9 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onAddRuleDef(@Observes AddRuleDefEvent event) {
-        List<List<String>> newDefns = MatrixFunctions.addColumn(adapt(this.conditionDefinitions), () -> QMARK);
+        List<List<String>> newDefns = List2DFunctions.addColumn(adapt(this.conditionDefinitions), () -> QMARK);
         this.conditionDefinitions.clear();
-        List<List<String>> newDefns0 = MatrixFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
+        List<List<String>> newDefns0 = List2DFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
         this.actionDefinitions.clear();
         publish(ADD_RULE.name(), adapt(newDefns), adapt(newDefns0));
     }
@@ -141,7 +141,7 @@ public class MainViewModel implements ViewModel {
 
         // #2 If there are at least one condition defined, then this must also be updated
         if (!this.conditionDefinitions.isEmpty()) {
-            List<List<String>> newDefns = MatrixFunctions.addRow(adapt(this.conditionDefinitions), () -> QMARK);
+            List<List<String>> newDefns = List2DFunctions.addRow(adapt(this.conditionDefinitions), () -> QMARK);
             this.conditionDefinitions.clear();
             adapt(newDefns).stream().forEach(this.conditionDefinitions::add);
         }
@@ -170,7 +170,7 @@ public class MainViewModel implements ViewModel {
                 newDefns.add(indicators);
             }
         } else {
-            newDefns = MatrixFunctions.addRow(adapt(this.actionDefinitions), () -> DASH);
+            newDefns = List2DFunctions.addRow(adapt(this.actionDefinitions), () -> DASH);
 
         }
         this.actionDefinitions.clear();
@@ -226,9 +226,9 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onAddElseRule(@Observes AddElseRuleEvent event) {
-        List<List<String>> newDefns = MatrixFunctions.addColumn(adapt(this.conditionDefinitions), () -> QMARK);
+        List<List<String>> newDefns = List2DFunctions.addColumn(adapt(this.conditionDefinitions), () -> QMARK);
         this.conditionDefinitions.clear();
-        List<List<String>> newDefns0 = MatrixFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
+        List<List<String>> newDefns0 = List2DFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
         this.actionDefinitions.clear();
         publish(ADD_ELSE_RULE.name(), adapt(newDefns), adapt(newDefns0));
     }

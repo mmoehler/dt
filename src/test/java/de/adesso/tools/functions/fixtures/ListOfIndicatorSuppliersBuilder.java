@@ -17,40 +17,30 @@
  * under the License.
  */
 
-package de.adesso.tools.functions;
+package de.adesso.tools.functions.fixtures;
 
-import javafx.collections.ObservableList;
-import javafx.scene.control.TableView;
+import de.adesso.tools.ui.PossibleIndicatorsSupplier;
 
-import javax.annotation.Nonnull;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Created by mmoehler ofList 06.03.16.
  */
-class DefinitionsTableViewBuilder extends TableViewBuilder<ObservableList<String>> {
+public class ListOfIndicatorSuppliersBuilder {
+    List<PossibleIndicatorsSupplierBuilder> builders = new LinkedList<>();
 
-    public DefinitionsTableViewBuilder() {
+    public static ListOfIndicatorSuppliersBuilder newBuilder() {
+        return new ListOfIndicatorSuppliersBuilder();
     }
 
-    public DefinitionsTableViewDataBuilder<DefinitionsTableViewBuilder> dim(int rows, int cols) {
-        return new DefinitionsTableViewDataBuilder<>(rows, cols, this, (c) -> {
-            tableView.getItems().clear();
-            c.forEach(tableView.getItems()::add);
-        });
+    public ListOfIndicatorSuppliersBuilder add(String indicators) {
+        builders.add(PossibleIndicatorsSupplierBuilder.newBuilder().withIndicators(indicators));
+        return this;
     }
 
-    @Nonnull
-    @Override
-    public TableView<ObservableList<String>> build() {
-        return super.build();
-    }
-
-    @Override
-    protected int getColCount() {
-        return tableView.getItems().get(0).size();
+    public List<PossibleIndicatorsSupplier> build() {
+        return builders.stream().map(PossibleIndicatorsSupplierBuilder::build).collect(Collectors.toList());
     }
 }
-
-
-
-
