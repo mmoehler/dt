@@ -21,7 +21,7 @@ package de.adesso.tools.analysis.structure;
 
 import com.google.common.collect.Lists;
 import de.adesso.tools.Dump;
-import de.adesso.tools.common.ObservableList2DBuilder;
+import de.adesso.tools.common.builder.ObservableList2DBuilder;
 import de.adesso.tools.util.tuple.Tuple2;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

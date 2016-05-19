@@ -19,8 +19,8 @@
 
 package de.adesso.tools.functions;
 
-import de.adesso.tools.common.List2DBuilder;
-import de.adesso.tools.common.ListBuilder;
+import de.adesso.tools.common.builder.List2DBuilder;
+import de.adesso.tools.common.builder.ListBuilder;
 import javafx.collections.FXCollections;
 import org.testng.annotations.Test;
 

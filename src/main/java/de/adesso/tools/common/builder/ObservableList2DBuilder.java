@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.tools.common;
+package de.adesso.tools.common.builder;
 
 import de.adesso.tools.functions.MoreCollectors;
 import de.adesso.tools.functions.ObservableList2DFunctions;

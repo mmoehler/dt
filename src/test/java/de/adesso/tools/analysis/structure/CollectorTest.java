@@ -24,7 +24,7 @@ import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import de.adesso.tools.Dump;
-import de.adesso.tools.common.ObservableList2DBuilder;
+import de.adesso.tools.common.builder.ObservableList2DBuilder;
 import de.adesso.tools.functions.ObservableList2DFunctions;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;

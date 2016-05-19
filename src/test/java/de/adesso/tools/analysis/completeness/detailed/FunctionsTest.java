@@ -19,8 +19,8 @@
 
 package de.adesso.tools.analysis.completeness.detailed;
 
-import de.adesso.tools.common.List2DBuilder;
-import de.adesso.tools.common.ListBuilder;
+import de.adesso.tools.common.builder.List2DBuilder;
+import de.adesso.tools.common.builder.ListBuilder;
 import javafx.collections.ObservableList;
 import org.testng.annotations.Test;
 
@@ -28,7 +28,7 @@ import java.util.*;
 import java.util.function.BinaryOperator;
 
 import static de.adesso.tools.analysis.completeness.detailed.Functions.*;
-import static de.adesso.tools.common.List2DBuilder.observable;
+import static de.adesso.tools.common.builder.List2DBuilder.observable;
 import static de.adesso.tools.functions.Adapters.Matrix.adapt;
 import static de.adesso.tools.functions.List2DFunctions.transpose;
 import static org.hamcrest.MatcherAssert.assertThat;

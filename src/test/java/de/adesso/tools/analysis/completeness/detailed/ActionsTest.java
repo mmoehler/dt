@@ -21,7 +21,7 @@ package de.adesso.tools.analysis.completeness.detailed;
 
 
 import com.codepoetics.protonpack.StreamUtils;
-import de.adesso.tools.common.List2DBuilder;
+import de.adesso.tools.common.builder.List2DBuilder;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 import javafx.collections.ObservableList;
@@ -137,14 +137,25 @@ public class ActionsTest {
     @Test
     public void testA5OK() {
         int expected = 0;
+//        List<String> rf = StringListBuilder.on("-,-,-").build();
+//        List<String> ri = StringListBuilder.on("Y,Y,N").build();
+
 //        List<String> rf = StringListBuilder.on("N,-,-").build();
 //        List<String> ri = StringListBuilder.on("N,Y,N").build();
 
-        List<String> rf = StringListBuilder.on("-,Y,-,Y").build();
-        List<String> ri = StringListBuilder.on("N,Y,Y,Y").build();
+//        List<String> rf = StringListBuilder.on("-,N,-").build();
+//        List<String> ri = StringListBuilder.on("N,N,Y").build();
 
 
-        List<List<String>> actual = A5.apply(rf, ri);
+        List<String> rf = StringListBuilder.on("-,-,-").build();
+        List<String> ri = StringListBuilder.on("Y,Y,N").build();
+
+
+//        List<String> rf = StringListBuilder.on("-,Y,-,Y").build();
+//        List<String> ri = StringListBuilder.on("N,-,Y,Y").build();
+
+
+        List<List<String>> actual = _A5.apply(rf, ri);
 
         dumpTableItems("ACTUAL", actual);
 

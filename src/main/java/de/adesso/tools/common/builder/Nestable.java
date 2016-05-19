@@ -17,12 +17,12 @@
  * under the License.
  */
 
-package de.adesso.tools.functions.chained.third;
+package de.adesso.tools.common.builder;
 
 /**
- * Created by moehler ofList 11.03.2016.
+ * Created by moehler on 12.05.2016.
  */
-@FunctionalInterface
-public interface Callback<O> {
-    void call(O o);
+public interface Nestable<P,O> {
+    public P done();
+    public O build();
 }

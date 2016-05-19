@@ -21,14 +21,14 @@ package de.adesso.tools.functions;
 
 import com.google.common.collect.Lists;
 import de.adesso.tools.Dump;
-import de.adesso.tools.common.List2DBuilder;
+import de.adesso.tools.common.builder.List2DBuilder;
 import javafx.collections.ObservableList;
 import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.stream.Stream;
 
-import static de.adesso.tools.common.List2DBuilder.observable;
+import static de.adesso.tools.common.builder.List2DBuilder.observable;
 import static de.adesso.tools.functions.MoreCollectors.toObservableList;
 import static de.adesso.tools.functions.MoreCollectors.toSingleObject;
 import static de.adesso.tools.functions.ObservableList2DFunctions.*;

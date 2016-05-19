@@ -23,6 +23,6 @@ package de.adesso.tools.functions.chained.third;
  * Created by moehler on 12.05.2016.
  */
 public interface Nestable<P,O> {
-    public P done();
-    public O build();
+    P done();
+    O build();
 }

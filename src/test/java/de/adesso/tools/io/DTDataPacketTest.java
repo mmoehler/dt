@@ -19,7 +19,7 @@
 
 package de.adesso.tools.io;
 
-import de.adesso.tools.common.List2DBuilder;
+import de.adesso.tools.common.builder.List2DBuilder;
 import de.adesso.tools.functions.Adapters;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;

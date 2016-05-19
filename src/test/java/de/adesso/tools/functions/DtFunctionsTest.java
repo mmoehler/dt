@@ -20,8 +20,8 @@
 package de.adesso.tools.functions;
 
 import de.adesso.tools.Dump;
-import de.adesso.tools.common.ListBuilder;
-import de.adesso.tools.common.ObservableList2DBuilder;
+import de.adesso.tools.common.builder.ListBuilder;
+import de.adesso.tools.common.builder.ObservableList2DBuilder;
 import de.adesso.tools.functions.fixtures.TableColumnBuilder;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.PossibleIndicatorsSupplier;

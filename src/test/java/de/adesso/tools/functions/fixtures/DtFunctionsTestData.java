@@ -25,7 +25,7 @@ import de.adesso.tools.Dump;
 import de.adesso.tools.analysis.structure.DefaultStructuralAnalysis;
 import de.adesso.tools.analysis.structure.Indicator;
 import de.adesso.tools.analysis.structure.StructuralAnalysisResultEmitter;
-import de.adesso.tools.common.List2DBuilder;
+import de.adesso.tools.common.builder.List2DBuilder;
 import de.adesso.tools.functions.List2DFunctions;
 import de.adesso.tools.functions.MoreCollectors;
 import de.adesso.tools.util.tuple.Tuple;

@@ -20,7 +20,7 @@
 package de.adesso.tools.analysis.completeness.detailed;
 
 import com.codepoetics.protonpack.StreamUtils;
-import de.adesso.tools.common.List2DBuilder;
+import de.adesso.tools.common.builder.List2DBuilder;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 

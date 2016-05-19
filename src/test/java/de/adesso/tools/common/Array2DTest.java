@@ -17,12 +17,35 @@
  * under the License.
  */
 
-package de.adesso.tools.functions.chained.third;
+package de.adesso.tools.common;
+
+import de.adesso.tools.Dump;
+import de.adesso.tools.common.builder.Array2D;
+import org.testng.annotations.Test;
 
 /**
- * Created by moehler ofList 11.03.2016.
+ * Created by moehler on 18.05.2016.
  */
-@FunctionalInterface
-public interface Callback<O> {
-    void call(O o);
+public class Array2DTest {
+
+    @Test
+    public void testSet() throws Exception {
+        final Array2D array2D = Array2D.newBuilder()
+                .fillWith("-")
+                .dimension()
+                .rows(4)
+                .columns(2)
+                .done()
+                .build();
+
+        array2D.set(2,1,"Y");
+
+        Dump.arry2DItems("ARRAY_2D", array2D.intern());
+
+    }
+
+    @Test
+    public void testGet() throws Exception {
+
+    }
 }

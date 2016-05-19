@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.tools.functions.chained.third;
+package de.adesso.tools.common.builder;
 
 /**
  * Created by moehler ofList 11.03.2016.

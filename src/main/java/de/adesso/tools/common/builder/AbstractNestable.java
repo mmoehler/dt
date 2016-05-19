@@ -17,12 +17,25 @@
  * under the License.
  */
 
-package de.adesso.tools.functions.chained.third;
+package de.adesso.tools.common.builder;
+
 
 /**
- * Created by moehler ofList 11.03.2016.
+ * Created by moehler on 12.05.2016.
  */
-@FunctionalInterface
-public interface Callback<O> {
-    void call(O o);
+public abstract class AbstractNestable<P,O> implements Nestable<P,O> {
+
+    private final P parent;
+    private final Callback<O> callback;
+
+    public AbstractNestable(P parent, Callback<O> callback) {
+        this.parent = parent;
+        this.callback = callback;
+    }
+
+    @Override
+    public P done() {
+        callback.call(this.build());
+        return parent;
+    }
 }

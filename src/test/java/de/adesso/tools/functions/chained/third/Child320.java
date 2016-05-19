@@ -39,13 +39,13 @@ public class Child320 extends Model {
         return new Builder(null, null);
     }
 
-    public static Builder newBuilder(Root300.Builder parent, Callback<Root300.Builder, Child320> callback) {
+    public static Builder newBuilder(Root300.Builder parent, Callback<Child320> callback) {
         return new Builder(parent, callback);
     }
 
     public static class Builder extends AbstractNestable<Root300.Builder, Child320> {
         String name;
-        public Builder(Root300.Builder parent, Callback<Root300.Builder, Child320> callback) {
+        public Builder(Root300.Builder parent, Callback<Child320> callback) {
             super(parent, callback);
         }
 

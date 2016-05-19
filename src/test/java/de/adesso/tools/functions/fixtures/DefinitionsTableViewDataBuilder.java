@@ -19,12 +19,12 @@
 
 package de.adesso.tools.functions.fixtures;
 
-import de.adesso.tools.common.List2DBuilder;
+import de.adesso.tools.common.builder.List2DBuilder;
 import de.adesso.tools.functions.chained.first.AbstractSubBuilder;
 import de.adesso.tools.functions.chained.first.Callback;
 import javafx.collections.ObservableList;
 
-import static de.adesso.tools.common.List2DBuilder.observable;
+import static de.adesso.tools.common.builder.List2DBuilder.observable;
 
 /**
  * Created by mmoehler ofList 06.03.16.

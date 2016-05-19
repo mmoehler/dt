@@ -22,6 +22,7 @@ package de.adesso.tools;
 import com.codepoetics.protonpack.Indexed;
 import javafx.collections.ObservableList;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -65,6 +66,12 @@ public class Dump {
     public static <T> void indexed(String msg, Indexed<T> i) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
             System.out.println(String.format("<%d:%s>",i.getIndex(), String.valueOf(i.getValue())));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    public static <E> void arry2DItems(String msg, E[][] a) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        Arrays.stream(a).forEach(i -> System.out.println("\t" + Arrays.toString(i)));
         System.out.println("<<<<<<<<<<\n");
     }
 }

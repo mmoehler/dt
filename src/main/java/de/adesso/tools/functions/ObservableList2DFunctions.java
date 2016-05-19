@@ -30,7 +30,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static de.adesso.tools.common.ObservableList2DBuilder.observable2DOf;
+import static de.adesso.tools.common.builder.ObservableList2DBuilder.observable2DOf;
 import static de.adesso.tools.functions.MoreCollectors.toObservableList;
 import static de.adesso.tools.functions.MoreCollectors.toSingleObject;
 import static java.util.stream.IntStream.range;

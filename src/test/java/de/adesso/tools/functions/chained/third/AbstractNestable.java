@@ -25,9 +25,9 @@ package de.adesso.tools.functions.chained.third;
 public abstract class AbstractNestable<P,O> implements Nestable<P,O> {
 
     private final P parent;
-    private final Callback<P,O> callback;
+    private final Callback<O> callback;
 
-    public AbstractNestable(P parent, Callback<P, O> callback) {
+    public AbstractNestable(P parent, Callback<O> callback) {
         this.parent = parent;
         this.callback = callback;
     }

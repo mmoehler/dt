@@ -17,46 +17,56 @@
  * under the License.
  */
 
-package de.adesso.tools.functions.chained.third;
+package de.adesso.tools.common.builder;
 
-import de.adesso.tools.functions.chained.second.Model;
+import javax.annotation.Nonnull;
 
 /**
- * Created by moehler on 11.05.2016.
+ * Created by moehler on 18.05.2016.
  */
-public class Child310 extends Model {
+public class Dimension {
+    int rows, columns;
 
-    public Child310(String name) {
-        super(name);
-    }
-
-    private Child310(Builder builder) {
-        super(builder.name);
+    private Dimension(Builder builder) {
+        rows = builder.rows;
+        columns = builder.columns;
     }
 
     public static Builder newBuilder() {
-        return new Builder(null, null);
+        return new Builder();
     }
 
-    public static Builder newBuilder(Root300.Builder parent, Callback<Child310> callback) {
+    public static Builder newBuilder(Array2D.Builder parent, Callback<Dimension> callback) {
         return new Builder(parent, callback);
     }
 
-    public static class Builder extends AbstractNestable<Root300.Builder, Child310> {
-        String name;
-        public Builder(Root300.Builder parent, Callback<Child310> callback) {
+    public static class Builder extends AbstractNestable<Array2D.Builder, Dimension>{
+        private int rows;
+        private int columns;
+
+        public Builder() {
+            super(null, null);
+        }
+
+        public Builder(Array2D.Builder parent, Callback<Dimension> callback) {
             super(parent, callback);
         }
 
-        public Builder withName(String name) {
-            this.name = name;
+        @Nonnull
+        public Builder rows(int val) {
+            rows = val;
             return this;
         }
 
-        @Override
-        public Child310 build() {
-            return new Child310(this);
+        @Nonnull
+        public Builder columns(int val) {
+            columns = val;
+            return this;
+        }
+
+        @Nonnull
+        public Dimension build() {
+            return new Dimension(this);
         }
     }
-
 }

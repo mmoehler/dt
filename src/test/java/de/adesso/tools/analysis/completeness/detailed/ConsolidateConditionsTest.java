@@ -22,7 +22,7 @@ package de.adesso.tools.analysis.completeness.detailed;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import de.adesso.tools.common.ObservableList2DBuilder;
+import de.adesso.tools.common.builder.ObservableList2DBuilder;
 import javafx.collections.ObservableList;
 import org.testng.Assert;
 import org.testng.annotations.Test;
