@@ -40,6 +40,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * Created by mmoehler on 15.05.16.
  */
+@SuppressWarnings("unchecked")
 public class ColumnDifference implements Function<Tuple2<List<String>, List<String>>, List<List<String>>> {
 
     private static final List<List<String>> INTERNAL = List2DBuilder.matrixOf("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();

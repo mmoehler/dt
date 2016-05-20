@@ -49,6 +49,7 @@ import static java.util.stream.Collectors.toList;
  * General Decisiontable Functions
  * Created by moehler ofList 11.01.2016.
  */
+@SuppressWarnings("unchecked")
 public final class DtFunctions {
 
     public static final String SPLITEX = "[,;]";

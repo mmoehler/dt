@@ -147,15 +147,15 @@ public class ActionsTest {
 //        List<String> ri = StringListBuilder.on("N,N,Y").build();
 
 
-        List<String> rf = StringListBuilder.on("-,-,-").build();
-        List<String> ri = StringListBuilder.on("Y,Y,N").build();
+//        List<String> rf = StringListBuilder.on("-,-,-").build();
+//        List<String> ri = StringListBuilder.on("Y,Y,N").build();
 
 
-//        List<String> rf = StringListBuilder.on("-,Y,-,Y").build();
-//        List<String> ri = StringListBuilder.on("N,-,Y,Y").build();
+        List<String> rf = StringListBuilder.on("-,Y,-,Y").build();
+        List<String> ri = StringListBuilder.on("N,-,Y,Y").build();
 
 
-        List<List<String>> actual = _A5.apply(rf, ri);
+        List<List<String>> actual = __A5.apply(rf, ri);
 
         dumpTableItems("ACTUAL", actual);
 
@@ -167,6 +167,7 @@ public class ActionsTest {
         List<String> rf = StringListBuilder.on("Y,N,-").build();
         List<String> ri = StringListBuilder.on("N,Y,N").build();
 
+        //noinspection unchecked
         Function<List<Tuple2<String, String>>, Integer>[] conditions = new Function[]{
                 B1, B2, B3, B4
         };
@@ -188,7 +189,7 @@ public class ActionsTest {
     @Test
     public void testA5Consolidate() {
         ObservableList<ObservableList<String>> conditions = adapt(List2DBuilder.matrixOf("N,N,Y,N,Y,N,-,Y,-").dim(3, 3).build());
-        ObservableList<ObservableList<String>>[] observables = new ObservableList[]{conditions};
+        @SuppressWarnings("unchecked") ObservableList<ObservableList<String>>[] observables = new ObservableList[]{conditions};
         /*
         for (int i = 0; i < conditions.size(); i++) {
             ObservableList<ObservableList<String>> tmp = List2DFunctions.removeRowsAt(observables[0],i);

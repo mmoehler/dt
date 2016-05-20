@@ -66,6 +66,7 @@ import static de.adesso.tools.functions.DtFunctions.*;
 import static de.adesso.tools.functions.MoreCollectors.toSingleObject;
 import static de.adesso.tools.ui.Notifications.EV_CONSOLIDATE_RULES;
 
+@SuppressWarnings("unchecked")
 public class MainView implements FxmlView<MainViewModel> {
 
     public static final String COND_ROW_HEADER = "C%02d";

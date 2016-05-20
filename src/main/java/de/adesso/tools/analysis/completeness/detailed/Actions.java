@@ -20,13 +20,14 @@
 package de.adesso.tools.analysis.completeness.detailed;
 
 import com.codepoetics.protonpack.StreamUtils;
-import com.google.common.collect.ImmutableList;
 import de.adesso.tools.common.builder.List2DBuilder;
+import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 
 import java.util.*;
 import java.util.function.BiFunction;
 import java.util.function.Function;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -76,68 +77,22 @@ public class Actions {
                 return List2DBuilder.matrixOf(processed).dim(processed.size(), 1).build();
             };
 
-    public static BiFunction<List<String>, List<String>, List<List<String>>> A5 =
-            (rf, ri) -> {
-                System.out.println(String.format("A5 invoked with %s, %s!", rf, ri));
-
-                // counting dashes
-                long dashCount = rf.stream().filter(s -> isDASH(s)).count();
-
-                List<List<String>> result = List2DBuilder.empty().dim(rf.size(), (int) dashCount).build();
-
-                int countDashesSeen = 0;
-
-                for (int i = 0; i < rf.size(); i++) {
-                    String l = rf.get(i);
-                    String r = ri.get(i);
-                    if (isDASH(l)) {
-                        if (countDashesSeen > 0) {
-                            for (int j = 0; j < countDashesSeen; j++) {
-                                result.get(i).add(DASH);
-                            }
-                            for (int j = 0; j < i; j++) {
-                                result.get(j).add(ri.get(j));
-                            }
-                        }
-                        String s = new String();
-                        switch (r) {
-                            case YES:
-                                s = NO;
-                                break;
-                            case NO:
-                                s = YES;
-                                break;
-                            case DASH:
-                                s = DASH;
-                                break;
-                            default:
-                                // nop
-                                ;
-                        }
-                        result.get(i).add(s);
-                        countDashesSeen++;
-                    } else {
-                        result.get(i).add(l);
-                    }
-                }
-                return result;
-            };
-
-    enum I {
-        Y("Y", 0), N("N", 1), D("-", 2), E("E", 3);
+    enum Indicator {
+        Y("Y", 0), N("N", 1), D("-", 2);
 
         final int index;
         final String code;
 
-        I(String code, int index) {
+        Indicator(String code, int index) {
             this.code = code;
             this.index = index;
         }
 
-        static Optional<I> from(String code) {
-            return Arrays.stream(I.values())
+        static Indicator from(String code) {
+            return Arrays.stream(Indicator.values())
                     .filter(e -> e.code.equals(code))
-                    .findFirst();
+                    .findFirst()
+                    .orElseThrow(exceptionSupplier("Unknown code < %s >!", code));
         }
 
         public String code() {
@@ -149,14 +104,23 @@ public class Actions {
         }
     }
 
+    private static Supplier<IllegalStateException> exceptionSupplier(String message) {
+        return () -> new IllegalStateException(message);
+    }
 
-    static I T[][] = {
+    private static Supplier<IllegalStateException> exceptionSupplier(String format, Object...args) {
+        return () -> new IllegalStateException(String.format(format, args));
+    }
+
+
+    static Indicator ProcessingRules[][] = {
                   /*  Y    N    D    */
-            /*Y*/ {I.Y, I.E, I.Y,},
-            /*N*/ {I.E, I.N, I.N,},
-            /*D*/ {I.N, I.Y, I.D}
+            /*Y*/ {Indicator.Y, null, Indicator.Y,},
+            /*N*/ {null, Indicator.N, Indicator.N,},
+            /*D*/ {Indicator.N, Indicator.Y, Indicator.D}
     };
-    public static BiFunction<List<String>, List<String>, List<List<String>>> _A5 =
+
+    public static BiFunction<List<String>, List<String>, List<List<String>>> A5 =
             (rf, ri) -> {
                 System.out.println(String.format("A5 invoked with %s, %s!", rf, ri));
 
@@ -166,78 +130,43 @@ public class Actions {
                 final int rows = rf.size();
 
 
-                final List<List<String>> result = List2DBuilder.empty().dim(rf.size(), (int) dashCount).build();
+                final List<List<String>> result = new ArrayList<>(rf.size());
                 int dashesSeen = 0;
-
+                Function<Tuple2<Indicator, Indicator>, List<String>> matchingProcessor;
                 for (int i = 0; i < rows; i++) {
 
-                    String l = rf.get(i);
-                    String r = ri.get(i);
+                    Indicator l = Indicator.from(rf.get(i));
+                    Indicator r = Indicator.from(ri.get(i));
+                    Tuple2<Indicator, Indicator> differenz = Tuple.of(l, r);
 
-                    if (isDASH(l)) {
-                        result.set(i,_minus(l,r,cols,dashesSeen));
+                    if (isDASH(l.code)) {
+                        matchingProcessor = dashFirstIndicators(cols, dashesSeen);
                         dashesSeen++;
                     } else {
-                        fill(result.get(i),minus(l, r),cols);
+                        matchingProcessor = dashSecondOrSameIndicators(cols, dashesSeen);
                     }
+                    result.add(matchingProcessor.apply(differenz));
                 }
 
                 return result;
             };
 
 
+    private static Function<Tuple2<Indicator, Indicator>, List<String>> dashSecondOrSameIndicators(int dashCount, int dashesSeen) {
+        return (t) -> IntStream.range(0, dashCount)
+                .mapToObj(i -> t._1().code)
+                .collect(Collectors.toList());
+    }
 
-
-    public static Function<Tuple2<I,I>, List<String>> minus(int dashCount, int dashesSeen) {
+    private static Function<Tuple2<Indicator, Indicator>, List<String>> dashFirstIndicators(int dashCount, int dashesSeen) {
         return (t) -> IntStream.range(0, dashCount)
                 .mapToObj(i -> (i < dashesSeen) ? DASH : ((i > dashesSeen) ? t._2().code : minus(t._1(), t._2())))
                 .collect(Collectors.toList());
-
     }
 
-    public static List<String> _minus(String l, String r, int dashCount, int dashesSeen) {
-        List<String> ret = new ArrayList<>(dashCount);
-        for (int i = 0; i < dashCount; i++) {
-            if(i<dashesSeen) {
-                ret.add(DASH);
-            } else if(i>dashesSeen) {
-                ret.add(r);
-            } else {
-                ret.add(minus(l,r));
-            }
-        }
-        return ImmutableList.<String>builder().addAll(ret).build();
+    private static String minus(Indicator l, Indicator r) {
+        Optional<Indicator> optional = Optional.ofNullable(ProcessingRules[l.index][r.index]);
+        return optional.orElseThrow(exceptionSupplier("Illegal combination of - Subtrahed: %s and Minuend: %s!", l, r)).code();
     }
-
-
-    public static <T> void dumpTableItems(String msg, List<List<T>> list2D) {
-        System.out.println(String.format("%s >>>>>>>>>>", msg));
-        list2D.forEach(i -> System.out.println("\t" + i));
-        System.out.println("<<<<<<<<<<\n");
-    }
-
-    static List<String> add(List<String> l, int dashCount, String s) {
-        for (int i = 0; i < dashCount; i++) {
-            l.add(DASH);
-        }
-        l.add(s);
-        return l;
-    }
-
-    static String minus(String l, String r) {
-        return T[I.from(l).get().index][I.from(r).get().index].code;
-    }
-
-    static String minus(I l, I r) {
-        return T[l.index][r.index].code;
-    }
-
-
-    static void fill(List<String> l, String s, int cols) {
-        for (int i = 0; i < cols; i++) {
-            l.add(s);
-        }
-    }
-
 
 }

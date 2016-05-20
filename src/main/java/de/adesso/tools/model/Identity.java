@@ -31,11 +31,8 @@ public abstract class Identity {
 
         Identity identity = (Identity) o;
 
-        if (!id.equals(identity.id)) {
-            return false;
-        }
+        return id.equals(identity.id);
 
-        return true;
     }
 
     @Override

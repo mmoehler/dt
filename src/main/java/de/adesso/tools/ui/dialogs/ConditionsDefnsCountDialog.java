@@ -68,7 +68,7 @@ public class ConditionsDefnsCountDialog extends Dialog<Tuple2<Integer, Boolean>>
         setResultConverter((dialogButton) -> {
             ButtonBar.ButtonData data = dialogButton == null ? null : dialogButton.getButtonData();
             return data == ButtonBar.ButtonData.OK_DONE
-                    ? Tuple.<Integer, Boolean>of(Integer.valueOf(textField.getText()), checkBox.isSelected())
+                    ? Tuple.of(Integer.valueOf(textField.getText()), checkBox.isSelected())
                     : null;
         });
     }

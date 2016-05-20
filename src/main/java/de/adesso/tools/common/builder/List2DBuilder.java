@@ -42,7 +42,6 @@ public class List2DBuilder {
     private boolean transposed;
 
     protected List2DBuilder() {
-        ;
     }
 
     protected List2DBuilder(String data) {

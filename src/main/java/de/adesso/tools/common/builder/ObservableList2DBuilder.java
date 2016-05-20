@@ -45,7 +45,6 @@ public class ObservableList2DBuilder {
     private boolean transposed;
 
     protected ObservableList2DBuilder() {
-        ;
     }
 
     protected ObservableList2DBuilder(String data) {

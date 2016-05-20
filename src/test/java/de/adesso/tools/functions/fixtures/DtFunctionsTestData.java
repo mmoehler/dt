@@ -114,7 +114,7 @@ public class DtFunctionsTestData {
         final int actRows = rndInt(2, 6);
         final int cols = (int) Math.pow(2, condRows);
 
-        List<Integer> toDelete = rndInts(0, cols, (int) cols / 2);
+        List<Integer> toDelete = rndInts(0, cols, cols / 2);
         Collections.sort(toDelete, (a, b) -> b - a);
 
         System.err.println("toDelete = " + toDelete);

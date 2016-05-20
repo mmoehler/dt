@@ -62,7 +62,7 @@ public class ConsolidateConditions implements Function<ObservableList<Observable
                 .map(l -> l.stream()
                         .collect(toObservableList()))
                 .collect(toObservableList());
-        ObservableList<ObservableList<String>> _copy[] = new ObservableList[]{copy};
+        @SuppressWarnings("unchecked") ObservableList<ObservableList<String>> _copy[] = new ObservableList[]{copy};
 
         Dump.dumpTableItems("002", _copy[0]);
 
@@ -116,6 +116,7 @@ public class ConsolidateConditions implements Function<ObservableList<Observable
                 .filter(i -> i != currentRow)
                 .mapToObj(j -> FXCollections.observableList(original.get(j)))
                 .collect(toObservableList());
+        //noinspection unchecked
         final ObservableList<ObservableList<String>>[] conditionRows = new ObservableList[]{r};
 
         if(!indicesOfDashedIndicators.isEmpty()) {

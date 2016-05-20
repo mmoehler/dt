@@ -80,7 +80,8 @@ public class TableColumnBuilder<C> extends AbstractSubBuilder<TableColumn, C> {
     @Nonnull
     public TableColumn build() {
         TableColumn col = new TableColumn<>(columnName);
-        if (null != propertyName) col.setCellValueFactory(new PropertyValueFactory<>(propertyName));
+        if (null != propertyName) //noinspection unchecked
+            col.setCellValueFactory(new PropertyValueFactory<>(propertyName));
         return col;
     }
 }

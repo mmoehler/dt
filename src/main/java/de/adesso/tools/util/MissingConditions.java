@@ -139,7 +139,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
 
 
     public interface DT extends BinaryOperator<List<List<String>>> {
-        public static BinaryOperator<List<List<String>>> difference() {
+        static BinaryOperator<List<List<String>>> difference() {
             return (a, b) -> new MissingConditions().apply(a, b);
         }
 

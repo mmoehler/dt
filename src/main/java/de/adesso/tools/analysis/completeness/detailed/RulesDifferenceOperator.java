@@ -59,7 +59,7 @@ public class RulesDifferenceOperator implements Function<List<List<String>>, Lis
         Arrays.fill(s, "-");
         String joined = String.join(",", s);
         List<List<String>> tmp = List2DBuilder.matrixOf(joined).dim(rights.size(), 1).transposed().build();
-        final List<List<String>>[] lefts = new List[]{tmp};
+        @SuppressWarnings("unchecked") final List<List<String>>[] lefts = new List[]{tmp};
         for (List<String> right : rights) {
             lefts[0] = lefts[0].stream()
                     .map(l -> columnDifference.apply(l, right))
