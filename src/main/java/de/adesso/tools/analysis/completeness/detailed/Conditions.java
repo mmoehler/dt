@@ -36,14 +36,11 @@ public class Conditions {
     /**
      * B1 Gibt es für mindestens eine Bedingung das Anzeigerpaar YES/NO bzw. NO/YES ?
      */
-    public static Function<List<Tuple2<String, String>>, Integer> B1 = new Function<List<Tuple2<String, String>>, Integer>() {
-        @Override
-        public Integer apply(List<Tuple2<String, String>> pairs) {
-            final Optional<Tuple2<String, String>> optB1 = pairs.stream().filter(
-                    x -> isNO(x._1()) && isYES(x._2()) || isNO(x._2()) && isYES(x._1()))
-                    .findFirst();
-            return optB1.isPresent() ? 1 : 0;
-        }
+    public static Function<List<Tuple2<String, String>>, Integer> B1 = pairs -> {
+        final Optional<Tuple2<String, String>> optB1 = pairs.stream().filter(
+                x -> isNO(x._1()) && isYES(x._2()) || isNO(x._2()) && isYES(x._1()))
+                .findFirst();
+        return optB1.isPresent() ? 1 : 0;
     };
 
     /**
@@ -52,7 +49,7 @@ public class Conditions {
     public static Function<List<Tuple2<String, String>>, Integer> B2 = new Function<List<Tuple2<String, String>>, Integer>() {
         @Override
         public Integer apply(List<Tuple2<String, String>> pairs) {
-            if (pairs.stream().map(p -> p._1()).filter(s -> s.equals("-")).findFirst().isPresent()) {
+            if (pairs.stream().map(Tuple2::_1).filter(s -> s.equals("-")).findFirst().isPresent()) {
                 return 0;
             }
             return pairs.stream().allMatch(Predicate.isEqual(pairs.get(0))) ? 1 : 0;
@@ -62,14 +59,11 @@ public class Conditions {
     /**
      * B3 Gibt es für mindestens eine Bedingung das Anzeigerpaar -/YES bzw. -/NO ?
      */
-    public static Function<List<Tuple2<String, String>>, Integer> B3 = new Function<List<Tuple2<String, String>>, Integer>() {
-        @Override
-        public Integer apply(List<Tuple2<String, String>> pairs) {
-            final Optional<Tuple2<String, String>> optB1 = pairs.stream().filter(
-                    x -> isDASH(x._1()) && (isNO(x._2()) || isYES(x._2())))
-                    .findFirst();
-            return optB1.isPresent() ? 1 : 0;
-        }
+    public static Function<List<Tuple2<String, String>>, Integer> B3 = pairs -> {
+        final Optional<Tuple2<String, String>> optB1 = pairs.stream().filter(
+                x -> isDASH(x._1()) && (isNO(x._2()) || isYES(x._2())))
+                .findFirst();
+        return optB1.isPresent() ? 1 : 0;
     };
 
     /**

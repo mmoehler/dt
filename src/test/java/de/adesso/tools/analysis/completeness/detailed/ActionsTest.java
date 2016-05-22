@@ -155,7 +155,7 @@ public class ActionsTest {
         List<String> ri = StringListBuilder.on("N,-,Y,Y").build();
 
 
-        List<List<String>> actual = __A5.apply(rf, ri);
+        List<List<String>> actual = A5.apply(rf, ri);
 
         dumpTableItems("ACTUAL", actual);
 
@@ -173,7 +173,7 @@ public class ActionsTest {
         };
 
         List<Tuple2<String, String>> prototype = StreamUtils
-                .zip(rf.stream(), ri.stream(), (x, y) -> Tuple.of(x, y))
+                .zip(rf.stream(), ri.stream(), Tuple::of)
                 .collect(toList());
 
 

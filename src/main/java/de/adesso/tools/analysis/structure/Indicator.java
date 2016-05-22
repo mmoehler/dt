@@ -24,12 +24,7 @@ package de.adesso.tools.analysis.structure;
  */
 public interface Indicator {
 
-    Indicator NOOP = new Indicator() {
-        @Override
-        public String getCode() {
-            return "NOP";
-        }
-    };
+    Indicator NOOP = () -> "NOP";
 
     String getCode();
 }

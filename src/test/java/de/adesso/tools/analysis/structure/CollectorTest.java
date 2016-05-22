@@ -231,9 +231,7 @@ public class CollectorTest {
 
 //            final ObservableList<ObservableList<String>> R[] = new List[]{conditions};
             U.forEach(i -> conditions.get(row).set(i, "-"));
-            D.forEach(i -> {
-                R[0] = R[0].stream().map(removeColumn(i)).collect(toObservableList());
-            });
+            D.forEach(i -> R[0] = R[0].stream().map(removeColumn(i)).collect(toObservableList()));
 
             //ObservableList<ObservableList<String>> consolidated = Functions.consolidate().apply(adapt(conditions));
 

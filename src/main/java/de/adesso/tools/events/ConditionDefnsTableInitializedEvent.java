@@ -17,9 +17,8 @@ public class ConditionDefnsTableInitializedEvent {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("ConditionDefnsTableInitializedEvent{");
-        sb.append("columnCount=").append(columnCount);
-        sb.append('}');
-        return sb.toString();
+        String sb = "ConditionDefnsTableInitializedEvent{" + "columnCount=" + columnCount +
+                '}';
+        return sb;
     }
 }

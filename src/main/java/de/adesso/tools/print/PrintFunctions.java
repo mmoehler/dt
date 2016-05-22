@@ -17,35 +17,12 @@
  * under the License.
  */
 
-package de.adesso.tools.analysis.completeness.detailed;
-
-import javax.annotation.Nonnull;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+package de.adesso.tools.print;
 
 /**
- * Created by mmoehler ofList 19.03.16.
+ * Created by mmoehler on 21.05.16.
  */
-public class StringListBuilder {
-    public final static String pattern = "[; ,]";
-    private final String data;
-
-    private StringListBuilder(@Nonnull String data) {
-        this.data = data;
+public final class PrintFunctions {
+    private PrintFunctions() {
     }
-
-    public static StringListBuilder on(String data) {
-        return new StringListBuilder(data);
-    }
-
-    @Nonnull
-    public List<String> build() {
-        List<String> result = Collections.emptyList();
-        final String[] rawData = data.split(pattern);
-        result = Arrays.stream(rawData).collect(Collectors.toList());
-        return result;
-    }
-
 }

@@ -75,6 +75,7 @@ public final class Tuple1<T1> implements Tuple, Comparable<Tuple1<T1>>, Serializ
 
     @Override
     public List<?> asList() {
+        //noinspection ArraysAsListWithZeroOrOneArgument
         return Arrays.asList(_1);
     }
 

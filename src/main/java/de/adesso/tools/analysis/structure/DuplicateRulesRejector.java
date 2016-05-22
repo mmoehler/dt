@@ -57,7 +57,7 @@ public class DuplicateRulesRejector implements Function<Tuple2<List<List<String>
         final int sz = l.size() - 1;
         return IntStream.range(0, sz)
                 .mapToObj(idx -> indicesOf(l.subList(idx + 1, sz), l.get(idx), idx + 1))
-                .reduce(new TreeSet<Integer>((x,y)-> y - x), (a, b) -> {
+                .reduce(new TreeSet<>((x, y) -> y - x), (a, b) -> {
                     a.addAll(b);
                     return a;
                 });

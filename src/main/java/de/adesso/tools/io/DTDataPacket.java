@@ -31,6 +31,7 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
+import java.util.List;
 import java.util.stream.IntStream;
 
 import static de.adesso.tools.exception.LambdaExceptionUtil.rethrowIntConsumer;
@@ -118,9 +119,7 @@ public class DTDataPacket implements Externalizable {
 
         IntStream.range(0, rows)
                 .forEach(rethrowIntConsumer(i -> IntStream.range(0, cols)
-                        .forEach(rethrowIntConsumer(j -> {
-                            out.writeUTF(conditionDefinitions.get(i).get(j));
-                        }))));
+                        .forEach(rethrowIntConsumer(j -> out.writeUTF(conditionDefinitions.get(i).get(j))))));
     }
 
     private void readConditionsExternal(ObjectInput in, int rows, int cols) throws IOException {
@@ -186,7 +185,7 @@ public class DTDataPacket implements Externalizable {
     }
 
     public void reset() {
-        allData.forEach(d -> d.clear());
+        allData.forEach(List::clear);
     }
 
     public void become(DTDataPacket other) {

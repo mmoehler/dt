@@ -19,6 +19,8 @@
 
 package de.adesso.tools.model;
 
+import com.google.common.collect.Lists;
+
 /**
  * General state and behaviour of all declarations
  * Created by mohler ofList 16.01.16.
@@ -109,5 +111,9 @@ public class Declaration extends Identity {
         result = 31 * result + (expression != null ? expression.hashCode() : 0);
         result = 31 * result + (possibleIndicators != null ? possibleIndicators.hashCode() : 0);
         return result;
+    }
+
+    public Object[] toArray() {
+        return Lists.newArrayList(getLfdNr(), getExpression(), getPossibleIndicators()).toArray(new Object[3]);
     }
 }

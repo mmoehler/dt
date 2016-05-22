@@ -86,15 +86,13 @@ public class ConsolidateConditions implements Function<ObservableList<Observable
                     Map<Boolean, List<Integer>> partitioned = groupDuplicatesAccordingToTheirIndices(duplicateRules, conditionColumns);
 
                     final int cr = currentRow;
-                    partitioned.forEach((k, v) -> {
-                        v.forEach(c -> {
-                            if (k) {
-                                _copy[0].get(cr).set(c, "-");
-                            } else {
-                                toDelete.add(c);
-                            }
-                        });
-                    });
+                    partitioned.forEach((k, v) -> v.forEach(c -> {
+                        if (k) {
+                            _copy[0].get(cr).set(c, "-");
+                        } else {
+                            toDelete.add(c);
+                        }
+                    }));
 
                     toDelete.stream()
                             .sorted((a, b) -> b - a)

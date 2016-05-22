@@ -46,6 +46,7 @@ public class ConditionComparisonOperator implements BinaryOperator<Indicator> {
 
     private static void checkIndicators(Indicator... indicators) {
         for (Indicator i : indicators) {
+            //noinspection SuspiciousMethodCalls
             if (!INDICATORS.contains(i)) {
                 throw new IllegalArgumentException(String.format("Illegal indicator: %s!", i.getCode()));
             }

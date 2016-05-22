@@ -197,17 +197,13 @@ public class MainView implements FxmlView<MainViewModel> {
     private void doFileOpen(String key, Object[] value) {
         configureFileChooser(getFileChooser(), "Open DTMG File");
         File file = getFileChooser().showOpenDialog(this.actionSplitPane.getScene().getWindow());
-        if (file != null) {
-            if (file != null) {
-                try {
-                    final int countColumns = viewModel.openFile(file);
-                    prepareDefinitionsTables4NewData(countColumns);
-                    viewModel.populateLoadedData();
-                } catch (IOException | ClassNotFoundException e) {
-                    exceptionHandler.showAndWaitAlert(e);
-                    return;
-                }
-            }
+        if (file != null) try {
+            final int countColumns = viewModel.openFile(file);
+            prepareDefinitionsTables4NewData(countColumns);
+            viewModel.populateLoadedData();
+        } catch (IOException | ClassNotFoundException e) {
+            exceptionHandler.showAndWaitAlert(e);
+            return;
         }
     }
 

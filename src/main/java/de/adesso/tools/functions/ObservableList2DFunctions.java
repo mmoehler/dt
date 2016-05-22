@@ -67,11 +67,9 @@ public class ObservableList2DFunctions {
     }
 
     public static Function<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> transpose() {
-        return m -> {
-            return range(0, m.get(0).size()).mapToObj(r ->
-                    range(0, m.size()).mapToObj(c -> m.get(c).get(r)).collect(toObservableList())
-            ).collect(toObservableList());
-        };
+        return m -> range(0, m.get(0).size()).mapToObj(r ->
+                range(0, m.size()).mapToObj(c -> m.get(c).get(r)).collect(toObservableList())
+        ).collect(toObservableList());
     }
 
 
@@ -122,7 +120,7 @@ public class ObservableList2DFunctions {
             Set<Integer> set = Arrays.stream(positions).boxed().collect(Collectors.toSet());
             return IntStream.range(0, strings.size())
                     .filter(x -> !set.contains(x))
-                    .mapToObj(y -> strings.get(y))
+                    .mapToObj(strings::get)
                     .collect(toObservableList());
         }
 

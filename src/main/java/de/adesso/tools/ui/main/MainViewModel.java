@@ -332,6 +332,7 @@ public class MainViewModel implements ViewModel {
         throw new UnsupportedOperationException("Not implemented yet!!");
     }
 
+    // TODO Test this!!
     public void onDeleteRedundantRules(@Observes DeleteRedundantRulesEvent event) {
         Stream<Tuple2<List<List<String>>, List<List<String>>>> dt
                 = Stream.of(Tuple.of(adapt(getConditionDefinitions()), adapt(getActionDefinitions())));

@@ -61,7 +61,7 @@ public class ColumnDifference implements Function<Tuple2<List<String>, List<Stri
         final List<String> right = conditionPair._2();
 
         List<Tuple2<String, String>> prototype = StreamUtils
-                .zip(left.stream(), right.stream(), (x, y) -> Tuple.of(x, y))
+                .zip(left.stream(), right.stream(), Tuple::of)
                 .collect(toList());
 
         final List<Integer> mask = Arrays.stream(CONDITIONS)
@@ -77,7 +77,7 @@ public class ColumnDifference implements Function<Tuple2<List<String>, List<Stri
                     }
                     return -1;
                 })
-                .map(qq -> qq.intValue()).filter(vv -> vv >= 0).collect(Collectors.toList());
+                .map(Number::intValue).filter(vv -> vv >= 0).collect(Collectors.toList());
 
         //dumpList1DItems("IDX",indices);
 
@@ -87,7 +87,7 @@ public class ColumnDifference implements Function<Tuple2<List<String>, List<Stri
 
         // perform the action at the determined index and ...
 
-        List<List<String>> applied = ACTIONS[indices.get(0).intValue()].apply(left, right);
+        List<List<String>> applied = ACTIONS[indices.get(0)].apply(left, right);
 
         return transpose(applied);
 

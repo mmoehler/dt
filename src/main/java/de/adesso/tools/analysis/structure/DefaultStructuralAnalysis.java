@@ -27,6 +27,7 @@ import javax.inject.Singleton;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.BiFunction;
@@ -51,8 +52,8 @@ public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>,
         for (int i = 0; i < inConditions.size() - 1; i++) {
             for (int j = 1; j < inConditions.size(); j++) {
                 if (j > i) {
-                    final Stream<Indicator> leftStream = inConditions.get(i).stream().map(a -> Indicators.lookup(a));
-                    final Stream<Indicator> rightStream = inConditions.get(j).stream().map(a -> Indicators.lookup(a));
+                    final Stream<Indicator> leftStream = inConditions.get(i).stream().map(Indicators::lookup);
+                    final Stream<Indicator> rightStream = inConditions.get(j).stream().map(Indicators::lookup);
                     final List<Indicator> collected = StreamUtils
                             .zip(leftStream, rightStream, Operators.conditionComparison())
                             .collect(Collectors.toList());
@@ -64,7 +65,7 @@ public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>,
         final List<Indicator> reducedConditionIndicators = outConditions.stream()
                 .map(c -> c.stream()
                         .reduce(Combiners.conditionComparisonResult()))
-                .map(r -> r.get())
+                .map(Optional::get)
                 .collect(Collectors.toList());
 
         return reducedConditionIndicators;
@@ -89,7 +90,7 @@ public class DefaultStructuralAnalysis implements BiFunction<List<List<String>>,
         final List<Indicator> reducedActionIndicators = outActions.stream()
                 .map(c -> c.stream()
                         .reduce(Combiners.actionComparisonResult()))
-                .map(r -> r.get())
+                .map(Optional::get)
                 .collect(Collectors.toList());
 
         return reducedActionIndicators;

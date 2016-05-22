@@ -67,8 +67,8 @@ public class Root300 extends Model {
         private Child310 child310;
         private Child320 child320;
 
-        private Child310.Builder child310Builder = Child310.newBuilder(this, (o) -> withChild310(o));
-        private Child320.Builder child320Builder = Child320.newBuilder(this, (o) -> withChild320(o));
+        private Child310.Builder child310Builder = Child310.newBuilder(this, this::withChild310);
+        private Child320.Builder child320Builder = Child320.newBuilder(this, this::withChild320);
 
         public Builder withName(String name) {
             this.name = name;

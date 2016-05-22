@@ -201,7 +201,7 @@ public final class List2DFunctions {
             Set<Integer> set = Arrays.stream(positions).boxed().collect(Collectors.toSet());
             return IntStream.range(0, strings.size())
                     .filter(x -> !set.contains(x))
-                    .mapToObj(y -> strings.get(y))
+                    .mapToObj(strings::get)
                     .collect(toList());
         }
 

@@ -23,11 +23,9 @@ import de.adesso.tools.Dump;
 import de.adesso.tools.functions.DtFunctions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 
 import java.util.function.Consumer;
-import java.util.function.IntFunction;
 import java.util.stream.IntStream;
 
 /**
@@ -50,22 +48,21 @@ public class UpdateDefinitionTable implements Consumer<ObservableList<Observable
             table.setItems(FXCollections.observableArrayList());
         }
 
+        //noinspection ConstantConditions
         final int oldLen = oldItems.size();
         final int newLen = newItems.size();
 
         if (newLen != oldLen) {
             table.getColumns().clear();
-            IntStream.range(0, newItems.get(0).size()).mapToObj(makeColumn()).forEach(table.getColumns()::add);
+            IntStream.range(0, newItems.get(0).size())
+                    .mapToObj(DtFunctions::createTableColumn)
+                    .forEach(table.getColumns()::add);
         }
 
         Dump.dumpTableItems("NEW ITEMS", newItems);
 
         newItems.forEach(table.getItems()::add);
         table.refresh();
-    }
-
-    private static IntFunction<TableColumn<ObservableList<String>, String>> makeColumn() {
-        return (i) -> DtFunctions.createTableColumn(i);
     }
 
 }

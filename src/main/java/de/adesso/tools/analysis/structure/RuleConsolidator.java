@@ -80,7 +80,7 @@ public class RuleConsolidator implements Function<Tuple2<ObservableList<Observab
         // map indices of actions to their conditions
         ObservableList<ObservableList<ObservableList<String>>> parts = indices.stream()
                 .map(c -> c.stream()
-                        .map(i -> transposedConditions.get(i))
+                        .map(transposedConditions::get)
                         .collect(toObservableList()))
                 .collect(toObservableList());
         return parts;
@@ -89,10 +89,10 @@ public class RuleConsolidator implements Function<Tuple2<ObservableList<Observab
     List<List<Integer>> detectIndicesOfDupplicateActionCombinations(ObservableList<ObservableList<String>> transposedActions) {
         Map<ObservableList<String>, List<Integer>> collect = IntStream.range(0, transposedActions.size())
                 .boxed()
-                .collect(Collectors.groupingBy(a -> transposedActions.get(a), Collectors.toList()));
+                .collect(Collectors.groupingBy(transposedActions::get, Collectors.toList()));
 
         List<List<Integer>> indices = collect.entrySet().stream()
-                .map(e -> e.getValue())
+                .map(Map.Entry::getValue)
                 .filter(l -> l.size() > 1)
                 .collect(Collectors.toList());
         return indices;

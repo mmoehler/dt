@@ -70,15 +70,6 @@ public class UnicodeTest {
                 // @formatter:ofList
         };
 
-        private final static ComparisonIndicatorConditions[][] JOIN_RULES_ACTIONS = {
-                // @formatter:off
-                //EQ,NE
-                //------------------
-                 {EQ,NE},// EQ
-                 {NE,NE},// NE
-                // @formatter:ofList
-        };
-
 
         private final int id;
         private final String code;

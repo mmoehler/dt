@@ -84,7 +84,7 @@ public class DTDataPacketTest {
         System.out.println("WRITTEN");
     }
 
-    private final Tuple4 testData() {
+    private Tuple4 testData() {
         final TableView<ConditionDeclTableViewModel> conditionDeclTab = conditionDeclTableViewBuilder()
                 .addModelWithLfdNbr("C01").withExpression("EXP-01").withIndicators("Y,N")
                 .addModelWithLfdNbr("C02").withExpression("EXP-02").withIndicators("Y,N")

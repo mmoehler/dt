@@ -74,7 +74,7 @@ public class DtFunctionsTestData {
     public static String[] rndDefinitions(int inclRows, int inclCols, String possibilities) {
         final String[] strings = ThreadLocalRandom.current().ints((inclRows * inclCols), 0, possibilities.length())
                 .mapToObj(i -> Character.toString(possibilities.charAt(i)))
-                .toArray(size -> new String[size]);
+                .toArray(String[]::new);
         return strings;
     }
 
@@ -168,7 +168,7 @@ public class DtFunctionsTestData {
         final int sz = l.size() - 1;
         return IntStream.range(0, sz)
                 .mapToObj(idx -> indicesOf(l.subList(idx + 1, sz), l.get(idx), idx + 1))
-                .reduce(new TreeSet<Integer>((x,y)-> y - x), (a, b) -> {
+                .reduce(new TreeSet<>((x, y) -> y - x), (a, b) -> {
                     a.addAll(b);
                     return a;
                 });

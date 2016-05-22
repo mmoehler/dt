@@ -63,7 +63,8 @@ public class ConditionComparisonResultCombiner implements BinaryOperator<Indicat
                     .build();
 
     private static void checkIndicators(Indicator left, Indicator right) {
-        Optional<Indicator> forbidden = Optional.ofNullable(
+        //noinspection SuspiciousMethodCalls
+        @SuppressWarnings("SuspiciousMethodCalls") Optional<Indicator> forbidden = Optional.ofNullable(
                 (!L_INDICATORS.contains(left))
                         ? left
                         : ((!R_INDICATORS.contains(right))

@@ -86,7 +86,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
         List<List<String>> reduced = xi.stream().map(a -> {
 
             List<Tuple2<String, String>> prototype = StreamUtils
-                    .zip(a.stream(), condition.get(0).stream(), (x, y) -> Tuple.of(x, y))
+                    .zip(a.stream(), condition.get(0).stream(), Tuple::of)
                     .collect(toList());
 
             //dumpList1DItems("PROTO",prototype);
@@ -114,7 +114,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
                         return -1;
                     })
                     // .peek(xyz -> System.out.println(xyz))
-                    .map(qq -> qq.intValue()).filter(vv -> vv >= 0).collect(Collectors.toList());
+                    .map(Number::intValue).filter(vv -> vv >= 0).collect(Collectors.toList());
 
             //dumpList1DItems("IDX",indices);
 
@@ -123,7 +123,7 @@ public class MissingConditions implements BinaryOperator<List<List<String>>> {
             }
 
             // perform the action at the determined index and ...
-            List<List<String>> applied = ACTIONS[indices.get(0).intValue()].apply(a, condition.get(0));
+            List<List<String>> applied = ACTIONS[indices.get(0)].apply(a, condition.get(0));
 
             // ... return the resulting matrix
             applied = transpose(applied);

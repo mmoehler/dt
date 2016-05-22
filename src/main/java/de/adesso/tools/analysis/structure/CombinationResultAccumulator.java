@@ -50,7 +50,8 @@ public class CombinationResultAccumulator implements BinaryOperator<Indicator> {
     private static final EnumSet<Indicators> C_INDICATORS = EnumSet.of(EQ, LO, GT, NE, NI, XX);
 
     private static void checkIndicators(Indicator actionResult, Indicator conditionResult) {
-        Optional<Indicator> forbidden = Optional.ofNullable(
+        //noinspection SuspiciousMethodCalls
+        @SuppressWarnings("SuspiciousMethodCalls") Optional<Indicator> forbidden = Optional.ofNullable(
                 (!A_INDICATORS.contains(actionResult))
                         ? actionResult
                         : ((!C_INDICATORS.contains(conditionResult))

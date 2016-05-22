@@ -21,7 +21,6 @@ public class ConditionsDefnsCountDialog extends Dialog<Tuple2<Integer, Boolean>>
     private final CheckBox checkBox;
     private final TextField textField;
     private final String defaultNumberValue;
-    private final boolean defaultBooleanValue;
 
 
     public ConditionsDefnsCountDialog() {
@@ -49,7 +48,7 @@ public class ConditionsDefnsCountDialog extends Dialog<Tuple2<Integer, Boolean>>
         label.textProperty().bind(dialogPane.contentTextProperty());
 
         this.defaultNumberValue = defaultNumberValue;
-        this.defaultBooleanValue = defaultBooleanValue;
+        boolean defaultBooleanValue1 = defaultBooleanValue;
 
         this.grid = new GridPane();
         this.grid.setHgap(10);
@@ -99,6 +98,6 @@ public class ConditionsDefnsCountDialog extends Dialog<Tuple2<Integer, Boolean>>
         grid.add(checkBox, 0, 1);
         getDialogPane().setContent(grid);
 
-        Platform.runLater(() -> textField.requestFocus());
+        Platform.runLater(textField::requestFocus);
     }
 }

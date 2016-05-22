@@ -61,7 +61,7 @@ public class Functions {
     public static BiFunction<List<String>, List<String>, List<List<String>>> columnDifference = (left, right) -> {
 
         List<Tuple2<String, String>> prototype = StreamUtils
-                .zip(left.stream(), right.stream(), (x, y) -> Tuple.of(x, y))
+                .zip(left.stream(), right.stream(), Tuple::of)
                 .collect(toList());
 
         final List<Integer> mask = Arrays.stream(CONDITIONS)
@@ -77,7 +77,7 @@ public class Functions {
                     }
                     return -1;
                 })
-                .map(qq -> qq.intValue()).filter(vv -> vv >= 0).collect(Collectors.toList());
+                .map(Number::intValue).filter(vv -> vv >= 0).collect(Collectors.toList());
 
         //dumpList1DItems("IDX",indices);
 
@@ -146,16 +146,14 @@ class ConsolidateRules0 implements Function<List<List<String>>, List<List<String
                     Map<Boolean, List<Integer>> partitioned = groupDuplicatesAccordingToTheirIndices(duplicateRules, conditionColumns);
                     LOGGER.debug("partitioned = " + partitioned);
                     final int cr = currentRow;
-                    partitioned.forEach((k, v) -> {
-                        v.forEach(c -> {
-                            if (k) {
-                                _copy[0].get(cr).set(c, "-");
-                                LOGGER.debug("replaceColumnsAt = " + c);
-                            } else {
-                                toDelete.add(c);
-                            }
-                        });
-                    });
+                    partitioned.forEach((k, v) -> v.forEach(c -> {
+                        if (k) {
+                            _copy[0].get(cr).set(c, "-");
+                            LOGGER.debug("replaceColumnsAt = " + c);
+                        } else {
+                            toDelete.add(c);
+                        }
+                    }));
 
                     LOGGER.debug("removeColumnsAt (unordered) = {}",toDelete);
                     toDelete.stream()

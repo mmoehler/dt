@@ -25,7 +25,6 @@ import de.adesso.tools.exception.IOExceptionSmuggler;
 import de.adesso.tools.functions.Adapters;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
-import javafx.embed.swing.JFXPanel;
 import javafx.scene.control.TableView;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
@@ -46,7 +45,6 @@ public class StorerTest {
 
     @BeforeClass
     public void setUp() throws Exception {
-        JFXPanel fxPanel = new JFXPanel();
     }
 
     @Test
@@ -165,9 +163,9 @@ public class StorerTest {
                     }
                 });
 
-                for (int i = 0; i < rows; i++) {
+                for (List<String> conditionDefinition : conditionDefinitions) {
                     for (int j = 0; j < cols; j++) {
-                        out.writeUTF(conditionDefinitions.get(i).get(j));
+                        out.writeUTF(conditionDefinition.get(j));
                     }
                 }
             } catch (IOExceptionSmuggler ex) {

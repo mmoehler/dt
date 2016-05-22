@@ -61,7 +61,7 @@ public final class ConditionSimpleCompletenessCheck {
         List<List<Integer>> transposed = List2DFunctions.transpose(list);
         final Integer reduced = transposed.stream().map(l -> l.stream().reduce(1, (a, b) -> a * b)).reduce(0, (c, d) -> c + d);
         final Integer all = determineMaxColumns(decls);
-        return Tuple.of(all == reduced, all, reduced);
+        return Tuple.of(all.equals(reduced), all, reduced);
     }
 
 

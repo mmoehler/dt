@@ -58,9 +58,7 @@ public class DeclarationsTableCell<S, T> extends TableCell<S, T> {
 
         setAlignment(Pos.CENTER);
 
-        textField.setOnAction(evt -> {
-            commitEdit(this.converter.fromString(textField.getText()));
-        });
+        textField.setOnAction(evt -> commitEdit(this.converter.fromString(textField.getText())));
 
         textField.focusedProperty().addListener((obs, wasFocused, isNowFocused) -> {
             if (!isNowFocused) {
@@ -148,7 +146,7 @@ public class DeclarationsTableCell<S, T> extends TableCell<S, T> {
             if (table != null) {
                 TableColumn<S, T> column = getTableColumn();
                 TableColumn.CellEditEvent<S, T> event = new TableColumn.CellEditEvent<>(table,
-                        new TablePosition<S, T>(table, getIndex(), column),
+                        new TablePosition<>(table, getIndex(), column),
                         TableColumn.editCommitEvent(), item);
                 Event.fireEvent(column, event);
             }

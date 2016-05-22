@@ -32,8 +32,8 @@ public class Array2D {
     private Array2D(Builder builder) {
         dimension = builder.dimension;
         data = new String[dimension.rows][dimension.columns];
-        for (int i = 0; i < data.length; i++) {
-            Arrays.fill(data[i], builder.defaultValue);
+        for (String[] aData : data) {
+            Arrays.fill(aData, builder.defaultValue);
         }
     }
 
@@ -63,7 +63,7 @@ public class Array2D {
     public static final class Builder {
         private Dimension dimension;
         private String defaultValue;
-        private Dimension.Builder dimensionBuilder = Dimension.newBuilder(Builder.this, (o) -> this.dimension(o));
+        private Dimension.Builder dimensionBuilder = Dimension.newBuilder(Builder.this, this::dimension);
 
         public Builder() {
         }

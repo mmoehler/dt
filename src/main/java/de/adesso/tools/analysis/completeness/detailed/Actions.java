@@ -20,6 +20,7 @@
 package de.adesso.tools.analysis.completeness.detailed;
 
 import com.codepoetics.protonpack.StreamUtils;
+import de.adesso.tools.common.Reserved;
 import de.adesso.tools.common.builder.List2DBuilder;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
@@ -125,7 +126,7 @@ public class Actions {
                 System.out.println(String.format("A5 invoked with %s, %s!", rf, ri));
 
                 // counting dashes
-                final long dashCount = rf.stream().filter(s -> isDASH(s)).count();
+                final long dashCount = rf.stream().filter(Reserved::isDASH).count();
                 final int cols = (int) dashCount;
                 final int rows = rf.size();
 

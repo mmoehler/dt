@@ -27,7 +27,6 @@ import de.adesso.tools.ui.PossibleIndicatorsSupplier;
 import de.adesso.tools.ui.action.ActionDeclTableViewModel;
 import de.adesso.tools.ui.condition.ConditionDeclTableViewModel;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -44,6 +43,8 @@ import static de.adesso.tools.functions.Adapters.Matrix.adapt;
 import static de.adesso.tools.functions.List2DFunctions.*;
 import static java.lang.Math.min;
 import static java.util.stream.Collectors.toList;
+import static javafx.collections.FXCollections.observableArrayList;
+import static javafx.collections.FXCollections.observableList;
 
 /**
  * General Decisiontable Functions
@@ -112,16 +113,16 @@ public final class DtFunctions {
      */
     public static ObservableList<ObservableList<String>> fullExpandConditions(List<ConditionDeclTableViewModel> indicators) {
         // TODO Define Preconditions if neccessary!
-        final ObservableList<ObservableList<String>> retList = FXCollections.observableArrayList();
+        final ObservableList<ObservableList<String>> retList = observableArrayList();
         final List<List<String>> rawIndicators = determineIndicatorListPerRow(indicators);
         final List<List<String>> permutations = permutations(rawIndicators);
         final List<List<String>> transposed = transpose(permutations);
-        transposed.forEach(l -> retList.add(FXCollections.observableArrayList(l)));
+        transposed.forEach(l -> retList.add(observableArrayList(l)));
         return retList;
     }
 
     public static ObservableList<ObservableList<String>> fullExpandActions(List<ActionDeclTableViewModel> indicators, int countColumns) {
-        final ObservableList<ObservableList<String>> retList = FXCollections.observableArrayList();
+        final ObservableList<ObservableList<String>> retList = observableArrayList();
         final int rowCount = indicators.size();
 
         if (0 < rowCount) {
@@ -132,7 +133,7 @@ public final class DtFunctions {
                 return new ArrayList<>(Arrays.asList(s));
             }).collect(toList());
 
-            transposed.forEach(l -> retList.add(FXCollections.observableArrayList(l)));
+            transposed.forEach(l -> retList.add(observableArrayList(l)));
 
         }
 
@@ -156,7 +157,7 @@ public final class DtFunctions {
      * @return a 2d matrix composed by nested {@link ObservableList}s as data prepared for the condition tavke view
      */
     public static ObservableList<ObservableList<String>> limitedExpandConditions(List<ConditionDeclTableViewModel> indicators, int countColumns, boolean dontFillWithIndicators) {
-        final ObservableList<ObservableList<String>> retList = FXCollections.observableArrayList();
+        final ObservableList<ObservableList<String>> retList = observableArrayList();
         final ObservableList<ObservableList<String>> fullExpanded = fullExpandConditions(indicators);
         // tolerate invalid com count. In case of errors, the contColumns is
         // corrected to determineMaxColumns(indicators) columns.
@@ -169,7 +170,7 @@ public final class DtFunctions {
             if (subList instanceof ObservableList) {
                 retList.add((ObservableList) subList);
             } else {
-                retList.add(FXCollections.observableList(subList));
+                retList.add(observableList(subList));
             }
         });
         return retList;
@@ -218,7 +219,7 @@ public final class DtFunctions {
             //          updateRowHeaders(declarations, rowHeaderTemplate);
 
             definitions.getItems().clear();
-            newDefs.stream().map(s -> FXCollections.observableArrayList(s)).forEach(definitions.getItems()::add);
+            newDefs.stream().map(s -> observableArrayList(s)).forEach(definitions.getItems()::add);
 
             declarations.refresh();
             definitions.refresh();
@@ -248,9 +249,9 @@ public final class DtFunctions {
             final List<List<String>> newActDefs = removeColumnsAt(adapt(actionDefns), index.getAsInt());
 
             conditionDefns.clear();
-            newConDefs.stream().map(s -> FXCollections.observableArrayList(s)).forEach(conditionDefns::add);
+            newConDefs.stream().map(s -> observableArrayList(s)).forEach(conditionDefns::add);
             actionDefns.clear();
-            newActDefs.stream().map(s -> FXCollections.observableArrayList(s)).forEach(actionDefns::add);
+            newActDefs.stream().map(s -> observableArrayList(s)).forEach(actionDefns::add);
 
             conditionTable.refresh();
             actionTable.refresh();
@@ -290,9 +291,9 @@ public final class DtFunctions {
             List<List<String>> newActionDefns = swapColumnsAt(adapt(actionDefinitions), c1Idx, c2Idx);
 
             conditionDefinitions.clear();
-            newConditionDefns.stream().map(s -> FXCollections.observableArrayList(s)).forEach(conditionDefinitions::add);
+            newConditionDefns.stream().map(s -> observableArrayList(s)).forEach(conditionDefinitions::add);
             actionDefinitions.clear();
-            newActionDefns.stream().map(s -> FXCollections.observableArrayList(s)).forEach(actionDefinitions::add);
+            newActionDefns.stream().map(s -> observableArrayList(s)).forEach(actionDefinitions::add);
         }
     }
 

@@ -38,8 +38,6 @@ public class ConditionDeclTableViewModel implements PossibleIndicatorsSupplier, 
 
     private final ModelWrapper<ConditionDecl> wrapper = new ModelWrapper<>();
 
-    private boolean someValidation = true;
-
     public ConditionDeclTableViewModel(ConditionDecl decl) {
         id = decl.getId();
         wrapper.set(decl);
@@ -56,6 +54,7 @@ public class ConditionDeclTableViewModel implements PossibleIndicatorsSupplier, 
 
     @Override
     public ConditionDeclTableViewModel save() {
+        boolean someValidation = true;
         if (someValidation) {
             wrapper.commit();
         }
@@ -109,7 +108,7 @@ public class ConditionDeclTableViewModel implements PossibleIndicatorsSupplier, 
 
     public boolean isValid() {
         return asList(lfdNrProperty(), expressionProperty(), possibleIndicatorsProperty()).stream()
-                .map(i -> i.get() != null && i.get() != EMPTY_STRING)
+                .map(i -> i.get() != null && !EMPTY_STRING.equals(i.get()))
                 .reduce(true, (x, y) -> x && y);
 
     }
