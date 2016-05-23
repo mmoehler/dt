@@ -12,6 +12,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: de.vandermeer:asciitable-j7:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: de.vandermeer:asciilist-j7:1.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: de.sven-jacobs:loremipsum:1.0" level="project" />
     <orderEntry type="library" name="Maven: de.saxsys:mvvmfx:1.5.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.12" level="project" />
     <orderEntry type="library" name="Maven: net.jodah:typetools:0.4.1" level="project" />

@@ -2,63 +2,19 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b2d1880-d391-4d61-bb7f-0c8e21880d82" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Emitter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/PrintFunctions.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/EmitterTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/Printer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TableTest.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TextPrinter.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TextPrinterTest.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DecisionTable.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/mmoehler.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/mmoehler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_sven_jacobs_loremipsum_1_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_vandermeer_asciilist_j7_1_0_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_vandermeer_asciitable_j7_1_0_0.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_commons_commons_lang3_3_4.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/ConsoleCharSink.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/MemoryCharSink.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/zip/FileCharSink.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/model/DecisionTable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/EmitterConsumer.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dt.iml" afterPath="$PROJECT_DIR$/dt.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ColumnDifference.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ColumnDifference.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Conditions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Conditions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ConsolidateConditions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ConsolidateConditions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Functions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Functions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/simple/ConditionSimpleCompletenessCheck.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/simple/ConditionSimpleCompletenessCheck.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ActionComparisonOperator.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ActionComparisonOperator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ActionComparisonResultCombiner.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ActionComparisonResultCombiner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/CombinationResultAccumulator.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/CombinationResultAccumulator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ConditionComparisonOperator.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ConditionComparisonOperator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ConditionComparisonResultCombiner.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ConditionComparisonResultCombiner.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DefaultStructuralAnalysis.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DefaultStructuralAnalysis.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DuplicateRulesRejector.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DuplicateRulesRejector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/Indicator.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/Indicator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/RuleConsolidator.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/RuleConsolidator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/StructuralAnalysisResultEmitter.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/StructuralAnalysisResultEmitter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Array2D.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Array2D.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/events/ConditionDefnsTableInitializedEvent.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/events/ConditionDefnsTableInitializedEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/List2DFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/List2DFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/ObservableList2DFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/ObservableList2DFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/DTDataPacket.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/DTDataPacket.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/model/Declaration.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/model/Declaration.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/DeclarationsTableCell.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/DeclarationsTableCell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/UpdateDefinitionTable.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/UpdateDefinitionTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/condition/ConditionDeclTableViewModel.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/condition/ConditionDeclTableViewModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/dialogs/ConditionsDefnsCountDialog.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/dialogs/ConditionsDefnsCountDialog.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/MissingConditions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/MissingConditions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/OsCheck.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/OsCheck.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/tuple/Tuple0.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/tuple/Tuple0.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/tuple/Tuple1.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/tuple/Tuple1.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/default_de.properties" afterPath="$PROJECT_DIR$/src/main/resources/default_de.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/default_en.properties" afterPath="$PROJECT_DIR$/src/main/resources/default_en.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/logback.xml" afterPath="$PROJECT_DIR$/src/main/resources/logback.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/menu_de.properties" afterPath="$PROJECT_DIR$/src/main/resources/menu_de.properties" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ActionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ActionsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/StringListBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/StringListBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/CollectorTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/CollectorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/common/UnicodeTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/common/UnicodeTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Root300.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Root300.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/DtFunctionsTestData.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/DtFunctionsTestData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/io/DTDataPacketTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/io/DTDataPacketTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/io/StorerTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/io/StorerTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Emitter.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Emitter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/EmitterTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/EmitterTest.java" />
     </list>
     <ignored path="dt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -73,30 +29,24 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/dt$de_adesso_tools.coverage" NAME="de.adesso.tools Coverage Results" MODIFIED="1457935801285" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>de.adesso.tools.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/dt$DtFunctionsTest.coverage" NAME="DtFunctionsTest Coverage Results" MODIFIED="1460137382395" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>de.adesso.tools.functions.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/dt$ActionsTest_testA5Design__1_.coverage" NAME="ActionsTest.testA5Design (1) Coverage Results" MODIFIED="1458462325690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.adesso.tools.analysis.completeness.detailed.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/dt$DtFunctionsTest_testDoInsertColumns__1_.coverage" NAME="DtFunctionsTest.testDoInsertColumns (1) Coverage Results" MODIFIED="1457187031580" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.adesso.tools.functions.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/dt$App.coverage" NAME="App Coverage Results" MODIFIED="1463246220792" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/dt$ActionsTest_testA5OK__1_.coverage" NAME="ActionsTest.testA5OK (1) Coverage Results" MODIFIED="1463673126187" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>de.adesso.tools.analysis.completeness.detailed.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/dt$DtFunctionsTest.coverage" NAME="DtFunctionsTest Coverage Results" MODIFIED="1457935627414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>de.adesso.tools.functions.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/dt$de_adesso_tools.coverage" NAME="de.adesso.tools Coverage Results" MODIFIED="1457935801285" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.adesso.tools.*</FILTER>
     </SUITE>
   </component>
   <component name="CreatePatchCommitExecutor">
     <option name="PATCH_PATH" value="" />
-  </component>
-  <component name="DsmViewSettings">
-    <option name="flattenPackages" value="true" />
-    <option name="groupByModuleGroups" value="false" />
-    <option name="groupByModules" value="false" />
-    <option name="groupCycles" value="true" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FavoritesManager">
@@ -104,72 +54,101 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Emitter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Emitter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#3868#3869#0" expanded="true" />
-                <element signature="e#3902#3903#0" expanded="true" />
-                <element signature="e#4608#4609#0" expanded="true" />
-                <element signature="e#4642#4643#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EmitterTest.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="EmitterTest.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/print/EmitterTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.2455243">
-              <caret line="74" column="47" selection-start-line="74" selection-start-column="47" selection-end-line="74" selection-end-column="47" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="V2_AsciiTable.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/V2_AsciiTable.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="119" column="28" selection-start-line="119" selection-start-column="28" selection-end-line="119" selection-end-column="28" />
-              <folding>
-                <element signature="e#3331#3332#0" expanded="true" />
-                <element signature="e#3355#3356#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ActionDecl.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/model/ActionDecl.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="43" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="43" />
+            <state vertical-scroll-proportion="-11.137931">
+              <caret line="99" column="73" selection-start-line="99" selection-start-column="73" selection-end-line="99" selection-end-column="73" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Declaration.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/model/Declaration.java">
+      <file leaf-file-name="sample-dt.txt" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/sample-dt.txt">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="116" column="65" selection-start-line="116" selection-start-column="65" selection-end-line="116" selection-end-column="65" />
+              <caret line="20" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TableTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TableTest.java">
+      <file leaf-file-name="V1_CharactersBoxDrawing.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v1/V1_CharactersBoxDrawing.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="41" column="68" selection-start-line="41" selection-start-column="68" selection-end-line="41" selection-end-column="68" />
+              <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="V1_AsciiTable.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v1/V1_AsciiTable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="38" column="19" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RenderUtilities.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/render/RenderUtilities.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="64" column="61" selection-start-line="64" selection-start-column="61" selection-end-line="64" selection-end-column="61" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ArrayTransformations.java" pinned="false" current-in-tab="true">
+        <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/commons/ArrayTransformations.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4213615">
+              <caret line="196" column="24" selection-start-line="196" selection-start-column="24" selection-end-line="196" selection-end-column="24" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileCharSink.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/io/zip/FileCharSink.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="42" column="70" selection-start-line="42" selection-start-column="70" selection-end-line="42" selection-end-column="70" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileStore.java" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/nio/file/FileStore.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="WindowsFileStore.class" pinned="false" current-in-tab="false">
+        <entry file="jar://C:/Java/jdk1.8.0_66/jre/lib/rt.jar!/sun/nio/fs/WindowsFileStore.class">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.7777777">
+              <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="EmitterConsumer.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/print/EmitterConsumer.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="49" column="27" selection-start-line="49" selection-start-column="27" selection-end-line="49" selection-end-column="27" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -184,6 +163,7 @@
       <list>
         <option value="JUnit4 Test Class" />
         <option value="Interface" />
+        <option value="Enum" />
         <option value="TestNG Test Class" />
         <option value="Class" />
       </list>
@@ -201,59 +181,63 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/StringListBuilder.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/common/UnicodeTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/tuple/Tuple0.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/simple/ConditionSimpleCompletenessCheck.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ActionComparisonOperator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ActionComparisonResultCombiner.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/CombinationResultAccumulator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ConditionComparisonOperator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ConditionComparisonResultCombiner.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/StructuralAnalysisResultEmitter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/tuple/Tuple1.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/events/ConditionDefnsTableInitializedEvent.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/Indicator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DuplicateRulesRejector.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/OsCheck.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/io/StorerTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Array2D.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Conditions.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DefaultStructuralAnalysis.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/DtFunctionsTestData.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/List2DFunctions.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Root300.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/RuleConsolidator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/UpdateDefinitionTable.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/CollectorTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ConsolidateConditions.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/DeclarationsTableCell.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/DTDataPacket.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/StructuralAnalysisResultEmitter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Functions.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/ObservableList2DFunctions.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ColumnDifference.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DtFunctionsTestData.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/MissingConditions.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/condition/ConditionDeclTableViewModel.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/io/DTDataPacketTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/dialogs/ConditionsDefnsCountDialog.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ConsolidateRules.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ConsolidateRulesTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/RuleConsolidator.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/NestedBuilder.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Child11.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Child12.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Child21.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Child22.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Child10.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Child20.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Main.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Root.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/first/SampleInnerBuilder.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Child10.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Root.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Model.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Root300.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/Array2D.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/Nestable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/Callback.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/AbstractNestable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Dimension2DBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Callback.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/AbstractNestable.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Nestable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/StringArray2DBuilder.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Callback.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Child310.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/AbstractNestable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Dimension.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/Dump.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Child320.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Array2D.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/common/Array2DTest.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ActionsTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/PrintService.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/PrintServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TextPrinter.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TextPrinterTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/PrintFunctions.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/model/Declaration.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TableTest.java" />
+        <option value="$USER_HOME$/.IntelliJIdea15/system/temp-testng-customsuite.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/model/DecisionTable.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Emitter.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/FSMTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/MemoryCharSink.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/ConsoleCharSink.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/EmitterConsumer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/zip/FileCharSink.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/EmitterTest.java" />
       </list>
     </option>
+  </component>
+  <component name="JsBowerSettings">
+    <exe-path />
+    <config-path />
   </component>
   <component name="JsBuildToolGruntFileManager" detection-done="true" />
   <component name="JsBuildToolPackageJson" detection-done="true" />
@@ -318,9 +302,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+    <option name="y" value="1" />
     <option name="width" value="1920" />
-    <option name="height" value="977" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -333,10 +317,22 @@
             <id>Abstraction issuesJava</id>
           </State>
           <State>
+            <id>Class structureJava</id>
+          </State>
+          <State>
+            <id>Code maturity issuesJava</id>
+          </State>
+          <State>
             <id>Code style issuesJava</id>
           </State>
           <State>
+            <id>Google Web Toolkit issues</id>
+          </State>
+          <State>
             <id>Java</id>
+          </State>
+          <State>
+            <id>Java language level migration aidsJava</id>
           </State>
           <State>
             <id>JavaFX</id>
@@ -354,7 +350,19 @@
             <id>Naming conventionsJava</id>
           </State>
           <State>
+            <id>Performance issuesJava</id>
+          </State>
+          <State>
+            <id>Spring</id>
+          </State>
+          <State>
+            <id>Spring AOPSpring</id>
+          </State>
+          <State>
             <id>TestNGJava</id>
+          </State>
+          <State>
+            <id>Threading issuesJava</id>
           </State>
         </expanded-state>
         <selected-state>
@@ -372,7 +380,7 @@
     <OptionsSetting value="true" id="Update" />
     <OptionsSetting value="true" id="Status" />
     <OptionsSetting value="true" id="Edit" />
-    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="2" id="Add" />
     <ConfirmationsSetting value="0" id="Remove" />
   </component>
   <component name="ProjectView">
@@ -417,28 +425,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="asciitable-j7-1.0.0.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Maven: de.vandermeer:asciitable-j7:1.0.0" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="asciitable-j7-1.0.0.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="META-INF" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -519,36 +505,6 @@
               <option name="myItemId" value="asciitable" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="v1" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Maven: de.vandermeer:asciitable-j7:1.0.0" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="asciitable-j7-1.0.0.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="asciitable" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="commons" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -557,164 +513,11 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="print" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="tools" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="print" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="Scope">
         <subPane subId="Tests">
           <PATH>
@@ -959,6 +762,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -967,77 +771,72 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="last_opened_file_path" value="/" />
+    <property name="last_opened_file_path" value="/Applications/SceneBuilder.app" />
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
-    <property name="last_directory_selection" value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui" />
-    <property name="SearchEverywhereHistoryKey" value="REduceOps&#9;FILE&#9;jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/util/stream/ReduceOps.java&#10;MatrixFunction&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/tools/functions/MatrixFunctions.java&#10;Consolid&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/test/java/de/adesso/tools/analysis/completeness/detailed/ConsolidateRulesTest.java&#10;ObservableList&#9;PSI&#9;JAVA://javafx.collections.ObservableList&#10;ConditionDeclT&#9;PSI&#9;JAVA://de.adesso.tools.ui.condition.ConditionDeclTableViewModel&#10;doAddCo&#9;PSI&#9;JAVA://de.adesso.tools.ui.menu.MenuView#doAddConditionDecl&#10;addColumn&#9;PSI&#9;JAVA://de.adesso.tools.functions.MatrixFunctions#addColumn&#10;determineIndi&#9;PSI&#9;JAVA://de.adesso.tools.ui.main.MainView#determineIndices&#10;MatrixBuilder&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/tools/common/MatrixBuilder.java&#10;FXCollections&#9;PSI&#9;JAVA://javafx.collections.FXCollections&#10;MatrixBui&#9;PSI&#9;JAVA://de.adesso.tools.common.MatrixBuilder" />
+    <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions" />
+    <property name="SearchEverywhereHistoryKey" value="asByteSink&#9;PSI&#9;JAVA://com.google.common.io.Files#asByteSink&#10;Tuple&#9;PSI&#9;JAVA://de.adesso.tools.util.tuple.Tuple&#10;ConditionDeclT&#9;PSI&#9;JAVA://de.adesso.tools.ui.condition.ConditionDeclTableViewModel&#10;doAddCo&#9;PSI&#9;JAVA://de.adesso.tools.ui.menu.MenuView#doAddConditionDecl&#10;addColumn&#9;PSI&#9;JAVA://de.adesso.tools.functions.MatrixFunctions#addColumn&#10;determineIndi&#9;PSI&#9;JAVA://de.adesso.tools.ui.main.MainView#determineIndices&#10;MatrixBuilder&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/tools/common/MatrixBuilder.java&#10;FXCollections&#9;PSI&#9;JAVA://javafx.collections.FXCollections&#10;MatrixBui&#9;PSI&#9;JAVA://de.adesso.tools.common.MatrixBuilder" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="TestNG" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="260" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="258" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="262" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="259" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="266" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="263" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1060" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1050" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="260" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="258" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="262" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="259" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="266" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="263" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1060" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1050" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
-    <property name="com.intellij.ide.scratch.LRUPopupBuilder$2/Languages" value="JAVA" />
-    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.includeInheritedMembers" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="de.adesso.tools.print" />
-      <recent name="de.adesso.tools.analysis.structure" />
+      <recent name="de.adesso.tools.common" />
       <recent name="de.adesso.tools.analysis.completeness.detailed" />
       <recent name="de.adesso.tools.functions" />
-      <recent name="de.adesso.tools.io" />
     </key>
     <key name="MoveMembersDialog.RECENTS_KEY">
-      <recent name="de.adesso.tools.functions.List2DFuntionsFunctions" />
       <recent name="de.adesso.tools.functions.ListFunctions" />
       <recent name="de.adesso.tools.util.func.DtFunctions" />
       <recent name="de.adesso.tools.util.func.DtOps" />
       <recent name="de.adesso.tools.util.matrix.Matrix" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="de.adesso.tools.analysis.completeness.detailed" />
+      <recent name="de.adesso.tools.analysis.structure" />
+      <recent name="de.adesso.tools.ui" />
       <recent name="de.adesso.tools.functions" />
       <recent name="de.adesso.tools" />
       <recent name="de.adesso.tools.util.func" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/de/adesso/tools" />
       <recent name="C:\cygwin64\home\moehler\m2-projects\dt\src\main\java\de\adesso\tools\analysis\completeness\simple" />
       <recent name="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="de.adesso.tools.functions" />
-      <recent name="de.adesso.tools.ui" />
-      <recent name="de.adesso.tools.common" />
-      <recent name="de.adesso.tools.events" />
+      <recent name="de.adesso.tools.io.zip" />
       <recent name="de.adesso.tools.io" />
+      <recent name="de.adesso.tools.common" />
+      <recent name="de.adesso.tools.functions.chained.third" />
+      <recent name="de.adesso.tools.functions.chained.second" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\cygwin64\home\moehler\m2-projects\dt\src\test\java\de\adesso\tools\functions\chained\third" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
-      <recent name="de.adesso.tools.print" />
-      <recent name="de.adesso.tools.analysis.structure" />
       <recent name="de.adesso.tools.events" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
-      <recent name="de.adesso.tools.functions" />
       <recent name="de.adesso.tools.analysis.structure" />
     </key>
   </component>
@@ -1055,31 +854,62 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/dictionaries/mmoehler.xml</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/Dump.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/dt.iml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/pom.xml</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ColumnDifference.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Conditions.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ConsolidateConditions.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Functions.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/RulesDifferenceOperator.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/simple/ConditionSimpleCompletenessCheck.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ActionComparisonOperator.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ActionComparisonResultCombiner.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/CombinationResultAccumulator.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ConditionComparisonOperator.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/ConditionComparisonResultCombiner.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DefaultStructuralAnalysis.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DuplicateRulesRejector.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/Indicator.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/RuleConsolidator.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/StructuralAnalysisResultEmitter.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Array2D.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/List2DBuilder.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Nestable.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/ObservableList2DBuilder.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/events/ConditionDefnsTableInitializedEvent.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/List2DFunctions.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/ObservableList2DFunctions.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/io/DTDataPacket.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/model/Declaration.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/model/Identity.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/DeclarationsTableCell.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/Notifications.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/PossibleIndicatorsSupplier.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/UpdateDefinitionTable.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/condition/ConditionDeclTableViewModel.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/dialogs/ConditionsDefnsCountDialog.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/dialogs/Dialogs.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/util/MissingConditions.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/util/OsCheck.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/util/tuple/Tuple0.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/util/tuple/Tuple1.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/default_de.properties</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/default_en.properties</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/logback.xml</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/resources/menu_de.properties</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ActionsTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ConsolidateConditionsTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/FunctionsTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/Tuple2ListBuilder.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/StringListBuilder.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/CollectorTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/RuleConsolidatorTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/common/ListBuilderTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DtFunctionsTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/List2DFunctionsTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/ObservableList2DFunctionsTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/AbstractNestable.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Callback.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Child310.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Child320.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Nestable.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/DefinitionsTableViewDataBuilder.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/common/UnicodeTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Root300.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/DtFunctionsTestData.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/TableColumnBuilder.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/io/DTDataPacketTest.java</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/io/StorerTest.java</PATH>
         </FILE-GROUP>
@@ -1089,15 +919,13 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/AbstractNestable.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Array2D.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Callback.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Dimension.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/List2DBuilder.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/ListBuilder.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Nestable.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/ObservableList2DBuilder.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/common/Array2DTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Emitter.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/print/PrintFunctions.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/print/EmitterTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/print/Printer.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TableTest.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TextPrinter.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TextPrinterTest.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -1105,9 +933,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/List2DBuilder.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/ListBuilder.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/common/ObservableList2DBuilder.java</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/DecisionTable.java</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -1189,8 +1015,61 @@
       </FILE-GROUP>
     </UpdatedFiles>
   </component>
-  <component name="RunManager" selected="TestNG.EmitterTest.testApply (2)">
-    <configuration default="false" name="EmitterTest.testEmitActions" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="Application.App">
+    <configuration default="false" name="ActionsTest.testA5OK (1)" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="de.adesso.tools.analysis.completeness.detailed.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="dt" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="de.adesso.tools.analysis.completeness.detailed" />
+      <option name="MAIN_CLASS_NAME" value="de.adesso.tools.analysis.completeness.detailed.ActionsTest" />
+      <option name="METHOD_NAME" value="testA5OK" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" value="0" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="false" name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="de.adesso.tools.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <option name="MAIN_CLASS_NAME" value="de.adesso.tools.App" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="dt" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="false" name="EmitterTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="de.adesso.tools.print.*" />
@@ -1203,9 +1082,9 @@
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="de.adesso.tools.print" />
       <option name="MAIN_CLASS_NAME" value="de.adesso.tools.print.EmitterTest" />
-      <option name="METHOD_NAME" value="testEmitActions" />
+      <option name="METHOD_NAME" />
       <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="TEST_OBJECT" value="CLASS" />
       <option name="VM_PARAMETERS" value="-ea" />
       <option name="PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
@@ -1273,73 +1152,7 @@
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="false" name="EmitterTest.testEmitAction" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="de.adesso.tools.print.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="dt" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="de.adesso.tools.print" />
-      <option name="MAIN_CLASS_NAME" value="de.adesso.tools.print.EmitterTest" />
-      <option name="METHOD_NAME" value="testEmitAction" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="false" name="EmitterTest.testApply (2)" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="de.adesso.tools.print.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="dt" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="de.adesso.tools.print" />
-      <option name="MAIN_CLASS_NAME" value="de.adesso.tools.print.EmitterTest" />
-      <option name="METHOD_NAME" value="testApply" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
+      <option name="PARAMETERS" value="0" />
       <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
       <option name="OUTPUT_DIRECTORY" />
       <option name="ANNOTATION_TYPE" />
@@ -1359,6 +1172,65 @@
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -1441,6 +1313,25 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
@@ -1721,53 +1612,26 @@
     <configuration default="true" type="osgi.bnd.run" factoryName="Test Launcher (JUnit)">
       <method />
     </configuration>
-    <configuration default="false" name="TextPrinterTest" type="JUnit" factoryName="JUnit" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="de.adesso.tools.print.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="dt" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" value="de.adesso.tools.print" />
-      <option name="MAIN_CLASS_NAME" value="de.adesso.tools.print.TextPrinterTest" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
-    <list size="6">
-      <item index="0" class="java.lang.String" itemvalue="JUnit.TextPrinterTest" />
-      <item index="1" class="java.lang.String" itemvalue="TestNG.EmitterTest.testEmitActions" />
-      <item index="2" class="java.lang.String" itemvalue="TestNG.EmitterTest.testApply" />
-      <item index="3" class="java.lang.String" itemvalue="TestNG.EmitterTest.testApply (1)" />
-      <item index="4" class="java.lang.String" itemvalue="TestNG.EmitterTest.testEmitAction" />
-      <item index="5" class="java.lang.String" itemvalue="TestNG.EmitterTest.testApply (2)" />
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="TestNG.ActionsTest.testA5OK (1)" />
+      <item index="1" class="java.lang.String" itemvalue="Application.App" />
+      <item index="2" class="java.lang.String" itemvalue="TestNG.EmitterTest" />
+      <item index="3" class="java.lang.String" itemvalue="TestNG.EmitterTest.testApply" />
+      <item index="4" class="java.lang.String" itemvalue="TestNG.EmitterTest.testApply (1)" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="TestNG.EmitterTest.testApply (2)" />
-        <item index="1" class="java.lang.String" itemvalue="TestNG.EmitterTest.testApply" />
-        <item index="2" class="java.lang.String" itemvalue="TestNG.EmitterTest.testEmitActions" />
-        <item index="3" class="java.lang.String" itemvalue="TestNG.EmitterTest.testEmitAction" />
-        <item index="4" class="java.lang.String" itemvalue="TestNG.EmitterTest.testApply (1)" />
+        <item index="0" class="java.lang.String" itemvalue="Application.App" />
+        <item index="1" class="java.lang.String" itemvalue="TestNG.EmitterTest.testApply (1)" />
+        <item index="2" class="java.lang.String" itemvalue="TestNG.EmitterTest.testApply" />
+        <item index="3" class="java.lang.String" itemvalue="TestNG.EmitterTest" />
+        <item index="4" class="java.lang.String" itemvalue="TestNG.ActionsTest.testA5OK (1)" />
       </list>
     </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="StructureViewFactory">
-    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR,SHOW_PROPERTIES,SHOW_ANONYMOUS" />
+    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR,SHOW_PROPERTIES" />
   </component>
   <component name="SvnConfiguration">
     <configuration>$USER_HOME$/.subversion</configuration>
@@ -1805,22 +1669,44 @@
       <workItem from="1458540616212" duration="2747000" />
       <workItem from="1458551552287" duration="1760000" />
       <workItem from="1458556307885" duration="14000" />
-      <workItem from="1458626064208" duration="9873000" />
-      <workItem from="1458828943086" duration="75257000" />
-      <workItem from="1459512309752" duration="1738000" />
-      <workItem from="1459514098388" duration="25603000" />
-      <workItem from="1459576114051" duration="47051000" />
-      <workItem from="1459707565669" duration="1122000" />
-      <workItem from="1460136198134" duration="46837000" />
-      <workItem from="1460809459979" duration="19284000" />
-      <workItem from="1461327410019" duration="43905000" />
-      <workItem from="1461607426577" duration="1479000" />
-      <workItem from="1461941759336" duration="25549000" />
-      <workItem from="1462112317070" duration="102000" />
-      <workItem from="1462367064108" duration="61480000" />
-      <workItem from="1463131895195" duration="27000" />
-      <workItem from="1463131970730" duration="39870000" />
-      <workItem from="1463727357061" duration="59456000" />
+      <workItem from="1458626064208" duration="9902000" />
+      <workItem from="1458711865868" duration="1734000" />
+      <workItem from="1459228208112" duration="7283000" />
+      <workItem from="1459239646292" duration="2029000" />
+      <workItem from="1459245579079" duration="23000" />
+      <workItem from="1459245656912" duration="4371000" />
+      <workItem from="1459400545107" duration="9213000" />
+      <workItem from="1459412114114" duration="21080000" />
+      <workItem from="1459443409316" duration="3045000" />
+      <workItem from="1459486144205" duration="9008000" />
+      <workItem from="1459747970590" duration="16319000" />
+      <workItem from="1459831669299" duration="11444000" />
+      <workItem from="1459869662343" duration="4986000" />
+      <workItem from="1459919966395" duration="3879000" />
+      <workItem from="1459936482644" duration="21090000" />
+      <workItem from="1460004331324" duration="8552000" />
+      <workItem from="1460016870116" duration="12506000" />
+      <workItem from="1461043683813" duration="1528000" />
+      <workItem from="1461128632759" duration="14620000" />
+      <workItem from="1461168800711" duration="39000" />
+      <workItem from="1461217084420" duration="13485000" />
+      <workItem from="1461301516682" duration="2363000" />
+      <workItem from="1461647896474" duration="2739000" />
+      <workItem from="1461733213815" duration="20571000" />
+      <workItem from="1461819282026" duration="12935000" />
+      <workItem from="1461908392914" duration="1027000" />
+      <workItem from="1462166361943" duration="614000" />
+      <workItem from="1462251949008" duration="1201000" />
+      <workItem from="1462347662029" duration="407000" />
+      <workItem from="1462771629593" duration="535000" />
+      <workItem from="1462942673698" duration="5353000" />
+      <workItem from="1462978919913" duration="4957000" />
+      <workItem from="1463028956371" duration="10932000" />
+      <workItem from="1463070968701" duration="56000" />
+      <workItem from="1463502561680" duration="510000" />
+      <workItem from="1463548985624" duration="18656000" />
+      <workItem from="1463637900017" duration="17477000" />
+      <workItem from="1463983649072" duration="15366000" />
     </task>
     <task id="LOCAL-00001" summary="Refactoring of Matrix functions">
       <created>1455475453269</created>
@@ -1912,127 +1798,175 @@
       <option name="project" value="LOCAL" />
       <updated>1458671968766</updated>
     </task>
-    <task id="LOCAL-00016" summary="Formal Completeness Check ( extended ) integrated. Needs Rework!!">
-      <created>1459185625147</created>
+    <task id="LOCAL-00016" summary="Worked at MissingConditions -&gt; Not Finished!!">
+      <created>1458671979445</created>
       <option name="number" value="00016" />
       <option name="project" value="LOCAL" />
-      <updated>1459185625147</updated>
+      <updated>1458671979445</updated>
     </task>
-    <task id="LOCAL-00017" summary="Formal Completeness Check ( extended ) integrated. Needs Rework!!">
-      <created>1459185642585</created>
+    <task id="LOCAL-00017" summary="Startworking at Struct. Analysis">
+      <created>1459236080805</created>
       <option name="number" value="00017" />
       <option name="project" value="LOCAL" />
-      <updated>1459185642585</updated>
+      <updated>1459236080805</updated>
     </task>
-    <task id="LOCAL-00018" summary="FileOpen and FileSaveAs implemented -&gt; Externalization does not work as expected!!">
-      <created>1459704316627</created>
+    <task id="LOCAL-00018" summary="Startworking at Struct. Analysis Comparisation Types defined - not completed">
+      <created>1459244423869</created>
       <option name="number" value="00018" />
       <option name="project" value="LOCAL" />
-      <updated>1459704316627</updated>
+      <updated>1459244423869</updated>
     </task>
-    <task id="LOCAL-00019" summary="some additional zip stuff added -&gt; use a fork-join like processing for storing a DT">
-      <created>1459710214551</created>
+    <task id="LOCAL-00019" summary="Startworking at Struct. Analysis Comparisation Types defined - not completed">
+      <created>1459274074276</created>
       <option name="number" value="00019" />
       <option name="project" value="LOCAL" />
-      <updated>1459710214551</updated>
+      <updated>1459274074276</updated>
     </task>
-    <task id="LOCAL-00020" summary="Consolidation is buggy - working on fix">
-      <created>1460498757077</created>
+    <task id="LOCAL-00020" summary="Startworking at Struct. Analysis Comparisation Types defined - not completed">
+      <created>1459410121311</created>
       <option name="number" value="00020" />
       <option name="project" value="LOCAL" />
-      <updated>1460498757077</updated>
+      <updated>1459410121311</updated>
     </task>
-    <task id="LOCAL-00021" summary="Consolidation of Conditions prototype works">
-      <created>1461008840932</created>
+    <task id="LOCAL-00021" summary="Structural Analysis Algorithm finished -&gt; Next Step: Integeration">
+      <created>1459441548278</created>
       <option name="number" value="00021" />
       <option name="project" value="LOCAL" />
-      <updated>1461008840932</updated>
+      <updated>1459441548278</updated>
     </task>
-    <task id="LOCAL-00022" summary="Consolidation of Conditions prototype works">
-      <created>1461009277655</created>
+    <task id="LOCAL-00022" summary="Integration Started (class StructureAnalysis) but not finished!!">
+      <created>1459446434387</created>
       <option name="number" value="00022" />
       <option name="project" value="LOCAL" />
-      <updated>1461009277655</updated>
+      <updated>1459446434387</updated>
     </task>
-    <task id="LOCAL-00023" summary="Consolidation of whole DT's works - Needs some Testing">
-      <created>1461526885976</created>
+    <task id="LOCAL-00023" summary="Handlerimplementation for Completeness- and Structural Analysis  started">
+      <created>1459500989977</created>
       <option name="number" value="00023" />
       <option name="project" value="LOCAL" />
-      <updated>1461526885976</updated>
+      <updated>1459500989977</updated>
     </task>
-    <task id="LOCAL-00024" summary="Consolidation of whole DT's works - Needs more Testing and DEbug LOG">
-      <created>1461608396417</created>
+    <task id="LOCAL-00024" summary="FileOpen and FileSaveAs Implementation and Test. FileSaveAs does not work correctly!!">
+      <created>1459778471315</created>
       <option name="number" value="00024" />
       <option name="project" value="LOCAL" />
-      <updated>1461608396417</updated>
+      <updated>1459778471315</updated>
     </task>
-    <task id="LOCAL-00025" summary="Consolidation of whole DT's works - Needs more Testing and DEbug LOG">
-      <created>1462112406623</created>
+    <task id="LOCAL-00025" summary="FileOpen and FileSaveAs Implementation and Test. OK. Preconditionchecks for datastate must be added ( load a new file if a modified oldfile is in memory!! )">
+      <created>1459874775058</created>
       <option name="number" value="00025" />
       <option name="project" value="LOCAL" />
-      <updated>1462112406623</updated>
+      <updated>1459874775058</updated>
     </task>
-    <task id="LOCAL-00026" summary="General Refactoring for konsequent use of java8 features">
-      <created>1462728966554</created>
+    <task id="LOCAL-00026" summary="Resolve completeness and structuralgaps - prepared">
+      <created>1459925050038</created>
       <option name="number" value="00026" />
       <option name="project" value="LOCAL" />
-      <updated>1462728966554</updated>
+      <updated>1459925050038</updated>
     </task>
-    <task id="LOCAL-00027" summary="General Refactoring for konsequent use of java8 features">
-      <created>1463387914126</created>
+    <task id="LOCAL-00027" summary="Analysis Menue enablement finished - NExt step bring all the menues to life!!">
+      <created>1459960905918</created>
       <option name="number" value="00027" />
       <option name="project" value="LOCAL" />
-      <updated>1463387914126</updated>
+      <updated>1459960905918</updated>
     </task>
-    <task id="LOCAL-00028" summary="Extended CompletenessCheck (A5) does not work correctly!!">
-      <created>1463419010540</created>
+    <task id="LOCAL-00028" summary="Consolidate after Structural Analysis imlemented but not tested">
+      <created>1460014868803</created>
       <option name="number" value="00028" />
       <option name="project" value="LOCAL" />
-      <updated>1463419010541</updated>
+      <updated>1460014868803</updated>
     </task>
-    <task id="LOCAL-00029" summary="Completeness Check fixed!">
-      <created>1463735492289</created>
+    <task id="LOCAL-00029" summary="Some trouble with crule consolidation after structural checks must be solved!!">
+      <created>1460044337890</created>
       <option name="number" value="00029" />
       <option name="project" value="LOCAL" />
-      <updated>1463735492289</updated>
+      <updated>1460044337890</updated>
     </task>
-    <option name="localTasksCounter" value="30" />
+    <task id="LOCAL-00030" summary="Some trouble with crule consolidation after structural checks must be solved!!">
+      <created>1460044533129</created>
+      <option name="number" value="00030" />
+      <option name="project" value="LOCAL" />
+      <updated>1460044533129</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Some trouble with crule consolidation after structural checks must be solved!!">
+      <created>1461316732588</created>
+      <option name="number" value="00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1461316732588</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Actualization and deletion of conditions during consolidation separated! Needs more testing">
+      <created>1461681113912</created>
+      <option name="number" value="00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1461681113912</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Actualization and deletion of conditions during consolidation separated! Needs more testing">
+      <created>1461923644985</created>
+      <option name="number" value="00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1461923644985</updated>
+    </task>
+    <task id="LOCAL-00034" summary="ConsolidateRules and RulesConsolidator - consolidate them!!">
+      <created>1462947824528</created>
+      <option name="number" value="00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1462947824528</updated>
+    </task>
+    <task id="LOCAL-00035" summary="ConsolidateRules and RulesConsolidator - consolidate them!!">
+      <created>1463070432888</created>
+      <option name="number" value="00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1463070432888</updated>
+    </task>
+    <task id="LOCAL-00036" summary="ConsolidateRules and RulesConsolidator - consolidate them!!">
+      <created>1463071002201</created>
+      <option name="number" value="00036" />
+      <option name="project" value="LOCAL" />
+      <updated>1463071002201</updated>
+    </task>
+    <task id="LOCAL-00037" summary="Bugfix Action5 of RuleCompletenessCheck">
+      <created>1463677713995</created>
+      <option name="number" value="00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1463677713995</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="EmitterTest_testApply - 2016.05.22 at 17h 20m 51s.xml">
+    <history-entry file="EmitterTest_testApply - 2016.05.23 at 13h 52m 36s.xml">
       <configuration name="EmitterTest.testApply" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="EmitterTest_testApply - 2016.05.22 at 17h 21m 25s.xml">
-      <configuration name="EmitterTest.testApply" configurationId="TestNG" />
+    <history-entry file="EmitterTest_testApply_(1) - 2016.05.23 at 13h 48m 32s.xml">
+      <configuration name="EmitterTest.testApply (1)" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="EmitterTest_testApply - 2016.05.22 at 17h 22m 12s.xml">
-      <configuration name="EmitterTest.testApply" configurationId="TestNG" />
+    <history-entry file="EmitterTest_testApply_(1) - 2016.05.23 at 13h 51m 40s.xml">
+      <configuration name="EmitterTest.testApply (1)" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="EmitterTest_testApply - 2016.05.22 at 17h 54m 34s.xml">
-      <configuration name="EmitterTest.testApply" configurationId="TestNG" />
+    <history-entry file="EmitterTest_testApply_(1) - 2016.05.23 at 13h 51m 47s.xml">
+      <configuration name="EmitterTest.testApply (1)" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="EmitterTest_testApply - 2016.05.22 at 17h 57m 17s.xml">
-      <configuration name="EmitterTest.testApply" configurationId="TestNG" />
+    <history-entry file="EmitterTest_testApply_(1) - 2016.05.23 at 13h 56m 36s.xml">
+      <configuration name="EmitterTest.testApply (1)" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="EmitterTest_testApply - 2016.05.22 at 18h 07m 12s.xml">
-      <configuration name="EmitterTest.testApply" configurationId="TestNG" />
+    <history-entry file="EmitterTest_testApply_(1) - 2016.05.23 at 13h 57m 09s.xml">
+      <configuration name="EmitterTest.testApply (1)" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="EmitterTest_testApply - 2016.05.22 at 19h 51m 46s.xml">
-      <configuration name="EmitterTest.testApply" configurationId="TestNG" />
+    <history-entry file="EmitterTest_testApply_(1) - 2016.05.23 at 18h 10m 08s.xml">
+      <configuration name="EmitterTest.testApply (1)" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="EmitterTest_testApply_(2) - 2016.05.22 at 20h 25m 40s.xml">
-      <configuration name="EmitterTest.testApply (2)" configurationId="TestNG" />
+    <history-entry file="EmitterTest_testApply_(1) - 2016.05.23 at 18h 11m 22s.xml">
+      <configuration name="EmitterTest.testApply (1)" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="EmitterTest_testEmitAction - 2016.05.22 at 17h 53m 34s.xml">
-      <configuration name="EmitterTest.testEmitAction" configurationId="TestNG" />
+    <history-entry file="EmitterTest_testApply_(1) - 2016.05.23 at 18h 14m 12s.xml">
+      <configuration name="EmitterTest.testApply (1)" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="EmitterTest_testEmitActions - 2016.05.22 at 17h 56m 52s.xml">
-      <configuration name="EmitterTest.testEmitActions" configurationId="TestNG" />
+    <history-entry file="EmitterTest_testApply_(1) - 2016.05.23 at 18h 37m 31s.xml">
+      <configuration name="EmitterTest.testApply (1)" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="734962000" />
+    <option name="totallyTimeSpent" value="568164000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2044,70 +1978,38 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="977" extended-state="6" />
+    <frame x="0" y="1" width="1920" height="1038" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33898306" sideWeight="0.49573562" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55011135" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.240625" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.63502824" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32768363" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.46666667" sideWeight="0.49413645" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299435" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24227902" sideWeight="0.4966118" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3242938" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31256655" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25559106" sideWeight="0.50338817" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40338984" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4034091" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55011135" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24193548" sideWeight="0.510101" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.325" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3215909" sideWeight="0.49573562" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284091" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3123656" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.240625" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24193548" sideWeight="0.48989898" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.27272728" sideWeight="0.49413645" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="DSM" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
-      <window_info id="Documentation" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-    </layout>
-    <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55011135" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.240625" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31256655" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40338984" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="DSM" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32881355" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33898306" sideWeight="0.49573562" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32768363" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.35932204" sideWeight="0.49413645" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3290735" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3299435" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24227902" sideWeight="0.4966118" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3242938" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25559106" sideWeight="0.50338817" order="3" side_tool="true" content_ui="tabs" />
-    </layout-to-restore>
+    </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -2132,36 +2034,40 @@
     <MESSAGE value="functions (with errors!) implemented" />
     <MESSAGE value="functions errors corrected and enhanced" />
     <MESSAGE value="Worked at MissingConditions -&gt; Not Finished!!" />
-    <MESSAGE value="Formal Completeness Check ( extended ) integrated. Needs Rework!!" />
-    <MESSAGE value="FileOpen and FileSaveAs implemented -&gt; Externalization does not work as expected!!" />
-    <MESSAGE value="some additional zip stuff added -&gt; use a fork-join like processing for storing a DT" />
-    <MESSAGE value="Consolidation is buggy - working on fix" />
-    <MESSAGE value="Consolidation of Conditions prototype works" />
-    <MESSAGE value="Consolidation of whole DT's works - Needs some Testing" />
-    <MESSAGE value="Consolidation of whole DT's works - Needs more Testing and DEbug LOG" />
-    <MESSAGE value="General Refactoring for konsequent use of java8 features" />
-    <MESSAGE value="Extended CompletenessCheck (A5) does not work correctly!!" />
-    <MESSAGE value="Completeness Check fixed!" />
-    <option name="LAST_COMMIT_MESSAGE" value="Completeness Check fixed!" />
+    <MESSAGE value="Startworking at Struct. Analysis" />
+    <MESSAGE value="Startworking at Struct. Analysis Comparisation Types defined - not completed" />
+    <MESSAGE value="Structural Analysis Algorithm finished -&gt; Next Step: Integeration" />
+    <MESSAGE value="Integration Started (class StructureAnalysis) but not finished!!" />
+    <MESSAGE value="Handlerimplementation for Completeness- and Structural Analysis  started" />
+    <MESSAGE value="FileOpen and FileSaveAs Implementation and Test. FileSaveAs does not work correctly!!" />
+    <MESSAGE value="FileOpen and FileSaveAs Implementation and Test. OK. Preconditionchecks for datastate must be added ( load a new file if a modified oldfile is in memory!! )" />
+    <MESSAGE value="Resolve completeness and structuralgaps - prepared" />
+    <MESSAGE value="Analysis Menue enablement finished - NExt step bring all the menues to life!!" />
+    <MESSAGE value="Consolidate after Structural Analysis imlemented but not tested" />
+    <MESSAGE value="Some trouble with crule consolidation after structural checks must be solved!!" />
+    <MESSAGE value="Actualization and deletion of conditions during consolidation separated! Needs more testing" />
+    <MESSAGE value="ConsolidateRules and RulesConsolidator - consolidate them!!" />
+    <MESSAGE value="Bugfix Action5 of RuleCompletenessCheck" />
+    <option name="LAST_COMMIT_MESSAGE" value="Bugfix Action5 of RuleCompletenessCheck" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java</url>
-          <line>298</line>
+          <line>328</line>
           <properties />
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuView.java</url>
-          <line>74</line>
+          <line>88</line>
           <properties />
           <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuViewModel.java</url>
-          <line>108</line>
+          <line>116</line>
           <properties />
           <option name="timeStamp" value="6" />
         </line-breakpoint>
@@ -2178,394 +2084,503 @@
           <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/fixtures/ConditionDeclTableViewBuilder.java</url>
-          <line>18</line>
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java</url>
+          <line>177</line>
           <properties />
-          <option name="timeStamp" value="15" />
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DtFunctionsTest.java</url>
+          <line>383</line>
+          <properties />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java</url>
-          <line>310</line>
+          <line>311</line>
           <properties />
           <option name="timeStamp" value="20" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java</url>
-          <line>165</line>
-          <properties />
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/CollectorTest.java</url>
-          <line>87</line>
-          <properties />
-          <option name="timeStamp" value="34" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/CollectorTest.java</url>
-          <line>101</line>
-          <properties />
-          <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/CollectorTest.java</url>
-          <line>120</line>
-          <properties />
-          <option name="timeStamp" value="37" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/structure/RuleConsolidator.java</url>
-          <properties />
-          <option name="timeStamp" value="41" />
-        </line-breakpoint>
-        <line-breakpoint suspend="NONE" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Functions.java</url>
-          <line>146</line>
-          <properties />
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Functions.java</url>
-          <line>176</line>
-          <properties />
-          <option name="timeStamp" value="43" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Functions.java</url>
-          <line>186</line>
-          <properties />
-          <option name="timeStamp" value="44" />
-        </line-breakpoint>
-        <line-breakpoint type="java-line">
           <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java</url>
-          <line>170</line>
+          <line>228</line>
           <properties />
-          <option name="timeStamp" value="47" />
+          <option name="timeStamp" value="25" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/List2DFunctions.java</url>
-          <line>30</line>
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java</url>
+          <line>460</line>
           <properties />
-          <option name="timeStamp" value="48" />
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/RulesDifferenceOperator.java</url>
-          <line>68</line>
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java</url>
+          <line>61</line>
           <properties />
-          <option name="timeStamp" value="49" />
+          <option name="timeStamp" value="29" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ActionsTest.java</url>
-          <line>157</line>
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/AbstractNestable.java</url>
+          <line>37</line>
           <properties />
-          <option name="timeStamp" value="50" />
+          <option name="timeStamp" value="31" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TextPrinterTest.java</url>
-          <line>35</line>
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java</url>
+          <line>148</line>
           <properties />
-          <option name="timeStamp" value="51" />
+          <option name="timeStamp" value="33" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TableTest.java</url>
-          <line>78</line>
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java</url>
+          <line>140</line>
           <properties />
-          <option name="timeStamp" value="52" />
+          <option name="timeStamp" value="35" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TableTest.java</url>
-          <line>45</line>
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/print/EmitterConsumer.java</url>
+          <line>57</line>
           <properties />
-          <option name="timeStamp" value="53" />
+          <option name="timeStamp" value="40" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="54" />
+      <option name="time" value="44" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="TestNG">
+        <watch expression="target.get()" language="JAVA" custom="" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/UpdateDefinitionTable.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/NestedBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="20" selection-start-line="58" selection-start-column="20" selection-end-line="58" selection-end-column="20" />
-          <folding />
+          <caret line="36" column="21" selection-start-line="36" selection-start-column="3" selection-end-line="36" selection-end-column="21" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/structure/CollectorTest.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/first/AbstractSubBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="233" column="27" selection-start-line="233" selection-start-column="27" selection-end-line="233" selection-end-column="27" />
-          <folding />
+          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ConsolidateConditions.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Child10.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19508196">
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/first/Callback.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="88" column="50" selection-start-line="88" selection-start-column="50" selection-end-line="88" selection-end-column="50" />
+          <caret line="25" column="17" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/first/SampleInnerBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Model.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21948357">
+          <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Main.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4190141">
+          <caret line="38" column="20" selection-start-line="38" selection-start-column="20" selection-end-line="38" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/DeclarationsTableCell.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3322034">
-          <caret line="60" column="37" selection-start-line="60" selection-start-column="37" selection-end-line="60" selection-end-column="37" />
-          <folding />
+        <state vertical-scroll-proportion="0.3321492">
+          <caret line="39" column="7" selection-start-line="39" selection-start-column="7" selection-end-line="39" selection-end-column="7" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/io/DTDataPacket.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3322034">
-          <caret line="121" column="57" selection-start-line="121" selection-start-column="57" selection-end-line="121" selection-end-column="57" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Functions.java">
+    <entry file="jar://C:/Java/jdk1.8.0_66/javafx-src.zip!/javafx/geometry/Dimension2D.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="148" column="50" selection-start-line="148" selection-start-column="50" selection-end-line="148" selection-end-column="50" />
-          <folding />
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/ObservableList2DFunctions.java">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/default_de.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="25" selection-start-line="0" selection-start-column="25" selection-end-line="0" selection-end-column="25" />
+        </state>
+      </provider>
+      <provider editor-type-id="ResourceBundle">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Nestable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="34" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
-          <folding />
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/ColumnDifference.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Callback.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="89" column="45" selection-start-line="89" selection-start-column="45" selection-end-line="89" selection-end-column="45" />
-          <folding />
+          <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/util/MissingConditions.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Root300.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="125" column="49" selection-start-line="125" selection-start-column="49" selection-end-line="125" selection-end-column="49" />
-          <folding />
+          <caret line="87" column="34" selection-start-line="87" selection-start-column="34" selection-end-line="87" selection-end-column="34" />
+          <folding>
+            <element signature="e#1807#1808#0" expanded="false" />
+            <element signature="e#1838#1839#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/util/tuple/mutable/AbstractInvocationHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Callback.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="113" column="4" selection-start-line="113" selection-start-column="4" selection-end-line="113" selection-end-column="4" />
+          <caret line="25" column="26" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/condition/ConditionDeclTableViewModel.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Nestable.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="4" selection-start-line="40" selection-start-column="4" selection-end-line="40" selection-end-column="4" />
+          <caret line="26" column="6" selection-start-line="26" selection-start-column="6" selection-end-line="26" selection-end-column="6" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/io/DTDataPacketTest.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/AbstractNestable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3322034">
-          <caret line="86" column="11" selection-start-line="86" selection-start-column="11" selection-end-line="86" selection-end-column="11" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="29" column="47" selection-start-line="29" selection-start-column="47" selection-end-line="29" selection-end-column="47" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Child310.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="62" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="62" selection-end-column="0" />
+          <folding>
+            <element signature="e#1554#1555#0" expanded="false" />
+            <element signature="e#1601#1602#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/Dump.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.70383275">
+          <caret line="73" column="23" selection-start-line="73" selection-start-column="23" selection-end-line="73" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Child320.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="56" selection-start-line="47" selection-start-column="56" selection-end-line="47" selection-end-column="56" />
+          <folding>
+            <element signature="e#1555#1556#0" expanded="false" />
+            <element signature="e#1602#1603#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Dimension.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="68" column="0" selection-start-line="68" selection-start-column="0" selection-end-line="68" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/AbstractNestable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.310345">
+          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Array2D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.754386">
+          <caret line="35" column="0" selection-start-line="35" selection-start-column="0" selection-end-line="35" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/common/Array2DTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.41463414">
+          <caret line="31" column="21" selection-start-line="31" selection-start-column="16" selection-end-line="31" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/List2DBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="2.251948">
+          <caret line="136" column="0" selection-start-line="136" selection-start-column="0" selection-end-line="136" selection-end-column="0" />
+          <folding>
+            <element signature="e#1375#1376#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/util/function/Predicate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33275262">
+          <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.IntelliJIdea15/system/temp-testng-customsuite.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ActionsTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="157" column="36" selection-start-line="157" selection-start-column="36" selection-end-line="157" selection-end-column="36" />
+        <state vertical-scroll-proportion="2.6051948">
+          <caret line="151" column="0" selection-start-line="151" selection-start-column="0" selection-end-line="151" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/dialogs/ConditionsDefnsCountDialog.java">
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/util/function/BiFunction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="0" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/print/Printer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="21" selection-start-line="24" selection-start-column="21" selection-end-line="24" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TextPrinter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.055658627">
-          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.44155845">
+          <caret line="43" column="17" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="17" />
           <folding>
-            <element signature="e#1023#1024#0" expanded="false" />
-            <element signature="e#1051#1052#0" expanded="false" />
+            <element signature="e#0#1891#0" expanded="false" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TextPrinter.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
+        <state vertical-scroll-proportion="2.5896103">
+          <caret line="152" column="14" selection-start-line="152" selection-start-column="14" selection-end-line="152" selection-end-column="14" />
           <folding>
-            <element signature="e#1023#1024#0" expanded="false" />
-            <element signature="e#1051#1052#0" expanded="false" />
+            <element signature="e#3653#3654#0" expanded="true" />
+            <element signature="e#3688#3689#0" expanded="true" />
+            <element signature="e#3718#3719#0" expanded="true" />
+            <element signature="e#3754#3755#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/sven-jacobs/loremipsum/1.0/loremipsum-1.0.jar!/de/svenjacobs/loremipsum/LoremIpsum.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="6.6666665">
-          <caret line="7" column="13" selection-start-line="7" selection-start-column="13" selection-end-line="7" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/javafx-src.zip!/javafx/scene/text/Text.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.94434136">
-          <caret line="262" column="11" selection-start-line="262" selection-start-column="11" selection-end-line="262" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-45.208332">
-          <caret line="155" column="31" selection-start-line="155" selection-start-column="31" selection-end-line="155" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v1/V1_TablePair.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/util/tuple/Tuple4.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="17" selection-start-line="23" selection-start-column="17" selection-end-line="23" selection-end-column="17" />
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/exception/LambdaExceptionUtil.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="70" selection-start-line="45" selection-start-column="55" selection-end-line="45" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/model/DecisionTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="158" column="0" selection-start-line="158" selection-start-column="0" selection-end-line="158" selection-end-column="0" />
           <folding>
-            <element signature="e#0#1477#0" expanded="false" />
+            <element signature="imports" expanded="true" />
+            <element signature="e#1865#1866#0" expanded="true" />
+            <element signature="e#1901#1902#0" expanded="true" />
+            <element signature="e#2287#2288#0" expanded="true" />
+            <element signature="e#2319#2320#0" expanded="true" />
+            <element signature="e#2388#2389#0" expanded="true" />
+            <element signature="e#2420#2421#0" expanded="true" />
+            <element signature="e#2484#2485#0" expanded="true" />
+            <element signature="e#2516#2517#0" expanded="true" />
+            <element signature="e#2588#2589#0" expanded="true" />
+            <element signature="e#2620#2621#0" expanded="true" />
+            <element signature="e#2839#2840#0" expanded="true" />
+            <element signature="e#2866#2867#0" expanded="true" />
+            <element signature="e#5285#5286#0" expanded="true" />
+            <element signature="e#5339#5340#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v1/V1_TableTheme.java">
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/util/Optional.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#2883#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v1/V1_StandardTableThemes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+          <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TextPrinterTest.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Emitter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
+          <folding>
+            <element signature="e#3607#3608#0" expanded="true" />
+            <element signature="e#3641#3642#0" expanded="true" />
+            <element signature="e#4347#4348#0" expanded="true" />
+            <element signature="e#4381#4382#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/io/OutputSupplier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#1725#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/io/MemoryCharSink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="38" selection-start-line="42" selection-start-column="38" selection-end-line="42" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1310#1311#0" expanded="true" />
+            <element signature="e#1355#1356#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/io/CharSink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="24" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="30" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/io/ByteSink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="149" column="0" selection-start-line="139" selection-start-column="3" selection-end-line="149" selection-end-column="0" />
+          <folding>
+            <element signature="e#5023#5024#0" expanded="true" />
+            <element signature="e#5073#5074#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/io/Files.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="183" column="21" selection-start-line="183" selection-start-column="21" selection-end-line="183" selection-end-column="21" />
+          <folding>
+            <element signature="e#5760#5761#0" expanded="true" />
+            <element signature="e#5806#5807#0" expanded="true" />
+            <element signature="e#6597#6598#0" expanded="true" />
+            <element signature="e#6654#6655#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/io/ConsoleCharSink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="18" selection-start-line="41" selection-start-column="18" selection-end-line="41" selection-end-column="18" />
+          <folding>
+            <element signature="e#1236#1237#0" expanded="true" />
+            <element signature="e#1288#1289#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/nio/file/FileStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/jre/lib/rt.jar!/sun/nio/fs/WindowsFileStore.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.7777777">
+          <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/nio/file/Files.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="50.50113">
+          <caret line="1459" column="28" selection-start-line="1459" selection-start-column="28" selection-end-line="1459" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/print/EmitterConsumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="27" selection-start-line="49" selection-start-column="27" selection-end-line="49" selection-end-column="27" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/RenderedTable.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/io/zip/FileCharSink.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <caret line="42" column="70" selection-start-line="42" selection-start-column="70" selection-end-line="42" selection-end-column="70" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/render/V2_TableRenderer.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/print/EmitterTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="17" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="17" />
+        <state vertical-scroll-proportion="-11.137931">
+          <caret line="99" column="73" selection-start-line="99" selection-start-column="73" selection-end-line="99" selection-end-column="73" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/render/V2_Width.java">
+    <entry file="file://$PROJECT_DIR$/sample-dt.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="21" selection-start-line="26" selection-start-column="21" selection-end-line="26" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/render/WidthLongestWordMinCol.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="33" selection-start-line="39" selection-start-column="11" selection-end-line="39" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/themes/V2_TableTheme.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="17" selection-start-line="26" selection-start-column="17" selection-end-line="26" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/themes/V2_TableThemeBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/themes/AbstractTableTheme.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/themes/V2_E_TableThemes.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="329" column="25" selection-start-line="329" selection-start-column="25" selection-end-line="329" selection-end-column="25" />
-          <folding>
-            <element signature="e#11009#11010#0" expanded="false" />
-            <element signature="e#11033#11034#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/testng/testng/6.9.10/testng-6.9.10-sources.jar!/org/testng/internal/Invoker.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19369894">
-          <caret line="656" column="0" selection-start-line="656" selection-start-column="0" selection-end-line="656" selection-end-column="0" />
+          <caret line="20" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -2578,144 +2593,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v1/V1_Factory.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="22" selection-start-line="23" selection-start-column="22" selection-end-line="23" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0.jar!/README.asciidoc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="105.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v1/V1_AsciiTable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.62963">
-          <caret line="492" column="9" selection-start-line="492" selection-start-column="9" selection-end-line="492" selection-end-column="9" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="19" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/render/V2_AsciiTableRenderer.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/render/RenderUtilities.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="78" column="13" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
+          <caret line="64" column="61" selection-start-line="64" selection-start-column="61" selection-end-line="64" selection-end-column="61" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/row/ContentRow.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/commons/ArrayTransformations.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="89" column="0" selection-start-line="89" selection-start-column="0" selection-end-line="89" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.4213615">
+          <caret line="196" column="24" selection-start-line="196" selection-start-column="24" selection-end-line="196" selection-end-column="24" />
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/render/WidthAbsoluteEven.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="9" selection-start-line="45" selection-start-column="9" selection-end-line="45" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/render/WidthFixedColumns.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="46" column="28" selection-start-line="46" selection-start-column="11" selection-end-line="46" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/util/tuple/Tuple4.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/print/PrintFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/model/Declaration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="116" column="65" selection-start-line="116" selection-start-column="65" selection-end-line="116" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/model/ActionDecl.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="43" selection-start-line="5" selection-start-column="32" selection-end-line="5" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/row/V2_Row.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19253209">
-          <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TableTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="68" selection-start-line="41" selection-start-column="68" selection-end-line="41" selection-end-column="68" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Emitter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="81" column="0" selection-start-line="81" selection-start-column="0" selection-end-line="81" selection-end-column="0" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#3868#3869#0" expanded="true" />
-            <element signature="e#3902#3903#0" expanded="true" />
-            <element signature="e#4608#4609#0" expanded="true" />
-            <element signature="e#4642#4643#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/V2_AsciiTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="119" column="28" selection-start-line="119" selection-start-column="28" selection-end-line="119" selection-end-column="28" />
-          <folding>
-            <element signature="e#3331#3332#0" expanded="true" />
-            <element signature="e#3355#3356#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/print/EmitterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2455243">
-          <caret line="74" column="47" selection-start-line="74" selection-start-column="47" selection-end-line="74" selection-end-column="47" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>

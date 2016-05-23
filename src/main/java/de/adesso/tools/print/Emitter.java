@@ -22,10 +22,10 @@ package de.adesso.tools.print;
 import com.codepoetics.protonpack.StreamUtils;
 import de.adesso.tools.model.ActionDecl;
 import de.adesso.tools.model.ConditionDecl;
+import de.adesso.tools.model.DecisionTable;
 import de.adesso.tools.model.Declaration;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
-import de.adesso.tools.util.tuple.Tuple4;
 import de.vandermeer.asciitable.v2.V2_AsciiTable;
 import de.vandermeer.asciitable.v2.row.ContentRow;
 import javafx.collections.ObservableList;
@@ -38,44 +38,38 @@ import java.util.stream.Stream;
 /**
  * Created by mmoehler on 21.05.16.
  */
-public class Emitter implements Function<Tuple4<
-        ObservableList<ConditionDecl>,
-        ObservableList<ActionDecl>,
-        ObservableList<ObservableList<String>>,
-        ObservableList<ObservableList<String>>
-        >
-        , V2_AsciiTable> {
+public class Emitter implements Function<DecisionTable, V2_AsciiTable> {
 
     private final static Object[] RULE_DESCRIPTOR = {};
+    public static final char[] ALIGNMENT = "cllcccc".toCharArray();
 
     @Override
-    public V2_AsciiTable apply(Tuple4<ObservableList<ConditionDecl>, ObservableList<ActionDecl>,
-            ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> dt) {
+    public V2_AsciiTable apply(DecisionTable dt) {
 
-        Tuple2<ObservableList<ConditionDecl>, ObservableList<ObservableList<String>>> conData = Tuple.of(dt._1(), dt._3());
-        Tuple2<ObservableList<ActionDecl>, ObservableList<ObservableList<String>>> actData = Tuple.of(dt._2(), dt._4());
+        Tuple2<ObservableList<ConditionDecl>, ObservableList<ObservableList<String>>> conData = Tuple.of(dt.getConditionDecls(), dt.getConditionDefs());
+        Tuple2<ObservableList<ActionDecl>, ObservableList<ObservableList<String>>> actData = Tuple.of(dt.getActionDecls(), dt.getActionDefs());
 
         V2_AsciiTable table = new V2_AsciiTable();
 
         table.addStrongRule();
         emitConditionsHeader(conData._2())
                 .map(addRowsAndRules(table))
-                .forEach(o -> o.ifPresent(p -> p.setAlignment("cllcccc".toCharArray())));
+                .forEach(o -> o.ifPresent(p -> p.setAlignment(ALIGNMENT)));
         table.addStrongRule();
 
         emitConditions().apply(conData)
                 .map(addRowsAndRules(table))
-                .forEach(o -> o.ifPresent(p -> p.setAlignment("cllcccc".toCharArray())));
+                .forEach(o -> o.ifPresent(p -> p.setAlignment(ALIGNMENT)));
 
         table.addStrongRule();
         emitActionsHeader(actData._2())
                 .map(addRowsAndRules(table))
-                .forEach(o -> o.ifPresent(p -> p.setAlignment("cllcccc".toCharArray())));
+                .forEach(o -> o.ifPresent(p -> p.setAlignment(ALIGNMENT)));
         table.addStrongRule();
 
         emitActions().apply(actData)
                 .map(addRowsAndRules(table))
-                .forEach(o -> o.ifPresent(p -> p.setAlignment("cllcccc".toCharArray())));
+                .forEach(o -> o.ifPresent(p -> p.setAlignment(ALIGNMENT)));
 
 
         table.addStrongRule();

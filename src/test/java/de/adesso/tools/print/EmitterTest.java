@@ -22,20 +22,20 @@ package de.adesso.tools.print;
 import com.codepoetics.protonpack.StreamUtils;
 import com.google.common.collect.Lists;
 import de.adesso.tools.functions.MoreCollectors;
+import de.adesso.tools.io.zip.FileCharSink;
 import de.adesso.tools.model.ActionDecl;
 import de.adesso.tools.model.ConditionDecl;
+import de.adesso.tools.model.DecisionTable;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 import de.adesso.tools.util.tuple.Tuple4;
-import de.vandermeer.asciitable.v2.RenderedTable;
 import de.vandermeer.asciitable.v2.V2_AsciiTable;
-import de.vandermeer.asciitable.v2.render.V2_AsciiTableRenderer;
-import de.vandermeer.asciitable.v2.render.WidthFixedColumns;
-import de.vandermeer.asciitable.v2.themes.V2_E_TableThemes;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.testng.annotations.Test;
 
+import java.io.File;
+import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
@@ -81,13 +81,26 @@ public class EmitterTest {
             return new ActionDecl(s[0], s[1], s[2]);
         }).collect(MoreCollectors.toObservableList());
 
-        Tuple4<ObservableList<ConditionDecl>, ObservableList<ActionDecl>,
-                ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> dt =
-                Tuple.of(conditionDecls, actionDecls, conditionDefs, actionDefs);
+
+        final DecisionTable dt = DecisionTable.newBuilder()
+                .conditionDecls(conditionDecls)
+                .conditionDefs(conditionDefs)
+                .actionDecls(actionDecls)
+                .actionDefs(actionDefs)
+                .build();
+
+        // ------------------------------------
 
         Optional<V2_AsciiTable> reduce = Stream.of(dt).map(new Emitter()).reduce((a, b) -> a = b);
 
-        reduce.ifPresent(t -> {
+        assertNotNull(reduce);
+        assertTrue(reduce.isPresent());
+
+        //reduce.ifPresent(EmitterConsumer.outputTo(() -> new ConsoleCharSink(Charset.forName("utf8"))));
+        reduce.ifPresent(EmitterConsumer.outputTo(() -> new FileCharSink(new File("./sample-dt.txt"), Charset.forName("utf8"))));
+
+        /*
+        {
 
             WidthFixedColumns widths = new WidthFixedColumns();
             for (int i = 0; i < t.getColumnCount(); i++) {
@@ -106,14 +119,27 @@ public class EmitterTest {
                 widths.add(w);
             }
 
-
             V2_AsciiTableRenderer r = new V2_AsciiTableRenderer().setWidth(widths);
             r.setTheme(V2_E_TableThemes.PLAIN_7BIT.get());
             RenderedTable renderedTable = r.render(t);
             String s = renderedTable.toString();
             System.out.println(s);
         });
+*/
+        // ------------------------------------
+    }
 
+    private Tuple4<
+            ObservableList<ConditionDecl>,
+            ObservableList<ActionDecl>,
+            ObservableList<ObservableList<String>>,
+            ObservableList<ObservableList<String>>> asDecisionTable(
+            ObservableList<ObservableList<String>> conditionDefs,
+            ObservableList<ConditionDecl> conditionDecls,
+            ObservableList<ObservableList<String>> actionDefs,
+            ObservableList<ActionDecl> actionDecls) {
+
+        return Tuple.of(conditionDecls, actionDecls, conditionDefs, actionDefs);
     }
 
     @Test
