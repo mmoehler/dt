@@ -19,10 +19,17 @@
 
 package de.adesso.tools.util;
 
+import de.adesso.tools.Dump;
 import de.svenjacobs.loremipsum.LoremIpsum;
 import org.testng.annotations.Test;
 
-import static de.adesso.tools.util.StringFunctions.Align.LEFT;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static de.adesso.tools.functions.MoreCollectors.toSingleObject;
+import static de.adesso.tools.util.StringFunctions.Align.*;
+import static de.adesso.tools.util.StringFunctions.*;
 
 /**
  * Created by moehler on 24.05.2016.
@@ -30,10 +37,90 @@ import static de.adesso.tools.util.StringFunctions.Align.LEFT;
 public class StringFunctionsTest {
 
     @Test
-    public void testWrapAlignCenter() throws Exception {
-        String s = new LoremIpsum().getWords(30);
-        System.out.println("\ns = " + s + '\n');
-        s = StringFunctions.wrap(35, LEFT).apply(s);
-        System.out.println(s);
+    public void testSplit() throws Exception {
+        String text = new LoremIpsum().getParagraphs(1);
+
+        List<String> actual = Stream.of(text)
+                .map(split())
+                .collect(toSingleObject());
+
+        Dump.dumpList1DItems("SPLIITED", actual);
     }
+
+    @Test
+    public void testNormalize() throws Exception {
+        String text = new LoremIpsum().getParagraphs(1);
+
+        List<String> actual = Stream.of(text)
+                .map(split())
+                .collect(toSingleObject());
+
+        actual = Stream.of(actual).map(normalize(40)).collect(toSingleObject());
+
+        Dump.dumpList1DItems("NORMALIZED", actual);
+    }
+
+    /**
+     * <div stle="width:300px;">
+     * <h3>Usage;</h3>
+     *
+     *      <div style="border: 1px solid red; padding: 5px;">
+     *      <pre>actual = normalizedList.stream().map(justify(40, CENTER)).collect(Collectors.toList());</pre>
+     *      </div>
+     * </div>
+     *
+     * @throws Exception
+     */
+
+    @Test
+    public void testJustifyCENTER() throws Exception {
+        String text = new LoremIpsum().getParagraphs(1);
+
+        List<String> actual = Stream.of(text)
+                .map(split())
+                .collect(toSingleObject());
+
+        actual = Stream.of(actual).map(normalize(40)).collect(toSingleObject());
+
+        actual = actual.stream().map(justify(40, CENTER)).collect(Collectors.toList());
+
+        //actual = actual.stream().map(s -> s.replaceAll(" ","_")).collect(Collectors.toList());
+        Dump.dumpList1DItems("CENTERED", actual);
+
+    }
+
+    @Test
+    public void testJustifyLEFT() throws Exception {
+        String text = new LoremIpsum().getParagraphs(1);
+
+        List<String> actual = Stream.of(text)
+                .map(split())
+                .collect(toSingleObject());
+
+        actual = Stream.of(actual).map(normalize(40)).collect(toSingleObject());
+
+        actual = actual.stream().map(justify(40, LEFT)).collect(Collectors.toList());
+
+        //actual = actual.stream().map(s -> s.replaceAll(" ","_")).collect(Collectors.toList());
+        Dump.dumpList1DItems("LEFT-JUSTIFIED", actual);
+
+    }
+
+    @Test
+    public void testJustifyRIGHT() throws Exception {
+        String text = new LoremIpsum().getParagraphs(1);
+
+        List<String> actual = Stream.of(text)
+                .map(split())
+                .collect(toSingleObject());
+
+        actual = Stream.of(actual).map(normalize(40)).collect(toSingleObject());
+
+        actual = actual.stream().map(justify(40, RIGHT)).collect(Collectors.toList());
+
+        //actual = actual.stream().map(s -> s.replaceAll(" ","_")).collect(Collectors.toList());
+        Dump.dumpList1DItems("RIGHT-JUSTIFIED", actual);
+
+    }
+
 }

@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b2d1880-d391-4d61-bb7f-0c8e21880d82" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/StringFunctions.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/util/StringFunctionsTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/StringFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/StringFunctions.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/tools/util/StringFunctionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/tools/util/StringFunctionsTest.java" />
     </list>
     <ignored path="dt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -22,17 +22,17 @@
     <SUITE FILE_PATH="coverage/dt$ActionsTest_testA5Design__1_.coverage" NAME="ActionsTest.testA5Design (1) Coverage Results" MODIFIED="1458462325690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.adesso.tools.analysis.completeness.detailed.*</FILTER>
     </SUITE>
+    <SUITE FILE_PATH="coverage/dt$DtFunctionsTest_testDoInsertColumns__1_.coverage" NAME="DtFunctionsTest.testDoInsertColumns (1) Coverage Results" MODIFIED="1457187031580" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>de.adesso.tools.functions.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/dt$ActionsTest_testA5OK__1_.coverage" NAME="ActionsTest.testA5OK (1) Coverage Results" MODIFIED="1463673126187" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.adesso.tools.analysis.completeness.detailed.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/dt$DtFunctionsTest_testDoInsertColumns__1_.coverage" NAME="DtFunctionsTest.testDoInsertColumns (1) Coverage Results" MODIFIED="1457187031580" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/dt$DtFunctionsTest.coverage" NAME="DtFunctionsTest Coverage Results" MODIFIED="1457935627414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.adesso.tools.functions.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/dt$de_adesso_tools.coverage" NAME="de.adesso.tools Coverage Results" MODIFIED="1457935801285" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.adesso.tools.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/dt$DtFunctionsTest.coverage" NAME="DtFunctionsTest Coverage Results" MODIFIED="1457935627414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>de.adesso.tools.functions.*</FILTER>
     </SUITE>
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -64,23 +64,37 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StringFunctions.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="StringFunctions.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/util/StringFunctions.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.64775413">
-              <caret line="75" column="93" selection-start-line="75" selection-start-column="93" selection-end-line="75" selection-end-column="93" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="91" column="32" selection-start-line="91" selection-start-column="32" selection-end-line="91" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#3741#3742#0" expanded="true" />
+                <element signature="e#3789#3790#0" expanded="true" />
+                <element signature="e#3867#3868#0" expanded="true" />
+                <element signature="e#3917#3918#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StringFunctionsTest.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/util/StringFunctionsTest.java">
+      <file leaf-file-name="Splitter.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/base/Splitter.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="32" column="24" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="35" />
+              <caret line="204" column="39" selection-start-line="204" selection-start-column="34" selection-end-line="204" selection-end-column="39" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="StringFunctionsTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/util/StringFunctionsTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.91570884">
+              <caret line="109" column="24" selection-start-line="109" selection-start-column="16" selection-end-line="109" selection-end-column="32" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -93,10 +107,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="42" column="70" selection-start-line="42" selection-start-column="70" selection-end-line="42" selection-end-column="70" />
-              <folding>
-                <element signature="e#0#1452#0" expanded="false" />
-                <element signature="imports" expanded="false" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -107,7 +118,7 @@
             <state vertical-scroll-proportion="0.0">
               <caret line="49" column="27" selection-start-line="49" selection-start-column="27" selection-end-line="49" selection-end-column="27" />
               <folding>
-                <element signature="imports" expanded="true" />
+                <element signature="e#0#3136#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -187,8 +198,8 @@
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/EmitterConsumer.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/zip/FileCharSink.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/EmitterTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/util/StringFunctionsTest.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/StringFunctions.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/util/StringFunctionsTest.java" />
       </list>
     </option>
   </component>
@@ -403,7 +414,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -608,6 +618,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -839,9 +850,6 @@
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
-    <key name="CreateClassDialog.RecentsKey">
-      <recent name="de.adesso.tools.events" />
-    </key>
     <key name="CreateTestDialog.Recents.Supers">
       <recent name="" />
     </key>
@@ -864,6 +872,10 @@
       <recent name="de.adesso.tools" />
       <recent name="de.adesso.tools.util.func" />
     </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\cygwin64\home\moehler\m2-projects\dt\src\main\java\de\adesso\tools\analysis\completeness\simple" />
+      <recent name="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions" />
+    </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="de.adesso.tools.io.zip" />
       <recent name="de.adesso.tools.io" />
@@ -874,16 +886,15 @@
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\cygwin64\home\moehler\m2-projects\dt\src\test\java\de\adesso\tools\functions\chained\third" />
     </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="C:\cygwin64\home\moehler\m2-projects\dt\src\main\java\de\adesso\tools\analysis\completeness\simple" />
-      <recent name="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions" />
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="de.adesso.tools.events" />
     </key>
     <key name="ExtractSuperBase.RECENT_KEYS">
       <recent name="de.adesso.tools.analysis.structure" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.App">
-    <configuration default="false" name="StringFunctionsTest.testWrap" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.StringFunctionsTest.testJustifyRIGHT">
+    <configuration default="false" name="StringFunctionsTest.testNormalize" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="de.adesso.tools.util.*" />
@@ -896,7 +907,73 @@
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="de.adesso.tools.util" />
       <option name="MAIN_CLASS_NAME" value="de.adesso.tools.util.StringFunctionsTest" />
-      <option name="METHOD_NAME" value="testWrap" />
+      <option name="METHOD_NAME" value="testNormalize" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="false" name="StringFunctionsTest.testJustify" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="de.adesso.tools.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="dt" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="de.adesso.tools.util" />
+      <option name="MAIN_CLASS_NAME" value="de.adesso.tools.util.StringFunctionsTest" />
+      <option name="METHOD_NAME" value="testJustify" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="false" name="StringFunctionsTest.testJustifyCENTER" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="de.adesso.tools.util.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="dt" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="de.adesso.tools.util" />
+      <option name="MAIN_CLASS_NAME" value="de.adesso.tools.util.StringFunctionsTest" />
+      <option name="METHOD_NAME" value="testJustifyCENTER" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -929,7 +1006,7 @@
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="de.adesso.tools.util" />
       <option name="MAIN_CLASS_NAME" value="de.adesso.tools.util.StringFunctionsTest" />
-      <option name="METHOD_NAME" />
+      <option name="METHOD_NAME" value="testJustifyCENTER" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="CLASS" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -949,7 +1026,7 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="false" name="StringFunctionsTest.testWrapAlignCenter" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="StringFunctionsTest.testJustifyRIGHT" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
           <option name="PATTERN" value="de.adesso.tools.util.*" />
@@ -962,7 +1039,7 @@
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="de.adesso.tools.util" />
       <option name="MAIN_CLASS_NAME" value="de.adesso.tools.util.StringFunctionsTest" />
-      <option name="METHOD_NAME" value="testWrapAlignCenter" />
+      <option name="METHOD_NAME" value="testJustifyRIGHT" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -980,59 +1057,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="false" name="StringFunctionsTest.testWrapAlignCenter (1)" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="de.adesso.tools.util.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="dt" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="de.adesso.tools.util" />
-      <option name="MAIN_CLASS_NAME" value="de.adesso.tools.util.StringFunctionsTest" />
-      <option name="METHOD_NAME" value="testWrapAlignCenter" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="METHOD" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" value="0" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="false" name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="de.adesso.tools.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="MAIN_CLASS_NAME" value="de.adesso.tools.App" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="dt" />
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -1480,19 +1504,19 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest.testWrap" />
-      <item index="1" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest" />
-      <item index="2" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest.testWrapAlignCenter" />
-      <item index="3" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest.testWrapAlignCenter (1)" />
-      <item index="4" class="java.lang.String" itemvalue="Application.App" />
+      <item index="0" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest.testNormalize" />
+      <item index="1" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest.testJustify" />
+      <item index="2" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest.testJustifyCENTER" />
+      <item index="3" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest" />
+      <item index="4" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest.testJustifyRIGHT" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.App" />
-        <item index="1" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest.testWrapAlignCenter" />
-        <item index="2" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest.testWrapAlignCenter (1)" />
-        <item index="3" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest.testWrap" />
-        <item index="4" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest" />
+        <item index="0" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest.testJustifyRIGHT" />
+        <item index="1" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest" />
+        <item index="2" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest.testJustifyCENTER" />
+        <item index="3" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest.testJustify" />
+        <item index="4" class="java.lang.String" itemvalue="TestNG.StringFunctionsTest.testNormalize" />
       </list>
     </recent_temporary>
   </component>
@@ -1574,7 +1598,8 @@
       <workItem from="1463548985624" duration="18656000" />
       <workItem from="1463637900017" duration="17477000" />
       <workItem from="1463983649072" duration="15388000" />
-      <workItem from="1464066609666" duration="20459000" />
+      <workItem from="1464066609666" duration="20496000" />
+      <workItem from="1464155419069" duration="19341000" />
     </task>
     <task id="LOCAL-00001" summary="Refactoring of Matrix functions">
       <created>1455475453269</created>
@@ -1804,43 +1829,49 @@
       <option name="project" value="LOCAL" />
       <updated>1464023615383</updated>
     </task>
-    <option name="localTasksCounter" value="39" />
+    <task id="LOCAL-00039" summary="Reworking the ASCII report!">
+      <created>1464108915352</created>
+      <option name="number" value="00039" />
+      <option name="project" value="LOCAL" />
+      <updated>1464108915352</updated>
+    </task>
+    <option name="localTasksCounter" value="40" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="StringFunctionsTest_testWrapAlignCenter - 2016.05.24 at 18h 12m 45s.xml">
-      <configuration name="StringFunctionsTest.testWrapAlignCenter" configurationId="TestNG" />
+    <history-entry file="StringFunctionsTest - 2016.05.25 at 17h 31m 45s.xml">
+      <configuration name="StringFunctionsTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="StringFunctionsTest_testWrapAlignCenter - 2016.05.24 at 18h 25m 08s.xml">
-      <configuration name="StringFunctionsTest.testWrapAlignCenter" configurationId="TestNG" />
+    <history-entry file="StringFunctionsTest - 2016.05.25 at 17h 32m 25s.xml">
+      <configuration name="StringFunctionsTest" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="StringFunctionsTest_testWrapAlignCenter - 2016.05.24 at 18h 31m 39s.xml">
-      <configuration name="StringFunctionsTest.testWrapAlignCenter" configurationId="TestNG" />
+    <history-entry file="StringFunctionsTest_testJustify - 2016.05.25 at 17h 13m 17s.xml">
+      <configuration name="StringFunctionsTest.testJustify" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="StringFunctionsTest_testWrapAlignCenter - 2016.05.24 at 18h 32m 36s.xml">
-      <configuration name="StringFunctionsTest.testWrapAlignCenter" configurationId="TestNG" />
+    <history-entry file="StringFunctionsTest_testJustify - 2016.05.25 at 17h 20m 18s.xml">
+      <configuration name="StringFunctionsTest.testJustify" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="StringFunctionsTest_testWrapAlignCenter - 2016.05.24 at 18h 33m 12s.xml">
-      <configuration name="StringFunctionsTest.testWrapAlignCenter" configurationId="TestNG" />
+    <history-entry file="StringFunctionsTest_testJustify - 2016.05.25 at 17h 28m 55s.xml">
+      <configuration name="StringFunctionsTest.testJustify" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="StringFunctionsTest_testWrapAlignCenter - 2016.05.24 at 18h 34m 00s.xml">
-      <configuration name="StringFunctionsTest.testWrapAlignCenter" configurationId="TestNG" />
+    <history-entry file="StringFunctionsTest_testJustify - 2016.05.25 at 17h 29m 24s.xml">
+      <configuration name="StringFunctionsTest.testJustify" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="StringFunctionsTest_testWrapAlignCenter - 2016.05.24 at 18h 36m 58s.xml">
-      <configuration name="StringFunctionsTest.testWrapAlignCenter" configurationId="TestNG" />
+    <history-entry file="StringFunctionsTest_testJustify - 2016.05.25 at 17h 29m 41s.xml">
+      <configuration name="StringFunctionsTest.testJustify" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="StringFunctionsTest_testWrapAlignCenter - 2016.05.24 at 18h 41m 39s.xml">
-      <configuration name="StringFunctionsTest.testWrapAlignCenter" configurationId="TestNG" />
+    <history-entry file="StringFunctionsTest_testJustifyCENTER - 2016.05.25 at 17h 31m 34s.xml">
+      <configuration name="StringFunctionsTest.testJustifyCENTER" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="StringFunctionsTest_testWrapAlignCenter_(1) - 2016.05.24 at 18h 06m 46s.xml">
-      <configuration name="StringFunctionsTest.testWrapAlignCenter (1)" configurationId="TestNG" />
+    <history-entry file="StringFunctionsTest_testJustifyCENTER - 2016.05.25 at 17h 32m 18s.xml">
+      <configuration name="StringFunctionsTest.testJustifyCENTER" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="StringFunctionsTest_testWrapAlignCenter_(1) - 2016.05.24 at 18h 40m 28s.xml">
-      <configuration name="StringFunctionsTest.testWrapAlignCenter (1)" configurationId="TestNG" />
+    <history-entry file="StringFunctionsTest_testJustifyRIGHT - 2016.05.25 at 17h 46m 22s.xml">
+      <configuration name="StringFunctionsTest.testJustifyRIGHT" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="588645000" />
+    <option name="totallyTimeSpent" value="608023000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1853,7 +1884,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="1" width="1920" height="1038" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -1872,8 +1903,8 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284091" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3123656" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.240625" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24193548" sideWeight="0.48989898" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4875" sideWeight="0.49413645" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24193548" sideWeight="0.48989898" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.375" sideWeight="0.49413645" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -1885,11 +1916,11 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55011135" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.325" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
@@ -1910,8 +1941,8 @@
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3215909" sideWeight="0.49573562" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3123656" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.240625" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout-to-restore>
   </component>
@@ -1927,7 +1958,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Refactoring of Matrix functions" />
     <MESSAGE value="Adding additional Insert functionality" />
     <MESSAGE value="SOme TRouble with Else Rule --&gt; Solve It!!" />
     <MESSAGE value="Matrix Tests completed" />
@@ -1952,7 +1982,8 @@
     <MESSAGE value="Actualization and deletion of conditions during consolidation separated! Needs more testing" />
     <MESSAGE value="ConsolidateRules and RulesConsolidator - consolidate them!!" />
     <MESSAGE value="Bugfix Action5 of RuleCompletenessCheck" />
-    <option name="LAST_COMMIT_MESSAGE" value="Bugfix Action5 of RuleCompletenessCheck" />
+    <MESSAGE value="Reworking the ASCII report!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reworking the ASCII report!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2047,24 +2078,6 @@
           <properties />
           <option name="timeStamp" value="40" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/util/StringFunctions.java</url>
-          <line>45</line>
-          <properties />
-          <option name="timeStamp" value="46" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/util/StringFunctions.java</url>
-          <line>76</line>
-          <properties />
-          <option name="timeStamp" value="48" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/util/StringFunctions.java</url>
-          <line>58</line>
-          <properties />
-          <option name="timeStamp" value="49" />
-        </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
@@ -2082,20 +2095,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/first/SampleInnerBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="39" column="0" selection-start-line="37" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Model.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.21948357">
-          <caret line="28" column="16" selection-start-line="28" selection-start-column="16" selection-end-line="28" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Main.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.4190141">
@@ -2371,7 +2370,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2379,7 +2377,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -2390,34 +2387,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/io/zip/FileCharSink.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="42" column="70" selection-start-line="42" selection-start-column="70" selection-end-line="42" selection-end-column="70" />
-          <folding>
-            <element signature="e#0#1452#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v1/V1_CharactersBoxDrawing.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#12939#0" expanded="false" />
-            <element signature="e#12506#12507#0" expanded="false" />
-            <element signature="e#12536#12537#0" expanded="false" />
-            <element signature="e#12575#12576#0" expanded="false" />
-            <element signature="e#12603#12604#0" expanded="false" />
-            <element signature="e#12643#12644#0" expanded="false" />
-            <element signature="e#12665#12666#0" expanded="false" />
-            <element signature="e#12703#12704#0" expanded="false" />
-            <element signature="e#12731#12732#0" expanded="false" />
-            <element signature="e#12769#12770#0" expanded="false" />
-            <element signature="e#12791#12792#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2425,10 +2398,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="38" column="19" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
-          <folding>
-            <element signature="e#0#17506#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2436,10 +2405,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="64" column="61" selection-start-line="64" selection-start-column="61" selection-end-line="64" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#8777#0" expanded="false" />
-            <element signature="imports" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -2447,6 +2412,45 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5555556">
           <caret line="20" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/print/EmitterConsumer.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="27" selection-start-line="49" selection-start-column="27" selection-end-line="49" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#3136#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/util/ListIterator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24113475">
+          <caret line="171" column="18" selection-start-line="171" selection-start-column="18" selection-end-line="171" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/testng/testng/6.9.10/testng-6.9.10-sources.jar!/org/testng/internal/Invoker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19366197">
+          <caret line="656" column="0" selection-start-line="656" selection-start-column="0" selection-end-line="656" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/io/zip/FileCharSink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="42" column="70" selection-start-line="42" selection-start-column="70" selection-end-line="42" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/lang/StringBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="398" column="25" selection-start-line="398" selection-start-column="25" selection-end-line="398" selection-end-column="25" />
           <folding />
         </state>
       </provider>
@@ -2459,20 +2463,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/print/EmitterConsumer.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/base/Splitter.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="27" selection-start-line="49" selection-start-column="27" selection-end-line="49" selection-end-column="27" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/util/ListIterator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24113475">
-          <caret line="171" column="18" selection-start-line="171" selection-start-column="18" selection-end-line="171" selection-end-column="18" />
+          <caret line="204" column="39" selection-start-line="204" selection-start-column="34" selection-end-line="204" selection-end-column="39" />
           <folding />
         </state>
       </provider>
@@ -2485,28 +2479,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/testng/testng/6.9.10/testng-6.9.10-sources.jar!/org/testng/internal/Invoker.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/util/StringFunctions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.19366197">
-          <caret line="656" column="0" selection-start-line="656" selection-start-column="0" selection-end-line="656" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="91" column="32" selection-start-line="91" selection-start-column="32" selection-end-line="91" selection-end-column="32" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3741#3742#0" expanded="true" />
+            <element signature="e#3789#3790#0" expanded="true" />
+            <element signature="e#3867#3868#0" expanded="true" />
+            <element signature="e#3917#3918#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/tools/util/StringFunctionsTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="24" selection-start-line="32" selection-start-column="16" selection-end-line="32" selection-end-column="35" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/tools/util/StringFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64775413">
-          <caret line="75" column="93" selection-start-line="75" selection-start-column="93" selection-end-line="75" selection-end-column="93" />
+        <state vertical-scroll-proportion="0.91570884">
+          <caret line="109" column="24" selection-start-line="109" selection-start-column="16" selection-end-line="109" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

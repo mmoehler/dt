@@ -19,16 +19,18 @@
 
 package de.adesso.tools.util;
 
-import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 
 import java.util.Arrays;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 import java.util.function.Function;
+import java.util.function.Supplier;
+import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by moehler on 24.05.2016.
@@ -36,68 +38,88 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class StringFunctions {
 
 
-    private static Function<String, String> determineFormatter(String s, int len, Align align) {
-        Function<String, String> formatter = null;
-        switch (checkNotNull(align, "Missing align definition!!")) {
-            case RIGHT:
-                formatter = padIntern(len, (len - s.length()));
-                break;
-            case CENTER:
-                formatter = padIntern(len, (len - s.length()) / 2);
-                break;
-            case LEFT:
-                formatter = padIntern(len, 0);
-                break;
-            default:
-                throw new IllegalArgumentException("Unknown align request!!");
-        }
-        return formatter;
+    public static Function<String, List<String>> split() {
+        return (s) -> Splitter.on(Pattern.compile("[ ]+")).trimResults().splitToList(s);
     }
 
-    private static Function<String, String> padIntern(int len, int pos) {
-        return (s) -> {
-            char[] c = new char[len];
-            Arrays.fill(c, ' ');
-            try {
-                System.arraycopy(s.toCharArray(), 0, c, pos, s.length());
-            } catch (Exception e) {
-                System.out.printf("len=%d-%d-%d-%d-%s\n", len, c.length, s.length(), pos, s);
-                throw e;
+    public static Function<List<String>, List<String>> normalize(final int len) {
+        return (l) -> l.stream().reduce(new LinkedList<>(), accumulator(len), combiner());
+    }
+
+
+    public static Function<String, String> justify(final int len, final Align align) {
+        return (str) -> align.get().apply(str.trim(),len);
+    }
+
+    private static BiFunction<LinkedList<String>, String, LinkedList<String>> accumulator(final int len) {
+        return (l, w) -> {
+            w = w.trim();
+            final String lookup1 = (l.isEmpty() ? "" : l.getLast()) + ' ' + w;
+            final String nextElement = (lookup1.length() > len) ? w : (l.isEmpty()) ? w : l.removeLast() + ' ' + w;
+            l.add(nextElement);
+            return l;
+        };
+    }
+
+    private static BinaryOperator<LinkedList<String>> combiner() {
+        return (ll, lr) ->
+                Stream.concat(ll.stream(), lr.stream())
+                        .collect(Collectors.toCollection(LinkedList<String>::new));
+    }
+
+    enum Align implements Supplier<BiFunction<String, Integer, String>> {
+        RIGHT(
+                () -> (s,l) -> {
+                    char[] c = new char[l];
+                    Arrays.fill(c,' ');
+                    for (int i = s.length()-1, j = c.length - 1; i >= 0 ;) {
+                        c[j--] = s.charAt(i--);
+                    }
+                    return String.valueOf(c);
+                }
+        ),
+        LEFT(
+                () -> (s,l) -> {
+                    char[] c = new char[l];
+                    Arrays.fill(c,' ');
+                    for (int i = 0; i < s.length(); i++) {
+                        c[i] = s.charAt(i);
+                    }
+                    return String.valueOf(c);
+                }
+        ),
+        CENTER(
+                () -> (s,l) -> {
+                    char[] c = new char[l];
+                    Arrays.fill(c,' ');
+                    int ofs = (l -s.length())/2;
+                    for (int i = 0; i < s.length(); i++) {
+                        c[ofs++] = s.charAt(i);
+                    }
+                    return String.valueOf(c);
+                }
+        );
+
+        private final Supplier<BiFunction<String, Integer, String>> delegate;
+
+        Align(Supplier<BiFunction<String, Integer, String>> delegate) {
+            this.delegate = delegate;
+        }
+
+        @Override
+        public BiFunction<String, Integer, String> get() {
+            return this.delegate.get();
+        }
+    }
+
+    private static BiFunction<String,Integer,String> rightJustified(String text, int len) {
+        return (s,l) -> {
+            char[] c = new char[l];
+            Arrays.fill(c,' ');
+            for (int i = s.length()-1, j = c.length - 1; i >= 0 ;) {
+                c[j--] = s.charAt(i--);
             }
             return String.valueOf(c);
         };
-    }
-
-    public static Function<String, String> wrap(int len, Align align) {
-        return (s) -> {
-            final Stream<String> stream = Splitter.on(' ').omitEmptyStrings().splitToList(s).stream();
-            final LinkedList<String> normalized = stream.reduce(new LinkedList<>(), (l, w) -> {
-
-                // FIXME: When Lookup forget to consider the commas! Lets do this tomorrow!!!
-                if (((l.isEmpty() ? "" : l.getLast()) + w).length() > len) {
-
-                    String last = l.removeLast();
-                    l.add(determineFormatter(last,len,align).apply(last));
-                    l.add(w);
-                } else {
-                    l.add(
-                            (l.isEmpty())
-                                    ? w
-                                    : l.removeLast() + ' ' + w
-                    );
-                }
-                return l;
-            }, (BinaryOperator<LinkedList<String>>) (ll, lr) -> {
-                ll.addAll(lr);
-                return ll;
-            });
-            return Joiner.on('\n').join(normalized);
-        };
-    }
-
-    enum Align {
-        LEFT,
-        RIGHT,
-        CENTER;
     }
 }
