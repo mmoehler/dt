@@ -17,33 +17,20 @@
  * under the License.
  */
 
-package de.adesso.tools.common.builder;
+package de.adesso.tools.util.output;
 
-
-import static com.google.common.base.Preconditions.checkNotNull;
+import java.util.List;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 /**
- * Created by moehler on 12.05.2016.
+ * Created by mmoehler on 26.05.16.
  */
-public abstract class AbstractNestable<P, O> implements Nestable<P, O> {
-
-    public static final String ERROR_MESSAGE = "Bulder not used as nested builder!";
-    private final P parentBuilder;
-    private final Callback<O> ownerCallback;
-
-    public AbstractNestable() {
-        this.parentBuilder = null;
-        this.ownerCallback = null;
+public final class TableFunctions {
+    private TableFunctions() {
     }
 
-    public AbstractNestable(P parentBuilder, Callback<O> ownerCallback) {
-        this.parentBuilder = parentBuilder;
-        this.ownerCallback = ownerCallback;
-    }
-
-    @Override
-    public P done() {
-        checkNotNull(ownerCallback, ERROR_MESSAGE).call(this.build());
-        return checkNotNull(parentBuilder, ERROR_MESSAGE);
+    public static Function<List<List<String>>, List<List<String>>> formatTable(TableFormat format) {
+        return (m) -> m.stream().map(RowFunctions.formatRow(format)).collect(Collectors.toList());
     }
 }
