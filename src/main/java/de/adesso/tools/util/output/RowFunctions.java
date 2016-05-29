@@ -19,18 +19,21 @@
 
 package de.adesso.tools.util.output;
 
-import com.codepoetics.protonpack.StreamUtils;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import com.google.common.collect.Iterables;
-import de.adesso.tools.functions.MoreCollectors;
+import de.adesso.tools.print.AsciiRow;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static com.codepoetics.protonpack.StreamUtils.zip;
+import static com.google.common.collect.Iterables.size;
+import static de.adesso.tools.functions.MoreCollectors.toAsciiRow;
+import static de.adesso.tools.functions.MoreCollectors.toSingleObject;
+import static de.adesso.tools.util.output.FieldFunctions.format;
+import static java.util.stream.Collectors.toList;
 
 /**
  * Created by mmoehler on 26.05.16.
@@ -42,33 +45,39 @@ public final class RowFunctions {
     private RowFunctions() {
     }
 
-    public static Function<List<String>, List<String>> formatRow(TableFormat format) {
+    public static Function<AsciiRow, AsciiRow> formatRow(TableFormat format) {
         return (rawData) -> {
-            List<List<String>> normalized = Stream.of(rawData).map(l -> RowFunctions.normalize(format).apply(l)).collect(MoreCollectors.toSingleObject());
+            List<List<String>> normalized = Stream.of(rawData).map(l -> normalizeFields(format).apply(l.intern())).collect(toSingleObject());
             final int maxSize = normalized.stream().mapToInt(l -> l.size()).max().getAsInt();
             return normalized.stream().map(l -> {
                 while (l.size() < maxSize) {
                     l.add(Strings.repeat(SPACE, l.get(0).length()));
                 }
                 return l;
-            }).reduce(new ArrayList<>(), (a, b) -> (a.isEmpty())
+            }).map(AsciiRow::new).reduce(new AsciiRow(), (a, b) -> (a.isEmpty())
                     ? b
-                    : StreamUtils.zip(a.stream(), b.stream(), (l, r) -> l + format.columnSeparator.get() + r)
-                    .collect(Collectors.toList()));
+                    : zip(a.stream(), b.stream(), (l, r) -> l + format.columnSeparator.get() + r)
+                    .collect(toAsciiRow()));
         };
     }
 
-    private static Function<List<String>, List<List<String>>> normalize(TableFormat format) {
+    private static Function<List<String>, List<List<String>>> normalizeFields(TableFormat format) {
         return (l) -> {
-            Preconditions.checkArgument(Iterables.size(format.getColumnFormats()) >= l.size(),
+
+            String s1 = String.format(">>>>> l=%d ---> f=%d", l.size(), size(format.getColumnFormats()));
+            System.out.println(s1);
+            System.out.println(l);
+
+            Preconditions.checkArgument(size(format.getColumnFormats()) >= l.size(),
                     "Missing %s column format definitions!",
-                    l.size() - Iterables.size(format.getColumnFormats()));
+                    l.size() - size(format.getColumnFormats()));
+
             Iterator<ColumnFormat> itf = format.getColumnFormats().iterator();
             return l.stream()
                     .map(s -> Stream.of(s)
-                            .map(FieldFunctions.format(itf.next()))
-                            .collect(MoreCollectors.toSingleObject()))
-                    .collect(Collectors.toList());
+                            .map(format(itf.next()))
+                            .collect(toSingleObject()))
+                    .collect(toList());
         };
     }
 

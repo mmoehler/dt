@@ -20,119 +20,91 @@
 package de.adesso.tools.print;
 
 import com.codepoetics.protonpack.StreamUtils;
+import com.google.common.collect.Lists;
 import de.adesso.tools.model.ActionDecl;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.model.DecisionTable;
 import de.adesso.tools.model.Declaration;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
-import de.vandermeer.asciitable.v2.V2_AsciiTable;
-import de.vandermeer.asciitable.v2.row.ContentRow;
 import javafx.collections.ObservableList;
 
-import java.util.Arrays;
-import java.util.Optional;
+import java.util.List;
 import java.util.function.Function;
 import java.util.stream.Stream;
 
 /**
  * Created by mmoehler on 21.05.16.
  */
-public class Emitter implements Function<DecisionTable, V2_AsciiTable> {
+public class Emitter implements Function<DecisionTable, AsciiTable> {
 
-    private final static Object[] RULE_DESCRIPTOR = {};
-    public static final char[] ALIGNMENT = "cllcccc".toCharArray();
+    private static final String SPACE = " ";
+    private static final String ASTERISK = "*";
 
     @Override
-    public V2_AsciiTable apply(DecisionTable dt) {
+    public AsciiTable apply(DecisionTable dt) {
 
-        Tuple2<ObservableList<ConditionDecl>, ObservableList<ObservableList<String>>> conData = Tuple.of(dt.getConditionDecls(), dt.getConditionDefs());
-        Tuple2<ObservableList<ActionDecl>, ObservableList<ObservableList<String>>> actData = Tuple.of(dt.getActionDecls(), dt.getActionDefs());
+        Tuple2<ObservableList<ConditionDecl>, ObservableList<ObservableList<String>>> conData
+                = Tuple.of(dt.getConditionDecls(), dt.getConditionDefs());
 
-        V2_AsciiTable table = new V2_AsciiTable();
+        Tuple2<ObservableList<ActionDecl>, ObservableList<ObservableList<String>>> actData
+                = Tuple.of(dt.getActionDecls(), dt.getActionDefs());
 
-        table.addStrongRule();
-        emitConditionsHeader(conData._2())
-                .map(addRowsAndRules(table))
-                .forEach(o -> o.ifPresent(p -> p.setAlignment(ALIGNMENT)));
-        table.addStrongRule();
+        AsciiTable consumer = new AsciiTable();
 
-        emitConditions().apply(conData)
-                .map(addRowsAndRules(table))
-                .forEach(o -> o.ifPresent(p -> p.setAlignment(ALIGNMENT)));
+        emitHeader().apply(conData).forEach(consumer.getHeaderRows());
 
-        table.addStrongRule();
-        emitActionsHeader(actData._2())
-                .map(addRowsAndRules(table))
-                .forEach(o -> o.ifPresent(p -> p.setAlignment(ALIGNMENT)));
-        table.addStrongRule();
+        emitConditions().apply(conData).forEach(consumer.getConditionRows());
 
-        emitActions().apply(actData)
-                .map(addRowsAndRules(table))
-                .forEach(o -> o.ifPresent(p -> p.setAlignment(ALIGNMENT)));
+        emitActions().apply(actData).forEach(consumer.getActionRows());
 
-
-        table.addStrongRule();
-        return table;
+        return consumer;
     }
 
-    Function<Object[], Optional<ContentRow>> addRowsAndRules(V2_AsciiTable table) {
-        return d -> {
-            ContentRow r = null;
-            if (d.length == 0) {
-                table.addRule();
-            } else {
-                r = table.addRow(d);
-            }
-            return Optional.ofNullable(r);
-        };
-    }
-
-    public Function<Tuple2<ObservableList<ConditionDecl>, ObservableList<ObservableList<String>>>, Stream<Object[]>> emitConditions() {
+    Function<Tuple2<ObservableList<ConditionDecl>, ObservableList<ObservableList<String>>>, Stream<AsciiRow>> emitConditions() {
+        int i[] = {1};
         return (c) -> StreamUtils.zip(c._1().stream(), c._2().stream(), (l, r) -> Tuple.of(l, r))
-                .map(t -> emitCondition(t));
+                .map(t -> emitRow(i[0]++, t));
 
     }
 
-    public Object[] emitCondition(Tuple2<ConditionDecl, ObservableList<String>> t) {
-        return emitDecl(t);
+    Function<Tuple2<ObservableList<ActionDecl>, ObservableList<ObservableList<String>>>, Stream<AsciiRow>> emitActions() {
+        int i[] = {101};
+        return (c) -> StreamUtils.zip(c._1().stream(), c._2().stream(), (l, r) -> Tuple.of(l, r))
+                .map(t -> emitRow(i[0]++, t));
     }
 
-    private <D extends Declaration> Object[] emitDecl(Tuple2<D, ObservableList<String>> t) {
-        Object[] aPart = t._1().toArray();
-        Object[] bPart = t._2().toArray();
-        Object[] ret = Arrays.copyOf(aPart, aPart.length + bPart.length);
-        System.arraycopy(bPart, 0, ret, aPart.length, bPart.length);
+    static <D extends Declaration> AsciiRow emitRow(int nbr, Tuple2<D, ObservableList<String>> t) {
+        AsciiRow ret = new AsciiRow();
+        List<String> theDecl = Lists.newArrayList(ASTERISK, t._1().getExpression(), String.valueOf(nbr), ASTERISK);
+        ret.addAll(theDecl);
+        ret.addAll(t._2());
         return ret;
     }
 
-    public Function<Tuple2<ObservableList<ActionDecl>, ObservableList<ObservableList<String>>>, Stream<Object[]>> emitActions() {
-        return (c) -> StreamUtils.zip(c._1().stream(), c._2().stream(), (l, r) -> Tuple.of(l, r))
-                .map(t -> emitAction(t));
+    Function<Tuple2<ObservableList<ConditionDecl>, ObservableList<ObservableList<String>>>, Stream<AsciiRow>> emitHeader() {
+        return (tuple) -> {
+            ObservableList<String> t = tuple._2().get(0);
+            AsciiRow mainHeader = new AsciiRow(4 + t.size());
+            AsciiRow subHeader = new AsciiRow(4 + t.size());
+            int k = 1;
+            for (int i = 0; i < (4 + t.size()); i++) {
+                if (i < 4) {
+                    mainHeader.add(SPACE);
+                    subHeader.add(SPACE);
+                } else {
+                    int ruleNumber = k % 10;
+                    int decCounter = k / 10;
+                    k++;
+                    String sRuleNumber = String.valueOf(ruleNumber);
+                    String sDecCounter = (decCounter == 0 || ruleNumber != 0) ? " " : String.valueOf(decCounter);
+
+                    mainHeader.add(sDecCounter);
+                    subHeader.add(sRuleNumber);
+                }
+            }
+            return Stream.of(mainHeader, subHeader);
+        };
     }
 
-    public Object[] emitAction(Tuple2<ActionDecl, ObservableList<String>> t) {
-        return emitDecl(t);
-    }
-
-    public Stream<Object[]> emitConditionsHeader(ObservableList<ObservableList<String>> t) {
-        return emitHeader("CONDITIONS", t.get(0));
-    }
-
-    private Stream<Object[]> emitHeader(String title, ObservableList<String> t) {
-        Object[] mainHeader = new Object[3 + t.size()];
-        mainHeader[mainHeader.length - 1] = title;
-        Object[] subHeader = new Object[3 + t.size()];
-        subHeader[0] = "#";
-        subHeader[1] = "Description";
-        subHeader[2] = "Indicators";
-        for (int i = 0; i < t.size(); i++) {
-            subHeader[i + 3] = String.format("R%02d", i + 1);
-        }
-        return Stream.of(mainHeader, RULE_DESCRIPTOR, subHeader);
-    }
-
-    public Stream<Object[]> emitActionsHeader(ObservableList<ObservableList<String>> t) {
-        return emitHeader("ACTIONS", t.get(0));
-    }
 }

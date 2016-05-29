@@ -52,6 +52,15 @@ public class ColumnGroup {
         return lastColumn;
     }
 
+    @Override
+    public String toString() {
+        return "ColumnGroup{" +
+                "firstColumn=" + firstColumn +
+                ", lastColumn=" + lastColumn +
+                ", groupWidth=" + groupWidth +
+                '}';
+    }
+
     public static Builder newBuilder(ColumnGroup copy) {
         Builder builder = new Builder();
         builder.firstColumn = copy.firstColumn;

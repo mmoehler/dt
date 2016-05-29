@@ -22,12 +22,11 @@ package de.adesso.tools.util.output;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import de.adesso.tools.print.AsciiRow;
 import de.svenjacobs.loremipsum.LoremIpsum;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Map;
 import java.util.stream.Stream;
 
@@ -61,14 +60,15 @@ public class RowFunctionsTest {
         final String v2 = "Y,N";
 
 
-        ArrayList<String> rawData = Lists.newArrayList(v0, v1, v2);
+        AsciiRow rawData = new AsciiRow(Lists.newArrayList(v0, v1, v2));
+
 
         TableFormat.Builder builder = TableFormat.newBuilder()
-            .addColumnFormat().withAlign(Align.CENTER).withWidth(5).done()
-            .addColumnFormat().withAlign(Align.LEFT).withWidth(40).done()
-            .addColumnFormat().withAlign(Align.CENTER).withWidth(5).done();
+            .addColumnFormat().align(Align.CENTER).width(5).done()
+            .addColumnFormat().align(Align.LEFT).width(40).done()
+            .addColumnFormat().align(Align.CENTER).width(5).done();
 
-        List<String> collect = Stream.of(rawData).map(RowFunctions.formatRow(builder.build())).collect(toSingleObject());
+        AsciiRow collect = Stream.of(rawData).map(RowFunctions.formatRow(builder.build())).collect(toSingleObject());
 
         /*
 

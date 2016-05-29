@@ -47,6 +47,14 @@ public class ColumnFormat {
         return width;
     }
 
+    @Override
+    public String toString() {
+        return "ColumnFormat{" +
+                "align=" + align +
+                ", width=" + width +
+                '}';
+    }
+
     public static Builder newBuilder() {
         return new Builder();
     }
@@ -73,12 +81,12 @@ public class ColumnFormat {
             super(parentBuilder, ownerCallback);
         }
 
-        public Builder withAlign(Align val) {
+        public Builder align(Align val) {
             align = val;
             return this;
         }
 
-        public Builder withWidth(int val) {
+        public Builder width(int val) {
             width = val;
             return this;
         }

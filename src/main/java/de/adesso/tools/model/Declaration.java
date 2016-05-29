@@ -21,6 +21,8 @@ package de.adesso.tools.model;
 
 import com.google.common.collect.Lists;
 
+import java.util.List;
+
 /**
  * General state and behaviour of all declarations
  * Created by mohler ofList 16.01.16.
@@ -115,5 +117,9 @@ public class Declaration extends Identity {
 
     public Object[] toArray() {
         return Lists.newArrayList(getLfdNr(), getExpression(), getPossibleIndicators()).toArray(new Object[3]);
+    }
+
+    public List<String> asList() {
+        return Lists.newArrayList(getLfdNr(), getExpression(), getPossibleIndicators());
     }
 }

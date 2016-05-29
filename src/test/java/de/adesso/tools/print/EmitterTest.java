@@ -20,26 +20,25 @@
 package de.adesso.tools.print;
 
 import com.codepoetics.protonpack.StreamUtils;
+import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import de.adesso.tools.functions.MoreCollectors;
-import de.adesso.tools.io.zip.FileCharSink;
 import de.adesso.tools.model.ActionDecl;
 import de.adesso.tools.model.ConditionDecl;
 import de.adesso.tools.model.DecisionTable;
+import de.adesso.tools.util.output.Align;
+import de.adesso.tools.util.output.TableFormat;
+import de.adesso.tools.util.output.TableFunctions;
 import de.adesso.tools.util.tuple.Tuple;
 import de.adesso.tools.util.tuple.Tuple2;
 import de.adesso.tools.util.tuple.Tuple4;
-import de.vandermeer.asciitable.v2.V2_AsciiTable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.testng.annotations.Test;
 
-import java.io.File;
-import java.nio.charset.Charset;
-import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
+import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -55,13 +54,13 @@ public class EmitterTest {
     @Test
     public void testApply() throws Exception {
         List<String> rawConditionDefs =
-                Lists.newArrayList("Y;Y;Y;N", "Y; ; ; ", " ; ;Y;Y", " ;Y; ; ");
+                Lists.newArrayList("Y;Y;Y;N", "Y;-;-;-", "-;-;Y;Y", "-;Y;-;-");
         ObservableList<ObservableList<String>> conditionDefs = rawConditionDefs.stream()
                 .map(r -> FXCollections.observableArrayList(r.split(SPLIT_REGEX)))
                 .collect(MoreCollectors.toObservableList());
 
         List<String> rawConditionDecls =
-                Lists.newArrayList("C01;90 minutes;Y,N", "C02;Team A Winning;Y,N", "C03;Team B Winning;Y,N", "C04;Draw;Y,N", "C05;Keep Playing;X");
+                Lists.newArrayList("*;90 minutes;1;*", "*;Team A Winning;2;*", "*;Team B Winning;3;*", "*;Draw;4;*", "*;Keep Playing;5;*");
         ObservableList<ConditionDecl> conditionDecls = rawConditionDecls.stream().map(r -> {
             String s[] = r.split(SPLIT_REGEX);
             return new ConditionDecl(s[0], s[1], s[2]);
@@ -75,12 +74,13 @@ public class EmitterTest {
                 .collect(MoreCollectors.toObservableList());
 
         List<String> rawActionDecls =
-                Lists.newArrayList("A01;Game Over;X", "A02;Team A Wins;X", "A03;Team B Wins;X", "A04;Extra Time;X", "A05;Keep Playing;X");
+                Lists.newArrayList("*;Game Over;101;*", "*;Team A Wins;102;*", "*;Team B Wins;103;*", "*;Extra Time;104;*", "*;Keep Playing;105;*");
         ObservableList<ActionDecl> actionDecls = rawActionDecls.stream().map(r -> {
             String s[] = r.split(SPLIT_REGEX);
             return new ActionDecl(s[0], s[1], s[2]);
         }).collect(MoreCollectors.toObservableList());
 
+        // ---
 
         final DecisionTable dt = DecisionTable.newBuilder()
                 .conditionDecls(conditionDecls)
@@ -91,41 +91,77 @@ public class EmitterTest {
 
         // ------------------------------------
 
-        Optional<V2_AsciiTable> reduce = Stream.of(dt).map(new Emitter()).reduce((a, b) -> a = b);
+        AsciiTable asciiTable = Stream.of(dt).map(new Emitter())
+                .collect(MoreCollectors.toSingleObject());
 
-        assertNotNull(reduce);
-        assertTrue(reduce.isPresent());
+        assertNotNull(asciiTable);
+        
+        final int maxLen = 40;
+        final int columns = asciiTable.getColumnCount();
 
-        //reduce.ifPresent(EmitterConsumer.outputTo(() -> new ConsoleCharSink(Charset.forName("utf8"))));
-        reduce.ifPresent(EmitterConsumer.outputTo(() -> new FileCharSink(new File("./sample-dt.txt"), Charset.forName("utf8"))));
+        TableFormat.Builder builder = TableFormat.newBuilder();
+
+        //builder.columnSeparator().character('|').length(1).done();
+
+        for (int i = 0; i < columns; i++) {
+            switch (i) {
+                case 0:
+                    builder.addColumnFormat().width(3).align(Align.LEFT).done();
+                    break;
+                case 1:
+                    builder.addColumnFormat().width(maxLen+2).align(Align.LEFT).done();
+                    break;
+                case 2:
+                    builder.addColumnFormat().width(4).align(Align.RIGHT).done();
+                case 3:
+                    builder.addColumnFormat().width(3).align(Align.CENTER).done();
+                    break;
+                default:
+                    builder.addColumnFormat().width(1).align(Align.CENTER).done();
+                    break;
+            }
+        }
+
+
+        String result = new Formatter(builder.build()).apply(asciiTable);
+
+        System.out.println(result);
 
         /*
-        {
 
-            WidthFixedColumns widths = new WidthFixedColumns();
-            for (int i = 0; i < t.getColumnCount(); i++) {
-                int w = 0;
-                switch (i) {
-                    case 1:
-                        w = 30;
-                        break;
-                    case 2:
-                        w = 12;
-                        break;
-                    default:
-                        w = 5;
-                        break;
-                }
-                widths.add(w);
-            }
+        AsciiTable.AsciiRows conditionAsciiRows = asciiTable.getConditionRows();
+        List<AsciiRow> formattedConditions = Stream.of(conditionAsciiRows.intern())
+                .map(TableFunctions.formatTable(builder.build()))
+                .collect(MoreCollectors.toSingleObject());
+        formattedConditions.forEach(System.out::println);
 
-            V2_AsciiTableRenderer r = new V2_AsciiTableRenderer().setWidth(widths);
-            r.setTheme(V2_E_TableThemes.PLAIN_7BIT.get());
-            RenderedTable renderedTable = r.render(t);
-            String s = renderedTable.toString();
-            System.out.println(s);
-        });
-*/
+
+
+
+        AsciiTable.AsciiRows headerRows = asciiTable.getHeaderRows();
+        List<AsciiRow> formattedHeader = Stream.of(headerRows.intern())
+                .map(TableFunctions.formatTable(builder.build()))
+                .collect(MoreCollectors.toSingleObject());
+        formattedHeader.forEach(System.out::println);
+
+
+        AsciiTable.AsciiRows conditionAsciiRows = asciiTable.getConditionRows();
+        List<List<String>> formattedConditions = Stream.of(conditionAsciiRows.intern())
+                .map(TableFunctions.formatTable(builder.build()))
+                .collect(MoreCollectors.toAsciiRow());
+        formattedConditions.forEach(System.out::println);
+
+        AsciiTable.AsciiRows actionAsciiRows = asciiTable.getActionRows();
+        List<List<String>> formattedActions = Stream.of(actionAsciiRows.intern())
+                .map(TableFunctions.formatTable(builder.build()))
+                .collect(MoreCollectors.toSingleObject());
+        formattedActions.forEach(System.out::println);
+
+        */
+
+        //reduce.ifPresent(EmitterConsumer.outputTo(() -> new ConsoleCharSink(Charset.forName("utf8"))));
+        //reduce.ifPresent(EmitterConsumer.outputTo(() -> new FileCharSink(new File("./sample-dt.txt"), Charset.forName("utf8"))));
+
         // ------------------------------------
     }
 
@@ -146,13 +182,13 @@ public class EmitterTest {
     public void testEmitConditions() throws Exception {
 
         List<String> rawDefinitions =
-                Lists.newArrayList("Y;Y;Y;N", "Y; ; ; ", " ; ;Y;Y", " ;Y; ; ");
+                Lists.newArrayList("Y;Y;Y;N", "Y;-;-;-", "-;-;Y;Y", "-;Y;-;-");
         ObservableList<ObservableList<String>> definitions = rawDefinitions.stream()
                 .map(r -> FXCollections.observableArrayList(r.split(SPLIT_REGEX)))
                 .collect(MoreCollectors.toObservableList());
 
         List<String> rawDeclarations =
-                Lists.newArrayList("0;90 minutes;Y,N", "1;Team A Winning;Y,N", "2;Team B Winning;Y,N", "3;Draw;Y,N", "4;Keep Playing;X");
+                Lists.newArrayList("*;90 minutes;1;*", "*;Team A Winning;2;*", "*;Team B Winning;3;*", "*;Draw;4;*", "*;Keep Playing;5;*");
         ObservableList<ConditionDecl> declarations = rawDeclarations.stream().map(r -> {
             String s[] = r.split(SPLIT_REGEX);
             return new ConditionDecl(s[0], s[1], s[2]);
@@ -161,36 +197,75 @@ public class EmitterTest {
         Tuple2<ObservableList<ConditionDecl>, ObservableList<ObservableList<String>>> input =
                 Tuple.of(declarations, definitions);
 
-        List<Object[]> expected = StreamUtils.zip(rawDeclarations.stream(), rawDefinitions.stream(), (l, r) -> (l + ";" + r).split(SPLIT_REGEX)).collect(Collectors.toList());
+        // ... calculate expected values
+        List<List<String>> expected = StreamUtils.zip(rawDeclarations.stream(), rawDefinitions.stream(), (l, r) -> (l + ";" + r))
+                .map(Splitter.on(Pattern.compile(SPLIT_REGEX)).trimResults()::splitToList)
+                .collect(Collectors.toList());
 
-        List<Object[]> actual = new Emitter().emitConditions().apply(input).collect(Collectors.toList());
+        // ... get the actual
+        List<AsciiRow> actual = new Emitter().emitConditions().apply(input).collect(Collectors.toList());
 
 
         assertNotNull(expected);
         assertNotNull(actual);
         assertTrue(expected.size() == actual.size());
 
-        Iterator<Object[]> expIterator = expected.iterator();
-        Iterator<Object[]> actIterator = actual.iterator();
+        Iterator<AsciiRow> expIterator = expected.stream().map(AsciiRow::new).iterator();
+        Iterator<AsciiRow> actIterator = actual.iterator();
 
         while (expIterator.hasNext() && actIterator.hasNext()) {
-            assertArrayEquals(expIterator.next(), actIterator.next());
+            AsciiRow se = expIterator.next();
+            AsciiRow sa = actIterator.next();
+            assertEquals(se, sa);
+        }
+
+        final int maxLen = actual.stream().mapToInt(l -> l.get(1).length()).max().getAsInt();
+
+        TableFormat.Builder builder = TableFormat.newBuilder();
+
+        for (int i = 0; i < actual.get(0).size(); i++) {
+            switch (i) {
+                case 0:
+                    builder.addColumnFormat().width(3).align(Align.LEFT).done();
+                    break;
+                case 1:
+                    builder.addColumnFormat().width(maxLen+2).align(Align.LEFT).done();
+                    break;
+                case 2:
+                    builder.addColumnFormat().width(5).align(Align.RIGHT).done();
+                case 3:
+                    builder.addColumnFormat().width(3).align(Align.CENTER).done();
+                    break;
+                default:
+                    builder.addColumnFormat().width(1).align(Align.CENTER).done();
+                    break;
+            }
+        }
+
+        List<AsciiRow> collect = Stream.of(actual)
+                .map(TableFunctions.formatTable(builder.build()))
+                .collect(MoreCollectors.toSingleObject());
+
+        for (AsciiRow l : collect) {
+            for (String s : l) {
+                System.out.println(s);
+            }
         }
     }
 
     @Test
     public void testEmitCondition() throws Exception {
         ConditionDecl a = new ConditionDecl(String.valueOf(0), "Printer does not print", "Y,N");
-        Object[] expectedA = a.toArray();
+        List<String> expectedA = Lists.newArrayList("*", a.getExpression(), "1", "*");
         ObservableList<String> b = FXCollections.observableArrayList("Y,N,Y,N,Y,N,Y,N".split("[,]"));
-        Object[] expectedB = b.toArray();
+        List<String> expectedB = b;
 
-        Object[] expected = Arrays.copyOf(expectedA, expectedA.length + expectedB.length);
-        System.arraycopy(expectedB, 0, expected, expectedA.length, expectedB.length);
+        List<String> tmp = Stream.concat(expectedA.stream(), expectedB.stream()).collect(Collectors.toList());
+        AsciiRow expected = new AsciiRow(tmp);
 
-        Object[] actual = new Emitter().emitCondition(Tuple.of(a, b));
-
-        assertArrayEquals(expected, actual);
+        AsciiRow actual = new Emitter().emitRow(1, Tuple.of(a, b));
+        System.out.println("actual = " + actual);
+        assertEquals(expected, actual);
     }
 
     @Test
@@ -203,7 +278,7 @@ public class EmitterTest {
                 .collect(MoreCollectors.toObservableList());
 
         List<String> rawDeclarations =
-                Lists.newArrayList("0;Game Over;X", "1;Team A Wins;X", "2;Team B Wins;X", "3;Extra Time;X", "4;Keep Playing;X");
+                Lists.newArrayList("*;Game Over;101;*", "*;Team A Wins;102;*", "*;Team B Wins;103;*", "*;Extra Time;104;*", "*;Keep Playing;105;*");
         ObservableList<ActionDecl> declarations = rawDeclarations.stream().map(r -> {
             String s[] = r.split(SPLIT_REGEX);
             return new ActionDecl(s[0], s[1], s[2]);
@@ -212,41 +287,69 @@ public class EmitterTest {
         Tuple2<ObservableList<ActionDecl>, ObservableList<ObservableList<String>>> input =
                 Tuple.of(declarations, definitions);
 
-        List<Object[]> expected = StreamUtils.zip(rawDeclarations.stream(), rawDefinitions.stream(), (l, r) -> (l + ";" + r).split(SPLIT_REGEX)).collect(Collectors.toList());
+        List<List<String>> expected = StreamUtils.zip(rawDeclarations.stream(), rawDefinitions.stream(), (l, r) -> (l + ";" + r))
+                .map(Splitter.on(Pattern.compile(SPLIT_REGEX))::splitToList)
+                .collect(Collectors.toList());
 
-        List<Object[]> actual = new Emitter().emitActions().apply(input).collect(Collectors.toList());
+        List<AsciiRow> actual = new Emitter().emitActions().apply(input).collect(Collectors.toList());
 
 
         assertNotNull(expected);
         assertNotNull(actual);
         assertTrue(expected.size() == actual.size());
 
-        Iterator<Object[]> expIterator = expected.iterator();
-        Iterator<Object[]> actIterator = actual.iterator();
+        Iterator<AsciiRow> expIterator = expected.stream().map(AsciiRow::new).iterator();
+        Iterator<AsciiRow> actIterator = actual.iterator();
 
         while (expIterator.hasNext() && actIterator.hasNext()) {
-            assertArrayEquals(expIterator.next(), actIterator.next());
+            AsciiRow se = expIterator.next();
+            AsciiRow sa = actIterator.next();
+            System.out.println("sa = " + sa);
+            assertEquals(se, sa);
         }
     }
 
     @Test
     public void testEmitAction() throws Exception {
         ActionDecl a = new ActionDecl(String.valueOf(0), "Check the power cable", "X");
-        Object[] expectedA = a.toArray();
+        List<String> expectedA = Lists.newArrayList("*", a.getExpression(), String.valueOf(102), "*");
         ObservableList<String> b = FXCollections.observableArrayList(" , , , ,X, , , ".split("[,]"));
-        Object[] expectedB = b.toArray();
+        List<String> expectedB = b;
 
-        Object[] expected = Arrays.copyOf(expectedA, expectedA.length + expectedB.length);
-        System.arraycopy(expectedB, 0, expected, expectedA.length, expectedB.length);
+        List<String> tmp = Stream.concat(expectedA.stream(), expectedB.stream()).collect(Collectors.toList());
+        AsciiRow expected = new AsciiRow(tmp);
 
-        Object[] actual = new Emitter().emitAction(Tuple.of(a, b));
+        AsciiRow actual = new Emitter().emitRow(102, Tuple.of(a, b));
 
-        assertArrayEquals(expected, actual);
+        //Dump.dumpList1DItems("EMIT-ACTION", actual);
+        System.out.println("actual = " + actual);
+
+
+        assertEquals(expected, actual);
 
     }
 
     @Test
     public void testEmitHeader() throws Exception {
+        List<String> rawDefinitions =
+                Lists.newArrayList("Y;Y;Y;N", "Y;-;-;-", "-;-;Y;Y", "-;Y;-;-");
+        ObservableList<ObservableList<String>> definitions = rawDefinitions.stream()
+                .map(r -> FXCollections.observableArrayList(r.split(SPLIT_REGEX)))
+                .collect(MoreCollectors.toObservableList());
+
+        List<String> rawDeclarations =
+                Lists.newArrayList("*;90 minutes;1;*", "*;Team A Winning;2;*", "*;Team B Winning;3;*", "*;Draw;4;*", "*;Keep Playing;5;*");
+        ObservableList<ConditionDecl> declarations = rawDeclarations.stream().map(r -> {
+            String s[] = r.split(SPLIT_REGEX);
+            return new ConditionDecl(s[0], s[1], s[2]);
+        }).collect(MoreCollectors.toObservableList());
+
+        Tuple2<ObservableList<ConditionDecl>, ObservableList<ObservableList<String>>> input =
+                Tuple.of(declarations, definitions);
+
+        Stream<AsciiRow> listStream = new Emitter().emitHeader().apply(input);
+
+        listStream.forEach(System.out::println);
 
     }
 }

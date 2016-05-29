@@ -23,6 +23,7 @@ import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Lists;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Created by mmoehler on 26.05.16.
@@ -30,15 +31,17 @@ import java.util.List;
 public class TableFormat {
     private ImmutableList<ColumnFormat> columnFormats;
     private ImmutableList<ColumnGroup> columnGroups;
-    public ColumnSeparator columnSeparator = ColumnSeparator.DEFAULT;
+    public ColumnSeparator columnSeparator;
 
     private TableFormat(Builder builder) {
         columnFormats = ImmutableList.<ColumnFormat>builder()
                 .addAll(builder.columnFormats)
                 .build();
-        columnGroups = ImmutableList.<ColumnGroup>builder()
-                .addAll(builder.columnGroups)
-                .build();
+        builder.columnGroups.ifPresent(
+                (v) -> columnGroups = ImmutableList.<ColumnGroup>builder()
+                .addAll(v)
+                .build());
+        columnSeparator = builder.columnSeparator;
     }
 
     public ImmutableList<ColumnFormat> getColumnFormats() {
@@ -49,6 +52,12 @@ public class TableFormat {
         return columnGroups;
     }
 
+    public int calculateRowLength() {
+        // without column Groups!!
+        int len = columnFormats.stream().mapToInt(o -> o.getWidth()).sum() + (columnFormats.size() -1) * columnSeparator.get().length();
+        return len;
+    }
+
     public static Builder newBuilder() {
         return new Builder();
     }
@@ -56,13 +65,14 @@ public class TableFormat {
     public static Builder newBuilder(TableFormat copy) {
         Builder builder = new Builder();
         builder.columnFormats = copy.columnFormats;
-        builder.columnGroups = copy.columnGroups;
+        builder.columnGroups = (null == copy.columnGroups) ? Optional.empty() : Optional.ofNullable(copy.columnGroups);
+        builder.columnSeparator = copy.columnSeparator;
         return builder;
     }
 
     public static final class Builder {
         private List<ColumnFormat> columnFormats = Lists.newLinkedList();
-        private List<ColumnGroup> columnGroups = Lists.newLinkedList();
+        private Optional<List<ColumnGroup>> columnGroups = Optional.empty();
         private ColumnSeparator columnSeparator = ColumnSeparator.DEFAULT;
         private ColumnGroup.Builder columnGroupBuilder = ColumnGroup.newBuilder(Builder.this, Builder.this::addColumnGroup);
         private ColumnFormat.Builder columnFormatBuilder = ColumnFormat.newBuilder(Builder.this, Builder.this::addColumnFormat);
@@ -79,8 +89,8 @@ public class TableFormat {
             return this.columnGroupBuilder;
         }
 
-        public ColumnGroup.Builder columnSeparatorBuilder() {
-            return this.columnSeparatorBuilder();
+        public ColumnSeparator.Builder columnSeparator() {
+            return this.columnSeparatorBuilder;
         }
 
 
@@ -90,7 +100,10 @@ public class TableFormat {
         }
 
         public Builder addColumnGroup(ColumnGroup val) {
-            columnGroups.add(val);
+            if (!columnGroups.isPresent()) {
+                columnGroups = Optional.ofNullable(Lists.newLinkedList());
+            }
+            columnGroups.get().add(val);
             return this;
         }
 
@@ -100,7 +113,7 @@ public class TableFormat {
         }
 
         public Builder columnGroups(List<ColumnGroup> val) {
-            columnGroups = val;
+            columnGroups = Optional.ofNullable(val);
             return this;
         }
 

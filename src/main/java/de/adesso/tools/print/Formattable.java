@@ -17,25 +17,13 @@
  * under the License.
  */
 
-package de.adesso.tools.util.output;
+package de.adesso.tools.print;
 
-import de.adesso.tools.print.AsciiRow;
-
-import java.util.List;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import de.adesso.tools.util.output.TableFormat;
 
 /**
- * Created by mmoehler on 26.05.16.
+ * Created by mmoehler on 29.05.16.
  */
-public final class TableFunctions {
-    private TableFunctions() {
-    }
-
-    public static Function<List<AsciiRow>, List<AsciiRow>> formatTable(TableFormat format) {
-        return (m) -> m.stream()
-                .map(RowFunctions.formatRow(format))
-                .map(AsciiRow::new)
-                .collect(Collectors.toList());
-    }
+public interface Formattable {
+    String format(TableFormat tf);
 }

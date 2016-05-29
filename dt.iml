@@ -12,10 +12,6 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: de.vandermeer:asciitable-j7:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: de.vandermeer:asciilist-j7:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: de.sven-jacobs:loremipsum:1.0" level="project" />
     <orderEntry type="library" name="Maven: de.saxsys:mvvmfx:1.5.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.12" level="project" />
     <orderEntry type="library" name="Maven: net.jodah:typetools:0.4.1" level="project" />
@@ -44,9 +40,6 @@
     <orderEntry type="library" name="Maven: org.javafxdata:datafx-datareader:8.0b5" level="project" />
     <orderEntry type="library" name="Maven: javax.json:javax.json-api:1.0" level="project" />
     <orderEntry type="library" name="Maven: com.codepoetics:protonpack:1.8" level="project" />
-    <orderEntry type="library" name="Maven: de.vandermeer:asciitable-j7:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: de.vandermeer:asciilist-j7:1.0.0" level="project" />
-    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
     <orderEntry type="library" name="Maven: eu.lestard:advanced-bindings:0.4.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.assertj:assertj-core:1.7.1" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: eu.lestard:assertj-javafx:0.3.0" level="project" />

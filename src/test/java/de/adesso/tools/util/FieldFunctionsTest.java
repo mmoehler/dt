@@ -37,9 +37,9 @@ import static de.adesso.tools.util.output.FieldFunctions.*;
  */
 public class FieldFunctionsTest {
 
-    private final ColumnFormat centered = ColumnFormat.newBuilder().withWidth(40).withAlign(CENTER).build();
-    private final ColumnFormat rightJustified = ColumnFormat.newBuilder().withWidth(40).withAlign(RIGHT).build();
-    private final ColumnFormat leftJustified = ColumnFormat.newBuilder().withWidth(40).withAlign(LEFT).build();
+    private final ColumnFormat centered = ColumnFormat.newBuilder().width(40).align(CENTER).build();
+    private final ColumnFormat rightJustified = ColumnFormat.newBuilder().width(40).align(RIGHT).build();
+    private final ColumnFormat leftJustified = ColumnFormat.newBuilder().width(40).align(LEFT).build();
 
 
     /**

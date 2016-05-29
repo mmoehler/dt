@@ -19,6 +19,7 @@
 
 package de.adesso.tools.functions;
 
+import de.adesso.tools.print.AsciiRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -56,6 +57,16 @@ public class MoreCollectors {
                 },
                 EnumSet.of(Collector.Characteristics.IDENTITY_FINISH));
     }
+
+    public static Collector<String, ?, AsciiRow> toAsciiRow() {
+        return new CollectorImpl<>((Supplier<AsciiRow>) AsciiRow::new, AsciiRow::add,
+                (left, right) -> {
+                    left.addAll(right);
+                    return left;
+                },
+                EnumSet.of(Collector.Characteristics.IDENTITY_FINISH));
+    }
+
 
 
     private static <I, R> Function<I, R> castingIdentity() {

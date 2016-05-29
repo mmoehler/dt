@@ -61,6 +61,14 @@ public class ColumnSeparator implements Supplier<String> {
         return value;
     }
 
+    @Override
+    public String toString() {
+        return "ColumnSeparator{" +
+                "character=" + character +
+                ", length=" + length +
+                '}';
+    }
+
     public static Builder newBuilder(TableFormat.Builder parentBuilder, Callback<ColumnSeparator> ownerCallback) {
         return new Builder(parentBuilder, ownerCallback);
     }
