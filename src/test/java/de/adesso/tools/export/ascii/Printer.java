@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.tools.print;
+package de.adesso.tools.export.ascii;
 
 /**
  * Created by mmoehler on 20.05.16.

@@ -3,6 +3,7 @@ package de.adesso.tools.ui.main;
 import com.codepoetics.protonpack.Indexed;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
+import de.adesso.tools.Dump;
 import de.adesso.tools.analysis.structure.AnalysisResultEmitter;
 import de.adesso.tools.analysis.structure.Indicator;
 import de.adesso.tools.analysis.structure.Operators;
@@ -300,6 +301,8 @@ public class MainViewModel implements ViewModel {
         try {
 
             List<Indicator> result = structuralAnalysis.apply(adapt(this.conditionDefinitions), adapt(this.actionDefinitions));
+
+            Dump.dumpStructuralAnalysisResult("STRUCTURAL-ANALYSIS",result);
 
             final Tuple3<String, Multimap<Integer, Integer>, Multimap<Integer, Integer>> tuple3 =
                     resultEmitter.emitStructuralAnalysisResult().apply(result, this.conditionDefinitions.get(0).size());

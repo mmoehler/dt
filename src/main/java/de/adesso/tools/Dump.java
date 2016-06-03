@@ -20,6 +20,8 @@
 package de.adesso.tools;
 
 import com.codepoetics.protonpack.Indexed;
+import com.google.common.collect.Lists;
+import de.adesso.tools.analysis.structure.Indicator;
 import javafx.collections.ObservableList;
 
 import java.util.Arrays;
@@ -72,6 +74,14 @@ public class Dump {
     public static <E> void arry2DItems(String msg, E[][] a) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
         Arrays.stream(a).forEach(i -> System.out.println("\t" + Arrays.toString(i)));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    public static void dumpStructuralAnalysisResult(String msg, List<Indicator> r) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+
+        Lists.partition(r,5).forEach(System.out::println);
+
         System.out.println("<<<<<<<<<<\n");
     }
 }

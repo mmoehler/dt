@@ -17,12 +17,16 @@
  * under the License.
  */
 
-package de.adesso.tools.print;
+package de.adesso.tools.export.ascii;
+
+import javafx.scene.text.Text;
 
 /**
- * Created by mmoehler on 21.05.16.
+ * Created by mmoehler on 20.05.16.
  */
-public final class PrintFunctions {
-    private PrintFunctions() {
+public class TextPrinter implements Printer<Text> {
+    @Override
+    public boolean print(Text document) {
+        return false;
     }
 }

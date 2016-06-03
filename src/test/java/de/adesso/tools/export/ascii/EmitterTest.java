@@ -17,11 +17,16 @@
  * under the License.
  */
 
-package de.adesso.tools.print;
+package de.adesso.tools.export.ascii;
 
 import com.codepoetics.protonpack.StreamUtils;
+import com.codepoetics.protonpack.functions.TriFunction;
+import com.google.common.base.Joiner;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
+import de.adesso.tools.analysis.structure.DefaultStructuralAnalysis;
+import de.adesso.tools.analysis.structure.Indicator;
+import de.adesso.tools.analysis.structure.Indicators;
 import de.adesso.tools.functions.MoreCollectors;
 import de.adesso.tools.model.ActionDecl;
 import de.adesso.tools.model.ConditionDecl;
@@ -36,12 +41,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.testng.annotations.Test;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.BiFunction;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import static de.adesso.tools.functions.Adapters.Matrix.adapt;
+import static de.adesso.tools.util.HLists.*;
 import static org.junit.Assert.*;
 
 /**
@@ -68,7 +78,7 @@ public class EmitterTest {
 
 
         List<String> rawActionDefs =
-                Lists.newArrayList("X; ; ;X", "X; ; ; ", " ; ; ;X", " ;X; ; ", " ;X;X; ");
+                Lists.newArrayList("X;-;-;X", "X;-;-;-", "-;-;-;X", "-;X;-;-", "-;X;X;-");
         ObservableList<ObservableList<String>> actionDefs = rawActionDefs.stream()
                 .map(r -> FXCollections.observableArrayList(r.split(SPLIT_REGEX)))
                 .collect(MoreCollectors.toObservableList());
@@ -96,7 +106,7 @@ public class EmitterTest {
 
         assertNotNull(asciiTable);
         
-        final int maxLen = 40;
+        final int maxLen = 20;
         final int columns = asciiTable.getColumnCount();
 
         TableFormat.Builder builder = TableFormat.newBuilder();
@@ -113,9 +123,6 @@ public class EmitterTest {
                     break;
                 case 2:
                     builder.addColumnFormat().width(4).align(Align.RIGHT).done();
-                case 3:
-                    builder.addColumnFormat().width(3).align(Align.CENTER).done();
-                    break;
                 default:
                     builder.addColumnFormat().width(1).align(Align.CENTER).done();
                     break;
@@ -126,6 +133,25 @@ public class EmitterTest {
         String result = new Formatter(builder.build()).apply(asciiTable);
 
         System.out.println(result);
+
+
+
+
+        final DefaultStructuralAnalysis analysis = new DefaultStructuralAnalysis();
+
+        analysis.postConstruct();
+
+        List<Indicator> result0 =
+                analysis.apply(adapt(dt.getConditionDefs()), adapt(dt.getActionDefs()));
+
+        analysis.preDestroy();
+
+        final List<List<Indicator>> L = normalize.apply(dt.getConditionDefs().get(0).size()-1,result0);
+
+        for(List ll : L) {
+            System.out.println(ll);
+        }
+
 
         /*
 
@@ -352,4 +378,82 @@ public class EmitterTest {
         listStream.forEach(System.out::println);
 
     }
+
+    final static Indicator i[] = {Indicators.AS, Indicators.AS, Indicators.MI, Indicators.AS, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.MI, Indicators.AS, Indicators.MI, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.AS, Indicators.MI, Indicators.MI, Indicators.AS, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.AS, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI,
+            Indicators.AS, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.AS, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI, Indicators.MI,
+            Indicators.MI, Indicators.MI};
+
+    final static List<Indicator> l = Lists.newArrayList(Arrays.asList(i));
+
+
+    @Test
+    public void testIndicatorPaging() throws Exception {
+
+        //final List<List<Indicator>> L = f(15, l);
+
+        final List<List<Indicator>> L = normalize.apply(15,l);
+
+        for(List ll : L) {
+            System.out.println(ll);
+        }
+
+        final List<List<String>> F = L.stream().map(e -> format.apply(16, e)).collect(Collectors.toList());
+
+        System.out.println();
+        for(List ll : F) {
+            System.out.println(ll);
+        }
+
+
+        final List<String> collect = F.stream().map(ii -> ii.stream().collect(Collectors.joining(" "))).collect(Collectors.toList());
+        final String join = Joiner.on(System.lineSeparator()).skipNulls().join(collect);
+
+        System.out.println();
+        System.out.println(join);
+
+
+
+    }
+
+    @Test
+    public void testSplitAt() {
+        final Tuple2<List<Indicator>, List<Indicator>> tuple2 = splitAt.apply(15, l);
+        assertEquals(15,tuple2._1().size());
+    }
+
+    static BiFunction<Integer, List<Indicator>, List<String>> format = (i, li) -> {
+            final List<String> strings = li.stream()
+                    .map(a -> a.getCode())
+                    .collect(Collectors.toList());
+            return paddLeft(i - strings.size(), ".", strings);
+    };
+
+    public static BiFunction<Integer, List<Indicator>, Tuple2<List<Indicator>, List<Indicator>>> splitAt =
+            (i, l) -> Tuple.of(take(l, i), drop(l, i));
+
+    static BiFunction<Integer, List<Indicator>, List<List<Indicator>>> normalize = (i,l) -> {
+            TriFunction<TriFunction, Integer, List<Indicator>, List<List<Indicator>>> recursion = (TriFunction f, Integer i1, List<Indicator> l1) -> {
+                if (0 == i1) return new ArrayList<>();
+                Tuple2<List<Indicator>, List<Indicator>> t = splitAt.apply(i1, l1);
+                return addFirst(t._1(), (List<List<Indicator>>) f.apply(f, (i1 - 1), t._2()));
+            };
+            return recursion.apply(recursion, i, l);
+        };
+
+
 }

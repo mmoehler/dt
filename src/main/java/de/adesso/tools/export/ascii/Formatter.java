@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.tools.print;
+package de.adesso.tools.export.ascii;
 
 import com.google.common.collect.Lists;
 import de.adesso.tools.functions.MoreCollectors;

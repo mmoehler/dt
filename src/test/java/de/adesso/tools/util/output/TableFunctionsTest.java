@@ -23,7 +23,7 @@ import com.beust.jcommander.internal.Lists;
 import com.google.common.base.Strings;
 import de.adesso.tools.common.builder.List2DBuilder;
 import de.adesso.tools.functions.MoreCollectors;
-import de.adesso.tools.print.AsciiRow;
+import de.adesso.tools.export.ascii.AsciiRow;
 import org.testng.annotations.Test;
 
 import java.util.List;

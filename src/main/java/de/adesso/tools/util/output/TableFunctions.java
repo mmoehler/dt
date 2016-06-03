@@ -19,7 +19,7 @@
 
 package de.adesso.tools.util.output;
 
-import de.adesso.tools.print.AsciiRow;
+import de.adesso.tools.export.ascii.AsciiRow;
 
 import java.util.List;
 import java.util.function.Function;

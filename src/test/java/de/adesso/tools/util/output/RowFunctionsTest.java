@@ -22,7 +22,7 @@ package de.adesso.tools.util.output;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
-import de.adesso.tools.print.AsciiRow;
+import de.adesso.tools.export.ascii.AsciiRow;
 import de.svenjacobs.loremipsum.LoremIpsum;
 import org.testng.annotations.Test;
 

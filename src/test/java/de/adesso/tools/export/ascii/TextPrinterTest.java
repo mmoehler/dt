@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.tools.print;
+package de.adesso.tools.export.ascii;
 
 import de.saxsys.mvvmfx.testingutils.jfxrunner.JfxRunner;
 import javafx.print.PrinterJob;

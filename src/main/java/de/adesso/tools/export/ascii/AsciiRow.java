@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.tools.print;
+package de.adesso.tools.export.ascii;
 
 import java.util.*;
 import java.util.function.Supplier;

@@ -21,7 +21,7 @@ package de.adesso.tools.util.output;
 
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
-import de.adesso.tools.print.AsciiRow;
+import de.adesso.tools.export.ascii.AsciiRow;
 
 import java.util.Iterator;
 import java.util.List;

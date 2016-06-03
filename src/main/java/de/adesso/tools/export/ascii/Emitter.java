@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.tools.print;
+package de.adesso.tools.export.ascii;
 
 import com.codepoetics.protonpack.StreamUtils;
 import com.google.common.collect.Lists;
@@ -76,7 +76,7 @@ public class Emitter implements Function<DecisionTable, AsciiTable> {
 
     static <D extends Declaration> AsciiRow emitRow(int nbr, Tuple2<D, ObservableList<String>> t) {
         AsciiRow ret = new AsciiRow();
-        List<String> theDecl = Lists.newArrayList(ASTERISK, t._1().getExpression(), String.valueOf(nbr), ASTERISK);
+        List<String> theDecl = Lists.newArrayList(ASTERISK, t._1().getExpression(), String.valueOf(nbr));
         ret.addAll(theDecl);
         ret.addAll(t._2());
         return ret;
@@ -84,12 +84,13 @@ public class Emitter implements Function<DecisionTable, AsciiTable> {
 
     Function<Tuple2<ObservableList<ConditionDecl>, ObservableList<ObservableList<String>>>, Stream<AsciiRow>> emitHeader() {
         return (tuple) -> {
+            final int declSize = 3;
             ObservableList<String> t = tuple._2().get(0);
-            AsciiRow mainHeader = new AsciiRow(4 + t.size());
-            AsciiRow subHeader = new AsciiRow(4 + t.size());
+            AsciiRow mainHeader = new AsciiRow(declSize + t.size());
+            AsciiRow subHeader = new AsciiRow(declSize + t.size());
             int k = 1;
-            for (int i = 0; i < (4 + t.size()); i++) {
-                if (i < 4) {
+            for (int i = 0; i < (declSize + t.size()); i++) {
+                if (i < declSize) {
                     mainHeader.add(SPACE);
                     subHeader.add(SPACE);
                 } else {
@@ -106,5 +107,4 @@ public class Emitter implements Function<DecisionTable, AsciiTable> {
             return Stream.of(mainHeader, subHeader);
         };
     }
-
 }

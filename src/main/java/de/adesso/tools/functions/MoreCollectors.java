@@ -19,7 +19,8 @@
 
 package de.adesso.tools.functions;
 
-import de.adesso.tools.print.AsciiRow;
+import com.google.common.collect.ImmutableList;
+import de.adesso.tools.export.ascii.AsciiRow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -47,6 +48,17 @@ public class MoreCollectors {
                     return list.get(0);
                 }
         );
+    }
+
+
+    public static <T> Collector<T, ImmutableList.Builder<T>, ImmutableList<T>> toImmutableList() {
+        return new CollectorImpl<>((Supplier<ImmutableList.Builder<T>>)ImmutableList::builder, (builder, t) -> builder.add(t),
+                (left, right) -> {
+                    left.addAll(right.build());
+                    return left;
+                },
+                (builder) -> builder.build(),
+                EnumSet.of(Collector.Characteristics.UNORDERED));
     }
 
     public static <T> Collector<T, ?, ObservableList<T>> toObservableList() {
