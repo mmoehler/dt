@@ -2,25 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b2d1880-d391-4d61-bb7f-0c8e21880d82" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_8_3.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_digester_commons_digester_1_8.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_logging_commons_logging_1_1_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_validator_commons_validator_1_4_0.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__log4j_log4j_1_2_16.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__net_rootdev_java_rdfa_0_4_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_jena_jena_core_2_7_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_jena_jena_iri_0_9_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_odftoolkit_odfdom_java_0_8_10_incubating.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_odftoolkit_simple_odf_0_8_1_incubating.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_apache_odftoolkit_taglets_0_8_10_incubating.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_slf4j_slf4j_log4j12_1_6_4.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xerces_xercesImpl_2_9_1.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__xml_apis_xml_apis_1_3_04.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/odf/ODFExport.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFExportTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dt.iml" afterPath="$PROJECT_DIR$/dt.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFExportTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFExportTest.java" />
     </list>
     <ignored path="dt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -122,8 +105,8 @@
       <file leaf-file-name="ODFExportTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFExportTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.60076046">
-              <caret line="49" column="33" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
+            <state vertical-scroll-proportion="0.4011407">
+              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -1648,7 +1631,7 @@
       <workItem from="1464327683515" duration="65043000" />
       <workItem from="1464561168888" duration="6000" />
       <workItem from="1464623908940" duration="51000" />
-      <workItem from="1464968679897" duration="40168000" />
+      <workItem from="1464968679897" duration="41541000" />
     </task>
     <task id="LOCAL-00001" summary="Refactoring of Matrix functions">
       <created>1455475453269</created>
@@ -1914,16 +1897,16 @@
       <option name="project" value="LOCAL" />
       <updated>1465141954496</updated>
     </task>
-    <option name="localTasksCounter" value="45" />
+    <task id="LOCAL-00045" summary="ODF Export">
+      <created>1465145637406</created>
+      <option name="number" value="00045" />
+      <option name="project" value="LOCAL" />
+      <updated>1465145637406</updated>
+    </task>
+    <option name="localTasksCounter" value="46" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DtURLStreamHandlerFactoryTest - 2016.06.04 at 16h 22m 55s.xml">
-      <configuration name="DtURLStreamHandlerFactoryTest" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="DtURLStreamHandlerFactoryTest_test2_(1) - 2016.06.04 at 16h 22m 20s.xml">
-      <configuration name="DtURLStreamHandlerFactoryTest.test2 (1)" configurationId="TestNG" />
-    </history-entry>
     <history-entry file="DtURLStreamHandlerFactoryTest_test2_(2) - 2016.06.04 at 16h 23m 17s.xml">
       <configuration name="DtURLStreamHandlerFactoryTest.test2 (2)" configurationId="TestNG" />
     </history-entry>
@@ -1948,9 +1931,15 @@
     <history-entry file="ODFExportTest_testDoit - 2016.06.05 at 18h 32m 43s.xml">
       <configuration name="ODFExportTest.testDoit" configurationId="TestNG" />
     </history-entry>
+    <history-entry file="ODFExportTest_testDoit - 2016.06.05 at 23h 02m 12s.xml">
+      <configuration name="ODFExportTest.testDoit" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="ODFExportTest_testDoit - 2016.06.05 at 23h 03m 04s.xml">
+      <configuration name="ODFExportTest.testDoit" configurationId="TestNG" />
+    </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="741838000" />
+    <option name="totallyTimeSpent" value="743211000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1963,7 +1952,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1920" height="977" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284091" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -1978,7 +1967,7 @@
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3740113" sideWeight="0.49413645" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24174654" sideWeight="0.48989898" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24174654" sideWeight="0.48989898" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3242938" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31203407" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
@@ -2037,7 +2026,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="more tests written" />
     <MESSAGE value="column handling tests finished" />
     <MESSAGE value="start enhancing row handling tests" />
     <MESSAGE value="start implementation detailed completeness check and condition consolidation" />
@@ -2062,7 +2050,8 @@
     <MESSAGE value="Tableformatting except Column grouping finished" />
     <MESSAGE value="DT can now be converted to text representation." />
     <MESSAGE value="PAckagestructure cleaned, DeclTableCell Editor changed, Some Excpetionhandling" />
-    <option name="LAST_COMMIT_MESSAGE" value="PAckagestructure cleaned, DeclTableCell Editor changed, Some Excpetionhandling" />
+    <MESSAGE value="ODF Export" />
+    <option name="LAST_COMMIT_MESSAGE" value="ODF Export" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2544,8 +2533,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFExportTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.60076046">
-          <caret line="49" column="33" selection-start-line="49" selection-start-column="33" selection-end-line="49" selection-end-column="33" />
+        <state vertical-scroll-proportion="0.4011407">
+          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

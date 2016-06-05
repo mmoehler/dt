@@ -20,7 +20,10 @@
 package de.adesso.dtmg.export.odf;
 
 
+import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.TextDocument;
+import org.odftoolkit.simple.style.Font;
+import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.text.list.List;
@@ -37,11 +40,16 @@ public class ODFExportTest {
         try {
             outputOdt = TextDocument.newTextDocument();
 
+
+
             // add image
             //outputOdt.newImage(new URI("odf-logo.png"));
 
             // add paragraph
             outputOdt.addParagraph("Hello World, Hello Simple ODF!");
+
+            Font font1Base = new Font("Coutier", StyleTypeDefinitions.FontStyle.REGULAR, 12, Color.RED, StyleTypeDefinitions.TextLinePosition.REGULAR);
+            outputOdt.getParagraphByIndex(0,true).setFont(font1Base);
 
             // add list
             outputOdt.addParagraph("The following is a list.");
@@ -54,7 +62,7 @@ public class ODFExportTest {
             Cell cell = table.getCellByPosition(0, 0);
             cell.setStringValue("Hello World!");
 
-            outputOdt.save("HelloWorld.odt");
+            outputOdt.save("HelloWorld-01.odt");
         } catch (Exception e) {
             System.err.println("ERROR: unable to create output file.");
         }
