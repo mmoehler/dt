@@ -1,6 +1,7 @@
 package de.adesso.dtmg.ui.main;
 
 import com.codepoetics.protonpack.Indexed;
+import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
 import com.google.common.collect.Multimap;
 import de.adesso.dtmg.Dump;
@@ -306,6 +307,9 @@ public class MainViewModel implements ViewModel {
     private Optional<String> internalStructuralAnalysis() {
         String ret = null;
         try {
+
+            Preconditions.checkArgument(!this.conditionDefinitions.isEmpty(), "Structural Analysis without Condition Definitions is not possible!");
+            Preconditions.checkArgument(!this.actionDefinitions.isEmpty(), "Structural Analysis without Action Definitions is not possible!");
 
             List<Indicator> result = structuralAnalysis.apply(adapt(this.conditionDefinitions), adapt(this.actionDefinitions));
 

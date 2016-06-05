@@ -29,3 +29,13 @@
 }
 
 
+.text-field-table-cell {
+    -fx-padding: 0;
+    -fx-background-insets: 0.0;
+}
+.text-field-table-cell .text-field {
+    -fx-padding: 0;
+    -fx-background-insets: 0.0;
+    -fx-background-color:yellow;
+    -fx-border-width: 0;
+}

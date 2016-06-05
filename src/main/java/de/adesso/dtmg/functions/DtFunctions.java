@@ -21,7 +21,6 @@ package de.adesso.dtmg.functions;
 
 import com.google.common.collect.Lists;
 import de.adesso.dtmg.ui.DeclarationTableViewModel;
-import de.adesso.dtmg.ui.DeclarationsTableCell;
 import de.adesso.dtmg.ui.DefinitionsTableCell;
 import de.adesso.dtmg.ui.PossibleIndicatorsSupplier;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
@@ -34,6 +33,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.control.cell.TextFieldTableCell;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -453,7 +453,8 @@ public final class DtFunctions {
         col.setMaxWidth(maxWidth);
         col.setResizable(resizable);
         col.setCellValueFactory(new PropertyValueFactory<>(propertyName));
-        col.setCellFactory(DeclarationsTableCell.forTableColumn(alignment));
+        //col.setCellFactory(DeclarationsTableCell.forTableColumn(alignment));
+        col.setCellFactory(TextFieldTableCell.forTableColumn());
         col.setOnEditCommit(value);
         return col;
     }
