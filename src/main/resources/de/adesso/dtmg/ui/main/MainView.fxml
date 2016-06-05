@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/null" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.adesso.dtmg.ui.main.MainView">
+    <children>
+        <fx:include source="../menu/MenuView.fxml" />
+      <SplitPane dividerPositions="0.5" orientation="VERTICAL">
+        <items>
+          <AnchorPane>
+               <children>
+                    <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="600.0" prefWidth="1022.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <items>
+                            <AnchorPane>
+                                <children>
+                                    <SplitPane fx:id="conditionSplitPane" dividerPositions="0.5" prefHeight="162.0" prefWidth="1020.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <items>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                <children>
+                                                    <TableView id="conditionDeclTable" fx:id="conditionDeclarationsTable" prefHeight="158.0" prefWidth="85.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                        <contextMenu>
+                                                            <ContextMenu>
+                                                                <items>
+                                                                    <MenuItem mnemonicParsing="false" text="Unspecified Action" />
+                                                                </items>
+                                                            </ContextMenu>
+                                                        </contextMenu>
+                                                    </TableView>
+                                                </children>
+                                            </AnchorPane>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                <children>
+                                                    <TableView id="conditionDefnsTable" fx:id="conditionDefinitionsTable" prefHeight="158.0" prefWidth="205.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                </children>
+                                            </AnchorPane>
+                                        </items>
+                                    </SplitPane>
+                                </children>
+                            </AnchorPane>
+                            <AnchorPane>
+                                <children>
+                                    <SplitPane fx:id="actionSplitPane" dividerPositions="0.5" prefHeight="162.0" prefWidth="1020.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                        <items>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
+                                                <children>
+                                                    <TableView id="actionDeclTable" fx:id="actionDeclarationsTable" prefHeight="158.0" prefWidth="145.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                </children>
+                                            </AnchorPane>
+                                            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="158.0" prefWidth="575.0">
+                                                <children>
+                                                    <TableView id="actionDefnsTable" fx:id="actionDefinitionsTable" prefHeight="158.0" prefWidth="145.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                </children>
+                                            </AnchorPane>
+                                        </items>
+                                    </SplitPane>
+                                </children>
+                            </AnchorPane>
+                        </items>
+                    </SplitPane>
+               </children>
+            </AnchorPane>
+          <AnchorPane>
+               <children>
+                    <TextArea fx:id="console" editable="false" focusTraversable="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <font>
+                            <Font size="12.0" />
+                        </font>
+                    </TextArea>
+               </children>
+            </AnchorPane>
+        </items>
+      </SplitPane>
+    </children>
+</VBox>

@@ -159,7 +159,7 @@
                 <artifactId>javafx-maven-plugin</artifactId>
                 <version>8.1.2</version>
                 <configuration>
-                    <mainClass>de.adesso.tools.App</mainClass>
+                    <mainClass>de.adesso.dtmg.App</mainClass>
                 </configuration>
             </plugin>
         </plugins>
