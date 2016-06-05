@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.apache.odftoolkit:odfdom-java:0.8.10-incubating">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/odftoolkit/odfdom-java/0.8.10-incubating/odfdom-java-0.8.10-incubating.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/odftoolkit/odfdom-java/0.8.10-incubating/odfdom-java-0.8.10-incubating-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/apache/odftoolkit/odfdom-java/0.8.10-incubating/odfdom-java-0.8.10-incubating-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
