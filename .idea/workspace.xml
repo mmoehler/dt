@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6b2d1880-d391-4d61-bb7f-0c8e21880d82" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFTableEmitter.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dt.iml" afterPath="$PROJECT_DIR$/dt.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFExportTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFExportTest.java" />
     </list>
     <ignored path="dt.iws" />
@@ -18,12 +20,6 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/dt$de_adesso_tools.coverage" NAME="de.adesso.tools Coverage Results" MODIFIED="1457935801285" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>de.adesso.tools.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/dt$DtFunctionsTest.coverage" NAME="DtFunctionsTest Coverage Results" MODIFIED="1457935627414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>de.adesso.tools.functions.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/dt$ActionsTest_testA5Design__1_.coverage" NAME="ActionsTest.testA5Design (1) Coverage Results" MODIFIED="1458462325690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.adesso.tools.analysis.completeness.detailed.*</FILTER>
     </SUITE>
@@ -32,6 +28,12 @@
     </SUITE>
     <SUITE FILE_PATH="coverage/dt$ActionsTest_testA5OK__1_.coverage" NAME="ActionsTest.testA5OK (1) Coverage Results" MODIFIED="1463673126187" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.adesso.tools.analysis.completeness.detailed.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/dt$DtFunctionsTest.coverage" NAME="DtFunctionsTest Coverage Results" MODIFIED="1457935627414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>de.adesso.tools.functions.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/dt$de_adesso_tools.coverage" NAME="de.adesso.tools Coverage Results" MODIFIED="1457935801285" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>de.adesso.tools.*</FILTER>
     </SUITE>
   </component>
   <component name="CreatePatchCommitExecutor">
@@ -43,60 +45,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="MainView.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainView.java">
+      <file leaf-file-name="Strings.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/base/Strings.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="93" column="46" selection-start-line="92" selection-start-column="0" selection-end-line="93" selection-end-column="46" />
-              <folding>
-                <element signature="e#3721#3722#0" expanded="true" />
-                <element signature="e#3744#3745#0" expanded="true" />
-                <element signature="e#3837#3838#0" expanded="true" />
-                <element signature="e#3888#3889#0" expanded="true" />
-                <element signature="e#3978#3979#0" expanded="true" />
-                <element signature="e#4028#4029#0" expanded="true" />
-                <element signature="e#4274#4275#0" expanded="true" />
-                <element signature="e#4327#4328#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ExceptionHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/exception/ExceptionHandler.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MainViewModel.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="311" column="63" selection-start-line="311" selection-start-column="63" selection-end-line="311" selection-end-column="63" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-16.25">
-              <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ODFExport.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/odf/ODFExport.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="23" column="3" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
+              <caret line="178" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -105,8 +58,38 @@
       <file leaf-file-name="ODFExportTest.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFExportTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.4011407">
-              <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.507722">
+              <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TableFunctionsTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/output/TableFunctionsTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="List2DFunctionsTest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/List2DFunctionsTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="225" column="108" selection-start-line="225" selection-start-column="8" selection-end-line="225" selection-end-column="108" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ODFTableEmitter.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFTableEmitter.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="47" column="74" selection-start-line="47" selection-start-column="74" selection-end-line="47" selection-end-column="74" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -114,47 +97,108 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OdfTextDocument.java" pinned="false" current-in-tab="false">
-        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/odftoolkit/odfdom-java/0.8.10-incubating/odfdom-java-0.8.10-incubating-sources.jar!/org/odftoolkit/odfdom/doc/OdfTextDocument.java">
+      <file leaf-file-name="Table.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/odftoolkit/simple-odf/0.8.1-incubating/simple-odf-0.8.1-incubating-sources.jar!/org/odftoolkit/simple/table/Table.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="TextFieldTableCell.java" pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/javafx-src.zip!/javafx/scene/control/cell/TextFieldTableCell.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="45" column="50" selection-start-line="45" selection-start-column="45" selection-end-line="45" selection-end-column="54" />
+              <caret line="119" column="36" selection-start-line="119" selection-start-column="22" selection-end-line="119" selection-end-column="36" />
               <folding>
-                <element signature="e#4634#4635#0" expanded="true" />
-                <element signature="e#4661#4662#0" expanded="true" />
-                <element signature="e#6278#6279#0" expanded="true" />
-                <element signature="e#6312#6313#0" expanded="true" />
+                <element signature="e#67801#67802#0" expanded="true" />
+                <element signature="e#67848#67849#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dtmg.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/dtmg.css">
+      <file leaf-file-name="Row.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/org/apache/odftoolkit/simple-odf/0.8.1-incubating/simple-odf-0.8.1-incubating-sources.jar!/org/odftoolkit/simple/table/Row.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-19.666666">
-              <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="66" column="13" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="StructuralAnalysisResultEmitter.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/structure/StructuralAnalysisResultEmitter.java">
+      <file leaf-file-name="ImmutableList.java" pinned="false" current-in-tab="false">
+        <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/collect/ImmutableList.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="70" column="43" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
-              <folding />
+              <caret line="92" column="22" selection-start-line="92" selection-start-column="22" selection-end-line="92" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#21804#0" expanded="false" />
+                <element signature="imports" expanded="false" />
+                <element signature="e#3044#3045#0" expanded="false" />
+                <element signature="e#3085#3086#0" expanded="false" />
+                <element signature="e#3478#3479#0" expanded="false" />
+                <element signature="e#3533#3534#0" expanded="false" />
+                <element signature="e#3734#3735#0" expanded="false" />
+                <element signature="e#3768#3769#0" expanded="false" />
+                <element signature="e#3975#3976#0" expanded="false" />
+                <element signature="e#4013#4014#0" expanded="false" />
+                <element signature="e#4226#4227#0" expanded="false" />
+                <element signature="e#4268#4269#0" expanded="false" />
+                <element signature="e#4487#4488#0" expanded="false" />
+                <element signature="e#4533#4534#0" expanded="false" />
+                <element signature="e#10739#10740#0" expanded="false" />
+                <element signature="e#10798#10799#0" expanded="false" />
+                <element signature="e#11641#11642#0" expanded="false" />
+                <element signature="e#11672#11673#0" expanded="false" />
+                <element signature="e#11737#11738#0" expanded="false" />
+                <element signature="e#11769#11770#0" expanded="false" />
+                <element signature="e#11957#11958#0" expanded="false" />
+                <element signature="e#12011#12012#0" expanded="false" />
+                <element signature="e#12083#12084#0" expanded="false" />
+                <element signature="e#12155#12156#0" expanded="false" />
+                <element signature="e#12362#12363#0" expanded="false" />
+                <element signature="e#12399#12400#0" expanded="false" />
+                <element signature="e#13294#13295#0" expanded="false" />
+                <element signature="e#13354#13355#0" expanded="false" />
+                <element signature="e#13602#13603#0" expanded="false" />
+                <element signature="e#13629#13630#0" expanded="false" />
+                <element signature="e#14040#14041#0" expanded="false" />
+                <element signature="e#14065#14066#0" expanded="false" />
+                <element signature="e#14651#14652#0" expanded="false" />
+                <element signature="e#14702#14703#0" expanded="false" />
+                <element signature="e#14953#14954#0" expanded="false" />
+                <element signature="e#15004#15005#0" expanded="false" />
+                <element signature="e#15244#15245#0" expanded="false" />
+                <element signature="e#15295#15296#0" expanded="false" />
+                <element signature="e#15415#15416#0" expanded="false" />
+                <element signature="e#15436#15437#0" expanded="false" />
+                <element signature="e#16017#16018#0" expanded="false" />
+                <element signature="e#16067#16068#0" expanded="false" />
+                <element signature="e#16258#16259#0" expanded="false" />
+                <element signature="e#16302#16303#0" expanded="false" />
+                <element signature="e#16345#16346#0" expanded="false" />
+                <element signature="e#16386#16387#0" expanded="false" />
+                <element signature="e#16432#16433#0" expanded="false" />
+                <element signature="e#16467#16468#0" expanded="false" />
+                <element signature="e#16518#16519#0" expanded="false" />
+                <element signature="e#16550#16551#0" expanded="false" />
+                <element signature="e#16616#16617#0" expanded="false" />
+                <element signature="e#16665#16666#0" expanded="false" />
+                <element signature="e#17430#17431#0" expanded="false" />
+                <element signature="e#17469#17470#0" expanded="false" />
+                <element signature="e#17510#17511#0" expanded="false" />
+                <element signature="e#17558#17559#0" expanded="false" />
+                <element signature="e#17621#17622#0" expanded="false" />
+                <element signature="e#17665#17666#0" expanded="false" />
+                <element signature="e#18228#18229#0" expanded="false" />
+                <element signature="e#18266#18267#0" expanded="false" />
+                <element signature="e#18293#18294#0" expanded="false" />
+                <element signature="e#18330#18331#0" expanded="false" />
+                <element signature="e#18578#18579#0" expanded="false" />
+                <element signature="e#18624#18625#0" expanded="false" />
+                <element signature="e#18808#18809#0" expanded="false" />
+                <element signature="e#18841#18842#0" expanded="false" />
+                <element signature="e#19767#19768#0" expanded="false" />
+                <element signature="e#19811#19812#0" expanded="false" />
+                <element signature="e#19882#19883#0" expanded="false" />
+                <element signature="e#19911#19912#0" expanded="false" />
+                <element signature="e#21744#21745#0" expanded="false" />
+                <element signature="e#21796#21797#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -165,10 +209,10 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit4 Test Class" />
-        <option value="Enum" />
         <option value="Interface" />
-        <option value="Class" />
+        <option value="Enum" />
         <option value="TestNG Test Class" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -184,56 +228,56 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/util/FieldFunctionsTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/output/ColumnGroups.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Child22.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Child10.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Child20.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Main.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Root.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/first/SampleInnerBuilder.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Child10.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Root.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/second/Model.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Root300.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Main.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/Array2D.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/Nestable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/Callback.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/AbstractNestable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Dimension2DBuilder.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Callback.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/AbstractNestable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/output/ColumnSeparator.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/output/ColumnGroup.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/output/ColumnFormat.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/model/Declaration.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/EmitterConsumer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MoreCollectors.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/output/FieldFunctions.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/output/TableFunctions.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/util/output/TableFunctionsTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/util/output/RowFunctionsTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Formatable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Formattable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/AsciiRow.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/Formatter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/output/RowFunctions.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Nestable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/StringArray2DBuilder.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Callback.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Child310.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/AbstractNestable.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Dimension.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/chained/third/Child320.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/Array2D.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/common/Array2DTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/analysis/completeness/detailed/ActionsTest.java" />
+        <option value="$USER_HOME$/.IntelliJIdea15/system/temp-testng-customsuite.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/model/DecisionTable.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Emitter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/SeparatorRow.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/AsciiTable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/output/TableFormat.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/MemoryCharSink.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/ConsoleCharSink.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/EmitterConsumer.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/io/zip/FileCharSink.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/print/EmitterTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Formatter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/Emitter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/PersistenceManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/zip/ConsoleURLStreamHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/ConsoleURLStreamHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/ConsoleURLStreamHandlerFactory.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/io/ConsoleURLStreamHandlerFactoryTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/DtURLStreamHandlerFactory.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/DtURLStreamHandler.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/ConsoleURLConnection.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/io/DtURLStreamHandlerFactoryTest.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/DtURLConnection.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/ConsoleCharSink.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/DefaultPersistenceManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/UpdateDefinitionTable2.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/model/DecisionTable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/scopes/DtView.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/UpdateDefinitionTable.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/DtView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/DtFunctions.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/DeclFieldCell.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/DeclFieldTableCell.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/dtmg.css" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/odf/ODFExport.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/StringFunctions.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/util/StringFunctionsTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/Dump.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/export/ascii/ExportFunctions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/export/ExportFunctions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/export/ascii/Emitter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/export/AsciiExportFunctions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/Lists2.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MoreCollectors.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/HLists.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/export/ascii/EmitterTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFTableEmitter.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFExportTest.java" />
       </list>
     </option>
@@ -305,9 +349,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="23" />
+    <option name="x" value="-1907" />
+    <option name="y" value="21" />
     <option name="width" value="1920" />
-    <option name="height" value="977" />
+    <option name="height" value="1038" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -329,9 +374,6 @@
             <id>Code style issuesJava</id>
           </State>
           <State>
-            <id>General</id>
-          </State>
-          <State>
             <id>Google Web Toolkit issues</id>
           </State>
           <State>
@@ -347,9 +389,6 @@
             <id>Javadoc issuesJava</id>
           </State>
           <State>
-            <id>Kotlin</id>
-          </State>
-          <State>
             <id>Memory issuesJava</id>
           </State>
           <State>
@@ -362,9 +401,6 @@
             <id>Performance issuesJava</id>
           </State>
           <State>
-            <id>Plugin DevKit</id>
-          </State>
-          <State>
             <id>Spring</id>
           </State>
           <State>
@@ -375,12 +411,6 @@
           </State>
           <State>
             <id>Threading issuesJava</id>
-          </State>
-          <State>
-            <id>XPath</id>
-          </State>
-          <State>
-            <id>XSLT</id>
           </State>
         </expanded-state>
         <selected-state>
@@ -416,6 +446,106 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Tests">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="dt">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src/test/java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="de/adesso/tools">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="util/func">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="dt">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src/test/java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="de/adesso/tools">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="common">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scratches" />
       <pane id="PackagesPane">
         <subPane>
@@ -613,184 +743,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Maven: org.apache.odftoolkit:taglets:0.8.10-incubating" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="taglets-0.8.10-incubating.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="taglet" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Maven: org.apache.odftoolkit:taglets:0.8.10-incubating" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="taglets-0.8.10-incubating.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Maven: org.apache.odftoolkit:odfdom-java:0.8.10-incubating" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="odfdom-java-0.8.10-incubating.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Maven: org.apache.odftoolkit:odfdom-java:0.8.10-incubating" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="odfdom-java-0.8.10-incubating.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="odfdom" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="External Libraries" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ExternalLibrariesNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Maven: org.apache.odftoolkit:odfdom-java:0.8.10-incubating" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.NamedLibraryElementNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="odfdom-java-0.8.10-incubating.jar" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="odfdom" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="incubator" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope">
-        <subPane subId="Tests">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="dt">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src/test/java">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="de/adesso/tools">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="util/func">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="dt">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src/test/java">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="de/adesso/tools">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="common">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -800,29 +752,29 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="/Applications/SceneBuilder.app" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions" />
-    <property name="SearchEverywhereHistoryKey" value="StructuralAnal&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/dtmg/analysis/structure/StructuralAnalysisResultEmitter.java&#10;MainView&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java&#10;TextCell&#9;FILE&#9;jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/ext/jfxrt.jar!/javafx/scene/control/cell/TextFieldTableCell.class&#10;Decision&#9;PSI&#9;JAVA://de.adesso.dtmg.model.DecisionTable&#10;BiConsumer&#9;FILE&#9;jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/util/function/BiConsumer.java&#10;File&#9;FILE&#9;jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/rt.jar!/sun/net/www/protocol/file/FileURLConnection.class&#10;Main&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java&#10;MAIN&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java&#10;UrlStrea&#9;FILE&#9;jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/net/URLStreamHandler.java&#10;FileUrl&#9;FILE&#9;jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/rt.jar!/com/sun/org/apache/xml/internal/resolver/helpers/FileURL.class&#10;Fileurl&#9;PSI&#9;JAVA://com.sun.tools.internal.ws.wscompile.Options#fileToURL&#10;FileUrlC&#9;PSI&#9;JAVA://java.net.JarURLConnection#jarFileURLConnection&#10;FileURL&#9;PSI&#9;JAVA://sun.net.www.protocol.file.FileURLConnection&#10;FileURLConnect&#9;FILE&#9;jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/rt.jar!/sun/net/www/protocol/file/FileURLConnection.class&#10;Reducer&#9;PSI&#9;JAVA://java.util.concurrent.ConcurrentHashMap.MapReduceEntriesTask#reducer&#10;Emitter&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/tools/print/Emitter.java&#10;asByteSink&#9;PSI&#9;JAVA://com.google.common.io.Files#asByteSink&#10;Tuple&#9;PSI&#9;JAVA://de.adesso.tools.util.tuple.Tuple&#10;ConditionDeclT&#9;PSI&#9;JAVA://de.adesso.tools.ui.condition.ConditionDeclTableViewModel&#10;doAddCo&#9;PSI&#9;JAVA://de.adesso.tools.ui.menu.MenuView#doAddConditionDecl&#10;addColumn&#9;PSI&#9;JAVA://de.adesso.tools.functions.MatrixFunctions#addColumn&#10;determineIndi&#9;PSI&#9;JAVA://de.adesso.tools.ui.main.MainView#determineIndices&#10;MatrixBuilder&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/tools/common/MatrixBuilder.java&#10;FXCollections&#9;PSI&#9;JAVA://javafx.collections.FXCollections&#10;MatrixBui&#9;PSI&#9;JAVA://de.adesso.tools.common.MatrixBuilder" />
+    <property name="SearchEverywhereHistoryKey" value="&#9;FILE&#9;file://C:/cygwin64/home/moehler/m2-projects/dt/src/main/java/de/adesso/tools/export/ascii/Emitter.java&#10;Emitter&#9;FILE&#9;file://C:/cygwin64/home/moehler/m2-projects/dt/src/main/java/de/adesso/tools/analysis/structure/StructuralAnalysisResultEmitter.java&#10;asByteSink&#9;PSI&#9;JAVA://com.google.common.io.Files#asByteSink&#10;Tuple&#9;PSI&#9;JAVA://de.adesso.tools.util.tuple.Tuple&#10;ConditionDeclT&#9;PSI&#9;JAVA://de.adesso.tools.ui.condition.ConditionDeclTableViewModel&#10;doAddCo&#9;PSI&#9;JAVA://de.adesso.tools.ui.menu.MenuView#doAddConditionDecl&#10;addColumn&#9;PSI&#9;JAVA://de.adesso.tools.functions.MatrixFunctions#addColumn&#10;determineIndi&#9;PSI&#9;JAVA://de.adesso.tools.ui.main.MainView#determineIndices&#10;MatrixBuilder&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/tools/common/MatrixBuilder.java&#10;FXCollections&#9;PSI&#9;JAVA://javafx.collections.FXCollections&#10;MatrixBui&#9;PSI&#9;JAVA://de.adesso.tools.common.MatrixBuilder" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="TestNG" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="263" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="258" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="263" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="259" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="268" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="263" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1054" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1050" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="263" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="258" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="263" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="259" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="268" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="263" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1054" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1050" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
@@ -833,11 +785,10 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
-      <recent name="de.adesso.dtmg.export.odf" />
-      <recent name="de.adesso.dtmg.io" />
-      <recent name="de.adesso.tools.util.output" />
       <recent name="de.adesso.tools.util" />
       <recent name="de.adesso.tools.common" />
+      <recent name="de.adesso.tools.analysis.completeness.detailed" />
+      <recent name="de.adesso.tools.functions" />
     </key>
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="de.adesso.tools.functions.ListFunctions" />
@@ -846,21 +797,20 @@
       <recent name="de.adesso.tools.util.matrix.Matrix" />
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
-      <recent name="de.adesso.dtmg.ui.main" />
-      <recent name="de.adesso.dtmg.functions" />
-      <recent name="de.adesso.dtmg.io" />
-      <recent name="de.adesso.tools.print" />
+      <recent name="de.adesso.tools.export" />
       <recent name="de.adesso.tools.analysis.structure" />
+      <recent name="de.adesso.tools.ui" />
+      <recent name="de.adesso.tools.functions" />
+      <recent name="de.adesso.tools" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="de.adesso.dtmg.ui" />
-      <recent name="de.adesso.dtmg.io" />
       <recent name="de.adesso.tools.io.zip" />
       <recent name="de.adesso.tools.io" />
       <recent name="de.adesso.tools.common" />
+      <recent name="de.adesso.tools.functions.chained.third" />
+      <recent name="de.adesso.tools.functions.chained.second" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io" />
       <recent name="C:\cygwin64\home\moehler\m2-projects\dt\src\test\java\de\adesso\tools\functions\chained\third" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -871,151 +821,11 @@
       <recent name="de.adesso.tools.analysis.structure" />
     </key>
   </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.idea/workspace.xml</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/Dump.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MoreCollectors.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/util/output/RowFunctions.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/util/output/TableFunctions.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/util/output/RowFunctionsTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/util/output/TableFunctionsTest.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/export/AsciiExportFunctions.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/export/ascii/AsciiRow.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/export/ascii/AsciiTable.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/export/ascii/Emitter.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/export/ascii/Formattable.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/export/ascii/Formatter.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/export/ascii/SeparatorRow.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/util/HLists.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/export/ascii/EmitterTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/export/ascii/Printer.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/export/ascii/TextPrinter.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/export/ascii/TextPrinterTest.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/print/AsciiRow.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/print/AsciiTable.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Emitter.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Formattable.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/print/Formatter.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/print/PrintFunctions.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/main/java/de/adesso/tools/print/SeparatorRow.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/print/EmitterTest.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/print/Printer.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TextPrinter.java</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/test/java/de/adesso/tools/print/TextPrinterTest.java</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
-  </component>
   <component name="RunManager" selected="TestNG.ODFExportTest.testDoit">
-    <configuration default="false" name="DtURLStreamHandlerFactoryTest.testCreateURLStreamHandler" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="EmitterTest.testApply" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="de.adesso.dtmg.io.*" />
+          <option name="PATTERN" value="de.adesso.tools.export.ascii.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -1023,9 +833,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="de.adesso.dtmg.io" />
-      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.io.DtURLStreamHandlerFactoryTest" />
-      <option name="METHOD_NAME" value="testCreateURLStreamHandler" />
+      <option name="PACKAGE_NAME" value="de.adesso.tools.export.ascii" />
+      <option name="MAIN_CLASS_NAME" value="de.adesso.tools.export.ascii.EmitterTest" />
+      <option name="METHOD_NAME" value="testApply" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -1045,10 +855,10 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="false" name="DtURLStreamHandlerFactoryTest" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="EmitterTest.testApply (1)" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="de.adesso.dtmg.io.*" />
+          <option name="PATTERN" value="de.adesso.tools.export.ascii.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -1056,42 +866,9 @@
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="de.adesso.dtmg.io" />
-      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.io.DtURLStreamHandlerFactoryTest" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="false" name="DtURLStreamHandlerFactoryTest.test2" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="de.adesso.dtmg.io.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="dt" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="de.adesso.dtmg.io" />
-      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.io.DtURLStreamHandlerFactoryTest" />
-      <option name="METHOD_NAME" value="test2" />
+      <option name="PACKAGE_NAME" value="de.adesso.tools.export.ascii" />
+      <option name="MAIN_CLASS_NAME" value="de.adesso.tools.export.ascii.EmitterTest" />
+      <option name="METHOD_NAME" value="testApply" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -1114,11 +891,11 @@
     <configuration default="false" name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="de.adesso.dtmg.*" />
+          <option name="PATTERN" value="de.adesso.tools.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.App" />
+      <option name="MAIN_CLASS_NAME" value="de.adesso.tools.App" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -1164,10 +941,102 @@
       <listeners />
       <method />
     </configuration>
+    <configuration default="false" name="ODFExportTest.testFonts" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="de.adesso.dtmg.export.odf.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="dt" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="de.adesso.dtmg.export.odf" />
+      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.export.odf.ODFExportTest" />
+      <option name="METHOD_NAME" value="testFonts" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -1250,6 +1119,25 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
@@ -1418,28 +1306,6 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
-      <MavenSettings>
-        <option name="myGeneralSettings" />
-        <option name="myRunnerSettings" />
-        <option name="myRunnerParameters">
-          <MavenRunnerParameters>
-            <option name="profiles">
-              <set />
-            </option>
-            <option name="goals">
-              <list />
-            </option>
-            <option name="profilesMap">
-              <map />
-            </option>
-            <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="" />
-          </MavenRunnerParameters>
-        </option>
-      </MavenSettings>
-      <method />
-    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -1531,25 +1397,25 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="TestNG.DtURLStreamHandlerFactoryTest.testCreateURLStreamHandler" />
-      <item index="1" class="java.lang.String" itemvalue="TestNG.DtURLStreamHandlerFactoryTest" />
-      <item index="2" class="java.lang.String" itemvalue="TestNG.DtURLStreamHandlerFactoryTest.test2" />
-      <item index="3" class="java.lang.String" itemvalue="Application.App" />
-      <item index="4" class="java.lang.String" itemvalue="TestNG.ODFExportTest.testDoit" />
+      <item index="0" class="java.lang.String" itemvalue="TestNG.EmitterTest.testApply" />
+      <item index="1" class="java.lang.String" itemvalue="TestNG.EmitterTest.testApply (1)" />
+      <item index="2" class="java.lang.String" itemvalue="Application.App" />
+      <item index="3" class="java.lang.String" itemvalue="TestNG.ODFExportTest.testDoit" />
+      <item index="4" class="java.lang.String" itemvalue="TestNG.ODFExportTest.testFonts" />
     </list>
     <recent_temporary>
       <list size="5">
         <item index="0" class="java.lang.String" itemvalue="TestNG.ODFExportTest.testDoit" />
-        <item index="1" class="java.lang.String" itemvalue="Application.App" />
-        <item index="2" class="java.lang.String" itemvalue="TestNG.DtURLStreamHandlerFactoryTest.testCreateURLStreamHandler" />
-        <item index="3" class="java.lang.String" itemvalue="TestNG.DtURLStreamHandlerFactoryTest.test2" />
-        <item index="4" class="java.lang.String" itemvalue="TestNG.DtURLStreamHandlerFactoryTest" />
+        <item index="1" class="java.lang.String" itemvalue="TestNG.ODFExportTest.testFonts" />
+        <item index="2" class="java.lang.String" itemvalue="Application.App" />
+        <item index="3" class="java.lang.String" itemvalue="TestNG.EmitterTest.testApply" />
+        <item index="4" class="java.lang.String" itemvalue="TestNG.EmitterTest.testApply (1)" />
       </list>
     </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="StructureViewFactory">
-    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR" />
+    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR,SHOW_PROPERTIES,SHOW_NON_PUBLIC" />
   </component>
   <component name="SvnConfiguration">
     <configuration>$USER_HOME$/.subversion</configuration>
@@ -1626,12 +1492,15 @@
       <workItem from="1463637900017" duration="17477000" />
       <workItem from="1463983649072" duration="15388000" />
       <workItem from="1464066609666" duration="20496000" />
-      <workItem from="1464155419069" duration="19341000" />
-      <workItem from="1464249112695" duration="28547000" />
-      <workItem from="1464327683515" duration="65043000" />
-      <workItem from="1464561168888" duration="6000" />
-      <workItem from="1464623908940" duration="51000" />
-      <workItem from="1464968679897" duration="41541000" />
+      <workItem from="1464155419069" duration="19404000" />
+      <workItem from="1464605167619" duration="169000" />
+      <workItem from="1464670639259" duration="27000" />
+      <workItem from="1464670679640" duration="19264000" />
+      <workItem from="1464756478222" duration="21380000" />
+      <workItem from="1464843012296" duration="5745000" />
+      <workItem from="1464930041600" duration="96000" />
+      <workItem from="1465193891566" duration="1130000" />
+      <workItem from="1465274935582" duration="8355000" />
     </task>
     <task id="LOCAL-00001" summary="Refactoring of Matrix functions">
       <created>1455475453269</created>
@@ -1867,79 +1736,55 @@
       <option name="project" value="LOCAL" />
       <updated>1464108915352</updated>
     </task>
-    <task id="LOCAL-00040" summary="Tableformatting except Column grouping finished">
-      <created>1464303753932</created>
+    <task id="LOCAL-00040" summary=" ASCII Report reworking is running!!">
+      <created>1464191832734</created>
       <option name="number" value="00040" />
       <option name="project" value="LOCAL" />
-      <updated>1464303753932</updated>
+      <updated>1464191832734</updated>
     </task>
-    <task id="LOCAL-00041" summary="DT can now be converted to text representation.">
-      <created>1464559958315</created>
+    <task id="LOCAL-00041" summary="STructural Analysreport started (See Emitter)">
+      <created>1464930126037</created>
       <option name="number" value="00041" />
       <option name="project" value="LOCAL" />
-      <updated>1464559958315</updated>
+      <updated>1464930126037</updated>
     </task>
-    <task id="LOCAL-00042" summary="DT can now be converted to text representation.">
-      <created>1464623937323</created>
-      <option name="number" value="00042" />
-      <option name="project" value="LOCAL" />
-      <updated>1464623937323</updated>
-    </task>
-    <task id="LOCAL-00043" summary="DT can now be converted to text representation.">
-      <created>1465135884041</created>
-      <option name="number" value="00043" />
-      <option name="project" value="LOCAL" />
-      <updated>1465135884041</updated>
-    </task>
-    <task id="LOCAL-00044" summary="PAckagestructure cleaned, DeclTableCell Editor changed, Some Excpetionhandling">
-      <created>1465141954496</created>
-      <option name="number" value="00044" />
-      <option name="project" value="LOCAL" />
-      <updated>1465141954496</updated>
-    </task>
-    <task id="LOCAL-00045" summary="ODF Export">
-      <created>1465145637406</created>
-      <option name="number" value="00045" />
-      <option name="project" value="LOCAL" />
-      <updated>1465145637406</updated>
-    </task>
-    <option name="localTasksCounter" value="46" />
+    <option name="localTasksCounter" value="42" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="DtURLStreamHandlerFactoryTest_test2_(2) - 2016.06.04 at 16h 23m 17s.xml">
-      <configuration name="DtURLStreamHandlerFactoryTest.test2 (2)" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="DtURLStreamHandlerFactoryTest_testCreateURLStreamHandler - 2016.06.04 at 16h 23m 55s.xml">
-      <configuration name="DtURLStreamHandlerFactoryTest.testCreateURLStreamHandler" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="DtURLStreamHandlerFactoryTest_testCreateURLStreamHandler - 2016.06.04 at 18h 06m 01s.xml">
-      <configuration name="DtURLStreamHandlerFactoryTest.testCreateURLStreamHandler" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="DtURLStreamHandlerFactoryTest_testCreateURLStreamHandler - 2016.06.04 at 18h 06m 19s.xml">
-      <configuration name="DtURLStreamHandlerFactoryTest.testCreateURLStreamHandler" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="DtURLStreamHandlerFactoryTest_testCreateURLStreamHandler - 2016.06.04 at 18h 07m 19s.xml">
-      <configuration name="DtURLStreamHandlerFactoryTest.testCreateURLStreamHandler" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="DtURLStreamHandlerFactoryTest_testCreateURLStreamHandler - 2016.06.04 at 18h 10m 50s.xml">
-      <configuration name="DtURLStreamHandlerFactoryTest.testCreateURLStreamHandler" configurationId="TestNG" />
-    </history-entry>
-    <history-entry file="ODFExportTest_testDoit - 2016.06.05 at 18h 32m 20s.xml">
+    <history-entry file="ODFExportTest_testDoit - 2016.06.07 at 08h 39m 03s.xml">
       <configuration name="ODFExportTest.testDoit" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="ODFExportTest_testDoit - 2016.06.05 at 18h 32m 43s.xml">
+    <history-entry file="ODFExportTest_testDoit - 2016.06.07 at 08h 39m 57s.xml">
       <configuration name="ODFExportTest.testDoit" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="ODFExportTest_testDoit - 2016.06.05 at 23h 02m 12s.xml">
+    <history-entry file="ODFExportTest_testDoit - 2016.06.07 at 08h 40m 29s.xml">
       <configuration name="ODFExportTest.testDoit" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="ODFExportTest_testDoit - 2016.06.05 at 23h 03m 04s.xml">
+    <history-entry file="ODFExportTest_testDoit - 2016.06.07 at 08h 57m 22s.xml">
       <configuration name="ODFExportTest.testDoit" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="ODFExportTest_testDoit - 2016.06.07 at 08h 57m 48s.xml">
+      <configuration name="ODFExportTest.testDoit" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="ODFExportTest_testFonts - 2016.06.07 at 08h 47m 45s.xml">
+      <configuration name="ODFExportTest.testFonts" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="ODFExportTest_testFonts - 2016.06.07 at 08h 49m 59s.xml">
+      <configuration name="ODFExportTest.testFonts" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="ODFExportTest_testFonts - 2016.06.07 at 08h 51m 20s.xml">
+      <configuration name="ODFExportTest.testFonts" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="ODFExportTest_testFonts - 2016.06.07 at 08h 52m 21s.xml">
+      <configuration name="ODFExportTest.testFonts" configurationId="TestNG" />
+    </history-entry>
+    <history-entry file="ODFExportTest_testFonts - 2016.06.07 at 08h 54m 16s.xml">
+      <configuration name="ODFExportTest.testFonts" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="743211000" />
+    <option name="totallyTimeSpent" value="664252000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -1951,68 +1796,38 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="23" width="1920" height="977" extended-state="6" />
+    <frame x="-1907" y="21" width="1920" height="1038" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284091" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32090396" sideWeight="0.49573562" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55011135" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.240625" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3242938" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3740113" sideWeight="0.49413645" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24174654" sideWeight="0.48989898" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3242938" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31203407" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24193548" sideWeight="0.510101" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40338984" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-    </layout>
-    <layout-to-restore>
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55011135" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.240625" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3123656" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4034091" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284091" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3215909" sideWeight="0.49573562" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.325" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.4875" sideWeight="0.49413645" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24193548" sideWeight="0.48989898" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50795454" sideWeight="0.51021504" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24193548" sideWeight="0.510101" order="3" side_tool="true" content_ui="tabs" />
-    </layout-to-restore>
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.325" sideWeight="0.49569893" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3215909" sideWeight="0.49139786" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284091" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3123656" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.240625" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24731183" sideWeight="0.48989898" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.37954545" sideWeight="0.48978496" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.325" sideWeight="0.77903223" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -2026,6 +1841,8 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="Matrix Tests completed" />
+    <MESSAGE value="more tests written" />
     <MESSAGE value="column handling tests finished" />
     <MESSAGE value="start enhancing row handling tests" />
     <MESSAGE value="start implementation detailed completeness check and condition consolidation" />
@@ -2047,497 +1864,498 @@
     <MESSAGE value="ConsolidateRules and RulesConsolidator - consolidate them!!" />
     <MESSAGE value="Bugfix Action5 of RuleCompletenessCheck" />
     <MESSAGE value="Reworking the ASCII report!" />
-    <MESSAGE value="Tableformatting except Column grouping finished" />
-    <MESSAGE value="DT can now be converted to text representation." />
-    <MESSAGE value="PAckagestructure cleaned, DeclTableCell Editor changed, Some Excpetionhandling" />
-    <MESSAGE value="ODF Export" />
-    <option name="LAST_COMMIT_MESSAGE" value="ODF Export" />
+    <MESSAGE value=" ASCII Report reworking is running!!" />
+    <MESSAGE value="STructural Analysreport started (See Emitter)" />
+    <option name="LAST_COMMIT_MESSAGE" value="STructural Analysreport started (See Emitter)" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/print/SeparatorRow.java</url>
-          <line>85</line>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java</url>
+          <line>328</line>
           <properties />
-          <option name="timeStamp" value="65" />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuView.java</url>
+          <line>88</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuViewModel.java</url>
+          <line>116</line>
+          <properties />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java</url>
+          <line>189</line>
+          <properties />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java</url>
+          <line>233</line>
+          <properties />
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/print/SeparatorRow.java</url>
-          <line>58</line>
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java</url>
+          <line>177</line>
           <properties />
-          <option name="timeStamp" value="66" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/print/AsciiTable.java</url>
-          <line>78</line>
-          <properties>
-            <option name="lambda-ordinal" value="0" />
-          </properties>
-          <option name="timeStamp" value="67" />
+          <url>file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DtFunctionsTest.java</url>
+          <line>383</line>
+          <properties />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/net/URLConnection.java</url>
-          <line>912</line>
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java</url>
+          <line>311</line>
           <properties />
-          <option name="timeStamp" value="68" />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java</url>
+          <line>228</line>
+          <properties />
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java</url>
+          <line>460</line>
+          <properties />
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java</url>
+          <line>61</line>
+          <properties />
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/AbstractNestable.java</url>
+          <line>45</line>
+          <properties />
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java</url>
+          <line>148</line>
+          <properties />
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java</url>
+          <line>140</line>
+          <properties />
+          <option name="timeStamp" value="35" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="69" />
+      <option name="time" value="53" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="TestNG">
+        <watch expression="target.get()" language="JAVA" custom="" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/structure/DefaultAnalysisResultEmitter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4581749">
-          <caret line="42" column="61" selection-start-line="42" selection-start-column="61" selection-end-line="42" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/structure/AnalysisResultEmitter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.256654">
-          <caret line="33" column="24" selection-start-line="33" selection-start-column="24" selection-end-line="33" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/output/TableFormat.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/base/Strings.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="57" column="19" selection-start-line="57" selection-start-column="19" selection-end-line="57" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/AsciiExportFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/util/function/Function.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="69" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="69" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/Emitter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.8301888">
-          <caret line="27" column="5" selection-start-line="27" selection-start-column="5" selection-end-line="27" selection-end-column="5" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/io/CharSink.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="163" column="0" selection-start-line="163" selection-start-column="0" selection-end-line="163" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/nio/channels/FileChannel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.640351">
-          <caret line="154" column="22" selection-start-line="154" selection-start-column="22" selection-end-line="154" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/beans/Beans.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334">
-          <caret line="465" column="6" selection-start-line="465" selection-start-column="6" selection-end-line="465" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/javafx-src.zip!/com/sun/webkit/network/data/DataURLConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4122807">
-          <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/io/RandomAccessFile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="278" column="22" selection-start-line="278" selection-start-column="22" selection-end-line="278" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/testng/testng/6.9.10/testng-6.9.10-sources.jar!/org/testng/annotations/Test.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="141" column="0" selection-start-line="141" selection-start-column="0" selection-end-line="141" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/net/JarURLConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.43726236">
-          <caret line="117" column="25" selection-start-line="117" selection-start-column="25" selection-end-line="117" selection-end-column="25" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/lib/tools.jar!/com/sun/tools/internal/ws/wscompile/Options.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="23.518518">
-          <caret line="290" column="22" selection-start-line="290" selection-start-column="22" selection-end-line="290" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/net/URL.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="330" column="11" selection-start-line="330" selection-start-column="11" selection-end-line="330" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/rt.jar!/com/sun/org/apache/xml/internal/resolver/helpers/FileURL.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#475#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/net/URLStreamHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="51" column="32" selection-start-line="51" selection-start-column="22" selection-end-line="51" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/rt.jar!/sun/net/www/protocol/file/Handler.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="15.407408">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/rt.jar!/sun/net/www/protocol/ftp/Handler.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="4.4444447">
-          <caret line="14" column="13" selection-start-line="14" selection-start-column="13" selection-end-line="14" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/net/URLConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33269963">
-          <caret line="456" column="14" selection-start-line="456" selection-start-column="14" selection-end-line="456" selection-end-column="14" />
-          <folding>
-            <element signature="e#16382#16383#0" expanded="true" />
-            <element signature="e#16412#16413#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/rt.jar!/sun/net/www/protocol/ftp/FtpURLConnection.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.9218435">
-          <caret line="53" column="30" selection-start-line="53" selection-start-column="30" selection-end-line="53" selection-end-column="30" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/io/PersistenceManagerTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="55" column="32" selection-start-line="55" selection-start-column="32" selection-end-line="55" selection-end-column="32" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/io/DtEntityTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="78" column="15" selection-start-line="78" selection-start-column="15" selection-end-line="78" selection-end-column="15" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/rt.jar!/sun/net/www/URLConnection.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.6666665">
-          <caret line="22" column="11" selection-start-line="22" selection-start-column="11" selection-end-line="22" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/rt.jar!/sun/net/www/protocol/file/FileURLConnection.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.2222223">
-          <caret line="50" column="23" selection-start-line="50" selection-start-column="14" selection-end-line="50" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/ConsoleCharSink.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/rt.jar!/sun/net/www/ParseUtil.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="48.88889">
-          <caret line="21" column="13" selection-start-line="21" selection-start-column="13" selection-end-line="21" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/PersistenceManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="28" column="25" selection-start-line="28" selection-start-column="17" selection-end-line="28" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/DefaultPersistenceManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/detailed/Actions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="128" column="58" selection-start-line="128" selection-start-column="58" selection-end-line="128" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/Notifications.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/PossibleIndicatorsSupplier.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="17" selection-start-line="7" selection-start-column="17" selection-end-line="7" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/util/function/BiConsumer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="72" column="10" selection-start-line="67" selection-start-column="0" selection-end-line="72" selection-end-column="10" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/model/DecisionTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="48" selection-start-line="93" selection-start-column="48" selection-end-line="93" selection-end-column="48" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/DtFunctionsTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="387" column="46" selection-start-line="387" selection-start-column="46" selection-end-line="387" selection-end-column="46" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/DtView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2130#2131#0" expanded="true" />
-            <element signature="e#2178#2179#0" expanded="true" />
-            <element signature="e#3305#3306#0" expanded="true" />
-            <element signature="e#3366#3367#0" expanded="true" />
-            <element signature="e#3539#3540#0" expanded="true" />
-            <element signature="e#3597#3598#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/UpdateDefinitionTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="13" selection-start-line="32" selection-start-column="13" selection-end-line="32" selection-end-column="13" />
-          <folding>
-            <element signature="e#1347#1348#0" expanded="true" />
-            <element signature="e#1381#1382#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/DtFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="456" column="61" selection-start-line="456" selection-start-column="61" selection-end-line="456" selection-end-column="61" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/DeclarationsTableCell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="117" column="0" selection-start-line="113" selection-start-column="0" selection-end-line="117" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/ext/jfxrt.jar!/javafx/scene/control/cell/TextFieldTableCell.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.0">
-          <caret line="19" column="31" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#2580#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/controlsfx/controlsfx/8.40.10/controlsfx-8.40.10-sources.jar!/impl/org/controlsfx/spreadsheet/CellView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2851711">
-          <caret line="71" column="13" selection-start-line="71" selection-start-column="13" selection-end-line="71" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/javafx-src.zip!/javafx/scene/control/cell/TextFieldTableCell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="50" selection-start-line="45" selection-start-column="45" selection-end-line="45" selection-end-column="54" />
-          <folding>
-            <element signature="e#4634#4635#0" expanded="true" />
-            <element signature="e#4661#4662#0" expanded="true" />
-            <element signature="e#6278#6279#0" expanded="true" />
-            <element signature="e#6312#6313#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/dtmg.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-19.666666">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/structure/StructuralAnalysisResultEmitter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="70" column="43" selection-start-line="70" selection-start-column="43" selection-end-line="70" selection-end-column="43" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/exception/ExceptionHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="36" column="16" selection-start-line="36" selection-start-column="16" selection-end-line="36" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="93" column="46" selection-start-line="92" selection-start-column="0" selection-end-line="93" selection-end-column="46" />
-          <folding>
-            <element signature="e#3721#3722#0" expanded="true" />
-            <element signature="e#3744#3745#0" expanded="true" />
-            <element signature="e#3837#3838#0" expanded="true" />
-            <element signature="e#3888#3889#0" expanded="true" />
-            <element signature="e#3978#3979#0" expanded="true" />
-            <element signature="e#4028#4029#0" expanded="true" />
-            <element signature="e#4274#4275#0" expanded="true" />
-            <element signature="e#4327#4328#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="311" column="63" selection-start-line="311" selection-start-column="63" selection-end-line="311" selection-end-column="63" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/odf/ODFExport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="3" selection-start-line="23" selection-start-column="3" selection-end-line="23" selection-end-column="3" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/odftoolkit/odfdom-java/0.8.10-incubating/odfdom-java-0.8.10-incubating-sources.jar!/org/odftoolkit/odfdom/doc/OdfTextDocument.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="13" selection-start-line="38" selection-start-column="13" selection-end-line="38" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-16.25">
-          <caret line="109" column="0" selection-start-line="109" selection-start-column="0" selection-end-line="109" selection-end-column="0" />
+          <caret line="178" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFExportTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.4011407">
-          <caret line="49" column="0" selection-start-line="49" selection-start-column="0" selection-end-line="49" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/collect/ImmutableList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="92" column="22" selection-start-line="92" selection-start-column="22" selection-end-line="92" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#21804#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3044#3045#0" expanded="false" />
+            <element signature="e#3085#3086#0" expanded="false" />
+            <element signature="e#3478#3479#0" expanded="false" />
+            <element signature="e#3533#3534#0" expanded="false" />
+            <element signature="e#3734#3735#0" expanded="false" />
+            <element signature="e#3768#3769#0" expanded="false" />
+            <element signature="e#3975#3976#0" expanded="false" />
+            <element signature="e#4013#4014#0" expanded="false" />
+            <element signature="e#4226#4227#0" expanded="false" />
+            <element signature="e#4268#4269#0" expanded="false" />
+            <element signature="e#4487#4488#0" expanded="false" />
+            <element signature="e#4533#4534#0" expanded="false" />
+            <element signature="e#10739#10740#0" expanded="false" />
+            <element signature="e#10798#10799#0" expanded="false" />
+            <element signature="e#11641#11642#0" expanded="false" />
+            <element signature="e#11672#11673#0" expanded="false" />
+            <element signature="e#11737#11738#0" expanded="false" />
+            <element signature="e#11769#11770#0" expanded="false" />
+            <element signature="e#11957#11958#0" expanded="false" />
+            <element signature="e#12011#12012#0" expanded="false" />
+            <element signature="e#12083#12084#0" expanded="false" />
+            <element signature="e#12155#12156#0" expanded="false" />
+            <element signature="e#12362#12363#0" expanded="false" />
+            <element signature="e#12399#12400#0" expanded="false" />
+            <element signature="e#13294#13295#0" expanded="false" />
+            <element signature="e#13354#13355#0" expanded="false" />
+            <element signature="e#13602#13603#0" expanded="false" />
+            <element signature="e#13629#13630#0" expanded="false" />
+            <element signature="e#14040#14041#0" expanded="false" />
+            <element signature="e#14065#14066#0" expanded="false" />
+            <element signature="e#14651#14652#0" expanded="false" />
+            <element signature="e#14702#14703#0" expanded="false" />
+            <element signature="e#14953#14954#0" expanded="false" />
+            <element signature="e#15004#15005#0" expanded="false" />
+            <element signature="e#15244#15245#0" expanded="false" />
+            <element signature="e#15295#15296#0" expanded="false" />
+            <element signature="e#15415#15416#0" expanded="false" />
+            <element signature="e#15436#15437#0" expanded="false" />
+            <element signature="e#16017#16018#0" expanded="false" />
+            <element signature="e#16067#16068#0" expanded="false" />
+            <element signature="e#16258#16259#0" expanded="false" />
+            <element signature="e#16302#16303#0" expanded="false" />
+            <element signature="e#16345#16346#0" expanded="false" />
+            <element signature="e#16386#16387#0" expanded="false" />
+            <element signature="e#16432#16433#0" expanded="false" />
+            <element signature="e#16467#16468#0" expanded="false" />
+            <element signature="e#16518#16519#0" expanded="false" />
+            <element signature="e#16550#16551#0" expanded="false" />
+            <element signature="e#16616#16617#0" expanded="false" />
+            <element signature="e#16665#16666#0" expanded="false" />
+            <element signature="e#17430#17431#0" expanded="false" />
+            <element signature="e#17469#17470#0" expanded="false" />
+            <element signature="e#17510#17511#0" expanded="false" />
+            <element signature="e#17558#17559#0" expanded="false" />
+            <element signature="e#17621#17622#0" expanded="false" />
+            <element signature="e#17665#17666#0" expanded="false" />
+            <element signature="e#18228#18229#0" expanded="false" />
+            <element signature="e#18266#18267#0" expanded="false" />
+            <element signature="e#18293#18294#0" expanded="false" />
+            <element signature="e#18330#18331#0" expanded="false" />
+            <element signature="e#18578#18579#0" expanded="false" />
+            <element signature="e#18624#18625#0" expanded="false" />
+            <element signature="e#18808#18809#0" expanded="false" />
+            <element signature="e#18841#18842#0" expanded="false" />
+            <element signature="e#19767#19768#0" expanded="false" />
+            <element signature="e#19811#19812#0" expanded="false" />
+            <element signature="e#19882#19883#0" expanded="false" />
+            <element signature="e#19911#19912#0" expanded="false" />
+            <element signature="e#21744#21745#0" expanded="false" />
+            <element signature="e#21796#21797#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/util/function/Predicate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33275262">
+          <caret line="48" column="12" selection-start-line="48" selection-start-column="12" selection-end-line="48" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/.IntelliJIdea15/system/temp-testng-customsuite.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/util/Optional.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="157" column="0" selection-start-line="157" selection-start-column="0" selection-end-line="157" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/io/OutputSupplier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="17" selection-start-line="33" selection-start-column="17" selection-end-line="33" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/io/CharSink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="48" column="24" selection-start-line="48" selection-start-column="22" selection-end-line="48" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/io/ByteSink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="149" column="0" selection-start-line="139" selection-start-column="3" selection-end-line="149" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/io/Files.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="183" column="21" selection-start-line="183" selection-start-column="21" selection-end-line="183" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/nio/file/FileStore.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="45" column="27" selection-start-line="45" selection-start-column="27" selection-end-line="45" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/jre/lib/rt.jar!/sun/nio/fs/WindowsFileStore.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="6" selection-start-line="24" selection-start-column="6" selection-end-line="24" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/nio/file/Files.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="50.50113">
+          <caret line="1459" column="28" selection-start-line="1459" selection-start-column="28" selection-end-line="1459" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v1/V1_CharactersBoxDrawing.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="24" column="12" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v1/V1_AsciiTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="38" column="19" selection-start-line="38" selection-start-column="19" selection-end-line="38" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/v2/render/RenderUtilities.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="61" selection-start-line="64" selection-start-column="61" selection-end-line="64" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/util/ListIterator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24113475">
+          <caret line="171" column="18" selection-start-line="171" selection-start-column="18" selection-end-line="171" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/testng/testng/6.9.10/testng-6.9.10-sources.jar!/org/testng/internal/Invoker.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.19366197">
+          <caret line="656" column="0" selection-start-line="656" selection-start-column="0" selection-end-line="656" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/lang/StringBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="398" column="25" selection-start-line="398" selection-start-column="25" selection-end-line="398" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/de/vandermeer/asciitable-j7/1.0.0/asciitable-j7-1.0.0-sources.jar!/de/vandermeer/asciitable/commons/ArrayTransformations.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="196" column="24" selection-start-line="196" selection-start-column="24" selection-end-line="196" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/base/Splitter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.030035336">
+          <caret line="204" column="39" selection-start-line="204" selection-start-column="34" selection-end-line="204" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/util/function/BiFunction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="43" column="17" selection-start-line="43" selection-start-column="17" selection-end-line="43" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/collect/ImmutableList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="92" column="22" selection-start-line="92" selection-start-column="22" selection-end-line="92" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#21804#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+            <element signature="e#3044#3045#0" expanded="false" />
+            <element signature="e#3085#3086#0" expanded="false" />
+            <element signature="e#3478#3479#0" expanded="false" />
+            <element signature="e#3533#3534#0" expanded="false" />
+            <element signature="e#3734#3735#0" expanded="false" />
+            <element signature="e#3768#3769#0" expanded="false" />
+            <element signature="e#3975#3976#0" expanded="false" />
+            <element signature="e#4013#4014#0" expanded="false" />
+            <element signature="e#4226#4227#0" expanded="false" />
+            <element signature="e#4268#4269#0" expanded="false" />
+            <element signature="e#4487#4488#0" expanded="false" />
+            <element signature="e#4533#4534#0" expanded="false" />
+            <element signature="e#10739#10740#0" expanded="false" />
+            <element signature="e#10798#10799#0" expanded="false" />
+            <element signature="e#11641#11642#0" expanded="false" />
+            <element signature="e#11672#11673#0" expanded="false" />
+            <element signature="e#11737#11738#0" expanded="false" />
+            <element signature="e#11769#11770#0" expanded="false" />
+            <element signature="e#11957#11958#0" expanded="false" />
+            <element signature="e#12011#12012#0" expanded="false" />
+            <element signature="e#12083#12084#0" expanded="false" />
+            <element signature="e#12155#12156#0" expanded="false" />
+            <element signature="e#12362#12363#0" expanded="false" />
+            <element signature="e#12399#12400#0" expanded="false" />
+            <element signature="e#13294#13295#0" expanded="false" />
+            <element signature="e#13354#13355#0" expanded="false" />
+            <element signature="e#13602#13603#0" expanded="false" />
+            <element signature="e#13629#13630#0" expanded="false" />
+            <element signature="e#14040#14041#0" expanded="false" />
+            <element signature="e#14065#14066#0" expanded="false" />
+            <element signature="e#14651#14652#0" expanded="false" />
+            <element signature="e#14702#14703#0" expanded="false" />
+            <element signature="e#14953#14954#0" expanded="false" />
+            <element signature="e#15004#15005#0" expanded="false" />
+            <element signature="e#15244#15245#0" expanded="false" />
+            <element signature="e#15295#15296#0" expanded="false" />
+            <element signature="e#15415#15416#0" expanded="false" />
+            <element signature="e#15436#15437#0" expanded="false" />
+            <element signature="e#16017#16018#0" expanded="false" />
+            <element signature="e#16067#16068#0" expanded="false" />
+            <element signature="e#16258#16259#0" expanded="false" />
+            <element signature="e#16302#16303#0" expanded="false" />
+            <element signature="e#16345#16346#0" expanded="false" />
+            <element signature="e#16386#16387#0" expanded="false" />
+            <element signature="e#16432#16433#0" expanded="false" />
+            <element signature="e#16467#16468#0" expanded="false" />
+            <element signature="e#16518#16519#0" expanded="false" />
+            <element signature="e#16550#16551#0" expanded="false" />
+            <element signature="e#16616#16617#0" expanded="false" />
+            <element signature="e#16665#16666#0" expanded="false" />
+            <element signature="e#17430#17431#0" expanded="false" />
+            <element signature="e#17469#17470#0" expanded="false" />
+            <element signature="e#17510#17511#0" expanded="false" />
+            <element signature="e#17558#17559#0" expanded="false" />
+            <element signature="e#17621#17622#0" expanded="false" />
+            <element signature="e#17665#17666#0" expanded="false" />
+            <element signature="e#18228#18229#0" expanded="false" />
+            <element signature="e#18266#18267#0" expanded="false" />
+            <element signature="e#18293#18294#0" expanded="false" />
+            <element signature="e#18330#18331#0" expanded="false" />
+            <element signature="e#18578#18579#0" expanded="false" />
+            <element signature="e#18624#18625#0" expanded="false" />
+            <element signature="e#18808#18809#0" expanded="false" />
+            <element signature="e#18841#18842#0" expanded="false" />
+            <element signature="e#19767#19768#0" expanded="false" />
+            <element signature="e#19811#19812#0" expanded="false" />
+            <element signature="e#19882#19883#0" expanded="false" />
+            <element signature="e#19911#19912#0" expanded="false" />
+            <element signature="e#21744#21745#0" expanded="false" />
+            <element signature="e#21796#21797#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/sample-dt.txt">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7577197">
+          <caret line="20" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/base/Strings.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="178" column="0" selection-start-line="153" selection-start-column="0" selection-end-line="178" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/odftoolkit/simple-odf/0.8.1-incubating/simple-odf-0.8.1-incubating-sources.jar!/org/odftoolkit/simple/table/Row.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="66" column="13" selection-start-line="66" selection-start-column="13" selection-end-line="66" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/odftoolkit/simple-odf/0.8.1-incubating/simple-odf-0.8.1-incubating-sources.jar!/org/odftoolkit/simple/table/Table.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="119" column="36" selection-start-line="119" selection-start-column="22" selection-end-line="119" selection-end-column="36" />
+          <folding>
+            <element signature="e#67801#67802#0" expanded="true" />
+            <element signature="e#67848#67849#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/output/TableFunctionsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/odftoolkit/simple-odf/0.8.1-incubating/simple-odf-0.8.1-incubating-sources.jar!/org/odftoolkit/simple/TextDocument.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.9515347">
+          <caret line="179" column="31" selection-start-line="179" selection-start-column="31" selection-end-line="179" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/List2DFunctionsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="225" column="108" selection-start-line="225" selection-start-column="8" selection-end-line="225" selection-end-column="108" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFTableEmitter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="74" selection-start-line="47" selection-start-column="74" selection-end-line="47" selection-end-column="74" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFExportTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.507722">
+          <caret line="61" column="0" selection-start-line="61" selection-start-column="0" selection-end-line="61" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
