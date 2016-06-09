@@ -1,6 +1,5 @@
 package de.adesso.dtmg.functions;
 
-import de.adesso.dtmg.Dump;
 import javafx.collections.FXCollections;
 
 import java.util.*;
@@ -54,7 +53,6 @@ public final class List2DFunctions {
 
 
     public static <T> List<List<T>> transpose(List<List<T>> original) {
-        Dump.dumpTableItems("TRANSPOSE", original);
         if(original.isEmpty()) return original;
         return Stream.of(original).map(transpose()).collect(MoreCollectors.toSingleObject());
     }
