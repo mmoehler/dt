@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.ifthen;
+package de.adesso.dtmg.export.java.straightScan;
 
 import com.codepoetics.protonpack.Indexed;
 
@@ -27,7 +27,7 @@ import java.util.List;
 /**
  * Created by moehler on 09.06.2016.
  */
-public class DtNode {
+public class DtNode implements Visitable {
     final int index;
     final List<Indexed<String>> data;
     DtNode yes;
@@ -53,6 +53,14 @@ public class DtNode {
         return builder;
     }
 
+    @Override
+    public String toString() {
+        return "DtNode{" +
+                "index=" + index +
+                ", no=" + no +
+                ", yes=" + yes +
+                '}';
+    }
 
     /**
      * {@code DtNode} builder static inner class.

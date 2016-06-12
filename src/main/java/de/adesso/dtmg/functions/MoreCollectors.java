@@ -43,7 +43,7 @@ public class MoreCollectors {
                 Collectors.toList(),
                 list -> {
                     if (list.size() != 1) {
-                        throw new IllegalStateException();
+                        throw new IllegalStateException(String.valueOf(list));
                     }
                     return list.get(0);
                 }

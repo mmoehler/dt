@@ -88,6 +88,21 @@ public final class LambdaExceptionUtil {
     }
 
     /**
+     * .map(rethrowFunction(name -> Class.forName(name))) or .map(rethrowFunction(Class::forName))
+     */
+    public static <T, U, R, E extends Exception> BiFunction<T, U, R> rethrowBiFunction(BiFunction_WithExceptions<T, U, R, E> function) {
+        return (t,u) -> {
+            try {
+                return function.apply(t,u);
+            } catch (Exception exception) {
+                throwAsUnchecked(exception);
+                return null;
+            }
+        };
+    }
+
+
+    /**
      * rethrowSupplier(() -> new StringJoiner(new String(new byte[]{77, 97, 114, 107}, "UTF-8"))),
      */
     public static <T, E extends Exception> Supplier<T> rethrowSupplier(Supplier_WithExceptions<T, E> function) {
@@ -161,6 +176,12 @@ public final class LambdaExceptionUtil {
     public interface Function_WithExceptions<T, R, E extends Exception> {
         R apply(T t) throws E;
     }
+
+    @FunctionalInterface
+    public interface BiFunction_WithExceptions<T, U, R, E extends Exception> {
+        R apply(T t, U u) throws E;
+    }
+
 
     @FunctionalInterface
     public interface Supplier_WithExceptions<T, E extends Exception> {

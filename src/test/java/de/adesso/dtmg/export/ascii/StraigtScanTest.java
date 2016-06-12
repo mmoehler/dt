@@ -57,7 +57,7 @@ import static org.junit.Assert.*;
 /**
  * Created by mmoehler on 22.05.16.
  */
-public class EmitterTest {
+public class StraigtScanTest {
 
     public static final String SPLIT_REGEX = "[;]";
 

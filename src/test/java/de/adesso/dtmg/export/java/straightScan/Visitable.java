@@ -17,11 +17,13 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.ifthen;
+package de.adesso.dtmg.export.java.straightScan;
 
 /**
- * Created by moehler on 08.06.2016.
+ * Created by mmoehler on 10.06.16.
  */
-public class Emitter {
-    String emit(){return null;}
+public interface Visitable<T extends Visitor> {
+    default void accept(T visitor, Object...args) {
+        visitor.visit(this, args);
+    }
 }
