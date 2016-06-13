@@ -23,12 +23,15 @@ import com.codepoetics.protonpack.StreamUtils;
 import com.sun.codemodel.*;
 import de.adesso.dtmg.exception.LambdaExceptionUtil;
 import de.adesso.dtmg.functions.ObservableList2DFunctions;
+import de.adesso.dtmg.model.ActionDecl;
+import de.adesso.dtmg.model.ConditionDecl;
 import de.adesso.dtmg.model.DecisionTable;
 import javafx.collections.ObservableList;
 
 import javax.annotation.Generated;
 import java.text.DateFormat;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
@@ -57,13 +60,13 @@ public class StraigtScan implements LambdaExceptionUtil.BiFunction_WithException
         JDocComment jDocComment = jc.javadoc();
         jDocComment.add("TODO Class Level Java Docs");
 
-        emitConditionStubs(condefs, jCodeModel, jc, jTypeVar01);
-        emitActionStubs(actdefs, jc, jTypeVar01, jTypeVar02);
-        emitApplyMethod(condefs, jc, jTypeVar01, jTypeVar02);
+        emitConditionStubs(dt.getConditionDecls(), condefs, jCodeModel, jc, jTypeVar01);
+        emitActionStubs(dt.getActionDecls(), actdefs, jc, jTypeVar01, jTypeVar02);
+        emitApplyMethod(condefs, actdefs, jc, jTypeVar01, jTypeVar02);
         return jCodeModel;
     }
 
-    private void emitApplyMethod(ObservableList<ObservableList<String>> condefs, JDefinedClass jc, JTypeVar jTypeVar01, JTypeVar jTypeVar02) {
+    private void emitApplyMethod(ObservableList<ObservableList<String>> condefs, ObservableList<ObservableList<String>> actdefs, JDefinedClass jc, JTypeVar jTypeVar01, JTypeVar jTypeVar02) {
         String methodName = "apply";
         JMethod jmRun = jc.method(JMod.PUBLIC, jTypeVar02, methodName);
         jmRun.param(jTypeVar01, "input");
@@ -92,28 +95,34 @@ public class StraigtScan implements LambdaExceptionUtil.BiFunction_WithException
             flag[0] = loopBody._if(expr);
             JBlock thenBody = flag[0]._then();
 
-
-            thenBody._return(JExpr.invoke(String.format("actions%02d", i)).arg(JExpr.direct("input")));
+            int j[] = {1};
+            StreamUtils.zipWithIndex(actdefs.get(i).stream())
+                    .filter(f -> !"-".equals(f.getValue()))
+                    .map(s -> JExpr.invoke(String.format("actions%02d", j[0]++)).arg(JExpr.direct("input")))
+                    .forEach(thenBody::add);
+            thenBody._break();
         });
     }
 
-    private void emitActionStubs(ObservableList<ObservableList<String>> actdefs, JDefinedClass jc, JTypeVar jTypeVar01, JTypeVar jTypeVar02) {
-        Map<String, JMethod> actions = IntStream.range(0, actdefs.size())
+    private Map<String, JMethod> emitActionStubs(ObservableList<ActionDecl> actdecls, ObservableList<ObservableList<String>> actdefs, JDefinedClass jc, JTypeVar jTypeVar01, JTypeVar jTypeVar02) {
+        final Iterator<ActionDecl> actDeclsIterator = actdecls.iterator();
+        return IntStream.range(0, actdefs.get(0).size())
                 .mapToObj(i -> {
                     JMethod jMethod = jc.method(JMod.PROTECTED | JMod.ABSTRACT, jTypeVar02, String.format("actions%02d", i));
                     jMethod.param(jTypeVar01, "input");
-                    jMethod.javadoc().add(String.format("Documentation of the %d. action block", i + 1));
+                    jMethod.javadoc().add(actDeclsIterator.next().getExpression());
                     return jMethod;
                 })
                 .collect(Collectors.toMap(JMethod::name, Function.identity()));
     }
 
-    private void emitConditionStubs(ObservableList<ObservableList<String>> condefs, JCodeModel jCodeModel, JDefinedClass jc, JTypeVar jTypeVar01) {
-        Map<String, JMethod> conditions = IntStream.range(0, condefs.get(0).size())
+    private Map<String, JMethod> emitConditionStubs(ObservableList<ConditionDecl> condecls, ObservableList<ObservableList<String>> condefs, JCodeModel jCodeModel, JDefinedClass jc, JTypeVar jTypeVar01) {
+        final Iterator<ConditionDecl> conDeclsIterator = condecls.iterator();
+        return IntStream.range(0, condefs.get(0).size())
                 .mapToObj(i -> {
                     JMethod jMethod = jc.method(JMod.PROTECTED | JMod.ABSTRACT, jCodeModel.BOOLEAN, String.format("condition%02d", i));
                     jMethod.param(jTypeVar01, "input");
-                    jMethod.javadoc().add(String.format("Documentation of the %d. condition", i + 1));
+                    jMethod.javadoc().add(conDeclsIterator.next().getExpression());
                     jMethod.javadoc().addReturn().add("boolean <code>true</code> if the condition requirements full filled, otherwise <code>false</code>");
                     return jMethod;
                 })
