@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.straightScan;
+package de.adesso.dtmg.export.java.treeMethod;
 
 /**
  * Created by mmoehler on 10.06.16.

@@ -20,8 +20,10 @@
 package de.adesso.dtmg;
 
 import com.codepoetics.protonpack.Indexed;
+import com.google.common.base.Preconditions;
 import com.google.common.collect.Lists;
 import de.adesso.dtmg.analysis.structure.Indicator;
+import de.adesso.dtmg.util.tuple.Tuple;
 import javafx.collections.ObservableList;
 
 import java.util.Arrays;
@@ -46,11 +48,18 @@ public class Dump {
         System.out.println("<<<<<<<<<<\n");
     }
 
+    public static void dumpTuple(String msg, Tuple tuple) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        Preconditions.checkNotNull(tuple, "Tuple is NULL!!").asList().forEach(k -> System.out.println("\t" + k));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
     public static void dumpMap(String msg, Map<?, ?> map) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
         map.forEach((k, v) -> System.out.println("\t" + k + " -> " + v));
         System.out.println("<<<<<<<<<<\n");
     }
+
 
     public static <T> void dumpList1DItems(String msg, List<T> list1D) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
@@ -79,9 +88,15 @@ public class Dump {
 
     public static void dumpStructuralAnalysisResult(String msg, List<Indicator> r) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
-
         Lists.partition(r,5).forEach(System.out::println);
-
         System.out.println("<<<<<<<<<<\n");
     }
+
+    public static <T> void dumListWithIndexedValues(String msg, List<Indexed<T>> v) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        v.forEach(i -> System.out.println(String.format("(%02d) => %s", i.getIndex(), i.getValue())));
+        System.out.println("<<<<<<<<<<\n");
+
+    }
+
 }

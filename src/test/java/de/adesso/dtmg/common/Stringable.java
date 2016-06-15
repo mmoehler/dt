@@ -17,13 +17,13 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.straightScan;
+package de.adesso.dtmg.common;
 
 /**
- * Created by mmoehler on 10.06.16.
+ * Created by moehler on 14.06.2016.
  */
-public interface Visitable<T extends Visitor> {
-    default void accept(T visitor, Object...args) {
-        visitor.visit(this, args);
-    }
+@FunctionalInterface
+public interface Stringable<T> {
+    String asString();
 }
+
