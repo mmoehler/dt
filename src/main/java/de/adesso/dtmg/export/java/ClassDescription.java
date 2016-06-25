@@ -53,7 +53,7 @@ public class ClassDescription {
         return packagename;
     }
 
-    public String getTargetpath() {
+    public String getSourceRoot() {
         return targetpath;
     }
 
@@ -70,7 +70,7 @@ public class ClassDescription {
             return this;
         }
 
-        public Builder sorceroot(String val) {
+        public Builder sourceroot(String val) {
             sorceroot = val;
             return this;
         }

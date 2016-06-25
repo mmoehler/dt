@@ -17,13 +17,14 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.straightScan;
+package de.adesso.dtmg.export.java.treeMethod;
 
 import com.codepoetics.protonpack.Indexed;
 import com.codepoetics.protonpack.StreamUtils;
 import com.google.common.collect.Sets;
 import com.sun.codemodel.*;
 import de.adesso.dtmg.Dump;
+import de.adesso.dtmg.common.ToStringDecorator;
 import de.adesso.dtmg.common.builder.List2DBuilder;
 import de.adesso.dtmg.functions.List2DFunctions;
 import de.adesso.dtmg.util.RandomDefinitions;
@@ -42,33 +43,8 @@ import java.util.stream.IntStream;
 /**
  * Created by moehler on 08.06.2016.
  */
-public class StraigtScanTest {
+public class ForFutureUse {
 
-
-    static class IndexedToStringDecorator {
-        final Indexed indexed;
-
-        public static IndexedToStringDecorator decorate(Indexed<?> indexed) {
-            return new IndexedToStringDecorator(indexed);
-        }
-
-        private IndexedToStringDecorator(Indexed<?> indexed) {
-            this.indexed = indexed;
-        }
-
-        @Override
-        public String toString() {
-            return String.format("([%02d] => %s)", indexed.getIndex(), indexed.getValue());
-        }
-    }
-
-
-    static <T> void dumListWithIndexedValues(String msg, List<Indexed<T>> v) {
-        System.out.println(String.format("%s >>>>>>>>>>", msg));
-        v.forEach(i -> System.out.println(String.format("(%02d) => %s", i.getIndex(), i.getValue())));
-        System.out.println("<<<<<<<<<<\n");
-
-    }
 
     private static <T> List<List<T>> splitBySeparator(List<T> list, Predicate<? super T> predicate) {
         final List<List<T>> finalList = new ArrayList<>();
@@ -85,6 +61,36 @@ public class StraigtScanTest {
             finalList.add(list.subList(fromIndex, toIndex));
         }
         return finalList;
+    }
+
+    static void createDecisionTree(List<List<String>> dt, DtNode top) {
+
+        System.out.println(String.format("(%02d) => %s",
+                top.index,
+                top.data.stream()
+                        .map(i -> ToStringDecorator.decorate(i, (o) -> String.format("",o.getIndex(), o.getValue())).asString())
+                        .collect(Collectors.toList())));
+
+        if (top.index >= dt.size() - 1) return;
+
+        final List<Indexed<String>> theTrues = top.data.stream()
+                .filter(i -> Pattern.matches("Y|-", i.getValue()))
+                .map(j -> Indexed.index(j.getIndex(), dt.get(top.index + 1).get((int) j.getIndex())))
+                .collect(Collectors.toList());
+
+        DtNode ifTrue = DtNode.newBuilder().data(theTrues).index(top.index + 1).build();
+        top.yes = ifTrue;
+        createDecisionTree(dt, ifTrue);
+
+        final List<Indexed<String>> theOthers = top.data.stream()
+                .filter(i -> Pattern.matches("N|-", i.getValue()))
+                .map(j -> Indexed.index(j.getIndex(), dt.get(top.index + 1).get((int) j.getIndex())))
+                .collect(Collectors.toList());
+
+        DtNode ifFalse = DtNode.newBuilder().data(theOthers).index(top.index + 1).build();
+        top.no = ifFalse;
+        createDecisionTree(dt, ifFalse);
+
     }
 
     @Test
@@ -123,8 +129,8 @@ public class StraigtScanTest {
                 .map(j -> Indexed.index(j.getIndex(), dt.get(1).get((int) j.getIndex())))
                 .collect(Collectors.toList());
 
-        dumListWithIndexedValues("LEFT", theTrues);
-        dumListWithIndexedValues("RIGHT", theOthers);
+        Dump.dumListWithIndexedValues("LEFT", theTrues);
+        Dump.dumListWithIndexedValues("RIGHT", theOthers);
 
 
     }
@@ -165,7 +171,7 @@ public class StraigtScanTest {
         );
 
 
-        final File file=new File("./");
+        final File file = new File("./");
         jCodeModel.build(file);
 
 
@@ -194,20 +200,20 @@ public class StraigtScanTest {
         Map<String, JMethod> conditions = IntStream.range(0, dt.get(0).size())
                 .mapToObj(i -> {
                     JMethod jMethod = jc.method(JMod.PROTECTED | JMod.ABSTRACT, jCodeModel.BOOLEAN, String.format("condition%02d", i));
-                    jMethod.param(jTypeVar01,"input");
-                    jMethod.javadoc().add(String.format("Documentation of the %d. condition", i+1));
+                    jMethod.param(jTypeVar01, "input");
+                    jMethod.javadoc().add(String.format("Documentation of the %d. condition", i + 1));
                     jMethod.javadoc().addReturn().add("boolean <code>true</code> if the condition requirements full filled, otherwise <code>false</code>");
                     return jMethod;
                 })
                 .collect(Collectors.toMap(JMethod::name, Function.identity()));
 
-        conditions.entrySet().forEach(e -> System.out.println(e.getKey() + " => "+ e.getValue()));
+        conditions.entrySet().forEach(e -> System.out.println(e.getKey() + " => " + e.getValue()));
 
         Map<String, JMethod> actions = IntStream.range(0, dt.size())
                 .mapToObj(i -> {
-                    JMethod jMethod = jc.method(JMod.PROTECTED | JMod.ABSTRACT,jTypeVar02, String.format("actions%02d", i));
-                    jMethod.param(jTypeVar01,"input");
-                    jMethod.javadoc().add(String.format("Documentation of the %d. action block", i+1));
+                    JMethod jMethod = jc.method(JMod.PROTECTED | JMod.ABSTRACT, jTypeVar02, String.format("actions%02d", i));
+                    jMethod.param(jTypeVar01, "input");
+                    jMethod.javadoc().add(String.format("Documentation of the %d. action block", i + 1));
                     return jMethod;
                 })
                 .collect(Collectors.toMap(JMethod::name, Function.identity()));
@@ -228,31 +234,31 @@ public class StraigtScanTest {
 
         JConditional flag[] = {null};
         IntStream.range(0, dt.size()).forEach(i -> {
-            JExpression[] invocation = {null};
+                    JExpression[] invocation = {null};
 
-            Optional<JExpression> expression = StreamUtils.zipWithIndex(dt.get(i).stream())
-                    .filter(f -> !"-".equals(f.getValue()))
-                    .map(s -> {
-                        invocation[0] = JExpr.invoke(String.format("condition%02d", s.getIndex())).arg(JExpr.direct("input"));
+                    Optional<JExpression> expression = StreamUtils.zipWithIndex(dt.get(i).stream())
+                            .filter(f -> !"-".equals(f.getValue()))
+                            .map(s -> {
+                                invocation[0] = JExpr.invoke(String.format("condition%02d", s.getIndex())).arg(JExpr.direct("input"));
 
-                        if ("N".equals(s.getValue())) {
-                            invocation[0]=invocation[0].not();
-                        }
-                        return invocation[0];
-                    }).reduce((l, r) -> l.cand(r));
+                                if ("N".equals(s.getValue())) {
+                                    invocation[0] = invocation[0].not();
+                                }
+                                return invocation[0];
+                            }).reduce((l, r) -> l.cand(r));
 
-            JExpression expr = expression.orElseThrow(()-> new IllegalStateException("Missing Conditional Expression!"));
+                    JExpression expr = expression.orElseThrow(() -> new IllegalStateException("Missing Conditional Expression!"));
 
-            flag[0] = loopBody._if(expr);
-            JBlock thenBody = flag[0]._then();
+                    flag[0] = loopBody._if(expr);
+                    JBlock thenBody = flag[0]._then();
 
 
-            thenBody._return(JExpr.invoke(String.format("actions%02d", i)).arg(JExpr.direct("input")));
+                    thenBody._return(JExpr.invoke(String.format("actions%02d", i)).arg(JExpr.direct("input")));
 
-        }
+                }
         );
         //Users/mmoehler/checkouts/dt/src/test/java/de/adesso/dtmg/export/java/ifthen
-        final File file=new File("./src/test/java");
+        final File file = new File("./src/test/java");
         //file.mkdirs();
         jCodeModel.build(file);
 
@@ -347,40 +353,8 @@ public class StraigtScanTest {
 
     }
 
-
     interface Identifiable {
         String id();
     }
-
-    static void createDecisionTree(List<List<String>> dt, DtNode top) {
-
-        System.out.println(String.format("(%02d) => %s",
-                top.index,
-                top.data.stream()
-                        .map(i -> IndexedToStringDecorator.decorate(i).toString())
-                        .collect(Collectors.toList())));
-
-        if (top.index >= dt.size() - 1) return;
-
-        final List<Indexed<String>> theTrues = top.data.stream()
-                .filter(i -> Pattern.matches("Y|-", i.getValue()))
-                .map(j -> Indexed.index(j.getIndex(), dt.get(top.index + 1).get((int) j.getIndex())))
-                .collect(Collectors.toList());
-
-        DtNode ifTrue = DtNode.newBuilder().data(theTrues).index(top.index + 1).build();
-        top.yes = ifTrue;
-        createDecisionTree(dt, ifTrue);
-
-        final List<Indexed<String>> theOthers = top.data.stream()
-                .filter(i -> Pattern.matches("N|-", i.getValue()))
-                .map(j -> Indexed.index(j.getIndex(), dt.get(top.index + 1).get((int) j.getIndex())))
-                .collect(Collectors.toList());
-
-        DtNode ifFalse = DtNode.newBuilder().data(theOthers).index(top.index + 1).build();
-        top.no = ifFalse;
-        createDecisionTree(dt, ifFalse);
-
-    }
-
 
 }

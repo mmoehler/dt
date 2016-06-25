@@ -17,49 +17,32 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java;
+package de.adesso.dtmg.common;
+
+import java.util.function.Function;
 
 /**
- * Created by mmoehler on 12.06.16.
+ * Created by moehler on 14.06.2016.
  */
-public class ConcreteRules extends AbstractRules<String,String> {
-    @Override
-    protected String actions00(String input) {
-        return null;
+public class ToStringDecorator<T> implements Stringable {
+    private final T delegate;
+    private final Function<T, String> transformer;
+
+    public static <O> Stringable decorate(O t, Function<O, String> f) {
+        return new ToStringDecorator(t,f);
+    }
+
+    private ToStringDecorator(T delegate, Function<T, String> transformer) {
+        this.delegate = delegate;
+        this.transformer = transformer;
     }
 
     @Override
-    protected boolean condition00(String input) {
-        return false;
+    public String asString() {
+        return transformer.apply(delegate);
     }
 
-    @Override
-    protected boolean condition01(String input) {
-        return false;
-    }
-
-    @Override
-    protected boolean condition02(String input) {
-        return false;
-    }
-
-    @Override
-    protected String actions01(String input) {
-        return null;
-    }
-
-    @Override
-    protected String actions02(String input) {
-        return null;
-    }
-
-    @Override
-    protected String actions03(String input) {
-        return null;
-    }
-
-    @Override
-    protected String actions04(String input) {
-        return null;
+    public T getDelegate() {
+        return delegate;
     }
 }
