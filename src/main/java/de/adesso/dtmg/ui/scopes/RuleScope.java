@@ -11,6 +11,7 @@ public class RuleScope implements Scope {
     private final SimpleBooleanProperty consolidateRules = new SimpleBooleanProperty(true);
     private final SimpleBooleanProperty removeDuplicateRules = new SimpleBooleanProperty(true);
     private final SimpleBooleanProperty missingRules = new SimpleBooleanProperty(true);
+    private final SimpleBooleanProperty elseRuleSet = new SimpleBooleanProperty(false);
 
     public boolean getConsolidateRules() {
         return consolidateRules.get();
@@ -46,5 +47,17 @@ public class RuleScope implements Scope {
 
     public SimpleBooleanProperty missingRulesProperty() {
         return missingRules;
+    }
+
+    public boolean isElseRuleSet() {
+        return elseRuleSet.get();
+    }
+
+    public void setElseRuleSet(boolean elseRuleSet) {
+        this.elseRuleSet.set(elseRuleSet);
+    }
+
+    public SimpleBooleanProperty elseRuleProperty() {
+        return elseRuleSet;
     }
 }

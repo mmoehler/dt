@@ -14,6 +14,7 @@ import de.adesso.dtmg.exception.ExceptionHandler;
 import de.adesso.dtmg.functions.DtFunctions;
 import de.adesso.dtmg.functions.List2DFunctions;
 import de.adesso.dtmg.functions.MoreCollectors;
+import de.adesso.dtmg.functions.ObservableListFunctions;
 import de.adesso.dtmg.io.DtEntity;
 import de.adesso.dtmg.io.PersistenceManager;
 import de.adesso.dtmg.model.ActionDecl;
@@ -38,6 +39,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
+import java.util.function.Function;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -55,10 +58,13 @@ import static java.util.Collections.emptyList;
 public class MainViewModel implements ViewModel {
 
     public static final String QMARK = "?";
+    public static final String ELSE = "E";
     public static final Object[] NO_ARGS = {};
     public static final String COND_ROW_HEADER = "C%02d";
     public static final String DASH = "-";
     private static final String ACT_ROW_HEADER = "A%02d";
+    private final static Predicate<ObservableList<String>> HAS_ELSE_RULE  =
+            c -> (c.isEmpty()) ? false : c.get(c.size() - 1).equals(ELSE);
     private final ObservableList<ConditionDeclTableViewModel> conditionDeclarations = FXCollections.observableArrayList();
     private final ObservableList<ObservableList<String>> conditionDefinitions = FXCollections.observableArrayList();
     private final ObservableList<ActionDeclTableViewModel> actionDeclarations = FXCollections.observableArrayList();
@@ -87,6 +93,7 @@ public class MainViewModel implements ViewModel {
     private Multimap<Integer, Integer> compressibleRules = emptyMultimap();
     private Multimap<Integer, Integer> dupplicateRules = emptyMultimap();
     private DtEntity loadedData = null;
+    private boolean elseRuleSet = true;
 
     public MainViewModel() {
         super();
@@ -150,10 +157,17 @@ public class MainViewModel implements ViewModel {
 
         // #2 If there are at least one condition defined, then this must also be updated
         if (!this.conditionDefinitions.isEmpty()) {
-            List<List<String>> newDefns = List2DFunctions.addRow(adapt(this.conditionDefinitions), () -> QMARK);
+            List<List<String>> newDefns = internalAddConditionDefnsRow();
             this.conditionDefinitions.clear();
             adapt(newDefns).stream().forEach(this.conditionDefinitions::add);
         }
+    }
+
+    private List<List<String>> internalAddConditionDefnsRow() {
+        List<List<String>> row = (HAS_ELSE_RULE.test(this.conditionDefinitions.get(0)))
+                ? List2DFunctions.addRowWithElseRule(adapt(this.conditionDefinitions), () -> QMARK)
+                : List2DFunctions.addRow(adapt(this.conditionDefinitions), () -> QMARK);
+        return row;
     }
 
     public void onAddActionDecl(@Observes AddActionDeclEvent event) {
@@ -235,11 +249,13 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onAddElseRule(@Observes AddElseRuleEvent event) {
-        List<List<String>> newDefns = List2DFunctions.addColumn(adapt(this.conditionDefinitions), () -> QMARK);
+        List<List<String>> newDefns = List2DFunctions.addColumn(adapt(this.conditionDefinitions), () -> ELSE);
         this.conditionDefinitions.clear();
         List<List<String>> newDefns0 = List2DFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
         this.actionDefinitions.clear();
         publish(ADD_ELSE_RULE.name(), adapt(newDefns), adapt(newDefns0));
+        this.elseRuleSet = true;
+        notifyElseRuleSet();
     }
 
     public void updateRowHeader() {
@@ -259,10 +275,21 @@ public class MainViewModel implements ViewModel {
         }
     }
 
+    private Predicate<ObservableList<String>> hasNoElseRule()  {
+        return c -> (c.isEmpty()) ? true : !c.get(c.size() - 1).equals(ELSE);
+    }
+
+    private Function<ObservableList<String>,ObservableList<String>> suppressElseRule() {
+        return i -> (hasNoElseRule().test(i)) ? (i) : (ObservableListFunctions.take(i,i.size()-1));
+    }
+
     private Optional<String> internalFormalCompletenessCheck() {
         String ret = null;
         try {
-            final List<Indexed<List<String>>> result = isFormalComplete(this.conditionDeclarations, this.conditionDefinitions);
+            ObservableList<ObservableList<String>> conditionDefnsWithoutElseRule
+                    = this.conditionDefinitions.stream().map(suppressElseRule()).collect(MoreCollectors.toObservableList());
+
+            final List<Indexed<List<String>>> result = isFormalComplete(this.conditionDeclarations, conditionDefnsWithoutElseRule);
             Tuple2<String, List<String>> tuple2 = resultEmitter.emitFormalCompletenessCheckResults().apply(result);
             missingRules = tuple2._2();
             ret = tuple2._1();
@@ -303,7 +330,6 @@ public class MainViewModel implements ViewModel {
         }
     }
 
-    // TODO Validation!! PRE: all table containers must not be empty!!
     private Optional<String> internalStructuralAnalysis() {
         String ret = null;
         try {
@@ -311,12 +337,19 @@ public class MainViewModel implements ViewModel {
             Preconditions.checkArgument(!this.conditionDefinitions.isEmpty(), "Structural Analysis without Condition Definitions is not possible!");
             Preconditions.checkArgument(!this.actionDefinitions.isEmpty(), "Structural Analysis without Action Definitions is not possible!");
 
-            List<Indicator> result = structuralAnalysis.apply(adapt(this.conditionDefinitions), adapt(this.actionDefinitions));
+            // check whether an else rule is defined! If yes make it unavailable for this action!!
+            ObservableList<ObservableList<String>> clearedConditions = this.conditionDefinitions;
+            ObservableList<ObservableList<String>> clearedActions = this.actionDefinitions;
+            if(!this.hasNoElseRule().test(this.conditionDefinitions.get(0))) {
+                clearedConditions = this.conditionDefinitions.stream().map(suppressElseRule()).collect(MoreCollectors.toObservableList());
+                clearedActions = this.actionDefinitions.stream().map(c -> ObservableListFunctions.take(c, c.size() - 1)).collect(MoreCollectors.toObservableList());
+            }
+            List<Indicator> result = structuralAnalysis.apply(adapt(clearedConditions), adapt(clearedActions));
 
             Dump.dumpStructuralAnalysisResult("STRUCTURAL-ANALYSIS", result);
 
             final Tuple3<String, Multimap<Integer, Integer>, Multimap<Integer, Integer>> tuple3 =
-                    resultEmitter.emitStructuralAnalysisResult().apply(result, this.conditionDefinitions.get(0).size());
+                    resultEmitter.emitStructuralAnalysisResult().apply(result, clearedConditions.get(0).size());
 
             compressibleRules = tuple3._2();
             dupplicateRules = tuple3._3();
@@ -367,6 +400,11 @@ public class MainViewModel implements ViewModel {
     private void notifyMissingRulesCleared() {
         mdScope.missingRulesProperty().set(missingRules.isEmpty());
     }
+
+    private void notifyElseRuleSet() {
+        mdScope.elseRuleProperty().set(elseRuleSet);
+    }
+
 
     private void notifyRuleDuplicatesCleared() {
         mdScope.removeDuplicateRulesProperty().set(dupplicateRules.isEmpty());

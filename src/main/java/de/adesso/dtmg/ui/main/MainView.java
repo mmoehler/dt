@@ -56,6 +56,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
+import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
@@ -70,6 +71,9 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
 
     public static final String COND_ROW_HEADER = "C%02d";
     private static final String ACT_ROW_HEADER = "A%02d";
+    private static final String ELSE = "E";
+    private final static Predicate<ObservableList<String>> HAS_ELSE_RULE  =
+            c -> (c.isEmpty()) ? false : c.get(c.size() - 1).equals(ELSE);
     private final DoubleProperty conditionDividerPos = new SimpleDoubleProperty();
     private final DoubleProperty actionDividerPos = new SimpleDoubleProperty();
     @FXML
@@ -197,14 +201,6 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
             ObservableList<ObservableList<String>> newConditions = consolidated._1();
             ObservableList<ObservableList<String>> newActions = consolidated._2();
 
-
-            /*
-            Stream.of(newConditions).forEach(new UpdateDefinitionTable(conditionDefinitionsTable));
-            Stream.of(newActions).forEach(new UpdateDefinitionTable(actionDefinitionsTable));
-            */
-            // Alternative --
-
-
             updateDefinitions(newConditions, newActions);
 
 
@@ -247,7 +243,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         }
     }
 
-    private void doAddElseRule(String key, Object[] value) {
+    private void   doAddElseRule(String key, Object[] value) {
         final int countColumns = conditionDefinitionsTable.getColumns().size();
         final Optional<String> elseRuleName = Optional.of(ELSE_RULE_HEADER);
         conditionDefinitionsTable.getColumns().add(createTableColumn(countColumns, elseRuleName));
@@ -292,19 +288,21 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     }
 
     private void doMoveRuleRight(String key, Object[] value) {
-        doMoveColumns(this.conditionDefinitionsTable,
+        if(doMoveColumns(this.conditionDefinitionsTable,
                 this.actionDefinitionsTable,
-                getIndex(value), DIR_RIGHT);
-        updateColHeaders(this.conditionDefinitionsTable);
-        updateColHeaders(this.actionDefinitionsTable);
+                getIndex(value), DIR_RIGHT)) {
+            updateColHeaders(this.conditionDefinitionsTable);
+            updateColHeaders(this.actionDefinitionsTable);
+        }
     }
 
     private void doMoveRuleLeft(String key, Object[] value) {
-        doMoveColumns(this.conditionDefinitionsTable,
+        if(doMoveColumns(this.conditionDefinitionsTable,
                 this.actionDefinitionsTable,
-                getIndex(value), DIR_LEFT);
-        updateColHeaders(this.conditionDefinitionsTable);
-        updateColHeaders(this.actionDefinitionsTable);
+                getIndex(value), DIR_LEFT)) {
+            updateColHeaders(this.conditionDefinitionsTable);
+            updateColHeaders(this.actionDefinitionsTable);
+        }
     }
 
     private void doAddRule(String key, Object[] value) {
@@ -368,9 +366,16 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     }
 
     private void doInsConditionDecl(String key, Object[] value) {
-        doInsertRows(this.conditionDeclarationsTable, this.conditionDefinitionsTable, getIndex(value),
-                () -> new ConditionDeclTableViewModel(new ConditionDecl()),
-                QMARK_SUPPLIER, () -> "C%02d");
+        if(HAS_ELSE_RULE.test(this.conditionDefinitionsTable.getItems().get(0))) {
+            doInsertRowsWithElseRule(this.conditionDeclarationsTable, this.conditionDefinitionsTable, getIndex(value),
+                    () -> new ConditionDeclTableViewModel(new ConditionDecl()),
+                    QMARK_SUPPLIER, () -> "C%02d");
+
+        } else {
+            doInsertRows(this.conditionDeclarationsTable, this.conditionDefinitionsTable, getIndex(value),
+                    () -> new ConditionDeclTableViewModel(new ConditionDecl()),
+                    QMARK_SUPPLIER, () -> "C%02d");
+        }
         this.viewModel.updateRowHeader();
     }
 

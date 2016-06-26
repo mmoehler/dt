@@ -114,7 +114,7 @@ public class DefinitionsTableCell<S, T> extends TableCell<S, T> {
             final String newValue = getText();
             switch (newValue) {
                 case QMARK:
-                    setCellStyle("#f37c4e");
+                    setCellStyle("#ff0000");
                     break;
                 case YES:
                     setCellStyle("#f3b804");
@@ -123,7 +123,13 @@ public class DefinitionsTableCell<S, T> extends TableCell<S, T> {
                     setCellStyle("#7fc2f3");
                     break;
                 case DASH:
-                    setCellStyle("#04dddd");
+                    setCellStyle("#fefefe");
+                    break;
+                case ELSE:
+                    setCellStyle("#ff8000");
+                    break;
+                case DOACTION:
+                    setCellStyle("#408000");
                     break;
                 case NOTHING:
                 case SPACE:

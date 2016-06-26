@@ -32,6 +32,9 @@ public class MenuView implements FxmlView<MenuViewModel> {
     private MenuItem deleteRedundantRules;
     @FXML
     private MenuItem completeReport;
+    @FXML
+    private MenuItem addElseRuleMenuItem;
+
 
     @InjectViewModel
     private MenuViewModel viewModel;
@@ -43,6 +46,7 @@ public class MenuView implements FxmlView<MenuViewModel> {
         consolidateRules.disableProperty().bind(viewModel.consolidateRulesProperty());
         deleteRedundantRules.disableProperty().bind(viewModel.removeDuplicateRulesProperty());
         addMissingRules.disableProperty().bind(viewModel.missingRulesProperty());
+        addElseRuleMenuItem.disableProperty().bind(viewModel.elseRuleSetProperty());
     }
 
     // General

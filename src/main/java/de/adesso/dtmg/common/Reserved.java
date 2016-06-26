@@ -11,6 +11,8 @@ public class Reserved {
     public static final String QMARK = "?";
     public static final String SPACE = " ";
     public static final String NOTHING = "";
+    public static final String ELSE = "E";
+    public static final String DOACTION = "X";
 
     public static boolean isDASH(String s) {
         return DASH.equals(s);
@@ -26,5 +28,9 @@ public class Reserved {
 
     public static boolean isHASH(String s) {
         return HASH.equals(s);
+    }
+
+    public static boolean isELSE(String s) {
+        return ELSE.equals(s);
     }
 }

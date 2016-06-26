@@ -226,6 +226,30 @@ public final class DtFunctions {
         }
     }
 
+    public static <T extends DeclarationTableViewModel> void doInsertRowsWithElseRule(TableView<T> declarations,
+                                                                          TableView<ObservableList<String>> definitions,
+                                                                          OptionalInt value,
+                                                                          Supplier<T> defaultDecl, Supplier<String> defaultDefValue, Supplier<String> rowHeaderTemplate) {
+
+        OptionalInt index = determineRowIndices(declarations, definitions, value);
+
+        if (index.isPresent()) {
+            List<T> newDecls = ListFunctions.insertElementsAt(declarations.getItems(), index.getAsInt(), defaultDecl);
+            List<List<String>> newDefs = insertRowsWithElseRuleAt(adapt(definitions.getItems()), index.getAsInt(), defaultDefValue);
+
+            declarations.getItems().clear();
+            newDecls.forEach(declarations.getItems()::add);
+            //          updateRowHeaders(declarations, rowHeaderTemplate);
+
+            definitions.getItems().clear();
+            newDefs.stream().map(s -> observableArrayList(s)).forEach(definitions.getItems()::add);
+
+            declarations.refresh();
+            definitions.refresh();
+        }
+    }
+
+
     public static void doRemoveColumns(TableView<ObservableList<String>> conditionTable,
                                        TableView<ObservableList<String>> actionTable,
                                        OptionalInt value) {
@@ -279,22 +303,32 @@ public final class DtFunctions {
         }
     }
 
-    public static void doMoveColumns(TableView conditionTable, TableView actionTable, OptionalInt value, boolean direction) {
+    private static boolean isSwappingAllowed(ObservableList<ObservableList<String>> conditionDefinitions, int targetIndex) {
+        return !conditionDefinitions.get(0).get(targetIndex).equals(ELSE);
+    }
+
+    public static boolean doMoveColumns(TableView conditionTable, TableView actionTable, OptionalInt value, boolean direction) {
         final OptionalInt index = determineColumnIndex(conditionTable, actionTable, value);
+        boolean ret = false;
         if (index.isPresent()) {
             final int c1Idx = index.getAsInt();
             final int c2Idx = determineNextIndex(direction, c1Idx, conditionTable.getColumns().size());
             ObservableList<ObservableList<String>> conditionDefinitions = conditionTable.getItems();
-            ObservableList<ObservableList<String>> actionDefinitions = actionTable.getItems();
 
-            List<List<String>> newConditionDefns = swapColumnsAt(adapt(conditionDefinitions), c1Idx, c2Idx);
-            List<List<String>> newActionDefns = swapColumnsAt(adapt(actionDefinitions), c1Idx, c2Idx);
+            if(isSwappingAllowed(conditionDefinitions, c2Idx)) {
+                ObservableList<ObservableList<String>> actionDefinitions = actionTable.getItems();
 
-            conditionDefinitions.clear();
-            newConditionDefns.stream().map(s -> observableArrayList(s)).forEach(conditionDefinitions::add);
-            actionDefinitions.clear();
-            newActionDefns.stream().map(s -> observableArrayList(s)).forEach(actionDefinitions::add);
+                List<List<String>> newConditionDefns = swapColumnsAt(adapt(conditionDefinitions), c1Idx, c2Idx);
+                List<List<String>> newActionDefns = swapColumnsAt(adapt(actionDefinitions), c1Idx, c2Idx);
+
+                conditionDefinitions.clear();
+                newConditionDefns.stream().map(s -> observableArrayList(s)).forEach(conditionDefinitions::add);
+                actionDefinitions.clear();
+                newActionDefns.stream().map(s -> observableArrayList(s)).forEach(actionDefinitions::add);
+                ret = true;
+            }
         }
+        return ret;
     }
 
     private static int determineNextIndex(boolean directionDownOrRight, int c1Idx, int maxExclIndex) {

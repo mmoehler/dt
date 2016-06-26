@@ -18,6 +18,7 @@ import static java.util.stream.IntStream.range;
  * Created by mmoehler ofList 13.02.16.
  */
 public final class List2DFunctions {
+    public static final String ELSE = "E";
 
     // --Commented out by Inspection (15.05.16, 08:50):public static final String QMARK = "?";
 
@@ -105,6 +106,20 @@ public final class List2DFunctions {
                 .collect(toList());
     }
 
+    public static List<String> newRowWithElseRule(int len, Supplier<String> defaultValue) {
+        if (len < 0) {
+            throw new IllegalStateException("len < 0!");
+        }
+        if (len == 0) {
+            return Collections.emptyList();
+        }
+        List<String> row = IntStream.range(0, len-1)
+                .mapToObj(i -> defaultValue.get())
+                .collect(toList());
+        row.add(ELSE);
+        return row;
+    }
+
     public static List<List<String>> removeRowsAt(List<List<String>> original, int index) {
         if (original.isEmpty()) {
             return original;
@@ -125,6 +140,15 @@ public final class List2DFunctions {
                 .mapToObj(i -> (index == i) ? (newRow(len, defaultValue)) : (it.next()))
                 .collect(toCollection(FXCollections::observableArrayList));
     }
+
+    public static List<List<String>> insertRowsWithElseRuleAt(List<List<String>> original, int index, Supplier<String> defaultValue) {
+        final int len = original.get(0).size();
+        Iterator<? extends List<String>> it = original.iterator();
+        return IntStream.range(0, original.size() + 1)
+                .mapToObj(i -> (index == i) ? (newRowWithElseRule(len, defaultValue)) : (it.next()))
+                .collect(toCollection(FXCollections::observableArrayList));
+    }
+
 
     public static <T> List<T> swapRowsAt(List<T> original, int row1Idx, int row2Idx) {
         List<T> copy = FXCollections.observableList(original);
@@ -153,6 +177,20 @@ public final class List2DFunctions {
         copiedMatrix.add(copiedRow);
         return copiedMatrix;
     }
+
+    public static List<List<String>> addRowWithElseRule(List<List<String>> original, Supplier<String> valueSupplier) {
+        if (original.isEmpty()) {
+            return original;
+        }
+        List<List<String>> copiedMatrix = copy(original);
+        List<String> copiedRow = IntStream.range(0, original.get(0).size()-1)
+                .mapToObj(i -> valueSupplier.get())
+                .collect(toList());
+        copiedRow.add(ELSE);
+        copiedMatrix.add(copiedRow);
+        return copiedMatrix;
+    }
+
 
     // -----------------
 

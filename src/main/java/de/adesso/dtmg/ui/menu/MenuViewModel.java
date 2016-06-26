@@ -20,6 +20,7 @@ public class MenuViewModel implements ViewModel {
     private final SimpleBooleanProperty consolidateRules = new SimpleBooleanProperty(true);
     private final SimpleBooleanProperty removeDuplicateRules = new SimpleBooleanProperty(true);
     private final SimpleBooleanProperty missingRules = new SimpleBooleanProperty(true);
+    private final SimpleBooleanProperty elseRuleSet = new SimpleBooleanProperty(false);
 
     @Inject
     private Event<TriggerShutdownEvent> shouldCloseEvent;
@@ -83,6 +84,7 @@ public class MenuViewModel implements ViewModel {
         consolidateRules.bind(mdScope.consolidateRulesProperty());
         removeDuplicateRules.bind(mdScope.removeDuplicateRulesProperty());
         missingRules.bind(mdScope.missingRulesProperty());
+        elseRuleSet.bind(mdScope.elseRuleProperty());
     }
 
     public boolean getConsolidateRules() {
@@ -107,6 +109,14 @@ public class MenuViewModel implements ViewModel {
 
     public SimpleBooleanProperty missingRulesProperty() {
         return missingRules;
+    }
+
+    public boolean getElseRuleSet() {
+        return elseRuleSet.get();
+    }
+
+    public SimpleBooleanProperty elseRuleSetProperty() {
+        return elseRuleSet;
     }
 
     public void closeAction() {
