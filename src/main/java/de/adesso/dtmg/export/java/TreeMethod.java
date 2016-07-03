@@ -17,15 +17,11 @@
  * under the License.
  */
 
-package de.adesso.dtmg.io;
-
-import java.io.Serializable;
-import java.net.URL;
+package de.adesso.dtmg.export.java;
 
 /**
- * Created by mmoehler ofList 01.04.16.
+ * Created by mmoehler on 02.07.16.
  */
-public interface PersistenceManager<O extends Serializable> {
-    O read(URL source);
-    void write(O o, URL target);
+public class TreeMethod {
+
 }

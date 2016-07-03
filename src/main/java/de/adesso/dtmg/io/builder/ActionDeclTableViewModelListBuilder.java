@@ -17,11 +17,10 @@
  * under the License.
  */
 
-package de.adesso.dtmg.functions.fixtures;
+package de.adesso.dtmg.io.builder;
 
-import de.adesso.dtmg.functions.chained.first.Builder;
-import de.adesso.dtmg.model.ConditionDecl;
-import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
+import de.adesso.dtmg.model.ActionDecl;
+import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -30,20 +29,20 @@ import java.util.List;
 /**
  * Created by mmoehler ofList 06.03.16.
  */
-public class ConditionDeclTableViewModelListBuilder implements Builder<List<ConditionDeclTableViewModel>> {
-    ObservableList<ConditionDeclTableViewModel> list = FXCollections.observableArrayList();
+public class ActionDeclTableViewModelListBuilder implements Builder<List<ActionDeclTableViewModel>> {
 
-    public ConditionDeclTableViewModelListBuilder() {
+    private final ObservableList<ActionDeclTableViewModel> list = FXCollections.observableArrayList();
+
+    public ActionDeclTableViewModelListBuilder() {
         super();
     }
 
-    public ConditionDeclBuilder<ConditionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
-        return new ConditionDeclBuilder<>(number, this,
-                (ConditionDecl c) -> list.add(new ConditionDeclTableViewModel(c)));
+    public ActionDeclBuilder<ActionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
+        return new ActionDeclBuilder<>(number, this, (ActionDecl a) -> list.add(new ActionDeclTableViewModel(a)));
     }
 
-    public ObservableList<ConditionDeclTableViewModel> build() {
+    @Override
+    public ObservableList<ActionDeclTableViewModel> build() {
         return list;
     }
-
 }

@@ -12,10 +12,10 @@ public class AboutAuthorViewModel implements ViewModel {
 
 
     public void openBlog() {
-        hostServices.showDocument("http://www.lestard.eu");
+        hostServices.showDocument("http://www.adesso.de");
     }
 
     public void openTwitter() {
-        hostServices.showDocument("https://twitter.com/manuel_mauky");
+        hostServices.showDocument("mailto:moehler@adesso.de?subject=DTMG");
     }
 }

@@ -17,33 +17,25 @@
  * under the License.
  */
 
-package de.adesso.dtmg.functions.fixtures;
+package de.adesso.dtmg.io.builder;
 
-import de.adesso.dtmg.functions.chained.first.Builder;
-import de.adesso.dtmg.model.ConditionDecl;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-import java.util.List;
 
 /**
  * Created by mmoehler ofList 06.03.16.
  */
-public class ConditionDeclTableViewModelListBuilder implements Builder<List<ConditionDeclTableViewModel>> {
-    ObservableList<ConditionDeclTableViewModel> list = FXCollections.observableArrayList();
+public class ConditionDeclTableViewBuilder extends TableViewBuilder<ConditionDeclTableViewModel> {
 
-    public ConditionDeclTableViewModelListBuilder() {
-        super();
+    public ConditionDeclTableViewBuilder() {
     }
 
-    public ConditionDeclBuilder<ConditionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
+    public ConditionDeclBuilder<ConditionDeclTableViewBuilder> addModelWithLfdNbr(String number) {
         return new ConditionDeclBuilder<>(number, this,
-                (ConditionDecl c) -> list.add(new ConditionDeclTableViewModel(c)));
+                (c) -> tableView.getItems().add(new ConditionDeclTableViewModel(c)));
     }
 
-    public ObservableList<ConditionDeclTableViewModel> build() {
-        return list;
+    @Override
+    protected int getColCount() {
+        return 4;
     }
-
 }

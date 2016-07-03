@@ -19,6 +19,7 @@
 
 package de.adesso.dtmg.ui.main;
 
+import de.adesso.dtmg.common.Reserved;
 import de.adesso.dtmg.exception.ExceptionHandler;
 import de.adesso.dtmg.functions.DtFunctions;
 import de.adesso.dtmg.model.ActionDecl;
@@ -52,10 +53,7 @@ import javafx.stage.FileChooser;
 import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
+import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.IntStream;
@@ -124,12 +122,12 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         return this.conditionDefinitionsTable;
     }
 
-    private static <T extends DeclarationTableViewModel> void initializeDeclarationTablesColumns(TableView<T> table) {
+    private static <T extends DeclarationTableViewModel> void initializeDeclarationTablesColumns(TableView<T> table, String prefix) {
         List<TableColumn<T, String>> l = new ArrayList<>();
         l.add(createTableColumn("#", "lfdNr", 40, 40, 40, false, Pos.CENTER,
                 (TableColumn.CellEditEvent<T, String> evt) -> evt.getTableView().getItems().get(evt.getTablePosition().getRow())
                         .lfdNrProperty().setValue(evt.getNewValue())));
-        l.add(createTableColumn("Expression", "expression", 300, 300, Integer.MAX_VALUE, true, Pos.CENTER_LEFT,
+        l.add(createExpressionTableColumn("Expression", "expression", 300, 300, Integer.MAX_VALUE, true, Pos.CENTER_LEFT,prefix,
                 (TableColumn.CellEditEvent<T, String> evt) -> evt.getTableView().getItems().get(evt.getTablePosition().getRow())
                         .expressionProperty().setValue(evt.getNewValue())));
         l.add(createTableColumn("Indicators", "possibleIndicators", 100, 100, Integer.MAX_VALUE, true, Pos.CENTER,
@@ -150,8 +148,12 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     private static void configureFileChooser(final FileChooser fileChooser, String title) {
         fileChooser.setTitle(title);
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
-        FileChooser.ExtensionFilter dtmExtFilter = new FileChooser.ExtensionFilter("DTMG files (*.dtm)", "*.dtm");
-        fileChooser.getExtensionFilters().add(dtmExtFilter);
+        FileChooser.ExtensionFilter dtmgExtFilters[] = {new FileChooser.ExtensionFilter("Binary files (*.dtm)", "*.dtm"),
+                new FileChooser.ExtensionFilter("Horizontal ASCII files (*.dth)", "*.dth"),
+                new FileChooser.ExtensionFilter("Vertical ASCII files (*.dtv)", "*.dtv")
+        };
+        Arrays.stream(dtmgExtFilters).forEach(fileChooser.getExtensionFilters()::add);
+
     }
 
     public void initialize() {
@@ -297,12 +299,27 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     }
 
     private void doMoveRuleLeft(String key, Object[] value) {
-        if(doMoveColumns(this.conditionDefinitionsTable,
-                this.actionDefinitionsTable,
-                getIndex(value), DIR_LEFT)) {
-            updateColHeaders(this.conditionDefinitionsTable);
-            updateColHeaders(this.actionDefinitionsTable);
+        OptionalInt index = getIndex(value);
+        if(index.isPresent() && !isElseRule(index.getAsInt())) {
+            if (doMoveColumns(this.conditionDefinitionsTable,
+                    this.actionDefinitionsTable,
+                    index, DIR_LEFT)) {
+                updateColHeaders(this.conditionDefinitionsTable);
+                updateColHeaders(this.actionDefinitionsTable);
+            }
         }
+    }
+
+    private boolean isElseRule(int index) {
+        boolean ret = false;
+        ObservableList<ObservableList<String>> items = this.conditionDefinitionsTable.getItems();
+        if(!items.isEmpty()) {
+            ObservableList<String> strings = items.get(0);
+            if(!strings.isEmpty()) {
+                ret = Reserved.isELSE(strings.get(strings.size()-1));
+            }
+        }
+        return ret;
     }
 
     private void doAddRule(String key, Object[] value) {
@@ -332,10 +349,6 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         final OptionalInt index = determineColumnIndex(this.conditionDefinitionsTable, this.actionDefinitionsTable, getIndex(value));
 
         if (index.isPresent()) {
-
-            // -------
-
-            // -------
 
             int newCols = this.conditionDefinitionsTable.getColumns().size() + 1;
             this.conditionDefinitionsTable.getColumns().clear();
@@ -382,7 +395,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     private void doInsActionDecl(String key, Object[] value) {
         doInsertRows(this.actionDeclarationsTable, this.actionDefinitionsTable, getIndex(value),
                 () -> new ActionDeclTableViewModel(new ActionDecl()),
-                QMARK_SUPPLIER, () -> "A%02d");
+                DASH_SUPPLIER, () -> "A%02d");
         this.viewModel.updateRowHeader();
     }
 
@@ -501,7 +514,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
 
         initializeConditionDeclFocusHandling();
         initializeTableKeyboardHandling(conditionDeclarationsTable);
-        initializeDeclarationTablesColumns(this.conditionDeclarationsTable);
+        initializeDeclarationTablesColumns(this.conditionDeclarationsTable, "is_");
 
         this.conditionDeclarationsTable.getItems().clear();
         this.conditionDeclarationsTable.setItems(viewModel.getConditionDeclarations());
@@ -511,7 +524,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         this.actionDeclarationsTable.getSelectionModel().setCellSelectionEnabled(true);
 
         initializeTableKeyboardHandling(actionDeclarationsTable);
-        initializeDeclarationTablesColumns(this.actionDeclarationsTable);
+        initializeDeclarationTablesColumns(this.actionDeclarationsTable,"do_");
 
         this.actionDeclarationsTable.getItems().clear();
         this.actionDeclarationsTable.setItems(viewModel.getActionDeclarations());

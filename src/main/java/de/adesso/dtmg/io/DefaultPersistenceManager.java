@@ -19,11 +19,20 @@
 
 package de.adesso.dtmg.io;
 
+import com.google.common.collect.Maps;
+import com.google.common.io.Files;
+import de.adesso.dtmg.io.strategy.BinaryPersistenceStrategy;
+import de.adesso.dtmg.io.strategy.HorizontalAsciiPersistenceStrategy;
+import de.adesso.dtmg.io.strategy.VerticalAsciiPersistenceStrategy;
 import sun.net.www.ParseUtil;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.inject.Singleton;
-import java.io.*;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.Map;
+import java.util.function.Function;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -32,30 +41,53 @@ import static com.google.common.base.Preconditions.checkNotNull;
  */
 @Singleton
 public class DefaultPersistenceManager implements PersistenceManager<DtEntity> {
+
+    private final Map<String, PersistenceStrategy<DtEntity>> strategies = Maps.newHashMap();
+
     public DefaultPersistenceManager() {
     }
 
-    @Override
-    public DtEntity read(URL source) throws IOException, ClassNotFoundException {
-        checkNotNull(source, "Missing Source URL!");
-        final String path = ParseUtil.decode(source.getPath());
-        try (RandomAccessFile randomAccessFile = new RandomAccessFile(path, "r");
-             FileInputStream fileInputStream = new FileInputStream(randomAccessFile.getFD());
-             ObjectInputStream in = new ObjectInputStream(fileInputStream)) {
-            return ((DtEntity) in.readObject());
-        }
+    @PostConstruct
+    public void initStrategies() {
+        PersistenceStrategy<DtEntity> strategyArray[] = new PersistenceStrategy[]{
+                new BinaryPersistenceStrategy(),
+                new VerticalAsciiPersistenceStrategy(),
+                new HorizontalAsciiPersistenceStrategy()
+        };
+        Arrays.stream(strategyArray).forEach(p -> strategies.put(p.extension(),p));
+    }
+
+    @PreDestroy
+    public void releaseStrategies() {
+        strategies.clear();
     }
 
     @Override
-    public void write(DtEntity dtEntity, URL target) throws IOException {
+    public DtEntity read(final URL source) {
+        checkNotNull(source, "Missing Source URL!");
+        return detectStrategyAndDo(source, (s) -> s.read(source)  );
+
+    }
+
+    @Override
+    public void write(DtEntity dtEntity, URL target) {
         checkNotNull(target, "Missing Target URL!");
         checkNotNull(dtEntity, "Missing Entity to Save!");
-        final String path = ParseUtil.decode(target.getPath());
-        try (RandomAccessFile raf = new RandomAccessFile(path, "rw");
-             FileOutputStream fos = new FileOutputStream(raf.getFD());
-             ObjectOutputStream out = new ObjectOutputStream(fos)) {
-            out.writeObject(dtEntity);
-            out.flush();
-        }
+        detectStrategyAndDo(target, (s) -> {
+            s.write(dtEntity, target);
+            return dtEntity;
+        });
     }
+
+    private DtEntity detectStrategyAndDo(URL source, Function<PersistenceStrategy<DtEntity>, DtEntity> strategyEvaluation) {
+        final String path = ParseUtil.decode(source.getPath());
+        String extension = Files.getFileExtension(path);
+        PersistenceStrategy<DtEntity> strategy = strategies.get(extension);
+        if(null != strategy) {
+            return strategyEvaluation.apply(strategy);
+        }
+        throw new IllegalArgumentException(String.format("No matching persistence strategy for %s!", String.valueOf(source)));
+    }
+
+
 }

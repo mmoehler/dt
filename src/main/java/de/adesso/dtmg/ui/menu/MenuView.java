@@ -57,13 +57,6 @@ public class MenuView implements FxmlView<MenuViewModel> {
     }
 
     @FXML
-    public void doAbout() {
-        Parent view = FluentViewLoader.fxmlView(AboutView.class)
-                .load().getView();
-        DialogHelper.showDialog(view, primaryStage, "/dtmg.css");
-    }
-
-    @FXML
     public void doAddConditionDecl(ActionEvent actionEvent) {
         viewModel.addConditionDeclAction();
     }
@@ -183,11 +176,19 @@ public class MenuView implements FxmlView<MenuViewModel> {
         viewModel.completeReportAction();
     }
 
+    @FXML
     public void doAddMissingRules(ActionEvent actionEvent) {
         viewModel.addMissingRules();
     }
 
+    @FXML
     public void doDeleteRedundantRules(ActionEvent actionEvent) {
         viewModel.deleteRedundantRules();
+    }
+
+    @FXML
+    public void doAbout() {
+        Parent view = FluentViewLoader.fxmlView(AboutView.class).load().getView();
+        DialogHelper.showDialog(view, primaryStage, "/about.css");
     }
 }

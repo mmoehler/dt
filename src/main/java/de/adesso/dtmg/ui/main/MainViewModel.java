@@ -120,11 +120,15 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onAddRuleDef(@Observes AddRuleDefEvent event) {
-        List<List<String>> newDefns = List2DFunctions.addColumn(adapt(this.conditionDefinitions), () -> QMARK);
-        this.conditionDefinitions.clear();
-        List<List<String>> newDefns0 = List2DFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
-        this.actionDefinitions.clear();
-        publish(ADD_RULE.name(), adapt(newDefns), adapt(newDefns0));
+        if(hasNoElseRule().test(this.conditionDefinitions.get(0))) {
+            List<List<String>> newDefns = List2DFunctions.addColumn(adapt(this.conditionDefinitions), () -> QMARK);
+            this.conditionDefinitions.clear();
+            List<List<String>> newDefns0 = List2DFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
+            this.actionDefinitions.clear();
+            publish(ADD_RULE.name(), adapt(newDefns), adapt(newDefns0));
+        } else {
+            publish(INS_RULE.name(), this.conditionDefinitions.get(0).size()-1);
+        }
     }
 
     public ObservableList<ObservableList<String>> initializeConditionDefnsData(final int requestedColCount, final boolean shouldPopulateData) {
@@ -249,13 +253,15 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onAddElseRule(@Observes AddElseRuleEvent event) {
-        List<List<String>> newDefns = List2DFunctions.addColumn(adapt(this.conditionDefinitions), () -> ELSE);
-        this.conditionDefinitions.clear();
-        List<List<String>> newDefns0 = List2DFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
-        this.actionDefinitions.clear();
-        publish(ADD_ELSE_RULE.name(), adapt(newDefns), adapt(newDefns0));
-        this.elseRuleSet = true;
-        notifyElseRuleSet();
+        if(hasNoElseRule().test(this.conditionDefinitions.get(0))) {
+            List<List<String>> newDefns = List2DFunctions.addColumn(adapt(this.conditionDefinitions), () -> ELSE);
+            this.conditionDefinitions.clear();
+            List<List<String>> newDefns0 = List2DFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
+            this.actionDefinitions.clear();
+            publish(ADD_ELSE_RULE.name(), adapt(newDefns), adapt(newDefns0));
+            this.elseRuleSet = true;
+            notifyElseRuleSet();
+        }
     }
 
     public void updateRowHeader() {

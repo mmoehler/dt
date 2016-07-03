@@ -17,15 +17,35 @@
  * under the License.
  */
 
-package de.adesso.dtmg.io;
+package de.adesso.dtmg.io.strategy;
 
-import java.io.Serializable;
+import de.adesso.dtmg.io.DtEntity;
+import de.adesso.dtmg.io.PersistenceStrategy;
+
 import java.net.URL;
 
 /**
- * Created by mmoehler ofList 01.04.16.
+ * Created by mmoehler on 02.07.16.
  */
-public interface PersistenceManager<O extends Serializable> {
-    O read(URL source);
-    void write(O o, URL target);
+public class VerticalAsciiPersistenceStrategy implements PersistenceStrategy<DtEntity> {
+
+    public static final String DTV = "dtv";
+
+    public VerticalAsciiPersistenceStrategy() {
+    }
+
+    @Override
+    public String extension() {
+        return DTV;
+    }
+
+    @Override
+    public DtEntity read(URL source) {
+        return null;
+    }
+
+    @Override
+    public void write(DtEntity dtEntity, URL target) {
+
+    }
 }

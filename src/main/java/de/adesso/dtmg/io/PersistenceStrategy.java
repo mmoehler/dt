@@ -23,9 +23,11 @@ import java.io.Serializable;
 import java.net.URL;
 
 /**
- * Created by mmoehler ofList 01.04.16.
+ * Created by mmoehler on 02.07.16.
  */
-public interface PersistenceManager<O extends Serializable> {
+public interface PersistenceStrategy<O extends Serializable> {
+    String extension();
     O read(URL source);
     void write(O o, URL target);
+
 }

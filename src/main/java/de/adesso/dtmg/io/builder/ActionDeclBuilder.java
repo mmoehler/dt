@@ -17,33 +17,37 @@
  * under the License.
  */
 
-package de.adesso.dtmg.functions.fixtures;
+package de.adesso.dtmg.io.builder;
 
-import de.adesso.dtmg.functions.chained.first.Builder;
 import de.adesso.dtmg.model.ActionDecl;
-import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-
-import java.util.List;
 
 /**
  * Created by mmoehler ofList 06.03.16.
  */
-public class ActionDeclTableViewModelListBuilder implements Builder<List<ActionDeclTableViewModel>> {
+public class ActionDeclBuilder<C> extends AbstractSubBuilder<ActionDecl, C> {
+    private final String lfdNr;
+    private String expression;
+    private String indicators;
 
-    private final ObservableList<ActionDeclTableViewModel> list = FXCollections.observableArrayList();
-
-    public ActionDeclTableViewModelListBuilder() {
-        super();
-    }
-
-    public ActionDeclBuilder<ActionDeclTableViewModelListBuilder> addTableViewModelWithLfdNbr(String number) {
-        return new ActionDeclBuilder<>(number, this, (ActionDecl a) -> list.add(new ActionDeclTableViewModel(a)));
+    public ActionDeclBuilder(String lfdNr, C caller, Callback<ActionDecl> callback) {
+        super(caller, callback);
+        this.lfdNr = lfdNr;
     }
 
     @Override
-    public ObservableList<ActionDeclTableViewModel> build() {
-        return list;
+    public ActionDecl build() {
+        return new ActionDecl(lfdNr, expression, indicators);
     }
+
+    public ActionDeclBuilder<C> withExpression(String expression) {
+        this.expression = expression;
+        return this;
+    }
+
+    public C withIndicators(String possibleIndicators) {
+        this.indicators = possibleIndicators;
+        getCallback().call(build());
+        return getCaller();
+    }
+
 }

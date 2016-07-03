@@ -17,15 +17,13 @@
  * under the License.
  */
 
-package de.adesso.dtmg.io;
-
-import java.io.Serializable;
-import java.net.URL;
+package de.adesso.dtmg.io.builder;
 
 /**
- * Created by mmoehler ofList 01.04.16.
+ * Created by mmoehler ofList 11.03.16.
  */
-public interface PersistenceManager<O extends Serializable> {
-    O read(URL source);
-    void write(O o, URL target);
+interface SubBuilder<R, C> extends Builder<R> {
+    C getCaller();
+
+    Callback<R> getCallback();
 }

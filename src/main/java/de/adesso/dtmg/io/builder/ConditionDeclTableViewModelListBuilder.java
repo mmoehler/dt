@@ -17,9 +17,8 @@
  * under the License.
  */
 
-package de.adesso.dtmg.functions.fixtures;
+package de.adesso.dtmg.io.builder;
 
-import de.adesso.dtmg.functions.chained.first.Builder;
 import de.adesso.dtmg.model.ConditionDecl;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
 import javafx.collections.FXCollections;

@@ -17,15 +17,27 @@
  * under the License.
  */
 
-package de.adesso.dtmg.io;
-
-import java.io.Serializable;
-import java.net.URL;
+package de.adesso.dtmg.io.builder;
 
 /**
- * Created by mmoehler ofList 01.04.16.
+ * Created by mmoehler ofList 11.03.16.
  */
-public interface PersistenceManager<O extends Serializable> {
-    O read(URL source);
-    void write(O o, URL target);
+public abstract class AbstractSubBuilder<R, C> implements SubBuilder<R, C> {
+    protected final C caller;
+    protected final Callback<R> callback;
+
+    public AbstractSubBuilder(C caller, Callback<R> callback) {
+        this.callback = callback;
+        this.caller = caller;
+    }
+
+    @Override
+    public C getCaller() {
+        return this.caller;
+    }
+
+    @Override
+    public Callback<R> getCallback() {
+        return this.callback;
+    }
 }

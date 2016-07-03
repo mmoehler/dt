@@ -25,6 +25,7 @@ import de.adesso.dtmg.ui.DefinitionsTableCell;
 import de.adesso.dtmg.ui.PossibleIndicatorsSupplier;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
+import de.adesso.dtmg.util.Normalizer;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.ObservableList;
 import javafx.event.EventHandler;
@@ -34,6 +35,7 @@ import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.control.cell.TextFieldTableCell;
+import javafx.util.StringConverter;
 
 import java.util.*;
 import java.util.function.Supplier;
@@ -476,6 +478,31 @@ public final class DtFunctions {
 
     public static TableColumn<ObservableList<String>, String> createTableColumn(int x) {
         return createTableColumn(x, Optional.empty());
+    }
+
+    public static <S> TableColumn<S, String> createExpressionTableColumn(String columnName, String propertyName, int prefWidth,
+                                                               int minWidth, int maxWidth, boolean resizable,
+                                                               Pos alignment,final String prefix, EventHandler<TableColumn.CellEditEvent<S, String>> value) {
+        TableColumn<S, String> col = new TableColumn<>(columnName);
+        col.setMinWidth(minWidth);
+        col.setPrefWidth(prefWidth);
+        col.setMaxWidth(maxWidth);
+        col.setResizable(resizable);
+        col.setCellValueFactory(new PropertyValueFactory<>(propertyName));
+        //col.setCellFactory(DeclarationsTableCell.forTableColumn(alignment));
+        col.setCellFactory(TextFieldTableCell.forTableColumn(new StringConverter<String>() {
+            @Override
+            public String toString(String object) {
+                return object;
+            }
+
+            @Override
+            public String fromString(String string) {
+                return Normalizer.INSTANCE.toJavaIdentifer(prefix, string);
+            }
+        }));
+        col.setOnEditCommit(value);
+        return col;
     }
 
     public static <S> TableColumn<S, String> createTableColumn(String columnName, String propertyName, int prefWidth,

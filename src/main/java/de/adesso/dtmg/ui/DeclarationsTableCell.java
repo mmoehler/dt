@@ -96,13 +96,13 @@ public class DeclarationsTableCell<S, T> extends TableCell<S, T> {
      *
      * @return
      */
-    public static <S> Callback<TableColumn<S, String>, TableCell<S, String>> forTableColumn() {
-        return list -> new DeclarationsTableCell(IDENTITY_CONVERTER);
+    public static <S> Callback<TableColumn<S, String>, TableCell<S, String>> forTableColumn(StringConverter<String> converter) {
+        return list -> new DeclarationsTableCell(converter);
     }
 
-    public static <S> Callback<TableColumn<S, String>, TableCell<S, String>> forTableColumn(Pos position) {
+    public static <S> Callback<TableColumn<S, String>, TableCell<S, String>> forTableColumn(Pos position, StringConverter<String> converter) {
         return list -> {
-            final DeclarationsTableCell cell = new DeclarationsTableCell(IDENTITY_CONVERTER);
+            final DeclarationsTableCell cell = new DeclarationsTableCell(converter);
             cell.setAlignment(position);
             return cell;
         };
