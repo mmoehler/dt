@@ -1,40 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="6b2d1880-d391-4d61-bb7f-0c8e21880d82" name="Default" comment="TReeMethod started">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/de/adesso/dtmg/ui/about/Author.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/TreeMethod.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/PersistenceStrategy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder/AbstractSubBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder/ActionDeclBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder/ActionDeclTableViewBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder/ActionDeclTableViewModelListBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder/Builder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder/Callback.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder/ConditionDeclBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder/ConditionDeclTableViewBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder/ConditionDeclTableViewModelListBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder/SubBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder/TableViewBuilder.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/strategy/BinaryPersistenceStrategy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/strategy/HorizontalAsciiPersistenceStrategy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/strategy/VerticalAsciiPersistenceStrategy.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/Normalizer.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/about.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/de/adesso/dtmg/ui/about/AboutAuthorView.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/resources/de/adesso/dtmg/ui/about/AboutView.fxml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/TreeMethodTest.java" />
+    <list default="true" id="6b2d1880-d391-4d61-bb7f-0c8e21880d82" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/treemethod/Node.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/tuple/HObservableLists.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/treeMethod/DtEntityStub.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/HListsTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/test.dtx" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/todos.txt" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/StraightScan.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/straightscan/StraightScan.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/TreeMethod.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/treemethod/TreeMethod.java" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/TreeMethodTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/treeMethod/TreeMethodTest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/DtFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/DtFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/DefaultPersistenceManager.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/DefaultPersistenceManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/PersistenceManager.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/PersistenceManager.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/DeclarationsTableCell.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/DeclarationsTableCell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/about/AboutAuthorViewModel.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/about/AboutAuthorViewModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainView.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/menu/MenuView.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/menu/MenuView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/ActionDeclTableViewModelListBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/ActionDeclTableViewModelListBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/ConditionDeclTableViewModelListBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/ConditionDeclTableViewModelListBuilder.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/ObservableList2DFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/ObservableList2DFunctions.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/HLists.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/HLists.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/StraightScanTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/StraightScanTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/StraightScanTest2.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/StraightScanTest2.java" />
     </list>
     <ignored path="dt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -49,14 +30,11 @@
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/dt$de_adesso_tools.coverage" NAME="de.adesso.tools Coverage Results" MODIFIED="1457935801285" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>de.adesso.tools.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/dt$DtFunctionsTest.coverage" NAME="DtFunctionsTest Coverage Results" MODIFIED="1457935627414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>de.adesso.tools.functions.*</FILTER>
-    </SUITE>
     <SUITE FILE_PATH="coverage/dt$ActionsTest_testA5Design__1_.coverage" NAME="ActionsTest.testA5Design (1) Coverage Results" MODIFIED="1458462325690" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.adesso.tools.analysis.completeness.detailed.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/dt$LeistungsartenFestlegenPart01RulesTest_testBitSet.coverage" NAME="LeistungsartenFestlegenPart01RulesTest.testBitSet Coverage Results" MODIFIED="1466060556875" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>de.adesso.dtmg.export.java.straigtScan.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/dt$DtFunctionsTest_testDoInsertColumns__1_.coverage" NAME="DtFunctionsTest.testDoInsertColumns (1) Coverage Results" MODIFIED="1457187031580" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.adesso.tools.functions.*</FILTER>
@@ -64,7 +42,13 @@
     <SUITE FILE_PATH="coverage/dt$ActionsTest_testA5OK__1_.coverage" NAME="ActionsTest.testA5OK (1) Coverage Results" MODIFIED="1463673126187" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.adesso.tools.analysis.completeness.detailed.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/dt$TreeMethodTest_testLoad.coverage" NAME="TreeMethodTest.testLoad Coverage Results" MODIFIED="1467543492864" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/dt$DtFunctionsTest.coverage" NAME="DtFunctionsTest Coverage Results" MODIFIED="1457935627414" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>de.adesso.tools.functions.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/dt$de_adesso_tools.coverage" NAME="de.adesso.tools Coverage Results" MODIFIED="1457935801285" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>de.adesso.tools.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/dt$TreeMethodTest__1_.coverage" NAME="TreeMethodTest (1) Coverage Results" MODIFIED="1467701307909" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>de.adesso.dtmg.export.java.*</FILTER>
     </SUITE>
   </component>
@@ -76,15 +60,94 @@
     <favorites_list name="dt" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="TreeMethodTest.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/treeMethod/TreeMethodTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.4357035">
+              <caret line="175" column="22" selection-start-line="175" selection-start-column="22" selection-end-line="175" selection-end-column="22" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ObservableList2DFunctions.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/ObservableList2DFunctions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="70" column="17" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DtEntityStub.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/treeMethod/DtEntityStub.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="41" column="39" selection-start-line="41" selection-start-column="39" selection-end-line="41" selection-end-column="39" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DtEntity.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/DtEntity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="TreeMethod.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/treemethod/TreeMethod.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="83" column="4" selection-start-line="83" selection-start-column="4" selection-end-line="83" selection-end-column="4" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="HObservableLists.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/tuple/HObservableLists.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="53" column="33" selection-start-line="53" selection-start-column="33" selection-end-line="53" selection-end-column="33" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Node.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/treemethod/Node.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="69" column="33" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JUnit4 Test Class" />
+        <option value="Interface" />
         <option value="Enum" />
         <option value="TestNG Test Class" />
-        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -101,57 +164,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/odf/ODFExport.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/export/ascii/ExportFunctions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/export/ExportFunctions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/export/ascii/Emitter.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/export/AsciiExportFunctions.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/Lists2.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/MoreCollectors.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/tools/util/HLists.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/tools/export/ascii/EmitterTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFTableEmitter.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFExportTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/ifthen/DtNode.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/ifthen/IfThen.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/ifthen/Visitable.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/ifthen/Visitor.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/ifthen/ConditionNode.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/ifthen/SimpleVisitor.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/ifthen/Rules.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/MoreCollectors.java" />
-        <option value="$PROJECT_DIR$/de/adesso/dtmg/export/java/Rules.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/Rules.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/ifthen/EmitterTest.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/ConcreteRules.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/AbstractRules.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/ifthen/Emitter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/Emitter.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/ClassDescription.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/exception/LambdaExceptionUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/StraigtScan.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/Reserved.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/DefinitionsTableCell.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/ObservableListFunctions.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/RandomDefinitions.java" />
         <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/List2DFunctions.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/scopes/RuleScope.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/menu/MenuViewModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/about/AboutAuthorView.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/about/AboutView.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/menu/MenuView.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/de/adesso/dtmg/ui/about/AboutView.fxml" />
-        <option value="$PROJECT_DIR$/src/main/resources/de/adesso/dtmg/ui/about/AboutAuthorView.fxml" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/about/AboutAuthorViewModel.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/Normalizer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/DeclarationsTableCell.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/DtFunctions.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/TreeMethod.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/ifthen/DtNode.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/ifthen/EmitterTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/AbstractRules.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/StraigtScan.java" />
         <option value="$PROJECT_DIR$/pom.xml" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/treeMethod/BufferCharSequence.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/ConditionDeclTableViewModelListBuilder.java" />
-        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/ActionDeclTableViewModelListBuilder.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/dtm/BinaryPersistenceStrategy.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/strategy/VerticalAsciiPersistenceStrategy.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/strategy/BinaryPersistenceStrategy.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/PersistenceManager.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/PersistenceStrategy.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainView.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/strategy/HorizontalAsciiPersistenceStrategy.java" />
-        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/DefaultPersistenceManager.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/common/ToStringable.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/common/AsStringable.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/common/Stringable.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/common/ToStringDecorator.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straightScan/StraightScanTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straightScan/ForFutureUse.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/model/ActionDecl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/StraightScanTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/Dump.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/PrinterTroubleshootingRules.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straightScan/PrinterTroubleshootingRulesImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/PrinterTroubleshootingRulesImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/PrinterTroubleshootingRulesTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/PrinterTroubleshootingRulesTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/StraightScan.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/LeistungsartenFestlegen.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/StraightScanTest2.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/LeistungsartenFestlegenPart01Rules.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/LeistungsartenFestlegenPart01RulesResults.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/LeistungsartenFestlegenPart01RulesImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/LeistungsartenFestlegenPart01RulesImpl.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/LeistungsartenFestlegenPart01RulesTest.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/LeistungsartenFestlegenPart01Rules.java" />
+        <option value="$PROJECT_DIR$/todos.txt" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/HLists.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/HListsTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/treemethod/Node.java" />
         <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/TreeMethodTest.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/about.css" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/treemethod/TreeMethod.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/treeMethod/DtEntityStub.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/tuple/HObservableLists.java" />
+        <option value="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/ObservableList2DFunctions.java" />
+        <option value="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/treeMethod/TreeMethodTest.java" />
       </list>
     </option>
   </component>
@@ -222,10 +285,10 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-2" />
-    <option name="y" value="23" />
-    <option name="width" value="1920" />
-    <option name="height" value="977" />
+    <option name="x" value="-1928" />
+    <option name="y" value="-8" />
+    <option name="width" value="1936" />
+    <option name="height" value="1056" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -247,9 +310,6 @@
             <id>Code style issuesJava</id>
           </State>
           <State>
-            <id>General</id>
-          </State>
-          <State>
             <id>Google Web Toolkit issues</id>
           </State>
           <State>
@@ -265,9 +325,6 @@
             <id>Javadoc issuesJava</id>
           </State>
           <State>
-            <id>Kotlin</id>
-          </State>
-          <State>
             <id>Memory issuesJava</id>
           </State>
           <State>
@@ -280,9 +337,6 @@
             <id>Performance issuesJava</id>
           </State>
           <State>
-            <id>Plugin DevKit</id>
-          </State>
-          <State>
             <id>Spring</id>
           </State>
           <State>
@@ -293,12 +347,6 @@
           </State>
           <State>
             <id>Threading issuesJava</id>
-          </State>
-          <State>
-            <id>XPath</id>
-          </State>
-          <State>
-            <id>XSLT</id>
           </State>
         </expanded-state>
         <selected-state>
@@ -334,6 +382,54 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope">
+        <subPane subId="Tests">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="dt">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src/test/java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="de/adesso/tools">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="util/func">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="dt">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="src/test/java">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="de/adesso/tools">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT USER_OBJECT="common">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -530,54 +626,7 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope">
-        <subPane subId="Tests">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="dt">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src/test/java">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="de/adesso/tools">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="util/func">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="dt">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="src/test/java">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="de/adesso/tools">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT USER_OBJECT="common">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -593,6 +642,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -651,36 +718,6 @@
               <option name="myItemId" value="dtmg" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="test" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dtmg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -745,6 +782,48 @@
               <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="treeMethod" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dt" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="dtmg" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="export" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="straigtScan" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -816,7 +895,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
+              <option name="myItemId" value="export" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -846,11 +925,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
+              <option name="myItemId" value="export" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
+              <option name="myItemId" value="java" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -880,11 +959,15 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ui" />
+              <option name="myItemId" value="export" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dialogs" />
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="treemethod" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -914,25 +997,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="dt" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
+              <option name="myItemId" value="export" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -940,15 +1005,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dtmg" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="io" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="strategy" />
+              <option name="myItemId" value="straightscan" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -976,7 +1033,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -986,29 +1042,29 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="last_opened_file_path" value="/Applications/SceneBuilder.app" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Font" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="last_directory_selection" value="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions" />
-    <property name="SearchEverywhereHistoryKey" value="dofileopen&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainView#doFileOpen&#10;doInsAction&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainView#doInsActionDecl&#10;onInsert&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainViewModel#onInsertActionDecl&#10;doinsertAction&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.menu.MenuView#doInsertActionDecl&#10;onMoveR&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainViewModel#onMoveRuleLeft&#10;doAddRu&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainView#doAddRule&#10;doInsert&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.menu.MenuView#doInsertRuleDef&#10;doInsR&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainView#doInsRule&#10;onAddRule&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainViewModel#onAddRuleDef&#10;onAdd&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainViewModel#onAddRuleDef&#10;else&#9;PSI&#9;JAVA://de.adesso.dtmg.events.AddElseRuleEvent&#10;onAdde&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainViewModel#onAddElseRule&#10;onAddElse&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainViewModel#onAddElseRule&#10;elseRule&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainViewModel#elseRuleSet&#10;onaddelse&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainViewModel#onAddElseRule&#10;doMove&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainView#doMoveRuleRight&#10;oninsertCond&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainViewModel#onInsertConditionDecl&#10;hasElse&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainViewModel#hasNoElseRule&#10;onformalcom&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainViewModel#onFormalCompletenessCheckAction&#10;onAddEl&#9;PSI&#9;JAVA://de.adesso.dtmg.ui.main.MainViewModel#onAddElseRule&#10;DefaultStruct&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/dtmg/analysis/structure/DefaultStructuralAnalysis.java&#10;Executor&#9;PSI&#9;JAVA://java.util.concurrent.ExecutorService&#10;Future&#9;PSI&#9;JAVA://java.util.concurrent.Future&#10;Rules&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/test/java/de/adesso/dtmg/export/java/ifthen/Rules.java&#10;Runnable&#9;FILE&#9;jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/lang/Runnable.java&#10;StructuralAnal&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/dtmg/analysis/structure/StructuralAnalysisResultEmitter.java&#10;MainView&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java&#10;TextCell&#9;FILE&#9;jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/ext/jfxrt.jar!/javafx/scene/control/cell/TextFieldTableCell.class&#10;Decision&#9;PSI&#9;JAVA://de.adesso.dtmg.model.DecisionTable&#10;BiConsumer&#9;FILE&#9;jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/util/function/BiConsumer.java&#10;File&#9;FILE&#9;jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/rt.jar!/sun/net/www/protocol/file/FileURLConnection.class&#10;Main&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java&#10;MAIN&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java&#10;UrlStrea&#9;FILE&#9;jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/net/URLStreamHandler.java&#10;FileUrl&#9;FILE&#9;jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/rt.jar!/com/sun/org/apache/xml/internal/resolver/helpers/FileURL.class&#10;Fileurl&#9;PSI&#9;JAVA://com.sun.tools.internal.ws.wscompile.Options#fileToURL&#10;FileUrlC&#9;PSI&#9;JAVA://java.net.JarURLConnection#jarFileURLConnection&#10;FileURL&#9;PSI&#9;JAVA://sun.net.www.protocol.file.FileURLConnection&#10;FileURLConnect&#9;FILE&#9;jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/jre/lib/rt.jar!/sun/net/www/protocol/file/FileURLConnection.class&#10;Reducer&#9;PSI&#9;JAVA://java.util.concurrent.ConcurrentHashMap.MapReduceEntriesTask#reducer&#10;Emitter&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/tools/print/Emitter.java&#10;asByteSink&#9;PSI&#9;JAVA://com.google.common.io.Files#asByteSink&#10;Tuple&#9;PSI&#9;JAVA://de.adesso.tools.util.tuple.Tuple&#10;ConditionDeclT&#9;PSI&#9;JAVA://de.adesso.tools.ui.condition.ConditionDeclTableViewModel&#10;doAddCo&#9;PSI&#9;JAVA://de.adesso.tools.ui.menu.MenuView#doAddConditionDecl&#10;addColumn&#9;PSI&#9;JAVA://de.adesso.tools.functions.MatrixFunctions#addColumn&#10;determineIndi&#9;PSI&#9;JAVA://de.adesso.tools.ui.main.MainView#determineIndices&#10;MatrixBuilder&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/tools/common/MatrixBuilder.java&#10;FXCollections&#9;PSI&#9;JAVA://javafx.collections.FXCollections&#10;MatrixBui&#9;PSI&#9;JAVA://de.adesso.tools.common.MatrixBuilder" />
+    <property name="SearchEverywhereHistoryKey" value="HLis&#9;PSI&#9;JAVA://de.adesso.dtmg.util.HLists&#10;step&#9;PSI&#9;JAVA://de.adesso.dtmg.export.java.TreeMethodTest#step1&#10;Condi&#9;PSI&#9;JAVA://de.adesso.dtmg.model.ConditionDecl&#10;Emitter&#9;FILE&#9;file://C:/cygwin64/home/moehler/m2-projects/dt/src/main/java/de/adesso/tools/analysis/structure/StructuralAnalysisResultEmitter.java&#10;asByteSink&#9;PSI&#9;JAVA://com.google.common.io.Files#asByteSink&#10;Tuple&#9;PSI&#9;JAVA://de.adesso.tools.util.tuple.Tuple&#10;ConditionDeclT&#9;PSI&#9;JAVA://de.adesso.tools.ui.condition.ConditionDeclTableViewModel&#10;doAddCo&#9;PSI&#9;JAVA://de.adesso.tools.ui.menu.MenuView#doAddConditionDecl&#10;addColumn&#9;PSI&#9;JAVA://de.adesso.tools.functions.MatrixFunctions#addColumn&#10;determineIndi&#9;PSI&#9;JAVA://de.adesso.tools.ui.main.MainView#determineIndices&#10;MatrixBuilder&#9;FILE&#9;file:///Users/mmoehler/checkouts/dt/src/main/java/de/adesso/tools/common/MatrixBuilder.java&#10;FXCollections&#9;PSI&#9;JAVA://javafx.collections.FXCollections&#10;MatrixBui&#9;PSI&#9;JAVA://de.adesso.tools.common.MatrixBuilder" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="TestNG" />
     <property name="JavaScriptPreferStrict" value="false" />
     <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="263" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="258" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="263" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="259" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="268" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="263" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1054" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="1050" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="263" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="258" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="263" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="259" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="268" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="263" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
-    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1054" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="1050" />
     <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
   </component>
   <component name="RecentsManager">
@@ -1016,11 +1072,11 @@
       <recent name="" />
     </key>
     <key name="CreateTestDialog.RecentsKey">
+      <recent name="de.adesso.dtmg.util" />
       <recent name="de.adesso.dtmg.export.java" />
-      <recent name="de.adesso.dtmg.export.odf" />
-      <recent name="de.adesso.dtmg.io" />
-      <recent name="de.adesso.tools.util.output" />
+      <recent name="de.adesso.dtmg.export.java.ifthen" />
       <recent name="de.adesso.tools.util" />
+      <recent name="de.adesso.tools.common" />
     </key>
     <key name="MoveMembersDialog.RECENTS_KEY">
       <recent name="de.adesso.tools.functions.ListFunctions" />
@@ -1030,28 +1086,24 @@
     </key>
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
       <recent name="de.adesso.dtmg.export.java" />
-      <recent name="de.adesso.dtmg.ui.main" />
-      <recent name="de.adesso.dtmg.functions" />
-      <recent name="de.adesso.dtmg.io" />
-      <recent name="de.adesso.tools.print" />
+      <recent name="de.adesso.tools.export" />
+      <recent name="de.adesso.tools.analysis.structure" />
+      <recent name="de.adesso.tools.ui" />
+      <recent name="de.adesso.tools.functions" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/resources/de/adesso/dtmg/ui/about" />
       <recent name="C:\cygwin64\home\moehler\m2-projects\dt\src\main\java\de\adesso\tools\analysis\completeness\simple" />
       <recent name="$PROJECT_DIR$/src/test/java/de/adesso/tools/functions" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
-      <recent name="de.adesso.dtmg.io.builder" />
-      <recent name="de.adesso.dtmg.functions" />
-      <recent name="de.adesso.dtmg.ui" />
-      <recent name="de.adesso.dtmg.io" />
+      <recent name="de.adesso.dtmg.util.tuple" />
+      <recent name="de.adesso.dtmg.export.java.straigtScan" />
       <recent name="de.adesso.tools.io.zip" />
+      <recent name="de.adesso.tools.io" />
+      <recent name="de.adesso.tools.common" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder" />
-      <recent name="$PROJECT_DIR$/src/main/resources/de/adesso/dtmg/ui/about" />
-      <recent name="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/about" />
-      <recent name="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io" />
+      <recent name="C:\cygwin64\home\moehler\m2-projects\dt" />
       <recent name="C:\cygwin64\home\moehler\m2-projects\dt\src\test\java\de\adesso\tools\functions\chained\third" />
     </key>
     <key name="CreateClassDialog.RecentsKey">
@@ -1061,11 +1113,11 @@
       <recent name="de.adesso.tools.analysis.structure" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.App">
-    <configuration default="false" name="TreeMethodTest (1)" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+  <component name="RunManager" selected="TestNG.TreeMethodTest.testStep4_Split_Definitions">
+    <configuration default="false" name="TreeMethodTest.testStep1_Leaf" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="de.adesso.dtmg.export.java.*" />
+          <option name="PATTERN" value="de.adesso.dtmg.export.java.treeMethod.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -1074,107 +1126,8 @@
       <option name="ALTERNATIVE_JRE_PATH" />
       <option name="SUITE_NAME" />
       <option name="PACKAGE_NAME" value="de.adesso.dtmg.export.java" />
-      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.export.java.TreeMethodTest" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="false" name="TreeMethodTest (4)" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="de.adesso.dtmg.export.java.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="dt" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="de.adesso.dtmg.export.java" />
-      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.export.java.TreeMethodTest" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="false" name="TreeMethodTest (2)" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="de.adesso.dtmg.export.java.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="dt" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="de.adesso.dtmg.export.java" />
-      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.export.java.TreeMethodTest" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
-      <method />
-    </configuration>
-    <configuration default="false" name="TreeMethodTest.testLoad" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
-        <pattern>
-          <option name="PATTERN" value="de.adesso.dtmg.export.java.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <module name="dt" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" value="de.adesso.dtmg.export.java" />
-      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.export.java.TreeMethodTest" />
-      <option name="METHOD_NAME" value="testLoad" />
+      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.export.java.treeMethod.TreeMethodTest" />
+      <option name="METHOD_NAME" value="testStep1_Leaf" />
       <option name="GROUP_NAME" />
       <option name="TEST_OBJECT" value="METHOD" />
       <option name="VM_PARAMETERS" value="-ea" />
@@ -1194,30 +1147,201 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="false" name="App" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration default="false" name="TreeMethodTest.testStep4_Split_DEfinitions" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
-          <option name="PATTERN" value="de.adesso.dtmg.*" />
+          <option name="PATTERN" value="de.adesso.dtmg.export.java.treeMethod.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
-      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.App" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <module name="dt" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="de.adesso.dtmg.export.java" />
+      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.export.java.treeMethod.TreeMethodTest" />
+      <option name="METHOD_NAME" value="testStep4_Split_DEfinitions" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="dt" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
       <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="false" name="TreeMethodTest.testStep4_Split_Definitions_by_Function" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="de.adesso.dtmg.export.java.treeMethod.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="dt" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="de.adesso.dtmg.export.java" />
+      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.export.java.treeMethod.TreeMethodTest" />
+      <option name="METHOD_NAME" value="testStep4_Split_Definitions_by_Function" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="false" name="TreeMethodTest.testStep1_Non_Leaf" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="de.adesso.dtmg.export.java.treeMethod.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="dt" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="de.adesso.dtmg.export.java.treeMethod" />
+      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.export.java.treeMethod.TreeMethodTest" />
+      <option name="METHOD_NAME" value="testStep1_Non_Leaf" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="false" name="TreeMethodTest.testStep4_Split_Definitions" type="TestNG" factoryName="TestNG" temporary="true" nameIsGenerated="true">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
+        <pattern>
+          <option name="PATTERN" value="de.adesso.dtmg.export.java.treeMethod.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <module name="dt" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" value="de.adesso.dtmg.export.java.treeMethod" />
+      <option name="MAIN_CLASS_NAME" value="de.adesso.dtmg.export.java.treeMethod.TreeMethodTest" />
+      <option name="METHOD_NAME" value="testStep4_Split_Definitions" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="METHOD" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$MODULE_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="singleModule" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
       <method />
     </configuration>
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
       <module name="" />
       <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m -ea" />
       <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidRunConfigurationType" factoryName="Android Application">
+      <module name="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="DEPLOY" value="true" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="USE_LAST_SELECTED_DEVICE" value="false" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="USE_COMMAND_LINE" value="true" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
+      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
+      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
+      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
+      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
+      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -1300,6 +1424,25 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="CucumberJavaRunConfigurationType" factoryName="Cucumber java">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="myFilePath" />
+      <option name="GLUE" />
+      <option name="myNameFilter" />
+      <option name="myGeneratedName" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="FlashRunConfigurationType" factoryName="Flash App">
@@ -1468,28 +1611,6 @@
       <envs />
       <method />
     </configuration>
-    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
-      <MavenSettings>
-        <option name="myGeneralSettings" />
-        <option name="myRunnerSettings" />
-        <option name="myRunnerParameters">
-          <MavenRunnerParameters>
-            <option name="profiles">
-              <set />
-            </option>
-            <option name="goals">
-              <list />
-            </option>
-            <option name="profilesMap">
-              <map />
-            </option>
-            <option name="resolveToWorkspace" value="false" />
-            <option name="workingDirPath" value="" />
-          </MavenRunnerParameters>
-        </option>
-      </MavenSettings>
-      <method />
-    </configuration>
     <configuration default="true" type="Remote" factoryName="Remote">
       <option name="USE_SOCKET_TRANSPORT" value="true" />
       <option name="SERVER_MODE" value="false" />
@@ -1581,25 +1702,25 @@
       <method />
     </configuration>
     <list size="5">
-      <item index="0" class="java.lang.String" itemvalue="TestNG.TreeMethodTest (1)" />
-      <item index="1" class="java.lang.String" itemvalue="TestNG.TreeMethodTest (4)" />
-      <item index="2" class="java.lang.String" itemvalue="TestNG.TreeMethodTest (2)" />
-      <item index="3" class="java.lang.String" itemvalue="TestNG.TreeMethodTest.testLoad" />
-      <item index="4" class="java.lang.String" itemvalue="Application.App" />
+      <item index="0" class="java.lang.String" itemvalue="TestNG.TreeMethodTest.testStep1_Leaf" />
+      <item index="1" class="java.lang.String" itemvalue="TestNG.TreeMethodTest.testStep4_Split_DEfinitions" />
+      <item index="2" class="java.lang.String" itemvalue="TestNG.TreeMethodTest.testStep4_Split_Definitions_by_Function" />
+      <item index="3" class="java.lang.String" itemvalue="TestNG.TreeMethodTest.testStep1_Non_Leaf" />
+      <item index="4" class="java.lang.String" itemvalue="TestNG.TreeMethodTest.testStep4_Split_Definitions" />
     </list>
     <recent_temporary>
       <list size="5">
-        <item index="0" class="java.lang.String" itemvalue="Application.App" />
-        <item index="1" class="java.lang.String" itemvalue="TestNG.TreeMethodTest.testLoad" />
-        <item index="2" class="java.lang.String" itemvalue="TestNG.TreeMethodTest (2)" />
-        <item index="3" class="java.lang.String" itemvalue="TestNG.TreeMethodTest (4)" />
-        <item index="4" class="java.lang.String" itemvalue="TestNG.TreeMethodTest (1)" />
+        <item index="0" class="java.lang.String" itemvalue="TestNG.TreeMethodTest.testStep4_Split_Definitions" />
+        <item index="1" class="java.lang.String" itemvalue="TestNG.TreeMethodTest.testStep1_Leaf" />
+        <item index="2" class="java.lang.String" itemvalue="TestNG.TreeMethodTest.testStep1_Non_Leaf" />
+        <item index="3" class="java.lang.String" itemvalue="TestNG.TreeMethodTest.testStep4_Split_Definitions_by_Function" />
+        <item index="4" class="java.lang.String" itemvalue="TestNG.TreeMethodTest.testStep4_Split_DEfinitions" />
       </list>
     </recent_temporary>
   </component>
   <component name="ShelveChangesManager" show_recycled="false" />
   <component name="StructureViewFactory">
-    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR" />
+    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR,SHOW_PROPERTIES,SHOW_NON_PUBLIC" />
   </component>
   <component name="SvnConfiguration">
     <configuration>$USER_HOME$/.subversion</configuration>
@@ -1676,16 +1797,43 @@
       <workItem from="1463637900017" duration="17477000" />
       <workItem from="1463983649072" duration="15388000" />
       <workItem from="1464066609666" duration="20496000" />
-      <workItem from="1464155419069" duration="19341000" />
-      <workItem from="1464249112695" duration="28547000" />
-      <workItem from="1464327683515" duration="65043000" />
-      <workItem from="1464561168888" duration="6000" />
-      <workItem from="1464623908940" duration="51000" />
-      <workItem from="1464968679897" duration="41564000" />
-      <workItem from="1465503375501" duration="46202000" />
-      <workItem from="1466865564289" duration="20406000" />
-      <workItem from="1467400202297" duration="2514000" />
-      <workItem from="1467448043267" duration="47357000" />
+      <workItem from="1464155419069" duration="19404000" />
+      <workItem from="1464605167619" duration="169000" />
+      <workItem from="1464670639259" duration="27000" />
+      <workItem from="1464670679640" duration="19264000" />
+      <workItem from="1464756478222" duration="21380000" />
+      <workItem from="1464843012296" duration="5745000" />
+      <workItem from="1464930041600" duration="96000" />
+      <workItem from="1465193891566" duration="1130000" />
+      <workItem from="1465274935582" duration="8431000" />
+      <workItem from="1465296168724" duration="612000" />
+      <workItem from="1465378618049" duration="8559000" />
+      <workItem from="1465447641219" duration="9950000" />
+      <workItem from="1465794894058" duration="1783000" />
+      <workItem from="1465813863359" duration="4938000" />
+      <workItem from="1465885834394" duration="22369000" />
+      <workItem from="1465965640995" duration="3827000" />
+      <workItem from="1466010261349" duration="621000" />
+      <workItem from="1466052298818" duration="10901000" />
+      <workItem from="1466400024948" duration="1228000" />
+      <workItem from="1467004917031" duration="762000" />
+      <workItem from="1467278641896" duration="888000" />
+      <workItem from="1467616657630" duration="1360000" />
+      <workItem from="1467693848652" duration="7593000" />
+      <workItem from="1467709909207" duration="17068000" />
+      <workItem from="1467780213087" duration="12909000" />
+    </task>
+    <task id="LOCAL-00001" summary="Refactoring of Matrix functions">
+      <created>1455475453269</created>
+      <option name="number" value="00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1455475453269</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Adding additional Insert functionality">
+      <created>1455901514694</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1455901514694</updated>
     </task>
     <task id="LOCAL-00003" summary="Adding additional Insert functionality">
       <created>1455901537381</created>
@@ -1909,115 +2057,85 @@
       <option name="project" value="LOCAL" />
       <updated>1464108915352</updated>
     </task>
-    <task id="LOCAL-00040" summary="Tableformatting except Column grouping finished">
-      <created>1464303753932</created>
+    <task id="LOCAL-00040" summary=" ASCII Report reworking is running!!">
+      <created>1464191832734</created>
       <option name="number" value="00040" />
       <option name="project" value="LOCAL" />
-      <updated>1464303753932</updated>
+      <updated>1464191832734</updated>
     </task>
-    <task id="LOCAL-00041" summary="DT can now be converted to text representation.">
-      <created>1464559958315</created>
+    <task id="LOCAL-00041" summary="STructural Analysreport started (See Emitter)">
+      <created>1464930126037</created>
       <option name="number" value="00041" />
       <option name="project" value="LOCAL" />
-      <updated>1464559958315</updated>
+      <updated>1464930126037</updated>
     </task>
-    <task id="LOCAL-00042" summary="DT can now be converted to text representation.">
-      <created>1464623937323</created>
+    <task id="LOCAL-00042" summary="ODF Export evaluated">
+      <created>1465283573698</created>
       <option name="number" value="00042" />
       <option name="project" value="LOCAL" />
-      <updated>1464623937323</updated>
+      <updated>1465283573698</updated>
     </task>
-    <task id="LOCAL-00043" summary="DT can now be converted to text representation.">
-      <created>1465135884041</created>
+    <task id="LOCAL-00043" summary="Evaluation Code Export">
+      <created>1465492701244</created>
       <option name="number" value="00043" />
       <option name="project" value="LOCAL" />
-      <updated>1465135884041</updated>
+      <updated>1465492701244</updated>
     </task>
-    <task id="LOCAL-00044" summary="PAckagestructure cleaned, DeclTableCell Editor changed, Some Excpetionhandling">
-      <created>1465141954496</created>
+    <task id="LOCAL-00044" summary="Straight Scan implemented -&gt; Test">
+      <created>1465828842733</created>
       <option name="number" value="00044" />
       <option name="project" value="LOCAL" />
-      <updated>1465141954496</updated>
+      <updated>1465828842733</updated>
     </task>
-    <task id="LOCAL-00045" summary="ODF Export">
-      <created>1465145637406</created>
+    <task id="LOCAL-00045" summary="Straight Scan implemented -&gt; Start wit tree method">
+      <created>1465971367941</created>
       <option name="number" value="00045" />
       <option name="project" value="LOCAL" />
-      <updated>1465145637406</updated>
+      <updated>1465971367941</updated>
     </task>
-    <task id="LOCAL-00046" summary="ODF Export">
-      <created>1465160653431</created>
+    <task id="LOCAL-00046" summary="Straight Scan implemented -&gt; Start wit tree method">
+      <created>1466400046481</created>
       <option name="number" value="00046" />
       <option name="project" value="LOCAL" />
-      <updated>1465160653431</updated>
+      <updated>1466400046481</updated>
     </task>
-    <task id="LOCAL-00047" summary="Straight Scan Method raw implemented">
-      <created>1465761090350</created>
-      <option name="number" value="00047" />
-      <option name="project" value="LOCAL" />
-      <updated>1465761090350</updated>
-    </task>
-    <task id="LOCAL-00048" summary="Straight Scan Method raw implemented">
-      <created>1466865591712</created>
-      <option name="number" value="00048" />
-      <option name="project" value="LOCAL" />
-      <updated>1466865591712</updated>
-    </task>
-    <task id="LOCAL-00049" summary="Straight Scan Method raw implemented">
-      <created>1466865607311</created>
-      <option name="number" value="00049" />
-      <option name="project" value="LOCAL" />
-      <updated>1466865607311</updated>
-    </task>
-    <task id="LOCAL-00050" summary="Straight Scan Method raw implemented">
-      <created>1466865941745</created>
-      <option name="number" value="00050" />
-      <option name="project" value="LOCAL" />
-      <updated>1466865941746</updated>
-    </task>
-    <task id="LOCAL-00051" summary="Else Rule handling except:&#10;&#10;e) MoveRule&#10;&#9;o Verboten für Else Rule&#10;&#9;o MoveRight verboten wenn Rule rechts neben &#9;   &#10;&#9;   der zu verschiebenden Rule die Else Rule ist&#10;&#10;f) AddRule - Wenn ElseRule definiert, dann neue &#10;   ConditionDef vor der ElseRule einfügen!">
-      <created>1466972434718</created>
-      <option name="number" value="00051" />
-      <option name="project" value="LOCAL" />
-      <updated>1466972434718</updated>
-    </task>
-    <option name="localTasksCounter" value="52" />
+    <option name="localTasksCounter" value="48" />
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="TreeMethodTest_(1) - 2016.07.03 at 18h 34m 36s.xml">
-      <configuration name="TreeMethodTest (1)" configurationId="TestNG" />
+    <history-entry file="TreeMethodTest_testStep1_Leaf - 2016.07.06 at 08h 32m 13s.xml">
+      <configuration name="TreeMethodTest.testStep1_Leaf" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="TreeMethodTest_(1) - 2016.07.03 at 19h 12m 52s.xml">
-      <configuration name="TreeMethodTest (1)" configurationId="TestNG" />
+    <history-entry file="TreeMethodTest_testStep1_Leaf - 2016.07.06 at 08h 37m 53s.xml">
+      <configuration name="TreeMethodTest.testStep1_Leaf" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="TreeMethodTest_(2) - 2016.07.03 at 17h 35m 59s.xml">
-      <configuration name="TreeMethodTest (2)" configurationId="TestNG" />
+    <history-entry file="TreeMethodTest_testStep1_Leaf - 2016.07.06 at 08h 39m 27s.xml">
+      <configuration name="TreeMethodTest.testStep1_Leaf" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="TreeMethodTest_(2) - 2016.07.03 at 18h 43m 28s.xml">
-      <configuration name="TreeMethodTest (2)" configurationId="TestNG" />
+    <history-entry file="TreeMethodTest_testStep1_Non_Leaf - 2016.07.06 at 08h 24m 10s.xml">
+      <configuration name="TreeMethodTest.testStep1_Non_Leaf" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="TreeMethodTest_(2) - 2016.07.03 at 19h 16m 15s.xml">
-      <configuration name="TreeMethodTest (2)" configurationId="TestNG" />
+    <history-entry file="TreeMethodTest_testStep1_Non_Leaf - 2016.07.06 at 08h 29m 54s.xml">
+      <configuration name="TreeMethodTest.testStep1_Non_Leaf" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="TreeMethodTest_(3) - 2016.07.03 at 18h 33m 38s.xml">
-      <configuration name="TreeMethodTest (3)" configurationId="TestNG" />
+    <history-entry file="TreeMethodTest_testStep4_Split_Definitions - 2016.07.06 at 14h 06m 33s.xml">
+      <configuration name="TreeMethodTest.testStep4_Split_Definitions" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="TreeMethodTest_(4) - 2016.07.03 at 16h 59m 36s.xml">
-      <configuration name="TreeMethodTest (4)" configurationId="TestNG" />
+    <history-entry file="TreeMethodTest_testStep4_Split_Definitions - 2016.07.06 at 14h 07m 49s.xml">
+      <configuration name="TreeMethodTest.testStep4_Split_Definitions" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="TreeMethodTest_(4) - 2016.07.03 at 18h 41m 25s.xml">
-      <configuration name="TreeMethodTest (4)" configurationId="TestNG" />
+    <history-entry file="TreeMethodTest_testStep4_Split_Definitions - 2016.07.06 at 14h 12m 03s.xml">
+      <configuration name="TreeMethodTest.testStep4_Split_Definitions" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="TreeMethodTest_(5) - 2016.07.03 at 18h 43m 58s.xml">
-      <configuration name="TreeMethodTest (5)" configurationId="TestNG" />
+    <history-entry file="TreeMethodTest_testStep4_Split_Definitions_by_Function - 2016.07.06 at 07h 58m 20s.xml">
+      <configuration name="TreeMethodTest.testStep4_Split_Definitions_by_Function" configurationId="TestNG" />
     </history-entry>
-    <history-entry file="TreeMethodTest_testLoad - 2016.07.03 at 19h 18m 46s.xml">
-      <configuration name="TreeMethodTest.testLoad" configurationId="TestNG" />
+    <history-entry file="TreeMethodTest_testStep4_Split_Definitions_by_Function - 2016.07.06 at 08h 01m 21s.xml">
+      <configuration name="TreeMethodTest.testStep4_Split_Definitions_by_Function" configurationId="TestNG" />
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="859713000" />
+    <option name="totallyTimeSpent" value="769696000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -2029,68 +2147,38 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-2" y="23" width="1920" height="977" extended-state="6" />
-    <editor active="false" />
+    <frame x="-1928" y="-8" width="1936" height="1056" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32768363" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32090396" sideWeight="0.49573562" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55011135" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.240625" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3242938" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.21129943" sideWeight="0.49413645" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328541" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27209798" sideWeight="0.48989898" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3242938" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31203407" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32850778" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3518931" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50795454" sideWeight="0.51021504" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24193548" sideWeight="0.510101" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40338984" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32405347" sideWeight="0.49569893" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3207127" sideWeight="0.49139786" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284091" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3123656" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.240625" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24520256" sideWeight="0.48989898" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23273942" sideWeight="0.48978496" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889125" sideWeight="0.5" order="8" side_tool="true" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32293987" sideWeight="0.77903223" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.55011135" sideWeight="0.5042644" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.240625" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="CDI" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31203407" sideWeight="0.4966118" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.40338984" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3284091" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32090396" sideWeight="0.49573562" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Documentation" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3242938" sideWeight="0.4978678" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.3740113" sideWeight="0.49413645" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32903227" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32954547" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.24174654" sideWeight="0.48989898" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3242938" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24193548" sideWeight="0.510101" order="3" side_tool="true" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -2104,6 +2192,7 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <MESSAGE value="start implementation detailed completeness check and condition consolidation" />
     <MESSAGE value="functions (with errors!) implemented" />
     <MESSAGE value="functions errors corrected and enhanced" />
     <MESSAGE value="Worked at MissingConditions -&gt; Not Finished!!" />
@@ -2122,520 +2211,512 @@
     <MESSAGE value="ConsolidateRules and RulesConsolidator - consolidate them!!" />
     <MESSAGE value="Bugfix Action5 of RuleCompletenessCheck" />
     <MESSAGE value="Reworking the ASCII report!" />
-    <MESSAGE value="Tableformatting except Column grouping finished" />
-    <MESSAGE value="DT can now be converted to text representation." />
-    <MESSAGE value="PAckagestructure cleaned, DeclTableCell Editor changed, Some Excpetionhandling" />
-    <MESSAGE value="ODF Export" />
-    <MESSAGE value="Straight Scan Method raw implemented" />
-    <MESSAGE value="Else Rule handling except:&#10;&#10;e) MoveRule&#10;&#9;o Verboten für Else Rule&#10;&#9;o MoveRight verboten wenn Rule rechts neben &#9;   &#10;&#9;   der zu verschiebenden Rule die Else Rule ist&#10;&#10;f) AddRule - Wenn ElseRule definiert, dann neue &#10;   ConditionDef vor der ElseRule einfügen!" />
-    <MESSAGE value="TReeMethod started" />
-    <option name="LAST_COMMIT_MESSAGE" value="TReeMethod started" />
+    <MESSAGE value=" ASCII Report reworking is running!!" />
+    <MESSAGE value="STructural Analysreport started (See Emitter)" />
+    <MESSAGE value="ODF Export evaluated" />
+    <MESSAGE value="Evaluation Code Export" />
+    <MESSAGE value="Straight Scan implemented -&gt; Test" />
+    <MESSAGE value="Straight Scan implemented -&gt; Start wit tree method" />
+    <option name="LAST_COMMIT_MESSAGE" value="Straight Scan implemented -&gt; Start wit tree method" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/print/SeparatorRow.java</url>
-          <line>85</line>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java</url>
+          <line>328</line>
           <properties />
-          <option name="timeStamp" value="65" />
+          <option name="timeStamp" value="4" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuView.java</url>
+          <line>88</line>
+          <properties />
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/menu/MenuViewModel.java</url>
+          <line>116</line>
+          <properties />
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainViewModel.java</url>
+          <line>189</line>
+          <properties />
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java</url>
+          <line>233</line>
+          <properties />
+          <option name="timeStamp" value="9" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/print/SeparatorRow.java</url>
-          <line>58</line>
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java</url>
+          <line>177</line>
           <properties />
-          <option name="timeStamp" value="66" />
+          <option name="timeStamp" value="10" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/print/AsciiTable.java</url>
-          <line>78</line>
-          <properties>
-            <option name="lambda-ordinal" value="0" />
-          </properties>
-          <option name="timeStamp" value="67" />
+          <url>file://$PROJECT_DIR$/src/test/java/de/adesso/tools/functions/DtFunctionsTest.java</url>
+          <line>383</line>
+          <properties />
+          <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/net/URLConnection.java</url>
-          <line>912</line>
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/functions/DtFunctions.java</url>
+          <line>311</line>
           <properties />
-          <option name="timeStamp" value="68" />
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java</url>
+          <line>228</line>
+          <properties />
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/ui/main/MainView.java</url>
+          <line>460</line>
+          <properties />
+          <option name="timeStamp" value="26" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java</url>
+          <line>61</line>
+          <properties />
+          <option name="timeStamp" value="29" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/common/builder/AbstractNestable.java</url>
+          <line>45</line>
+          <properties />
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java</url>
+          <line>148</line>
+          <properties />
+          <option name="timeStamp" value="33" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/main/java/de/adesso/tools/analysis/completeness/detailed/Actions.java</url>
+          <line>140</line>
+          <properties />
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/ifthen/EmitterTest.java</url>
+          <line>138</line>
+          <properties />
+          <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/LeistungsartenFestlegenPart01Rules.java</url>
+          <line>95</line>
+          <properties />
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/treeMethod/TreeMethodTest.java</url>
+          <line>253</line>
+          <properties />
+          <option name="timeStamp" value="62" />
         </line-breakpoint>
       </breakpoints>
       <breakpoints-dialog>
         <breakpoints-dialog />
       </breakpoints-dialog>
-      <option name="time" value="72" />
+      <option name="time" value="63" />
     </breakpoint-manager>
-    <watches-manager />
+    <watches-manager>
+      <configuration name="TestNG">
+        <watch expression="target.get()" language="JAVA" custom="" />
+      </configuration>
+    </watches-manager>
   </component>
   <component name="antWorkspaceConfiguration">
     <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/List2DFunctions.java">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/odftoolkit/simple-odf/0.8.1-incubating/simple-odf-0.8.1-incubating-sources.jar!/org/odftoolkit/simple/table/Table.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="20" column="0" selection-start-line="20" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.8779343">
+          <caret line="119" column="36" selection-start-line="119" selection-start-column="22" selection-end-line="119" selection-end-column="36" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/dialogs/ConditionsDefnsCountDialog.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/output/TableFunctionsTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="16" column="13" selection-start-line="16" selection-start-column="13" selection-end-line="16" selection-end-column="13" />
-          <folding />
+        <state vertical-scroll-proportion="0.17957747">
+          <caret line="36" column="13" selection-start-line="36" selection-start-column="13" selection-end-line="36" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/dtmg.css">
+    <entry file="jar://$MAVEN_REPOSITORY$/org/apache/odftoolkit/simple-odf/0.8.1-incubating/simple-odf-0.8.1-incubating-sources.jar!/org/odftoolkit/simple/TextDocument.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-25.625">
-          <caret line="41" column="0" selection-start-line="41" selection-start-column="0" selection-end-line="41" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="-3.9515347">
+          <caret line="179" column="31" selection-start-line="179" selection-start-column="31" selection-end-line="179" selection-end-column="31" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/de/adesso/dtmg/ui/menu/MenuView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/List2DFunctionsTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="44.150944">
-          <caret line="20" column="19" selection-start-line="20" selection-start-column="19" selection-end-line="20" selection-end-column="19" />
-          <folding />
+        <state vertical-scroll-proportion="3.870892">
+          <caret line="225" column="108" selection-start-line="225" selection-start-column="8" selection-end-line="225" selection-end-column="108" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/about/AboutView.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFTableEmitter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="20" selection-start-line="41" selection-start-column="8" selection-end-line="41" selection-end-column="20" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
+        <state vertical-scroll-proportion="0.47887325">
+          <caret line="47" column="74" selection-start-line="47" selection-start-column="74" selection-end-line="47" selection-end-column="74" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/about/AboutViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="15" column="13" selection-start-line="15" selection-start-column="13" selection-end-line="15" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/menu/MenuView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="84" column="0" selection-start-line="84" selection-start-column="0" selection-end-line="84" selection-end-column="0" />
-          <folding>
-            <element signature="e#2404#2405#0" expanded="true" />
-            <element signature="e#2448#2449#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/de/adesso/dtmg/ui/about/AboutView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.4339623">
-          <caret line="29" column="240" selection-start-line="29" selection-start-column="240" selection-end-line="29" selection-end-column="240" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/about/AboutAuthorView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/de/adesso/dtmg/ui/about/AboutAuthorView.fxml">
-      <provider editor-type-id="JavaFX-Scene-Builder">
-        <state />
-      </provider>
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.3018868">
-          <caret line="28" column="207" selection-start-line="28" selection-start-column="207" selection-end-line="28" selection-end-column="207" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/about/AboutAuthorViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="18" column="72" selection-start-line="18" selection-start-column="72" selection-end-line="18" selection-end-column="72" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/Normalizer.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="35" column="4" selection-start-line="35" selection-start-column="4" selection-end-line="35" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/DeclarationsTableCell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="99" column="58" selection-start-line="99" selection-start-column="58" selection-end-line="99" selection-end-column="58" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/DefinitionsTableCell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="19" column="27" selection-start-line="19" selection-start-column="13" selection-end-line="19" selection-end-column="33" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/javafx-src.zip!/javafx/scene/control/cell/TextFieldTableCell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.19298245">
-          <caret line="45" column="13" selection-start-line="45" selection-start-column="13" selection-end-line="45" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/DtFunctions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="484" column="97" selection-start-line="484" selection-start-column="97" selection-end-line="484" selection-end-column="97" />
-          <folding>
-            <element signature="e#2132#2162#0" expanded="true" />
-            <element signature="e#22581#22582#0" expanded="true" />
-            <element signature="e#22626#22627#0" expanded="true" />
-            <element signature="e#22703#22704#0" expanded="true" />
-            <element signature="e#22793#22794#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/ClassDescription.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="47" column="34" selection-start-line="47" selection-start-column="34" selection-end-line="47" selection-end-column="34" />
-          <folding>
-            <element signature="e#1625#1626#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/StraightScan.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/AsciiExportFunctions.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/TreeMethod.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/odf/ODFExport.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="2" selection-start-line="24" selection-start-column="2" selection-end-line="24" selection-end-column="2" />
-          <folding />
+          <caret line="24" column="13" selection-start-line="24" selection-start-column="13" selection-end-line="24" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/List2DFunctions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33215547">
+          <caret line="55" column="0" selection-start-line="55" selection-start-column="0" selection-end-line="55" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/analysis/structure/CollectorTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.27031803">
+          <caret line="48" column="13" selection-start-line="48" selection-start-column="13" selection-end-line="48" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/odf/ODFExportTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="0" selection-start-line="46" selection-start-column="0" selection-end-line="52" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/RandomDefinitions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="13" selection-start-line="33" selection-start-column="13" selection-end-line="33" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/codepoetics/protonpack/1.8/protonpack-1.8-sources.jar!/com/codepoetics/protonpack/Indexed.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/src.zip!/java/lang/reflect/InvocationHandler.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.33333334">
+          <caret line="40" column="17" selection-start-line="40" selection-start-column="17" selection-end-line="40" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Java/jdk1.8.0_66/jre/lib/rt.jar!/sun/misc/ProxyGenerator.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.888889">
+          <caret line="104" column="25" selection-start-line="104" selection-start-column="25" selection-end-line="104" selection-end-column="25" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-15.0">
-          <caret line="166" column="0" selection-start-line="166" selection-start-column="0" selection-end-line="166" selection-end-column="0" />
+        <state vertical-scroll-proportion="-63.423077">
+          <caret line="120" column="31" selection-start-line="120" selection-start-column="31" selection-end-line="120" selection-end-column="31" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/lang/CharSequence.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/common/Stringable.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5313093">
-          <caret line="65" column="7" selection-start-line="65" selection-start-column="7" selection-end-line="65" selection-end-column="7" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="0" selection-start-line="26" selection-start-column="0" selection-end-line="26" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/common/ToStringDecorator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="30" column="57" selection-start-line="30" selection-start-column="57" selection-end-line="30" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/model/ActionDecl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/model/ConditionDecl.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="155" column="0" selection-start-line="155" selection-start-column="0" selection-end-line="155" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/treeMethod/ForFutureUse.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="263" column="0" selection-start-line="260" selection-start-column="1" selection-end-line="263" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/tuple/Tuple.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="0" selection-start-line="12" selection-start-column="0" selection-end-line="12" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/tuple/Tuple3.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="125" column="14" selection-start-line="125" selection-start-column="14" selection-end-line="125" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/Dump.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="52" column="45" selection-start-line="52" selection-start-column="45" selection-end-line="52" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/straightscan/StraightScan.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/StraightScanTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="149" column="52" selection-start-line="149" selection-start-column="52" selection-end-line="149" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/StraightScanTest2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="70" column="55" selection-start-line="70" selection-start-column="55" selection-end-line="70" selection-end-column="55" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/PrinterTroubleshootingRules.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="36" column="0" selection-start-line="36" selection-start-column="0" selection-end-line="36" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/LeistungsartenFestlegenPart01Rules.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="0" selection-start-line="53" selection-start-column="0" selection-end-line="53" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/nio/Buffer.java">
+    <entry file="file://$PROJECT_DIR$/sample-dt.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33206832">
-          <caret line="174" column="22" selection-start-line="174" selection-start-column="22" selection-end-line="174" selection-end-column="22" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="20" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="20" selection-end-column="0" />
         </state>
       </provider>
     </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/nio/ByteBuffer.java">
+    <entry file="file://$PROJECT_DIR$/todos.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3605313">
-          <caret line="262" column="16" selection-start-line="262" selection-start-column="16" selection-end-line="262" selection-end-column="16" />
-          <folding />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="38" selection-start-line="12" selection-start-column="38" selection-end-line="12" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/builder/Dimension.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/builder/ObservableList2DBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.32297063">
+          <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/builder/Callback.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="25" column="20" selection-start-line="25" selection-start-column="17" selection-end-line="25" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/builder/AbstractNestable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="27" column="27" selection-start-line="27" selection-start-column="22" selection-end-line="27" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/builder/ListBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/builder/List2DBuilder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="116" column="46" selection-start-line="116" selection-start-column="31" selection-end-line="116" selection-end-column="46" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/ActionDeclBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
-          <folding />
+          <caret line="28" column="13" selection-start-line="28" selection-start-column="13" selection-end-line="28" selection-end-column="13" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/ConditionDeclBuilder.java">
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/ActionDeclTableViewBuilder.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33206832">
-          <caret line="33" column="11" selection-start-line="33" selection-start-column="11" selection-end-line="33" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/ActionDeclTableViewModelListBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="41" column="28" selection-start-line="41" selection-start-column="28" selection-end-line="41" selection-end-column="28" />
-          <folding>
-            <element signature="e#1418#1419#0" expanded="false" />
-            <element signature="e#1441#1442#0" expanded="false" />
-            <element signature="e#1751#1752#0" expanded="false" />
-            <element signature="e#1778#1779#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/ConditionDeclTableViewModelListBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="40" column="0" selection-start-line="40" selection-start-column="0" selection-end-line="40" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/strategy/VerticalAsciiPersistenceStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="88" selection-start-line="29" selection-start-column="46" selection-end-line="29" selection-end-column="88" />
-          <folding>
-            <element signature="imports" expanded="false" />
-            <element signature="e#1228#1229#0" expanded="false" />
-            <element signature="e#1254#1255#0" expanded="false" />
-            <element signature="e#1308#1309#0" expanded="false" />
-            <element signature="e#1335#1336#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/chained/first/AbstractSubBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="22" selection-start-line="24" selection-start-column="22" selection-end-line="24" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/chained/first/Builder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="17" selection-start-line="24" selection-start-column="17" selection-end-line="24" selection-end-column="17" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/chained/first/SubBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="10" selection-start-line="24" selection-start-column="10" selection-end-line="24" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#1007#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder/ActionDeclBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="0.2642487">
           <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder/ConditionDeclTableViewBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="51" selection-start-line="26" selection-start-column="51" selection-end-line="26" selection-end-column="51" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/strategy/BinaryPersistenceStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="32" column="3" selection-start-line="32" selection-start-column="3" selection-end-line="32" selection-end-column="3" />
-          <folding>
-            <element signature="imports" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/PersistenceManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/PersistenceStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="60" selection-start-line="27" selection-start-column="60" selection-end-line="27" selection-end-column="60" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/dialogs/Dialogs.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="19" selection-start-line="11" selection-start-column="19" selection-end-line="11" selection-end-column="19" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="430" column="15" selection-start-line="430" selection-start-column="15" selection-end-line="430" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainView.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="154" column="83" selection-start-line="154" selection-start-column="83" selection-end-line="154" selection-end-column="83" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/builder/ConditionDeclBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.11867089">
-          <caret line="22" column="0" selection-start-line="22" selection-start-column="0" selection-end-line="22" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/TableViewBuilder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2356021">
-          <caret line="36" column="22" selection-start-line="36" selection-start-column="22" selection-end-line="36" selection-end-column="22" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/strategy/HorizontalAsciiPersistenceStrategy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="89" column="54" selection-start-line="89" selection-start-column="54" selection-end-line="89" selection-end-column="54" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#2071#2072#0" expanded="true" />
-            <element signature="e#2097#2098#0" expanded="true" />
-            <element signature="e#6482#6483#0" expanded="true" />
-            <element signature="e#6552#6553#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/menu/MenuViewModel.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="218" column="0" selection-start-line="218" selection-start-column="0" selection-end-line="218" selection-end-column="0" />
-          <folding>
-            <element signature="e#6542#6543#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/DefaultPersistenceManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="86" column="52" selection-start-line="86" selection-start-column="52" selection-end-line="86" selection-end-column="52" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/io/PersistenceManagerTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
+        <state vertical-scroll-proportion="-0.9161677">
           <caret line="43" column="13" selection-start-line="43" selection-start-column="13" selection-end-line="43" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/collect/ImmutableCollection.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.3321739">
+          <caret line="214" column="31" selection-start-line="214" selection-start-column="31" selection-end-line="214" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/HListsTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="59" column="0" selection-start-line="59" selection-start-column="0" selection-end-line="59" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#2946#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.dtx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/HLists.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.027960526">
+          <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$MAVEN_REPOSITORY$/com/google/guava/guava/18.0/guava-18.0-sources.jar!/com/google/common/collect/ImmutableList.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7763158">
+          <caret line="701" column="3" selection-start-line="629" selection-start-column="2" selection-end-line="701" selection-end-column="3" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/treemethod/Node.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="69" column="33" selection-start-line="69" selection-start-column="33" selection-end-line="69" selection-end-column="33" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/DtEntity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="72" column="0" selection-start-line="72" selection-start-column="0" selection-end-line="72" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/treemethod/TreeMethod.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="83" column="4" selection-start-line="83" selection-start-column="4" selection-end-line="83" selection-end-column="4" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/treeMethod/DtEntityStub.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="39" selection-start-line="41" selection-start-column="39" selection-end-line="41" selection-end-column="39" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/tuple/HObservableLists.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="33" selection-start-line="53" selection-start-column="33" selection-end-line="53" selection-end-column="33" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/ObservableList2DFunctions.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.2460733">
-          <caret line="68" column="107" selection-start-line="68" selection-start-column="107" selection-end-line="68" selection-end-column="107" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/util/stream/ReferencePipeline.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="5.533019">
-          <caret line="660" column="0" selection-start-line="60" selection-start-column="0" selection-end-line="660" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/util/stream/Stream.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33254716">
-          <caret line="853" column="10" selection-start-line="853" selection-start-column="9" selection-end-line="853" selection-end-column="14" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_74.jdk/Contents/Home/src.zip!/java/util/stream/Collectors.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.43867925">
-          <caret line="414" column="0" selection-start-line="410" selection-start-column="0" selection-end-line="414" selection-end-column="0" />
-          <folding>
-            <element signature="e#16803#16804#0" expanded="false" />
-            <element signature="e#16858#16859#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/TreeMethodTest.java">
-      <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="177" column="41" selection-start-line="177" selection-start-column="41" selection-end-line="177" selection-end-column="41" />
+          <caret line="70" column="17" selection-start-line="70" selection-start-column="17" selection-end-line="70" selection-end-column="17" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/treeMethod/TreeMethodTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.4357035">
+          <caret line="175" column="22" selection-start-line="175" selection-start-column="22" selection-end-line="175" selection-end-column="22" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/about.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78142077">
-          <caret line="39" column="49" selection-start-line="39" selection-start-column="48" selection-end-line="39" selection-end-column="49" />
-          <folding />
         </state>
       </provider>
     </entry>

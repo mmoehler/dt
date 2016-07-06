@@ -53,6 +53,13 @@ public final class HLists {
         return collect;
     }
 
+    public static <E> List<List<E>> splitAt(List<E> l, int index) {
+        return ImmutableList.<List<E>>builder()
+                .add(take(l,index))
+                .add(drop(l,index))
+                .build();
+    }
+
     public static <E> List<E> paddLeft(int count, E e, List<E> l) {
         final ImmutableList.Builder<E> builder = ImmutableList.<E>builder();
         for (int i = 0; i < count; i++) {
