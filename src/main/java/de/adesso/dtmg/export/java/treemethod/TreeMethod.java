@@ -30,9 +30,12 @@ import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.dtmg.util.tuple.HObservableLists;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
+import de.adesso.dtmg.util.tuple.Tuple3;
 import javafx.collections.ObservableList;
 
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
@@ -59,6 +62,39 @@ public class TreeMethod {
                 ? Tuple.of(true,actionDeclarations.get((int)found.get().getIndex()).getModel())
                 : Tuple.of(false,null);
     }
+
+    /** Find the action that has maximum number of occurrence in OR-decision table */
+    private Tuple3<Boolean,ActionDeclTableViewModel,Integer> step2(DtEntity e) {
+        ObservableList<ObservableList<String>> aDefinitions = e.getActionDefinitions();
+        ObservableList<ObservableList<String>> cdefinitions = ObservableList2DFunctions.transpose().apply(e.getConditionDefinitions());
+        ObservableList<ActionDeclTableViewModel> adeclarations = e.getActionDeclarations();
+
+        int countActions[] = new int[aDefinitions.size()];
+        int row = 0;
+        for (; row < aDefinitions.size(); row++) {
+            countActions[row] = 0;
+            for (int col = 0; col < aDefinitions.get(0).size(); col++) {
+                if (aDefinitions.get(row).get(col).equals(X)) {
+                    long dashCount = cdefinitions.get(col).stream().filter(x -> DASH.equals(x)).count();
+                    countActions[row]+=Math.pow(2,dashCount);
+                }
+            }
+        }
+
+        Optional<Indexed<Integer>> max = StreamUtils.zipWithIndex(Arrays.stream(countActions)
+                .boxed())
+                .collect(Collectors.maxBy((a, b) -> a.getValue().intValue() - b.getValue().intValue()));
+
+        if(max.isPresent()) {
+            int idx = (int)max.get().getIndex();
+            Tuple3<Boolean, ActionDeclTableViewModel, Integer> tuple3 = Tuple.of(true, adeclarations.get(idx), idx);
+            System.out.println("tuple3 = " + tuple3);
+            return tuple3;
+        }
+        return Tuple.of(false,null,null);
+    }
+
+
 
 
     public Tuple2<DtEntity,DtEntity> step4(DtEntity e, int idx) {

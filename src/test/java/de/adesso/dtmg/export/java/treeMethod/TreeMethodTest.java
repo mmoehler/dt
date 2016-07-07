@@ -21,6 +21,7 @@ package de.adesso.dtmg.export.java.treeMethod;
 
 import com.codepoetics.protonpack.Indexed;
 import com.codepoetics.protonpack.StreamUtils;
+import com.google.common.collect.Lists;
 import com.google.common.io.LineReader;
 import de.adesso.dtmg.Dump;
 import de.adesso.dtmg.common.builder.ObservableList2DBuilder;
@@ -33,7 +34,10 @@ import de.adesso.dtmg.io.DtEntity;
 import de.adesso.dtmg.model.Declaration;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
-import de.adesso.dtmg.util.tuple.*;
+import de.adesso.dtmg.util.tuple.HObservableLists;
+import de.adesso.dtmg.util.tuple.Tuple;
+import de.adesso.dtmg.util.tuple.Tuple2;
+import de.adesso.dtmg.util.tuple.Tuple4;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.hamcrest.CoreMatchers;
@@ -48,10 +52,7 @@ import java.nio.CharBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -106,15 +107,42 @@ public class TreeMethodTest {
     }
 
     @Test
-    public void testStep1_Leaf() {
+    public void testStep1_Leaf_1() {
 
         ActionDeclTableViewModelListBuilder builder = new ActionDeclTableViewModelListBuilder();
         final ObservableList<ActionDeclTableViewModel> w =
                 builder.addTableViewModelWithLfdNbr("A001").withExpression("x").withIndicators("Y,N").build();
 
         final ObservableList<ObservableList<String>> x = ObservableList2DBuilder.observable2DOf(
-                "X,-,-,-,-,-,-,-"
-        ).dim(8, 1).build();
+                "X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-"
+        ).dim(1, 17).transposed().build();
+        Dump.dumpTableItems("X",x);
+
+        DtEntity e = DtEntityStub.createFor(w,x);
+        final Tuple2<Boolean, Declaration> tuple2 = tm.step1(e);
+
+        final ObservableList<String> expected = FXCollections.observableArrayList();
+        expected.add("X");
+
+        assertThat(tuple2._1(), equalTo(Boolean.TRUE));
+        assertThat(tuple2._2(), equalTo(w.get(0).getModel()));
+
+
+    }
+
+    @Test
+    public void testStep1_Leaf_3() {
+
+        ActionDeclTableViewModelListBuilder builder = new ActionDeclTableViewModelListBuilder();
+        final ObservableList<ActionDeclTableViewModel> w =
+                builder.addTableViewModelWithLfdNbr("A001").withExpression("x").withIndicators("Y,N").build();
+
+        final ObservableList<ObservableList<String>> x = ObservableList2DBuilder.observable2DOf(
+                        "X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,"
+                        +"X,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,"
+                        +"X,-,-,-,-,-,-,-,-,-,-,X,-,-,X,-,-"
+
+        ).dim(3, 17).transposed().build();
         Dump.dumpTableItems("X",x);
 
         DtEntity e = DtEntityStub.createFor(w,x);
@@ -207,10 +235,15 @@ public class TreeMethodTest {
     }
 
 
+    public TreeMethodTest() {
+        super();
+    }
 
-        @Test
+    @Test
     public void testLoad() throws Exception {
         DtEntity e = readDecisionTable();
+
+            /*
 
         // step 1
         Tuple2<Boolean,ActionDeclTableViewModel> r0 = step1(e);
@@ -227,10 +260,13 @@ public class TreeMethodTest {
 
         //tEntity, DtEntity> r3 =
                 step4(e,r2._4());
+
+                */
     }
 
 
     public  Node<Declaration> transform(DtEntity dt) {
+        /*
         final Tuple2<Boolean, ActionDeclTableViewModel> step1 = step1(dt);
         Node<Declaration> ret = null;
         if(step1._1()) {
@@ -247,6 +283,8 @@ public class TreeMethodTest {
             ret = condition;
         }
         return ret;
+        */
+        return null;
     }
 
     /** Check the OR-decision table to see if it can be leaf node or condition node*/
@@ -266,34 +304,20 @@ public class TreeMethodTest {
     }
 
     /** Find the action that has maximum number of occurrence in OR-decision table */
-    private Tuple3<Boolean,ActionDeclTableViewModel,Integer> step2(DtEntity e) {
-        ObservableList<ObservableList<String>> actions = e.getActionDefinitions();
-        ObservableList<ObservableList<String>> conditions = ObservableList2DFunctions.transpose().apply(e.getConditionDefinitions());
-        ObservableList<ActionDeclTableViewModel> adecl = e.getActionDeclarations();
+    @Test
+    public void testStep2() {
 
-        int countActions[] = new int[actions.size()];
-        int row = 0;
-        for (; row < actions.size(); row++) {
-            countActions[row] = 0;
-            for (int col = 0; col < actions.get(0).size(); col++) {
-                if (actions.get(row).get(col).equals(X)) {
-                    long dashCount = conditions.get(col).stream().filter(x -> DASH.equals(x)).count();
-                    countActions[row]+=Math.pow(2,dashCount);
-                }
-            }
+
+        final ArrayList<String> list = Lists.newArrayList("0", "-", "-", "-", "-");
+        final Map<String, Integer> collect = list.stream().collect(Collectors.groupingBy(x -> x)).entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, v -> v.getValue().size()));
+
+        Dump.dumpMap("X",collect);
+
+        int i=0;
+        for (Map.Entry<String,Integer> e : collect.entrySet()) {
+            ;//if()
         }
 
-        Optional<Indexed<Integer>> max = StreamUtils.zipWithIndex(Arrays.stream(countActions)
-                .boxed())
-                .collect(Collectors.maxBy((a, b) -> a.getValue().intValue() - b.getValue().intValue()));
-
-        if(max.isPresent()) {
-            int idx = (int)max.get().getIndex();
-            Tuple3<Boolean, ActionDeclTableViewModel, Integer> tuple3 = Tuple.of(true, adecl.get(idx), idx);
-            System.out.println("tuple3 = " + tuple3);
-            return tuple3;
-        }
-        return Tuple.of(false,null,null);
     }
 
     /** Find the maximum number of occurrence of the unique value of each condition */
