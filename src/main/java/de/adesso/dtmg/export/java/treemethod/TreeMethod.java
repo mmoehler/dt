@@ -33,7 +33,6 @@ import de.adesso.dtmg.util.tuple.Tuple2;
 import de.adesso.dtmg.util.tuple.Tuple3;
 import javafx.collections.ObservableList;
 
-import java.util.Arrays;
 import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -64,36 +63,36 @@ public class TreeMethod {
     }
 
     /** Find the action that has maximum number of occurrence in OR-decision table */
-    private Tuple3<Boolean,ActionDeclTableViewModel,Integer> step2(DtEntity e) {
+    public Tuple3<Boolean,ActionDeclTableViewModel,Integer> step2(DtEntity e) {
         ObservableList<ObservableList<String>> aDefinitions = e.getActionDefinitions();
         ObservableList<ObservableList<String>> cdefinitions = ObservableList2DFunctions.transpose().apply(e.getConditionDefinitions());
         ObservableList<ActionDeclTableViewModel> adeclarations = e.getActionDeclarations();
 
-        int countActions[] = new int[aDefinitions.size()];
-        int row = 0;
-        for (; row < aDefinitions.size(); row++) {
-            countActions[row] = 0;
-            for (int col = 0; col < aDefinitions.get(0).size(); col++) {
-                if (aDefinitions.get(row).get(col).equals(X)) {
-                    long dashCount = cdefinitions.get(col).stream().filter(x -> DASH.equals(x)).count();
-                    countActions[row]+=Math.pow(2,dashCount);
-                }
-            }
-        }
+        Stream<Integer> integerStream = StreamUtils.zipWithIndex(aDefinitions.stream())
+                .map(r -> StreamUtils.zipWithIndex(r.getValue().stream())
+                        .filter(s -> s.getValue().equals(X))
+                        .map(s -> calcCountFromDashes(cdefinitions.get((int) s.getIndex())))
+                        .reduce(0, (a, b) -> a + b));
+        Optional<Indexed<Integer>> max = StreamUtils.zipWithIndex(integerStream)
+                .collect(Collectors.maxBy((l, r) -> l.getValue().compareTo(r.getValue())));
 
-        Optional<Indexed<Integer>> max = StreamUtils.zipWithIndex(Arrays.stream(countActions)
-                .boxed())
-                .collect(Collectors.maxBy((a, b) -> a.getValue().intValue() - b.getValue().intValue()));
 
         if(max.isPresent()) {
             int idx = (int)max.get().getIndex();
             Tuple3<Boolean, ActionDeclTableViewModel, Integer> tuple3 = Tuple.of(true, adeclarations.get(idx), idx);
-            System.out.println("tuple3 = " + tuple3);
             return tuple3;
         }
         return Tuple.of(false,null,null);
     }
 
+    private static int calcCountFromDashes(ObservableList<String> c) {
+        int result = 1;
+        long count = c.stream().filter(s -> DASH.equals(s)).count();
+        if(count>0) {
+            result = (int) Math.pow(2,count);
+        }
+        return result;
+    }
 
 
 

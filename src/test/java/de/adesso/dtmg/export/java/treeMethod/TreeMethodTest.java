@@ -21,7 +21,6 @@ package de.adesso.dtmg.export.java.treeMethod;
 
 import com.codepoetics.protonpack.Indexed;
 import com.codepoetics.protonpack.StreamUtils;
-import com.google.common.collect.Lists;
 import com.google.common.io.LineReader;
 import de.adesso.dtmg.Dump;
 import de.adesso.dtmg.common.builder.ObservableList2DBuilder;
@@ -34,10 +33,7 @@ import de.adesso.dtmg.io.DtEntity;
 import de.adesso.dtmg.model.Declaration;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
-import de.adesso.dtmg.util.tuple.HObservableLists;
-import de.adesso.dtmg.util.tuple.Tuple;
-import de.adesso.dtmg.util.tuple.Tuple2;
-import de.adesso.dtmg.util.tuple.Tuple4;
+import de.adesso.dtmg.util.tuple.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.hamcrest.CoreMatchers;
@@ -52,7 +48,10 @@ import java.nio.CharBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
-import java.util.*;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Optional;
 import java.util.function.BinaryOperator;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -114,8 +113,8 @@ public class TreeMethodTest {
                 builder.addTableViewModelWithLfdNbr("A001").withExpression("x").withIndicators("Y,N").build();
 
         final ObservableList<ObservableList<String>> x = ObservableList2DBuilder.observable2DOf(
-                "X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-"
-        ).dim(1, 17).transposed().build();
+                "X,-,-,-,-,-,-,-"
+        ).dim(8, 1).build();
         Dump.dumpTableItems("X",x);
 
         DtEntity e = DtEntityStub.createFor(w,x);
@@ -131,6 +130,21 @@ public class TreeMethodTest {
     }
 
     @Test
+    public void testStep2() throws Exception {
+
+        DtEntity e = readDecisionTable();
+
+        final ObservableList<ObservableList<String>> x = e.getActionDefinitions();
+        Dump.dumpTableItems("X",x);
+
+        final ObservableList<ObservableList<String>> y = e.getConditionDefinitions();
+        Dump.dumpTableItems("Y",y);
+
+        Tuple3<Boolean, ActionDeclTableViewModel, Integer> tuple3 = tm.step2(e);
+        System.out.println("tuple3 = " + tuple3);
+    }
+
+    @Test
     public void testStep1_Leaf_3() {
 
         ActionDeclTableViewModelListBuilder builder = new ActionDeclTableViewModelListBuilder();
@@ -138,11 +152,11 @@ public class TreeMethodTest {
                 builder.addTableViewModelWithLfdNbr("A001").withExpression("x").withIndicators("Y,N").build();
 
         final ObservableList<ObservableList<String>> x = ObservableList2DBuilder.observable2DOf(
-                        "X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,"
-                        +"X,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,"
-                        +"X,-,-,-,-,-,-,-,-,-,-,X,-,-,X,-,-"
+                        "X,X,X,X,X,-,X,-,"
+                        +"-,-,-,-,-,-,-,-,"
+                        +"-,-,-,-,-,-,-,-"
 
-        ).dim(3, 17).transposed().build();
+        ).dim(8, 3).build();
         Dump.dumpTableItems("X",x);
 
         DtEntity e = DtEntityStub.createFor(w,x);
@@ -176,43 +190,30 @@ public class TreeMethodTest {
 
         final Tuple2<DtEntity, DtEntity> step4 = tm.step4(e, 0);
 
-        Dump.dumpTableItems("LEFT",ObservableList2DFunctions.transpose().apply(step4._1().getActionDefinitions()));
-        Dump.dumpTableItems("RIGHT",ObservableList2DFunctions.transpose().apply(step4._2().getActionDefinitions()));
-    }
+        ObservableList<ObservableList<String>> actuals_left = step4._1().getActionDefinitions();
+        ObservableList<ObservableList<String>> actuals_right = step4._2().getActionDefinitions();
 
-    @Test
-    public void testStep4_Split_Definitions_by_Function() {
+        Dump.dumpTableItems("LEFT", actuals_left);
+        Dump.dumpTableItems("RIGHT",actuals_right);
 
-        final ObservableList<ObservableList<String>> x = ObservableList2DBuilder.observable2DOf(
-                "X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,"
-                        +"-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,"
-                        +"-,-,X,-,-,-,X,-,X,-,-,-,X,X,-,-,X,"
-                        +"-,-,-,X,-,-,X,-,-,X,X,-,X,X,-,X,X,"
-                        +"-,-,-,-,X,-,-,-,-,X,-,-,X,-,-,X,X,"
-                        +"-,-,-,-,-,X,-,-,X,-,X,-,-,X,-,X,X,"
-                        +"-,-,-,-,-,-,-,X,-,-,-,-,-,-,X,-,-,"
-                        +"-,-,-,-,-,-,-,-,-,-,-,X,-,-,X,-,-"
-        ).dim(8, 17).build();
-        Dump.dumpTableItems("X",x);
-
-        final Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> tuple2 = splitDefinitionsAt(x, 1);
-
-        ObservableList2DBuilder.observable2DOf(
+        final ObservableList<ObservableList<String>> expected_left = ObservableList2DBuilder.observable2DOf(
                 "X,-,-,-,-,-,-,-"
-        ).dim(1,8).build();
+        ).dim(8, 1).build();
 
-        // TODO Das Splitten ist noch voll BANANE!!
+        final ObservableList<ObservableList<String>> expected_right = ObservableList2DBuilder.observable2DOf(
+                "-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,"
+                        +"X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,"
+                        +"-,X,-,-,-,X,-,X,-,-,-,X,X,-,-,X,"
+                        +"-,-,X,-,-,X,-,-,X,X,-,X,X,-,X,X,"
+                        +"-,-,-,X,-,-,-,-,X,-,-,X,-,-,X,X,"
+                        +"-,-,-,-,X,-,-,X,-,X,-,-,X,-,X,X,"
+                        +"-,-,-,-,-,-,X,-,-,-,-,-,-,X,-,-,"
+                        +"-,-,-,-,-,-,-,-,-,-,X,-,-,X,-,-"
+        ).dim(8, 16).build();
 
+        assertThat(actuals_left, equalTo(expected_left));
+        assertThat(actuals_right, equalTo(expected_right));
 
-        Dump.dumpTableItems("LEFT",tuple2._1());
-        Dump.dumpTableItems("RIGHT",tuple2._2());
-    }
-
-
-    public static Tuple2<ObservableList<ObservableList<String>>,ObservableList<ObservableList<String>>> splitDefinitionsAt(ObservableList<ObservableList<String>> l, int idx) {
-        final ObservableList<ObservableList<String>> y = ObservableList2DFunctions.transpose().apply(l);
-        final ObservableList<ObservableList<ObservableList<String>>> lists = HObservableLists.splitAt(y, 1);
-        return Tuple.of(ObservableList2DFunctions.transpose().apply(lists.get(0)),ObservableList2DFunctions.transpose().apply(lists.get(1)));
     }
 
     @Test
@@ -242,6 +243,8 @@ public class TreeMethodTest {
     @Test
     public void testLoad() throws Exception {
         DtEntity e = readDecisionTable();
+
+        Dump.dumpTableItems("CONDEFS",e.getConditionDefinitions());
 
             /*
 
@@ -300,23 +303,6 @@ public class TreeMethodTest {
         return (optional.isPresent())
                 ? Tuple.of(true,adecl.get(adecl.indexOf(optional.get())))
                 : Tuple.of(false,null);
-
-    }
-
-    /** Find the action that has maximum number of occurrence in OR-decision table */
-    @Test
-    public void testStep2() {
-
-
-        final ArrayList<String> list = Lists.newArrayList("0", "-", "-", "-", "-");
-        final Map<String, Integer> collect = list.stream().collect(Collectors.groupingBy(x -> x)).entrySet().stream().collect(Collectors.toMap(Map.Entry::getKey, v -> v.getValue().size()));
-
-        Dump.dumpMap("X",collect);
-
-        int i=0;
-        for (Map.Entry<String,Integer> e : collect.entrySet()) {
-            ;//if()
-        }
 
     }
 
