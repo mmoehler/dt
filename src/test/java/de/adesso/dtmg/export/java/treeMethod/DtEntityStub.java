@@ -38,6 +38,11 @@ public class DtEntityStub extends DtEntity {
         return new DtEntityStub(EMPTY_CDECL,EMPTY_DEFS,EMPTY_ADECL,actionDefinitions);
     }
 
+    public static DtEntity createForActions(ObservableList<ActionDeclTableViewModel> actionDeclarations, ObservableList<ObservableList<String>> actionDefinitions) {
+        return new DtEntityStub(EMPTY_CDECL,EMPTY_DEFS,actionDeclarations,actionDefinitions);
+    }
+
+
     public static DtEntity createForConditionDefinitions(ObservableList<ObservableList<String>> conditionDefinitions) {
         return new DtEntityStub(EMPTY_CDECL,conditionDefinitions,EMPTY_ADECL,EMPTY_DEFS);
     }

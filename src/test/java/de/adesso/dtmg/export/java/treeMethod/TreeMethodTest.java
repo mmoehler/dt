@@ -19,11 +19,8 @@
 
 package de.adesso.dtmg.export.java.treeMethod;
 
-import com.codepoetics.protonpack.Indexed;
-import com.codepoetics.protonpack.StreamUtils;
 import com.google.common.io.LineReader;
 import de.adesso.dtmg.Dump;
-import de.adesso.dtmg.common.builder.ObservableList2DBuilder;
 import de.adesso.dtmg.export.java.treemethod.Node;
 import de.adesso.dtmg.export.java.treemethod.TreeMethod;
 import de.adesso.dtmg.functions.ObservableList2DFunctions;
@@ -33,7 +30,9 @@ import de.adesso.dtmg.io.DtEntity;
 import de.adesso.dtmg.model.Declaration;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
-import de.adesso.dtmg.util.tuple.*;
+import de.adesso.dtmg.util.tuple.Tuple2;
+import de.adesso.dtmg.util.tuple.Tuple3;
+import de.adesso.dtmg.util.tuple.Tuple5;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.hamcrest.CoreMatchers;
@@ -50,11 +49,6 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Optional;
-import java.util.function.BinaryOperator;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -82,50 +76,47 @@ public class TreeMethodTest {
     }
 
     @Test
-    public void testStep1_Non_Leaf() {
+    public void testStep1_Non_Leaf() throws Exception {
 
-        final ObservableList<ObservableList<String>> x = ObservableList2DBuilder.observable2DOf(
-                        "X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,"
-                        +"-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,"
-                        +"-,-,X,-,-,-,X,-,X,-,-,-,X,X,-,-,X,"
-                        +"-,-,-,X,-,-,X,-,-,X,X,-,X,X,-,X,X,"
-                        +"-,-,-,-,X,-,-,-,-,X,-,-,X,-,-,X,X,"
-                        +"-,-,-,-,-,X,-,-,X,-,X,-,-,X,-,X,X,"
-                        +"-,-,-,-,-,-,-,X,-,-,-,-,-,-,X,-,-,"
-                        +"-,-,-,-,-,-,-,-,-,-,-,X,-,-,X,-,-"
-        ).dim(8, 17).build();
+        DtEntity e = readDecisionTable();
+
+        final ObservableList<ObservableList<String>> x = e.getActionDefinitions();
+
         Dump.dumpTableItems("X",x);
 
-        DtEntity e = DtEntityStub.createForActionDefinitions(x);
         final Tuple2<Boolean, Declaration> tuple2 = tm.step1(e);
+
+        System.out.println(">>> tuple2 = " + tuple2);
 
         assertThat(tuple2._1(), equalTo(Boolean.FALSE));
         assertThat(tuple2._2(), CoreMatchers.nullValue());
 
-        
     }
 
     @Test
-    public void testStep1_Leaf_1() {
+    public void testStep1_Leaf_1() throws Exception {
 
-        ActionDeclTableViewModelListBuilder builder = new ActionDeclTableViewModelListBuilder();
-        final ObservableList<ActionDeclTableViewModel> w =
-                builder.addTableViewModelWithLfdNbr("A001").withExpression("x").withIndicators("Y,N").build();
+        DtEntity e = readDecisionTable();
 
-        final ObservableList<ObservableList<String>> x = ObservableList2DBuilder.observable2DOf(
-                "X,-,-,-,-,-,-,-"
-        ).dim(8, 1).build();
-        Dump.dumpTableItems("X",x);
+        final ObservableList<ObservableList<String>> x = e.getActionDefinitions();
+        final ObservableList<ActionDeclTableViewModel> y = e.getActionDeclarations();
 
-        DtEntity e = DtEntityStub.createFor(w,x);
-        final Tuple2<Boolean, Declaration> tuple2 = tm.step1(e);
+        final ObservableList<ObservableList<String>> _x = FXCollections.observableArrayList();
+        _x.add(x.get(0));
 
-        final ObservableList<String> expected = FXCollections.observableArrayList();
-        expected.add("X");
+        final ObservableList<ActionDeclTableViewModel> _y = FXCollections.observableArrayList();
+        _y.add(y.get(0));
+
+        DtEntity _e = DtEntityStub.createForActions(_y,_x);
+
+        Dump.dumpTableItems("X",_x);
+
+        final Tuple2<Boolean, Declaration> tuple2 = tm.step1(_e);
+
+        System.out.println(">>> tuple2 = " + tuple2);
 
         assertThat(tuple2._1(), equalTo(Boolean.TRUE));
-        assertThat(tuple2._2(), equalTo(w.get(0).getModel()));
-
+        assertThat(tuple2._2(), equalTo(_y.get(0).getModel()));
 
     }
 
@@ -142,84 +133,109 @@ public class TreeMethodTest {
 
         Tuple3<Boolean, ActionDeclTableViewModel, Integer> tuple3 = tm.step2(e);
         System.out.println("tuple3 = " + tuple3);
+
+        assertThat(tuple3._1(), equalTo(Boolean.TRUE));
+        assertThat(tuple3._2().expressionProperty().get(), equalTo("no action"));
+        assertThat(tuple3._3(), equalTo(0));
     }
 
     @Test
-    public void testStep1_Leaf_3() {
+    public void testStep3() throws Exception {
 
-        ActionDeclTableViewModelListBuilder builder = new ActionDeclTableViewModelListBuilder();
-        final ObservableList<ActionDeclTableViewModel> w =
-                builder.addTableViewModelWithLfdNbr("A001").withExpression("x").withIndicators("Y,N").build();
+        DtEntity e = readDecisionTable();
 
-        final ObservableList<ObservableList<String>> x = ObservableList2DBuilder.observable2DOf(
-                        "X,X,X,X,X,-,X,-,"
-                        +"-,-,-,-,-,-,-,-,"
-                        +"-,-,-,-,-,-,-,-"
-
-        ).dim(8, 3).build();
+        final ObservableList<ObservableList<String>> x = e.getActionDefinitions();
         Dump.dumpTableItems("X",x);
 
-        DtEntity e = DtEntityStub.createFor(w,x);
-        final Tuple2<Boolean, Declaration> tuple2 = tm.step1(e);
+        final ObservableList<ObservableList<String>> y = e.getConditionDefinitions();
+        Dump.dumpTableItems("Y",y);
 
-        final ObservableList<String> expected = FXCollections.observableArrayList();
-        expected.add("X");
+        final Tuple5<Boolean, ConditionDeclTableViewModel, String, Integer, Integer> tuple5 = tm.step3(e, 0);
+        System.out.println("tuple4 = " + tuple5);
 
-        assertThat(tuple2._1(), equalTo(Boolean.TRUE));
-        assertThat(tuple2._2(), equalTo(w.get(0).getModel()));
 
+        assertThat(tuple5._1(), equalTo(Boolean.TRUE));
+        assertThat(tuple5._2().expressionProperty().get(), equalTo("x"));
+        assertThat(tuple5._3(), equalTo("N"));
+        assertThat(tuple5._4(), equalTo(0));
+
+    }
+
+
+    @Test
+    public void testStep4() throws Exception {
+
+        DtEntity e = readDecisionTable();
+
+        final ObservableList<ObservableList<String>> x = e.getActionDefinitions();
+        Dump.dumpTableItems("X",x);
+
+        final ObservableList<ObservableList<String>> y = e.getConditionDefinitions();
+        Dump.dumpTableItems("Y",y);
+
+        final Tuple2<DtEntity, DtEntity> tuple2 = tm.step4(e, 0);
+        System.out.println("tuple2 = " + tuple2);
+
+        System.out.println("====================================================================");
+
+        Dump.dumpTableItems("L_CDF", tuple2._1().getConditionDefinitions());
+        Dump.dumpTableItems("L_ADF", tuple2._1().getActionDefinitions());
+
+        System.out.println("====================================================================");
+
+        Dump.dumpTableItems("R_CDF", tuple2._2().getConditionDefinitions());
+        Dump.dumpTableItems("R_ADF", tuple2._2().getActionDefinitions());
+
+        /*
+        assertThat(tuple4._1(), equalTo(Boolean.TRUE));
+        assertThat(tuple4._2().expressionProperty().get(), equalTo("x"));
+        assertThat(tuple4._3(), equalTo("N"));
+        assertThat(tuple4._4(), equalTo(0));
+        */
 
     }
 
     @Test
-    public void testStep4_Split_Definitions() {
+    public void testStep1_L_Step4() throws Exception {
 
-        final ObservableList<ObservableList<String>> x = ObservableList2DBuilder.observable2DOf(
-                "X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,"
-                        +"-,X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,"
-                        +"-,-,X,-,-,-,X,-,X,-,-,-,X,X,-,-,X,"
-                        +"-,-,-,X,-,-,X,-,-,X,X,-,X,X,-,X,X,"
-                        +"-,-,-,-,X,-,-,-,-,X,-,-,X,-,-,X,X,"
-                        +"-,-,-,-,-,X,-,-,X,-,X,-,-,X,-,X,X,"
-                        +"-,-,-,-,-,-,-,X,-,-,-,-,-,-,X,-,-,"
-                        +"-,-,-,-,-,-,-,-,-,-,-,X,-,-,X,-,-"
-        ).dim(8, 17).build();
+        DtEntity e = readDecisionTable();
+
+        final ObservableList<ObservableList<String>> x = e.getActionDefinitions();
         Dump.dumpTableItems("X",x);
 
-        DtEntity e = DtEntityStub.createForActionDefinitions(x);
+        final ObservableList<ObservableList<String>> y = e.getConditionDefinitions();
+        Dump.dumpTableItems("Y",y);
 
-        final Tuple2<DtEntity, DtEntity> step4 = tm.step4(e, 0);
+        final Tuple2<DtEntity, DtEntity> tuple2 = tm.step4(e, 0);
+        System.out.println("tuple2 = " + tuple2);
 
-        ObservableList<ObservableList<String>> actuals_left = step4._1().getActionDefinitions();
-        ObservableList<ObservableList<String>> actuals_right = step4._2().getActionDefinitions();
 
-        Dump.dumpTableItems("LEFT", actuals_left);
-        Dump.dumpTableItems("RIGHT",actuals_right);
+        System.out.println("====================================================================");
 
-        final ObservableList<ObservableList<String>> expected_left = ObservableList2DBuilder.observable2DOf(
-                "X,-,-,-,-,-,-,-"
-        ).dim(8, 1).build();
+        Dump.dumpTableItems("L_CDF", tuple2._1().getConditionDefinitions());
+        Dump.dumpTableItems("L_ADF", tuple2._1().getActionDefinitions());
 
-        final ObservableList<ObservableList<String>> expected_right = ObservableList2DBuilder.observable2DOf(
-                "-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,"
-                        +"X,-,-,-,-,-,-,-,-,-,-,-,-,-,-,-,"
-                        +"-,X,-,-,-,X,-,X,-,-,-,X,X,-,-,X,"
-                        +"-,-,X,-,-,X,-,-,X,X,-,X,X,-,X,X,"
-                        +"-,-,-,X,-,-,-,-,X,-,-,X,-,-,X,X,"
-                        +"-,-,-,-,X,-,-,X,-,X,-,-,X,-,X,X,"
-                        +"-,-,-,-,-,-,X,-,-,-,-,-,-,X,-,-,"
-                        +"-,-,-,-,-,-,-,-,-,-,X,-,-,X,-,-"
-        ).dim(8, 16).build();
+        System.out.println("====================================================================");
 
-        assertThat(actuals_left, equalTo(expected_left));
-        assertThat(actuals_right, equalTo(expected_right));
+        Dump.dumpTableItems("R_CDF", tuple2._2().getConditionDefinitions());
+        Dump.dumpTableItems("R_ADF", tuple2._2().getActionDefinitions());
+
+
+        final Tuple2<Boolean, Declaration> tuple21 = tm.step1(tuple2._1());
+
+        System.out.println("tuple21 = " + tuple21);
+
+        final Tuple2<Boolean, Declaration> tuple22 = tm.step1(tuple2._2());
+
+        System.out.println("tuple22 = " + tuple22);
 
     }
 
     @Test
     public void testBuildTree() throws Exception {
         DtEntity e = readDecisionTable();
-        Node<Declaration> decisionTree = transform(e);
+        TreeMethod tm = new TreeMethod();
+        Node<Declaration> decisionTree = transform(e, tm);
 
         for (Node<Declaration> node : decisionTree) {
             String indent = createIndent(node.getLevel());
@@ -240,175 +256,27 @@ public class TreeMethodTest {
         super();
     }
 
-    @Test
-    public void testLoad() throws Exception {
-        DtEntity e = readDecisionTable();
+    public  Node<Declaration> transform(DtEntity dt, TreeMethod tm) {
 
-        Dump.dumpTableItems("CONDEFS",e.getConditionDefinitions());
-
-            /*
-
-        // step 1
-        Tuple2<Boolean,ActionDeclTableViewModel> r0 = step1(e);
-
-        System.out.println("r0 = " + r0);
-        System.out.println("step1 = " + (r0._1() ? "This is leaf node" : "This is condition node"));
-
-        Tuple3<Boolean,ActionDeclTableViewModel,Integer> r1 = step2(e);
-        System.out.println("step2 = Select action: '" + r1._2().expressionProperty().get() + "'");
-
-        Tuple4<Boolean, ConditionDeclTableViewModel, String, Integer> r2 = step3(e, r1._3());
-        System.out.println("r2 = " + r2);
-        System.out.println("step3 = Select input: '" + r2._2().expressionProperty().get() + "'");
-
-        //tEntity, DtEntity> r3 =
-                step4(e,r2._4());
-
-                */
-    }
-
-
-    public  Node<Declaration> transform(DtEntity dt) {
-        /*
-        final Tuple2<Boolean, ActionDeclTableViewModel> step1 = step1(dt);
+        final Tuple2<Boolean, Declaration> step1 = tm.step1(dt);
         Node<Declaration> ret = null;
         if(step1._1()) {
-            ret = new Node(step1.$2().getModel());
+            ret = new Node(step1._2());
         } else {
-            final Tuple3<Boolean, ActionDeclTableViewModel, Integer> step2 = step2(dt);
-            final Tuple4<Boolean, ConditionDeclTableViewModel, String, Integer> step3 = step3(dt, step2._3());
+            final Tuple3<Boolean, ActionDeclTableViewModel, Integer> step2 = tm.step2(dt);
+            final Tuple5<Boolean, ConditionDeclTableViewModel, String, Integer, Integer> step3 = tm.step3(dt, step2._3());
             Node<Declaration> condition = new Node<>(step3._2().getModel());
-            final Tuple2<DtEntity,DtEntity> step4 = step4(dt, step3._4());
+            final Tuple2<DtEntity,DtEntity> step4 = tm.step4(dt, step3._4());
             if(N.equals(step3._3())) {
-                condition.left(transform(step4._1()));
-                condition.right(transform(step4._2()));
+                condition.left(transform(step4._1(),tm));
+                condition.right(transform(step4._2(),tm));
+            } else {
+                condition.right(transform(step4._1(),tm));
+                condition.left(transform(step4._2(),tm));
             }
             ret = condition;
         }
         return ret;
-        */
-        return null;
-    }
-
-    /** Check the OR-decision table to see if it can be leaf node or condition node*/
-    private Tuple2<Boolean,ActionDeclTableViewModel> step1(DtEntity e) {
-        ObservableList<ObservableList<String>> actions = e.getActionDefinitions();
-
-        Dump.dumpTableItems("ACTIONS", actions);
-
-        ObservableList<ActionDeclTableViewModel> adecl = e.getActionDeclarations();
-        Optional<ObservableList<String>> optional = actions.stream()
-                .filter(l -> l.stream()
-                        .filter(el -> el.equals(X)).count() == l.size()).findFirst();
-        return (optional.isPresent())
-                ? Tuple.of(true,adecl.get(adecl.indexOf(optional.get())))
-                : Tuple.of(false,null);
-
-    }
-
-    /** Find the maximum number of occurrence of the unique value of each condition */
-    private Tuple4<Boolean,ConditionDeclTableViewModel, String, Integer> step3(DtEntity e, int index) {
-        ObservableList<ObservableList<String>> actions = e.getActionDefinitions();
-
-        // determine indices of X of the max action row
-        List<Long> collectX = StreamUtils.zipWithIndex(actions.get(index).stream())
-                .filter(s -> s.getValue().equals(X))
-                .map(t -> t.getIndex())
-                .collect(Collectors.toList());
-
-        System.out.println("collectX = " + collectX);
-
-        ObservableList<ObservableList<String>> conditions = ObservableList2DFunctions.transpose().apply(e.getConditionDefinitions());
-
-        Dump.dumpTableItems("TRANSCONDEFS", conditions);
-
-        List<ObservableList<String>> conditionsWithActions = collectX.stream().map(l -> conditions.get(l.intValue())).collect(Collectors.toList());
-        System.out.println("conditionsWithActions = " + conditionsWithActions);
-
-        //List<Integer>  =
-        Integer[] countedY = conditionsWithActions.stream().map(c -> countingY(c))
-                .reduce(newIntegerArray(conditions.get(0).size(),0), addLists);
-        System.out.println("countedY = " + Arrays.toString(countedY));
-
-        Integer[]  countedN = conditionsWithActions.stream().map(c -> countingN(c))
-                .reduce(newIntegerArray(conditions.get(0).size(),0), addLists);
-        System.out.println("countedN = " + Arrays.toString(countedN));
-
-        Optional<Indexed<Integer>> max = Stream.concat(StreamUtils
-                .zipWithIndex(Arrays.stream(countedY)), StreamUtils.zipWithIndex(Arrays.stream(countedN)))
-                .collect(Collectors.maxBy((a, b) -> a.getValue().compareTo(b.getValue())));
-
-        if(max.isPresent()) {
-            int idx = (int)max.get().getIndex();
-            return Tuple.of(true,e.getConditionDeclarations().get(idx),e.getConditionDefinitions().get(index).get(idx),idx);
-        }
-
-        return Tuple.of(false,null,null,null);
-    }
-
-    /** Separate the OR-decision table from the previous
-     step into two sub-tables by grouping the rows that contain ‘0’
-     into one table and rows that contain ‘1’ into another table. */
-    private Tuple2<DtEntity,DtEntity> step4(DtEntity e, int idx) {
-
-        int index = idx+1;
-
-        final ObservableList<ConditionDeclTableViewModel> conditionDeclarations = e.getConditionDeclarations();
-
-        final ObservableList<ObservableList<ConditionDeclTableViewModel>> splittedCDEC = HObservableLists.splitAt(conditionDeclarations, index);
-
-        final ObservableList<ObservableList<String>> conditionDefinitions = e.getConditionDefinitions();
-        final ObservableList<ObservableList<ObservableList<String>>> splittedCDEF = HObservableLists.splitAt(conditionDefinitions, index);
-
-        splittedCDEF.forEach(t -> Dump.dumpTableItems("DEFNS",t));
-
-        final ObservableList<ActionDeclTableViewModel> actionDeclarations = e.getActionDeclarations();
-        final ObservableList<ObservableList<ActionDeclTableViewModel>> splittedADEC = HObservableLists.splitAt(actionDeclarations, index);
-
-        final ObservableList<ObservableList<String>> actionDefinitions = e.getActionDefinitions();
-        final ObservableList<ObservableList<ObservableList<String>>> splittedADEF = HObservableLists.splitAt(actionDefinitions, index);
-
-        splittedADEF.forEach(t -> Dump.dumpTableItems("ADEFNS",t));
-
-        return Tuple.of(
-                new DtEntity(splittedCDEC.get(0),splittedCDEF.get(0),splittedADEC.get(0),splittedADEF.get(0)),
-                new DtEntity(splittedCDEC.get(1),splittedCDEF.get(1),splittedADEC.get(1),splittedADEF.get(1))
-        );
-
-    }
-
-
-    public Integer[] newIntegerArray(int size, Integer filler) {
-        Integer ret[] = new Integer[size];
-        Arrays.fill(ret,0);
-        return ret;
-    }
-
-    private BinaryOperator<Integer[]> addLists = (a, b) -> StreamUtils.zip(Arrays.stream(a), Arrays.stream(b),
-            (l, r) -> new Integer(l + r)).toArray(Integer[]::new);
-
-    private Integer[] countingY(ObservableList < String > c) {
-        Integer[] list = new Integer[c.size()];
-        Arrays.fill(list,0);
-        for (int i = 0; i < c.size(); i++) {
-            if(Y.equals(c.get(i))) {
-                long dashes = c.stream().filter(y -> DASH.equals(y)).count();
-                list[i]+=(int)Math.pow(2,dashes);
-            }
-        }
-        return list;
-    }
-
-    private Integer[] countingN(ObservableList<String> c) {
-        Integer[] list = new Integer[c.size()];
-        Arrays.fill(list,0);
-        for (int i = 0; i < c.size(); i++) {
-            if(N.equals(c.get(i))) {
-                long dashes = c.stream().filter(y -> DASH.equals(y)).count();
-                list[i]+=(int)Math.pow(2,dashes);
-            }
-        }
-        return list;
     }
 
 
@@ -434,9 +302,6 @@ public class TreeMethodTest {
         }
         conditionDecls.addAll(builder.build());
 
-        // -- DUMP
-        conditionDecls.stream().forEach(System.out::println);
-
         // Read ConditionDefns
 
         ObservableList<ObservableList<String>> conditionDefns = FXCollections.observableArrayList();
@@ -454,8 +319,6 @@ public class TreeMethodTest {
         }
         ;
 
-        Dump.dumpTableItems("CONDDEFS", conditionDefns);
-
         s0 = l.split(":");
         i = Integer.parseInt(s0[0]);
         ObservableList<ActionDeclTableViewModel> actionDecls = FXCollections.observableArrayList();
@@ -468,9 +331,6 @@ public class TreeMethodTest {
         }
 
         actionDecls.addAll(abuilder.build());
-
-        // -- DUMP
-        actionDecls.stream().forEach(System.out::println);
 
         // Read ActionDefns
 
@@ -489,9 +349,11 @@ public class TreeMethodTest {
         }
         ;
 
-        Dump.dumpTableItems("ACTDEFS", actionDefns);
 
-        DtEntity ret = new DtEntity(conditionDecls, conditionDefns, actionDecls, actionDefns);
+        final ObservableList<ObservableList<String>> _conditionDefns = ObservableList2DFunctions.transpose().apply(conditionDefns);
+        final ObservableList<ObservableList<String>> _actionDefns = ObservableList2DFunctions.transpose().apply(actionDefns);
+
+        DtEntity ret = new DtEntity(conditionDecls, _conditionDefns, actionDecls, _actionDefns);
         return ret;
     }
 
