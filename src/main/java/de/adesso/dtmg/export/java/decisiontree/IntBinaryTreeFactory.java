@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.treemethod;
+package de.adesso.dtmg.export.java.decisiontree;
 
 import com.codepoetics.protonpack.Indexed;
 import com.codepoetics.protonpack.StreamUtils;
@@ -29,7 +29,7 @@ import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import de.adesso.dtmg.util.tuple.Tuple3;
-import de.adesso.dtmg.util.tuple.Tuple5;
+import de.adesso.dtmg.util.tuple.Tuple4;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.function.BinaryOperator;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -48,12 +49,64 @@ import static de.adesso.dtmg.functions.ObservableList2DFunctions.transpose;
 /**
  * Created by mmoehler on 02.07.16.
  */
-public class TreeMethod {
+public class IntBinaryTreeFactory implements Function<DtEntity,IntBinaryTree> {
     public static final String X = "X";
     public static final String DASH = "-";
     public static final String Y = "Y";
     public static final String N = "N";
     public static final String S = " ";
+
+
+    public static IntBinaryTree createFrom(DtEntity dt) {
+        return new IntBinaryTreeFactory().apply(dt);
+    }
+
+    @Override
+    public IntBinaryTree apply(DtEntity dt) {
+        final Tuple2<Boolean, Declaration> step1 = step1(dt);
+        IntBinaryTree ret = null;
+        if(step1._1()) {
+            ret = new IntBinaryTree(declIndex(step1._2()));
+        } else {
+            final Tuple3<Boolean, ActionDeclTableViewModel, Integer> step2 = step2(dt);
+            final Tuple4<Boolean, ConditionDeclTableViewModel, Integer, Integer> step3 = step3(dt, step2._3());
+            IntBinaryTree condition = new IntBinaryTree(declIndex(step3._2().getModel()));
+            final Tuple2<DtEntity,DtEntity> step4 = step4(dt, step3._3());
+            condition.left(apply(step4._1()));
+            condition.right(apply(step4._2()));
+            ret = condition;
+        }
+        return ret;
+    }
+
+    static int declIndex(Declaration d) {
+        StringBuilder ret = new StringBuilder();
+        char[] chars = d.getLfdNr().toCharArray();
+        for (char c : chars) {
+            if(Character.isDigit(c)) {
+                ret.append(c);
+            }
+        }
+        return Integer.parseInt(ret.toString());
+    }
+
+    private BinaryTree<Declaration> buildTreeFrom(DtEntity dt) {
+        final Tuple2<Boolean, Declaration> step1 = step1(dt);
+        BinaryTree<Declaration> ret = null;
+        if(step1._1()) {
+            ret = new BinaryTree(step1._2());
+        } else {
+            final Tuple3<Boolean, ActionDeclTableViewModel, Integer> step2 = step2(dt);
+            final Tuple4<Boolean, ConditionDeclTableViewModel, Integer, Integer> step3 = step3(dt, step2._3());
+            BinaryTree<Declaration> condition = new BinaryTree<>(step3._2().getModel());
+            final Tuple2<DtEntity,DtEntity> step4 = step4(dt, step3._3());
+            condition.left(buildTreeFrom(step4._1()));
+            condition.right(buildTreeFrom(step4._2()));
+            ret = condition;
+        }
+        return ret;
+    }
+
 
     /** Check the OR-decision table to see if it can be leaf node or condition node*/
     public Tuple2<Boolean,Declaration> step1(DtEntity e) {
@@ -119,7 +172,7 @@ public class TreeMethod {
     }
 
     /** Find the maximum number of occurrence of the unique value of each condition */
-    public Tuple5<Boolean,ConditionDeclTableViewModel, String, Integer, Integer> step3(DtEntity e, int actionIndex) {
+    public Tuple4<Boolean,ConditionDeclTableViewModel, Integer, Integer> step3(DtEntity e, int actionIndex) {
         ObservableList<ObservableList<String>> actions = transpose().apply(e.getActionDefinitions());
 
         // determine indices of X's of the max action row
@@ -154,10 +207,14 @@ public class TreeMethod {
             final String s1 = String.format(">>> Split table by condition '%s'", e.getConditionDeclarations().get(conditionIndex).getModel().getExpression());
             System.out.println(s1);
 
-            return Tuple.of(true,e.getConditionDeclarations().get(conditionIndex),e.getConditionDefinitions().get(actionIndex).get(conditionIndex),conditionIndex, actionIndex);
+            String s = String.format("c: %d - a: %d", conditionIndex, actionIndex);
+            System.out.println("### s = " + s);
+            ObservableList<String> strings = e.getConditionDefinitions().get(conditionIndex);
+            System.out.println("### cdefs = " + strings);
+            return Tuple.of(true,e.getConditionDeclarations().get(conditionIndex),conditionIndex, actionIndex);
         }
 
-        return Tuple.of(false,null,null,null,null);
+        return Tuple.of(false,null,null,null);
     }
 
     public Integer[] newIntegerArray(int size, Integer filler) {

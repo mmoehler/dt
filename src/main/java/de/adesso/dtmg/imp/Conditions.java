@@ -17,11 +17,20 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.treeMethod;
+package de.adesso.dtmg.imp;
+
+import java.util.concurrent.Callable;
+import java.util.function.Supplier;
 
 /**
- * Created by mmoehler on 10.06.16.
+ * Created by mmoehler on 17.07.16.
  */
-public interface Visitor<T extends Visitable> {
-    void visit(T visitable, Object... args);
+public interface Conditions extends Supplier<Callable<Boolean>[]> {
+    boolean condition000();
+    boolean condition001();
+    boolean condition002();
+    boolean condition003();
+    boolean condition004();
+    Conditions setExpected(boolean...flags);
+    Supplier<Callable<Boolean>[]> supplier();
 }

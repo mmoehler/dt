@@ -17,69 +17,86 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.treemethod;
+package de.adesso.dtmg.export.java.decisiontree;
 
+import com.google.common.collect.Lists;
+
+import java.util.Collections;
 import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * Created by moehler on 05.07.2016.
  */
-public class Node<T> implements Iterable<Node<T>>{
+public class BinaryTree<T> implements Iterable<BinaryTree<T>>, Consumer<Boolean[]>{
 
-    public static Node NULL_NODE = new Node();
+    public static BinaryTree NULL_TREE = new BinaryTree();
 
     protected T data;
-    protected Node<T> parent = NULL_NODE;
-    protected final LinkedList<Node<T>> children = new LinkedList<>();
+    protected BinaryTree<T> parent = NULL_TREE, left = NULL_TREE, right = NULL_TREE;
 
-    private Node() {
+    private BinaryTree() {
         this(null);
     }
 
-    public Node(T data) {
+    public BinaryTree(T data) {
         this.data = data;
+    }
+
+    @Override
+    public void accept(Boolean[] booleen) {
+
     }
 
     public T getData() {
         return data;
     }
 
-    public Node<T> left(T child) {
-        Node<T> childNode = new Node<T>(child);
-        childNode.parent = this;
-        this.children.addFirst(childNode);
-        return childNode;
+    public BinaryTree<T> left(T child) {
+        BinaryTree<T> childBinaryTree = new BinaryTree<T>(child);
+        childBinaryTree.parent = this;
+        this.left= childBinaryTree;
+        return childBinaryTree;
     }
 
-    public Node<T> right(T child) {
-        Node<T> childNode = new Node<T>(child);
-        childNode.parent = this;
-        this.children.addLast(childNode);
-        return childNode;
+    public BinaryTree<T> right(T child) {
+        BinaryTree<T> childBinaryTree = new BinaryTree<T>(child);
+        childBinaryTree.parent = this;
+        this.right= childBinaryTree;
+        return childBinaryTree;
     }
 
-    public Node<T> left(Node<T> child) {
-        Node<T> childNode = child;
-        childNode.parent = this;
-        this.children.addFirst(childNode);
-        return childNode;
+    public BinaryTree<T> left(BinaryTree<T> child) {
+        BinaryTree<T> childBinaryTree = child;
+        childBinaryTree.parent = this;
+        this.left= childBinaryTree;
+        return childBinaryTree;
     }
 
-    public Node<T> right(Node<T> child) {
-        Node<T> childNode = child;
-        childNode.parent = this;
-        this.children.addLast(childNode);
-        return childNode;
+    public BinaryTree<T> right(BinaryTree<T> child) {
+        BinaryTree<T> childBinaryTree = child;
+        childBinaryTree.parent = this;
+        this.right= childBinaryTree;
+        return childBinaryTree;
     }
 
+    public List<BinaryTree<T>> children() {
+        return (isLeaf())
+                ? Collections.emptyList()
+                : (this.left == NULL_TREE)
+                ? Lists.newArrayList(this.right)
+                : (this.right == NULL_TREE)
+                ? Lists.newArrayList(this.left)
+                :  Lists.newArrayList(this.left, this.right);
+    }
 
     public boolean isRoot() {
-        return parent == NULL_NODE;
+        return parent == NULL_TREE;
     }
 
     public boolean isLeaf() {
-        return this.children.isEmpty();
+        return this.left == NULL_TREE && this.right == NULL_TREE;
     }
 
     public int getLevel() {
@@ -90,42 +107,42 @@ public class Node<T> implements Iterable<Node<T>>{
     }
 
     @Override
-    public Iterator<Node<T>> iterator() {
+    public Iterator<BinaryTree<T>> iterator() {
         NodeIterator<T> iter = new NodeIterator<T>(this);
         return iter;
 
     }
 
-    static class NodeIterator<T> implements Iterator<Node<T>> {
+    static class NodeIterator<T> implements Iterator<BinaryTree<T>> {
 
         enum ProcessStages {
             ProcessParent, ProcessChildCurNode, ProcessChildSubNode
         }
 
-        private Node<T> treeNode;
+        private BinaryTree<T> treeBinaryTree;
         private ProcessStages doNext;
-        private Node<T> next;
-        private Iterator<Node<T>> childrenCurNodeIterator;
-        private Iterator<Node<T>> childrenSubNodeIterator;
+        private BinaryTree<T> next;
+        private Iterator<BinaryTree<T>> childrenCurNodeIterator;
+        private Iterator<BinaryTree<T>> childrenSubNodeIterator;
 
-        public NodeIterator(Node<T> node) {
-            this.treeNode = node;
+        public NodeIterator(BinaryTree<T> binaryTree) {
+            this.treeBinaryTree = binaryTree;
             this.doNext = ProcessStages.ProcessParent;
-            this.childrenCurNodeIterator = node.children.iterator();
+            this.childrenCurNodeIterator = binaryTree.children().iterator();
         }
 
         @Override
         public boolean hasNext() {
 
             if (this.doNext == ProcessStages.ProcessParent) {
-                this.next = this.treeNode;
+                this.next = this.treeBinaryTree;
                 this.doNext = ProcessStages.ProcessChildCurNode;
                 return true;
             }
 
             if (this.doNext == ProcessStages.ProcessChildCurNode) {
                 if (childrenCurNodeIterator.hasNext()) {
-                    Node<T> childDirect = childrenCurNodeIterator.next();
+                    BinaryTree<T> childDirect = childrenCurNodeIterator.next();
                     childrenSubNodeIterator = childDirect.iterator();
                     this.doNext = ProcessStages.ProcessChildSubNode;
                     return hasNext();
@@ -152,7 +169,7 @@ public class Node<T> implements Iterable<Node<T>>{
         }
 
         @Override
-        public Node<T> next() {
+        public BinaryTree<T> next() {
             return this.next;
         }
 

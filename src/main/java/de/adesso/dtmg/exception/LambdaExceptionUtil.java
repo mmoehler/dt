@@ -194,6 +194,12 @@ public final class LambdaExceptionUtil {
     }
 
     @FunctionalInterface
+    public interface Callable_WithExceptions<R,E extends Exception> {
+        R call() throws E;
+    }
+
+
+    @FunctionalInterface
     public interface IntFunction_WithExceptions<R, E extends Exception> {
         R apply(int value) throws E;
     }
