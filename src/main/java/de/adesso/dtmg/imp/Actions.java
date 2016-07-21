@@ -17,11 +17,20 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.treeMethod;
+package de.adesso.dtmg.imp;
+
+import java.util.function.Supplier;
 
 /**
- * Created by mmoehler on 10.06.16.
+ * Created by mmoehler on 16.07.16.
  */
-public interface Visitor<T extends Visitable> {
-    void visit(T visitable, Object... args);
+public interface Actions extends Supplier<Runnable[]> {
+    void action000();
+    void action001();
+    void action002();
+    void action003();
+    void action004();
+    void action005();
+    void action006();
+    void action007();
 }

@@ -19,20 +19,26 @@
 
 package de.adesso.dtmg.export.java.treeMethod;
 
+import com.google.common.collect.BiMap;
+import com.google.common.collect.HashBiMap;
 import com.google.common.io.LineReader;
 import de.adesso.dtmg.Dump;
-import de.adesso.dtmg.export.java.treemethod.Node;
-import de.adesso.dtmg.export.java.treemethod.TreeMethod;
+import de.adesso.dtmg.export.java.decisiontree.BinaryTree;
+import de.adesso.dtmg.export.java.decisiontree.DecisionTree;
+import de.adesso.dtmg.export.java.decisiontree.IntBinaryTree;
+import de.adesso.dtmg.export.java.decisiontree.IntBinaryTreeFactory;
 import de.adesso.dtmg.functions.ObservableList2DFunctions;
 import de.adesso.dtmg.functions.fixtures.ActionDeclTableViewModelListBuilder;
 import de.adesso.dtmg.functions.fixtures.ConditionDeclTableViewModelListBuilder;
+import de.adesso.dtmg.imp.ActionsImpl;
+import de.adesso.dtmg.imp.ConditionsImpl;
 import de.adesso.dtmg.io.DtEntity;
 import de.adesso.dtmg.model.Declaration;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import de.adesso.dtmg.util.tuple.Tuple3;
-import de.adesso.dtmg.util.tuple.Tuple5;
+import de.adesso.dtmg.util.tuple.Tuple4;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.hamcrest.CoreMatchers;
@@ -49,6 +55,9 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -63,11 +72,11 @@ public class TreeMethodTest {
     public static final String Y = "Y";
     public static final String N = "N";
 
-    TreeMethod tm;
+    IntBinaryTreeFactory tm;
 
     @BeforeMethod
     public void setUp() throws Exception {
-        tm = new TreeMethod();
+        tm = new IntBinaryTreeFactory();
     }
 
     @AfterMethod
@@ -150,14 +159,14 @@ public class TreeMethodTest {
         final ObservableList<ObservableList<String>> y = e.getConditionDefinitions();
         Dump.dumpTableItems("Y",y);
 
-        final Tuple5<Boolean, ConditionDeclTableViewModel, String, Integer, Integer> tuple5 = tm.step3(e, 0);
-        System.out.println("tuple4 = " + tuple5);
+        final Tuple4<Boolean, ConditionDeclTableViewModel, Integer, Integer> tuple4 = tm.step3(e, 0);
+        System.out.println("tuple4 = " + tuple4);
 
 
-        assertThat(tuple5._1(), equalTo(Boolean.TRUE));
-        assertThat(tuple5._2().expressionProperty().get(), equalTo("x"));
-        assertThat(tuple5._3(), equalTo("N"));
-        assertThat(tuple5._4(), equalTo(0));
+        assertThat(tuple4._1(), equalTo(Boolean.TRUE));
+        assertThat(tuple4._2().expressionProperty().get(), equalTo("x"));
+        assertThat(tuple4._3(), equalTo(0));
+        assertThat(tuple4._4(), equalTo(0));
 
     }
 
@@ -232,21 +241,90 @@ public class TreeMethodTest {
     }
 
     @Test
+    public void testDecisionTree() throws Exception {
+        DtEntity e = readDecisionTable();
+        boolean b[] = {true,true,false,false,true};
+        DecisionTree tree = DecisionTree.newBuilder()
+                .conditionSupplier(new ConditionsImpl().setExpected(b).supplier())
+                .actionSupplier(new ActionsImpl())
+                .decisionTable(e)
+                .build();
+
+        for (IntBinaryTree t : tree.getTree()) {
+            String indent = createIndent(t.getLevel());
+            String s = String.format("%s%02d.%d",(t.isLeaf()) ? "A" : "C",t.getData(), t.hashCode());
+            System.out.println(indent + s);
+        }
+
+
+        System.out.println("######################################");
+        tree.accept(b);
+        System.out.println("######################################");
+
+    }
+
+
+
+    @Test
     public void testBuildTree() throws Exception {
         DtEntity e = readDecisionTable();
-        TreeMethod tm = new TreeMethod();
-        Node<Declaration> decisionTree = transform(e, tm);
+        IntBinaryTreeFactory tm = new IntBinaryTreeFactory();
+        BinaryTree<Declaration> decisionTree = transform(e, tm);
 
-        for (Node<Declaration> node : decisionTree) {
-            String indent = createIndent(node.getLevel());
-            System.out.println(indent + node.getData());
+        for (BinaryTree<Declaration> binaryTree : decisionTree) {
+            String indent = createIndent(binaryTree.getLevel());
+            String s = String.format("%d[%s]@%s", getIndex(binaryTree), binaryTree.getData().getExpression(), Integer.toHexString(binaryTree.hashCode()));
+            System.out.println(indent + s);
         }
+    }
+
+    static int getIndex(BinaryTree<Declaration> t) {
+        String strNr = t.getData().getLfdNr();
+        strNr = strNr.substring(1,strNr.length());
+        return Integer.parseInt(strNr);
+    }
+
+    String nodeName(BinaryTree<Declaration> binaryTree) {
+        String s = String.format("%s[%s]@%s", binaryTree.getData().getLfdNr(), binaryTree.getData().getExpression(), Integer.toHexString(binaryTree.hashCode()));
+        return s;
+    }
+
+    @Test
+    public void testBuildGraphvizTree() throws Exception {
+        DtEntity e = readDecisionTable();
+        IntBinaryTreeFactory tm = new IntBinaryTreeFactory();
+        BinaryTree<Declaration> decisionTree = transform(e, tm);
+        int i=0;
+        BiMap<Object,Object> map = HashBiMap.create();
+
+        for (BinaryTree<Declaration> binaryTree : decisionTree) {
+            map.put(nodeName(binaryTree), i++);
+        }
+
+
+        System.out.println("digraph d {");
+
+        for (Map.Entry<Object,Object> n : map.entrySet()) {
+            String s = String.format("%s [label=\"%s\"]", n.getValue(), n.getKey());
+            System.out.println(s);
+        }
+
+        for (BinaryTree<Declaration> binaryTree : decisionTree) {
+            if (!binaryTree.isLeaf()) {
+                List<Object> list = binaryTree.children().stream().map(l -> map.get(nodeName(l))).collect(Collectors.toList());
+                for (Object o : list) {
+                    String s = String.format("%s -> %s", map.get(nodeName(binaryTree)), String.valueOf(o));
+                    System.out.println(s);
+                }
+            }
+        }
+        System.out.println("}");
     }
 
     private static String createIndent(int depth) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < depth; i++) {
-            sb.append(' ');
+            sb.append("     ");
         }
         return sb.toString();
     }
@@ -256,24 +334,19 @@ public class TreeMethodTest {
         super();
     }
 
-    public  Node<Declaration> transform(DtEntity dt, TreeMethod tm) {
+    public BinaryTree<Declaration> transform(DtEntity dt, IntBinaryTreeFactory tm) {
 
         final Tuple2<Boolean, Declaration> step1 = tm.step1(dt);
-        Node<Declaration> ret = null;
+        BinaryTree<Declaration> ret = null;
         if(step1._1()) {
-            ret = new Node(step1._2());
+            ret = new BinaryTree(step1._2());
         } else {
             final Tuple3<Boolean, ActionDeclTableViewModel, Integer> step2 = tm.step2(dt);
-            final Tuple5<Boolean, ConditionDeclTableViewModel, String, Integer, Integer> step3 = tm.step3(dt, step2._3());
-            Node<Declaration> condition = new Node<>(step3._2().getModel());
-            final Tuple2<DtEntity,DtEntity> step4 = tm.step4(dt, step3._4());
-            if(N.equals(step3._3())) {
-                condition.left(transform(step4._1(),tm));
-                condition.right(transform(step4._2(),tm));
-            } else {
-                condition.right(transform(step4._1(),tm));
-                condition.left(transform(step4._2(),tm));
-            }
+            final Tuple4<Boolean, ConditionDeclTableViewModel, Integer, Integer> step3 = tm.step3(dt, step2._3());
+            BinaryTree<Declaration> condition = new BinaryTree<>(step3._2().getModel());
+            final Tuple2<DtEntity,DtEntity> step4 = tm.step4(dt, step3._3());
+            condition.left(transform(step4._1(),tm));
+            condition.right(transform(step4._2(),tm));
             ret = condition;
         }
         return ret;
