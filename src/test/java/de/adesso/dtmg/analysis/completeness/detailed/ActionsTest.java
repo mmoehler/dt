@@ -196,7 +196,7 @@ public class ActionsTest {
             ObservableList<ObservableList<String>> cur = List2DFunctions.transpose(tmp);
             Map<ObservableList<String>, List<Integer>> map = new HashMap<>();
             IntStream.range(0,cur.size()).forEach(j -> map
-                    .compute(cur.get(j), (k, v) -> (v == null) ? newWithValue(j) : addValue(v,j)));
+                    .compute(cur.getVar(j), (k, v) -> (v == null) ? newWithValue(j) : addValue(v,j)));
             final int row = i;
             map.entrySet().stream().filter(e -> e.getValue().size() > 1)
                     .forEach(f -> {
@@ -204,9 +204,9 @@ public class ActionsTest {
                         Collections.sort(indices, (a,b) -> (-1));
                         for (int r = 0; r<indices.size() ; r++) {
                             if(r==indices.size()-1) {
-                                observables[0].get(row).set(indices.get(r), DASH);
+                                observables[0].getVar(row).set(indices.getVar(r), DASH);
                             } else {
-                                observables[0] = List2DFunctions.removeColumnsAt(observables[0], indices.get(r));
+                                observables[0] = List2DFunctions.removeColumnsAt(observables[0], indices.getVar(r));
                             }
                         }
                     });

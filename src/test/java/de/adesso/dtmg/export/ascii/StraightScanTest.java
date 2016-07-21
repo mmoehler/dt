@@ -228,7 +228,7 @@ public class StraightScanTest {
                 .map(Splitter.on(Pattern.compile(SPLIT_REGEX)).trimResults()::splitToList)
                 .collect(Collectors.toList());
 
-        // ... get the actual
+        // ... getVar the actual
         List<AsciiRow> actual = new Emitter().emitConditions().apply(input).collect(Collectors.toList());
 
 

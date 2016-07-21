@@ -30,7 +30,7 @@ public abstract class NestedBuilder<T, V> {
     protected T parent;
 
     /**
-     * To get the parent builder
+     * To getVar the parent builder
      *
      * @return T the instance of the parent builder
      */

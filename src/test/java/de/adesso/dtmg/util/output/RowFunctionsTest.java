@@ -79,7 +79,7 @@ public class RowFunctionsTest {
 
         List<String> collect = normalized.stream().map(l -> {
             while (l.size() < maxSize) {
-                l.add(getEmptyFieldData(l.get(0).length()));
+                l.add(getEmptyFieldData(l.getVar(0).length()));
             }
             return l;
         }).reduce(new ArrayList<>(), (a, b) -> (a.isEmpty())

@@ -60,8 +60,20 @@ public class Dump {
         System.out.println("<<<<<<<<<<\n");
     }
 
+    public static <T> void dumpMapLongIntegerListString(String msg, Map<Long, List<T>> map) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        map.forEach((k, v) -> System.out.println("\t" + k + " ->" + v.stream().map(a -> String.valueOf(a)).reduce("\t\t",(l,r) -> (l.length()==0) ? r : ("\t\t"+l+"\n\t\t"+r))));
+        System.out.println("<<<<<<<<<<\n");
+    }
 
-    public static <T> void dumpList1DItems(String msg, List<T> list1D) {
+    public static void dumpMapLongListChrAr(String msg, Map<Long, List<char[]>> map) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        map.forEach((k, v) -> System.out.println("\t" + k + " ->" + v.stream().map(a -> Arrays.toString(a)).reduce("\t\t",(l,r) -> (l.length()==0) ? r : ("\t\t"+l+"\n\t\t"+r))));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+
+    public static <T> void dumpList1DItems(String msg, Iterable<T> list1D) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
         list1D.forEach(i -> System.out.println("\t" + i));
         System.out.println("<<<<<<<<<<\n");

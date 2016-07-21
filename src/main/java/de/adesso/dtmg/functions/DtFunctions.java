@@ -442,7 +442,7 @@ public final class DtFunctions {
     public static <T extends DeclarationTableViewModel> void updateRowHeaders(TableView<T> table, Supplier<String> template) {
         int counter[] = {1};
         table.getItems().forEach(c -> {
-            c.lfdNrProperty().set(String.format(template.get(), counter[0]++));
+            c.lfdNrProperty().set(String.format(template.getVar(), counter[0]++));
             c.save();
         });
     }

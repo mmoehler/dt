@@ -5,8 +5,8 @@ import java.time.ZoneId;
 import java.time.ZonedDateTime;
 
 /**
- * This class is used to have a single clock that is used to get time instances. When somewhere an instance of
- * {@link java.time.LocalDate} or {@link java.time.LocalDateTime} with the current time is needed you should get it by
+ * This class is used to have a single clock that is used to getVar time instances. When somewhere an instance of
+ * {@link java.time.LocalDate} or {@link java.time.LocalDateTime} with the current time is needed you should getVar it by
  * using the 'now' method with the Clock param:
  * <p>
  * <pre>

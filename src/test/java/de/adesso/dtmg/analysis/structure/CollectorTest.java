@@ -126,9 +126,9 @@ public class CollectorTest {
         final Optional<Indicator> reduced = outConditions.get(outConditions.size() - 1).stream().reduce(Combiners.conditionComparisonResult());
 
         if (reduced.isPresent()) {
-            System.out.println("reduced.get().getCode() = " + reduced.get().getCode());
+            System.out.println("reduced.getVar().getCode() = " + reduced.get().getCode());
         } else {
-            System.out.println("reduced.get().getCode() = NULL");
+            System.out.println("reduced.getVar().getCode() = NULL");
         }
 
         // now for each result do the reduction

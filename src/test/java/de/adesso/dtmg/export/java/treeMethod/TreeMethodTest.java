@@ -188,7 +188,7 @@ public class TreeMethodTest {
 
         /*
         assertThat(tuple4._1(), equalTo(Boolean.TRUE));
-        assertThat(tuple4._2().expressionProperty().get(), equalTo("x"));
+        assertThat(tuple4._2().expressionProperty().getVar(), equalTo("x"));
         assertThat(tuple4._3(), equalTo("N"));
         assertThat(tuple4._4(), equalTo(0));
         */

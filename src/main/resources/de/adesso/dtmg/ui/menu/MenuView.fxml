@@ -39,7 +39,7 @@
                         <SeparatorMenuItem mnemonicParsing="false"/>
                         <MenuItem mnemonicParsing="false" onAction="#doClose" text="Quit DTMG">
                             <accelerator>
-                                <KeyCodeCombination alt="UP" code="Q" control="UP" meta="DOWN" shift="UP"
+                                <KeyCodeCombination alt="UP" code="R" control="UP" meta="DOWN" shift="UP"
                                                     shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
