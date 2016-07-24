@@ -1,6 +1,6 @@
-package de.adesso.dtmg.export.quine.expressions;
+package de.adesso.dtmg.export.quine.parser.expressions;
 
-import de.adesso.dtmg.export.quine.Context;
+import de.adesso.dtmg.export.quine.parser.Context;
 
 /**
  * A simple variable name expression like "abc".

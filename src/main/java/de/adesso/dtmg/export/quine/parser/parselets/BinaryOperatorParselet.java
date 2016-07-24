@@ -1,9 +1,9 @@
-package de.adesso.dtmg.export.quine.parselets;
+package de.adesso.dtmg.export.quine.parser.parselets;
 
-import de.adesso.dtmg.export.quine.Parser;
-import de.adesso.dtmg.export.quine.Token;
-import de.adesso.dtmg.export.quine.expressions.Expression;
-import de.adesso.dtmg.export.quine.expressions.OperatorExpression;
+import de.adesso.dtmg.export.quine.parser.Parser;
+import de.adesso.dtmg.export.quine.parser.Token;
+import de.adesso.dtmg.export.quine.parser.expressions.Expression;
+import de.adesso.dtmg.export.quine.parser.expressions.OperatorExpression;
 
 /**
  * Generic infix parselet for a binary arithmetic operator. The only

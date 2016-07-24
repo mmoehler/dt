@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.dtmg.util.combination;
+package de.adesso.dtmg.export.quine;
 
 /**
  * Created by moehler on 20.07.2016.

@@ -20,10 +20,13 @@
 package de.adesso.dtmg.export.quine;
 
 import com.beust.jcommander.internal.Lists;
+import com.codepoetics.protonpack.StreamUtils;
 import de.adesso.dtmg.Dump;
-import de.adesso.dtmg.export.quine.expressions.Expression;
-import de.adesso.dtmg.util.combination.Pair;
-import de.adesso.dtmg.util.combination.Permutation;
+import de.adesso.dtmg.export.quine.parser.BantamParser;
+import de.adesso.dtmg.export.quine.parser.Lexer;
+import de.adesso.dtmg.export.quine.parser.Parser;
+import de.adesso.dtmg.export.quine.parser.expressions.Expression;
+import de.adesso.dtmg.functions.List2DFunctions;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import org.testng.annotations.Test;
@@ -34,6 +37,7 @@ import java.util.function.BinaryOperator;
 import java.util.function.Function;
 import java.util.function.IntFunction;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.StreamSupport;
 
 /**
@@ -44,11 +48,15 @@ public class ParserTest {
     final static char H = '-';
     final static Tuple2<List<Integer>, String> EMPY_COMB_RESULT = Tuple.of(null,null);
 
-    protected static List<Tuple2<List<Integer>, String>> normalize(final List<Tuple2<List<Integer>, String>> mapped, List<List<Tuple2<List<Integer>, String>>> collected, final Map<String,Boolean> notCombinables) {
-        final Map<Long, List<Tuple2<List<Integer>, String>>> grouped = mapped.stream().collect(Collectors.groupingBy((l) -> l._2().chars().filter((c) -> c == 49).count()));
-        final List<Tuple2<List<Integer>, String>> result = Lists.newArrayList();
+    protected static List<Tuple2<List<Integer>, String>> determinePrimeImplicants(
+            final List<Tuple2<List<Integer>, String>> mapped,
+            final Map<HashMapKeyAdapter,Boolean> processedTerms) {
 
-        Dump.dumpMapLongIntegerListString("GROUPED",grouped);
+        // grouping the input by its count of '1'
+        final Map<Long, List<Tuple2<List<Integer>, String>>> grouped = mapped.stream()
+                .collect(Collectors.groupingBy((l) -> l._2().chars().filter((c) -> c == 49).count()));
+
+        final List<Tuple2<List<Integer>, String>> result = Lists.newArrayList();
 
         for (long ii = 0; ii < grouped.keySet().size() - 1; ii++) {
             final long iii = ii;
@@ -61,21 +69,26 @@ public class ParserTest {
 
             // #4 combine them
             final List<Tuple2<List<Integer>, String>> combined = paired.stream()
-                    .map(t -> doCombine(t, notCombinables))
+                    .map(t -> doCombine(t, processedTerms))
                     .filter(e -> e != EMPY_COMB_RESULT)
                     .distinct()
                     .collect(Collectors.toList());
 
+            // #5 if nothing more to combine filter out the prime implicants and return them
             if(combined.isEmpty()) {
-                return Collections.emptyList();
+
+                final List<Tuple2<List<Integer>,String>> primeImplicants = processedTerms.entrySet().stream()
+                        .filter(e -> !e.getValue())
+                        .map(e -> e.getKey())
+                        .distinct()
+                        .map(HashMapKeyAdapter::get)
+                        .collect(Collectors.toList());
+
+                return primeImplicants;
             }
-
-            //Dump.dumpList1DItems("COMBINED", combined);
-
             result.addAll(combined);
         }
-        collected.add(result);
-        return normalize(result,collected,notCombinables);
+        return determinePrimeImplicants(result,processedTerms);
     }
 
     private static <T> List<T> concat(List<T> l, List<T> r) {
@@ -85,7 +98,9 @@ public class ParserTest {
         return Collections.unmodifiableList(ret);
     }
 
-    private static Tuple2<List<Integer>, String> doCombine(Pair<Tuple2<List<Integer>, String>, Tuple2<List<Integer>, String>> pair, Map<String,Boolean> cobinationResults) {
+    private static Tuple2<List<Integer>, String> doCombine(
+            Pair<Tuple2<List<Integer>, String>, Tuple2<List<Integer>, String>> pair,
+            Map<HashMapKeyAdapter,Boolean> cobinationResults) {
         Tuple2<List<Integer>, String> ret;
         String s0 = pair.left._2();
         String s1 = pair.right._2();
@@ -93,6 +108,9 @@ public class ParserTest {
 
         final boolean b = isCombinable(pair);
         System.out.println(String.format(">>> %s -> %s", String.valueOf(pair), String.valueOf(b)));
+
+        HashMapKeyAdapter kl = HashMapKeyAdapter.adapt(pair.left);
+        HashMapKeyAdapter kr = HashMapKeyAdapter.adapt(pair.right);
 
         if(isCombinable(pair)) {
             char c0[] = s0.toCharArray();
@@ -103,16 +121,16 @@ public class ParserTest {
             }
             final String s = String.valueOf(c2);
             ret = Tuple.of(concat(pair.left._1(),pair.right._1()),s);
-            cobinationResults.put(pair.left._2(), true);
-            cobinationResults.put(pair.right._2(), true);
+            cobinationResults.put(kl, true);
+            cobinationResults.put(kr, true);
 
         } else {
             ret = EMPY_COMB_RESULT;
-            if(!cobinationResults.containsKey(pair.left._2())) {
-                cobinationResults.put(pair.left._2(), false);
+            if(!cobinationResults.containsKey(kl)) {
+                cobinationResults.put(kl, false);
             }
-            if(!cobinationResults.containsKey(pair.right._2())) {
-                cobinationResults.put(pair.right._2(), false);
+            if(!cobinationResults.containsKey(kr)) {
+                cobinationResults.put(kr, false);
             }
         }
         return ret;
@@ -174,8 +192,8 @@ public class ParserTest {
     }
 
     @Test
-    public void testCombine() throws Exception {
-        String[] i = {
+    public void testQuineMcCluskey() throws Exception {
+        String[] terms = {
                 "0000",
                 "0001",
                 "0010",
@@ -189,8 +207,7 @@ public class ParserTest {
         };
 
         // #0 Number the entries
-        final List<Tuple2<List<Integer>, String>> mapped = Arrays.stream(i)
-                .peek(e0 -> System.out.println(Integer.parseInt(e0, 2)))
+        final List<Tuple2<List<Integer>, String>> preparedTerms = Arrays.stream(terms)
                 .map(e -> {
                     Integer k = new Integer(Integer.parseInt(e, 2));
                     LinkedList<Integer> l = new LinkedList<Integer>();
@@ -199,32 +216,132 @@ public class ParserTest {
                     return t;
                 }).collect(Collectors.toList());
 
-        Dump.dumpList1DItems("MAPPED", mapped);
+        Map<HashMapKeyAdapter,Boolean> processedTerms = new HashMap<>();
+        final List<Tuple2<List<Integer>, String>> primeImplicants = determinePrimeImplicants(preparedTerms, /*collected,*/ processedTerms);
 
-        final List<Tuple2<List<Integer>, String>> result = Lists.newArrayList();
+        Dump.dumpList1DItems("PRIMEIMPLICANTS", primeImplicants);
 
-        // >>>>> RECURSION <<<<<
-        List<List<Tuple2<List<Integer>, String>>> collected = Lists.newLinkedList();
-        Map<String,Boolean> notCombinables = new TreeMap<>();
+        // determine dimensions of the prime implicants - min term matrix
+        List<List<Integer>> matrix = createCalculationMatrix(primeImplicants);
 
-        normalize(mapped, collected, notCombinables);
+        // perform COLUMN-DOMINANZ-CHECK
+        matrix = performColumnDominanceCheck(primeImplicants,matrix);
 
-        final List<String> notCombined = notCombinables.entrySet().stream()
-                .filter(e -> !e.getValue())
-                .map(e -> e.getKey())
-                .distinct()
+        Dump.dumpList1DItems("NULLEDMATRIX",matrix);
+
+        // perform ROW-DOMINANZ-CHECK
+
+
+
+        // detect row with the most 1's
+
+        long index = StreamUtils.zipWithIndex(matrix.stream().map(a -> a.stream().mapToInt(Integer::intValue).sum()))
+                .collect(Collectors.maxBy((a, b) -> a.getValue().compareTo(b.getValue()))).get().getIndex();
+
+        System.out.println("index = " + index);
+
+        /** rowIndices.add((int)index); */
+
+
+
+        /**************
+
+        String result = rowIndices.stream().map(i -> primeImplicants.get(i)._2())
+                .map(this::toMinTerm)
+                .reduce("",(ll,rr) -> Strings.isNullOrEmpty(ll) ? rr : ll + " + " + rr);
+
+        System.out.println("result = " + result);
+
+        **************/
+
+    }
+
+    public List<List<Integer>> performColumnDominanceCheck(List<Tuple2<List<Integer>, String>> primeImplicants, List<List<Integer>> matrix) {
+        List<List<Integer>> matrixT = List2DFunctions.transpose(matrix);
+        Dump.dumpTableItems("MATRIX INITIALIZED TRANSPOSED", matrixT);
+
+        // determine row indices of 1 where sum entries is 1
+        List<Long> colIndices = StreamUtils.zipWithIndex(matrixT.stream().map(a -> a.stream().mapToInt(Integer::intValue).sum()))
+                .filter(k -> k.getValue().intValue() == 1)
+                .map(l -> l.getIndex())
                 .collect(Collectors.toList());
 
-        Dump.dumpList1DItems("NOTCOMBINABLES", notCombined);
+        Dump.dumpList1DItems("COL INDICES", colIndices);
 
-        //Dump.dumpMap("NOTCOMBINED", notCombinables);
+        List<Integer> rowIndices = colIndices.stream()
+                .mapToInt(l -> l.intValue())
+                .mapToObj(i -> StreamUtils.zipWithIndex(matrixT.get(i).stream())
+                        .filter(h -> h.getValue().intValue() == 1)
+                        .map(k -> k.getIndex())
+                        .mapToInt(d -> d.intValue())
+                        .boxed()
+                        .findFirst().get()
+                )
+                .sorted((x,y) -> y.compareTo(x))
+                .collect(Collectors.toList());
 
-        for(List<Tuple2<List<Integer>, String>> l : collected) {
-            Dump.dumpList1DItems("RET",l);
+        Dump.dumpList1DItems("ROW INDICES", rowIndices);
+
+        // detect all indices of 1 of the rows with index in rowIndices
+        List<Integer> columnsToNull = rowIndices.stream()
+                .flatMap(i -> StreamUtils.zipWithIndex(matrix.get(i).stream())
+                        .filter(j -> j.getValue().intValue() == 1)
+                        .map(k -> k.getIndex())
+                        .mapToInt(l -> l.intValue()).boxed())
+                .sorted((x,y) -> y.compareTo(x))
+                .collect(Collectors.toList());
+
+        Dump.dumpList1DItems("COLSTONULL", columnsToNull);
+
+        // remove the detected rows and columns
+        //List<List<Integer>> matrix0 = List2DFunctions.transpose(matrix);
+        for(Integer i : columnsToNull) {
+            matrixT.remove(i.intValue());
         }
+        List<List<Integer>> matrixN = List2DFunctions.transpose(matrixT);
 
-        Dump.dumpTableItems("RESULT", collected);
+        Dump.dumpList1DItems("PI",primeImplicants);
+
+        for(Integer i : rowIndices) {
+            matrixN.remove(i.intValue());
+            primeImplicants.remove(i.intValue());
+        }
+        return matrixN;
     }
+
+    private List<List<Integer>> createCalculationMatrix(List<Tuple2<List<Integer>, String>> primeImplicants) {
+        final int rows = primeImplicants.size();
+        final int cols = primeImplicants.stream().flatMap(e -> e._1().stream()).max((l, r) -> l - r).get()+1;
+
+        final List<List<Integer>> matrix = List2DFunctions.newList2D(rows, cols, 0);
+        Dump.dumpTableItems("MATRIX NORMAL", matrix);
+
+        List<List<Integer>> piVals = primeImplicants.stream().map(k -> k._1()).collect(Collectors.toList());
+        IntStream.range(0,rows).forEach(i -> piVals.get(i).forEach(j -> matrix.get(i).set(j,1)));
+        Dump.dumpTableItems("MATRIX NORMAL INITIALIZED", matrix);
+        return matrix;
+    }
+
+    public String toMinTerm(String l) {
+        char[] c = l.toCharArray();
+        String ret = new String();
+        boolean flag = false;
+        for (int i = 0; i < c.length; i++) {
+            if('-' != c[i]) {
+                if(flag) {
+                    ret += '*';
+                } else {
+                    flag = !flag;
+                }
+                if('0' == c[i]) {
+                    ret += '!';
+                }
+                ret += (char)('a'+i);
+            }
+        }
+        return ret;
+    }
+
 
     @Test
     public void testI2C() throws Exception {

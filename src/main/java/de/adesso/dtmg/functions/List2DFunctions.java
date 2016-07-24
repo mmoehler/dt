@@ -6,7 +6,6 @@ import java.util.*;
 import java.util.function.Function;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toCollection;
@@ -30,6 +29,14 @@ public final class List2DFunctions {
         return m ->
               range(0, m.get(0).size()).mapToObj(r ->
                     range(0, m.size()).mapToObj(c -> m.get(c).get(r)).collect(toList())).collect(toList());
+    }
+
+    public static <T> List<List<T>> newList2D(int rows, int cols, T filler) {
+        return range(0,rows).mapToObj(i -> {
+            ArrayList<T> row = new ArrayList<>(cols);
+            range(0,cols).forEach(d -> row.add(filler));
+            return row;
+        }).collect(Collectors.toList());
     }
 
     public static Function<List<String>, List<String>> replaceColumn(List<String> newData, int pos) {
@@ -101,7 +108,7 @@ public final class List2DFunctions {
         if (len == 0) {
             return Collections.emptyList();
         }
-        return IntStream.range(0, len)
+        return range(0, len)
                 .mapToObj(i -> defaultValue.get())
                 .collect(toList());
     }
@@ -113,7 +120,7 @@ public final class List2DFunctions {
         if (len == 0) {
             return Collections.emptyList();
         }
-        List<String> row = IntStream.range(0, len-1)
+        List<String> row = range(0, len-1)
                 .mapToObj(i -> defaultValue.get())
                 .collect(toList());
         row.add(ELSE);
@@ -124,7 +131,7 @@ public final class List2DFunctions {
         if (original.isEmpty()) {
             return original;
         }
-        return IntStream.range(0, original.size())
+        return range(0, original.size())
                 .filter(i -> index != i).mapToObj(original::get)
                 .collect(toCollection(FXCollections::observableArrayList));
     }
@@ -136,7 +143,7 @@ public final class List2DFunctions {
     public static List<List<String>> insertRowsAt(List<List<String>> original, int index, Supplier<String> defaultValue) {
         final int len = original.get(0).size();
         Iterator<? extends List<String>> it = original.iterator();
-        return IntStream.range(0, original.size() + 1)
+        return range(0, original.size() + 1)
                 .mapToObj(i -> (index == i) ? (newRow(len, defaultValue)) : (it.next()))
                 .collect(toCollection(FXCollections::observableArrayList));
     }
@@ -144,7 +151,7 @@ public final class List2DFunctions {
     public static List<List<String>> insertRowsWithElseRuleAt(List<List<String>> original, int index, Supplier<String> defaultValue) {
         final int len = original.get(0).size();
         Iterator<? extends List<String>> it = original.iterator();
-        return IntStream.range(0, original.size() + 1)
+        return range(0, original.size() + 1)
                 .mapToObj(i -> (index == i) ? (newRowWithElseRule(len, defaultValue)) : (it.next()))
                 .collect(toCollection(FXCollections::observableArrayList));
     }
@@ -171,7 +178,7 @@ public final class List2DFunctions {
             return original;
         }
         List<List<String>> copiedMatrix = copy(original);
-        List<String> copiedRow = IntStream.range(0, original.get(0).size())
+        List<String> copiedRow = range(0, original.get(0).size())
                 .mapToObj(i -> valueSupplier.get())
                 .collect(toList());
         copiedMatrix.add(copiedRow);
@@ -183,7 +190,7 @@ public final class List2DFunctions {
             return original;
         }
         List<List<String>> copiedMatrix = copy(original);
-        List<String> copiedRow = IntStream.range(0, original.get(0).size()-1)
+        List<String> copiedRow = range(0, original.get(0).size()-1)
                 .mapToObj(i -> valueSupplier.get())
                 .collect(toList());
         copiedRow.add(ELSE);
@@ -235,7 +242,7 @@ public final class List2DFunctions {
         @Override
         public List<String> apply(List<String> strings) {
             Set<Integer> set = Arrays.stream(positions).boxed().collect(Collectors.toSet());
-            return IntStream.range(0, strings.size())
+            return range(0, strings.size())
                     .filter(x -> !set.contains(x))
                     .mapToObj(strings::get)
                     .collect(toList());

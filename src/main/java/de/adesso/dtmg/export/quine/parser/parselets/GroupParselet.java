@@ -1,9 +1,9 @@
-package de.adesso.dtmg.export.quine.parselets;
+package de.adesso.dtmg.export.quine.parser.parselets;
 
-import de.adesso.dtmg.export.quine.Parser;
-import de.adesso.dtmg.export.quine.Token;
-import de.adesso.dtmg.export.quine.TokenType;
-import de.adesso.dtmg.export.quine.expressions.Expression;
+import de.adesso.dtmg.export.quine.parser.Parser;
+import de.adesso.dtmg.export.quine.parser.Token;
+import de.adesso.dtmg.export.quine.parser.TokenType;
+import de.adesso.dtmg.export.quine.parser.expressions.Expression;
 
 /**
  * Parses parentheses used to group an expression, like "a * (b + c)".

@@ -1,9 +1,9 @@
-package de.adesso.dtmg.export.quine.parselets;
+package de.adesso.dtmg.export.quine.parser.parselets;
 
 
-import de.adesso.dtmg.export.quine.Parser;
-import de.adesso.dtmg.export.quine.Token;
-import de.adesso.dtmg.export.quine.expressions.Expression;
+import de.adesso.dtmg.export.quine.parser.Parser;
+import de.adesso.dtmg.export.quine.parser.Token;
+import de.adesso.dtmg.export.quine.parser.expressions.Expression;
 
 /**
  * One of the two interfaces used by the Pratt parser. A PrefixParselet is

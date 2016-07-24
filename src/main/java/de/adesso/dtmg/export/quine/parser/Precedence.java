@@ -17,31 +17,19 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.quine;
-
-import java.util.HashMap;
-import java.util.Map;
+package de.adesso.dtmg.export.quine.parser;
 
 /**
- * Created by moehler on 19.07.2016.
+ * Defines the different precendence levels used by the infix parsers. These
+ * determine how a series of infix expressions will be grouped. For example,
+ * "a + b * c - d" will be parsed as "(a + (b * c)) - d" because "*" has higher
+ * precedence than "+" and "-". Here, bigger numbers mean higher precedence.
  */
-public class ContextImpl implements Context {
-
-    private final Map<String, Integer> variables = new HashMap<>();
-
-    @Override
-    public int getVar(String mName) {
-        return this.variables.get(mName);
-    }
-
-    @Override
-    public void putVar(String mName) {
-        if (!variables.containsKey(mName))
-            this.variables.put(mName, 0);
-    }
-
-    @Override
-    public Map<String, Integer> getVariables() {
-        return this.variables;
-    }
+public class Precedence {
+    // Ordered in increasing precedence.
+    public static final int CONDITIONAL = 1;
+    public static final int SUM         = 2;
+    public static final int PRODUCT     = 3;
+    public static final int PREFIX      = 4;
+    public static final int POSTFIX     = 5;
 }

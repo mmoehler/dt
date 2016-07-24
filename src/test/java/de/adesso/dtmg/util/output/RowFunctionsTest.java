@@ -72,7 +72,7 @@ public class RowFunctionsTest {
 
         /*
 
-        List<List<String>> normalized = Stream.of(rawData).map(l -> RowFunctions.normalize(formats).apply(l)).collect(MoreCollectors.toSingleObject());
+        List<List<String>> normalized = Stream.of(rawData).map(l -> RowFunctions.determinePrimeImplicants(formats).apply(l)).collect(MoreCollectors.toSingleObject());
 
         final int maxSize = normalized.stream().mapToInt(l -> l.size()).max().getAsInt();
 

@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.quine;
+package de.adesso.dtmg.export.quine.parser;
 
 import java.util.HashMap;
 import java.util.Iterator;

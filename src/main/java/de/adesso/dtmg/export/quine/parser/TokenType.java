@@ -17,14 +17,32 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.quine;
+package de.adesso.dtmg.export.quine.parser;
 
 /**
  * Created by moehler on 18.07.2016.
  */
-@SuppressWarnings("serial")
-public class ParseException extends RuntimeException {
-    public ParseException(String message) {
-        super(message);
+public enum TokenType {
+    LEFT_PAREN,
+    RIGHT_PAREN,
+    PLUS,
+    ASTERISK,
+    TILDE,
+    NAME,
+    EOF;
+
+    /**
+     * If the TokenType represents a punctuator (i.e. a token that can split an
+     * identifier like '+', this will getVar its text.
+     */
+    public Character punctuator() {
+        switch (this) {
+            case LEFT_PAREN:  return '(';
+            case RIGHT_PAREN: return ')';
+            case PLUS:        return '+';
+            case ASTERISK:    return '*';
+            case TILDE:       return '~';
+            default:          return null;
+        }
     }
 }

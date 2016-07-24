@@ -1,7 +1,7 @@
-package de.adesso.dtmg.export.quine.expressions;
+package de.adesso.dtmg.export.quine.parser.expressions;
 
-import de.adesso.dtmg.export.quine.Context;
-import de.adesso.dtmg.export.quine.TokenType;
+import de.adesso.dtmg.export.quine.parser.Context;
+import de.adesso.dtmg.export.quine.parser.TokenType;
 
 /**
  * A prefix unary arithmetic expression like "!a" or "-b".

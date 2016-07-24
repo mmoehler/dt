@@ -17,17 +17,14 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.quine;
-
-import java.util.Map;
+package de.adesso.dtmg.export.quine.parser;
 
 /**
- * Created by moehler on 19.07.2016.
+ * Created by moehler on 18.07.2016.
  */
-public interface Context {
-    Map<String, Integer> getVariables();
-
-    int getVar(String mName);
-
-    void putVar(String mName);
+@SuppressWarnings("serial")
+public class ParseException extends RuntimeException {
+    public ParseException(String message) {
+        super(message);
+    }
 }
