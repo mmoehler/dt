@@ -25,8 +25,8 @@ import de.adesso.dtmg.export.quine.parser.parselets.*;
  * Extends the generic Parser class with support for parsing the actual Bantam
  * grammar.
  */
-public class BantamParser extends Parser {
-  public BantamParser(Lexer lexer) {
+public class BooleanExpressionParser extends Parser {
+  public BooleanExpressionParser(Lexer lexer) {
     super(lexer);
     
     // Register all of the parselets for the grammar.
@@ -36,7 +36,7 @@ public class BantamParser extends Parser {
     register(TokenType.LEFT_PAREN, new GroupParselet());
 
     // Register the simple operator parselets.
-    prefix(TokenType.TILDE,     Precedence.PREFIX);
+    prefix(TokenType.NEGATION,     Precedence.PREFIX);
 
     // For kicks, we'll make "!" both prefix and postfix, kind of like ++.
     infixLeft(TokenType.PLUS,     Precedence.SUM);

@@ -26,9 +26,9 @@ public class PrefixExpression implements Expression {
     public int eval(Context e) {
         int r = mRight.eval(e);
         char op = mOperator.punctuator();
-        if('~' == op) {
+        if('!' == op) {
             return (r==1) ? 0 : 1;
         }
-        throw new IllegalStateException("'~' expected");
+        throw new IllegalStateException("'!' expected");
     }
 }

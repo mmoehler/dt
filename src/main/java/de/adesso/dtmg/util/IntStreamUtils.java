@@ -18,10 +18,13 @@ public final class IntStreamUtils {
                 .map(i -> to - i + from - 1);
     }
 
+    public static IntStream indices() {
+        return IntStream.iterate(0, l -> l + 1);
+    }
+
     public static IntStream zip(IntStream lefts, IntStream rights, IntBinaryOperator combiner) {
         return StreamSupport.intStream(ZippingIntSpliterator.zipping(lefts.spliterator(), rights.spliterator(), combiner), false);
     }
-
 }
 
 class ZippingIntSpliterator implements Spliterator.OfInt {

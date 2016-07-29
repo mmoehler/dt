@@ -17,36 +17,36 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.quine.parser;
-
-import java.util.HashMap;
-import java.util.Map;
+package de.adesso.dtmg.export.quine.utils;
 
 /**
- * Created by moehler on 19.07.2016.
+ * Created by moehler on 27.07.2016.
  */
-public class ContextImpl implements Context {
-
-    private final Map<String, Integer> variables = new HashMap<>();
-
-    @Override
-    public int getVar(String mName) {
-        return this.variables.get(mName);
+public final class ConversionUtils {
+    public static char c(int i) {
+        if (i >= 0 && i <= 9) {
+            return (char) (i + 48);
+        }
+        throw new IndexOutOfBoundsException("Illegal char range");
     }
 
-    @Override
-    public void putVar(String mName) {
-        if (!variables.containsKey(mName))
-            this.variables.put(mName, 0);
+    public static int i(char c) {
+        if (c >= 48 && c <= 57) {
+            return (c - 48);
+        }
+        throw new IndexOutOfBoundsException("Illegal char range");
     }
 
-    @Override
-    public Map<String, Integer> getVariables() {
-        return this.variables;
+    public static char[] c(int i[]) {
+        char ret[] = new char[i.length];
+        for (int j = 0; j < i.length; j++) {
+            ret[j] = c(i[j]);
+        }
+        return ret;
     }
 
-    @Override
-    public String toString() {
-        return String.valueOf(variables);
+    public static int[] i(char c[]) {
+        return String.valueOf(c).chars().map(a -> i((char) a)).toArray();
     }
+
 }

@@ -27,7 +27,7 @@ public enum TokenType {
     RIGHT_PAREN,
     PLUS,
     ASTERISK,
-    TILDE,
+    NEGATION,
     NAME,
     EOF;
 
@@ -41,7 +41,7 @@ public enum TokenType {
             case RIGHT_PAREN: return ')';
             case PLUS:        return '+';
             case ASTERISK:    return '*';
-            case TILDE:       return '~';
+            case NEGATION:       return '!';
             default:          return null;
         }
     }

@@ -79,6 +79,13 @@ public class Dump {
         System.out.println("<<<<<<<<<<\n");
     }
 
+    public static <T> void dumpList1DIndexedItems(String msg, Iterable<Indexed<T>> list1D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list1D.forEach(i -> System.out.println("\t" + i.getIndex() + " : " + i.getValue()));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+
     public static <T> void dumpList1DArrays(String msg, Iterable<T[]> list1D) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
         list1D.forEach(i -> System.out.println("\t" + Arrays.toString(i)));

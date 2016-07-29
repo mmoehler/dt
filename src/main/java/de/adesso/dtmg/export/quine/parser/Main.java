@@ -25,7 +25,7 @@ import de.adesso.dtmg.export.quine.parser.expressions.Expression;
 public class Main {
   public static void main(String[] args) {
     // Function call.
-    test("c*~a+a*~b*d+a*~b*~c*~d", "(((c * (~a)) + ((a * (~b)) * d)) + (((a * (~b)) * (~c)) * (~d)))");
+    test("c*!a+a*!b*d+a*!b*!c*!d", "(((c * (!a)) + ((a * (!b)) * d)) + (((a * (!b)) * (!c)) * (!d)))");
 
 
     // Show the results.
@@ -44,7 +44,7 @@ public class Main {
    */
   public static void test(String source, String expected) {
     Lexer lexer = new Lexer(source);
-    Parser parser = new BantamParser(lexer);
+    Parser parser = new BooleanExpressionParser(lexer);
     
     try {
       Expression result = parser.parseExpression();
