@@ -6,6 +6,7 @@ import de.saxsys.mvvmfx.InjectScope;
 import de.saxsys.mvvmfx.ViewModel;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.stage.Stage;
 
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
@@ -229,5 +230,9 @@ public class MenuViewModel implements ViewModel {
 
     public ObservableValue<? extends Boolean> consolidateRules() {
         return consolidateRules;
+    }
+
+    public void registerQuineMcCluskeyDialog(Stage dialog) {
+        mdScope.quineMcCluskeyDialog(dialog);
     }
 }

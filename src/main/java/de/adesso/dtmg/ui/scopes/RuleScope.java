@@ -2,6 +2,7 @@ package de.adesso.dtmg.ui.scopes;
 
 import de.saxsys.mvvmfx.Scope;
 import javafx.beans.property.SimpleBooleanProperty;
+import javafx.stage.Stage;
 
 import javax.inject.Singleton;
 
@@ -60,4 +61,8 @@ public class RuleScope implements Scope {
     public SimpleBooleanProperty elseRuleProperty() {
         return elseRuleSet;
     }
+
+    private Stage quineMcCluskeyDialog;
+    public Stage quineMcCluskeyDialog() { return quineMcCluskeyDialog; };
+    public void quineMcCluskeyDialog(Stage dialog) { quineMcCluskeyDialog=dialog; };
 }

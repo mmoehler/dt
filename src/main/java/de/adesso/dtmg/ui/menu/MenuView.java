@@ -1,6 +1,7 @@
 package de.adesso.dtmg.ui.menu;
 
 import de.adesso.dtmg.ui.about.AboutView;
+import de.adesso.dtmg.ui.tools.QuineMcCluskeyView;
 import de.adesso.dtmg.util.DialogHelper;
 import de.saxsys.mvvmfx.FluentViewLoader;
 import de.saxsys.mvvmfx.FxmlView;
@@ -190,5 +191,11 @@ public class MenuView implements FxmlView<MenuViewModel> {
     public void doAbout() {
         Parent view = FluentViewLoader.fxmlView(AboutView.class).load().getView();
         DialogHelper.showDialog(view, primaryStage, "/about.css");
+    }
+
+    public void doQuineMcCluskey(ActionEvent actionEvent) {
+        Parent view = FluentViewLoader.fxmlView(QuineMcCluskeyView.class).load().getView();
+        Stage dialog = DialogHelper.showDialog(view, primaryStage, "/about.css");
+        viewModel.registerQuineMcCluskeyDialog(dialog);
     }
 }
