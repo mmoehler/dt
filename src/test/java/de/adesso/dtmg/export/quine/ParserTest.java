@@ -24,7 +24,9 @@ import de.adesso.dtmg.util.tuple.Tuple2;
 import org.testng.annotations.Test;
 
 import java.util.List;
-import java.util.function.IntFunction;
+import java.util.function.Function;
+
+import static java.lang.Math.pow;
 
 /**
  * Created by moehler on 19.07.2016.
@@ -58,11 +60,13 @@ public class ParserTest {
 
     @Test
     public void testOther() throws Exception {
+
+
+
+
         for (int c = 0; c < 3; c++) {
             final int k = c;
-            IntFunction<Integer> a0 = (r) -> r % 2;
-            IntFunction<Integer> a1 = (r) -> ((r / (int) Math.pow(2, k) % (int) Math.pow(2, k)));
-            IntFunction<Integer> f = (0 < c) ? a1 : a0;
+            Function<Integer, Integer> f = (idx) -> (int) (idx / pow(2, k) % 2);
             for (int r = 0; r < 8; r++) {
                 System.out.print(f.apply(r));
             }

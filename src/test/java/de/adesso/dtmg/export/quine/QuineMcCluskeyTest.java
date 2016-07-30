@@ -47,9 +47,15 @@ public class QuineMcCluskeyTest {
     @Test
     public void testApply() throws Exception {
         //final String s = f.apply("!a*!b*!c*!d + !a*b*!c*d + !a*b*c*!d + !a*b*c*d +a*!b*!c*d + a*!b*c*!d + a*b*!c*d + a*b*c*!d + a*b*c*d");
-        final String s = f.apply("a*!b*!c*!d + !a*c*d + a*b*!c + a*b*!d + b*c*d");
+        //final String s = f.apply("a*!b*!c*!d + !a*c*d + a*b*!c + a*b*!d + b*c*d");
+        //String si = "!a!b!c!d + !acd + ab!c + ab!d + bcd";
+        String si = "a*!b*!c*!d + !a*c*d + a*b*!c + a*b*!d + b*c*d";
+        //String si = "!a*!b*!c*!d + !a*b*!c*d + !a*b*c*!d + !a*b*c*d +a*!b*!c*d + a*!b*c*!d + a*b*!c*d + a*b*c*!d + a*b*c*d";
+        //String si = "ab!c + a!bd + a!b";
+        final String so = f.apply(si);
 
-        System.out.println("RESULT = " + s);
+        System.out.println("INPUT  = " + si);
+        System.out.println("OUTPUT = " + so);
     }
 
     @Test
@@ -57,7 +63,8 @@ public class QuineMcCluskeyTest {
         Map<HashMapKeyAdapter,Boolean> processedTermsCache = new HashMap<>();
 
         //final List<String> terms = f.parseExpression("!a*!b*!c*!d + !a*!b*!c*!d + a*!b*c*d + a*!b*c*!d + !a*b*c*d + !a*b*c*!d + !a*!b*c*d");
-        final List<String> terms = f.parseExpression("!a*!b*!c*!d + !a*b*!c*d + !a*b*c*!d + !a*b*c*d +a*!b*!c*d + a*!b*c*!d + a*b*!c*d + a*b*c*!d + a*b*c*d");
+        //final List<String> terms = f.parseExpression("!a*!b*!c*!d + !a*b*!c*d + !a*b*c*!d + !a*b*c*d +a*!b*!c*d + a*!b*c*!d + a*b*!c*d + a*b*c*!d + a*b*c*d");
+        final List<String> terms = f.parseExpression("!a!b!c!d + !acd + ab!c + ab!d + bcd");
 
 
         // #0 Number the entries
