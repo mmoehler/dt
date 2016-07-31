@@ -63,13 +63,19 @@ public class MainViewModel implements ViewModel {
     public static final String COND_ROW_HEADER = "C%02d";
     public static final String DASH = "-";
     private static final String ACT_ROW_HEADER = "A%02d";
-    private final static Predicate<ObservableList<String>> HAS_ELSE_RULE  =
+    private final static Predicate<ObservableList<String>> HAS_ELSE_RULE =
             c -> (c.isEmpty()) ? false : c.get(c.size() - 1).equals(ELSE);
     private final ObservableList<ConditionDeclTableViewModel> conditionDeclarations = FXCollections.observableArrayList();
     private final ObservableList<ObservableList<String>> conditionDefinitions = FXCollections.observableArrayList();
     private final ObservableList<ActionDeclTableViewModel> actionDeclarations = FXCollections.observableArrayList();
     private final ObservableList<ObservableList<String>> actionDefinitions = FXCollections.observableArrayList();
-    private final DtEntity data = new DtEntity(conditionDeclarations, conditionDefinitions, actionDeclarations, actionDefinitions);
+
+    private final DtEntity data = new DtEntity(
+            conditionDeclarations,
+            conditionDefinitions,
+            actionDeclarations,
+            actionDefinitions
+    );
 
     @InjectScope
     private RuleScope mdScope;
@@ -120,14 +126,14 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onAddRuleDef(@Observes AddRuleDefEvent event) {
-        if(hasNoElseRule().test(this.conditionDefinitions.get(0))) {
+        if (hasNoElseRule().test(this.conditionDefinitions.get(0))) {
             List<List<String>> newDefns = List2DFunctions.addColumn(adapt(this.conditionDefinitions), () -> QMARK);
             this.conditionDefinitions.clear();
             List<List<String>> newDefns0 = List2DFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
             this.actionDefinitions.clear();
             publish(ADD_RULE.name(), adapt(newDefns), adapt(newDefns0));
         } else {
-            publish(INS_RULE.name(), this.conditionDefinitions.get(0).size()-1);
+            publish(INS_RULE.name(), this.conditionDefinitions.get(0).size() - 1);
         }
     }
 
@@ -253,7 +259,7 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onAddElseRule(@Observes AddElseRuleEvent event) {
-        if(hasNoElseRule().test(this.conditionDefinitions.get(0))) {
+        if (hasNoElseRule().test(this.conditionDefinitions.get(0))) {
             List<List<String>> newDefns = List2DFunctions.addColumn(adapt(this.conditionDefinitions), () -> ELSE);
             this.conditionDefinitions.clear();
             List<List<String>> newDefns0 = List2DFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
@@ -281,12 +287,12 @@ public class MainViewModel implements ViewModel {
         }
     }
 
-    private Predicate<ObservableList<String>> hasNoElseRule()  {
+    private Predicate<ObservableList<String>> hasNoElseRule() {
         return c -> (c.isEmpty()) ? true : !c.get(c.size() - 1).equals(ELSE);
     }
 
-    private Function<ObservableList<String>,ObservableList<String>> suppressElseRule() {
-        return i -> (hasNoElseRule().test(i)) ? (i) : (ObservableListFunctions.take(i,i.size()-1));
+    private Function<ObservableList<String>, ObservableList<String>> suppressElseRule() {
+        return i -> (hasNoElseRule().test(i)) ? (i) : (ObservableListFunctions.take(i, i.size() - 1));
     }
 
     private Optional<String> internalFormalCompletenessCheck() {
@@ -346,7 +352,7 @@ public class MainViewModel implements ViewModel {
             // check whether an else rule is defined! If yes make it unavailable for this action!!
             ObservableList<ObservableList<String>> clearedConditions = this.conditionDefinitions;
             ObservableList<ObservableList<String>> clearedActions = this.actionDefinitions;
-            if(!this.hasNoElseRule().test(this.conditionDefinitions.get(0))) {
+            if (!this.hasNoElseRule().test(this.conditionDefinitions.get(0))) {
                 clearedConditions = this.conditionDefinitions.stream().map(suppressElseRule()).collect(MoreCollectors.toObservableList());
                 clearedActions = this.actionDefinitions.stream().map(c -> ObservableListFunctions.take(c, c.size() - 1)).collect(MoreCollectors.toObservableList());
             }
@@ -433,8 +439,9 @@ public class MainViewModel implements ViewModel {
         return loadedData.getConditionDefinitions().get(0).size();
     }
 
-    public void populateLoadedData() {
+    public DtEntity populateLoadedData() {
         this.data.become(loadedData);
+        return this.data;
     }
 
     public void saveFile(URL url) throws IOException {

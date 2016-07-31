@@ -23,6 +23,6 @@ package de.adesso.dtmg.common.builder;
  * Created by moehler ofList 11.03.2016.
  */
 @FunctionalInterface
-public interface Callback<O> {
-    void call(O o);
+public interface Callback<V> {
+    void call(V values);
 }

@@ -25,18 +25,18 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * Created by moehler on 12.05.2016.
  */
-public abstract class AbstractNestable<P, O> implements Nestable<P, O> {
+public abstract class AbstractNestable<P, R> implements Nestable<P, R> {
 
-    public static final String ERROR_MESSAGE = "Bulder not used as nested builder!";
+    public static final String ERROR_MESSAGE = "Builder not used as nested builder!";
     private final P parentBuilder;
-    private final Callback<O> ownerCallback;
+    private final Callback<R> ownerCallback;
 
     public AbstractNestable() {
         this.parentBuilder = null;
         this.ownerCallback = null;
     }
 
-    public AbstractNestable(P parentBuilder, Callback<O> ownerCallback) {
+    public AbstractNestable(P parentBuilder, Callback ownerCallback) {
         this.parentBuilder = parentBuilder;
         this.ownerCallback = ownerCallback;
     }

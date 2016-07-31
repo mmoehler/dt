@@ -19,14 +19,9 @@
 
 package de.adesso.dtmg.io;
 
-import javax.annotation.Nonnull;
-import java.io.Serializable;
-import java.net.URL;
-
 /**
- * Created by mmoehler ofList 01.04.16.
+ * Created by mmoehler on 31.07.16.
  */
-public interface PersistenceManager<O extends Serializable> {
-    @Nonnull O read(@Nonnull URL source);
-    void write(@Nonnull O o, @Nonnull URL target);
+public interface OverrideCallback {
+    boolean override();
 }

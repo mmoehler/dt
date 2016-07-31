@@ -22,6 +22,7 @@ package de.adesso.dtmg.io.strategy;
 import de.adesso.dtmg.io.DtEntity;
 import de.adesso.dtmg.io.PersistenceStrategy;
 
+import javax.annotation.Nonnull;
 import java.net.URL;
 
 /**
@@ -34,6 +35,7 @@ public class VerticalAsciiPersistenceStrategy implements PersistenceStrategy<DtE
     public VerticalAsciiPersistenceStrategy() {
     }
 
+    @Nonnull
     @Override
     public String extension() {
         return DTV;

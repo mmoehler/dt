@@ -22,7 +22,7 @@ package de.adesso.dtmg.common.builder;
 /**
  * Created by moehler on 12.05.2016.
  */
-public interface Nestable<P,O> {
+public interface Nestable<P,R> {
     P done();
-    O build();
+    R build();
 }

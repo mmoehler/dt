@@ -17,16 +17,32 @@
  * under the License.
  */
 
-package de.adesso.dtmg.io;
+package de.adesso.dtmg.export.odf;
 
-import javax.annotation.Nonnull;
-import java.io.Serializable;
-import java.net.URL;
+import de.adesso.dtmg.common.builder.AbstractNestable;
+import de.adesso.dtmg.common.builder.Callback;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by mmoehler ofList 01.04.16.
+ * Created by mmoehler on 31.07.16.
  */
-public interface PersistenceManager<O extends Serializable> {
-    @Nonnull O read(@Nonnull URL source);
-    void write(@Nonnull O o, @Nonnull URL target);
+public class HeaderBuilder extends AbstractNestable<ODFDecisionTableData.Builder, String[]> {
+
+    private final List<String> fields = new ArrayList<>();
+
+    public HeaderBuilder(ODFDecisionTableData.Builder parentBuilder, Callback ownerCallback) {
+        super(parentBuilder, ownerCallback);
+    }
+
+    public HeaderBuilder field(String name) {
+        this.fields.add(name);
+        return this;
+    }
+
+    @Override
+    public String[] build() {
+        return fields.toArray(new String[fields.size()]);
+    }
 }

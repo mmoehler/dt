@@ -34,6 +34,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sun.net.www.ParseUtil;
 
+import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.net.URL;
@@ -54,6 +55,7 @@ public class HorizontalAsciiPersistenceStrategy implements PersistenceStrategy<D
     public HorizontalAsciiPersistenceStrategy() {
     }
 
+    @Nonnull
     @Override
     public String extension() {
         return DTH;

@@ -22,9 +22,11 @@ package de.adesso.dtmg.export.quine.parser2;
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;
 import com.google.common.primitives.Ints;
-import de.adesso.dtmg.Dump;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Iterator;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -72,8 +74,6 @@ public class ExpParser {
 
         int[] pos = indicesOf(r, '-');
 
-        System.out.println("Arrays.toString(pos) = " + Arrays.toString(pos));
-        
         if(0 == pos.length) {
             return Lists.newArrayList(String.valueOf(r));
         }
@@ -84,7 +84,6 @@ public class ExpParser {
     }
 
     List<String> denormalizeTerm(char[] r, int[] pos, int cVars) {
-        System.out.println("r = " + String.valueOf(r));
         List<String> ret = Lists.newLinkedList();
         Iterator<Integer> intF[] = new Iterator[pos.length];
         for (int i = 0; i < pos.length; i++) {
@@ -102,7 +101,6 @@ public class ExpParser {
                         : r[i];
             }
             ret.add(String.valueOf(r0));
-            System.out.println("r0 = " + String.valueOf(r0));
         }
 
         return ret;
@@ -131,11 +129,4 @@ public class ExpParser {
     public static IntStream cycle(final int period) {
         return IntStream.iterate(0, i -> i + 1).map(idx -> (int) (idx / pow(2, period) % 2));
     }
-
-    public static void main(String[] args) {
-        final List<String> list = new ExpParser().parse("!a!b!c!d + !acd + ab!c + ab!d + bcd");
-        Dump.dumpList1DItems("TERMS", list);
-    }
-
-
 }

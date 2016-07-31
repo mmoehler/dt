@@ -23,6 +23,7 @@ import de.adesso.dtmg.io.DtEntity;
 import de.adesso.dtmg.io.PersistenceStrategy;
 import sun.net.www.ParseUtil;
 
+import javax.annotation.Nonnull;
 import java.io.*;
 import java.net.URL;
 
@@ -38,6 +39,7 @@ public class BinaryPersistenceStrategy implements PersistenceStrategy<DtEntity> 
     public BinaryPersistenceStrategy() {
     }
 
+    @Nonnull
     @Override
     public String extension() {
         return DTM;
@@ -60,13 +62,14 @@ public class BinaryPersistenceStrategy implements PersistenceStrategy<DtEntity> 
     public void write(DtEntity dtEntity, URL target) {
         checkNotNull(target, "Missing Target URL!");
         checkNotNull(dtEntity, "Missing Entity to Save!");
+
         final String path = ParseUtil.decode(target.getPath());
         try (RandomAccessFile raf = new RandomAccessFile(path, "rw");
              FileOutputStream fos = new FileOutputStream(raf.getFD());
              ObjectOutputStream out = new ObjectOutputStream(fos)) {
             out.writeObject(dtEntity);
             out.flush();
-        } catch(Exception e) {
+        } catch (Exception e) {
             throw new IllegalStateException(e);
         }
     }

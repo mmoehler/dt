@@ -22,13 +22,16 @@ package de.adesso.dtmg.export.odf;
 
 import com.google.common.base.Strings;
 import de.adesso.dtmg.common.builder.List2DBuilder;
+import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
+import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.type.Color;
 import org.odftoolkit.simple.TextDocument;
+import org.odftoolkit.simple.style.Border;
 import org.odftoolkit.simple.style.Font;
+import org.odftoolkit.simple.style.PageLayoutProperties;
 import org.odftoolkit.simple.style.StyleTypeDefinitions;
 import org.odftoolkit.simple.table.Cell;
 import org.odftoolkit.simple.table.Table;
-import org.odftoolkit.simple.text.list.List;
 import org.testng.annotations.Test;
 
 import java.awt.*;
@@ -57,24 +60,35 @@ public class ODFExportTest {
             outputOdt = TextDocument.newTextDocument();
 
 
-            // add image
-            //outputOdt.newImage(new URI("odf-logo.png"));
+            outputOdt.getOfficeMasterStyles().getMasterPages().forEachRemaining(System.out::println);
 
-            // add paragraph
-            outputOdt.addParagraph("Hello World, Hello Simple ODF!");
+            StyleMasterPageElement defaultPage = outputOdt.getOfficeMasterStyles().getMasterPage("Standard");
+            String pageLayoutName = defaultPage.getStylePageLayoutNameAttribute();
+            System.out.println("pageLayoutName = " + pageLayoutName);
+            OdfStylePageLayout pageLayoutStyle = defaultPage.getAutomaticStyles().getPageLayout(pageLayoutName);
+            PageLayoutProperties pageLayoutProperties = PageLayoutProperties.getOrCreatePageLayoutProperties(pageLayoutStyle);
 
-            Font font1Base = new Font("Monospaced", StyleTypeDefinitions.FontStyle.REGULAR, 8, Color.RED, StyleTypeDefinitions.TextLinePosition.REGULAR);
-            outputOdt.getParagraphByIndex(0, true).setFont(font1Base);
+            double pageHeightInMM = 210.00;
+            pageLayoutProperties.setPageHeight(pageHeightInMM);
+            double pageWidthInMM = 297.00;
+            pageLayoutProperties.setPageWidth(pageWidthInMM);
+            pageLayoutProperties.setPrintOrientation(StyleTypeDefinitions.PrintOrientation.LANDSCAPE);
 
-            // add list
-            outputOdt.addParagraph("The following is a list.");
-            List list = outputOdt.addList();
-            String[] items = {"item1", "item2", "item3"};
-            list.addItems(items);
+            //pageLayoutProperties.setMarginLeft(leftMarginInMM);
+            //pageLayoutProperties.setMarginRight(rightMarginInMM);
+            //pageLayoutProperties.setMarginTop(topMarginInMM);
+            //pageLayoutProperties.setMarginBottom(bottomMarginInMM);
+
+
+            Font font1Base = new Font("Courier new", StyleTypeDefinitions.FontStyle.REGULAR, 8, Color.RED, StyleTypeDefinitions.TextLinePosition.REGULAR);
+            //outputOdt.getParagraphByIndex(0, true).setFont(font1Base);
 
             // add table
 
             Table table = ODFTableEmitter.emit(outputOdt, data);
+            table.setCellStyleInheritance(true);
+
+
             table.getColumnList().forEach(c -> {
                 c.setUseOptimalWidth(true);
 
@@ -87,12 +101,25 @@ public class ODFExportTest {
 
             });
 
+            table.getRowList().forEach(r -> {
+                r.setUseOptimalHeight(true);
+                int cellCount = r.getCellCount();
+                IntStream.range(0,cellCount).forEach(i1 -> {
+                    Cell cell1 = r.getCellByIndex(i1);
+                    cell1.setFont(font1Base);
+                    cell1.setHorizontalAlignment(StyleTypeDefinitions.HorizontalAlignmentType.CENTER);
+                    cell1.setVerticalAlignment(StyleTypeDefinitions.VerticalAlignmentType.MIDDLE);
+                    cell1.setBorders(StyleTypeDefinitions.CellBordersType.ALL_FOUR, new Border(Color.GRAY, 1.0, StyleTypeDefinitions.SupportedLinearMeasure.PT));
+                });
+            });
+
+
 
 //            Table table = outputOdt.addTable(2, 2);
 //            Cell cell = table.getCellByPosition(0, 0);
 //            cell.setStringValue("Hello World!");
 
-            outputOdt.save("HelloWorld-04.odt");
+            outputOdt.save("HelloWorld-10.odt");
         } catch (Exception e) {
             e.printStackTrace();
             System.err.println("ERROR: unable to create output file.");
