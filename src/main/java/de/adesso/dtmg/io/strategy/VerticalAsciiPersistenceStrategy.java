@@ -23,7 +23,7 @@ import de.adesso.dtmg.io.DtEntity;
 import de.adesso.dtmg.io.PersistenceStrategy;
 
 import javax.annotation.Nonnull;
-import java.net.URL;
+import java.net.URI;
 
 /**
  * Created by mmoehler on 02.07.16.
@@ -42,12 +42,12 @@ public class VerticalAsciiPersistenceStrategy implements PersistenceStrategy<DtE
     }
 
     @Override
-    public DtEntity read(URL source) {
+    public DtEntity read(URI source) {
         return null;
     }
 
     @Override
-    public void write(DtEntity dtEntity, URL target) {
+    public void write(DtEntity dtEntity, URI target) {
 
     }
 }

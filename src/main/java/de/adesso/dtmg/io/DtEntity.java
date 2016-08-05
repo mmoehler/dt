@@ -19,11 +19,12 @@
 
 package de.adesso.dtmg.io;
 
-import com.google.common.collect.ImmutableList;
 import de.adesso.dtmg.model.ActionDecl;
 import de.adesso.dtmg.model.ConditionDecl;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -31,7 +32,6 @@ import java.io.Externalizable;
 import java.io.IOException;
 import java.io.ObjectInput;
 import java.io.ObjectOutput;
-import java.util.List;
 import java.util.stream.IntStream;
 
 import static de.adesso.dtmg.exception.LambdaExceptionUtil.rethrowIntConsumer;
@@ -43,34 +43,31 @@ import static de.adesso.dtmg.exception.LambdaExceptionUtil.rethrowIntFunction;
  * Created by mmoehler ofList 01.04.16.
  */
 public class DtEntity implements Externalizable {
-
-
     private static final long serialVersionUID = -2022916876266547636L;
-    transient private final ImmutableList<ObservableList> allData;
-    transient private boolean dirty;
     private ObservableList<ObservableList<String>> conditionDefinitions;
     private ObservableList<ObservableList<String>> actionDefinitions;
     private ObservableList<ConditionDeclTableViewModel> conditionDeclarations;
     private ObservableList<ActionDeclTableViewModel> actionDeclarations;
+    private BooleanProperty elseRule;
 
     public DtEntity() {
         this.conditionDefinitions = FXCollections.observableArrayList();
         this.conditionDeclarations = FXCollections.observableArrayList();
         this.actionDeclarations = FXCollections.observableArrayList();
         this.actionDefinitions = FXCollections.observableArrayList();
-        allData = ImmutableList.of(conditionDeclarations, conditionDefinitions, actionDeclarations, actionDefinitions);
+        this.elseRule = new SimpleBooleanProperty(false);
     }
 
     public DtEntity(
             ObservableList<ConditionDeclTableViewModel> conditionDeclarations,
             ObservableList<ObservableList<String>> conditionDefinitions,
             ObservableList<ActionDeclTableViewModel> actionDeclarations,
-            ObservableList<ObservableList<String>> actionDefinitions) {
+            ObservableList<ObservableList<String>> actionDefinitions,
+            BooleanProperty elseRule) {
 
+        this.elseRule = elseRule;
         initConditionsData(conditionDeclarations, conditionDefinitions);
         initActionsData(actionDeclarations, actionDefinitions);
-
-        allData = ImmutableList.of(conditionDeclarations, conditionDefinitions, actionDeclarations, actionDefinitions);
     }
 
     private void initActionsData(ObservableList<ActionDeclTableViewModel> actionDeclarations, ObservableList<ObservableList<String>> actionDefinitions) {
@@ -95,6 +92,7 @@ public class DtEntity implements Externalizable {
 
         writeConditionsExternal(out, crows, cols);
         writeActionsExternal(out, arows, cols);
+        out.writeBoolean(elseRule.get());
     }
 
 
@@ -106,6 +104,7 @@ public class DtEntity implements Externalizable {
 
         readConditionsExternal(in, crows, cols);
         readActionsExternal(in, arows, cols);
+        elseRule.set(in.readBoolean());
     }
 
     private void writeConditionsExternal(ObjectOutput out, int rows, int cols) throws IOException {
@@ -184,9 +183,7 @@ public class DtEntity implements Externalizable {
         return conditionDeclarations;
     }
 
-    public void reset() {
-        allData.forEach(List::clear);
-    }
+    public boolean hasElseRule() { return this.elseRule.get(); }
 
     public void become(DtEntity other) {
         this.conditionDeclarations.clear();
@@ -197,13 +194,6 @@ public class DtEntity implements Externalizable {
         other.actionDeclarations.forEach(this.actionDeclarations::add);
         this.actionDefinitions.clear();
         other.actionDefinitions.forEach(this.actionDefinitions::add);
-    }
-
-    public boolean isDirty() {
-        return dirty;
-    }
-
-    public void setDirty(boolean dirty) {
-        this.dirty = dirty;
+        this.elseRule.set(other.elseRule.get());
     }
 }

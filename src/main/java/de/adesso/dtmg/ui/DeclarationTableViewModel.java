@@ -24,7 +24,7 @@ import javafx.beans.property.StringProperty;
 /**
  * Created by mohler ofList 06.02.16.
  */
-public interface DeclarationTableViewModel {
+public interface DeclarationTableViewModel extends Iterable<String> {
     String getId();
 
     StringProperty lfdNrProperty();

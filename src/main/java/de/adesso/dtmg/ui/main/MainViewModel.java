@@ -28,6 +28,8 @@ import de.adesso.dtmg.util.tuple.Tuple3;
 import de.saxsys.mvvmfx.InjectScope;
 import de.saxsys.mvvmfx.ViewModel;
 import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -35,7 +37,7 @@ import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
-import java.net.URL;
+import java.net.URI;
 import java.util.List;
 import java.util.Optional;
 import java.util.OptionalInt;
@@ -69,12 +71,14 @@ public class MainViewModel implements ViewModel {
     private final ObservableList<ObservableList<String>> conditionDefinitions = FXCollections.observableArrayList();
     private final ObservableList<ActionDeclTableViewModel> actionDeclarations = FXCollections.observableArrayList();
     private final ObservableList<ObservableList<String>> actionDefinitions = FXCollections.observableArrayList();
+    private final BooleanProperty elseRule = new SimpleBooleanProperty(false);
 
     private final DtEntity data = new DtEntity(
             conditionDeclarations,
             conditionDefinitions,
             actionDeclarations,
-            actionDefinitions
+            actionDefinitions,
+            elseRule
     );
 
     @InjectScope
@@ -260,12 +264,17 @@ public class MainViewModel implements ViewModel {
 
     public void onAddElseRule(@Observes AddElseRuleEvent event) {
         if (hasNoElseRule().test(this.conditionDefinitions.get(0))) {
-            List<List<String>> newDefns = List2DFunctions.addColumn(adapt(this.conditionDefinitions), () -> ELSE);
+
+            List<List<String>> newCDefns = List2DFunctions.addColumn(adapt(this.conditionDefinitions), () -> ELSE);
             this.conditionDefinitions.clear();
-            List<List<String>> newDefns0 = List2DFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
+
+            List<List<String>> newADefns = List2DFunctions.addColumn(adapt(this.actionDefinitions), () -> DASH);
             this.actionDefinitions.clear();
-            publish(ADD_ELSE_RULE.name(), adapt(newDefns), adapt(newDefns0));
+
+            publish(ADD_ELSE_RULE.name(), adapt(newCDefns), adapt(newADefns));
+
             this.elseRuleSet = true;
+            this.elseRule.set(true);
             notifyElseRuleSet();
         }
     }
@@ -434,7 +443,7 @@ public class MainViewModel implements ViewModel {
 
     }
 
-    public int openFile(URL url) throws IOException, ClassNotFoundException {
+    public int openFile(URI url) throws IOException, ClassNotFoundException {
         loadedData = persistenceManager.read(url);
         return loadedData.getConditionDefinitions().get(0).size();
     }
@@ -444,7 +453,7 @@ public class MainViewModel implements ViewModel {
         return this.data;
     }
 
-    public void saveFile(URL url) throws IOException {
+    public void saveFile(URI url) throws IOException {
         persistenceManager.write(this.data, url);
     }
 

@@ -25,7 +25,7 @@ import sun.net.www.ParseUtil;
 
 import javax.annotation.Nonnull;
 import java.io.*;
-import java.net.URL;
+import java.net.URI;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -46,8 +46,8 @@ public class BinaryPersistenceStrategy implements PersistenceStrategy<DtEntity> 
     }
 
     @Override
-    public DtEntity read(URL source) {
-        checkNotNull(source, "Missing Source URL!");
+    public DtEntity read(URI source) {
+        checkNotNull(source, "Missing Source URI!");
         final String path = ParseUtil.decode(source.getPath());
         try (RandomAccessFile randomAccessFile = new RandomAccessFile(path, "r");
              FileInputStream fileInputStream = new FileInputStream(randomAccessFile.getFD());
@@ -59,7 +59,7 @@ public class BinaryPersistenceStrategy implements PersistenceStrategy<DtEntity> 
     }
 
     @Override
-    public void write(DtEntity dtEntity, URL target) {
+    public void write(DtEntity dtEntity, URI target) {
         checkNotNull(target, "Missing Target URL!");
         checkNotNull(dtEntity, "Missing Entity to Save!");
 

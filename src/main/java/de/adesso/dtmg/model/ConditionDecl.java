@@ -20,6 +20,7 @@
 package de.adesso.dtmg.model;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * Raw declaration of the condition of a rule
@@ -33,12 +34,20 @@ public class ConditionDecl extends Declaration {
         setPossibleIndicators(builder.possibleIndicators);
     }
 
+    public static ConditionDecl of(@Nonnull List<String> data) {
+        return new ConditionDecl(data);
+    }
+
     public ConditionDecl() {
         super();
     }
 
     public ConditionDecl(String lfdNr, String expression, String possibleIndicators) {
         super(lfdNr, expression, possibleIndicators);
+    }
+
+    protected ConditionDecl(@Nonnull List<String> data) {
+        super(data);
     }
 
     public static Builder newBuilder() {

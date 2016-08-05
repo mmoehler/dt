@@ -21,7 +21,7 @@ package de.adesso.dtmg.io;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;
-import java.net.URL;
+import java.net.URI;
 
 /**
  * Created by mmoehler on 02.07.16.
@@ -30,8 +30,8 @@ public interface PersistenceStrategy<O extends Serializable> {
     @Nonnull
     String extension();
 
-    @Nonnull O read(@Nonnull URL source);
+    @Nonnull O read(@Nonnull URI source);
 
-    void write(@Nonnull O o, @Nonnull URL target);
+    void write(@Nonnull O o, @Nonnull URI target);
 
 }

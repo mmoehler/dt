@@ -29,7 +29,7 @@ import sun.net.www.ParseUtil;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.inject.Singleton;
-import java.net.URL;
+import java.net.URI;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.function.Function;
@@ -63,14 +63,14 @@ public class DefaultPersistenceManager implements PersistenceManager<DtEntity> {
     }
 
     @Override
-    public DtEntity read(final URL source) {
-        checkNotNull(source, "Missing Source URL!");
+    public DtEntity read(final URI source) {
+        checkNotNull(source, "Missing Source URI!");
         return detectStrategyAndDo(source, (s) -> s.read(source)  );
 
     }
 
     @Override
-    public void write(DtEntity dtEntity, URL target) {
+    public void write(DtEntity dtEntity, URI target) {
         checkNotNull(target, "Missing Target URL!");
         checkNotNull(dtEntity, "Missing Entity to Save!");
         detectStrategyAndDo(target, (s) -> {
@@ -79,7 +79,7 @@ public class DefaultPersistenceManager implements PersistenceManager<DtEntity> {
         });
     }
 
-    private DtEntity detectStrategyAndDo(URL source, Function<PersistenceStrategy<DtEntity>, DtEntity> strategyEvaluation) {
+    private DtEntity detectStrategyAndDo(URI source, Function<PersistenceStrategy<DtEntity>, DtEntity> strategyEvaluation) {
         final String path = ParseUtil.decode(source.getPath());
         String extension = Files.getFileExtension(path);
         PersistenceStrategy<DtEntity> strategy = strategies.get(extension);

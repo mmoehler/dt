@@ -21,13 +21,15 @@ package de.adesso.dtmg.model;
 
 import com.google.common.collect.Lists;
 
+import javax.annotation.Nonnull;
+import java.util.Iterator;
 import java.util.List;
 
 /**
  * General state and behaviour of all declarations
  * Created by mohler ofList 16.01.16.
  */
-public class Declaration extends Identity {
+public class Declaration extends Identity implements Iterable<String> {
 
     public static final String EMPTY_STRING = "";
     /**
@@ -47,6 +49,12 @@ public class Declaration extends Identity {
 
     public Declaration() {
     }
+
+    @Nonnull
+    protected Declaration(@Nonnull List<String> data) {
+        this(data.get(0), data.get(1), data.get(2));
+    }
+
 
     public Declaration(String lfdNr, String expression, String possibleIndicators) {
         this.lfdNr = lfdNr;
@@ -121,5 +129,10 @@ public class Declaration extends Identity {
 
     public List<String> asList() {
         return Lists.newArrayList(getLfdNr(), getExpression(), getPossibleIndicators());
+    }
+
+    @Override
+    public Iterator<String> iterator() {
+        return asList().iterator();
     }
 }

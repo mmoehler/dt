@@ -59,7 +59,7 @@ public final class DtFunctions {
     public static final String QMARK = "?";
     public static final String DASH = "-";
     public static final String RULE_HEADER = "R%02d";
-    public static final String ELSE_RULE_HEADER = "ELSE";
+    public static final String   ELSE_RULE_HEADER = "ELSE";
     public static final Supplier<String> QMARK_SUPPLIER = () -> QMARK;
     public static final Supplier<String> DASH_SUPPLIER = () -> DASH;
 

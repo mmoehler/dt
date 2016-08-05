@@ -1,13 +1,8 @@
- Else Rule handling:
+Add dependency
 
-a) MoveRule
-    o Verboten für Else Rule
-    o MoveRight verboten wenn Rule rechts neben
-      der zu verschiebenden Rule die Else Rule ist
 
-b) AddRule
-    o Wenn ElseRule definiert, dann neue
-      Rule vor der ElseRule einfügen!
-
-c) Farben
-    o Besseres rot und grün definieren
+<dependency>
+  <groupId>com.fasterxml.jackson.dataformat</groupId>
+  <artifactId>jackson-dataformat-csv</artifactId>
+  <version>2.7.0</version>
+</dependency>

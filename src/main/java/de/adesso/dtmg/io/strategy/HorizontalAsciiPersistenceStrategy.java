@@ -19,6 +19,7 @@
 
 package de.adesso.dtmg.io.strategy;
 
+import com.google.common.base.Preconditions;
 import com.google.common.io.LineReader;
 import de.adesso.dtmg.exception.IOExceptionSmuggler;
 import de.adesso.dtmg.io.DtEntity;
@@ -28,8 +29,9 @@ import de.adesso.dtmg.io.builder.ConditionDeclTableViewModelListBuilder;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.dtmg.util.tuple.Tuple;
-import de.adesso.dtmg.util.tuple.Tuple2;
 import de.adesso.dtmg.util.tuple.Tuple3;
+import javafx.beans.property.BooleanProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sun.net.www.ParseUtil;
@@ -37,7 +39,7 @@ import sun.net.www.ParseUtil;
 import javax.annotation.Nonnull;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.net.URL;
+import java.net.URI;
 import java.nio.CharBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
@@ -61,7 +63,7 @@ public class HorizontalAsciiPersistenceStrategy implements PersistenceStrategy<D
         return DTH;
     }
 
-    private Tuple2<ObservableList<ActionDeclTableViewModel>,ObservableList<ObservableList<String>>> readActions(LineReader lr, String lastLine) {
+    private Tuple3<String, ObservableList<ActionDeclTableViewModel>, ObservableList<ObservableList<String>>> readActions(LineReader lr, String lastLine) {
         try {
             String l = lastLine;
             String[] _s0 = l.split(":");
@@ -85,7 +87,7 @@ public class HorizontalAsciiPersistenceStrategy implements PersistenceStrategy<D
             }
             for (; ; ) {
                 l = lr.readLine(); // 10000
-                if (null == l) break;
+                if (l.matches("E:(0|1)")) break;
                 String[] s2 = l.split("");
                 Iterator<ObservableList<String>> it = actionDefns.iterator();
                 Arrays.stream(s2)
@@ -93,15 +95,15 @@ public class HorizontalAsciiPersistenceStrategy implements PersistenceStrategy<D
                         .forEach(y -> it.next().add(y));
             }
 
-            return Tuple.of(actionDecls,actionDefns);
+            return Tuple.of(l, actionDecls, actionDefns);
 
-        } catch(IOException e) {
+        } catch (IOException e) {
             throw new IOExceptionSmuggler(e);
         }
 
     }
 
-    private Tuple3<String,ObservableList<ConditionDeclTableViewModel>,ObservableList<ObservableList<String>>> readConditions(LineReader lr) {
+    private Tuple3<String, ObservableList<ConditionDeclTableViewModel>, ObservableList<ObservableList<String>>> readConditions(LineReader lr) {
         try {
             String l = lr.readLine();
             // -- Build ConditionDEcls (5:x,p,q,r,s)
@@ -123,15 +125,16 @@ public class HorizontalAsciiPersistenceStrategy implements PersistenceStrategy<D
             for (int j = 0; j < i; j++) {
                 conditionDefns.add(FXCollections.observableArrayList());
             }
-            for(;;) {
+            for (; ; ) {
                 l = lr.readLine(); // 10000
-                if(l.matches("[2-9].*")) break;
+                if (l.matches("[2-9].*")) break;
                 String[] s2 = l.split("");
                 Iterator<ObservableList<String>> it = conditionDefns.iterator();
                 Arrays.stream(s2)
                         .map(x -> ("1".equals(x) ? "Y" : ("0".equals(x)) ? "N" : x))
                         .forEach(y -> it.next().add(y));
-            };
+            }
+            ;
 
             return Tuple.of(l, conditionDecls, conditionDefns);
         } catch (IOException e) {
@@ -141,7 +144,7 @@ public class HorizontalAsciiPersistenceStrategy implements PersistenceStrategy<D
 
 
     @Override
-    public DtEntity read(URL source) {
+    public DtEntity read(URI source) {
         final String path = ParseUtil.decode(source.getPath());
         FileChannel fileChannel = null;
         MappedByteBuffer buffer = null;
@@ -151,17 +154,26 @@ public class HorizontalAsciiPersistenceStrategy implements PersistenceStrategy<D
         } catch (IOException e) {
             throw new IOExceptionSmuggler(e);
         }
-        CharBuffer cb =  Charset.forName("utf8").decode(buffer);
+        CharBuffer cb = Charset.forName("utf8").decode(buffer);
         LineReader lr = new LineReader(cb);
 
+        Tuple3<String, ObservableList<ConditionDeclTableViewModel>, ObservableList<ObservableList<String>>> con = readConditions(lr);
+        Tuple3<String, ObservableList<ActionDeclTableViewModel>, ObservableList<ObservableList<String>>> act = readActions(lr, con._1());
+        BooleanProperty hasElseRule = new SimpleBooleanProperty(readElseRuleInfo(act._1()));
+        return new DtEntity(con._2(), con._3(), act._2(), act._3(), hasElseRule);
+    }
 
-        Tuple3<String,ObservableList<ConditionDeclTableViewModel>, ObservableList<ObservableList<String>>> con = readConditions(lr);
-        Tuple2<ObservableList<ActionDeclTableViewModel>, ObservableList<ObservableList<String>>> act = readActions(lr, con._1());
-        return new DtEntity(con._2(),con._3(),act._1(),act._2());
+    private boolean readElseRuleInfo(String s) {
+        if(null == s) return false;
+        String[] info = s.split(":");
+        Preconditions.checkPositionIndexes(0, 1, 2);
+        Preconditions.checkArgument("E".equals(info[0]), String.format("Illegal Else rule info -> %s", s));
+        Preconditions.checkArgument("10".contains(info[1]), String.format("Illegal Else rule info -> %s", s));
+        return ("1".equals(info[1]));
     }
 
     @Override
-    public void write(DtEntity dtEntity, URL target) {
+    public void write(DtEntity dtEntity, URI target) {
         throw new UnsupportedOperationException("write *.dth");
     }
 }

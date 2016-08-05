@@ -22,6 +22,7 @@ package de.adesso.dtmg.export.java.treeMethod;
 import de.adesso.dtmg.io.DtEntity;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -53,6 +54,6 @@ public class DtEntityStub extends DtEntity {
     }
 
     public DtEntityStub(ObservableList<ConditionDeclTableViewModel> conditionDeclarations, ObservableList<ObservableList<String>> conditionDefinitions, ObservableList<ActionDeclTableViewModel> actionDeclarations, ObservableList<ObservableList<String>> actionDefinitions) {
-        super(conditionDeclarations, conditionDefinitions, actionDeclarations, actionDefinitions);
+        super(conditionDeclarations, conditionDefinitions, actionDeclarations, actionDefinitions, new SimpleBooleanProperty(false));
     }
 }

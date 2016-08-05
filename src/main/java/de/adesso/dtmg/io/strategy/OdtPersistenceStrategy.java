@@ -37,7 +37,7 @@ import javax.annotation.Nonnull;
 import java.io.FileOutputStream;
 import java.io.ObjectOutputStream;
 import java.io.RandomAccessFile;
-import java.net.URL;
+import java.net.URI;
 import java.util.stream.IntStream;
 
 /**
@@ -54,12 +54,12 @@ public class OdtPersistenceStrategy implements PersistenceStrategy<DtEntity> {
     }
 
     @Override
-    public DtEntity read(URL source) {
+    public DtEntity read(URI source) {
         throw new UnsupportedOperationException("*.odt - files cant not be imported!");
     }
 
     @Override
-    public void write(DtEntity dtEntity, URL target) {
+    public void write(DtEntity dtEntity, URI target) {
         final String path = ParseUtil.decode(target.getPath());
         try (RandomAccessFile raf = new RandomAccessFile(path, "rw");
              FileOutputStream fos = new FileOutputStream(raf.getFD());

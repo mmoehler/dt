@@ -21,12 +21,12 @@ package de.adesso.dtmg.io;
 
 import javax.annotation.Nonnull;
 import java.io.Serializable;
-import java.net.URL;
+import java.net.URI;
 
 /**
  * Created by mmoehler ofList 01.04.16.
  */
 public interface PersistenceManager<O extends Serializable> {
-    @Nonnull O read(@Nonnull URL source);
-    void write(@Nonnull O o, @Nonnull URL target);
+    @Nonnull O read(@Nonnull URI source);
+    void write(@Nonnull O o, @Nonnull URI target);
 }

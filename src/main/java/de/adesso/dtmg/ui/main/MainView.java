@@ -223,7 +223,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         configureFileChooser(getFileChooser(), "Open DTMG File");
         File file = getFileChooser().showOpenDialog(this.actionSplitPane.getScene().getWindow());
         if (file != null) try {
-            final int countColumns = viewModel.openFile(file.toURI().toURL());
+            final int countColumns = viewModel.openFile(file.toURI());
             prepareDefinitionsTables4NewData(countColumns);
             viewModel.populateLoadedData();
         } catch (IOException | ClassNotFoundException e) {
@@ -237,7 +237,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         File file = getFileChooser().showSaveDialog(this.actionSplitPane.getScene().getWindow());
         if (file != null) {
             try {
-                viewModel.saveFile(file.toURI().toURL());
+                viewModel.saveFile(file.toURI());
             } catch (IOException e) {
                 exceptionHandler.showAndWaitAlert(e);
                 return;
@@ -245,18 +245,21 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         }
     }
 
+    // publish(ADD_ELSE_RULE.name(), adapt(newCDefns), adapt(newADefns));
+
     private void   doAddElseRule(String key, Object[] value) {
         final int countColumns = conditionDefinitionsTable.getColumns().size();
         final Optional<String> elseRuleName = Optional.of(ELSE_RULE_HEADER);
-        conditionDefinitionsTable.getColumns().add(createTableColumn(countColumns, elseRuleName));
-        ObservableList<ObservableList<String>> newDefns = (ObservableList<ObservableList<String>>) value[0];
-        newDefns.stream().forEach(this.viewModel.getConditionDefinitions()::add);
-        conditionDefinitionsTable.refresh();
 
-        actionDefinitionsTable.getColumns().add(createTableColumn(countColumns, elseRuleName));
         if (value.length >= 2 && null != value[1]) {
-            newDefns = (ObservableList<ObservableList<String>>) value[1];
-            newDefns.stream().forEach(this.viewModel.getActionDefinitions()::add);
+            conditionDefinitionsTable.getColumns().add(createTableColumn(countColumns, elseRuleName));
+            ObservableList<ObservableList<String>> newCDefns = (ObservableList<ObservableList<String>>) value[0];
+            newCDefns.stream().forEach(this.viewModel.getConditionDefinitions()::add);
+            conditionDefinitionsTable.refresh();
+
+            actionDefinitionsTable.getColumns().add(createTableColumn(countColumns, elseRuleName));
+            ObservableList<ObservableList<String>> newADefns = (ObservableList<ObservableList<String>>) value[1];
+            newADefns.stream().peek(System.out::println).forEach(this.viewModel.getActionDefinitions()::add);
             actionDefinitionsTable.refresh();
         }
     }

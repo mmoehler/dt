@@ -25,6 +25,8 @@ import de.adesso.dtmg.ui.PossibleIndicatorsSupplier;
 import de.saxsys.mvvmfx.utils.mapping.ModelWrapper;
 import javafx.beans.property.StringProperty;
 
+import java.util.Iterator;
+
 import static java.util.Arrays.asList;
 
 /**
@@ -117,4 +119,8 @@ public class ConditionDeclTableViewModel implements PossibleIndicatorsSupplier, 
         return wrapper.get();
     }
 
+    @Override
+    public Iterator<String> iterator() {
+        return getModel().iterator();
+    }
 }
