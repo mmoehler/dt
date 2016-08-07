@@ -17,38 +17,10 @@
  * under the License.
  */
 
-package de.adesso.dtmg.io.strategy;
-
-import de.adesso.dtmg.io.DtEntity;
-
-import javax.annotation.Nonnull;
-import java.net.URI;
-import java.util.concurrent.ExecutorService;
+package de.adesso.dtmg.events;
 
 /**
- * Created by mmoehler on 02.07.16.
+ * CDI event class that is used to indicate that a contact was updated/added/removed.
  */
-public class VerticalAsciiPersistenceStrategy extends AbstractPersistenceStrategy<DtEntity> {
-
-    public static final String DTV = "dtv";
-
-    public VerticalAsciiPersistenceStrategy(ExecutorService pool) {
-        super(pool);
-    }
-
-    @Nonnull
-    @Override
-    public String extension() {
-        return DTV;
-    }
-
-    @Override
-    public DtEntity read(URI source) {
-        return null;
-    }
-
-    @Override
-    public void write(DtEntity dtEntity, URI target) {
-
-    }
+public class FileExportAsEvent {
 }

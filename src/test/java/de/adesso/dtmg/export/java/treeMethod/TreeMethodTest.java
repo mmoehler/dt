@@ -39,7 +39,6 @@ import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import de.adesso.dtmg.util.tuple.Tuple3;
 import de.adesso.dtmg.util.tuple.Tuple4;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.hamcrest.CoreMatchers;
@@ -391,7 +390,6 @@ public class TreeMethodTest {
                     .map(x -> ("1".equals(x) ? "Y" : ("0".equals(x)) ? "N" : x))
                     .forEach(y -> it.next().add(y));
         }
-        ;
 
         s0 = l.split(":");
         i = Integer.parseInt(s0[0]);
@@ -421,13 +419,12 @@ public class TreeMethodTest {
                     .map(x -> ("1".equals(x) ? "X" : (".".equals(x)) ? " " : x))
                     .forEach(y -> it.next().add(y));
         }
-        ;
 
 
         final ObservableList<ObservableList<String>> _conditionDefns = ObservableList2DFunctions.transpose().apply(conditionDefns);
         final ObservableList<ObservableList<String>> _actionDefns = ObservableList2DFunctions.transpose().apply(actionDefns);
 
-        DtEntity ret = new DtEntity(conditionDecls, _conditionDefns, actionDecls, _actionDefns, new SimpleBooleanProperty(false));
+        DtEntity ret = new DtEntity(conditionDecls, _conditionDefns, actionDecls, _actionDefns);
         return ret;
     }
 

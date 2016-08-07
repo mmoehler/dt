@@ -17,10 +17,18 @@
  * under the License.
  */
 
-package de.adesso.dtmg.events;
+package de.adesso.dtmg.export;
+
+import javax.annotation.Nonnull;
+import java.io.Serializable;
+import java.net.URI;
 
 /**
- * CDI event class that is used to indicate that a contact was updated/added/removed.
+ * Created by mmoehler on 06.08.16.
  */
-public class AddMissingRulesEvent {
+public interface ExportStrategy<O extends Serializable> {
+        @Nonnull
+        String extension();
+
+        void export(@Nonnull O o, @Nonnull URI target);
 }

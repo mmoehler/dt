@@ -30,7 +30,6 @@ import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import de.adesso.dtmg.util.tuple.Tuple3;
 import de.adesso.dtmg.util.tuple.Tuple4;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -263,8 +262,8 @@ public class IntBinaryTreeFactory implements Function<DtEntity,IntBinaryTree> {
         cdl.remove(conditionIndex);
 
         return Tuple.of(
-                new DtEntity(cdl,leftCDefns,entity.getActionDeclarations(),leftADefns, new SimpleBooleanProperty(false)),
-                new DtEntity(cdl,rightCDefns,entity.getActionDeclarations(),rightADefns, new SimpleBooleanProperty(false))
+                new DtEntity(cdl,leftCDefns,entity.getActionDeclarations(),leftADefns),
+                new DtEntity(cdl,rightCDefns,entity.getActionDeclarations(),rightADefns)
         );
     }
 

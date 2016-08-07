@@ -17,32 +17,15 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.odf;
+package de.adesso.dtmg.export;
 
-import de.adesso.dtmg.common.builder.AbstractNestable;
-import de.adesso.dtmg.common.builder.Callback;
-
-import java.util.ArrayList;
-import java.util.List;
+import javax.annotation.Nonnull;
+import java.io.Serializable;
+import java.net.URI;
 
 /**
- * Created by mmoehler on 31.07.16.
+ * Created by mmoehler ofList 01.04.16.
  */
-public class HeaderBuilder extends AbstractNestable<ODFDecisionTableData.Builder, String[]> {
-
-    private final List<String> fields = new ArrayList<>();
-
-    public HeaderBuilder(ODFDecisionTableData.Builder parentBuilder, Callback ownerCallback) {
-        super(parentBuilder, ownerCallback);
-    }
-
-    public HeaderBuilder field(String name) {
-        this.fields.add(name);
-        return this;
-    }
-
-    @Override
-    public String[] build() {
-        return fields.toArray(new String[fields.size()]);
-    }
+public interface ExportManager<O extends Serializable> {
+    void export(@Nonnull O o, @Nonnull URI target);
 }

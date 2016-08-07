@@ -63,7 +63,7 @@ public class IntIndexed {
 
     @Override
     public int hashCode() {
-        int result = (int) (index ^ (index >>> 32));
+        int result = index ^ (index >>> 32);
         result = 31 * result + value;
         return result;
     }

@@ -211,7 +211,7 @@ public class QuineMcCluskey implements Function<String, String> {
     }
 
     public String convertToMinTerm(List<String> result) {
-        return (String) result.stream()
+        return result.stream()
                 .map(this::toMinTerm)
                 .sorted()
                 .reduce(EMPTY_STRING, (ll, rr) -> Strings.isNullOrEmpty(ll) ? rr : ll + STR_PLUS_SPACED + rr);

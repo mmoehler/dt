@@ -7,10 +7,10 @@ import com.google.common.collect.Multimap;
 import de.adesso.dtmg.Dump;
 import de.adesso.dtmg.analysis.structure.AnalysisResultEmitter;
 import de.adesso.dtmg.analysis.structure.Indicator;
-import de.adesso.dtmg.analysis.structure.Operators;
 import de.adesso.dtmg.analysis.structure.StructuralAnalysis;
 import de.adesso.dtmg.events.*;
 import de.adesso.dtmg.exception.ExceptionHandler;
+import de.adesso.dtmg.export.ExportManager;
 import de.adesso.dtmg.functions.DtFunctions;
 import de.adesso.dtmg.functions.List2DFunctions;
 import de.adesso.dtmg.functions.MoreCollectors;
@@ -45,7 +45,6 @@ import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import static com.google.common.collect.Multimaps0.emptyMultimap;
 import static de.adesso.dtmg.analysis.completeness.detailed.ConditionDetailedCompletenessCheck.isFormalComplete;
@@ -67,6 +66,7 @@ public class MainViewModel implements ViewModel {
     private static final String ACT_ROW_HEADER = "A%02d";
     private final static Predicate<ObservableList<String>> HAS_ELSE_RULE =
             c -> (c.isEmpty()) ? false : c.get(c.size() - 1).equals(ELSE);
+    public static final String STR_RULES_COMPLETE = "RULES COMPLETE";
     private final ObservableList<ConditionDeclTableViewModel> conditionDeclarations = FXCollections.observableArrayList();
     private final ObservableList<ObservableList<String>> conditionDefinitions = FXCollections.observableArrayList();
     private final ObservableList<ActionDeclTableViewModel> actionDeclarations = FXCollections.observableArrayList();
@@ -77,8 +77,7 @@ public class MainViewModel implements ViewModel {
             conditionDeclarations,
             conditionDefinitions,
             actionDeclarations,
-            actionDefinitions,
-            elseRule
+            actionDefinitions
     );
 
     @InjectScope
@@ -98,6 +97,9 @@ public class MainViewModel implements ViewModel {
 
     @Inject
     private PersistenceManager<DtEntity> persistenceManager;
+
+    @Inject
+    private ExportManager<DtEntity> exportManager;
 
     private List<String> missingRules = emptyList();
     private Multimap<Integer, Integer> compressibleRules = emptyMultimap();
@@ -292,7 +294,6 @@ public class MainViewModel implements ViewModel {
         Optional<String> s = internalFormalCompletenessCheck();
         if (s.isPresent()) {
             notificationCenter.publish(PREPARE_CONSOLE.name(), s.get());
-            notifyMissingRulesCleared();
         }
     }
 
@@ -307,14 +308,19 @@ public class MainViewModel implements ViewModel {
     private Optional<String> internalFormalCompletenessCheck() {
         String ret = null;
         try {
-            ObservableList<ObservableList<String>> conditionDefnsWithoutElseRule
-                    = this.conditionDefinitions.stream().map(suppressElseRule()).collect(MoreCollectors.toObservableList());
-
-            final List<Indexed<List<String>>> result = isFormalComplete(this.conditionDeclarations, conditionDefnsWithoutElseRule);
-            Tuple2<String, List<String>> tuple2 = resultEmitter.emitFormalCompletenessCheckResults().apply(result);
-            missingRules = tuple2._2();
-            ret = tuple2._1();
-            ret = (Strings.isNullOrEmpty(ret)) ? "RULES COMPLETE" : ret;
+            if(hasNoElseRule().test(this.conditionDefinitions.get(0))) {
+                /*
+                ObservableList<ObservableList<String>> conditionDefnsWithoutElseRule
+                        = this.conditionDefinitions.stream().map(suppressElseRule()).collect(MoreCollectors.toObservableList());
+                */
+                final List<Indexed<List<String>>> result = isFormalComplete(this.conditionDeclarations, this.conditionDefinitions);
+                Tuple2<String, List<String>> tuple2 = resultEmitter.emitFormalCompletenessCheckResults().apply(result);
+                missingRules = tuple2._2();
+                ret = tuple2._1();
+                ret = (Strings.isNullOrEmpty(ret)) ? STR_RULES_COMPLETE : ret;
+            } else {
+                ret = STR_RULES_COMPLETE;
+            }
         } catch (Exception e) {
             exceptionHandler.showAndWaitAlert(e);
         }
@@ -337,9 +343,7 @@ public class MainViewModel implements ViewModel {
         }
 
         notificationCenter.publish(PREPARE_CONSOLE.name(), message);
-        notifyMissingRulesCleared();
         notifyRulesConsolidated();
-        notifyRuleDuplicatesCleared();
     }
 
     public void onStructuralAnalysisAction(@Observes StructuralAnalysisEvent event) {
@@ -347,7 +351,6 @@ public class MainViewModel implements ViewModel {
         if (s.isPresent()) {
             notificationCenter.publish(PREPARE_CONSOLE.name(), s.get());
             notifyRulesConsolidated();
-            notifyRuleDuplicatesCleared();
         }
     }
 
@@ -394,41 +397,12 @@ public class MainViewModel implements ViewModel {
 
     }
 
-    public void onAddMissingRules(@Observes AddMissingRulesEvent event) {
-        missingRules.clear();
-        notifyMissingRulesCleared();
-        throw new UnsupportedOperationException("Not implemented yet!!");
-    }
-
-    // TODO Test this!!
-    public void onDeleteRedundantRules(@Observes DeleteRedundantRulesEvent event) {
-        Stream<Tuple2<List<List<String>>, List<List<String>>>> dt
-                = Stream.of(Tuple.of(adapt(getConditionDefinitions()), adapt(getActionDefinitions())));
-        Tuple2<List<List<String>>, List<List<String>>> clearedDt
-                = dt.map(Operators.rejectDupplicateRules()).collect(MoreCollectors.toSingleObject());
-
-
-        dupplicateRules.clear();
-        notifyRuleDuplicatesCleared();
-        throw new UnsupportedOperationException("Not implemented yet!!");
-
-    }
-
     private void notifyRulesConsolidated() {
         mdScope.consolidateRulesProperty().set(compressibleRules.isEmpty());
     }
 
-    private void notifyMissingRulesCleared() {
-        mdScope.missingRulesProperty().set(missingRules.isEmpty());
-    }
-
     private void notifyElseRuleSet() {
         mdScope.elseRuleProperty().set(elseRuleSet);
-    }
-
-
-    private void notifyRuleDuplicatesCleared() {
-        mdScope.removeDuplicateRulesProperty().set(dupplicateRules.isEmpty());
     }
 
     public void onFileOpenAction(@Observes FileOpenEvent event) {
@@ -437,6 +411,10 @@ public class MainViewModel implements ViewModel {
 
     public void onFileSaveAsAction(@Observes FileSaveAsEvent event) {
         publish(FILE_SAVE_AS.name(), NO_ARGS);
+    }
+
+    public void onFileExportAsAction(@Observes FileExportAsEvent event) {
+        publish(FILE_EXPORT_AS.name(), NO_ARGS);
     }
 
     public void onFileSaveAction(@Observes FileSaveEvent event) {
@@ -455,6 +433,10 @@ public class MainViewModel implements ViewModel {
 
     public void saveFile(URI url) throws IOException {
         persistenceManager.write(this.data, url);
+    }
+
+    public void exportFile(URI url) throws IOException {
+        exportManager.export(this.data, url);
     }
 
 

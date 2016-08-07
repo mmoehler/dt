@@ -19,32 +19,28 @@
 
 package de.adesso.dtmg.export.odf;
 
+import de.adesso.dtmg.Dump;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.table.TableContainer;
 
-import java.util.List;
 import java.util.function.BiFunction;
-import java.util.function.Function;
-import java.util.stream.IntStream;
 
 /**
  * Created by moehler on 07.06.2016.
  */
-public class ODFTableEmitter implements BiFunction<TableContainer, List<List<String>>, Table> {
+public class OdtTableEmitter implements BiFunction<TableContainer, OdtDecisionTableData, Table> {
 
-    private Function<List<List<String>>, String[][]> internal = lists ->
-            lists.stream().map(u -> u.toArray(new String[0])).toArray(String[][]::new);
-
-    public static Table emit(TableContainer tableContainer, List<List<String>> data) {
-        final ODFTableEmitter emitter = new ODFTableEmitter();
+    public static Table emit(TableContainer tableContainer, OdtDecisionTableData data) {
+        final OdtTableEmitter emitter = new OdtTableEmitter();
         return emitter.apply(tableContainer, data);
     }
 
     @Override
-    public Table apply(TableContainer tableContainer, List<List<String>> lists) {
-        String[][] data = internal.apply(lists);
-        String[] colheader = IntStream.range(0, data[0].length).mapToObj(i -> String.format("R%02d", i)).toArray(String[]::new);
-        String[] rowheader = IntStream.range(0, data.length).mapToObj(i -> String.format("C%02d", i)).toArray(String[]::new);
-        return Table.newTable(tableContainer, rowheader, colheader, data);
+    public Table apply(TableContainer tableContainer, OdtDecisionTableData data) {
+        String[] colheader = null;
+        String[] rowheader = null;
+        String[][] tableData = data.getData();
+        Dump.array2DItems("TABLEDATA",tableData);
+        return Table.newTable(tableContainer, rowheader, colheader, tableData);
     }
 }

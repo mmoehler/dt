@@ -17,11 +17,12 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.odf;
+package de.adesso.dtmg.export;
+
+import java.io.Serializable;
 
 /**
- * Created by mmoehler on 05.06.16.
+ * Created by mmoehler on 06.08.16.
  */
-public class ODFExport {
-    public void doit() {}
+public abstract class AbstractExportStrategy<O extends Serializable> implements ExportStrategy<O>{
 }

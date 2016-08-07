@@ -45,8 +45,6 @@ public class MenuView implements FxmlView<MenuViewModel> {
 
     public void initialize() {
         consolidateRules.disableProperty().bind(viewModel.consolidateRulesProperty());
-        deleteRedundantRules.disableProperty().bind(viewModel.removeDuplicateRulesProperty());
-        addMissingRules.disableProperty().bind(viewModel.missingRulesProperty());
         addElseRuleMenuItem.disableProperty().bind(viewModel.elseRuleSetProperty());
     }
 
@@ -178,16 +176,6 @@ public class MenuView implements FxmlView<MenuViewModel> {
     }
 
     @FXML
-    public void doAddMissingRules(ActionEvent actionEvent) {
-        viewModel.addMissingRules();
-    }
-
-    @FXML
-    public void doDeleteRedundantRules(ActionEvent actionEvent) {
-        viewModel.deleteRedundantRules();
-    }
-
-    @FXML
     public void doAbout() {
         Parent view = FluentViewLoader.fxmlView(AboutView.class).load().getView();
         DialogHelper.showDialog(view, primaryStage, "/about.css");
@@ -197,5 +185,9 @@ public class MenuView implements FxmlView<MenuViewModel> {
         Parent view = FluentViewLoader.fxmlView(QuineMcCluskeyView.class).load().getView();
         Stage dialog = DialogHelper.showDialog(view, primaryStage, "/about.css");
         viewModel.registerQuineMcCluskeyDialog(dialog);
+    }
+
+    public void doFileExportAs(ActionEvent actionEvent) {
+        viewModel.fileExportAs();
     }
 }

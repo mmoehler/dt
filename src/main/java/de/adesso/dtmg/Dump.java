@@ -105,11 +105,18 @@ public class Dump {
         System.out.println("<<<<<<<<<<\n");
     }
 
-    public static <E> void arry2DItems(String msg, E[][] a) {
+    public static <E> void array2DItems(String msg, E[][] a) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
         Arrays.stream(a).forEach(i -> System.out.println("\t" + Arrays.toString(i)));
         System.out.println("<<<<<<<<<<\n");
     }
+
+    public static <E> void array1DItems(String msg, E[] a) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        System.out.println("\t" + Arrays.toString(a));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
 
     public static void dumpStructuralAnalysisResult(String msg, List<Indicator> r) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));

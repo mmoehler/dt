@@ -21,7 +21,6 @@ package de.adesso.dtmg.export.odf;
 
 
 import com.google.common.base.Strings;
-import de.adesso.dtmg.common.builder.List2DBuilder;
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.type.Color;
@@ -42,7 +41,7 @@ import java.util.stream.IntStream;
 /**
  * Created by mmoehler on 05.06.16.
  */
-public class ODFExportTest {
+public class OdtExportStrategyTest {
 
     @Test
     public void testDoit() throws Exception {
@@ -52,7 +51,7 @@ public class ODFExportTest {
 
         final java.util.List<String> stringList = IntStream.range(0, 16 * 16).mapToObj(i -> ind[ThreadLocalRandom.current().nextInt(0, 3)]).collect(Collectors.toList());
 
-        java.util.List<java.util.List<String>> data = (List2DBuilder.matrixOf(stringList).dim(16, 16).build());
+        //java.util.List<java.util.List<String>> data = (List2DBuilder.matrixOf(stringList).dim(16, 16).build());
 
 
         TextDocument outputOdt;
@@ -84,8 +83,8 @@ public class ODFExportTest {
             //outputOdt.getParagraphByIndex(0, true).setFont(font1Base);
 
             // add table
-
-            Table table = ODFTableEmitter.emit(outputOdt, data);
+            OdtDecisionTableData data = OdtDecisionTableData.newBuilder().build();
+            Table table = OdtTableEmitter.emit(outputOdt, data);
             table.setCellStyleInheritance(true);
 
 

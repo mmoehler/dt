@@ -20,23 +20,24 @@
 package de.adesso.dtmg.io.strategy;
 
 import de.adesso.dtmg.io.DtEntity;
-import de.adesso.dtmg.io.PersistenceStrategy;
 import sun.net.www.ParseUtil;
 
 import javax.annotation.Nonnull;
 import java.io.*;
 import java.net.URI;
+import java.util.concurrent.ExecutorService;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
  * Created by mmoehler on 02.07.16.
  */
-public class BinaryPersistenceStrategy implements PersistenceStrategy<DtEntity> {
+public class BinaryPersistenceStrategy extends AbstractPersistenceStrategy<DtEntity> {
 
     public static final String DTM = "dtm";
 
-    public BinaryPersistenceStrategy() {
+    public BinaryPersistenceStrategy(ExecutorService pool) {
+        super(pool);
     }
 
     @Nonnull

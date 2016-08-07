@@ -23,8 +23,6 @@ import de.adesso.dtmg.model.ActionDecl;
 import de.adesso.dtmg.model.ConditionDecl;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -48,24 +46,20 @@ public class DtEntity implements Externalizable {
     private ObservableList<ObservableList<String>> actionDefinitions;
     private ObservableList<ConditionDeclTableViewModel> conditionDeclarations;
     private ObservableList<ActionDeclTableViewModel> actionDeclarations;
-    private BooleanProperty elseRule;
 
     public DtEntity() {
         this.conditionDefinitions = FXCollections.observableArrayList();
         this.conditionDeclarations = FXCollections.observableArrayList();
         this.actionDeclarations = FXCollections.observableArrayList();
         this.actionDefinitions = FXCollections.observableArrayList();
-        this.elseRule = new SimpleBooleanProperty(false);
     }
 
     public DtEntity(
             ObservableList<ConditionDeclTableViewModel> conditionDeclarations,
             ObservableList<ObservableList<String>> conditionDefinitions,
             ObservableList<ActionDeclTableViewModel> actionDeclarations,
-            ObservableList<ObservableList<String>> actionDefinitions,
-            BooleanProperty elseRule) {
+            ObservableList<ObservableList<String>> actionDefinitions) {
 
-        this.elseRule = elseRule;
         initConditionsData(conditionDeclarations, conditionDefinitions);
         initActionsData(actionDeclarations, actionDefinitions);
     }
@@ -92,7 +86,6 @@ public class DtEntity implements Externalizable {
 
         writeConditionsExternal(out, crows, cols);
         writeActionsExternal(out, arows, cols);
-        out.writeBoolean(elseRule.get());
     }
 
 
@@ -104,7 +97,6 @@ public class DtEntity implements Externalizable {
 
         readConditionsExternal(in, crows, cols);
         readActionsExternal(in, arows, cols);
-        elseRule.set(in.readBoolean());
     }
 
     private void writeConditionsExternal(ObjectOutput out, int rows, int cols) throws IOException {
@@ -183,8 +175,6 @@ public class DtEntity implements Externalizable {
         return conditionDeclarations;
     }
 
-    public boolean hasElseRule() { return this.elseRule.get(); }
-
     public void become(DtEntity other) {
         this.conditionDeclarations.clear();
         other.conditionDeclarations.forEach(this.conditionDeclarations::add);
@@ -194,6 +184,5 @@ public class DtEntity implements Externalizable {
         other.actionDeclarations.forEach(this.actionDeclarations::add);
         this.actionDefinitions.clear();
         other.actionDefinitions.forEach(this.actionDefinitions::add);
-        this.elseRule.set(other.elseRule.get());
     }
 }

@@ -19,7 +19,6 @@
 
 package de.adesso.dtmg.export.odf;
 
-import de.adesso.dtmg.common.builder.Callback;
 import de.adesso.dtmg.model.ActionDecl;
 import de.adesso.dtmg.model.ConditionDecl;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
@@ -33,37 +32,33 @@ import java.util.stream.IntStream;
 /**
  * Created by mmoehler on 31.07.16.
  */
-public class ODFDecisionTableData {
+public class OdtDecisionTableData {
     public static final Object NO_ARG = new Object();
-    String[][] data;
-    String[] conditionDeclsHeader;
-    String[] actionDeclsHeader;
-    String[] rowheader;
-
-    public String[] getActionDeclsHeader() {
-        return actionDeclsHeader;
-    }
+    private String[][] data;
 
     public String[][] getData() {
         return data;
     }
 
-    public String[] getRowheader() {
-        return rowheader;
-    }
-
-    public String[] getConditionDeclsHeader() {
-        return conditionDeclsHeader;
-    }
 
     // --
+    private OdtDecisionTableData(Builder builder) {
+        String[] colheader = concat(builder.conditionDeclsHeader, builder.conditionDefsHeader);
+        String[] actionsHeader = Arrays.copyOf(colheader, colheader.length);
+        String conditions[][] = new String[builder.conditionDecls.length][];
+        for (int i = 0; i < builder.conditionDecls.length; i++) {
+            conditions[i] = concat(builder.conditionDecls[i], builder.conditionDefs[i]);
+        }
+        String actions[][] = new String[builder.actionDecls.length][];
+        for (int i = 0; i < builder.actionDecls.length; i++) {
+            actions[i] = concat(builder.actionDecls[i], builder.actionDefs[i]);
+        }
 
-
-    private ODFDecisionTableData(Builder builder) {
-        // TODO Open Issue - Who gives me the different header informations??!!
-
-
-
+        this.data = new String[conditions.length+actions.length+2][];
+        System.arraycopy(conditions,0,this.data,1,conditions.length);
+        System.arraycopy(actions,0,this.data,conditions.length+2, actions.length);
+        this.data[0] = colheader;
+        this.data[conditions.length+1] = actionsHeader;
     }
 
     public static Builder newBuilder() {
@@ -71,13 +66,13 @@ public class ODFDecisionTableData {
     }
 
     public static final class Builder {
-        String[][] data;
+        public static final String STR_E = "E";
+        public static final String STR_ELSE = "ELSE";
+        public static final String DCL_HEADER[] = {"#", "Expression", "Indicators"};
         String[] conditionDeclsHeader;
         String[] actionDeclsHeader;
         String[] conditionDefsHeader;
         String[] actionDefsHeader;
-
-        String[] rowheader;
 
         String[][] conditionDecls;
         String[][] conditionDefs;
@@ -88,91 +83,62 @@ public class ODFDecisionTableData {
                 lists.stream().map(u -> u.toArray(new String[0])).toArray(String[][]::new);
 
 
-        HeaderBuilder conditionDeclsHeaderBuilder = new HeaderBuilder(ODFDecisionTableData.Builder.this, new Callback<String[]>(){
-            @Override
-            public void call(String[] values) {
-                ODFDecisionTableData.Builder.this.setConditionDeclsHeader(values);
-            }
-        });
-        HeaderBuilder actionDeclHeaderBuilder = new HeaderBuilder(ODFDecisionTableData.Builder.this, new Callback<String[]>(){
-            @Override
-            public void call(String[] values) {
-                ODFDecisionTableData.Builder.this.setActionDeclsHeader(values);
-            }
-        });
-
         private Builder() {
-        }
-
-        public HeaderBuilder conditionDeclsHeader() {
-            return this.conditionDeclsHeaderBuilder;
         }
 
         public Builder conditionDefs(ObservableList<ObservableList<String>> val) {
             conditionDefs = array2D.apply(val);
+            conditionDefsHeader = IntStream.range(0, val.get(0).size()).mapToObj(i -> String.format("R%02d", (i+1))).toArray(String[]::new);
+            if(hasElseRule(val.get(0))) {
+                setElseRuleHeader(conditionDefsHeader);
+            }
             return this;
         }
 
         public Builder conditionDecls(ObservableList<ConditionDeclTableViewModel> val) {
-            Function<ConditionDecl,String> f[] = newArray(3,
+            Function<ConditionDecl, String> f[] = newArray(3,
                     x -> x.getLfdNr(),
                     x -> x.getExpression(),
                     x -> x.getPossibleIndicators());
 
             conditionDecls = val.stream()
-                    .map(m -> IntStream.range(0,f.length)
+                    .map(m -> IntStream.range(0, f.length)
                             .mapToObj(i -> f[i].apply(m.getModel()))
                             .toArray(String[]::new)
                     ).toArray(String[][]::new);
-            return this;
-        }
 
-        public Builder conditionDefsHeader(ObservableList<String> val) {
-            conditionDefsHeader = IntStream.range(0, val.size()).mapToObj(i -> String.format("%02d", i)).toArray(String[]::new);
+            conditionDeclsHeader = Arrays.copyOf(DCL_HEADER, DCL_HEADER.length);
             return this;
-        }
-
-        public HeaderBuilder actionDeclsHeader() {
-            return actionDeclHeaderBuilder;
         }
 
         public Builder actionDecls(ObservableList<ActionDeclTableViewModel> val) {
-            Function<ActionDecl,String> f[] = newArray(3,
+            Function<ActionDecl, String> f[] = newArray(3,
                     x -> x.getLfdNr(),
                     x -> x.getExpression(),
                     x -> x.getPossibleIndicators());
 
             actionDecls = val.stream()
-                    .map(m -> IntStream.range(0,f.length)
+                    .map(m -> IntStream.range(0, f.length)
                             .mapToObj(i -> f[i].apply(m.getModel()))
                             .toArray(String[]::new)
-            ).toArray(String[][]::new);
+                    ).toArray(String[][]::new);
+
+            actionDeclsHeader = Arrays.copyOf(DCL_HEADER, DCL_HEADER.length);
 
             return this;
         }
 
         public Builder actionDefs(ObservableList<ObservableList<String>> val) {
             actionDefs = array2D.apply(val);
+            actionDefsHeader = IntStream.range(0, val.get(0).size()).mapToObj(i -> String.format("R%02d", (i+1))).toArray(String[]::new);
+            if(hasElseRule(val.get(0))) {
+                setElseRuleHeader(actionDefsHeader);
+            }
             return this;
         }
 
-        public Builder actionDefsHeader(ObservableList<String> val) {
-            actionDefsHeader = IntStream.range(0, val.size()).mapToObj(i -> String.format("%02d", i)).toArray(String[]::new);
-            return this;
-        }
-
-        // -- internal setter ---------------------------------------
-
-        void setActionDeclsHeader(String[] actionDeclsHeader) {
-            this.actionDeclsHeader = actionDeclsHeader;
-        }
-
-        void setConditionDeclsHeader(String[] conditionDeclsHeader) {
-            this.conditionDeclsHeader = conditionDeclsHeader;
-        }
-
-        public ODFDecisionTableData build() {
-            return new ODFDecisionTableData(this);
+        public OdtDecisionTableData build() {
+            return new OdtDecisionTableData(this);
         }
 
         // -- private stuff -----------------------------------------
@@ -182,5 +148,23 @@ public class ODFDecisionTableData {
             return Arrays.copyOf(array, length);
         }
 
+        static boolean hasElseRule(ObservableList<String> def) {
+            return STR_E.equals(def.get(def.size() - 1));
+        }
+
+        static void setElseRuleHeader(String[] header) {
+            header[header.length-1]=STR_ELSE;
+        }
     }
+
+    static String[][] concat(String[][] data) {
+        return Arrays.stream(data).map(a -> Arrays.copyOf(a, a.length)).toArray(String[][]::new);
+    }
+
+    static <T> T[] concat(T[] left, T[] right) {
+        T[] copyOf = Arrays.copyOf(left, left.length + right.length);
+        System.arraycopy(right,0,copyOf,left.length,right.length);
+        return copyOf;
+    }
+
 }

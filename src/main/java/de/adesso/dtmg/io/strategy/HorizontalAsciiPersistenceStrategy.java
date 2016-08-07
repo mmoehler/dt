@@ -23,15 +23,13 @@ import com.google.common.base.Preconditions;
 import com.google.common.io.LineReader;
 import de.adesso.dtmg.exception.IOExceptionSmuggler;
 import de.adesso.dtmg.io.DtEntity;
-import de.adesso.dtmg.io.PersistenceStrategy;
 import de.adesso.dtmg.io.builder.ActionDeclTableViewModelListBuilder;
 import de.adesso.dtmg.io.builder.ConditionDeclTableViewModelListBuilder;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.dtmg.util.tuple.Tuple;
+import de.adesso.dtmg.util.tuple.Tuple2;
 import de.adesso.dtmg.util.tuple.Tuple3;
-import javafx.beans.property.BooleanProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sun.net.www.ParseUtil;
@@ -46,15 +44,17 @@ import java.nio.channels.FileChannel;
 import java.nio.charset.Charset;
 import java.util.Arrays;
 import java.util.Iterator;
+import java.util.concurrent.ExecutorService;
 
 /**
  * Created by mmoehler on 02.07.16.
  */
-public class HorizontalAsciiPersistenceStrategy implements PersistenceStrategy<DtEntity> {
+public class HorizontalAsciiPersistenceStrategy extends AbstractPersistenceStrategy<DtEntity> {
 
     public static final String DTH = "dth";
 
-    public HorizontalAsciiPersistenceStrategy() {
+    public HorizontalAsciiPersistenceStrategy(ExecutorService pool) {
+        super(pool);
     }
 
     @Nonnull
@@ -63,7 +63,7 @@ public class HorizontalAsciiPersistenceStrategy implements PersistenceStrategy<D
         return DTH;
     }
 
-    private Tuple3<String, ObservableList<ActionDeclTableViewModel>, ObservableList<ObservableList<String>>> readActions(LineReader lr, String lastLine) {
+    private Tuple2<ObservableList<ActionDeclTableViewModel>, ObservableList<ObservableList<String>>> readActions(LineReader lr, String lastLine) {
         try {
             String l = lastLine;
             String[] _s0 = l.split(":");
@@ -87,7 +87,7 @@ public class HorizontalAsciiPersistenceStrategy implements PersistenceStrategy<D
             }
             for (; ; ) {
                 l = lr.readLine(); // 10000
-                if (l.matches("E:(0|1)")) break;
+                if (null==l) break;
                 String[] s2 = l.split("");
                 Iterator<ObservableList<String>> it = actionDefns.iterator();
                 Arrays.stream(s2)
@@ -95,7 +95,7 @@ public class HorizontalAsciiPersistenceStrategy implements PersistenceStrategy<D
                         .forEach(y -> it.next().add(y));
             }
 
-            return Tuple.of(l, actionDecls, actionDefns);
+            return Tuple.of(actionDecls, actionDefns);
 
         } catch (IOException e) {
             throw new IOExceptionSmuggler(e);
@@ -134,7 +134,6 @@ public class HorizontalAsciiPersistenceStrategy implements PersistenceStrategy<D
                         .map(x -> ("1".equals(x) ? "Y" : ("0".equals(x)) ? "N" : x))
                         .forEach(y -> it.next().add(y));
             }
-            ;
 
             return Tuple.of(l, conditionDecls, conditionDefns);
         } catch (IOException e) {
@@ -158,9 +157,9 @@ public class HorizontalAsciiPersistenceStrategy implements PersistenceStrategy<D
         LineReader lr = new LineReader(cb);
 
         Tuple3<String, ObservableList<ConditionDeclTableViewModel>, ObservableList<ObservableList<String>>> con = readConditions(lr);
-        Tuple3<String, ObservableList<ActionDeclTableViewModel>, ObservableList<ObservableList<String>>> act = readActions(lr, con._1());
-        BooleanProperty hasElseRule = new SimpleBooleanProperty(readElseRuleInfo(act._1()));
-        return new DtEntity(con._2(), con._3(), act._2(), act._3(), hasElseRule);
+        Tuple2<ObservableList<ActionDeclTableViewModel>, ObservableList<ObservableList<String>>> act = readActions(lr, con._1());
+
+        return new DtEntity(con._2(), con._3(), act._1(), act._2());
     }
 
     private boolean readElseRuleInfo(String s) {

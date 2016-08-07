@@ -37,6 +37,13 @@
                             </accelerator>
                         </MenuItem>
                         <SeparatorMenuItem mnemonicParsing="false"/>
+                        <MenuItem fx:id="fileExport" mnemonicParsing="false" onAction="#doFileExportAs" text="Export As...">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="DOWN"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <SeparatorMenuItem mnemonicParsing="false"/>
                         <MenuItem mnemonicParsing="false" onAction="#doClose" text="Quit DTMG">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="R" control="UP" meta="DOWN" shift="UP"
@@ -175,13 +182,6 @@
                                                     shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <MenuItem fx:id="addMissingRules" mnemonicParsing="false" onAction="#doAddMissingRules"
-                                  text="Add Missing Rules">
-                            <accelerator>
-                                <KeyCodeCombination alt="UP" code="F11" control="UP" meta="UP" shift="DOWN"
-                                                    shortcut="UP"/>
-                            </accelerator>
-                        </MenuItem>
                         <SeparatorMenuItem mnemonicParsing="false"/>
                         <MenuItem fx:id="structuralAnalysis" mnemonicParsing="false" onAction="#doStructuralAnalysis"
                                   text="Structural Analysis">
@@ -194,13 +194,6 @@
                                   text="Consolidate Rules">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="F12" control="UP" meta="UP" shift="DOWN"
-                                                    shortcut="UP"/>
-                            </accelerator>
-                        </MenuItem>
-                        <MenuItem fx:id="deleteRedundantRules" mnemonicParsing="false"
-                                  onAction="#doDeleteRedundantRules" text="Delete Redundant Rules">
-                            <accelerator>
-                                <KeyCodeCombination alt="UP" code="F12" control="DOWN" meta="UP" shift="DOWN"
                                                     shortcut="UP"/>
                             </accelerator>
                         </MenuItem>

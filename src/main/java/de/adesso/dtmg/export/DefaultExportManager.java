@@ -17,14 +17,12 @@
  * under the License.
  */
 
-package de.adesso.dtmg.io;
+package de.adesso.dtmg.export;
 
 import com.google.common.collect.Maps;
 import com.google.common.io.Files;
-import de.adesso.dtmg.io.strategy.BinaryPersistenceStrategy;
-import de.adesso.dtmg.io.strategy.HorizontalAsciiPersistenceStrategy;
-import de.adesso.dtmg.io.strategy.VerticalAsciiPersistenceStrategy;
-import de.adesso.dtmg.io.strategy.ZIppedCsvPersistenceStrategy;
+import de.adesso.dtmg.export.odf.OdtExportStrategy;
+import de.adesso.dtmg.io.DtEntity;
 import sun.net.www.ParseUtil;
 
 import javax.annotation.PostConstruct;
@@ -43,22 +41,19 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Created by mmoehler on 04.06.16.
  */
 @Singleton
-public class DefaultPersistenceManager implements PersistenceManager<DtEntity> {
+public class DefaultExportManager implements ExportManager<DtEntity> {
 
     private final ExecutorService pool = Executors.newCachedThreadPool();
 
-    private final Map<String, PersistenceStrategy<DtEntity>> strategies = Maps.newHashMap();
+    private final Map<String, ExportStrategy<DtEntity>> strategies = Maps.newHashMap();
 
-    public DefaultPersistenceManager() {
+    public DefaultExportManager() {
     }
 
     @PostConstruct
     public void initStrategies() {
-        PersistenceStrategy<DtEntity> strategyArray[] = new PersistenceStrategy[]{
-                new BinaryPersistenceStrategy(pool),
-                new VerticalAsciiPersistenceStrategy(pool),
-                new HorizontalAsciiPersistenceStrategy(pool),
-                new ZIppedCsvPersistenceStrategy(pool)
+        ExportStrategy<DtEntity> strategyArray[] = new ExportStrategy[]{
+                new OdtExportStrategy()
         };
         Arrays.stream(strategyArray).forEach(p -> strategies.put(p.extension(), p));
     }
@@ -70,30 +65,23 @@ public class DefaultPersistenceManager implements PersistenceManager<DtEntity> {
     }
 
     @Override
-    public DtEntity read(final URI source) {
-        checkNotNull(source, "Missing Source URI!");
-        return detectStrategyAndDo(source, (s) -> s.read(source));
-
-    }
-
-    @Override
-    public void write(DtEntity dtEntity, URI target) {
+    public void export(DtEntity dtEntity, URI target) {
         checkNotNull(target, "Missing Target URL!");
-        checkNotNull(dtEntity, "Missing Entity to Save!");
+        checkNotNull(dtEntity, "Missing Entity to Export!");
         detectStrategyAndDo(target, (s) -> {
-            s.write(dtEntity, target);
+            s.export(dtEntity, target);
             return dtEntity;
         });
     }
 
-    private DtEntity detectStrategyAndDo(URI source, Function<PersistenceStrategy<DtEntity>, DtEntity> strategyEvaluation) {
+    private DtEntity detectStrategyAndDo(URI source, Function<ExportStrategy<DtEntity>, DtEntity> strategyEvaluation) {
         final String path = ParseUtil.decode(source.getPath());
         String extension = Files.getFileExtension(path);
-        PersistenceStrategy<DtEntity> strategy = strategies.get(extension);
+        ExportStrategy<DtEntity> strategy = strategies.get(extension);
         if (null != strategy) {
             return strategyEvaluation.apply(strategy);
         }
-        throw new IllegalArgumentException(String.format("No matching persistence strategy for %s!", String.valueOf(source)));
+        throw new IllegalArgumentException(String.format("No matching export strategy for %s!", String.valueOf(source)));
     }
 
 

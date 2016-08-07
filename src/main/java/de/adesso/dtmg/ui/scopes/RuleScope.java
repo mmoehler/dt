@@ -10,8 +10,6 @@ import javax.inject.Singleton;
 public class RuleScope implements Scope {
 
     private final SimpleBooleanProperty consolidateRules = new SimpleBooleanProperty(true);
-    private final SimpleBooleanProperty removeDuplicateRules = new SimpleBooleanProperty(true);
-    private final SimpleBooleanProperty missingRules = new SimpleBooleanProperty(true);
     private final SimpleBooleanProperty elseRuleSet = new SimpleBooleanProperty(false);
 
     public boolean getConsolidateRules() {
@@ -24,30 +22,6 @@ public class RuleScope implements Scope {
 
     public SimpleBooleanProperty consolidateRulesProperty() {
         return consolidateRules;
-    }
-
-    public boolean getRemoveDuplicateRules() {
-        return removeDuplicateRules.get();
-    }
-
-    public void setRemoveDuplicateRules(boolean removeDuplicateRules) {
-        this.removeDuplicateRules.set(removeDuplicateRules);
-    }
-
-    public SimpleBooleanProperty removeDuplicateRulesProperty() {
-        return removeDuplicateRules;
-    }
-
-    public boolean getMissingRules() {
-        return missingRules.get();
-    }
-
-    public void setMissingRules(boolean missingRules) {
-        this.missingRules.set(missingRules);
-    }
-
-    public SimpleBooleanProperty missingRulesProperty() {
-        return missingRules;
     }
 
     public boolean isElseRuleSet() {
@@ -63,6 +37,7 @@ public class RuleScope implements Scope {
     }
 
     private Stage quineMcCluskeyDialog;
-    public Stage quineMcCluskeyDialog() { return quineMcCluskeyDialog; };
-    public void quineMcCluskeyDialog(Stage dialog) { quineMcCluskeyDialog=dialog; };
+    public Stage quineMcCluskeyDialog() { return quineMcCluskeyDialog; }
+
+    public void quineMcCluskeyDialog(Stage dialog) { quineMcCluskeyDialog=dialog; }
 }

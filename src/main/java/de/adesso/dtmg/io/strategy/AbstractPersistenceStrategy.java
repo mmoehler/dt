@@ -17,10 +17,24 @@
  * under the License.
  */
 
-package de.adesso.dtmg.events;
+package de.adesso.dtmg.io.strategy;
+
+import de.adesso.dtmg.io.PersistenceStrategy;
+
+import java.io.Serializable;
+import java.util.concurrent.ExecutorService;
 
 /**
- * CDI event class that is used to indicate that a contact was updated/added/removed.
+ * Created by mmoehler on 05.08.16.
  */
-public class DeleteRedundantRulesEvent {
+public abstract class AbstractPersistenceStrategy<T extends Serializable> implements PersistenceStrategy<T> {
+    protected final ExecutorService pool;
+
+    public AbstractPersistenceStrategy(ExecutorService pool) {
+        this.pool = pool;
+    }
+
+    public ExecutorService getPool() {
+        return pool;
+    }
 }

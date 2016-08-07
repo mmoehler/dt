@@ -132,8 +132,6 @@ public class AsciiExportFunctions {
         return null;
     }
 
-    ;
-
     public static Function<DecisionTable, String> exportStructuralAnalysisResult() {
         return dt -> {
 

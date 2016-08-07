@@ -17,10 +17,10 @@
  * under the License.
  */
 
-package de.adesso.dtmg.io.strategy;
+package de.adesso.dtmg.export.odf;
 
+import de.adesso.dtmg.export.AbstractExportStrategy;
 import de.adesso.dtmg.io.DtEntity;
-import de.adesso.dtmg.io.PersistenceStrategy;
 import org.odftoolkit.odfdom.dom.element.style.StyleMasterPageElement;
 import org.odftoolkit.odfdom.incubator.doc.style.OdfStylePageLayout;
 import org.odftoolkit.odfdom.type.Color;
@@ -34,16 +34,13 @@ import org.odftoolkit.simple.table.Table;
 import sun.net.www.ParseUtil;
 
 import javax.annotation.Nonnull;
-import java.io.FileOutputStream;
-import java.io.ObjectOutputStream;
-import java.io.RandomAccessFile;
 import java.net.URI;
 import java.util.stream.IntStream;
 
 /**
- * Created by mmoehler on 31.07.16.
+ * Created by mmoehler on 05.06.16.
  */
-public class OdtPersistenceStrategy implements PersistenceStrategy<DtEntity> {
+public class OdtExportStrategy extends AbstractExportStrategy<DtEntity>{
 
     public static final String EXTENSION = "odt";
 
@@ -54,21 +51,12 @@ public class OdtPersistenceStrategy implements PersistenceStrategy<DtEntity> {
     }
 
     @Override
-    public DtEntity read(URI source) {
-        throw new UnsupportedOperationException("*.odt - files cant not be imported!");
-    }
-
-    @Override
-    public void write(DtEntity dtEntity, URI target) {
+    public void export(DtEntity dtEntity, URI target) {
         final String path = ParseUtil.decode(target.getPath());
-        try (RandomAccessFile raf = new RandomAccessFile(path, "rw");
-             FileOutputStream fos = new FileOutputStream(raf.getFD());
-             ObjectOutputStream out = new ObjectOutputStream(fos)) {
+        try {
 
             TextDocument outputOdt = createTextDocument(dtEntity);
-            outputOdt.save(out);
-            out.writeObject(dtEntity);
-            out.flush();
+            outputOdt.save(path);
 
         } catch (Exception e) {
             throw new IllegalStateException(e);
@@ -85,9 +73,15 @@ public class OdtPersistenceStrategy implements PersistenceStrategy<DtEntity> {
 
             Font font1Base = obtainFontCourierNew8();
 
-            Table table = null;//ODFTableEmitter.emit(outputOdt, data);
-            table.setCellStyleInheritance(true);
+            OdtDecisionTableData.Builder builder = OdtDecisionTableData.newBuilder()
+                    .conditionDecls(dtEntity.getConditionDeclarations())
+                    .conditionDefs(dtEntity.getConditionDefinitions())
+                    .actionDecls(dtEntity.getActionDeclarations())
+                    .actionDefs(dtEntity.getActionDefinitions());
 
+            Table table = OdtTableEmitter.emit(outputOdt, builder.build());
+
+            table.setCellStyleInheritance(true);
             formatTable(font1Base, table);
 
             return outputOdt;
@@ -124,7 +118,7 @@ public class OdtPersistenceStrategy implements PersistenceStrategy<DtEntity> {
     }
 
     private Font obtainFontCourierNew8() {
-        return new Font("Courier new", StyleTypeDefinitions.FontStyle.REGULAR, 8, Color.RED, StyleTypeDefinitions.TextLinePosition.REGULAR);
+        return new Font("Courier new", StyleTypeDefinitions.FontStyle.REGULAR, 8, Color.BLACK, StyleTypeDefinitions.TextLinePosition.REGULAR);
     }
 
     private void configurePageForA4Landscape(PageLayoutProperties pageLayoutProperties) {
@@ -143,7 +137,6 @@ public class OdtPersistenceStrategy implements PersistenceStrategy<DtEntity> {
     private PageLayoutProperties obtainPageLayoutProperties(TextDocument outputOdt) {
         StyleMasterPageElement defaultPage = outputOdt.getOfficeMasterStyles().getMasterPage("Standard");
         String pageLayoutName = defaultPage.getStylePageLayoutNameAttribute();
-        System.out.println("pageLayoutName = " + pageLayoutName);
         OdfStylePageLayout pageLayoutStyle = defaultPage.getAutomaticStyles().getPageLayout(pageLayoutName);
         return PageLayoutProperties.getOrCreatePageLayoutProperties(pageLayoutStyle);
     }

@@ -124,7 +124,6 @@ public enum Normalizer {
                 }
             }
         }
-        ;
         return sb.toString().toLowerCase();
     }
 }

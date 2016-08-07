@@ -12,6 +12,8 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Maven: commons-beanutils:commons-beanutils:1.9.2" level="project" />
+    <orderEntry type="library" name="Maven: commons-collections:commons-collections:3.2.1" level="project" />
     <orderEntry type="library" name="Maven: de.saxsys:mvvmfx:1.5.0-SNAPSHOT" level="project" />
     <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.12" level="project" />
     <orderEntry type="library" name="Maven: net.jodah:typetools:0.4.1" level="project" />
@@ -44,15 +46,6 @@
     <orderEntry type="library" name="Maven: eu.lestard:advanced-bindings:0.4.0" level="project" />
     <orderEntry type="library" name="Maven: org.apache.odftoolkit:odfdom-java:0.8.10-incubating" level="project" />
     <orderEntry type="library" name="Maven: org.apache.odftoolkit:taglets:0.8.10-incubating" level="project" />
-    <orderEntry type="module-library">
-      <library name="Maven: com.sun:tools:1.7.0">
-        <CLASSES>
-          <root url="jar://C:/Java/jdk1.8.0_66/lib/tools.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
     <orderEntry type="library" name="Maven: xerces:xercesImpl:2.9.1" level="project" />
     <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.3.04" level="project" />
     <orderEntry type="library" name="Maven: org.apache.jena:jena-core:2.7.4" level="project" />

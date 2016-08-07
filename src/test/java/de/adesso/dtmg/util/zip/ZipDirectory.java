@@ -19,11 +19,7 @@
 
 package de.adesso.dtmg.util.zip;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.ZipEntry;
@@ -80,7 +76,7 @@ public class ZipDirectory {
         }
     }
 
-    public static void addToZip(File directoryToZip, File file, ZipOutputStream zos) throws FileNotFoundException,
+    public static void addToZip(File directoryToZip, File file, ZipOutputStream zos) throws
             IOException {
 
         FileInputStream fis = new FileInputStream(file);

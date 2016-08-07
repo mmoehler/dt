@@ -36,7 +36,9 @@ import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
 import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -53,6 +55,8 @@ import javafx.stage.FileChooser;
 import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
@@ -70,7 +74,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     public static final String COND_ROW_HEADER = "C%02d";
     private static final String ACT_ROW_HEADER = "A%02d";
     private static final String ELSE = "E";
-    private final static Predicate<ObservableList<String>> HAS_ELSE_RULE  =
+    private final static Predicate<ObservableList<String>> HAS_ELSE_RULE =
             c -> (c.isEmpty()) ? false : c.get(c.size() - 1).equals(ELSE);
     private final DoubleProperty conditionDividerPos = new SimpleDoubleProperty();
     private final DoubleProperty actionDividerPos = new SimpleDoubleProperty();
@@ -94,6 +98,9 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     private NotificationCenter notificationCenter;
     @Inject
     private ExceptionHandler exceptionHandler;
+
+    private final SimpleObjectProperty<Path> currentFile = new SimpleObjectProperty<>();
+    private final SimpleBooleanProperty fileChanged = new SimpleBooleanProperty(false);
 
     private String lastKey = null;
     private FileChooser fileChooser;
@@ -127,7 +134,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         l.add(createTableColumn("#", "lfdNr", 40, 40, 40, false, Pos.CENTER,
                 (TableColumn.CellEditEvent<T, String> evt) -> evt.getTableView().getItems().get(evt.getTablePosition().getRow())
                         .lfdNrProperty().setValue(evt.getNewValue())));
-        l.add(createExpressionTableColumn("Expression", "expression", 300, 300, Integer.MAX_VALUE, true, Pos.CENTER_LEFT,prefix,
+        l.add(createExpressionTableColumn("Expression", "expression", 300, 300, Integer.MAX_VALUE, true, Pos.CENTER_LEFT, prefix,
                 (TableColumn.CellEditEvent<T, String> evt) -> evt.getTableView().getItems().get(evt.getTablePosition().getRow())
                         .expressionProperty().setValue(evt.getNewValue())));
         l.add(createTableColumn("Indicators", "possibleIndicators", 100, 100, Integer.MAX_VALUE, true, Pos.CENTER,
@@ -150,11 +157,22 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         FileChooser.ExtensionFilter dtmgExtFilters[] = {new FileChooser.ExtensionFilter("Binary files (*.dtm)", "*.dtm"),
                 new FileChooser.ExtensionFilter("Horizontal ASCII files (*.dth)", "*.dth"),
-                new FileChooser.ExtensionFilter("Vertical ASCII files (*.dtv)", "*.dtv")
+                new FileChooser.ExtensionFilter("Vertical ASCII files (*.dtv)", "*.dtv"),
+                new FileChooser.ExtensionFilter("Zipped CSV files (*.dtz)", "*.dtz"),
         };
         Arrays.stream(dtmgExtFilters).forEach(fileChooser.getExtensionFilters()::add);
 
     }
+
+    private static void configureFileChooser4Export(final FileChooser fileChooser, String title) {
+        fileChooser.setTitle(title);
+        fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
+        FileChooser.ExtensionFilter dtmgExtFilters[] = {
+                new FileChooser.ExtensionFilter("ODF text file (*.odt)", "*.odt")
+        };
+        Arrays.stream(dtmgExtFilters).forEach(fileChooser.getExtensionFilters()::add);
+    }
+
 
     public void initialize() {
         initializeDividerSynchronization();
@@ -168,7 +186,6 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
                 console.setText(String.valueOf(value[0])));
 
         this.viewModel.subscribe(Notifications.REM_ACTION.name(), this::doRemActionDecl);
-        this.viewModel.subscribe(Notifications.REM_RULES_WITHOUT_ACTIONS.name(), this::doRemRulesWithoutActions);
         this.viewModel.subscribe(Notifications.REM_RULE.name(), this::doRemRule);
         this.viewModel.subscribe(Notifications.REM_CONDITION.name(), this::doRemConditionDecl);
 
@@ -187,6 +204,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
 
         this.viewModel.subscribe(Notifications.FILE_OPEN.name(), this::doFileOpen);
         this.viewModel.subscribe(Notifications.FILE_SAVE_AS.name(), this::doFileSaveAs);
+        this.viewModel.subscribe(Notifications.FILE_EXPORT_AS.name(), this::doFileExportAs);
 
         this.viewModel.subscribe(EV_CONSOLIDATE_RULES.name(), this::doConsolidateRules);
     }
@@ -220,34 +238,69 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     }
 
     private void doFileOpen(String key, Object[] value) {
-        configureFileChooser(getFileChooser(), "Open DTMG File");
-        File file = getFileChooser().showOpenDialog(this.actionSplitPane.getScene().getWindow());
-        if (file != null) try {
-            final int countColumns = viewModel.openFile(file.toURI());
-            prepareDefinitionsTables4NewData(countColumns);
-            viewModel.populateLoadedData();
-        } catch (IOException | ClassNotFoundException e) {
-            exceptionHandler.showAndWaitAlert(e);
-            return;
+
+
+
+        FileChooser fc = getFileChooser();
+        try {
+            configureFileChooser(getFileChooser(), "Open DTMG File");
+            File file = fc.showOpenDialog(this.actionSplitPane.getScene().getWindow());
+            if (file != null) try {
+                final int countColumns = viewModel.openFile(file.toURI());
+                prepareDefinitionsTables4NewData(countColumns);
+                viewModel.populateLoadedData();
+                this.currentFile.set(Paths.get(file.toURI()));
+            } catch (IOException | ClassNotFoundException e) {
+                exceptionHandler.showAndWaitAlert(e);
+                return;
+            }
+        } finally {
+            fc.getExtensionFilters().clear();
         }
     }
 
     private void doFileSaveAs(String key, Object[] value) {
-        configureFileChooser(getFileChooser(), "Save DTMG File");
-        File file = getFileChooser().showSaveDialog(this.actionSplitPane.getScene().getWindow());
-        if (file != null) {
-            try {
-                viewModel.saveFile(file.toURI());
-            } catch (IOException e) {
-                exceptionHandler.showAndWaitAlert(e);
-                return;
+        FileChooser fc = getFileChooser();
+        try {
+            configureFileChooser(getFileChooser(), "Save DTMG File");
+            File file = fc.showOpenDialog(this.actionSplitPane.getScene().getWindow());
+            if (file != null) {
+                try {
+                    viewModel.saveFile(file.toURI());
+                } catch (IOException e) {
+                    exceptionHandler.showAndWaitAlert(e);
+                    return;
+                }
             }
+        } finally {
+            fc.getExtensionFilters().clear();
         }
     }
 
+
+    private void doFileExportAs(String key, Object[] value) {
+        FileChooser fc = getFileChooser();
+        try {
+            configureFileChooser4Export(getFileChooser(), "Export DTMG File");
+            File file = getFileChooser().showSaveDialog(this.actionSplitPane.getScene().getWindow());
+            if (file != null) {
+                try {
+                    viewModel.exportFile(file.toURI());
+                } catch (IOException e) {
+                    exceptionHandler.showAndWaitAlert(e);
+                    return;
+                }
+            }
+        } finally {
+            fc.getExtensionFilters().clear();
+        }
+
+    }
+
+
     // publish(ADD_ELSE_RULE.name(), adapt(newCDefns), adapt(newADefns));
 
-    private void   doAddElseRule(String key, Object[] value) {
+    private void doAddElseRule(String key, Object[] value) {
         final int countColumns = conditionDefinitionsTable.getColumns().size();
         final Optional<String> elseRuleName = Optional.of(ELSE_RULE_HEADER);
 
@@ -293,7 +346,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     }
 
     private void doMoveRuleRight(String key, Object[] value) {
-        if(doMoveColumns(this.conditionDefinitionsTable,
+        if (doMoveColumns(this.conditionDefinitionsTable,
                 this.actionDefinitionsTable,
                 getIndex(value), DIR_RIGHT)) {
             updateColHeaders(this.conditionDefinitionsTable);
@@ -303,7 +356,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
 
     private void doMoveRuleLeft(String key, Object[] value) {
         OptionalInt index = getIndex(value);
-        if(index.isPresent() && !isElseRule(index.getAsInt())) {
+        if (index.isPresent() && !isElseRule(index.getAsInt())) {
             if (doMoveColumns(this.conditionDefinitionsTable,
                     this.actionDefinitionsTable,
                     index, DIR_LEFT)) {
@@ -316,10 +369,10 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     private boolean isElseRule(int index) {
         boolean ret = false;
         ObservableList<ObservableList<String>> items = this.conditionDefinitionsTable.getItems();
-        if(!items.isEmpty()) {
+        if (!items.isEmpty()) {
             ObservableList<String> strings = items.get(0);
-            if(!strings.isEmpty()) {
-                ret = Reserved.isELSE(strings.get(strings.size()-1));
+            if (!strings.isEmpty()) {
+                ret = Reserved.isELSE(strings.get(strings.size() - 1));
             }
         }
         return ret;
@@ -382,7 +435,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     }
 
     private void doInsConditionDecl(String key, Object[] value) {
-        if(HAS_ELSE_RULE.test(this.conditionDefinitionsTable.getItems().get(0))) {
+        if (HAS_ELSE_RULE.test(this.conditionDefinitionsTable.getItems().get(0))) {
             doInsertRowsWithElseRule(this.conditionDeclarationsTable, this.conditionDefinitionsTable, getIndex(value),
                     () -> new ConditionDeclTableViewModel(new ConditionDecl()),
                     QMARK_SUPPLIER, () -> "C%02d");
@@ -402,33 +455,6 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         this.viewModel.updateRowHeader();
     }
 
-
-    private void doRemRulesWithoutActions(String kk, Object[] value) {
-        /*
-        if (null != value && value.length == 1) {
-            List<Integer> indices = (List<Integer>) value[0];
-            int newCols = conditionDefinitionsTable.getColumns().size() - indices.size();
-            conditionDefinitionsTable.getColumns().clear();
-            actionDefinitionsTable.getColumns().clear();
-
-            IntStream.range(0, newCols).forEach(i -> {
-                conditionDefinitionsTable.getColumns().add(createTableColumn(i));
-                actionDefinitionsTable.getColumns().add(createTableColumn(i));
-            });
-
-            final ObservableList<ObservableList<String>> newConDefs = List2DFunctions.removeColumnsAt(viewModel.getConditionDefinitions(), indices);
-            final ObservableList<ObservableList<String>> newActDefs = List2DFunctions.removeColumnsAt(viewModel.getActionDefinitions(), indices);
-
-            viewModel.getConditionDefinitions().clear();
-            newConDefs.forEach(viewModel.getConditionDefinitions()::add);
-            viewModel.getActionDefinitions().clear();
-            newActDefs.forEach(viewModel.getActionDefinitions()::add);
-
-            conditionDefinitionsTable.refresh();
-            actionDefinitionsTable.refresh();
-        }
-        */
-    }
 
     private void doRemConditionDecl(String key, Object[] value) {
         doRemoveRows(this.conditionDeclarationsTable, this.conditionDefinitionsTable, getIndex(value));
@@ -527,7 +553,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         this.actionDeclarationsTable.getSelectionModel().setCellSelectionEnabled(true);
 
         initializeTableKeyboardHandling(actionDeclarationsTable);
-        initializeDeclarationTablesColumns(this.actionDeclarationsTable,"do_");
+        initializeDeclarationTablesColumns(this.actionDeclarationsTable, "do_");
 
         this.actionDeclarationsTable.getItems().clear();
         this.actionDeclarationsTable.setItems(viewModel.getActionDeclarations());

@@ -40,7 +40,7 @@ public class Array2DTest {
 
         array2D.set(2,1,"Y");
 
-        Dump.arry2DItems("ARRAY_2D", array2D.intern());
+        Dump.array2DItems("ARRAY_2D", array2D.intern());
 
     }
 

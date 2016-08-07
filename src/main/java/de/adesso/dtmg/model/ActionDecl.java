@@ -1,6 +1,7 @@
 package de.adesso.dtmg.model;
 
 import javax.annotation.Nonnull;
+import java.util.List;
 
 /**
  * Created by mohler ofList 16.01.16.
@@ -8,6 +9,14 @@ import javax.annotation.Nonnull;
 public class ActionDecl extends Declaration {
     public ActionDecl() {
         super();
+    }
+
+    public static ActionDecl of(@Nonnull List<String> data) {
+        return new ActionDecl(data);
+    }
+
+    protected ActionDecl(@Nonnull List<String> data) {
+        super(data);
     }
 
     public ActionDecl(String lfdNr, String expression, String possibleIndicators) {

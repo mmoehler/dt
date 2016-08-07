@@ -74,17 +74,13 @@ public class MenuViewModel implements ViewModel {
     @Inject
     private Event<FileSaveEvent> fileSaveEvent;
     @Inject
-    private Event<AddMissingRulesEvent> addMissingRulesEvent;
-    @Inject
-    private Event<DeleteRedundantRulesEvent> deleteRedundantRulesEvent;
+    private Event<FileExportAsEvent> fileExportAsEvent;
 
     @InjectScope
     private RuleScope mdScope;
 
     public void initialize() {
         consolidateRules.bind(mdScope.consolidateRulesProperty());
-        removeDuplicateRules.bind(mdScope.removeDuplicateRulesProperty());
-        missingRules.bind(mdScope.missingRulesProperty());
         elseRuleSet.bind(mdScope.elseRuleProperty());
     }
 
@@ -94,22 +90,6 @@ public class MenuViewModel implements ViewModel {
 
     public SimpleBooleanProperty consolidateRulesProperty() {
         return consolidateRules;
-    }
-
-    public boolean getRemoveDuplicateRules() {
-        return removeDuplicateRules.get();
-    }
-
-    public SimpleBooleanProperty removeDuplicateRulesProperty() {
-        return removeDuplicateRules;
-    }
-
-    public boolean getMissingRules() {
-        return missingRules.get();
-    }
-
-    public SimpleBooleanProperty missingRulesProperty() {
-        return missingRules;
     }
 
     public boolean getElseRuleSet() {
@@ -220,19 +200,15 @@ public class MenuViewModel implements ViewModel {
         fileSaveAsEvent.fire(new FileSaveAsEvent());
     }
 
-    public void addMissingRules() {
-        addMissingRulesEvent.fire(new AddMissingRulesEvent());
-    }
-
-    public void deleteRedundantRules() {
-        deleteRedundantRulesEvent.fire(new DeleteRedundantRulesEvent());
-    }
-
     public ObservableValue<? extends Boolean> consolidateRules() {
         return consolidateRules;
     }
 
     public void registerQuineMcCluskeyDialog(Stage dialog) {
         mdScope.quineMcCluskeyDialog(dialog);
+    }
+
+    public void fileExportAs() {
+        fileExportAsEvent.fire(new FileExportAsEvent());
     }
 }

@@ -19,11 +19,7 @@
 
 package de.adesso.dtmg.util.zip;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
@@ -58,7 +54,7 @@ public class ZipFiles {
 
     }
 
-    public static void addToZipFile(String fileName, ZipOutputStream zos) throws FileNotFoundException, IOException {
+    public static void addToZipFile(String fileName, ZipOutputStream zos) throws IOException {
 
         System.out.println("Writing '" + fileName + "' to zip file");
 
