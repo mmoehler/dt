@@ -5,156 +5,8 @@
     <option name="SCOPE_TYPE" value="3" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6b2d1880-d391-4d61-bb7f-0c8e21880d82" name="Default" comment="working on csv persistence">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_saxsys_mvvmfx_1_5_2.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/menu/RecentItems.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/PackageDependencyCheck.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/analysis/TestObservableList2DValueChanged.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_classic_1_1_7.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__ch_qos_logback_logback_core_1_1_7.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_annotations_2_8_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_core_2_8_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_core_jackson_databind_2_8_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_fasterxml_jackson_dataformat_jackson_dataformat_csv_2_8_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__com_github_javaparser_javaparser_core_2_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_collections_commons_collections_3_2_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__de_jensd_fontawesomefx_8_9.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__de_saxsys_mvvmfx_1_5_0_SNAPSHOT.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__de_saxsys_mvvmfx_testing_utils_1_5_0_SNAPSHOT.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__de_sven_jacobs_loremipsum_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__eu_lestard_advanced_bindings_0_4_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__eu_lestard_assertj_javafx_0_3_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__javax_json_javax_json_api_1_0.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_assertj_assertj_core_1_7_1.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_controlsfx_controlsfx_8_40_10.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javafxdata_datafx_core_8_0b5.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javafxdata_datafx_datareader_8_0b5.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_javassist_javassist_3_20_0_GA.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_jboss_jandex_2_0_2_Final.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__org_testfx_testfx_core_4_0_4_alpha.xml" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/detailed/ColumnDifference.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/simple/ConditionSimpleCompletenessCheck.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/AsciiExportFunctions.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/ascii/AsciiRow.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/ascii/AsciiTable.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/ascii/Emitter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/ascii/Formattable.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/ascii/Formatter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/ascii/SeparatorRow.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/decisiontree/BinaryTree.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/decisiontree/DecisionTree.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/decisiontree/IntBinaryTree.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/decisiontree/IntBinaryTreeFactory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/Emitter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/imp/Actions.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/imp/ActionsImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/imp/Conditions.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/imp/ConditionsImpl.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/ConsoleCharSink.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/OverrideCallback.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/CentralClock.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/HLists.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/IntIndexed.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/IntStreamUtils.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/MissingConditions.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/output/Align.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/output/ColumnFormat.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/output/ColumnGroup.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/output/ColumnSeparator.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/output/FieldFunctions.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/output/RowFunctions.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/output/TableFormat.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/output/TableFunctions.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/tuple/HObservableLists.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/tuple/mutable/AbstractInvocationHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/tuple/mutable/ImmutableHandler.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/common/Array2DTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/ascii/Printer.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/ascii/StraightScanTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/ascii/TextPrinter.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/ascii/TextPrinterTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/treeMethod/TreeMethodTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/ObservableList2DFunctionsTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/imp/ActionsTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/FieldFunctionsTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/HListsTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/output/CsvDeclTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/output/RowFunctionsTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/output/TableFunctionsTest.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/zip/MakeZipUnZip.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/zip/ZipDirectory.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/zip/ZipFSPUser.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/zip/ZipFileExample.java" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/zip/ZipFiles.java" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_9_2.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__commons_beanutils_commons_beanutils_1_8_3.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/.idea/libraries/Maven__de_saxsys_mvvmfx_cdi_1_5_0_SNAPSHOT.xml" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__de_saxsys_mvvmfx_cdi_1_5_2.xml" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/Dump.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/Dump.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/Reserved.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/Reserved.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/builder/AbstractNestable.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/AbstractNestable.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/builder/Array2D.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/Array2D.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/builder/Callback.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/Callback.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/builder/Dimension.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/Dimension.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/builder/List2DBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/List2DBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/builder/ListBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/ListBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/builder/Nestable.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/Nestable.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/common/builder/ObservableList2DBuilder.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/ObservableList2DBuilder.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/AbstractList2DOperator.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/AbstractList2DOperator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/AbstractObservableList2DOperator.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/AbstractObservableList2DOperator.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/Adapters.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/Adapters.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/DtFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/DtFunctions.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/List2DFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/List2DFunctions.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/ListFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/ListFunctions.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/MoreCollectors.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/MoreCollectors.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/ObservableList2DFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/ObservableList2DFunctions.java" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/functions/ObservableListFunctions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/ObservableListFunctions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/compiler.xml" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+    <list default="true" id="6b2d1880-d391-4d61-bb7f-0c8e21880d82" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dt.iml" afterPath="$PROJECT_DIR$/dt.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/detailed/Actions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/detailed/Actions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/detailed/ConditionDetailedCompletenessCheck.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/detailed/ConditionDetailedCompletenessCheck.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/detailed/Conditions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/detailed/Conditions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/detailed/ConsolidateConditions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/detailed/ConsolidateConditions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/detailed/Functions.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/detailed/Functions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/detailed/RulesDifferenceOperator.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/completeness/detailed/RulesDifferenceOperator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/structure/DefaultStructuralAnalysis.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/structure/DefaultStructuralAnalysis.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/structure/DuplicateRulesRejector.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/structure/DuplicateRulesRejector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/structure/RuleConsolidator.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/analysis/structure/RuleConsolidator.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/events/FileOpenEvent.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/events/FileOpenEvent.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/straightscan/StraightScan.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/java/straightscan/StraightScan.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/odf/OdtTableEmitter.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/odf/OdtTableEmitter.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/quine/QuineMcCluskey.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/export/quine/QuineMcCluskey.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/strategy/ZIppedCsvPersistenceStrategy.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/io/strategy/ZIppedCsvPersistenceStrategy.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/DefinitionsTableCell.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/DefinitionsTableCell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/DtView.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/DtView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainView.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/main/MainViewModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/menu/MenuView.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/menu/MenuView.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/menu/MenuViewModel.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/menu/MenuViewModel.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/scopes/RuleScope.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/ui/scopes/RuleScope.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/tuple/Tuple0.java" afterPath="$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/tuple/Tuple0.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/resources/de/adesso/dtmg/ui/menu/MenuView.fxml" afterPath="$PROJECT_DIR$/src/main/resources/de/adesso/dtmg/ui/menu/MenuView.fxml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/analysis/completeness/detailed/ActionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/analysis/completeness/detailed/ActionsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/analysis/completeness/detailed/ConsolidateConditionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/analysis/completeness/detailed/ConsolidateConditionsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/analysis/completeness/detailed/FunctionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/analysis/completeness/detailed/FunctionsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/analysis/completeness/detailed/Tuple2ListBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/analysis/completeness/detailed/Tuple2ListBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/analysis/structure/CollectorTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/analysis/structure/CollectorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/analysis/structure/RuleConsolidatorTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/analysis/structure/RuleConsolidatorTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/common/ListBuilderTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/common/ListBuilderTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/StraightScanTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/StraightScanTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/StraightScanTest2.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/straigtScan/StraightScanTest2.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/treeMethod/ForFutureUse.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/java/treeMethod/ForFutureUse.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/quine/QuineMcCluskeyTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/quine/QuineMcCluskeyTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/quine/parser2/ExpParserTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/export/quine/parser2/ExpParserTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/DtFunctionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/DtFunctionsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/List2DFunctionsTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/List2DFunctionsTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/UpdateDefinitionTable.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/UpdateDefinitionTable.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/DefinitionsTableViewDataBuilder.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/DefinitionsTableViewDataBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/DtFunctionsTestData.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/functions/fixtures/DtFunctionsTestData.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/io/PersistenceManagerTest.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/io/PersistenceManagerTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/RandomDefinitions.java" afterPath="$PROJECT_DIR$/src/test/java/de/adesso/dtmg/util/RandomDefinitions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/todos.txt" afterPath="$PROJECT_DIR$/todos.txt" />
     </list>
     <ignored path="dt.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -286,7 +138,7 @@
       <file leaf-file-name="PackageDependencyCheck.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/PackageDependencyCheck.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7910448">
+            <state vertical-scroll-proportion="0.79195404">
               <caret line="95" column="23" selection-start-line="95" selection-start-column="23" selection-end-line="95" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -320,7 +172,9 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -1710,13 +1564,7 @@
       <workItem from="1470891977396" duration="4717000" />
       <workItem from="1470898550546" duration="35000" />
       <workItem from="1470898722214" duration="12966000" />
-      <workItem from="1470929177833" duration="21000" />
-    </task>
-    <task id="LOCAL-00007" summary="Matrix Tests completed">
-      <created>1456903307584</created>
-      <option name="number" value="00007" />
-      <option name="project" value="LOCAL" />
-      <updated>1456903307584</updated>
+      <workItem from="1470929177833" duration="79000" />
     </task>
     <task id="LOCAL-00008" summary="more tests written">
       <created>1457030846961</created>
@@ -2006,7 +1854,13 @@
       <option name="project" value="LOCAL" />
       <updated>1470035327393</updated>
     </task>
-    <option name="localTasksCounter" value="57" />
+    <task id="LOCAL-00057" summary="Project restructuration and obsolete code removed - not finished!!">
+      <created>1470929253843</created>
+      <option name="number" value="00057" />
+      <option name="project" value="LOCAL" />
+      <updated>1470929253843</updated>
+    </task>
+    <option name="localTasksCounter" value="58" />
     <servers />
   </component>
   <component name="TestHistory">
@@ -2042,7 +1896,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="1014307000" />
+    <option name="totallyTimeSpent" value="1014365000" />
   </component>
   <component name="TodoView" selected-index="2">
     <todo-panel id="selected-file">
@@ -2059,6 +1913,7 @@
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32739422" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31959912" sideWeight="0.49139786" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32962137" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.50795454" sideWeight="0.51021504" order="7" side_tool="true" content_ui="tabs" />
@@ -2082,7 +1937,6 @@
       <window_info id="Dynamic Properties" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3507795" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="DSM" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" x="-1326" y="92" width="1234" height="856" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31959912" sideWeight="0.49139786" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Documentation" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" x="100" y="123" width="1720" height="777" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3997773" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4532294" sideWeight="0.48978496" order="2" side_tool="false" content_ui="tabs" />
@@ -2102,7 +1956,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="Structural Analysis Algorithm finished -&gt; Next Step: Integeration" />
     <MESSAGE value="Integration Started (class StructureAnalysis) but not finished!!" />
     <MESSAGE value="Handlerimplementation for Completeness- and Structural Analysis  started" />
     <MESSAGE value="FileOpen and FileSaveAs Implementation and Test. FileSaveAs does not work correctly!!" />
@@ -2127,7 +1980,8 @@
     <MESSAGE value="rw csv persistence strategy added" />
     <MESSAGE value="some zip stuff collected" />
     <MESSAGE value="working on csv persistence" />
-    <option name="LAST_COMMIT_MESSAGE" value="working on csv persistence" />
+    <MESSAGE value="Project restructuration and obsolete code removed - not finished!!" />
+    <option name="LAST_COMMIT_MESSAGE" value="Project restructuration and obsolete code removed - not finished!!" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2417,6 +2271,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="604" column="30" selection-start-line="604" selection-start-column="30" selection-end-line="604" selection-end-column="30" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2459,6 +2314,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="37" column="19" selection-start-line="37" selection-start-column="19" selection-end-line="37" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2466,6 +2322,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2522,6 +2379,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="35" column="13" selection-start-line="35" selection-start-column="13" selection-end-line="35" selection-end-column="13" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2529,6 +2387,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2572,6 +2431,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="1.7602459">
           <caret line="304" column="5" selection-start-line="304" selection-start-column="5" selection-end-line="304" selection-end-column="5" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -2637,7 +2497,9 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="9" column="18" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -2670,7 +2532,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/de/adesso/dtmg/util/PackageDependencyCheck.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7910448">
+        <state vertical-scroll-proportion="0.79195404">
           <caret line="95" column="23" selection-start-line="95" selection-start-column="23" selection-end-line="95" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
