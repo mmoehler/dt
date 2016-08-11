@@ -26,7 +26,7 @@ import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
-import static de.adesso.dtmg.common.Reserved.*;
+import static de.adesso.dtmg.Reserved.*;
 
 /**
  * Created by mmoehler ofList 19.03.16.

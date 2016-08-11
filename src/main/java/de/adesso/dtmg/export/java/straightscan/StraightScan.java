@@ -21,10 +21,10 @@ package de.adesso.dtmg.export.java.straightscan;
 
 import com.codepoetics.protonpack.StreamUtils;
 import com.sun.codemodel.*;
-import de.adesso.dtmg.Dump;
+import de.adesso.dtmg.util.Dump;
 import de.adesso.dtmg.exception.LambdaExceptionUtil;
 import de.adesso.dtmg.export.java.ClassDescription;
-import de.adesso.dtmg.functions.ObservableList2DFunctions;
+import de.adesso.dtmg.util.ObservableList2DFunctions;
 import de.adesso.dtmg.model.ActionDecl;
 import de.adesso.dtmg.model.ConditionDecl;
 import de.adesso.dtmg.model.DecisionTable;

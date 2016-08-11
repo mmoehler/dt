@@ -19,7 +19,7 @@
 
 package de.adesso.dtmg.analysis.completeness.detailed;
 
-import de.adesso.dtmg.common.builder.List2DBuilder;
+import de.adesso.dtmg.util.List2DBuilder;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +31,7 @@ import java.util.stream.Stream;
 
 import static de.adesso.dtmg.analysis.completeness.detailed.Functions.columnDifference;
 import static de.adesso.dtmg.analysis.completeness.detailed.Functions.consolidate;
-import static de.adesso.dtmg.functions.List2DFunctions.transpose;
+import static de.adesso.dtmg.util.List2DFunctions.transpose;
 
 /**
  * Created by mmoehler on 14.05.16.

@@ -23,9 +23,9 @@ import com.codepoetics.protonpack.StreamUtils;
 import com.google.common.collect.LinkedListMultimap;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
-import de.adesso.dtmg.Dump;
-import de.adesso.dtmg.common.builder.ObservableList2DBuilder;
-import de.adesso.dtmg.functions.ObservableList2DFunctions;
+import de.adesso.dtmg.util.Dump;
+import de.adesso.dtmg.util.ObservableList2DBuilder;
+import de.adesso.dtmg.util.ObservableList2DFunctions;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import javafx.collections.FXCollections;
@@ -38,10 +38,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static de.adesso.dtmg.functions.List2DFunctions.transpose;
-import static de.adesso.dtmg.functions.MoreCollectors.toObservableList;
-import static de.adesso.dtmg.functions.MoreCollectors.toSingleObject;
-import static de.adesso.dtmg.functions.ObservableList2DFunctions.removeColumn;
+import static de.adesso.dtmg.util.List2DFunctions.transpose;
+import static de.adesso.dtmg.util.MoreCollectors.toObservableList;
+import static de.adesso.dtmg.util.MoreCollectors.toSingleObject;
+import static de.adesso.dtmg.util.ObservableList2DFunctions.removeColumn;
 
 /**
  * Created by moehler ofList 31.03.2016.

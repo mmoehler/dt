@@ -21,7 +21,7 @@ package de.adesso.dtmg.io.strategy;
 
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
-import de.adesso.dtmg.functions.MoreCollectors;
+import de.adesso.dtmg.util.MoreCollectors;
 import de.adesso.dtmg.io.DtEntity;
 import de.adesso.dtmg.model.ActionDecl;
 import de.adesso.dtmg.model.ConditionDecl;

@@ -21,8 +21,8 @@ package de.adesso.dtmg.analysis.completeness.detailed;
 
 import com.codepoetics.protonpack.StreamUtils;
 import com.google.common.collect.LinkedListMultimap;
-import de.adesso.dtmg.common.builder.List2DBuilder;
-import de.adesso.dtmg.functions.List2DFunctions;
+import de.adesso.dtmg.util.List2DBuilder;
+import de.adesso.dtmg.util.List2DFunctions;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import org.slf4j.Logger;
@@ -37,10 +37,10 @@ import java.util.stream.Stream;
 
 import static de.adesso.dtmg.analysis.completeness.detailed.Actions.*;
 import static de.adesso.dtmg.analysis.completeness.detailed.Conditions.*;
-import static de.adesso.dtmg.common.Reserved.isDASH;
-import static de.adesso.dtmg.common.Reserved.isYES;
-import static de.adesso.dtmg.functions.List2DFunctions.removeColumnsAt;
-import static de.adesso.dtmg.functions.List2DFunctions.transpose;
+import static de.adesso.dtmg.Reserved.isDASH;
+import static de.adesso.dtmg.Reserved.isYES;
+import static de.adesso.dtmg.util.List2DFunctions.removeColumnsAt;
+import static de.adesso.dtmg.util.List2DFunctions.transpose;
 import static java.util.stream.Collectors.toList;
 
 /**

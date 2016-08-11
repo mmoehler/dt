@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.net.URI;
+import java.util.prefs.Preferences;
 
 /**
  * Created by mohler ofList 15.01.16.
@@ -76,12 +78,20 @@ public class MenuViewModel implements ViewModel {
     @Inject
     private Event<FileExportAsEvent> fileExportAsEvent;
 
+    private RecentItems recentItems;
+
     @InjectScope
     private RuleScope mdScope;
 
     public void initialize() {
         consolidateRules.bind(mdScope.consolidateRulesProperty());
         elseRuleSet.bind(mdScope.elseRuleProperty());
+        recentItems =  new RecentItems(10, Preferences.userRoot().node("dtmg/recent.files"));
+        mdScope.recentItems(recentItems);
+    }
+
+    public RecentItems getRecentItems() {
+        return recentItems;
     }
 
     public boolean getConsolidateRules() {
@@ -192,12 +202,20 @@ public class MenuViewModel implements ViewModel {
         fileOpenEvent.fire(new FileOpenEvent());
     }
 
+    public void fileOpen(URI uri) {
+        fileOpenEvent.fire(new FileOpenEvent(uri));
+    }
+
     public void fileSave() {
         fileSaveEvent.fire(new FileSaveEvent());
     }
 
     public void fileSaveAs() {
         fileSaveAsEvent.fire(new FileSaveAsEvent());
+    }
+
+    public void fileExportAs() {
+        fileExportAsEvent.fire(new FileExportAsEvent());
     }
 
     public ObservableValue<? extends Boolean> consolidateRules() {
@@ -208,7 +226,5 @@ public class MenuViewModel implements ViewModel {
         mdScope.quineMcCluskeyDialog(dialog);
     }
 
-    public void fileExportAs() {
-        fileExportAsEvent.fire(new FileExportAsEvent());
-    }
+
 }

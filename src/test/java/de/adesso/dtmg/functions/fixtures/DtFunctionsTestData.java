@@ -21,13 +21,13 @@ package de.adesso.dtmg.functions.fixtures;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import de.adesso.dtmg.Dump;
+import de.adesso.dtmg.util.Dump;
 import de.adesso.dtmg.analysis.structure.DefaultStructuralAnalysis;
 import de.adesso.dtmg.analysis.structure.Indicator;
 import de.adesso.dtmg.analysis.structure.StructuralAnalysisResultEmitter;
-import de.adesso.dtmg.common.builder.List2DBuilder;
-import de.adesso.dtmg.functions.List2DFunctions;
-import de.adesso.dtmg.functions.MoreCollectors;
+import de.adesso.dtmg.util.List2DBuilder;
+import de.adesso.dtmg.util.List2DFunctions;
+import de.adesso.dtmg.util.MoreCollectors;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import de.adesso.dtmg.util.tuple.Tuple3;
@@ -39,9 +39,9 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static de.adesso.dtmg.functions.DtFunctions.permutations;
-import static de.adesso.dtmg.functions.List2DFunctions.removeColumnsAt;
-import static de.adesso.dtmg.functions.List2DFunctions.transpose;
+import static de.adesso.dtmg.util.DtFunctions.permutations;
+import static de.adesso.dtmg.util.List2DFunctions.removeColumnsAt;
+import static de.adesso.dtmg.util.List2DFunctions.transpose;
 
 /**
  * Test fixtures of the DtFunctionsTest's

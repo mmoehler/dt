@@ -19,7 +19,7 @@
 
 package de.adesso.dtmg.ui.main;
 
-import de.adesso.dtmg.functions.DtFunctions;
+import de.adesso.dtmg.util.DtFunctions;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
 import de.saxsys.mvvmfx.FxmlView;

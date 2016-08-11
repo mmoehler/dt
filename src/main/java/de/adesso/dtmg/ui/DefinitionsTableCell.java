@@ -12,7 +12,7 @@ import javafx.scene.text.Font;
 import javafx.util.Callback;
 import javafx.util.StringConverter;
 
-import static de.adesso.dtmg.common.Reserved.*;
+import static de.adesso.dtmg.Reserved.*;
 
 /**
  * Created by mohler ofList 16.01.16.

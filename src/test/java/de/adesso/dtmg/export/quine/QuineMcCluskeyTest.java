@@ -20,7 +20,7 @@
 package de.adesso.dtmg.export.quine;
 
 import com.google.common.collect.Lists;
-import de.adesso.dtmg.Dump;
+import de.adesso.dtmg.util.Dump;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import org.testng.annotations.BeforeMethod;

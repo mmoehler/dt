@@ -19,8 +19,6 @@
 
 package de.adesso.dtmg.util;
 
-import de.adesso.dtmg.common.builder.List2DBuilder;
-
 import javax.annotation.Nonnull;
 import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;

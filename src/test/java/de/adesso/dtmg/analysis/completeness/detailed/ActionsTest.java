@@ -21,7 +21,7 @@ package de.adesso.dtmg.analysis.completeness.detailed;
 
 
 import com.codepoetics.protonpack.StreamUtils;
-import de.adesso.dtmg.common.builder.List2DBuilder;
+import de.adesso.dtmg.util.List2DBuilder;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import javafx.collections.ObservableList;
@@ -35,7 +35,7 @@ import java.util.stream.Collectors;
 
 import static de.adesso.dtmg.analysis.completeness.detailed.Actions.*;
 import static de.adesso.dtmg.analysis.completeness.detailed.Conditions.*;
-import static de.adesso.dtmg.functions.Adapters.Matrix.adapt;
+import static de.adesso.dtmg.util.Adapters.Matrix.adapt;
 import static java.util.stream.Collectors.toList;
 
 /**

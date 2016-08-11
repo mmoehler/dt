@@ -20,7 +20,7 @@
 package de.adesso.dtmg.export.quine.parser2;
 
 import com.google.common.collect.Sets;
-import de.adesso.dtmg.Dump;
+import de.adesso.dtmg.util.Dump;
 import org.testng.annotations.Test;
 
 import java.util.*;

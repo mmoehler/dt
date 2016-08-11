@@ -27,8 +27,8 @@ import javafx.collections.ObservableList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static de.adesso.dtmg.functions.Adapters.Matrix.adapt;
-import static de.adesso.dtmg.functions.List2DFunctions.transpose;
+import static de.adesso.dtmg.util.Adapters.Matrix.adapt;
+import static de.adesso.dtmg.util.List2DFunctions.transpose;
 
 /**
  * Created by mmoehler ofList 28.03.16.

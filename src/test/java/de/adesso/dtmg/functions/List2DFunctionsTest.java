@@ -19,8 +19,10 @@
 
 package de.adesso.dtmg.functions;
 
-import de.adesso.dtmg.common.builder.List2DBuilder;
-import de.adesso.dtmg.common.builder.ListBuilder;
+import de.adesso.dtmg.util.List2DFunctions;
+import de.adesso.dtmg.util.ListFunctions;
+import de.adesso.dtmg.util.List2DBuilder;
+import de.adesso.dtmg.util.ListBuilder;
 import javafx.collections.FXCollections;
 import org.testng.annotations.Test;
 
@@ -30,7 +32,7 @@ import java.util.List;
 import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
-import static de.adesso.dtmg.functions.List2DFunctions.*;
+import static de.adesso.dtmg.util.List2DFunctions.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
 import static org.testng.Assert.assertEquals;
@@ -212,7 +214,7 @@ public class List2DFunctionsTest {
         assertThat(actual, containsInAnyOrder(expected.toArray()));
     }
 
-    @org.junit.Test
+    @Test
     public void testCopyRow() throws Exception {
         List<List<String>> original = (List2DBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N").dim(3, 4).build());
         List<String> actual = copyRow(original.get(2));
@@ -221,7 +223,7 @@ public class List2DFunctionsTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @org.junit.Test
+    @Test
     public void testAddRow() throws Exception {
         List<List<String>> original = (List2DBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N").dim(3, 4).build());
         List<List<String>> expected = (List2DBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N,?,?,?,?").dim(4, 4).build());
@@ -235,7 +237,7 @@ public class List2DFunctionsTest {
 
     }
 
-    @org.junit.Test
+    @Test
     public void testAddColumn() throws Exception {
         List<List<String>> original = (List2DBuilder.matrixOf("Y,Y,Y,Y,Y,Y,N,N,Y,N,Y,N").dim(3, 4).build());
         List<List<String>> expected = (List2DBuilder.matrixOf("Y,Y,Y,Y,?,Y,Y,N,N,?,Y,N,Y,N,?").dim(3, 5).build());
@@ -257,14 +259,14 @@ public class List2DFunctionsTest {
 
     }
 
-    @org.junit.Test
+    @Test
     public void testNewRow() throws Exception {
         List<String> expected = ListBuilder.ofList("?,?,?,?,?,?,?,?,?,?").build();
         List<String> actual = newRow(10, QMARKS);
         assertThat(actual, equalTo(expected));
     }
 
-    @org.junit.Test
+    @Test
     public void testSwapRowsAt() throws Exception {
         List<List<String>> original = (List2DBuilder.matrixOf("A,A,A,A,B,B,B,B,C,C,C,C").dim(3, 4).build());
         List<List<String>> expected = (List2DBuilder.matrixOf("A,A,A,A,C,C,C,C,B,B,B,B").dim(3, 4).build());
@@ -274,7 +276,7 @@ public class List2DFunctionsTest {
         assertThat(actual, equalTo(expected));
     }
 
-    @org.junit.Test
+    @Test
     public void testSwapColumnsAt() throws Exception {
         List<List<String>> original = (List2DBuilder.matrixOf(
                 "A,B,C,D," +

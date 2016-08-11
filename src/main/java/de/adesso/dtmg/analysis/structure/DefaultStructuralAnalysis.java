@@ -35,7 +35,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static de.adesso.dtmg.functions.List2DFunctions.transpose;
+import static de.adesso.dtmg.util.List2DFunctions.transpose;
 import static java.util.concurrent.TimeUnit.SECONDS;
 
 /**

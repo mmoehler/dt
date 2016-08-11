@@ -19,10 +19,10 @@
 
 package de.adesso.dtmg.io;
 
-import de.adesso.dtmg.Dump;
-import de.adesso.dtmg.common.builder.List2DBuilder;
+import de.adesso.dtmg.util.Dump;
+import de.adesso.dtmg.util.List2DBuilder;
 import de.adesso.dtmg.exception.IOExceptionSmuggler;
-import de.adesso.dtmg.functions.Adapters;
+import de.adesso.dtmg.util.Adapters;
 import de.adesso.dtmg.model.ConditionDecl;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
 import javafx.scene.control.TableView;

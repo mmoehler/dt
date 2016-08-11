@@ -8,18 +8,8 @@ Add dependency
 </dependency>
 
 
-2) Set Else Header after reload DT with else rule
 
-3) Debud System.out.println's entfernenen
 
-5) File Close mit Sicherheitsabfrage bei geänderter Datei
+1) Codegenerierung !!!!!!
 
-6) File Save
-
-7) File New mit Sicherheitsabfrage bei geänderter Datei
-
-8) File Close  mit Sicherheitsabfrage bei geänderter Datei
-
-9) Open Recent Files !!!!!
-
-10) Codegenerierung !!!!!!
+2) Add Documentation to Action- and ConditionDecls!!

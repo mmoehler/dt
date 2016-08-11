@@ -19,12 +19,12 @@
 
 package de.adesso.dtmg.functions.fixtures;
 
-import de.adesso.dtmg.common.builder.List2DBuilder;
+import de.adesso.dtmg.util.List2DBuilder;
 import de.adesso.dtmg.functions.chained.first.AbstractSubBuilder;
 import de.adesso.dtmg.functions.chained.first.Callback;
 import javafx.collections.ObservableList;
 
-import static de.adesso.dtmg.common.builder.List2DBuilder.observable;
+import static de.adesso.dtmg.util.List2DBuilder.observable;
 
 /**
  * Created by mmoehler ofList 06.03.16.

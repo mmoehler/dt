@@ -20,7 +20,7 @@
 package de.adesso.dtmg.export.java.straigtScan;
 
 import com.sun.codemodel.JCodeModel;
-import de.adesso.dtmg.common.builder.ObservableList2DBuilder;
+import de.adesso.dtmg.util.ObservableList2DBuilder;
 import de.adesso.dtmg.export.java.ClassDescription;
 import de.adesso.dtmg.export.java.straightscan.StraightScan;
 import de.adesso.dtmg.model.ActionDecl;

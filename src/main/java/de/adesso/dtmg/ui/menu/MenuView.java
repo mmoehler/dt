@@ -6,13 +6,17 @@ import de.adesso.dtmg.util.DialogHelper;
 import de.saxsys.mvvmfx.FluentViewLoader;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import javax.inject.Inject;
+import java.net.URI;
+import java.nio.file.Paths;
 
 /**
  * Created by mohler ofList 15.01.16.
@@ -20,19 +24,11 @@ import javax.inject.Inject;
 public class MenuView implements FxmlView<MenuViewModel> {
 
     @FXML
-    private MenuItem removeConditionDeclMenuItem;
-    @FXML
-    private MenuItem formalCompleteness;
-    @FXML
-    private MenuItem addMissingRules;
-    @FXML
-    private MenuItem structuralAnalysis;
-    @FXML
     private MenuItem consolidateRules;
+
     @FXML
-    private MenuItem deleteRedundantRules;
-    @FXML
-    private MenuItem completeReport;
+    private Menu fileOpenRecent;
+
     @FXML
     private MenuItem addElseRuleMenuItem;
 
@@ -46,6 +42,27 @@ public class MenuView implements FxmlView<MenuViewModel> {
     public void initialize() {
         consolidateRules.disableProperty().bind(viewModel.consolidateRulesProperty());
         addElseRuleMenuItem.disableProperty().bind(viewModel.elseRuleSetProperty());
+
+        final RecentItems recentItems = viewModel.getRecentItems();
+       // fileOpenRecent.setDisable(recentItems.getItems().isEmpty());
+        final ToggleGroup recentItemsGroup = new ToggleGroup();
+        for (String path : recentItems.getItems()) {
+            RadioMenuItem recentFile = new RadioMenuItem(path);
+            recentFile.setUserData(Paths.get(path).toUri());
+            recentFile.setToggleGroup(recentItemsGroup);
+            fileOpenRecent.getItems().add(recentFile);
+        }
+
+        recentItemsGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            public void changed(ObservableValue<? extends Toggle> ov,
+                                Toggle old_toggle, Toggle new_toggle) {
+                if (recentItemsGroup.getSelectedToggle() != null) {
+                    URI path =
+                            (URI) recentItemsGroup.getSelectedToggle().getUserData();
+                    viewModel.fileOpen(path);
+                }
+            }
+        });
     }
 
     // General

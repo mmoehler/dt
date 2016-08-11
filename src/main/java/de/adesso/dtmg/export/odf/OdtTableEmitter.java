@@ -19,7 +19,6 @@
 
 package de.adesso.dtmg.export.odf;
 
-import de.adesso.dtmg.Dump;
 import org.odftoolkit.simple.table.Table;
 import org.odftoolkit.simple.table.TableContainer;
 
@@ -40,7 +39,6 @@ public class OdtTableEmitter implements BiFunction<TableContainer, OdtDecisionTa
         String[] colheader = null;
         String[] rowheader = null;
         String[][] tableData = data.getData();
-        Dump.array2DItems("TABLEDATA",tableData);
         return Table.newTable(tableContainer, rowheader, colheader, tableData);
     }
 }

@@ -20,8 +20,8 @@
 package de.adesso.dtmg.analysis.completeness.detailed;
 
 import com.codepoetics.protonpack.StreamUtils;
-import de.adesso.dtmg.common.Reserved;
-import de.adesso.dtmg.common.builder.List2DBuilder;
+import de.adesso.dtmg.Reserved;
+import de.adesso.dtmg.util.List2DBuilder;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 
@@ -32,7 +32,7 @@ import java.util.function.Supplier;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
-import static de.adesso.dtmg.common.Reserved.*;
+import static de.adesso.dtmg.Reserved.*;
 
 /**
  * Created by mmoehler ofList 19.03.16.

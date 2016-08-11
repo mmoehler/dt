@@ -19,9 +19,8 @@
 
 package de.adesso.dtmg.ui.main;
 
-import de.adesso.dtmg.common.Reserved;
+import de.adesso.dtmg.Reserved;
 import de.adesso.dtmg.exception.ExceptionHandler;
-import de.adesso.dtmg.functions.DtFunctions;
 import de.adesso.dtmg.model.ActionDecl;
 import de.adesso.dtmg.model.ConditionDecl;
 import de.adesso.dtmg.ui.DeclarationTableViewModel;
@@ -29,14 +28,13 @@ import de.adesso.dtmg.ui.Notifications;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.dtmg.ui.dialogs.Dialogs;
+import de.adesso.dtmg.util.DtFunctions;
 import de.adesso.dtmg.util.OsCheck;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
-import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 import javafx.beans.property.DoubleProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
@@ -55,6 +53,7 @@ import javafx.stage.FileChooser;
 import javax.inject.Inject;
 import java.io.File;
 import java.io.IOException;
+import java.net.URI;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
@@ -64,9 +63,9 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import static de.adesso.dtmg.analysis.structure.Operators.consolidateRules;
-import static de.adesso.dtmg.functions.DtFunctions.*;
-import static de.adesso.dtmg.functions.MoreCollectors.toSingleObject;
 import static de.adesso.dtmg.ui.Notifications.EV_CONSOLIDATE_RULES;
+import static de.adesso.dtmg.util.DtFunctions.*;
+import static de.adesso.dtmg.util.MoreCollectors.toSingleObject;
 
 @SuppressWarnings("unchecked")
 public class MainView extends DtView implements FxmlView<MainViewModel> {
@@ -78,6 +77,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
             c -> (c.isEmpty()) ? false : c.get(c.size() - 1).equals(ELSE);
     private final DoubleProperty conditionDividerPos = new SimpleDoubleProperty();
     private final DoubleProperty actionDividerPos = new SimpleDoubleProperty();
+    private final SimpleObjectProperty<Path> currentFile = new SimpleObjectProperty<>();
     @FXML
     public SplitPane conditionSplitPane;
     @FXML
@@ -94,39 +94,17 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     private TextArea console;
     @InjectViewModel
     private MainViewModel viewModel;
+/*
     @Inject
     private NotificationCenter notificationCenter;
+*/
     @Inject
     private ExceptionHandler exceptionHandler;
-
-    private final SimpleObjectProperty<Path> currentFile = new SimpleObjectProperty<>();
-    private final SimpleBooleanProperty fileChanged = new SimpleBooleanProperty(false);
-
     private String lastKey = null;
     private FileChooser fileChooser;
 
     public MainView() {
         super();
-    }
-
-    @Override
-    public TableView<ActionDeclTableViewModel> getActionDeclarationsTable() {
-        return this.actionDeclarationsTable;
-    }
-
-    @Override
-    public TableView<ObservableList<String>> getActionDefinitionsTable() {
-        return this.actionDefinitionsTable;
-    }
-
-    @Override
-    public TableView<ConditionDeclTableViewModel> getConditionDeclarationsTable() {
-        return this.conditionDeclarationsTable;
-    }
-
-    @Override
-    public TableView<ObservableList<String>> getConditionDefinitionsTable() {
-        return this.conditionDefinitionsTable;
     }
 
     private static <T extends DeclarationTableViewModel> void initializeDeclarationTablesColumns(TableView<T> table, String prefix) {
@@ -173,6 +151,25 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         Arrays.stream(dtmgExtFilters).forEach(fileChooser.getExtensionFilters()::add);
     }
 
+    @Override
+    public TableView<ActionDeclTableViewModel> getActionDeclarationsTable() {
+        return this.actionDeclarationsTable;
+    }
+
+    @Override
+    public TableView<ObservableList<String>> getActionDefinitionsTable() {
+        return this.actionDefinitionsTable;
+    }
+
+    @Override
+    public TableView<ConditionDeclTableViewModel> getConditionDeclarationsTable() {
+        return this.conditionDeclarationsTable;
+    }
+
+    @Override
+    public TableView<ObservableList<String>> getConditionDefinitionsTable() {
+        return this.conditionDefinitionsTable;
+    }
 
     public void initialize() {
         initializeDividerSynchronization();
@@ -182,7 +179,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     }
 
     protected void initializeObservers() {
-        notificationCenter.subscribe(Notifications.PREPARE_CONSOLE.name(), (key, value) ->
+        this.viewModel.subscribe(Notifications.PREPARE_CONSOLE.name(), (key, value) ->
                 console.setText(String.valueOf(value[0])));
 
         this.viewModel.subscribe(Notifications.REM_ACTION.name(), this::doRemActionDecl);
@@ -239,23 +236,95 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
 
     private void doFileOpen(String key, Object[] value) {
 
+        if (checkForOpenFile()) {
 
+            switch (querySaveIfChanged()) {
+                case YES:
+                    // save the old file
+                    try {
+                        viewModel.saveFile(this.currentFile.get().toUri());
+                    } catch (IOException e) {
+                        exceptionHandler.showAndWaitAlert(e);
+                        return;
+                    } finally {
+                        this.currentFile.setValue(null);
+                    }
+                    break;
+                case NO:
+                    // do nothing and forget the old stuff
+                    break;
+                default:
+                    // (Cancel was pushed) break the whole process
+                    return;
+            }
+        }
+
+        if(null != value && value.length>0 && null != value[0] && value[0] instanceof URI) {
+            URI uri = URI.class.cast(value[0]);
+            internalOpenFile(uri);
+            return;
+        }
 
         FileChooser fc = getFileChooser();
         try {
             configureFileChooser(getFileChooser(), "Open DTMG File");
             File file = fc.showOpenDialog(this.actionSplitPane.getScene().getWindow());
-            if (file != null) try {
-                final int countColumns = viewModel.openFile(file.toURI());
-                prepareDefinitionsTables4NewData(countColumns);
-                viewModel.populateLoadedData();
-                this.currentFile.set(Paths.get(file.toURI()));
-            } catch (IOException | ClassNotFoundException e) {
-                exceptionHandler.showAndWaitAlert(e);
-                return;
+            if (file != null) {
+                internalOpenFile(file.toURI());
             }
         } finally {
             fc.getExtensionFilters().clear();
+        }
+
+    }
+
+    private void internalOpenFile(URI uri) {
+        try {
+            final int countColumns = viewModel.openFile(uri);
+            prepareDefinitionsTables4NewData(countColumns);
+            viewModel.populateLoadedData();
+            this.currentFile.set(Paths.get(uri));
+            viewModel.getRecentItems().ifPresent(i -> i.push(Paths.get(uri).toString()));
+            viewModel.setUnchanged();
+        } catch (IOException | ClassNotFoundException e) {
+            exceptionHandler.showAndWaitAlert(e);
+        }
+    }
+
+    private Answer querySaveIfChanged() {
+        if(viewModel.changedProperty().get()) {
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("DTMG");
+            Path p = this.currentFile.get().getFileName();
+            alert.setHeaderText(String.format("Save file: %s?", p));
+
+            ButtonType buttonTypeYes = new ButtonType("Yes");
+            ButtonType buttonTypeNo = new ButtonType("No");
+            ButtonType buttonTypeCancel = new ButtonType("Cancel", ButtonBar.ButtonData.CANCEL_CLOSE);
+
+            alert.getButtonTypes().setAll(buttonTypeYes, buttonTypeNo, buttonTypeCancel);
+
+            Optional<ButtonType> result = alert.showAndWait();
+            if (result.get() == buttonTypeYes) {
+                return Answer.YES;
+            } else if (result.get() == buttonTypeNo) {
+                return Answer.NO;
+            } else {
+                return Answer.CANCEL;
+            }
+        }
+        return Answer.NO;
+    }
+
+    private boolean checkForOpenFile() {
+        return this.currentFile.isNotNull().get();
+    }
+
+    private void doFileSave(String key, Object[] value) {
+        if (viewModel.changedProperty().get()) {
+            if (null != currentFile.get()) {
+                internalSaveFile(currentFile.get().toFile());
+            }
         }
     }
 
@@ -265,18 +334,23 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
             configureFileChooser(getFileChooser(), "Save DTMG File");
             File file = fc.showOpenDialog(this.actionSplitPane.getScene().getWindow());
             if (file != null) {
-                try {
-                    viewModel.saveFile(file.toURI());
-                } catch (IOException e) {
-                    exceptionHandler.showAndWaitAlert(e);
-                    return;
-                }
+                internalSaveFile(file);
             }
         } finally {
             fc.getExtensionFilters().clear();
         }
     }
 
+    private boolean internalSaveFile(File file) {
+        try {
+            viewModel.saveFile(file.toURI());
+            viewModel.setUnchanged();
+        } catch (IOException e) {
+            exceptionHandler.showAndWaitAlert(e);
+            return true;
+        }
+        return false;
+    }
 
     private void doFileExportAs(String key, Object[] value) {
         FileChooser fc = getFileChooser();
@@ -297,9 +371,6 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
 
     }
 
-
-    // publish(ADD_ELSE_RULE.name(), adapt(newCDefns), adapt(newADefns));
-
     private void doAddElseRule(String key, Object[] value) {
         final int countColumns = conditionDefinitionsTable.getColumns().size();
         final Optional<String> elseRuleName = Optional.of(ELSE_RULE_HEADER);
@@ -316,6 +387,9 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
             actionDefinitionsTable.refresh();
         }
     }
+
+
+    // publish(ADD_ELSE_RULE.name(), adapt(newCDefns), adapt(newADefns));
 
     private OptionalInt getIndex(Object[] o) {
         OptionalInt index = OptionalInt.empty();
@@ -455,7 +529,6 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         this.viewModel.updateRowHeader();
     }
 
-
     private void doRemConditionDecl(String key, Object[] value) {
         doRemoveRows(this.conditionDeclarationsTable, this.conditionDefinitionsTable, getIndex(value));
         updateRowHeader();
@@ -466,7 +539,6 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         doRemoveRows(this.actionDeclarationsTable, this.actionDefinitionsTable, getIndex(value));
         updateRowHeader();
     }
-
 
     public void updateRowHeader() {
         int counter[] = {1};
@@ -673,6 +745,10 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
             }
         }
         return result;
+    }
+
+    enum Answer {
+        YES, NO, CANCEL
     }
 
 }

@@ -19,8 +19,23 @@
 
 package de.adesso.dtmg.events;
 
+import java.net.URI;
+
 /**
  * CDI event class that is used to indicate that a contact was updated/added/removed.
  */
 public class FileOpenEvent {
+    private final URI uri;
+
+    public FileOpenEvent() {
+        this(null);
+    }
+
+    public FileOpenEvent(URI uri) {
+        this.uri = uri;
+    }
+
+    public URI getUri() {
+        return uri;
+    }
 }

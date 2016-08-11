@@ -19,14 +19,13 @@
 
 package de.adesso.dtmg.functions;
 
-import de.adesso.dtmg.Dump;
-import de.adesso.dtmg.common.builder.ListBuilder;
-import de.adesso.dtmg.common.builder.ObservableList2DBuilder;
 import de.adesso.dtmg.functions.fixtures.TableColumnBuilder;
 import de.adesso.dtmg.model.ConditionDecl;
 import de.adesso.dtmg.ui.PossibleIndicatorsSupplier;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
+import de.adesso.dtmg.util.ListBuilder;
+import de.adesso.dtmg.util.ObservableList2DBuilder;
 import de.adesso.dtmg.util.matchers.Matchers;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.JFXPanel;
@@ -43,11 +42,11 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
-import static de.adesso.dtmg.functions.DtFunctions.*;
-import static de.adesso.dtmg.functions.DtFunctions.fullExpandConditions;
+import static de.adesso.dtmg.util.DtFunctions.*;
+import static de.adesso.dtmg.util.DtFunctions.fullExpandConditions;
+import static de.adesso.dtmg.util.MoreCollectors.toObservableList;
+import static de.adesso.dtmg.util.ObservableList2DFunctions.insertColumn;
 import static de.adesso.dtmg.functions.fixtures.DtFunctionsTestData.*;
-import static de.adesso.dtmg.functions.MoreCollectors.toObservableList;
-import static de.adesso.dtmg.functions.ObservableList2DFunctions.insertColumn;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.testng.Assert.assertEquals;
@@ -382,16 +381,8 @@ public class DtFunctionsTest {
                     .map(insertColumn("-", index.getAsInt()))
                     .collect(toObservableList());
 
-            Dump.dumpTableItems("Conditions", newConDefs);
-            Dump.dumpTableItems("Actions", newActDefs);
-
             Stream.of(newConDefs).forEach(new UpdateDefinitionTable(conditionDefTab));
             Stream.of(newActDefs).forEach(new UpdateDefinitionTable(actionDefTab));
-
-            Dump.dumpTableItems("Conditions", conditionDefTab.getItems());
-            Dump.dumpTableItems("Actions", actionDefTab.getItems());
-
-
         }
 
 

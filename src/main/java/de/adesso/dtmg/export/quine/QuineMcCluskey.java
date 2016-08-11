@@ -24,7 +24,7 @@ import com.codepoetics.protonpack.StreamUtils;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import de.adesso.dtmg.export.quine.parser2.ExpParser;
-import de.adesso.dtmg.functions.List2DFunctions;
+import de.adesso.dtmg.util.List2DFunctions;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 

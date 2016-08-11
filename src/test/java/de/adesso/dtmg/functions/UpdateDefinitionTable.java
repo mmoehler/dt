@@ -19,7 +19,7 @@
 
 package de.adesso.dtmg.functions;
 
-import de.adesso.dtmg.Dump;
+import de.adesso.dtmg.util.DtFunctions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.TableView;
@@ -57,9 +57,6 @@ public class UpdateDefinitionTable implements Consumer<ObservableList<Observable
                     .mapToObj(DtFunctions::createTableColumn)
                     .forEach(table.getColumns()::add);
         }
-
-        Dump.dumpTableItems("NEW ITEMS", newItems);
-
         newItems.forEach(table.getItems()::add);
         table.refresh();
     }

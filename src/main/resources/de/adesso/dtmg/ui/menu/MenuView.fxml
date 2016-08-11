@@ -3,8 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity"
-            minWidth="-Infinity" xmlns="http://javafx.com/javafx/8"
+<AnchorPane maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="de.adesso.dtmg.ui.menu.MenuView">
     <children>
         <MenuBar AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -24,6 +24,9 @@
                                                     shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
+                        <Menu fx:id="fileOpenRecent" mnemonicParsing="false" text="Open Recent..." >
+                            <items/>
+                        </Menu>
                         <MenuItem fx:id="fileSave" mnemonicParsing="false" onAction="#doFileSave" text="Save">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="S" control="DOWN" meta="UP" shift="UP"
@@ -37,7 +40,8 @@
                             </accelerator>
                         </MenuItem>
                         <SeparatorMenuItem mnemonicParsing="false"/>
-                        <MenuItem fx:id="fileExport" mnemonicParsing="false" onAction="#doFileExportAs" text="Export As...">
+                        <MenuItem fx:id="fileExport" mnemonicParsing="false" onAction="#doFileExportAs"
+                                  text="Export As...">
                             <accelerator>
                                 <KeyCodeCombination alt="UP" code="E" control="DOWN" meta="UP" shift="DOWN"
                                                     shortcut="UP"/>
@@ -210,7 +214,8 @@
 
                 <Menu mnemonicParsing="false" text="Tools">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#doQuineMcCluskey" text="Quine-McCluskey-Optimizer"/>
+                        <MenuItem mnemonicParsing="false" onAction="#doQuineMcCluskey"
+                                  text="Quine-McCluskey-Optimizer"/>
                     </items>
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">

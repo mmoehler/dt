@@ -3,36 +3,40 @@ package de.adesso.dtmg.ui.main;
 import com.codepoetics.protonpack.Indexed;
 import com.google.common.base.Preconditions;
 import com.google.common.base.Strings;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import de.adesso.dtmg.Dump;
 import de.adesso.dtmg.analysis.structure.AnalysisResultEmitter;
 import de.adesso.dtmg.analysis.structure.Indicator;
 import de.adesso.dtmg.analysis.structure.StructuralAnalysis;
 import de.adesso.dtmg.events.*;
 import de.adesso.dtmg.exception.ExceptionHandler;
 import de.adesso.dtmg.export.ExportManager;
-import de.adesso.dtmg.functions.DtFunctions;
-import de.adesso.dtmg.functions.List2DFunctions;
-import de.adesso.dtmg.functions.MoreCollectors;
-import de.adesso.dtmg.functions.ObservableListFunctions;
 import de.adesso.dtmg.io.DtEntity;
 import de.adesso.dtmg.io.PersistenceManager;
 import de.adesso.dtmg.model.ActionDecl;
 import de.adesso.dtmg.model.ConditionDecl;
+import de.adesso.dtmg.ui.DeclarationTableViewModel;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
+import de.adesso.dtmg.ui.menu.RecentItems;
 import de.adesso.dtmg.ui.scopes.RuleScope;
+import de.adesso.dtmg.util.DtFunctions;
+import de.adesso.dtmg.util.List2DFunctions;
+import de.adesso.dtmg.util.MoreCollectors;
+import de.adesso.dtmg.util.ObservableListFunctions;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import de.adesso.dtmg.util.tuple.Tuple3;
 import de.saxsys.mvvmfx.InjectScope;
+import de.saxsys.mvvmfx.ScopeProvider;
 import de.saxsys.mvvmfx.ViewModel;
-import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
 import javafx.collections.ObservableList;
 
+import javax.annotation.PreDestroy;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -48,14 +52,15 @@ import java.util.stream.IntStream;
 
 import static com.google.common.collect.Multimaps0.emptyMultimap;
 import static de.adesso.dtmg.analysis.completeness.detailed.ConditionDetailedCompletenessCheck.isFormalComplete;
-import static de.adesso.dtmg.functions.Adapters.Matrix.adapt;
-import static de.adesso.dtmg.functions.DtFunctions.fullExpandActions;
-import static de.adesso.dtmg.functions.DtFunctions.limitedExpandConditions;
-import static de.adesso.dtmg.functions.List2DFunctions.insertColumnsAt;
 import static de.adesso.dtmg.ui.Notifications.*;
+import static de.adesso.dtmg.util.Adapters.Matrix.adapt;
+import static de.adesso.dtmg.util.DtFunctions.fullExpandActions;
+import static de.adesso.dtmg.util.DtFunctions.limitedExpandConditions;
+import static de.adesso.dtmg.util.List2DFunctions.insertColumnsAt;
 import static java.util.Collections.emptyList;
 
 @Singleton
+@ScopeProvider(scopes={RuleScope.class})
 public class MainViewModel implements ViewModel {
 
     public static final String QMARK = "?";
@@ -84,9 +89,6 @@ public class MainViewModel implements ViewModel {
     private RuleScope mdScope;
 
     @Inject
-    private NotificationCenter notificationCenter;
-
-    @Inject
     private StructuralAnalysis structuralAnalysis;
 
     @Inject
@@ -107,9 +109,60 @@ public class MainViewModel implements ViewModel {
     private DtEntity loadedData = null;
     private boolean elseRuleSet = true;
 
+    private final ListChangeListener<DeclarationTableViewModel> decRowListener;
+    private final ListChangeListener<ObservableList<String>> defRowListener;
+    private final ListChangeListener<String> defColListener;
+    private final BooleanProperty changed = new SimpleBooleanProperty(false);
+
     public MainViewModel() {
         super();
+
+        defRowListener = new ListChangeListener<ObservableList<String>>() {
+            @Override
+            public void onChanged(Change<? extends ObservableList<String>> c) {
+                changed.set(true);
+            }
+        };
+
+        defColListener = new ListChangeListener<String>() {
+            @Override
+            public void onChanged(Change<? extends String> c) {
+                changed.set(true);
+            }
+        };
+
+        decRowListener = new ListChangeListener<DeclarationTableViewModel>() {
+            @Override
+            public void onChanged(Change<? extends DeclarationTableViewModel> c) {
+                changed.set(true);
+            }
+        };
+
+
+        Lists.newArrayList(conditionDefinitions,actionDefinitions).forEach(e -> {
+            e.forEach(f -> f.addListener(defColListener));
+            e.addListener(defRowListener);
+        });
+
     }
+
+    @PreDestroy
+    protected void preDestroy() {
+        Lists.newArrayList(conditionDefinitions,actionDefinitions).forEach(e -> {
+            e.forEach(f -> f.removeListener(defColListener));
+            e.removeListener(defRowListener);
+        });
+
+    }
+
+    public BooleanProperty changedProperty() {
+        return changed;
+    }
+
+    public void setUnchanged() {
+        this.changed.set(false);
+    }
+
 
     private static boolean isBlank(ObservableList<String> ol) {
         return ol.stream().allMatch(ss -> (ss.trim().length() == 0));
@@ -293,7 +346,7 @@ public class MainViewModel implements ViewModel {
     public void onFormalCompletenessCheckAction(@Observes FormalCompletenessCheckEvent event) {
         Optional<String> s = internalFormalCompletenessCheck();
         if (s.isPresent()) {
-            notificationCenter.publish(PREPARE_CONSOLE.name(), s.get());
+            this.publish(PREPARE_CONSOLE.name(), s.get());
         }
     }
 
@@ -309,10 +362,6 @@ public class MainViewModel implements ViewModel {
         String ret = null;
         try {
             if(hasNoElseRule().test(this.conditionDefinitions.get(0))) {
-                /*
-                ObservableList<ObservableList<String>> conditionDefnsWithoutElseRule
-                        = this.conditionDefinitions.stream().map(suppressElseRule()).collect(MoreCollectors.toObservableList());
-                */
                 final List<Indexed<List<String>>> result = isFormalComplete(this.conditionDeclarations, this.conditionDefinitions);
                 Tuple2<String, List<String>> tuple2 = resultEmitter.emitFormalCompletenessCheckResults().apply(result);
                 missingRules = tuple2._2();
@@ -342,14 +391,14 @@ public class MainViewModel implements ViewModel {
                     : "");
         }
 
-        notificationCenter.publish(PREPARE_CONSOLE.name(), message);
+        this.publish(PREPARE_CONSOLE.name(), message);
         notifyRulesConsolidated();
     }
 
     public void onStructuralAnalysisAction(@Observes StructuralAnalysisEvent event) {
         Optional<String> s = internalStructuralAnalysis();
         if (s.isPresent()) {
-            notificationCenter.publish(PREPARE_CONSOLE.name(), s.get());
+            this.publish(PREPARE_CONSOLE.name(), s.get());
             notifyRulesConsolidated();
         }
     }
@@ -369,9 +418,6 @@ public class MainViewModel implements ViewModel {
                 clearedActions = this.actionDefinitions.stream().map(c -> ObservableListFunctions.take(c, c.size() - 1)).collect(MoreCollectors.toObservableList());
             }
             List<Indicator> result = structuralAnalysis.apply(adapt(clearedConditions), adapt(clearedActions));
-
-            Dump.dumpStructuralAnalysisResult("STRUCTURAL-ANALYSIS", result);
-
             final Tuple3<String, Multimap<Integer, Integer>, Multimap<Integer, Integer>> tuple3 =
                     resultEmitter.emitStructuralAnalysisResult().apply(result, clearedConditions.get(0).size());
 
@@ -406,7 +452,7 @@ public class MainViewModel implements ViewModel {
     }
 
     public void onFileOpenAction(@Observes FileOpenEvent event) {
-        publish(FILE_OPEN.name(), NO_ARGS);
+        publish(FILE_OPEN.name(), (null == event.getUri()) ? NO_ARGS : event.getUri());
     }
 
     public void onFileSaveAsAction(@Observes FileSaveAsEvent event) {
@@ -448,5 +494,9 @@ public class MainViewModel implements ViewModel {
         final List<? extends List<String>> newActDefs =
                 insertColumnsAt(oldDefs._2(), index.getAsInt(), () -> DtFunctions.DASH);
         return Tuple.of(newConDefs, newActDefs);
+    }
+
+    public Optional<RecentItems> getRecentItems() {
+        return Optional.ofNullable(mdScope.recentItems());
     }
 }

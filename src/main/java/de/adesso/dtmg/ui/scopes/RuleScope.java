@@ -1,5 +1,6 @@
 package de.adesso.dtmg.ui.scopes;
 
+import de.adesso.dtmg.ui.menu.RecentItems;
 import de.saxsys.mvvmfx.Scope;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.stage.Stage;
@@ -38,6 +39,14 @@ public class RuleScope implements Scope {
 
     private Stage quineMcCluskeyDialog;
     public Stage quineMcCluskeyDialog() { return quineMcCluskeyDialog; }
-
     public void quineMcCluskeyDialog(Stage dialog) { quineMcCluskeyDialog=dialog; }
+
+    private RecentItems recentItems;
+    public RecentItems recentItems() {
+        return recentItems;
+    }
+
+    public void recentItems(RecentItems recentItems) {
+        this.recentItems = recentItems;
+    }
 }

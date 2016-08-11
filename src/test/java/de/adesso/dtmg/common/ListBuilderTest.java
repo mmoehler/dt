@@ -1,6 +1,6 @@
 package de.adesso.dtmg.common;
 
-import de.adesso.dtmg.common.builder.ListBuilder;
+import de.adesso.dtmg.util.ListBuilder;
 import org.testng.annotations.Test;
 
 import java.util.ArrayList;

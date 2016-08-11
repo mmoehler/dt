@@ -19,7 +19,7 @@
 
 package de.adesso.dtmg.analysis.structure;
 
-import de.adesso.dtmg.Dump;
+import de.adesso.dtmg.util.Dump;
 import de.adesso.dtmg.analysis.completeness.detailed.ConsolidateConditions;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
@@ -35,9 +35,9 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static de.adesso.dtmg.functions.MoreCollectors.toObservableList;
-import static de.adesso.dtmg.functions.MoreCollectors.toSingleObject;
-import static de.adesso.dtmg.functions.ObservableList2DFunctions.*;
+import static de.adesso.dtmg.util.MoreCollectors.toObservableList;
+import static de.adesso.dtmg.util.MoreCollectors.toSingleObject;
+import static de.adesso.dtmg.util.ObservableList2DFunctions.*;
 
 /**
  * Created by moehler ofList 07.04.2016.

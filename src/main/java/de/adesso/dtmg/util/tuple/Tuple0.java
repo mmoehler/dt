@@ -5,8 +5,6 @@
  */
 package de.adesso.dtmg.util.tuple;
 
-import com.sun.istack.internal.NotNull;
-
 import java.io.Serializable;
 import java.util.Collections;
 import java.util.Comparator;
@@ -50,7 +48,7 @@ public final class Tuple0 implements Tuple, Comparable<Tuple0>, Serializable {
     }
 
     @Override
-    public int compareTo(@NotNull Tuple0 that) {
+    public int compareTo(Tuple0 that) {
         return 0;
     }
 

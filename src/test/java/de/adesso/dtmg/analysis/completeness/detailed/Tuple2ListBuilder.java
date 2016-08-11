@@ -19,7 +19,7 @@
 
 package de.adesso.dtmg.analysis.completeness.detailed;
 
-import de.adesso.dtmg.common.builder.List2DBuilder;
+import de.adesso.dtmg.util.List2DBuilder;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 

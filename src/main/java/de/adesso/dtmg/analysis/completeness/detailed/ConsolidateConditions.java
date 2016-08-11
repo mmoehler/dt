@@ -20,8 +20,8 @@
 package de.adesso.dtmg.analysis.completeness.detailed;
 
 import com.google.common.collect.LinkedListMultimap;
-import de.adesso.dtmg.Dump;
-import de.adesso.dtmg.functions.ObservableList2DFunctions;
+import de.adesso.dtmg.util.Dump;
+import de.adesso.dtmg.util.ObservableList2DFunctions;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -31,8 +31,8 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static de.adesso.dtmg.functions.MoreCollectors.toObservableList;
-import static de.adesso.dtmg.functions.MoreCollectors.toSingleObject;
+import static de.adesso.dtmg.util.MoreCollectors.toObservableList;
+import static de.adesso.dtmg.util.MoreCollectors.toSingleObject;
 
 /**
  * Created by mmoehler on 08.05.16.

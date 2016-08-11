@@ -23,10 +23,10 @@ import com.codepoetics.protonpack.Indexed;
 import com.codepoetics.protonpack.StreamUtils;
 import com.google.common.collect.Sets;
 import com.sun.codemodel.*;
-import de.adesso.dtmg.Dump;
+import de.adesso.dtmg.util.Dump;
 import de.adesso.dtmg.common.ToStringDecorator;
-import de.adesso.dtmg.common.builder.List2DBuilder;
-import de.adesso.dtmg.functions.List2DFunctions;
+import de.adesso.dtmg.util.List2DBuilder;
+import de.adesso.dtmg.util.List2DFunctions;
 import de.adesso.dtmg.util.RandomDefinitions;
 import org.testng.annotations.Test;
 
