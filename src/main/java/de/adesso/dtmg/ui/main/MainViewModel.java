@@ -28,6 +28,7 @@ import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import de.adesso.dtmg.util.tuple.Tuple3;
 import de.saxsys.mvvmfx.InjectScope;
+import de.saxsys.mvvmfx.Scope;
 import de.saxsys.mvvmfx.ScopeProvider;
 import de.saxsys.mvvmfx.ViewModel;
 import javafx.beans.property.BooleanProperty;
@@ -42,9 +43,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 import java.io.IOException;
 import java.net.URI;
-import java.util.List;
-import java.util.Optional;
-import java.util.OptionalInt;
+import java.util.*;
 import java.util.function.Function;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -350,6 +349,15 @@ public class MainViewModel implements ViewModel {
         }
     }
 
+    public void onUpdateDeclDoc(@Observes UpdateDeclDocEvent event) {
+        Optional<String> s = Optional.ofNullable(event.getText());
+        if (s.isPresent()) {
+            this.publish(UPD_DOCUMENT.name(), s.get());
+        }
+    }
+
+
+
     private Predicate<ObservableList<String>> hasNoElseRule() {
         return c -> (c.isEmpty()) ? true : !c.get(c.size() - 1).equals(ELSE);
     }
@@ -467,6 +475,13 @@ public class MainViewModel implements ViewModel {
 
     }
 
+    public void onDocumentDeclaration(@Observes DocumentDeclarationEvent event) {
+        publish(DOCUMENT_DECLARATION.name(), NO_ARGS);
+    }
+
+
+
+
     public int openFile(URI url) throws IOException, ClassNotFoundException {
         loadedData = persistenceManager.read(url);
         return loadedData.getConditionDefinitions().get(0).size();
@@ -498,5 +513,9 @@ public class MainViewModel implements ViewModel {
 
     public Optional<RecentItems> getRecentItems() {
         return Optional.ofNullable(mdScope.recentItems());
+    }
+
+    public Collection<Scope> getDialogScopes() {
+        return Collections.singletonList(mdScope);
     }
 }

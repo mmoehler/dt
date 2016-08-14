@@ -22,6 +22,7 @@ package de.adesso.dtmg.util;
 import com.google.common.collect.Lists;
 import de.adesso.dtmg.ui.DeclarationTableViewModel;
 import de.adesso.dtmg.ui.DefinitionsTableCell;
+import de.adesso.dtmg.ui.ExpressionTableCell;
 import de.adesso.dtmg.ui.PossibleIndicatorsSupplier;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
@@ -357,6 +358,8 @@ public final class DtFunctions {
 
     }
 
+
+
     public static <T, U> OptionalInt determineColumnIndex(TableView<T> tableView0, TableView<U> tableView1, OptionalInt externalIndex) {
         OptionalInt index = OptionalInt.empty();
         if (externalIndex.isPresent()) {
@@ -478,7 +481,7 @@ public final class DtFunctions {
         return createTableColumn(x, Optional.empty());
     }
 
-    public static <S> TableColumn<S, String> createExpressionTableColumn(String columnName, String propertyName, int prefWidth,
+    public static <S extends DeclarationTableViewModel> TableColumn<S, String> createExpressionTableColumn(String columnName, String propertyName, int prefWidth,
                                                                int minWidth, int maxWidth, boolean resizable,
                                                                Pos alignment,final String prefix, EventHandler<TableColumn.CellEditEvent<S, String>> value) {
         TableColumn<S, String> col = new TableColumn<>(columnName);
@@ -488,7 +491,7 @@ public final class DtFunctions {
         col.setResizable(resizable);
         col.setCellValueFactory(new PropertyValueFactory<>(propertyName));
         //col.setCellFactory(DeclarationsTableCell.forTableColumn(alignment));
-        col.setCellFactory(TextFieldTableCell.forTableColumn(new StringConverter<String>() {
+        col.setCellFactory(ExpressionTableCell.forExpressionTableColumn(new StringConverter<String>() {
             @Override
             public String toString(String object) {
                 return object;

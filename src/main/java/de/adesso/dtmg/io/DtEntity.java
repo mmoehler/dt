@@ -99,7 +99,7 @@ public class DtEntity implements Externalizable {
         readActionsExternal(in, arows, cols);
     }
 
-    private void writeConditionsExternal(ObjectOutput out, int rows, int cols) throws IOException {
+    private void writeConditionsExternal(ObjectOutput out, int rows, int cols) {
 
         IntStream.range(0, rows).forEach(rethrowIntConsumer(i -> {
             ConditionDecl model = conditionDeclarations.get(i).save().getModel();
@@ -113,7 +113,7 @@ public class DtEntity implements Externalizable {
                         .forEach(rethrowIntConsumer(j -> out.writeUTF(conditionDefinitions.get(i).get(j))))));
     }
 
-    private void readConditionsExternal(ObjectInput in, int rows, int cols) throws IOException {
+    private void readConditionsExternal(ObjectInput in, int rows, int cols) {
         IntStream.range(0, rows).mapToObj(rethrowIntFunction(i -> {
             final String lfdnr = in.readUTF();
             final String expr = in.readUTF();
@@ -127,7 +127,7 @@ public class DtEntity implements Externalizable {
         }));
     }
 
-    private void readActionsExternal(ObjectInput in, int rows, int cols) throws IOException {
+    private void readActionsExternal(ObjectInput in, int rows, int cols) {
         IntStream.range(0, rows).mapToObj(rethrowIntFunction(i -> {
             final String lfdnr = in.readUTF();
             final String expr = in.readUTF();
@@ -143,7 +143,7 @@ public class DtEntity implements Externalizable {
         }));
     }
 
-    private void writeActionsExternal(ObjectOutput out, int rows, int cols) throws IOException {
+    private void writeActionsExternal(ObjectOutput out, int rows, int cols) {
 
         IntStream.range(0, rows).forEach(rethrowIntConsumer(i -> {
             ActionDecl model = actionDeclarations.get(i).save().getModel();

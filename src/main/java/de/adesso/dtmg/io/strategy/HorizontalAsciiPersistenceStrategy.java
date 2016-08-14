@@ -145,8 +145,8 @@ public class HorizontalAsciiPersistenceStrategy extends AbstractPersistenceStrat
     @Override
     public DtEntity read(URI source) {
         final String path = ParseUtil.decode(source.getPath());
-        FileChannel fileChannel = null;
-        MappedByteBuffer buffer = null;
+        FileChannel fileChannel;
+        MappedByteBuffer buffer;
         try {
             fileChannel = new RandomAccessFile(path, "r").getChannel();
             buffer = fileChannel.map(FileChannel.MapMode.READ_ONLY, 0, fileChannel.size());

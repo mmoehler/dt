@@ -17,36 +17,10 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.quine.parser;
-
-import java.util.HashMap;
-import java.util.Map;
+package de.adesso.dtmg.events;
 
 /**
- * Created by moehler on 19.07.2016.
+ * CDI event class that is used to indicate that a contact was updated/added/removed.
  */
-public class ContextImpl implements Context {
-
-    private final Map<String, Integer> variables = new HashMap<>();
-
-    @Override
-    public int getVar(String mName) {
-        return this.variables.get(mName);
-    }
-
-    @Override
-    public void putVar(String mName) {
-        if (!variables.containsKey(mName))
-            this.variables.put(mName, 0);
-    }
-
-    @Override
-    public Map<String, Integer> getVariables() {
-        return this.variables;
-    }
-
-    @Override
-    public String toString() {
-        return String.valueOf(variables);
-    }
+public class DocumentDeclarationEvent {
 }

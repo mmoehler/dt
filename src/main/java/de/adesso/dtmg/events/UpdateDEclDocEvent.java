@@ -17,32 +17,19 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.quine.parser;
+package de.adesso.dtmg.events;
 
 /**
- * Created by moehler on 18.07.2016.
+ * CDI event class that is used to indicate that a contact was updated/added/removed.
  */
-public enum TokenType {
-    LEFT_PAREN,
-    RIGHT_PAREN,
-    PLUS,
-    ASTERISK,
-    NEGATION,
-    NAME,
-    EOF;
+public class UpdateDeclDocEvent {
+    final String text;
 
-    /**
-     * If the TokenType represents a punctuator (i.e. a token that can split an
-     * identifier like '+', this will getVar its text.
-     */
-    public Character punctuator() {
-        switch (this) {
-            case LEFT_PAREN:  return '(';
-            case RIGHT_PAREN: return ')';
-            case PLUS:        return '+';
-            case ASTERISK:    return '*';
-            case NEGATION:       return '!';
-            default:          return null;
-        }
+    public UpdateDeclDocEvent(String text) {
+        this.text = text;
+    }
+
+    public String getText() {
+        return text;
     }
 }

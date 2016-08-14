@@ -23,7 +23,7 @@ import com.codepoetics.protonpack.Indexed;
 import com.codepoetics.protonpack.StreamUtils;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
-import de.adesso.dtmg.export.quine.parser2.ExpParser;
+import de.adesso.dtmg.export.quine.parser.ExpParser;
 import de.adesso.dtmg.util.List2DFunctions;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
@@ -220,7 +220,6 @@ public class QuineMcCluskey implements Function<String, String> {
     public String toMinTerm(String l) {
         char[] c = l.toCharArray();
         String ret = new String();
-        boolean flag = false;
         for (int i = 0; i < c.length; i++) {
             if (CHR_DASH != c[i]) {
                 if (CHR_0 == c[i]) {

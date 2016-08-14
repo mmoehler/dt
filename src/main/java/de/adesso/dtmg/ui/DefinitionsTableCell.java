@@ -180,7 +180,6 @@ public class DefinitionsTableCell<S, T> extends TableCell<S, T> {
     // commits the edit. Update property if possible and revert to text display
     @Override
     public void commitEdit(T item) {
-
         // This block is necessary to support commit ofList losing focus, because the baked-in mechanism
         // sets our editing state to false before we can intercept the loss of focus.
         // The default commitEdit(...) method simply bails if we are not editing...

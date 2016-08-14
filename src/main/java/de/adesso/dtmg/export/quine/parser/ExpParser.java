@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.quine.parser2;
+package de.adesso.dtmg.export.quine.parser;
 
 import com.google.common.base.Splitter;
 import com.google.common.collect.Lists;

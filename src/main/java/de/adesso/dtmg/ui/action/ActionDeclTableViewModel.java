@@ -91,6 +91,10 @@ public class ActionDeclTableViewModel implements PossibleIndicatorsSupplier, Dec
         return wrapper.field("possibleIndicators", ActionDecl::getPossibleIndicators, ActionDecl::setPossibleIndicators);
     }
 
+    public StringProperty documentationProperty() {
+        return wrapper.field("documentation", ActionDecl::getDocumentation, ActionDecl::setDocumentation);
+    }
+
     @Override
     public String toString() {
         return wrapper.get().toString();

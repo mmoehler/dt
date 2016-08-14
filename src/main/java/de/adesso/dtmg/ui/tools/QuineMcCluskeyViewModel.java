@@ -21,11 +21,13 @@ package de.adesso.dtmg.ui.tools;
 
 import de.adesso.dtmg.ui.scopes.RuleScope;
 import de.saxsys.mvvmfx.InjectScope;
+import de.saxsys.mvvmfx.ScopeProvider;
 import de.saxsys.mvvmfx.ViewModel;
 
 /**
  * Created by mmoehler on 30.07.16.
  */
+@ScopeProvider(scopes={RuleScope.class})
 public class QuineMcCluskeyViewModel implements ViewModel {
     @InjectScope
     private RuleScope mdScope;

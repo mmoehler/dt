@@ -43,7 +43,6 @@ public class DeclarationsTableCell<S, T> extends TableCell<S, T> {
 
     public DeclarationsTableCell(StringConverter<T> converter) {
         this.converter = converter;
-
         this.textField = createTextField();
 
         itemProperty().addListener((obx, oldItem, newItem) -> {

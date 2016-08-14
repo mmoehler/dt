@@ -3,7 +3,6 @@ package de.adesso.dtmg.ui.about;
 import de.adesso.dtmg.util.DialogHelper;
 import de.saxsys.mvvmfx.FluentViewLoader;
 import de.saxsys.mvvmfx.FxmlView;
-import de.saxsys.mvvmfx.InjectViewModel;
 import javafx.fxml.FXML;
 import javafx.scene.Parent;
 import javafx.stage.Stage;
@@ -13,9 +12,6 @@ import javax.inject.Singleton;
 
 @Singleton
 public class AboutView implements FxmlView<AboutViewModel> {
-
-    @InjectViewModel
-    private AboutViewModel viewModel;
 
     @Inject
     private Stage primaryStage;

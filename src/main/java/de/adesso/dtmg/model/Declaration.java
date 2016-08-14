@@ -47,16 +47,20 @@ public class Declaration extends Identity implements Iterable<String> {
      */
     protected String possibleIndicators = EMPTY_STRING;
 
+    /**
+     * Additional documentation
+     */
+    protected String documentation = EMPTY_STRING;
+
     public Declaration() {
     }
 
-    @Nonnull
     protected Declaration(@Nonnull List<String> data) {
         this(data.get(0), data.get(1), data.get(2));
     }
 
 
-    public Declaration(String lfdNr, String expression, String possibleIndicators) {
+    public Declaration(@Nonnull String lfdNr, @Nonnull String expression, @Nonnull String possibleIndicators) {
         this.lfdNr = lfdNr;
         this.expression = expression;
         this.possibleIndicators = possibleIndicators;
@@ -84,6 +88,14 @@ public class Declaration extends Identity implements Iterable<String> {
 
     public void setPossibleIndicators(String possibleIndicators) {
         this.possibleIndicators = possibleIndicators;
+    }
+
+    public String getDocumentation() {
+        return documentation;
+    }
+
+    public void setDocumentation(String documentation) {
+        this.documentation = documentation;
     }
 
     public int getPossibleIndicatorSize() {
@@ -121,10 +133,6 @@ public class Declaration extends Identity implements Iterable<String> {
         result = 31 * result + (expression != null ? expression.hashCode() : 0);
         result = 31 * result + (possibleIndicators != null ? possibleIndicators.hashCode() : 0);
         return result;
-    }
-
-    public Object[] toArray() {
-        return Lists.newArrayList(getLfdNr(), getExpression(), getPossibleIndicators()).toArray(new Object[3]);
     }
 
     public List<String> asList() {

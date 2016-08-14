@@ -1,27 +1,11 @@
 package de.adesso.dtmg.ui.about;
 
 import de.saxsys.mvvmfx.ViewModel;
-import de.saxsys.mvvmfx.utils.notifications.NotificationCenter;
-import javafx.application.HostServices;
-import javafx.beans.property.ReadOnlyStringProperty;
-import javafx.beans.property.ReadOnlyStringWrapper;
-import javafx.collections.FXCollections;
-import javafx.collections.MapChangeListener;
-import javafx.collections.ObservableMap;
-
-import javax.annotation.PostConstruct;
-import javax.inject.Inject;
-import java.util.function.Consumer;
 
 public class AboutViewModel implements ViewModel {
-
+/*
     private final ReadOnlyStringWrapper librariesLabelText = new ReadOnlyStringWrapper("");
-    // Package Private because of testing reasons
     ObservableMap<String, String> libraryLinkMap = FXCollections.observableHashMap();
-    /**
-     * Sadly the {@link javafx.application.HostServices} class of JavaFX is <code>final</code> so we can't mock it in
-     * tests. To still be able to test link actions we have introduced this handler as a mockable indirection.
-     */
     Consumer<String> onLinkClickedHandler;
     @Inject
     private HostServices hostServices;
@@ -65,5 +49,5 @@ public class AboutViewModel implements ViewModel {
     public ReadOnlyStringProperty librariesLabelTextProperty() {
         return librariesLabelText.getReadOnlyProperty();
     }
-
+*/
 }

@@ -33,6 +33,8 @@ public interface DeclarationTableViewModel extends Iterable<String> {
 
     StringProperty possibleIndicatorsProperty();
 
+    StringProperty documentationProperty();
+
     boolean isValid();
 
     DeclarationTableViewModel save();

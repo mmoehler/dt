@@ -60,7 +60,7 @@ public class PackageDependencyCheck {
         try {
             lines = Files.lines(Paths.get(f.toURI()), Charset.forName(UTF_8)).collect(Collectors.toList());
         } catch (IOException e) {
-            throw new IllegalArgumentException("Trouble with: " + f.getAbsolutePath());
+            throw new IllegalArgumentException("Trouble with: " + f.getAbsolutePath(), e);
         }
 
         final Optional<String> packageMame = lines.stream()

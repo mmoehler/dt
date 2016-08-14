@@ -131,6 +131,16 @@
                             </accelerator>
                         </MenuItem>
 
+                        <SeparatorMenuItem mnemonicParsing="false"/>
+
+                        <MenuItem fx:id="documentDeclaration" mnemonicParsing="false"
+                                  onAction="#doDocumentDeclaration" text="Document selected declaration">
+                            <accelerator>
+                                <KeyCodeCombination alt="UP" code="F10" control="UP" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+
                         <!-- ### Rules ### -->
                         <SeparatorMenuItem mnemonicParsing="false"/>
                         <MenuItem fx:id="addRuleMenuItem" mnemonicParsing="false" onAction="#doAddRuleDef"

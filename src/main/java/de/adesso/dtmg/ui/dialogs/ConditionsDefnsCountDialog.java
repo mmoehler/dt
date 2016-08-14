@@ -23,10 +23,6 @@ public class ConditionsDefnsCountDialog extends Dialog<Tuple2<Integer, Boolean>>
     private final String defaultNumberValue;
 
 
-    public ConditionsDefnsCountDialog() {
-        this("", false);
-    }
-
     public ConditionsDefnsCountDialog(@NamedArg("defaultNumberValue") String defaultNumberValue,
                                       @NamedArg("defaultBooleanValue") boolean defaultBooleanValue) {
         final DialogPane dialogPane = getDialogPane();
@@ -48,7 +44,6 @@ public class ConditionsDefnsCountDialog extends Dialog<Tuple2<Integer, Boolean>>
         label.textProperty().bind(dialogPane.contentTextProperty());
 
         this.defaultNumberValue = defaultNumberValue;
-        boolean defaultBooleanValue1 = defaultBooleanValue;
 
         this.grid = new GridPane();
         this.grid.setHgap(10);

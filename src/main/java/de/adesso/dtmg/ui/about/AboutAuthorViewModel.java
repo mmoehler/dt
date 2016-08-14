@@ -10,7 +10,6 @@ public class AboutAuthorViewModel implements ViewModel {
     @Inject
     private HostServices hostServices;
 
-
     public void openBlog() {
         hostServices.showDocument("http://www.adesso.de");
     }
@@ -18,4 +17,5 @@ public class AboutAuthorViewModel implements ViewModel {
     public void openTwitter() {
         hostServices.showDocument("mailto:moehler@adesso.de?subject=DTMG");
     }
+
 }

@@ -77,6 +77,10 @@ public class MenuViewModel implements ViewModel {
     private Event<FileSaveEvent> fileSaveEvent;
     @Inject
     private Event<FileExportAsEvent> fileExportAsEvent;
+    @Inject
+    private Event<DocumentDeclarationEvent> documentDeclarationEvent;
+
+
 
     private RecentItems recentItems;
 
@@ -227,4 +231,7 @@ public class MenuViewModel implements ViewModel {
     }
 
 
+    public void documentDeclaration() {
+        documentDeclarationEvent.fire(new DocumentDeclarationEvent());
+    }
 }

@@ -34,8 +34,6 @@ import static de.adesso.dtmg.util.List2DFunctions.transpose;
  * Created by mmoehler ofList 28.03.16.
  */
 public class ConditionDetailedCompletenessCheck {
-    public ConditionDetailedCompletenessCheck() {
-    }
 
     public static List<Indexed<List<String>>> isFormalComplete(ObservableList<ConditionDeclTableViewModel> decls, ObservableList<ObservableList<String>> defns) {
 

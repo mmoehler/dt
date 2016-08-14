@@ -207,4 +207,8 @@ public class MenuView implements FxmlView<MenuViewModel> {
     public void doFileExportAs(ActionEvent actionEvent) {
         viewModel.fileExportAs();
     }
+
+    public void doDocumentDeclaration(ActionEvent actionEvent) {
+        viewModel.documentDeclaration();
+    }
 }

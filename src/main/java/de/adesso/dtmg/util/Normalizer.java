@@ -21,6 +21,8 @@ package de.adesso.dtmg.util;
 
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Created by moehler on 02.07.16.
@@ -49,10 +51,8 @@ public enum Normalizer {
             return prefix + "_";
         }
         CharacterIterator ci = new StringCharacterIterator(replaceGermanUmlauts(ident.trim()));
-        StringBuilder sb = new StringBuilder(prefix);
+        StringBuffer sb = new StringBuffer(prefix);
         for (char c = ci.first(); c != CharacterIterator.DONE; c = ci.next()) {
-            if (c == ' ')
-                c = '_';
             if (sb.length() == 0) {
                 if (Character.isJavaIdentifierStart(c)) {
                     sb.append(c);
@@ -114,16 +114,23 @@ public enum Normalizer {
             } else {
                 switch (c) {
                     case '%':
-                        sb.append("_PROZENT");
+                        sb.append("Prozent");
                         break;
                     case '§':
-                        sb.append("PARAGRAPH");
+                        sb.append("Paragraph");
                         break;
                     default:
-                        sb.append('_');
+                        sb.append(' ');
                 }
             }
         }
-        return sb.toString().toLowerCase();
+        Pattern p = Pattern.compile(" (.)");
+        Matcher m = p.matcher(sb.toString());
+        sb = new StringBuffer();
+        while (m.find()) {
+            m.appendReplacement(sb, m.group(1).toUpperCase());
+        }
+        m.appendTail(sb);
+        return sb.toString();
     }
 }

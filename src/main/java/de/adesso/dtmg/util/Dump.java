@@ -21,9 +21,7 @@ package de.adesso.dtmg.util;
 
 import com.codepoetics.protonpack.Indexed;
 import com.google.common.base.Preconditions;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
-import de.adesso.dtmg.analysis.structure.Indicator;
 import de.adesso.dtmg.util.tuple.Tuple;
 import javafx.collections.ObservableList;
 
@@ -32,6 +30,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.Predicate;
+
+//import de.adesso.dtmg.analysis.structure.Indicator;
 
 /**
  * Created by mmoehler ofList 27.03.16.
@@ -62,11 +62,11 @@ public class Dump {
         System.out.println("<<<<<<<<<<\n");
     }
 
-    public static <K,V> void dumpMultiMap(String msg, Multimap<K,V> map, Predicate<V> valueFilter) {
+    public static <K, V> void dumpMultiMap(String msg, Multimap<K, V> map, Predicate<V> valueFilter) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
-        map.asMap().keySet().forEach(k ->{
+        map.asMap().keySet().forEach(k -> {
             System.out.println("\t" + String.valueOf(k));
-            if(null != valueFilter) {
+            if (null != valueFilter) {
                 map.get(k).stream()
                         .filter(valueFilter)
                         .forEach(v -> System.out.println("\t\t" + v));
@@ -78,35 +78,30 @@ public class Dump {
         System.out.println("<<<<<<<<<<\n");
     }
 
-    public static <K,V> void dumpSimpleDot(Multimap<K,V> map, Predicate<K> keyFilter, Predicate<V> valueFilter) {
+    public static <K, V> void dumpSimpleDot(Multimap<K, V> map, Predicate<K> keyFilter, Predicate<V> valueFilter) {
         System.out.println("digraph G {");
         map.asMap().keySet().stream()
                 .filter(keyFilter)
-                .forEach(k ->{
+                .forEach(k -> {
                     final String l = String.valueOf(k);
                     map.get(k).stream()
                             .filter(valueFilter)
-                            .forEach(v -> System.out.println(String.format("\t\"%s\" -> \"%s\";",l,v)));
+                            .forEach(v -> System.out.println(String.format("\t\"%s\" -> \"%s\";", l, v)));
 
-        });
+                });
         System.out.println("}\n");
     }
 
 
-
-
-
-
-
     public static <T> void dumpMapLongIntegerListString(String msg, Map<Long, List<T>> map) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
-        map.forEach((k, v) -> System.out.println("\t" + k + " ->" + v.stream().map(a -> String.valueOf(a)).reduce("\t\t",(l,r) -> (l.length()==0) ? r : ("\t\t"+l+"\n\t\t"+r))));
+        map.forEach((k, v) -> System.out.println("\t" + k + " ->" + v.stream().map(a -> String.valueOf(a)).reduce("\t\t", (l, r) -> (l.length() == 0) ? r : ("\t\t" + l + "\n\t\t" + r))));
         System.out.println("<<<<<<<<<<\n");
     }
 
     public static void dumpMapLongListChrAr(String msg, Map<Long, List<char[]>> map) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
-        map.forEach((k, v) -> System.out.println("\t" + k + " ->" + v.stream().map(a -> Arrays.toString(a)).reduce("\t\t",(l,r) -> (l.length()==0) ? r : ("\t\t"+l+"\n\t\t"+r))));
+        map.forEach((k, v) -> System.out.println("\t" + k + " ->" + v.stream().map(a -> Arrays.toString(a)).reduce("\t\t", (l, r) -> (l.length() == 0) ? r : ("\t\t" + l + "\n\t\t" + r))));
         System.out.println("<<<<<<<<<<\n");
     }
 
@@ -139,7 +134,7 @@ public class Dump {
 
     public static <T> void indexed(String msg, Indexed<T> i) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));
-            System.out.println(String.format("<%d:%s>",i.getIndex(), String.valueOf(i.getValue())));
+        System.out.println(String.format("<%d:%s>", i.getIndex(), String.valueOf(i.getValue())));
         System.out.println("<<<<<<<<<<\n");
     }
 
@@ -155,12 +150,6 @@ public class Dump {
         System.out.println("<<<<<<<<<<\n");
     }
 
-
-    public static void dumpStructuralAnalysisResult(String msg, List<Indicator> r) {
-        System.out.println(String.format("%s >>>>>>>>>>", msg));
-        Lists.partition(r,5).forEach(System.out::println);
-        System.out.println("<<<<<<<<<<\n");
-    }
 
     public static <T> void dumListWithIndexedValues(String msg, List<Indexed<T>> v) {
         System.out.println(String.format("%s >>>>>>>>>>", msg));

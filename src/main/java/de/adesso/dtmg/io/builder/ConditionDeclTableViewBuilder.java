@@ -26,9 +26,6 @@ import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
  */
 public class ConditionDeclTableViewBuilder extends TableViewBuilder<ConditionDeclTableViewModel> {
 
-    public ConditionDeclTableViewBuilder() {
-    }
-
     public ConditionDeclBuilder<ConditionDeclTableViewBuilder> addModelWithLfdNbr(String number) {
         return new ConditionDeclBuilder<>(number, this,
                 (c) -> tableView.getItems().add(new ConditionDeclTableViewModel(c)));

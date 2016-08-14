@@ -46,14 +46,6 @@ public class ConditionDeclTableViewModel implements PossibleIndicatorsSupplier, 
         wrapper.reload();
     }
 
-    public void reset() {
-        wrapper.reset();
-    }
-
-    public void reloadFromModel() {
-        wrapper.reload();
-    }
-
     @Override
     public ConditionDeclTableViewModel save() {
         boolean someValidation = true;
@@ -102,6 +94,12 @@ public class ConditionDeclTableViewModel implements PossibleIndicatorsSupplier, 
     public StringProperty possibleIndicatorsProperty() {
         return wrapper.field("possibleIndicators", ConditionDecl::getPossibleIndicators, ConditionDecl::setPossibleIndicators);
     }
+
+    @Override
+    public StringProperty documentationProperty() {
+        return wrapper.field("documentation", ConditionDecl::getDocumentation, ConditionDecl::setDocumentation);
+    }
+
 
     @Override
     public String toString() {

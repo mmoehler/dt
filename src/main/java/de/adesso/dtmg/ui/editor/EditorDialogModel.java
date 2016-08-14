@@ -17,19 +17,24 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.quine.parser;
+package de.adesso.dtmg.ui.editor;
+
+import de.adesso.dtmg.events.UpdateDeclDocEvent;
+import de.saxsys.mvvmfx.ViewModel;
+
+import javax.enterprise.event.Event;
+import javax.inject.Inject;
 
 /**
- * Defines the different precendence levels used by the infix parsers. These
- * determine how a series of infix expressions will be grouped. For example,
- * "a + b * c - d" will be parsed as "(a + (b * c)) - d" because "*" has higher
- * precedence than "+" and "-". Here, bigger numbers mean higher precedence.
+ * Created by mmoehler on 13.08.16.
  */
-public class Precedence {
-    // Ordered in increasing precedence.
-    public static final int CONDITIONAL = 1;
-    public static final int SUM         = 2;
-    public static final int PRODUCT     = 3;
-    public static final int PREFIX      = 4;
-    public static final int POSTFIX     = 5;
+public class EditorDialogModel implements ViewModel {
+
+    @Inject
+    private Event<UpdateDeclDocEvent> updateDeclDocEventEvent;
+
+
+    public void handleEditorOnOK(String text) {
+        updateDeclDocEventEvent.fire(new UpdateDeclDocEvent(text));
+    }
 }

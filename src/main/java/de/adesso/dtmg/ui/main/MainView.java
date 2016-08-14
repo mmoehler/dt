@@ -28,12 +28,17 @@ import de.adesso.dtmg.ui.Notifications;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.dtmg.ui.dialogs.Dialogs;
+import de.adesso.dtmg.ui.editor.EditorDialog;
+import de.adesso.dtmg.ui.editor.EditorDialogModel;
+import de.adesso.dtmg.util.DialogHelper;
 import de.adesso.dtmg.util.DtFunctions;
 import de.adesso.dtmg.util.OsCheck;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
+import de.saxsys.mvvmfx.FluentViewLoader;
 import de.saxsys.mvvmfx.FxmlView;
 import de.saxsys.mvvmfx.InjectViewModel;
+import de.saxsys.mvvmfx.ViewTuple;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleObjectProperty;
@@ -43,12 +48,14 @@ import javafx.fxml.FXML;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import javax.inject.Inject;
 import java.io.File;
@@ -75,6 +82,8 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     private static final String ELSE = "E";
     private final static Predicate<ObservableList<String>> HAS_ELSE_RULE =
             c -> (c.isEmpty()) ? false : c.get(c.size() - 1).equals(ELSE);
+    public static final String PREFIX_IS = "is";
+    public static final String PREFIX_DO = "do";
     private final DoubleProperty conditionDividerPos = new SimpleDoubleProperty();
     private final DoubleProperty actionDividerPos = new SimpleDoubleProperty();
     private final SimpleObjectProperty<Path> currentFile = new SimpleObjectProperty<>();
@@ -94,10 +103,8 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     private TextArea console;
     @InjectViewModel
     private MainViewModel viewModel;
-/*
     @Inject
-    private NotificationCenter notificationCenter;
-*/
+    private Stage primaryStage;
     @Inject
     private ExceptionHandler exceptionHandler;
     private String lastKey = null;
@@ -112,6 +119,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         l.add(createTableColumn("#", "lfdNr", 40, 40, 40, false, Pos.CENTER,
                 (TableColumn.CellEditEvent<T, String> evt) -> evt.getTableView().getItems().get(evt.getTablePosition().getRow())
                         .lfdNrProperty().setValue(evt.getNewValue())));
+
         l.add(createExpressionTableColumn("Expression", "expression", 300, 300, Integer.MAX_VALUE, true, Pos.CENTER_LEFT, prefix,
                 (TableColumn.CellEditEvent<T, String> evt) -> evt.getTableView().getItems().get(evt.getTablePosition().getRow())
                         .expressionProperty().setValue(evt.getNewValue())));
@@ -204,7 +212,13 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         this.viewModel.subscribe(Notifications.FILE_EXPORT_AS.name(), this::doFileExportAs);
 
         this.viewModel.subscribe(EV_CONSOLIDATE_RULES.name(), this::doConsolidateRules);
+
+        this.viewModel.subscribe(Notifications.DOCUMENT_DECLARATION.name(), this::doDocumentDeclaration);
+
+        this.viewModel.subscribe(Notifications.UPD_DOCUMENT.name(), this::updateDocumentDeclaration);
     }
+
+
 
     private void doConsolidateRules(String s, Object... objects) {
         try {
@@ -232,6 +246,44 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
             this.fileChooser = new FileChooser();
         }
         return fileChooser;
+    }
+
+    private DeclarationTableViewModel selectedModel;
+    private void doDocumentDeclaration(String s, Object... objects) {
+        OptionalInt index = getIndex(objects);
+        Optional<TableView<? extends DeclarationTableViewModel>> table = getSelectedDeclTable();
+        if(table.isPresent()) {
+            selectedModel = table.get().getSelectionModel().getSelectedItem();
+
+
+            ViewTuple<EditorDialog, EditorDialogModel> load = FluentViewLoader
+                    .fxmlView(EditorDialog.class)
+                    .providedScopes(viewModel.getDialogScopes())
+                    .load();
+
+            load.getCodeBehind().setText(selectedModel.documentationProperty().get());//model.documentationProperty().get());
+
+            Parent view = load.getView();
+            Stage showDialog = DialogHelper.showDialog(view, primaryStage, "/about.css");
+            load.getCodeBehind().setDisplayingStage(showDialog);
+
+        }
+    }
+
+    private void updateDocumentDeclaration(String s, Object... objects) {
+        String s1 = String.valueOf(objects[0]);
+        System.out.println("s1 = " + s1);
+        selectedModel.documentationProperty().set((String)objects[0]);
+    }
+
+    private Optional<TableView<? extends DeclarationTableViewModel>> getSelectedDeclTable() {
+        TableView<? extends DeclarationTableViewModel> ret = null;
+        if(getConditionDeclarationsTable().focusedProperty().get()) {
+            ret = getConditionDeclarationsTable();
+        } else if(getActionDeclarationsTable().focusedProperty().get()) {
+            ret = getActionDeclarationsTable();
+        }
+        return Optional.ofNullable(ret);
     }
 
     private void doFileOpen(String key, Object[] value) {
@@ -332,7 +384,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         FileChooser fc = getFileChooser();
         try {
             configureFileChooser(getFileChooser(), "Save DTMG File");
-            File file = fc.showOpenDialog(this.actionSplitPane.getScene().getWindow());
+            File file = fc.showSaveDialog(this.actionSplitPane.getScene().getWindow());
             if (file != null) {
                 internalSaveFile(file);
             }
@@ -615,7 +667,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
 
         initializeConditionDeclFocusHandling();
         initializeTableKeyboardHandling(conditionDeclarationsTable);
-        initializeDeclarationTablesColumns(this.conditionDeclarationsTable, "is_");
+        initializeDeclarationTablesColumns(this.conditionDeclarationsTable, PREFIX_IS);
 
         this.conditionDeclarationsTable.getItems().clear();
         this.conditionDeclarationsTable.setItems(viewModel.getConditionDeclarations());
@@ -625,7 +677,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         this.actionDeclarationsTable.getSelectionModel().setCellSelectionEnabled(true);
 
         initializeTableKeyboardHandling(actionDeclarationsTable);
-        initializeDeclarationTablesColumns(this.actionDeclarationsTable, "do_");
+        initializeDeclarationTablesColumns(this.actionDeclarationsTable, PREFIX_DO);
 
         this.actionDeclarationsTable.getItems().clear();
         this.actionDeclarationsTable.setItems(viewModel.getActionDeclarations());
