@@ -27,6 +27,7 @@ import de.adesso.dtmg.model.ActionDecl;
 public class ActionDeclBuilder<C> extends AbstractSubBuilder<ActionDecl, C> {
     private final String lfdNr;
     private String expression;
+    private String documentation;
     private String indicators;
 
     public ActionDeclBuilder(String lfdNr, C caller, Callback<ActionDecl> callback) {
@@ -36,13 +37,19 @@ public class ActionDeclBuilder<C> extends AbstractSubBuilder<ActionDecl, C> {
 
     @Override
     public ActionDecl build() {
-        return new ActionDecl(lfdNr, expression, indicators);
+        return new ActionDecl(lfdNr, expression, documentation, indicators);
     }
 
     public ActionDeclBuilder<C> withExpression(String expression) {
         this.expression = expression;
         return this;
     }
+
+    public ActionDeclBuilder<C> withDocumentation(String documentation) {
+        this.documentation = documentation;
+        return this;
+    }
+
 
     public C withIndicators(String possibleIndicators) {
         this.indicators = possibleIndicators;

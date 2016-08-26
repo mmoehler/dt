@@ -19,8 +19,6 @@
 
 package de.adesso.dtmg.export.java.treeMethod;
 
-import com.codepoetics.protonpack.Indexed;
-
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -29,6 +27,9 @@ import java.util.function.Predicate;
  * Created by mmoehler on 10.06.16.
  */
 public class SimpleVisitor implements Visitor<DtNode> {
+
+    private static String[] N = {"X1","X2", "X3", "X4"};
+
     @Override
     public void visit(DtNode visitable, Object...args) {
 
@@ -37,13 +38,13 @@ public class SimpleVisitor implements Visitor<DtNode> {
 
         printIF(visitable, cset);
 
-        if(null != visitable.yes)
+        if(null != visitable.yes && ! visitable.yes.isDontCare())
         visitable.yes.accept(this,args);
         else printAction(visitable, true, aset);
 
         printELSE();
 
-        if(null != visitable.no)
+        if(null != visitable.no && ! visitable.no.isDontCare())
         visitable.no.accept(this, args);
         else printAction(visitable, false, aset);
         printENDIF();
@@ -58,22 +59,22 @@ public class SimpleVisitor implements Visitor<DtNode> {
     }
 
     private void printIF(DtNode visitable, Set<String> set) {
-        final String cname = String.format("condition%02d",visitable.index);
+        final String cname = String.format("_%d",visitable.getConditionIndex());
         set.add(cname);
         System.out.println(String.format("if(%s()) {", cname));
 
     }
 
     private void printAction(DtNode visitable, boolean flag, Set<String> set) {
-        Predicate<Indexed<String>> p = (flag)
-                ? (i) -> i.getValue().equals("Y")
-                : (i) -> i.getValue().equals("N");
+        Predicate<DtCell> p = (flag)
+                ? (i) -> i.typeOf(DtCellType.Y)
+                : (i) -> i.typeOf(DtCellType.N);
 
-        Optional<Indexed<String>> first = visitable.data.stream().filter(p).findFirst();
+        Optional<DtCell> first = visitable.data.get(0).stream().filter(p).findFirst();
 
         String s = first.isPresent()
-                ? String.format("action%02d", first.get().getIndex())
-                : ("otherwise");
+                ? String.format("%s", N[first.get().col()])
+                : ("X5");
 
         set.add(s);
 

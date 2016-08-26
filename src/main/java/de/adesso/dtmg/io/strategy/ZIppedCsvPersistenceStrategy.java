@@ -36,10 +36,7 @@ import java.io.IOException;
 import java.net.URI;
 import java.nio.charset.Charset;
 import java.nio.file.*;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Future;
@@ -76,17 +73,29 @@ public class ZIppedCsvPersistenceStrategy extends AbstractPersistenceStrategy<Dt
         return EXTENSION;
     }
 
+    private List<String> mig(List<String> data) {
+        if(data.size()<4) {
+            List<String> ret = new ArrayList<>(4);
+            ret.addAll(data);
+            for (int i = 0; i < (4-data.size()); i++) {
+                ret.add("");
+            }
+            return Collections.unmodifiableList(ret);
+        }
+        return data;
+    }
+
     @Override
     public DtEntity read(URI source) {
 
         Function<String, ConditionDeclTableViewModel> csv2conditionDecl
-                = (s) -> new ConditionDeclTableViewModel(ConditionDecl.of(Splitter.on(STR_SEMICOLON).trimResults().splitToList(s)));
+                = (s) -> new ConditionDeclTableViewModel(ConditionDecl.of(mig(Splitter.on(STR_SEMICOLON).trimResults().splitToList(s))));
         Function<String, ActionDeclTableViewModel> csv2actionDecl
-                = (s) -> new ActionDeclTableViewModel(ActionDecl.of(Splitter.on(STR_SEMICOLON).trimResults().splitToList(s)));
+                = (s) -> new ActionDeclTableViewModel(ActionDecl.of(mig(Splitter.on(STR_SEMICOLON).trimResults().splitToList(s))));
         Function<String, ObservableList<String>> csv2definition
                 = (s) -> FXCollections.observableArrayList(Splitter.on(STR_SEMICOLON).trimResults().splitToList(s));
 
-        final Path path = Paths.get(ParseUtil.decode(source.getPath()));
+        final Path path = Paths.get(source);
         URI p = path.toUri();
         URI uri = URI.create( STR_PROTOCOL_JAR + p );
 

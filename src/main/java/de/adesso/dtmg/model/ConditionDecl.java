@@ -31,6 +31,7 @@ public class ConditionDecl extends Declaration {
     private ConditionDecl(Builder builder) {
         setLfdNr(builder.lfdNr);
         setExpression(builder.expression);
+        setDocumentation(builder.documentation);
         setPossibleIndicators(builder.possibleIndicators);
     }
 
@@ -42,8 +43,8 @@ public class ConditionDecl extends Declaration {
         super();
     }
 
-    public ConditionDecl(String lfdNr, String expression, String possibleIndicators) {
-        super(lfdNr, expression, possibleIndicators);
+    public ConditionDecl(String lfdNr, String expression, String possibleIndicators, String documentation) {
+        super(lfdNr, expression, possibleIndicators, documentation);
     }
 
     protected ConditionDecl(@Nonnull List<String> data) {
@@ -58,6 +59,7 @@ public class ConditionDecl extends Declaration {
         Builder builder = new Builder();
         builder.lfdNr = copy.lfdNr;
         builder.expression = copy.expression;
+        builder.documentation = copy.documentation;
         builder.possibleIndicators = copy.possibleIndicators;
         return builder;
     }
@@ -98,6 +100,16 @@ public class ConditionDecl extends Declaration {
     }
 
     @Override
+    public String getDocumentation() {
+        return super.getDocumentation();
+    }
+
+    @Override
+    public void setDocumentation(String documentation) {
+        super.setDocumentation(documentation);
+    }
+
+    @Override
     public String toString() {
         return super.toString();
     }
@@ -109,6 +121,7 @@ public class ConditionDecl extends Declaration {
     public static final class Builder {
         private String lfdNr;
         private String expression;
+        private String documentation;
         private String possibleIndicators;
 
         private Builder() {
@@ -147,6 +160,12 @@ public class ConditionDecl extends Declaration {
         @Nonnull
         public Builder withPossibleIndicators(@Nonnull String val) {
             possibleIndicators = val;
+            return this;
+        }
+
+        @Nonnull
+        public Builder withDocumentation(@Nonnull String val) {
+            documentation = val;
             return this;
         }
 

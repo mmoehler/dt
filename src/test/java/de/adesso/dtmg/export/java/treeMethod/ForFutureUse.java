@@ -21,10 +21,8 @@ package de.adesso.dtmg.export.java.treeMethod;
 
 import com.codepoetics.protonpack.Indexed;
 import com.codepoetics.protonpack.StreamUtils;
-import com.google.common.collect.Sets;
 import com.sun.codemodel.*;
 import de.adesso.dtmg.util.Dump;
-import de.adesso.dtmg.common.ToStringDecorator;
 import de.adesso.dtmg.util.List2DBuilder;
 import de.adesso.dtmg.util.List2DFunctions;
 import de.adesso.dtmg.util.RandomDefinitions;
@@ -64,33 +62,27 @@ public class ForFutureUse {
     }
 
     static void createDecisionTree(List<List<String>> dt, DtNode top) {
-
-        System.out.println(String.format("(%02d) => %s",
-                top.index,
-                top.data.stream()
-                        .map(i -> ToStringDecorator.decorate(i, (o) -> String.format("",o.getIndex(), o.getValue())).asString())
-                        .collect(Collectors.toList())));
-
-        if (top.index >= dt.size() - 1) return;
+/*
+        if (top.getConditionIndex() >= dt.size() - 1) return;
 
         final List<Indexed<String>> theTrues = top.data.stream()
                 .filter(i -> Pattern.matches("Y|-", i.getValue()))
-                .map(j -> Indexed.index(j.getIndex(), dt.get(top.index + 1).get((int) j.getIndex())))
+                .map(j -> Indexed.index(j.getIndex(), dt.get(top.conditionIndex + 1).get((int) j.getIndex())))
                 .collect(Collectors.toList());
 
-        DtNode ifTrue = DtNode.newBuilder().data(theTrues).index(top.index + 1).build();
+        DtNode ifTrue = DtNode.newBuilder().data(theTrues).index(top.conditionIndex + 1).build();
         top.yes = ifTrue;
         createDecisionTree(dt, ifTrue);
 
         final List<Indexed<String>> theOthers = top.data.stream()
                 .filter(i -> Pattern.matches("N|-", i.getValue()))
-                .map(j -> Indexed.index(j.getIndex(), dt.get(top.index + 1).get((int) j.getIndex())))
+                .map(j -> Indexed.index(j.getIndex(), dt.get(top.conditionIndex + 1).get((int) j.getIndex())))
                 .collect(Collectors.toList());
 
-        DtNode ifFalse = DtNode.newBuilder().data(theOthers).index(top.index + 1).build();
+        DtNode ifFalse = DtNode.newBuilder().data(theOthers).index(top.conditionIndex + 1).build();
         top.no = ifFalse;
         createDecisionTree(dt, ifFalse);
-
+*/
     }
 
     @Test
@@ -268,6 +260,7 @@ public class ForFutureUse {
 
     @Test
     public void testCreateDecisionTree() throws Exception {
+        /*
         //final List<List<String>> dt = List2DBuilder.matrixOf("-,Y,Y,N,N,Y,Y,Y,Y,Y,N,N").dim(3, 4).build();
 
         final List<List<String>> dt = List2DBuilder.matrixOf("Y,Y,N,N,N,-,-,Y,Y,N,Y,N,Y,N,-").dim(3, 5).build();
@@ -296,6 +289,7 @@ public class ForFutureUse {
         actionNames.forEach(n -> System.out.println(String.format(actTpl, n)));
 
         System.out.println("}");
+        */
     }
 
 

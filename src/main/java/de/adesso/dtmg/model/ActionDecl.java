@@ -19,12 +19,13 @@ public class ActionDecl extends Declaration {
         super(data);
     }
 
-    public ActionDecl(String lfdNr, String expression, String possibleIndicators) {
-        super(lfdNr, expression, possibleIndicators);
+    public ActionDecl(String lfdNr, String expression, String possibleIndicators, String   documentation) {
+        super(lfdNr, expression, possibleIndicators, documentation);
     }
 
     private ActionDecl(Builder builder) {
         setExpression(builder.expression);
+        setDocumentation(builder.documentation);
         setLfdNr(builder.lfdNr);
         setPossibleIndicators(builder.possibleIndicators);
     }
@@ -36,6 +37,7 @@ public class ActionDecl extends Declaration {
     public static Builder newBuilder(@Nonnull ActionDecl copy) {
         Builder builder = new Builder();
         builder.expression = copy.expression;
+        builder.documentation = copy.documentation;
         builder.lfdNr = copy.lfdNr;
         builder.possibleIndicators = copy.possibleIndicators;
         return builder;
@@ -77,6 +79,16 @@ public class ActionDecl extends Declaration {
     }
 
     @Override
+    public String getDocumentation() {
+        return super.getDocumentation();
+    }
+
+    @Override
+    public void setDocumentation(String documentation) {
+        super.setDocumentation(documentation);
+    }
+
+    @Override
     public String toString() {
         return super.toString();
     }
@@ -87,6 +99,7 @@ public class ActionDecl extends Declaration {
      */
     public static final class Builder {
         private String expression;
+        private String documentation;
         private String lfdNr;
         private String possibleIndicators;
 
@@ -114,6 +127,12 @@ public class ActionDecl extends Declaration {
         @Nonnull
         public Builder withLfdNr(@Nonnull String val) {
             lfdNr = val;
+            return this;
+        }
+
+        @Nonnull
+        public Builder withDocumentation(@Nonnull String val) {
+            documentation = val;
             return this;
         }
 

@@ -19,6 +19,8 @@
 
 package de.adesso.dtmg.model;
 
+import de.adesso.dtmg.io.DtEntity;
+import de.adesso.dtmg.util.MoreCollectors;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple4;
 import javafx.collections.ObservableList;
@@ -46,7 +48,16 @@ public class DecisionTable implements BiConsumer<ObservableList<String>,Observab
     }
 
     private DecisionTable(Builder builder) {
-        this.data = Tuple.of(builder.conditionDecls, builder.actionDecls, builder.conditionDefs, builder.actionDefs);
+        if(null == builder.dtEntity) {
+            this.data = Tuple.of(builder.conditionDecls, builder.actionDecls, builder.conditionDefs, builder.actionDefs);
+        } else {
+            final DtEntity dtEntity = builder.dtEntity;
+            final ObservableList<ConditionDecl> _1 = dtEntity.getConditionDeclarations().stream().map(e -> e.getModel()).collect(MoreCollectors.toObservableList());
+            final ObservableList<ActionDecl> _2 = dtEntity.getActionDeclarations().stream().map(e -> e.getModel()).collect(MoreCollectors.toObservableList());
+            final ObservableList<ObservableList<String>> _3 = dtEntity.getConditionDefinitions();
+            final ObservableList<ObservableList<String>> _4 = dtEntity.getActionDefinitions();
+            this.data = Tuple.of(_1, _2, _3, _4);
+        }
     }
 
     public static Builder newBuilder() {
@@ -98,12 +109,19 @@ public class DecisionTable implements BiConsumer<ObservableList<String>,Observab
      * {@code DecisionTable} builder static inner class.
      */
     public static final class Builder {
+        private DtEntity dtEntity;
         private ObservableList<ActionDecl> actionDecls;
         private ObservableList<ObservableList<String>> actionDefs;
         private ObservableList<ConditionDecl> conditionDecls;
         private ObservableList<ObservableList<String>> conditionDefs;
 
         private Builder() {
+        }
+
+        @Nonnull
+        public Builder dtEntity(@Nonnull DtEntity val) {
+            dtEntity = val;
+            return this;
         }
 
         /**

@@ -19,8 +19,6 @@
 
 package de.adesso.dtmg.export.java.treeMethod;
 
-import com.codepoetics.protonpack.Indexed;
-
 import javax.annotation.Nonnull;
 import java.util.List;
 
@@ -28,14 +26,14 @@ import java.util.List;
  * Created by moehler on 09.06.2016.
  */
 public class DtNode implements Visitable {
-    final int index;
-    final List<Indexed<String>> data;
-    DtNode yes;
-    DtNode no;
+    public int conditionIndex;
+    public List<List<DtCell>> data;
+    public DtNode yes;
+    public DtNode no;
 
     private DtNode(Builder builder) {
+        conditionIndex = builder.conditionIndex;
         data = builder.data;
-        index = builder.index;
         yes = builder.yes;
         no = builder.no;
     }
@@ -46,19 +44,27 @@ public class DtNode implements Visitable {
 
     public static Builder newBuilder(@Nonnull DtNode copy) {
         Builder builder = new Builder();
+        builder.conditionIndex = copy.conditionIndex;
         builder.data = copy.data;
-        builder.index = copy.index;
         builder.yes = copy.yes;
         builder.no = copy.no;
         return builder;
     }
 
+    public boolean isDontCare() {
+        return data.stream().flatMap(l -> l.stream()).allMatch(n -> n.typeOf(DtCellType.I));
+    }
+
+    public int getConditionIndex() {
+        return conditionIndex;
+    }
+
     @Override
     public String toString() {
         return "DtNode{" +
-                "index=" + index +
-                ", no=" + no +
-                ", yes=" + yes +
+                ", conditionIndex=" + getConditionIndex() +
+                ", yes=" + ((null==yes) ? "<?>" : yes) +
+                ", no=" + ((null==no) ? "<?>" : no) +
                 '}';
     }
 
@@ -66,8 +72,8 @@ public class DtNode implements Visitable {
      * {@code DtNode} builder static inner class.
      */
     public static final class Builder {
-        private List<Indexed<String>> data;
-        private int index;
+        public int conditionIndex;
+        private List<List<DtCell>> data;
         private DtNode yes;
         private DtNode no;
 
@@ -81,20 +87,14 @@ public class DtNode implements Visitable {
          * @return a reference to this Builder
          */
         @Nonnull
-        public Builder data(@Nonnull List<Indexed<String>> val) {
+        public Builder data(@Nonnull List<List<DtCell>> val) {
             data = val;
             return this;
         }
 
-        /**
-         * Sets the {@code index} and returns a reference to this Builder so that the methods can be chained together.
-         *
-         * @param val the {@code index} to set
-         * @return a reference to this Builder
-         */
         @Nonnull
-        public Builder index(int val) {
-            index = val;
+        public Builder conditionIndex(@Nonnull int val) {
+            conditionIndex = val;
             return this;
         }
 

@@ -56,13 +56,14 @@ public class Declaration extends Identity implements Iterable<String> {
     }
 
     protected Declaration(@Nonnull List<String> data) {
-        this(data.get(0), data.get(1), data.get(2));
+        this(data.get(0), data.get(1), data.get(2), data.get(3));
     }
 
 
-    public Declaration(@Nonnull String lfdNr, @Nonnull String expression, @Nonnull String possibleIndicators) {
+    public Declaration(@Nonnull String lfdNr, @Nonnull String expression, @Nonnull String possibleIndicators, @Nonnull String documentation) {
         this.lfdNr = lfdNr;
         this.expression = expression;
+        this.documentation = documentation;
         this.possibleIndicators = possibleIndicators;
     }
 
@@ -136,7 +137,7 @@ public class Declaration extends Identity implements Iterable<String> {
     }
 
     public List<String> asList() {
-        return Lists.newArrayList(getLfdNr(), getExpression(), getPossibleIndicators());
+        return Lists.newArrayList(getLfdNr(), getExpression(), getPossibleIndicators(), getDocumentation());
     }
 
     @Override

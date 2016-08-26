@@ -105,6 +105,7 @@ public class DtEntity implements Externalizable {
             ConditionDecl model = conditionDeclarations.get(i).save().getModel();
             out.writeUTF(model.getLfdNr());
             out.writeUTF(model.getExpression());
+            out.writeUTF(model.getDocumentation());
             out.writeUTF(model.getPossibleIndicators());
         }));
 
@@ -117,8 +118,9 @@ public class DtEntity implements Externalizable {
         IntStream.range(0, rows).mapToObj(rethrowIntFunction(i -> {
             final String lfdnr = in.readUTF();
             final String expr = in.readUTF();
+            final String doc = in.readUTF();
             final String posind = in.readUTF();
-            return new ConditionDeclTableViewModel(new ConditionDecl(lfdnr, expr, posind));
+            return new ConditionDeclTableViewModel(new ConditionDecl(lfdnr, expr, posind, doc));
         })).forEach(k -> conditionDeclarations.add(k));
 
         IntStream.range(0, rows).forEach(rethrowIntConsumer(i -> {
@@ -131,9 +133,10 @@ public class DtEntity implements Externalizable {
         IntStream.range(0, rows).mapToObj(rethrowIntFunction(i -> {
             final String lfdnr = in.readUTF();
             final String expr = in.readUTF();
+            final String doc = in.readUTF();
             final String posind = in.readUTF();
 
-            return new ActionDeclTableViewModel(new ActionDecl(lfdnr, expr, posind));
+            return new ActionDeclTableViewModel(new ActionDecl(lfdnr, expr, posind, doc));
         })).forEach(k -> actionDeclarations.add(k));
 
         IntStream.range(0, rows).forEach(rethrowIntConsumer(i -> {
@@ -149,6 +152,7 @@ public class DtEntity implements Externalizable {
             ActionDecl model = actionDeclarations.get(i).save().getModel();
             out.writeUTF(model.getLfdNr());
             out.writeUTF(model.getExpression());
+            out.writeUTF(model.getDocumentation());
             out.writeUTF(model.getPossibleIndicators());
         }));
 

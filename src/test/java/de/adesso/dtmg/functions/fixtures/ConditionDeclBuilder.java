@@ -19,32 +19,37 @@
 
 package de.adesso.dtmg.functions.fixtures;
 
-import de.adesso.dtmg.functions.chained.first.AbstractSubBuilder;
-import de.adesso.dtmg.functions.chained.first.Callback;
 import de.adesso.dtmg.model.ConditionDecl;
 
 /**
  * Created by mmoehler ofList 06.03.16.
  */
-public class ConditionDeclBuilder<C> extends AbstractSubBuilder<ConditionDecl, C> {
+public class ConditionDeclBuilder<C> extends de.adesso.dtmg.io.builder.AbstractSubBuilder<ConditionDecl, C> {
     private final String lfdNr;
     private String expression;
+    private String documentation;
     private String indicators;
 
-    public ConditionDeclBuilder(String lfdNr, C caller, Callback<ConditionDecl> callback) {
+    public ConditionDeclBuilder(String lfdNr, C caller, de.adesso.dtmg.io.builder.Callback<ConditionDecl> callback) {
         super(caller, callback);
         this.lfdNr = lfdNr;
     }
 
     @Override
     public ConditionDecl build() {
-        return new ConditionDecl(lfdNr, expression, indicators);
+        return new ConditionDecl(lfdNr, expression, documentation, indicators);
     }
 
     public ConditionDeclBuilder<C> withExpression(String expression) {
         this.expression = expression;
         return this;
     }
+
+    public ConditionDeclBuilder<C> withdocumentation(String documentation) {
+        this.documentation = documentation;
+        return this;
+    }
+
 
     public C withIndicators(String possibleIndicators) {
         this.indicators = possibleIndicators;

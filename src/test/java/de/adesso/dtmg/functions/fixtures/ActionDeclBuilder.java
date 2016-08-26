@@ -19,32 +19,37 @@
 
 package de.adesso.dtmg.functions.fixtures;
 
-import de.adesso.dtmg.functions.chained.first.AbstractSubBuilder;
-import de.adesso.dtmg.functions.chained.first.Callback;
 import de.adesso.dtmg.model.ActionDecl;
 
 /**
  * Created by mmoehler ofList 06.03.16.
  */
-public class ActionDeclBuilder<C> extends AbstractSubBuilder<ActionDecl, C> {
+public class ActionDeclBuilder<C> extends de.adesso.dtmg.io.builder.AbstractSubBuilder<ActionDecl, C> {
     private final String lfdNr;
     private String expression;
+    private String documentation;
     private String indicators;
 
-    public ActionDeclBuilder(String lfdNr, C caller, Callback<ActionDecl> callback) {
+    public ActionDeclBuilder(String lfdNr, C caller, de.adesso.dtmg.io.builder.Callback<ActionDecl> callback) {
         super(caller, callback);
         this.lfdNr = lfdNr;
     }
 
     @Override
     public ActionDecl build() {
-        return new ActionDecl(lfdNr, expression, indicators);
+        return new ActionDecl(lfdNr, expression, documentation, indicators);
     }
 
     public ActionDeclBuilder<C> withExpression(String expression) {
         this.expression = expression;
         return this;
     }
+
+    public ActionDeclBuilder<C> withDocumentation(String documentation) {
+        this.documentation = documentation;
+        return this;
+    }
+
 
     public C withIndicators(String possibleIndicators) {
         this.indicators = possibleIndicators;

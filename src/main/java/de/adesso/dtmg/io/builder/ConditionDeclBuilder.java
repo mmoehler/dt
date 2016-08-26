@@ -27,6 +27,7 @@ import de.adesso.dtmg.model.ConditionDecl;
 public class ConditionDeclBuilder<C> extends AbstractSubBuilder<ConditionDecl, C> {
     private final String lfdNr;
     private String expression;
+    private String documentation;
     private String indicators;
 
     public ConditionDeclBuilder(String lfdNr, C caller, Callback<ConditionDecl> callback) {
@@ -36,13 +37,19 @@ public class ConditionDeclBuilder<C> extends AbstractSubBuilder<ConditionDecl, C
 
     @Override
     public ConditionDecl build() {
-        return new ConditionDecl(lfdNr, expression, indicators);
+        return new ConditionDecl(lfdNr, expression, documentation, indicators);
     }
 
     public ConditionDeclBuilder<C> withExpression(String expression) {
         this.expression = expression;
         return this;
     }
+
+    public ConditionDeclBuilder<C> withdocumentation(String documentation) {
+        this.documentation = documentation;
+        return this;
+    }
+
 
     public C withIndicators(String possibleIndicators) {
         this.indicators = possibleIndicators;

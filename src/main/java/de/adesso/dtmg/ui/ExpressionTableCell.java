@@ -62,9 +62,13 @@ public class ExpressionTableCell<S extends DeclarationTableViewModel> extends Te
             boolean hasDoc = this.getTableView().getItems().get(getIndex()).documentationProperty().isNotEmpty().get();
             if(hasDoc) {
                 setStyle(HAS_NOTE_STYLE);
-                getTableView().refresh();
             }
         }
+    }
 
+    @Override
+    public void commitEdit(String newValue) {
+        super.commitEdit(newValue);
+        getTableView().requestFocus();
     }
 }

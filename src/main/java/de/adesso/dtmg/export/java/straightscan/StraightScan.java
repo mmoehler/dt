@@ -20,14 +20,14 @@
 package de.adesso.dtmg.export.java.straightscan;
 
 import com.codepoetics.protonpack.StreamUtils;
+import com.google.common.base.Strings;
 import com.sun.codemodel.*;
-import de.adesso.dtmg.util.Dump;
 import de.adesso.dtmg.exception.LambdaExceptionUtil;
 import de.adesso.dtmg.export.java.ClassDescription;
-import de.adesso.dtmg.util.ObservableList2DFunctions;
 import de.adesso.dtmg.model.ActionDecl;
 import de.adesso.dtmg.model.ConditionDecl;
 import de.adesso.dtmg.model.DecisionTable;
+import de.adesso.dtmg.util.ObservableList2DFunctions;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import javafx.collections.ObservableList;
@@ -89,33 +89,16 @@ public class StraightScan implements LambdaExceptionUtil.BiFunction_WithExceptio
         final JClass linkedListOfTypeVar02 = jm.ref(LinkedList.class).narrow(jTypeVar02);
         final JVar resultBuffer = jmBody.decl(listOfTypeVar02, "results", JExpr._new(linkedListOfTypeVar02));
 
-        JDoLoop doLoop = jmBody._do(JExpr.lit(true));
-        JBlock loopBody = doLoop.body();
-
         JConditional flag[] = {null};
         IntStream.range(0, condefs.size()).forEach(i -> {
             JExpression[] invocation = {null};
 
-            Optional<JExpression> expression = StreamUtils.zipWithIndex(condefs.get(i).stream())
+            final String condition = StreamUtils.zipWithIndex(condefs.get(i).stream())
                     .filter(f -> !"-".equals(f.getValue()))
-                    .map(s -> {
-                        final String mname = String.format("condition%02d", s.getIndex());
-                        Tuple2<JMethod, JVar> info = conditionStubs.get(mname);
+                    .map(s -> String.format("%scondition%02d(input)","N".equals(s.getValue()) ? "!" : "", s.getIndex()))
+                    .reduce("", (l, r) -> Strings.isNullOrEmpty(l) ? r : l + " && " + r);
 
-                        System.out.println("mname = " + mname);
-                        Dump.dumpTuple("INFO", info);
-
-
-                        invocation[0] = JExpr.invoke(info._1()).arg(info._2());
-                        if ("N".equals(s.getValue())) {
-                            invocation[0] = invocation[0].not();
-                        }
-                        return invocation[0];
-                    }).reduce((l, r) -> l.cand(r));
-
-            JExpression expr = expression.orElseThrow(() -> new IllegalStateException("Missing Conditional Expression!"));
-
-            flag[0] = loopBody._if(expr);
+            flag[0] = jmBody._if(JExpr.direct(condition));
             JBlock thenBody = flag[0]._then();
 
             StreamUtils.zipWithIndex(actdefs.get(i).stream())
@@ -127,10 +110,9 @@ public class StraightScan implements LambdaExceptionUtil.BiFunction_WithExceptio
                         return listAdd;
                     })
                     .forEach(thenBody::add);
-
-            final JInvocation reduceResults = JExpr.invoke(reducerStubs.get("reduceResults")._1()).arg(resultBuffer);
-            thenBody._return(reduceResults);
         });
+        final JInvocation reduceResults = JExpr.invoke(reducerStubs.get("reduceResults")._1()).arg(resultBuffer);
+        jmBody._return(reduceResults);
     }
 
     private Map<String, Tuple2<JMethod, JVar>> emitReducerStubs(JCodeModel jm, JDefinedClass jc, JTypeVar jTypeVar01, JTypeVar jTypeVar02) {

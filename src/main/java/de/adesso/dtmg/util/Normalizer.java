@@ -51,7 +51,7 @@ public enum Normalizer {
             return prefix + "_";
         }
         CharacterIterator ci = new StringCharacterIterator(replaceGermanUmlauts(ident.trim()));
-        StringBuffer sb = new StringBuffer(prefix);
+        StringBuffer sb = new StringBuffer();
         for (char c = ci.first(); c != CharacterIterator.DONE; c = ci.next()) {
             if (sb.length() == 0) {
                 if (Character.isJavaIdentifierStart(c)) {
@@ -131,6 +131,12 @@ public enum Normalizer {
             m.appendReplacement(sb, m.group(1).toUpperCase());
         }
         m.appendTail(sb);
-        return sb.toString();
+        String ret = sb.toString();
+        if(ret.startsWith(prefix)) {
+            return ret;
+        }
+        char[] c = ret.toCharArray();
+        c[0]+=32;
+        return (prefix + ret);
     }
 }

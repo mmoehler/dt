@@ -45,9 +45,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyCode;
@@ -180,11 +178,24 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     }
 
     public void initialize() {
+
+        /*
+        this.conditionDeclarationsTable.focusedProperty().addListener((ov,oldB, newB) -> {
+            if(oldB && !newB) {
+                conditionDeclarationsTable.getSelectionModel().clearSelection();
+            }
+        });
+        */
+
+
         initializeDividerSynchronization();
         intializeTableViewScrolling();
         initializeDeclarationTables();
         initializeObservers();
     }
+
+
+
 
     protected void initializeObservers() {
         this.viewModel.subscribe(Notifications.PREPARE_CONSOLE.name(), (key, value) ->
@@ -249,10 +260,12 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     }
 
     private DeclarationTableViewModel selectedModel;
+    private TableView<? extends DeclarationTableViewModel> selectedTable;
     private void doDocumentDeclaration(String s, Object... objects) {
         OptionalInt index = getIndex(objects);
         Optional<TableView<? extends DeclarationTableViewModel>> table = getSelectedDeclTable();
         if(table.isPresent()) {
+            selectedTable = table.get();
             selectedModel = table.get().getSelectionModel().getSelectedItem();
 
 
@@ -272,8 +285,10 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
 
     private void updateDocumentDeclaration(String s, Object... objects) {
         String s1 = String.valueOf(objects[0]);
-        System.out.println("s1 = " + s1);
         selectedModel.documentationProperty().set((String)objects[0]);
+        selectedTable.getColumns().get(1).setVisible(false);
+        selectedTable.getColumns().get(1).setVisible(true);
+
     }
 
     private Optional<TableView<? extends DeclarationTableViewModel>> getSelectedDeclTable() {
@@ -783,20 +798,6 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     }
 
     protected void intializeTableViewScrolling() {
-        System.err.println("scrollbar = " + String.valueOf(getVerticalScrollbar(this.conditionDefinitionsTable)));
-    }
-
-    private ScrollBar getVerticalScrollbar(TableView<?> table) {
-        ScrollBar result = null;
-        for (Node n : table.lookupAll(".scroll-bar")) {
-            if (n instanceof ScrollBar) {
-                ScrollBar bar = (ScrollBar) n;
-                if (bar.getOrientation().equals(Orientation.VERTICAL)) {
-                    result = bar;
-                }
-            }
-        }
-        return result;
     }
 
     enum Answer {
