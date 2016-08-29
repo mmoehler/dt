@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.treeMethod;
+package de.adesso.dtmg.export.java.treemethod;
 
 import javax.annotation.Nonnull;
 import java.util.List;

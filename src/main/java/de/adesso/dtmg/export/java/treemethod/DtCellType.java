@@ -17,11 +17,26 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.treeMethod;
+package de.adesso.dtmg.export.java.treemethod;
+
+import java.util.Arrays;
+import java.util.Optional;
 
 /**
- * Created by mmoehler on 10.06.16.
+ * Created by moehler on 25.08.2016.
  */
-public interface Visitor<T extends Visitable> {
-    void visit(T visitable, Object... args);
+public enum DtCellType {
+    Y("Y",1), N("N",2), I("-",4);
+
+    final String code;
+    final int weight;
+
+    DtCellType(String code, int weight) {
+        this.code = code;
+        this.weight = weight;
+    }
+
+    public static Optional<DtCellType> lookup(String code) {
+        return Arrays.stream(values()).filter(s -> code.equals(s.code)).findFirst();
+    }
 }

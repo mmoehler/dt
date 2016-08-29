@@ -25,6 +25,7 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import de.adesso.dtmg.export.quine.parser.ExpParser;
 import de.adesso.dtmg.util.List2DFunctions;
+import de.adesso.dtmg.util.Permutation;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 

@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.treeMethod;
+package de.adesso.dtmg.export.java.treemethod;
 
 import de.adesso.dtmg.io.DtEntity;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
@@ -42,14 +42,19 @@ public class DtEntityStub extends DtEntity {
         return new DtEntityStub(EMPTY_CDECL,EMPTY_DEFS,actionDeclarations,actionDefinitions);
     }
 
+    public static DtEntity createForConditions(ObservableList<ConditionDeclTableViewModel> conditionDeclarations, ObservableList<ObservableList<String>> conditionDefinitions) {
+        return new DtEntityStub(conditionDeclarations, conditionDefinitions, EMPTY_ADECL,EMPTY_DEFS);
+    }
+
 
     public static DtEntity createForConditionDefinitions(ObservableList<ObservableList<String>> conditionDefinitions) {
         return new DtEntityStub(EMPTY_CDECL,conditionDefinitions,EMPTY_ADECL,EMPTY_DEFS);
     }
 
 
-    public static DtEntity createFor(ObservableList<ActionDeclTableViewModel> actionDeclarations,ObservableList<ObservableList<String>> actionDefinitions) {
-        return new DtEntityStub(EMPTY_CDECL,EMPTY_DEFS,actionDeclarations,actionDefinitions);
+    public static DtEntity createFor(ObservableList<ActionDeclTableViewModel> actionDeclarations,ObservableList<ObservableList<String>> actionDefinitions,
+                                     ObservableList<ConditionDeclTableViewModel> conditionDeclarations, ObservableList<ObservableList<String>> conditionDefinitions) {
+        return new DtEntityStub(conditionDeclarations,conditionDefinitions,actionDeclarations,actionDefinitions);
     }
 
     public DtEntityStub(ObservableList<ConditionDeclTableViewModel> conditionDeclarations, ObservableList<ObservableList<String>> conditionDefinitions, ObservableList<ActionDeclTableViewModel> actionDeclarations, ObservableList<ObservableList<String>> actionDefinitions) {

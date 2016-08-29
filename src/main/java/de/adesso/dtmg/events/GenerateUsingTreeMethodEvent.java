@@ -17,13 +17,10 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.treeMethod;
+package de.adesso.dtmg.events;
 
 /**
- * Created by mmoehler on 10.06.16.
+ * CDI event class that is used to indicate that a contact was updated/added/removed.
  */
-public interface Visitable<T extends Visitor> {
-    default void accept(T visitor, Object...args) {
-        visitor.visit(this, args);
-    }
+public class GenerateUsingTreeMethodEvent {
 }

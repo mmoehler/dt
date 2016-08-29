@@ -17,7 +17,7 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.treeMethod;
+package de.adesso.dtmg.export.java.treemethod;
 
 import com.google.common.collect.Lists;
 import de.adesso.dtmg.io.DtEntity;
@@ -40,7 +40,7 @@ import static java.util.stream.IntStream.range;
 /**
  * Created by moehler on 26.08.2016.
  */
-public class DecomposeOptimized implements Function<DtEntity,DtNode> {
+public class OptimizedDecomposer implements Function<DtEntity,DtNode> {
 
     final Comparator<List<DtCell>> ruleConditionsComparator = (l, r) -> {
         if(l.size()!=r.size()) throw new IllegalStateException();

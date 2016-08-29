@@ -17,25 +17,10 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.treeMethod;
-
-import java.util.function.UnaryOperator;
-
-import static java.util.stream.IntStream.range;
+package de.adesso.dtmg.events;
 
 /**
- * Created by moehler on 25.08.2016.
+ * CDI event class that is used to indicate that a contact was updated/added/removed.
  */
-public class MatrixFunctions {
-
-    public static UnaryOperator<DtCell[][]> transpose() {
-        return m -> {
-            return range(0, m[0].length).mapToObj(r ->
-                    range(0, m.length).mapToObj(c -> m[c][r]).toArray(DtCell[]::new)
-            ).toArray(DtCell[][]::new);
-        };
-    }
-
-
-
+public class GenerateUsingStraightScanEvent {
 }

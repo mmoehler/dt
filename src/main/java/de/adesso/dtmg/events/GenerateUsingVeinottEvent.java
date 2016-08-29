@@ -17,26 +17,10 @@
  * under the License.
  */
 
-package de.adesso.dtmg.export.java.treeMethod;
-
-import java.util.Arrays;
-import java.util.Optional;
+package de.adesso.dtmg.events;
 
 /**
- * Created by moehler on 25.08.2016.
+ * CDI event class that is used to indicate that a contact was updated/added/removed.
  */
-public enum DtCellType {
-    Y("Y",1), N("N",2), I("-",4);
-
-    final String code;
-    final int weight;
-
-    DtCellType(String code, int weight) {
-        this.code = code;
-        this.weight = weight;
-    }
-
-    public static Optional<DtCellType> lookup(String code) {
-        return Arrays.stream(values()).filter(s -> code.equals(s.code)).findFirst();
-    }
+public class GenerateUsingVeinottEvent {
 }
