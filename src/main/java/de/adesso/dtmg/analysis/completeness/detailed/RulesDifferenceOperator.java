@@ -47,7 +47,6 @@ public class RulesDifferenceOperator implements Function<List<List<String>>, Lis
     private final BinaryOperator<List<List<String>>> merge0 = (l, r) -> Stream.concat(l.stream(), r.stream()).collect(Collectors.toList());
 
 
-
     public RulesDifferenceOperator() {
     }
 
@@ -68,7 +67,6 @@ public class RulesDifferenceOperator implements Function<List<List<String>>, Lis
         }
         return transpose(lefts[0]);
     }
-
 
 
 }

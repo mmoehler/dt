@@ -40,7 +40,7 @@ import java.util.stream.IntStream;
 /**
  * Created by mmoehler on 05.06.16.
  */
-public class OdtExportStrategy extends AbstractExportStrategy<DtEntity>{
+public class OdtExportStrategy extends AbstractExportStrategy<DtEntity> {
 
     public static final String EXTENSION = "odt";
 

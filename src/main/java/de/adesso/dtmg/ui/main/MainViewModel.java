@@ -11,6 +11,10 @@ import de.adesso.dtmg.analysis.structure.StructuralAnalysis;
 import de.adesso.dtmg.events.*;
 import de.adesso.dtmg.exception.ExceptionHandler;
 import de.adesso.dtmg.export.ExportManager;
+import de.adesso.dtmg.export.java.ClassDescription;
+import de.adesso.dtmg.export.java.treemethod.ConsoleCodeWriter;
+import de.adesso.dtmg.export.java.treemethod.TreeMethodCodeGenerator;
+import de.adesso.dtmg.export.java.treemethod.TreeMethodConfiguration;
 import de.adesso.dtmg.io.DtEntity;
 import de.adesso.dtmg.io.PersistenceManager;
 import de.adesso.dtmg.model.ActionDecl;
@@ -59,7 +63,7 @@ import static de.adesso.dtmg.util.List2DFunctions.insertColumnsAt;
 import static java.util.Collections.emptyList;
 
 @Singleton
-@ScopeProvider(scopes={RuleScope.class})
+@ScopeProvider(scopes = {RuleScope.class})
 public class MainViewModel implements ViewModel {
 
     public static final String QMARK = "?";
@@ -67,10 +71,10 @@ public class MainViewModel implements ViewModel {
     public static final Object[] NO_ARGS = {};
     public static final String COND_ROW_HEADER = "C%02d";
     public static final String DASH = "-";
+    public static final String STR_RULES_COMPLETE = "RULES COMPLETE";
     private static final String ACT_ROW_HEADER = "A%02d";
     private final static Predicate<ObservableList<String>> HAS_ELSE_RULE =
             c -> (c.isEmpty()) ? false : c.get(c.size() - 1).equals(ELSE);
-    public static final String STR_RULES_COMPLETE = "RULES COMPLETE";
     private final ObservableList<ConditionDeclTableViewModel> conditionDeclarations = FXCollections.observableArrayList();
     private final ObservableList<ObservableList<String>> conditionDefinitions = FXCollections.observableArrayList();
     private final ObservableList<ActionDeclTableViewModel> actionDeclarations = FXCollections.observableArrayList();
@@ -83,35 +87,27 @@ public class MainViewModel implements ViewModel {
             actionDeclarations,
             actionDefinitions
     );
-
+    private final ListChangeListener<DeclarationTableViewModel> decRowListener;
+    private final ListChangeListener<ObservableList<String>> defRowListener;
+    private final ListChangeListener<String> defColListener;
+    private final BooleanProperty changed = new SimpleBooleanProperty(false);
     @InjectScope
     private RuleScope mdScope;
-
     @Inject
     private StructuralAnalysis structuralAnalysis;
-
     @Inject
     private ExceptionHandler exceptionHandler;
-
     @Inject
     private AnalysisResultEmitter resultEmitter;
-
     @Inject
     private PersistenceManager<DtEntity> persistenceManager;
-
     @Inject
     private ExportManager<DtEntity> exportManager;
-
     private List<String> missingRules = emptyList();
     private Multimap<Integer, Integer> compressibleRules = emptyMultimap();
     private Multimap<Integer, Integer> dupplicateRules = emptyMultimap();
     private DtEntity loadedData = null;
     private boolean elseRuleSet = true;
-
-    private final ListChangeListener<DeclarationTableViewModel> decRowListener;
-    private final ListChangeListener<ObservableList<String>> defRowListener;
-    private final ListChangeListener<String> defColListener;
-    private final BooleanProperty changed = new SimpleBooleanProperty(false);
 
     public MainViewModel() {
         super();
@@ -138,16 +134,20 @@ public class MainViewModel implements ViewModel {
         };
 
 
-        Lists.newArrayList(conditionDefinitions,actionDefinitions).forEach(e -> {
+        Lists.newArrayList(conditionDefinitions, actionDefinitions).forEach(e -> {
             e.forEach(f -> f.addListener(defColListener));
             e.addListener(defRowListener);
         });
 
     }
 
+    private static boolean isBlank(ObservableList<String> ol) {
+        return ol.stream().allMatch(ss -> (ss.trim().length() == 0));
+    }
+
     @PreDestroy
     protected void preDestroy() {
-        Lists.newArrayList(conditionDefinitions,actionDefinitions).forEach(e -> {
+        Lists.newArrayList(conditionDefinitions, actionDefinitions).forEach(e -> {
             e.forEach(f -> f.removeListener(defColListener));
             e.removeListener(defRowListener);
         });
@@ -160,11 +160,6 @@ public class MainViewModel implements ViewModel {
 
     public void setUnchanged() {
         this.changed.set(false);
-    }
-
-
-    private static boolean isBlank(ObservableList<String> ol) {
-        return ol.stream().allMatch(ss -> (ss.trim().length() == 0));
     }
 
     public ObservableList<ConditionDeclTableViewModel> getConditionDeclarations() {
@@ -357,7 +352,6 @@ public class MainViewModel implements ViewModel {
     }
 
 
-
     private Predicate<ObservableList<String>> hasNoElseRule() {
         return c -> (c.isEmpty()) ? true : !c.get(c.size() - 1).equals(ELSE);
     }
@@ -369,7 +363,7 @@ public class MainViewModel implements ViewModel {
     private Optional<String> internalFormalCompletenessCheck() {
         String ret = null;
         try {
-            if(hasNoElseRule().test(this.conditionDefinitions.get(0))) {
+            if (hasNoElseRule().test(this.conditionDefinitions.get(0))) {
                 final List<Indexed<List<String>>> result = isFormalComplete(this.conditionDeclarations, this.conditionDefinitions);
                 Tuple2<String, List<String>> tuple2 = resultEmitter.emitFormalCompletenessCheckResults().apply(result);
                 missingRules = tuple2._2();
@@ -480,6 +474,21 @@ public class MainViewModel implements ViewModel {
     }
 
 
+    public void onGenerateUsingLineMask(@Observes GenerateUsingLineMaskEvent event) {
+        publish(GENERATE_LINE_MASK.name(), NO_ARGS);
+    }
+
+    public void onGenerateUsingTreeMethod(@Observes GenerateUsingTreeMethodEvent event) {
+        publish(GENERATE_TREE_METHOD.name(), NO_ARGS);
+    }
+
+    public void onGenerateUsingStraightScan(@Observes GenerateUsingStraightScanEvent event) {
+        publish(GENERATE_STRAIGHT_SCAN.name(), NO_ARGS);
+    }
+
+    public void onGenerateUsingVeinott(@Observes GenerateUsingVeinottEvent event) {
+        publish(GENERATE_VEINOTT.name(), NO_ARGS);
+    }
 
 
     public int openFile(URI url) throws IOException, ClassNotFoundException {
@@ -517,5 +526,18 @@ public class MainViewModel implements ViewModel {
 
     public Collection<Scope> getDialogScopes() {
         return Collections.singletonList(mdScope);
+    }
+
+    public void handleGenerateUsingTreeMethod(Optional<ClassDescription> classDescription) throws Exception {
+        if (classDescription.isPresent()) {
+            TreeMethodConfiguration cfg = TreeMethodConfiguration.newBuilder()
+                    .classDescription(classDescription.get())
+                    .decisionTable(this.data)
+                    .useOptimization(classDescription.get().isOptimized())
+                    .build();
+
+            new TreeMethodCodeGenerator().apply(cfg).build(new ConsoleCodeWriter());
+        }
+
     }
 }

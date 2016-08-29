@@ -29,8 +29,8 @@ import java.util.function.BinaryOperator;
 
 import static de.adesso.dtmg.analysis.completeness.detailed.Functions.*;
 import static de.adesso.dtmg.util.Adapters.Matrix.adapt;
-import static de.adesso.dtmg.util.List2DFunctions.transpose;
 import static de.adesso.dtmg.util.List2DBuilder.observable;
+import static de.adesso.dtmg.util.List2DFunctions.transpose;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
@@ -73,7 +73,7 @@ public class FunctionsTest {
         List<List<String>> consolidated = consolidate().apply(adapt(conditions));
         dumpTableItems("CONS", consolidated);
         ObservableList<ObservableList<String>> expected = observable(List2DBuilder.matrixOf("-,N,N,Y,-,Y").dim(3, 2).build());
-        assertThat(consolidated,equalTo(expected));
+        assertThat(consolidated, equalTo(expected));
     }
 
     @Test

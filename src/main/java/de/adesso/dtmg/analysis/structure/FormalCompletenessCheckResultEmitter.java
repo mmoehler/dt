@@ -32,6 +32,7 @@ import java.util.stream.Collectors;
  */
 public class FormalCompletenessCheckResultEmitter implements Function<List<Indexed<List<String>>>, Tuple2<String, List<String>>> {
     private static String TPL2 = "RULE %04d NOT DEFINED %s";
+
     @Override
     public Tuple2<String, List<String>> apply(List<Indexed<List<String>>> indexeds) {
 

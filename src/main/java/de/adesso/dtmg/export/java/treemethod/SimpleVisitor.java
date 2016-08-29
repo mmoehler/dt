@@ -19,6 +19,8 @@
 
 package de.adesso.dtmg.export.java.treemethod;
 
+import de.adesso.dtmg.export.java.Visitor;
+
 import java.util.Optional;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -28,24 +30,24 @@ import java.util.function.Predicate;
  */
 public class SimpleVisitor implements Visitor<DtNode> {
 
-    private static String[] N = {"X1","X2", "X3", "X4"};
+    private static String[] N = {"X1", "X2", "X3", "X4"};
 
     @Override
-    public void visit(DtNode visitable, Object...args) {
+    public void visit(DtNode visitable, Object... args) {
 
-        Set<String> aset = (Set<String>)args[0];
-        Set<String> cset = (Set<String>)args[1];
+        Set<String> aset = (Set<String>) args[0];
+        Set<String> cset = (Set<String>) args[1];
 
         printIF(visitable, cset);
 
-        if(null != visitable.yes && ! visitable.yes.isDontCare())
-        visitable.yes.accept(this,args);
+        if (null != visitable.yes && !visitable.yes.isDontCare())
+            visitable.yes.accept(this, args);
         else printAction(visitable, true, aset);
 
         printELSE();
 
-        if(null != visitable.no && ! visitable.no.isDontCare())
-        visitable.no.accept(this, args);
+        if (null != visitable.no && !visitable.no.isDontCare())
+            visitable.no.accept(this, args);
         else printAction(visitable, false, aset);
         printENDIF();
     }
@@ -59,7 +61,7 @@ public class SimpleVisitor implements Visitor<DtNode> {
     }
 
     private void printIF(DtNode visitable, Set<String> set) {
-        final String cname = String.format("_%d",visitable.getConditionIndex());
+        final String cname = String.format("_%d", visitable.getConditionIndex());
         set.add(cname);
         System.out.println(String.format("if(%s()) {", cname));
 

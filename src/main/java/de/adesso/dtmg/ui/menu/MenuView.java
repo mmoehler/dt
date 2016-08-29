@@ -44,7 +44,7 @@ public class MenuView implements FxmlView<MenuViewModel> {
         addElseRuleMenuItem.disableProperty().bind(viewModel.elseRuleSetProperty());
 
         final RecentItems recentItems = viewModel.getRecentItems();
-       // fileOpenRecent.setDisable(recentItems.getItems().isEmpty());
+        // fileOpenRecent.setDisable(recentItems.getItems().isEmpty());
         final ToggleGroup recentItemsGroup = new ToggleGroup();
         for (String path : recentItems.getItems()) {
             RadioMenuItem recentFile = new RadioMenuItem(path);
@@ -210,5 +210,21 @@ public class MenuView implements FxmlView<MenuViewModel> {
 
     public void doDocumentDeclaration(ActionEvent actionEvent) {
         viewModel.documentDeclaration();
+    }
+
+    public void doGenerateUsingLineMask(ActionEvent actionEvent) {
+        viewModel.generateUsingLineMask();
+    }
+
+    public void doGenerateUsingVeinott(ActionEvent actionEvent) {
+        viewModel.generateUsingVeinott();
+    }
+
+    public void doGenerateUsingStraightScan(ActionEvent actionEvent) {
+        viewModel.generateUsingStraightScan();
+    }
+
+    public void doGenerateUsingTreeMethod(ActionEvent actionEvent) {
+        viewModel.generateUsingTreeMethod();
     }
 }

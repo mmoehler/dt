@@ -22,7 +22,8 @@ package de.adesso.dtmg.functions.chained.third;
 /**
  * Created by moehler on 12.05.2016.
  */
-public interface Nestable<P,O> {
+public interface Nestable<P, O> {
     P done();
+
     O build();
 }

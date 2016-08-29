@@ -55,20 +55,20 @@ public class ApplyMethodEmitter implements Visitor<DtNode> {
         this.cfg = cfg;
 
         checkNotNull(this.cfg, "Missing expected TreeMethodConfiguration item!");
-        DtEntity dtEntity = checkNotNull(cfg.getDecisionTable(),"Missing Decisiontable for processing!!");
+        DtEntity dtEntity = checkNotNull(cfg.getDecisionTable(), "Missing Decisiontable for processing!!");
         stack = cfg.stack();
 
-        ObservableList<ConditionDeclTableViewModel> conditionDecls = checkNotNull(dtEntity.getConditionDeclarations(),"Missing Condition Declarations");
+        ObservableList<ConditionDeclTableViewModel> conditionDecls = checkNotNull(dtEntity.getConditionDeclarations(), "Missing Condition Declarations");
         cset = conditionDecls.stream()
                 .map(c -> c.expressionProperty().get())
                 .collect(Collectors.toList());
 
-        ObservableList<ActionDeclTableViewModel> actionDecls = checkNotNull(dtEntity.getActionDeclarations(),"Missing Action Declarations");
+        ObservableList<ActionDeclTableViewModel> actionDecls = checkNotNull(dtEntity.getActionDeclarations(), "Missing Action Declarations");
         List<String> aset = actionDecls.stream()
                 .map(c -> c.expressionProperty().get())
                 .collect(Collectors.toList());
 
-        ObservableList<ObservableList<String>> actionDefns = checkNotNull(dtEntity.getActionDefinitions(),"Missing Action Definitions");
+        ObservableList<ObservableList<String>> actionDefns = checkNotNull(dtEntity.getActionDefinitions(), "Missing Action Definitions");
 
         actionIndex = ObservableList2DFunctions.transpose()
                 .apply(actionDefns).stream()
@@ -84,31 +84,31 @@ public class ApplyMethodEmitter implements Visitor<DtNode> {
     public void visit(DtNode visitable, Object... args) {
 
         // ... first handle don't care
-        if(visitable.isDontCare()) {
+        if (visitable.isDontCare()) {
             final int ruleIndex = visitable.data.get(0).get(0).col();
             actionIndex.get(ruleIndex).stream()
                     .map(s -> JExpr.invoke(cfg.stub(s)).arg(JExpr.ref("value")))
                     .collect(Collectors.toList())
-                    .forEach(a -> ((JBlock)stack.peek()).add(a));
+                    .forEach(a -> ((JBlock) stack.peek()).add(a));
             return;
         }
 
-        stack.push(((JBlock)stack.peek())._if(emitIFCondition(visitable, cset, cfg)));
-        stack.push(((JConditional)stack.peek())._then());
+        stack.push(((JBlock) stack.peek())._if(emitIFCondition(visitable, cset, cfg)));
+        stack.push(((JConditional) stack.peek())._then());
 
-        if(null != visitable.yes && !visitable.isDontCare()) {
+        if (null != visitable.yes && !visitable.isDontCare()) {
             visitable.yes.accept(this, args);
         } else {
-            emitActions(visitable, true, actionIndex, cfg).forEach(a -> ((JBlock)stack.peek()).add(a));
+            emitActions(visitable, true, actionIndex, cfg).forEach(a -> ((JBlock) stack.peek()).add(a));
         }
 
         stack.pop();
-        stack.push(((JConditional)stack.peek())._else());
+        stack.push(((JConditional) stack.peek())._else());
 
-        if(null != visitable.no && !visitable.isDontCare()) {
+        if (null != visitable.no && !visitable.isDontCare()) {
             visitable.no.accept(this, args);
         } else {
-            emitActions(visitable, false, actionIndex, cfg).forEach(a -> ((JBlock)stack.peek()).add(a));
+            emitActions(visitable, false, actionIndex, cfg).forEach(a -> ((JBlock) stack.peek()).add(a));
         }
 
         stack.pop();
@@ -126,7 +126,7 @@ public class ApplyMethodEmitter implements Visitor<DtNode> {
 
         List<JInvocation> otherwise = Lists.newArrayList(JExpr.invoke(cfg.stub(OTHERWISE)).arg(JExpr.ref(VALUE)));
 
-        return (ruleIndex<0) ? otherwise : actionIndex.get(ruleIndex).stream()
+        return (ruleIndex < 0) ? otherwise : actionIndex.get(ruleIndex).stream()
                 .map(s -> JExpr.invoke(cfg.stub(s)).arg(JExpr.ref(VALUE)))
                 .collect(Collectors.toList());
     }

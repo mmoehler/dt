@@ -27,7 +27,7 @@ import java.util.prefs.Preferences;
  * Created by moehler on 09.08.2016.
  */
 public class RecentItems {
-    public final static String RECENT_ITEM_STRING = "recent.item."; 
+    public final static String RECENT_ITEM_STRING = "recent.item.";
     private int m_maxItems;
     private Preferences m_prefNode;
     private List<String> m_items = new ArrayList<String>();
@@ -87,10 +87,9 @@ public class RecentItems {
     private void loadFromPreferences() {
         // load recent files from properties
         for (int i = 0; i < m_maxItems; i++) {
-            String val = m_prefNode.get(RECENT_ITEM_STRING + i, ""); 
+            String val = m_prefNode.get(RECENT_ITEM_STRING + i, "");
 
-            if (!val.equals("")) 
-            {
+            if (!val.equals("")) {
                 m_items.add(val);
             } else {
                 break;

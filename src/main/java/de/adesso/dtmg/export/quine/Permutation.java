@@ -60,7 +60,7 @@ public class Permutation<L, R> implements Iterable<Pair<L, R>> {
                     } else {
                         qIterator = null;
                     }
-               }
+                }
                 return next != null;
             }
 

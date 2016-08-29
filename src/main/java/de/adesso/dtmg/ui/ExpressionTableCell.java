@@ -29,27 +29,27 @@ import javafx.util.converter.DefaultStringConverter;
 /**
  * Created by mmoehler on 14.08.16.
  */
-public class ExpressionTableCell<S extends DeclarationTableViewModel> extends TextFieldTableCell<S,String> {
+public class ExpressionTableCell<S extends DeclarationTableViewModel> extends TextFieldTableCell<S, String> {
 
     private final static String HAS_NOTE_STYLE = "-fx-background-image: url(\"de/adesso/dtmg/ui/main/hasdoc.png\");\n" +
             "-fx-background-position: right top;\n" +
             "-fx-background-repeat: no-repeat;";
 
 
-    public static <Y extends DeclarationTableViewModel> Callback<TableColumn<Y,String>, TableCell<Y,String>> forExpressionTableColumn() {
-        return forExpressionTableColumn(new DefaultStringConverter());
-    }
-
-    public static <Y extends DeclarationTableViewModel> Callback<TableColumn<Y,String>, TableCell<Y,String>> forExpressionTableColumn(
-            final StringConverter<String> converter) {
-        return list -> new ExpressionTableCell<Y>(converter);
-    }
-
     public ExpressionTableCell() {
     }
 
     public ExpressionTableCell(StringConverter<String> converter) {
         super(converter);
+    }
+
+    public static <Y extends DeclarationTableViewModel> Callback<TableColumn<Y, String>, TableCell<Y, String>> forExpressionTableColumn() {
+        return forExpressionTableColumn(new DefaultStringConverter());
+    }
+
+    public static <Y extends DeclarationTableViewModel> Callback<TableColumn<Y, String>, TableCell<Y, String>> forExpressionTableColumn(
+            final StringConverter<String> converter) {
+        return list -> new ExpressionTableCell<Y>(converter);
     }
 
     @Override
@@ -60,7 +60,7 @@ public class ExpressionTableCell<S extends DeclarationTableViewModel> extends Te
             setStyle("");
         } else {
             boolean hasDoc = this.getTableView().getItems().get(getIndex()).documentationProperty().isNotEmpty().get();
-            if(hasDoc) {
+            if (hasDoc) {
                 setStyle(HAS_NOTE_STYLE);
             }
         }

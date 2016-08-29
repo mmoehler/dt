@@ -43,13 +43,21 @@ public class PackageDependencyCheck {
     public static final String PACKAGE = "package";
     Multimap<String, String> adjacencyList = Multimaps.newSetMultimap(new HashMap<>(), HashSet::new);
 
+    public static void main(String[] args) {
+        String path = "C:\\cygwin64\\home\\moehler\\m2-projects\\dt\\src\\main\\java\\de\\adesso\\dtmg";
+        final PackageDependencyCheck check = new PackageDependencyCheck();
+        check.scan(new File(path));
+        Dump.dumpSimpleDot(check.adjacencyList, (v) -> v.startsWith("de.adesso"), (v) -> v.startsWith("de.adesso"));
+
+    }
+
     public void scan(File f) {
         checkNotNull(f, "Missing File!!");
         if (f.isDirectory()) {
             final File[] files = f.listFiles();
             Arrays.stream(files).forEach(this::scan);
         } else {
-            if(f.getName().endsWith(".java"))
+            if (f.getName().endsWith(".java"))
                 scanImports(f);
         }
     }
@@ -66,18 +74,18 @@ public class PackageDependencyCheck {
         final Optional<String> packageMame = lines.stream()
                 .filter(l -> l.startsWith(PACKAGE)).findFirst();
 
-        if(packageMame.isPresent()) {
+        if (packageMame.isPresent()) {
             String tmp = packageMame.get();
-            final String ps = extractPackageName(PACKAGE, tmp.substring(0,tmp.length()-1));
+            final String ps = extractPackageName(PACKAGE, tmp.substring(0, tmp.length() - 1));
             lines.stream()
                     .filter(l -> l.startsWith(IMPORT))
                     .map(k -> {
                         if (k.startsWith(IMPORT_STATIC)) {
-                            return extractPackageName(IMPORT_STATIC,k);
+                            return extractPackageName(IMPORT_STATIC, k);
                         }
-                        return extractPackageName(IMPORT,k);
+                        return extractPackageName(IMPORT, k);
                     })
-                    .forEach(m -> adjacencyList.put(m,ps));
+                    .forEach(m -> adjacencyList.put(m, ps));
         }
     }
 
@@ -87,14 +95,6 @@ public class PackageDependencyCheck {
                 .reduce((l, r) -> l + '.' + r);
         System.err.println(ret.get());
         return ret.get();
-    }
-
-    public static void main(String[] args) {
-        String path = "C:\\cygwin64\\home\\moehler\\m2-projects\\dt\\src\\main\\java\\de\\adesso\\dtmg";
-        final PackageDependencyCheck check = new PackageDependencyCheck();
-        check.scan(new File(path));
-        Dump.dumpSimpleDot(check.adjacencyList, (v) -> v.startsWith("de.adesso"), (v) -> v.startsWith("de.adesso"));
-
     }
 
 

@@ -103,7 +103,7 @@ public class OdtExportStrategyTest {
             table.getRowList().forEach(r -> {
                 r.setUseOptimalHeight(true);
                 int cellCount = r.getCellCount();
-                IntStream.range(0,cellCount).forEach(i1 -> {
+                IntStream.range(0, cellCount).forEach(i1 -> {
                     Cell cell1 = r.getCellByIndex(i1);
                     cell1.setFont(font1Base);
                     cell1.setHorizontalAlignment(StyleTypeDefinitions.HorizontalAlignmentType.CENTER);
@@ -111,7 +111,6 @@ public class OdtExportStrategyTest {
                     cell1.setBorders(StyleTypeDefinitions.CellBordersType.ALL_FOUR, new Border(Color.GRAY, 1.0, StyleTypeDefinitions.SupportedLinearMeasure.PT));
                 });
             });
-
 
 
 //            Table table = outputOdt.addTable(2, 2);
@@ -131,10 +130,10 @@ public class OdtExportStrategyTest {
 
         java.awt.Font f[] = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
 
-        System.out.println(Strings.repeat("-",83));
+        System.out.println(Strings.repeat("-", 83));
         final String h = String.format("%-40s | %-40s", "Name", "Family");
         System.out.println(h);
-        System.out.println(Strings.repeat("-",83));
+        System.out.println(Strings.repeat("-", 83));
         for (int i = 0; i < f.length; i++) {
             final String s = String.format("%-40s | %-40s", f[i].getFontName(), f[i].getFamily());
             System.out.println(s);

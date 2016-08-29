@@ -20,12 +20,12 @@
 package de.adesso.dtmg.export.java.straigtScan;
 
 import com.sun.codemodel.JCodeModel;
-import de.adesso.dtmg.util.ObservableList2DBuilder;
 import de.adesso.dtmg.export.java.ClassDescription;
 import de.adesso.dtmg.export.java.straightscan.StraightScan;
 import de.adesso.dtmg.model.ActionDecl;
 import de.adesso.dtmg.model.ConditionDecl;
 import de.adesso.dtmg.model.DecisionTable;
+import de.adesso.dtmg.util.ObservableList2DBuilder;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import org.testng.annotations.Test;
@@ -39,15 +39,15 @@ public class StraightScanTest2 {
 
 
     /**
-     *S
-    */
+     * S
+     */
     @Test
     public void testApply() throws Exception {
 
         final ObservableList<ConditionDecl> conditionDecls = FXCollections.observableArrayList(
-            ConditionDecl.newBuilder().withExpression("istLeistungsartKGVGWTKG").withPossibleIndicators("Y,N").withLfdNr("C01").build(),
-            ConditionDecl.newBuilder().withExpression("istLeistungsartOnlyWTKG").withPossibleIndicators("Y,N").withLfdNr("C02").build(),
-            ConditionDecl.newBuilder().withExpression("keineLeistungsarten").withPossibleIndicators("Y,N").withLfdNr("C03").build(),
+                ConditionDecl.newBuilder().withExpression("istLeistungsartKGVGWTKG").withPossibleIndicators("Y,N").withLfdNr("C01").build(),
+                ConditionDecl.newBuilder().withExpression("istLeistungsartOnlyWTKG").withPossibleIndicators("Y,N").withLfdNr("C02").build(),
+                ConditionDecl.newBuilder().withExpression("keineLeistungsarten").withPossibleIndicators("Y,N").withLfdNr("C03").build(),
                 ConditionDecl.newBuilder().withExpression("andereLeistungsarten").withPossibleIndicators("Y,N").withLfdNr("C04").build(),
                 ConditionDecl.newBuilder().withExpression("istUrsachenSchluessel010203").withPossibleIndicators("Y,N").withLfdNr("C05").build()
         );
@@ -66,7 +66,7 @@ public class StraightScanTest2 {
         );
 
         final ObservableList<ObservableList<String>> actionDefns = ObservableList2DBuilder.observable2DOf(
-                        "X,-,X,-,-," +
+                "X,-,X,-,-," +
                         "-,X,-,X,-," +
                         "X,-,-,-,X").dim(3, 5).build();
 

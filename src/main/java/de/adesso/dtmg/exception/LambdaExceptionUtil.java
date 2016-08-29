@@ -91,9 +91,9 @@ public final class LambdaExceptionUtil {
      * .map(rethrowFunction(name -> Class.forName(name))) or .map(rethrowFunction(Class::forName))
      */
     public static <T, U, R, E extends Exception> BiFunction<T, U, R> rethrowBiFunction(BiFunction_WithExceptions<T, U, R, E> function) {
-        return (t,u) -> {
+        return (t, u) -> {
             try {
-                return function.apply(t,u);
+                return function.apply(t, u);
             } catch (Exception exception) {
                 throwAsUnchecked(exception);
                 return null;
@@ -194,7 +194,7 @@ public final class LambdaExceptionUtil {
     }
 
     @FunctionalInterface
-    public interface Callable_WithExceptions<R,E extends Exception> {
+    public interface Callable_WithExceptions<R, E extends Exception> {
         R call() throws E;
     }
 

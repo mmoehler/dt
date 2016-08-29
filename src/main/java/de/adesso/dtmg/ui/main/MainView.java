@@ -21,6 +21,7 @@ package de.adesso.dtmg.ui.main;
 
 import de.adesso.dtmg.Reserved;
 import de.adesso.dtmg.exception.ExceptionHandler;
+import de.adesso.dtmg.export.java.ClassDescription;
 import de.adesso.dtmg.model.ActionDecl;
 import de.adesso.dtmg.model.ConditionDecl;
 import de.adesso.dtmg.ui.DeclarationTableViewModel;
@@ -30,6 +31,7 @@ import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
 import de.adesso.dtmg.ui.dialogs.Dialogs;
 import de.adesso.dtmg.ui.editor.EditorDialog;
 import de.adesso.dtmg.ui.editor.EditorDialogModel;
+import de.adesso.dtmg.ui.export.ClassDescriptionDialog;
 import de.adesso.dtmg.util.DialogHelper;
 import de.adesso.dtmg.util.DtFunctions;
 import de.adesso.dtmg.util.OsCheck;
@@ -76,12 +78,12 @@ import static de.adesso.dtmg.util.MoreCollectors.toSingleObject;
 public class MainView extends DtView implements FxmlView<MainViewModel> {
 
     public static final String COND_ROW_HEADER = "C%02d";
+    public static final String PREFIX_IS = "is";
+    public static final String PREFIX_DO = "do";
     private static final String ACT_ROW_HEADER = "A%02d";
     private static final String ELSE = "E";
     private final static Predicate<ObservableList<String>> HAS_ELSE_RULE =
             c -> (c.isEmpty()) ? false : c.get(c.size() - 1).equals(ELSE);
-    public static final String PREFIX_IS = "is";
-    public static final String PREFIX_DO = "do";
     private final DoubleProperty conditionDividerPos = new SimpleDoubleProperty();
     private final DoubleProperty actionDividerPos = new SimpleDoubleProperty();
     private final SimpleObjectProperty<Path> currentFile = new SimpleObjectProperty<>();
@@ -107,6 +109,8 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     private ExceptionHandler exceptionHandler;
     private String lastKey = null;
     private FileChooser fileChooser;
+    private DeclarationTableViewModel selectedModel;
+    private TableView<? extends DeclarationTableViewModel> selectedTable;
 
     public MainView() {
         super();
@@ -194,9 +198,6 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         initializeObservers();
     }
 
-
-
-
     protected void initializeObservers() {
         this.viewModel.subscribe(Notifications.PREPARE_CONSOLE.name(), (key, value) ->
                 console.setText(String.valueOf(value[0])));
@@ -227,9 +228,33 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         this.viewModel.subscribe(Notifications.DOCUMENT_DECLARATION.name(), this::doDocumentDeclaration);
 
         this.viewModel.subscribe(Notifications.UPD_DOCUMENT.name(), this::updateDocumentDeclaration);
+
+        this.viewModel.subscribe(Notifications.GENERATE_LINE_MASK.name(), this::generateUsingLineMask);
+        this.viewModel.subscribe(Notifications.GENERATE_STRAIGHT_SCAN.name(), this::generateUsingStraightScan);
+        this.viewModel.subscribe(Notifications.GENERATE_TREE_METHOD.name(), this::generateUsingTreeMethod);
+        this.viewModel.subscribe(Notifications.GENERATE_VEINOTT.name(), this::generateUsingVeinott);
     }
 
+    private void generateUsingLineMask(String s, Object... objects) {
+    }
 
+    private void generateUsingStraightScan(String s, Object... objects) {
+    }
+
+    private void generateUsingVeinott(String s, Object... objects) {
+    }
+
+    private void generateUsingTreeMethod(String s, Object... objects) {
+        try {
+            ClassDescriptionDialog dialog = new ClassDescriptionDialog();
+            Optional<ClassDescription> classDescription = dialog.showAndWait();
+            viewModel.handleGenerateUsingTreeMethod(classDescription);
+        } catch (Exception e) {
+            exceptionHandler.showAndWaitAlert(e);
+            return;
+        }
+
+    }
 
     private void doConsolidateRules(String s, Object... objects) {
         try {
@@ -259,12 +284,10 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
         return fileChooser;
     }
 
-    private DeclarationTableViewModel selectedModel;
-    private TableView<? extends DeclarationTableViewModel> selectedTable;
     private void doDocumentDeclaration(String s, Object... objects) {
         OptionalInt index = getIndex(objects);
         Optional<TableView<? extends DeclarationTableViewModel>> table = getSelectedDeclTable();
-        if(table.isPresent()) {
+        if (table.isPresent()) {
             selectedTable = table.get();
             selectedModel = table.get().getSelectionModel().getSelectedItem();
 
@@ -285,7 +308,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
 
     private void updateDocumentDeclaration(String s, Object... objects) {
         String s1 = String.valueOf(objects[0]);
-        selectedModel.documentationProperty().set((String)objects[0]);
+        selectedModel.documentationProperty().set((String) objects[0]);
         selectedTable.getColumns().get(1).setVisible(false);
         selectedTable.getColumns().get(1).setVisible(true);
 
@@ -293,9 +316,9 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
 
     private Optional<TableView<? extends DeclarationTableViewModel>> getSelectedDeclTable() {
         TableView<? extends DeclarationTableViewModel> ret = null;
-        if(getConditionDeclarationsTable().focusedProperty().get()) {
+        if (getConditionDeclarationsTable().focusedProperty().get()) {
             ret = getConditionDeclarationsTable();
-        } else if(getActionDeclarationsTable().focusedProperty().get()) {
+        } else if (getActionDeclarationsTable().focusedProperty().get()) {
             ret = getActionDeclarationsTable();
         }
         return Optional.ofNullable(ret);
@@ -326,7 +349,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
             }
         }
 
-        if(null != value && value.length>0 && null != value[0] && value[0] instanceof URI) {
+        if (null != value && value.length > 0 && null != value[0] && value[0] instanceof URI) {
             URI uri = URI.class.cast(value[0]);
             internalOpenFile(uri);
             return;
@@ -359,7 +382,7 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     }
 
     private Answer querySaveIfChanged() {
-        if(viewModel.changedProperty().get()) {
+        if (viewModel.changedProperty().get()) {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("DTMG");
             Path p = this.currentFile.get().getFileName();

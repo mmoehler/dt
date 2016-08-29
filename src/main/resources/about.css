@@ -20,6 +20,7 @@
 .invisible-pagination-control .pagination-control {
     visibility: hidden;
 }
+
 .hyperlink:visited {
     -fx-text-fill: -fx-text-base-color;
 }
@@ -32,6 +33,7 @@
 .hyperlink:focused {
     -fx-border-width: 0px;
 }
+
 .hyperlink:hover {
     -fx-underline: true;
 }

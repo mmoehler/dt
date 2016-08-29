@@ -52,14 +52,14 @@ public class StructuralAnalysisResultEmitter implements BiFunction<List<Indicato
         P p = new P();
 
         String header = IntStream.rangeClosed(1, countRules)
-                .mapToObj(i -> Strings.padStart((i>9 && i%10==0)?(String.valueOf(i /10)):(" "), 2, ' '))
+                .mapToObj(i -> Strings.padStart((i > 9 && i % 10 == 0) ? (String.valueOf(i / 10)) : (" "), 2, ' '))
                 .reduce("", (a, b) -> a + b);
 
         p.prlnps(header, STRUCTURE_ANALYSIS_RULE.length() + header.length() - 2, ' ');
 
         Iterator<Indicator> indics = analysisResult.iterator();
         header = IntStream.rangeClosed(1, countRules)
-                .mapToObj(i -> Strings.padStart(String.valueOf(i%10), 2, ' '))
+                .mapToObj(i -> Strings.padStart(String.valueOf(i % 10), 2, ' '))
                 .reduce("", (a, b) -> a + b);
 
         p.prlnps(header, STRUCTURE_ANALYSIS_RULE.length() + header.length() - 2, ' ');

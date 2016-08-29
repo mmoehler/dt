@@ -44,6 +44,7 @@ public class Child310 extends Model {
 
     public static class Builder extends AbstractNestable<Root300.Builder, Child310> {
         String name;
+
         public Builder(Root300.Builder parent, Callback<Child310> callback) {
             super(parent, callback);
         }

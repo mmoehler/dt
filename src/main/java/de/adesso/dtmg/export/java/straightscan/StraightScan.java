@@ -95,7 +95,7 @@ public class StraightScan implements LambdaExceptionUtil.BiFunction_WithExceptio
 
             final String condition = StreamUtils.zipWithIndex(condefs.get(i).stream())
                     .filter(f -> !"-".equals(f.getValue()))
-                    .map(s -> String.format("%scondition%02d(input)","N".equals(s.getValue()) ? "!" : "", s.getIndex()))
+                    .map(s -> String.format("%scondition%02d(input)", "N".equals(s.getValue()) ? "!" : "", s.getIndex()))
                     .reduce("", (l, r) -> Strings.isNullOrEmpty(l) ? r : l + " && " + r);
 
             flag[0] = jmBody._if(JExpr.direct(condition));

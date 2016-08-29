@@ -46,14 +46,14 @@ public final class List2DFunctions {
 
     public static <T> Function<List<List<T>>, List<List<T>>> transpose() {
         return m ->
-              range(0, m.get(0).size()).mapToObj(r ->
-                    range(0, m.size()).mapToObj(c -> m.get(c).get(r)).collect(toList())).collect(toList());
+                range(0, m.get(0).size()).mapToObj(r ->
+                        range(0, m.size()).mapToObj(c -> m.get(c).get(r)).collect(toList())).collect(toList());
     }
 
     public static <T> List<List<T>> newList2D(int rows, int cols, T filler) {
-        return range(0,rows).mapToObj(i -> {
+        return range(0, rows).mapToObj(i -> {
             ArrayList<T> row = new ArrayList<>(cols);
-            range(0,cols).forEach(d -> row.add(filler));
+            range(0, cols).forEach(d -> row.add(filler));
             return row;
         }).collect(Collectors.toList());
     }
@@ -70,8 +70,8 @@ public final class List2DFunctions {
         return new RemoveColumn(pos);
     }
 
-    public  static Function<List<String>, List<String>> swapColumns(int pos1, int pos2) {
-        return new SwapColumns(pos1,pos2);
+    public static Function<List<String>, List<String>> swapColumns(int pos1, int pos2) {
+        return new SwapColumns(pos1, pos2);
     }
 
     public static Function<List<String>, List<String>> moveColumn(int oldPos, int newPos) {
@@ -80,7 +80,7 @@ public final class List2DFunctions {
 
 
     public static <T> List<List<T>> transpose(List<List<T>> original) {
-        if(original.isEmpty()) return original;
+        if (original.isEmpty()) return original;
         return Stream.of(original).map(transpose()).collect(MoreCollectors.toSingleObject());
     }
 
@@ -110,12 +110,12 @@ public final class List2DFunctions {
     }
 
     public static List<List<String>> swapColumnsAt(List<List<String>> original, int col1Idx, int col2Idx) {
-        return original.stream().map(swapColumns(col1Idx,col2Idx)).collect(Collectors.toList());
+        return original.stream().map(swapColumns(col1Idx, col2Idx)).collect(Collectors.toList());
 
     }
 
     public static List<List<String>> moveColumn(List<List<String>> original, int from, int to) {
-        return original.stream().map(moveColumn(from,to)).collect(Collectors.toList());
+        return original.stream().map(moveColumn(from, to)).collect(Collectors.toList());
 
     }
 
@@ -139,7 +139,7 @@ public final class List2DFunctions {
         if (len == 0) {
             return Collections.emptyList();
         }
-        List<String> row = range(0, len-1)
+        List<String> row = range(0, len - 1)
                 .mapToObj(i -> defaultValue.get())
                 .collect(toList());
         row.add(ELSE);
@@ -209,7 +209,7 @@ public final class List2DFunctions {
             return original;
         }
         List<List<String>> copiedMatrix = copy(original);
-        List<String> copiedRow = range(0, original.get(0).size()-1)
+        List<String> copiedRow = range(0, original.get(0).size() - 1)
                 .mapToObj(i -> valueSupplier.get())
                 .collect(toList());
         copiedRow.add(ELSE);

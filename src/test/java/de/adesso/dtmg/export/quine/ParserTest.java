@@ -34,7 +34,7 @@ import static java.lang.Math.pow;
 public class ParserTest {
 
     final static char H = '-';
-    final static Tuple2<List<Integer>, String> EMPY_COMB_RESULT = Tuple.of(null,null);
+    final static Tuple2<List<Integer>, String> EMPY_COMB_RESULT = Tuple.of(null, null);
 
     @Test
     public void testQuineMcCluskey() throws Exception {
@@ -60,8 +60,6 @@ public class ParserTest {
 
     @Test
     public void testOther() throws Exception {
-
-
 
 
         for (int c = 0; c < 3; c++) {

@@ -35,10 +35,10 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
-import static de.adesso.dtmg.analysis.completeness.detailed.Actions.*;
-import static de.adesso.dtmg.analysis.completeness.detailed.Conditions.*;
 import static de.adesso.dtmg.Reserved.isDASH;
 import static de.adesso.dtmg.Reserved.isYES;
+import static de.adesso.dtmg.analysis.completeness.detailed.Actions.*;
+import static de.adesso.dtmg.analysis.completeness.detailed.Conditions.*;
 import static de.adesso.dtmg.util.List2DFunctions.removeColumnsAt;
 import static de.adesso.dtmg.util.List2DFunctions.transpose;
 import static java.util.stream.Collectors.toList;
@@ -51,14 +51,10 @@ public class Functions {
     private static final BiFunction<List<String>, List<String>, List<List<String>>>[] ACTIONS = new BiFunction[]{A1, A2, A3, A4, A5};
     private static final Function<List<Tuple2<String, String>>, Integer>[] CONDITIONS = new Function[]{B1, B2, B3, B4};
     private static final List<List<String>> INTERNAL = List2DBuilder.matrixOf("Y,N,N,N,N,-,Y,N,N,N,-,-,N,Y,Y,-,-,-,N,Y").dim(4, 5).build();
-    private static Function<String, Integer> maskMatrixMapper = s -> (isDASH(s)) ? 0 : 1;
     private static final List<? extends List<Integer>> M = transpose(makeMaskMatrix(INTERNAL));
-    private static Function<String, Integer> decisionMatrixMapper = s -> (isYES(s)) ? 1 : 0;
-    // @formatter::ofList
     private static final List<? extends List<Integer>> D = transpose(makeDecisionMatrix(INTERNAL));
-
-
     public static BiFunction<List<String>, List<String>, List<List<String>>> columnDifference = (left, right) -> {
+
 
         List<Tuple2<String, String>> prototype = StreamUtils
                 .zip(left.stream(), right.stream(), Tuple::of)
@@ -92,6 +88,10 @@ public class Functions {
         return transpose(applied);
 
     };
+    private static Function<String, Integer> maskMatrixMapper = s -> (isDASH(s)) ? 0 : 1;
+    private static Function<String, Integer> decisionMatrixMapper = s -> (isYES(s)) ? 1 : 0;
+    // @formatter::ofList
+
 
     public static List<List<Integer>> makeMaskMatrix(List<List<String>> conditions) {
         List<List<Integer>> M = conditions.stream().map(a -> a.stream().map(maskMatrixMapper).collect(toList())).collect(toList());
@@ -155,7 +155,7 @@ class ConsolidateRules0 implements Function<List<List<String>>, List<List<String
                         }
                     }));
 
-                    LOGGER.debug("removeColumnsAt (unordered) = {}",toDelete);
+                    LOGGER.debug("removeColumnsAt (unordered) = {}", toDelete);
                     toDelete.stream()
                             .sorted((a, b) -> b - a)
                             .peek(x -> LOGGER.debug("removeColumnsAt (ordered) = {}", x))

@@ -27,7 +27,7 @@ import de.saxsys.mvvmfx.ViewModel;
 /**
  * Created by mmoehler on 30.07.16.
  */
-@ScopeProvider(scopes={RuleScope.class})
+@ScopeProvider(scopes = {RuleScope.class})
 public class QuineMcCluskeyViewModel implements ViewModel {
     @InjectScope
     private RuleScope mdScope;

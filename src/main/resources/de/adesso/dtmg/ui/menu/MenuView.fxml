@@ -3,8 +3,8 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.input.*?>
 <?import javafx.scene.layout.*?>
-<AnchorPane maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity" minWidth="-Infinity"
-            xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="+Infinity" minHeight="-Infinity"
+            minWidth="-Infinity" xmlns="http://javafx.com/javafx/8"
             fx:controller="de.adesso.dtmg.ui.menu.MenuView">
     <children>
         <MenuBar AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
@@ -24,7 +24,7 @@
                                                     shortcut="UP"/>
                             </accelerator>
                         </MenuItem>
-                        <Menu fx:id="fileOpenRecent" mnemonicParsing="false" text="Open Recent..." >
+                        <Menu fx:id="fileOpenRecent" mnemonicParsing="false" text="Open Recent...">
                             <items/>
                         </Menu>
                         <MenuItem fx:id="fileSave" mnemonicParsing="false" onAction="#doFileSave" text="Save">
@@ -221,6 +221,40 @@
                         </MenuItem>
                     </items>
                 </Menu>
+
+                <Menu mnemonicParsing="false" text="Generate">
+                    <items>
+                        <MenuItem fx:id="treemethod" mnemonicParsing="false" onAction="#doGenerateUsingTreeMethod"
+                                  text="Tree Method">
+                            <accelerator>
+                                <KeyCodeCombination alt="DOWN" code="T" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="straightscan" mnemonicParsing="false" onAction="#doGenerateUsingStraightScan"
+                                  text="Straight Scan">
+                            <accelerator>
+                                <KeyCodeCombination alt="DOWN" code="S" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="veinott" mnemonicParsing="false" onAction="#doGenerateUsingVeinott"
+                                  text="Veinott">
+                            <accelerator>
+                                <KeyCodeCombination alt="DOWN" code="V" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                        <MenuItem fx:id="linemask" mnemonicParsing="false" onAction="#doGenerateUsingLineMask"
+                                  text="Line Mask">
+                            <accelerator>
+                                <KeyCodeCombination alt="DOWN" code="V" control="DOWN" meta="UP" shift="UP"
+                                                    shortcut="UP"/>
+                            </accelerator>
+                        </MenuItem>
+                    </items>
+                </Menu>
+
 
                 <Menu mnemonicParsing="false" text="Tools">
                     <items>

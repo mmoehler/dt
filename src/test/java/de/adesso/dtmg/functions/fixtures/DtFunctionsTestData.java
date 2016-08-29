@@ -21,10 +21,10 @@ package de.adesso.dtmg.functions.fixtures;
 
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import de.adesso.dtmg.util.Dump;
 import de.adesso.dtmg.analysis.structure.DefaultStructuralAnalysis;
 import de.adesso.dtmg.analysis.structure.Indicator;
 import de.adesso.dtmg.analysis.structure.StructuralAnalysisResultEmitter;
+import de.adesso.dtmg.util.Dump;
 import de.adesso.dtmg.util.List2DBuilder;
 import de.adesso.dtmg.util.List2DFunctions;
 import de.adesso.dtmg.util.MoreCollectors;
@@ -155,12 +155,12 @@ public class DtFunctionsTestData {
         Set<Integer> condDups = indicesOfAllDuplicates(conditions);
         Set<Integer> actDups = indicesOfAllDuplicates(actions);
 
-        Sets.intersection(condDups,actDups).forEach(i -> {
-            removeColumnsAt(conditions,i);
-            removeColumnsAt(actions,i);
+        Sets.intersection(condDups, actDups).forEach(i -> {
+            removeColumnsAt(conditions, i);
+            removeColumnsAt(actions, i);
         });
 
-        return Tuple.of(conditions,actions);
+        return Tuple.of(conditions, actions);
     }
 
 
@@ -175,12 +175,11 @@ public class DtFunctionsTestData {
     }
 
     static <T> Set<Integer> indicesOf(List<T> l, T t, int offset) {
-        return IntStream.range(0,l.size())
+        return IntStream.range(0, l.size())
                 .filter(i -> (l.get(i).equals(t)))
                 .mapToObj(i -> (i + offset))
                 .collect(Collectors.toSet());
     }
-
 
 
     private static boolean doStructuralAnalysis(Tuple2<List<List<String>>, List<List<String>>> dt) {

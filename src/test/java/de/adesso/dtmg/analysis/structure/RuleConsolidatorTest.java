@@ -52,8 +52,8 @@ public class RuleConsolidatorTest {
                         "Y,N,Y,N,Y").dim(4, 5).build();
 
         List<List<Integer>> indices = Lists.newArrayList(
-                Lists.newArrayList(0,2),
-                Lists.newArrayList(1,3)
+                Lists.newArrayList(0, 2),
+                Lists.newArrayList(1, 3)
         );
 
         ObservableList<ObservableList<String>> part0 = ObservableList2DBuilder.observable2DOf(
@@ -74,23 +74,23 @@ public class RuleConsolidatorTest {
 
         Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> actual = new RuleConsolidator().mergeRules(conditions, actions, indices, consolidated);
 
-        Dump.dumpTableItems("C",actual._1());
-        Dump.dumpTableItems("A",actual._2());
+        Dump.dumpTableItems("C", actual._1());
+        Dump.dumpTableItems("A", actual._2());
 
         ObservableList<ObservableList<String>> expActions = ObservableList2DBuilder.observable2DOf(
-                        "X,-,X," +
+                "X,-,X," +
                         "-,-,X," +
                         "X,X,X," +
                         "X,-,X").dim(4, 3).build();
 
         ObservableList<ObservableList<String>> expConditions = ObservableList2DBuilder.observable2DOf(
-                        "Y,Y,Y," +
+                "Y,Y,Y," +
                         "Y,Y,N," +
                         "-,-,Y," +
                         "Y,N,Y").dim(4, 3).build();
 
-        assertThat("Condition Consolidation fails!",actual._1(), equalTo(expConditions));
-        assertThat("Action Consolidation fails!",actual._2(), equalTo(expActions));
+        assertThat("Condition Consolidation fails!", actual._1(), equalTo(expConditions));
+        assertThat("Action Consolidation fails!", actual._2(), equalTo(expActions));
     }
 
     @Test
@@ -106,7 +106,6 @@ public class RuleConsolidatorTest {
                         "Y,Y," +
                         "Y,N," +
                         "N,N").dim(4, 2).transposed().build();
-
 
 
         ObservableList<ObservableList<ObservableList<String>>> parts = FXCollections.observableArrayList();
@@ -141,14 +140,14 @@ public class RuleConsolidatorTest {
     @Test
     public void testDetermineConditions4Consolidation() throws Exception {
         ObservableList<ObservableList<String>> input1 = ObservableList2DBuilder.observable2DOf(
-                        "Y,Y,Y,Y,Y," +
+                "Y,Y,Y,Y,Y," +
                         "Y,Y,Y,Y,N," +
                         "Y,Y,N,N,Y," +
                         "Y,N,Y,N,Y").dim(4, 5).transposed().build();
 
         List<List<Integer>> input2 = Lists.newArrayList(
-                Lists.newArrayList(0,2),
-                Lists.newArrayList(1,3)
+                Lists.newArrayList(0, 2),
+                Lists.newArrayList(1, 3)
         );
 
         ObservableList<ObservableList<String>> tmp0 = ObservableList2DBuilder.observable2DOf(
@@ -164,7 +163,6 @@ public class RuleConsolidatorTest {
                         "N,N").dim(4, 2).transposed().build();
 
 
-
         ObservableList<ObservableList<ObservableList<String>>> expected = FXCollections.observableArrayList();
         expected.add(tmp0);
         expected.add(tmp1);
@@ -178,15 +176,15 @@ public class RuleConsolidatorTest {
     @Test
     public void testDetectIndicesOfDupplicateActionCombinations() throws Exception {
         ObservableList<ObservableList<String>> input = ObservableList2DBuilder.observable2DOf(
-                                "X,-,X,-,X," +
-                                "-,-,-,-,X," +
-                                "X,X,X,X,X," +
-                                "X,-,X,-,X").dim(4, 5).transposed().build();
+                "X,-,X,-,X," +
+                        "-,-,-,-,X," +
+                        "X,X,X,X,X," +
+                        "X,-,X,-,X").dim(4, 5).transposed().build();
         List<List<Integer>> actuals = new RuleConsolidator().detectIndicesOfDupplicateActionCombinations(input);
 
         List<List<Integer>> expected = Lists.newArrayList(
-                Lists.newArrayList(0,2),
-                Lists.newArrayList(1,3)
+                Lists.newArrayList(0, 2),
+                Lists.newArrayList(1, 3)
         );
 
         assertThat(actuals, equalTo(expected));

@@ -45,28 +45,28 @@ public class UnicodeTest {
 
     enum ComparisonIndicatorConditions implements BinaryOperator<ComparisonIndicatorConditions> {
         // @formatter:off
-        EQ(0,"\u003D"),
-        NE(1,"\u2260"),
-        LO(2,"\u003C"),
-        GT(3,"\u003E"),
-        XX(4,"\u0058"),
-        NI(5,"\u2262"),
-        AS(6,"\u002A"),
-        MI(7,"\u002D"),
-        RR(8,"\u0052"),
-        CC(9,"\u0043");
+        EQ(0, "\u003D"),
+        NE(1, "\u2260"),
+        LO(2, "\u003C"),
+        GT(3, "\u003E"),
+        XX(4, "\u0058"),
+        NI(5, "\u2262"),
+        AS(6, "\u002A"),
+        MI(7, "\u002D"),
+        RR(8, "\u0052"),
+        CC(9, "\u0043");
         // @formatter:ofList
 
         private final static ComparisonIndicatorConditions[][] JOIN_RULES_CONDITION = {
                 // @formatter:off
                 //EQ,NE,LO,GT
                 //------------------
-                 {EQ,LO,GT,NE},// EQ
-                 {NE,NI,NI,NI},// NE
-                 {LO,LO,XX,NI},// LO
-                 {GT,XX,GT,NI},// GT
-                 {XX,XX,XX,NI},// XX
-                 {NI,NI,NI,NI},// NI
+                {EQ, LO, GT, NE},// EQ
+                {NE, NI, NI, NI},// NE
+                {LO, LO, XX, NI},// LO
+                {GT, XX, GT, NI},// GT
+                {XX, XX, XX, NI},// XX
+                {NI, NI, NI, NI},// NI
                 // @formatter:ofList
         };
 

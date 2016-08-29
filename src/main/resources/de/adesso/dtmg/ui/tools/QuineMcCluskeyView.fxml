@@ -5,67 +5,74 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40" xmlns:fx="http://javafx.com/fxml/1" fx:controller="de.adesso.dtmg.ui.tools.QuineMcCluskeyView">
-   <children>
-      <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-         <children>
-            <HBox prefHeight="40.0" prefWidth="600.0">
-               <padding>
-                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-               </padding>
-               <children>
-                  <Text fill="DIMGREY" strokeType="OUTSIDE" strokeWidth="0.0" text="Quine-McCluskey-Optimizer">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Text>
-               </children>
-            </HBox>
-            <Separator />
-            <VBox>
-               <children>
-                  <Label text="Expression to optimize:">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextArea fx:id="txtInput" minHeight="180.0" prefHeight="180.0">
-                     <VBox.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </VBox.margin>
-                  </TextArea>
-                  <Label text="Optimized Expression:">
-                     <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </VBox.margin>
-                  </Label>
-                  <TextArea fx:id="txtOutput" minHeight="180.0" prefHeight="180.0">
-                     <VBox.margin>
-                        <Insets left="5.0" right="5.0" />
-                     </VBox.margin>
-                  </TextArea>
-               </children>
-            </VBox>
-            <HBox alignment="BOTTOM_RIGHT" maxHeight="-Infinity" prefHeight="40.0" prefWidth="600.0">
-               <children>
-                  <Button fx:id="btnOptimize" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#doOptimze" prefHeight="27.0" prefWidth="80.0" text="Optimize">
-                     <HBox.margin>
-                        <Insets bottom="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnClearAll" mnemonicParsing="false" onAction="#doClearAll" prefHeight="27.0" prefWidth="80.0" text="Clear All">
-                     <HBox.margin>
-                        <Insets bottom="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-                  <Button fx:id="btnClose" cancelButton="true" mnemonicParsing="false" onAction="#doClose" prefHeight="27.0" prefWidth="80.0" text="Close">
-                     <HBox.margin>
-                        <Insets bottom="5.0" right="5.0" top="5.0" />
-                     </HBox.margin>
-                  </Button>
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </children>
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+            prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.40"
+            fx:controller="de.adesso.dtmg.ui.tools.QuineMcCluskeyView">
+    <children>
+        <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
+              AnchorPane.topAnchor="0.0">
+            <children>
+                <HBox prefHeight="40.0" prefWidth="600.0">
+                    <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                    </padding>
+                    <children>
+                        <Text fill="DIMGREY" strokeType="OUTSIDE" strokeWidth="0.0" text="Quine-McCluskey-Optimizer">
+                            <font>
+                                <Font size="24.0"/>
+                            </font>
+                        </Text>
+                    </children>
+                </HBox>
+                <Separator/>
+                <VBox>
+                    <children>
+                        <Label text="Expression to optimize:">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <TextArea fx:id="txtInput" minHeight="180.0" prefHeight="180.0">
+                            <VBox.margin>
+                                <Insets left="5.0" right="5.0"/>
+                            </VBox.margin>
+                        </TextArea>
+                        <Label text="Optimized Expression:">
+                            <VBox.margin>
+                                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0"/>
+                            </VBox.margin>
+                        </Label>
+                        <TextArea fx:id="txtOutput" minHeight="180.0" prefHeight="180.0">
+                            <VBox.margin>
+                                <Insets left="5.0" right="5.0"/>
+                            </VBox.margin>
+                        </TextArea>
+                    </children>
+                </VBox>
+                <HBox alignment="BOTTOM_RIGHT" maxHeight="-Infinity" prefHeight="40.0" prefWidth="600.0">
+                    <children>
+                        <Button fx:id="btnOptimize" defaultButton="true" maxHeight="-Infinity" maxWidth="-Infinity"
+                                minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#doOptimze"
+                                prefHeight="27.0" prefWidth="80.0" text="Optimize">
+                            <HBox.margin>
+                                <Insets bottom="5.0" right="5.0" top="5.0"/>
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnClearAll" mnemonicParsing="false" onAction="#doClearAll" prefHeight="27.0"
+                                prefWidth="80.0" text="Clear All">
+                            <HBox.margin>
+                                <Insets bottom="5.0" right="5.0" top="5.0"/>
+                            </HBox.margin>
+                        </Button>
+                        <Button fx:id="btnClose" cancelButton="true" mnemonicParsing="false" onAction="#doClose"
+                                prefHeight="27.0" prefWidth="80.0" text="Close">
+                            <HBox.margin>
+                                <Insets bottom="5.0" right="5.0" top="5.0"/>
+                            </HBox.margin>
+                        </Button>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </children>
 </AnchorPane>

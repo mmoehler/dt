@@ -76,6 +76,40 @@ public class CollectorTest {
 
     }
 
+    static Tuple2<List<Integer>, List<Integer>> split(Collection<Integer> data, BiPredicate<Collection<Integer>, Integer> rule) {
+        Tuple2<List<Integer>, List<Integer>> ret = Tuple.of(new ArrayList<>(), new ArrayList<>());
+        data.forEach(i -> {
+            ((rule.test(data, i)) ? (ret._1()) : (ret._2())).add(i);
+        });
+        return ret;
+
+
+    }
+
+    public static <T> void dumpTableItems(String msg, List<List<T>> list2D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list2D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    public static void dumpTableItems(String msg, ObservableList<ObservableList<String>> list2D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list2D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    public static void dumpMap(String msg, Map<?, ?> map) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        map.forEach((k, v) -> System.out.println("\t" + k + " -> " + v));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
+    public static <T> void dumpList1DItems(String msg, List<T> list1D) {
+        System.out.println(String.format("%s >>>>>>>>>>", msg));
+        list1D.forEach(i -> System.out.println("\t" + i));
+        System.out.println("<<<<<<<<<<\n");
+    }
+
     @Test
     public void comparisonCollectorAlgoTest() {
 
@@ -241,53 +275,18 @@ public class CollectorTest {
 
     }
 
-    static Tuple2<List<Integer>, List<Integer>> split(Collection<Integer> data, BiPredicate<Collection<Integer>, Integer> rule) {
-        Tuple2<List<Integer>, List<Integer>> ret = Tuple.of(new ArrayList<>(), new ArrayList<>());
-        data.forEach(i -> {
-            ((rule.test(data, i)) ? (ret._1()) : (ret._2())).add(i);
-        });
-        return ret;
-
-
-    }
-
-
-    public static <T> void dumpTableItems(String msg, List<List<T>> list2D) {
-        System.out.println(String.format("%s >>>>>>>>>>", msg));
-        list2D.forEach(i -> System.out.println("\t" + i));
-        System.out.println("<<<<<<<<<<\n");
-    }
-
-    public static void dumpTableItems(String msg, ObservableList<ObservableList<String>> list2D) {
-        System.out.println(String.format("%s >>>>>>>>>>", msg));
-        list2D.forEach(i -> System.out.println("\t" + i));
-        System.out.println("<<<<<<<<<<\n");
-    }
-
-    public static void dumpMap(String msg, Map<?, ?> map) {
-        System.out.println(String.format("%s >>>>>>>>>>", msg));
-        map.forEach((k, v) -> System.out.println("\t" + k + " -> " + v));
-        System.out.println("<<<<<<<<<<\n");
-    }
-
-    public static <T> void dumpList1DItems(String msg, List<T> list1D) {
-        System.out.println(String.format("%s >>>>>>>>>>", msg));
-        list1D.forEach(i -> System.out.println("\t" + i));
-        System.out.println("<<<<<<<<<<\n");
-    }
-
     @Test
-    public void testGroupActions(){
+    public void testGroupActions() {
         final ObservableList<ObservableList<String>> actions = ObservableList2DBuilder.observable2DOf(
-                         "-,-,X,X,X,-,-,-,-,"
-                        +"X,X,X,-,-,-,-,-,-,"
-                        +"X,-,X,X,X,X,X,X,X").dim(3, 9).build();
+                "-,-,X,X,X,-,-,-,-,"
+                        + "X,X,X,-,-,-,-,-,-,"
+                        + "X,-,X,X,X,X,X,X,X").dim(3, 9).build();
 
         final ObservableList<ObservableList<String>> conditions = ObservableList2DBuilder.observable2DOf(
-                         "Y,Y,Y,Y,Y,N,N,N,N,"
-                        +"Y,Y,N,-,-,-,-,-,-,"
-                        +"Y,N,-,Y,N,Y,Y,N,N,"
-                        +"Y,Y,Y,N,N,Y,N,Y,N").dim(4, 9).build();
+                "Y,Y,Y,Y,Y,N,N,N,N,"
+                        + "Y,Y,N,-,-,-,-,-,-,"
+                        + "Y,N,-,Y,N,Y,Y,N,N,"
+                        + "Y,Y,Y,N,N,Y,N,Y,N").dim(4, 9).build();
 
 
         Dump.dumpTableItems("OLD CODITIONS", conditions);
@@ -304,7 +303,7 @@ public class CollectorTest {
     }
 
     @Test
-    public void testGroupActions0(){
+    public void testGroupActions0() {
         final ObservableList<ObservableList<String>> actions = ObservableList2DBuilder.observable2DOf(
                 "X,X,X,X,X,X,-," +
                         "X,-,X,X,-,-,X," +
@@ -341,7 +340,7 @@ public class CollectorTest {
 */
 
         final ObservableList<ObservableList<String>> conditions = ObservableList2DBuilder.observable2DOf(
-                          "Y,Y,Y,"
+                "Y,Y,Y,"
                         + "Y,N,N,"
                         + "Y,Y,N").dim(3, 3).build();
 

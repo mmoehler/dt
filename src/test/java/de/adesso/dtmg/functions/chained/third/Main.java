@@ -27,10 +27,10 @@ public class Main {
         final Root300 root = Root300.newBuilder()
                 .withName("100")
                 .withChild310()
-                    .withName("110")
+                .withName("110")
                 .done()
                 .withChild320()
-                    .withName("120")
+                .withName("120")
                 .done()
                 .build();
 

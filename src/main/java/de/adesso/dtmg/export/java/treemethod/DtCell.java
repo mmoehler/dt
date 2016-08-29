@@ -73,7 +73,7 @@ public class DtCell implements Comparable<DtCell> {
 
     @Override
     public String toString() {
-        return type.code+String.format("[%d:%d]",row,col);
+        return type.code + String.format("[%d:%d]", row, col);
     }
 
     public List<DtCell> canonical() {

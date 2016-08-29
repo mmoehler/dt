@@ -38,21 +38,6 @@ import static de.adesso.dtmg.util.List2DFunctions.removeColumnsAt;
  */
 public class DuplicateRulesRejector implements Function<Tuple2<List<List<String>>, List<List<String>>>, Tuple2<List<List<String>>, List<List<String>>>> {
 
-    @Override
-    public Tuple2<List<List<String>>, List<List<String>>> apply(Tuple2<List<List<String>>, List<List<String>>> dt) {
-        List<List<String>> conditions = new ArrayList<>(dt._1());
-        List<List<String>> actions = new ArrayList<>(dt._2());
-
-        Set<Integer> condDups = indicesOfAllDuplicates(conditions);
-        Set<Integer> actDups = indicesOfAllDuplicates(actions);
-
-        Sets.intersection(condDups,actDups).forEach(i -> {
-            removeColumnsAt(conditions,i);
-            removeColumnsAt(actions,i);
-        });
-        return Tuple.of(conditions,actions);
-    }
-
     private static <T> Set<Integer> indicesOfAllDuplicates(List<T> l) {
         final int sz = l.size() - 1;
         return IntStream.range(0, sz)
@@ -64,10 +49,25 @@ public class DuplicateRulesRejector implements Function<Tuple2<List<List<String>
     }
 
     private static <T> Set<Integer> indicesOf(List<T> l, T t, int offset) {
-        return IntStream.range(0,l.size())
+        return IntStream.range(0, l.size())
                 .filter(i -> (l.get(i).equals(t)))
                 .mapToObj(i -> (i + offset))
                 .collect(Collectors.toSet());
+    }
+
+    @Override
+    public Tuple2<List<List<String>>, List<List<String>>> apply(Tuple2<List<List<String>>, List<List<String>>> dt) {
+        List<List<String>> conditions = new ArrayList<>(dt._1());
+        List<List<String>> actions = new ArrayList<>(dt._2());
+
+        Set<Integer> condDups = indicesOfAllDuplicates(conditions);
+        Set<Integer> actDups = indicesOfAllDuplicates(actions);
+
+        Sets.intersection(condDups, actDups).forEach(i -> {
+            removeColumnsAt(conditions, i);
+            removeColumnsAt(actions, i);
+        });
+        return Tuple.of(conditions, actions);
     }
 
 }

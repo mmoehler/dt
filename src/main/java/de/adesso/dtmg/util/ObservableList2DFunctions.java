@@ -67,9 +67,9 @@ public class ObservableList2DFunctions {
 
     public static Function<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> transpose() {
         return m -> {
-            if(m.isEmpty()) return m;
+            if (m.isEmpty()) return m;
             return range(0, m.get(0).size())
-                    .mapToObj(r ->range(0, m.size())
+                    .mapToObj(r -> range(0, m.size())
                             .mapToObj(c -> m.get(c).get(r))
                             .collect(toObservableList()))
                     .collect(toObservableList());

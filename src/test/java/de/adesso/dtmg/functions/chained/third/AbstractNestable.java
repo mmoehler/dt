@@ -22,7 +22,7 @@ package de.adesso.dtmg.functions.chained.third;
 /**
  * Created by moehler on 12.05.2016.
  */
-public abstract class AbstractNestable<P,O> implements Nestable<P,O> {
+public abstract class AbstractNestable<P, O> implements Nestable<P, O> {
 
     private final P parent;
     private final Callback<O> callback;

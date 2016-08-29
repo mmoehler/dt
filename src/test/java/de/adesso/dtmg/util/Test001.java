@@ -22,8 +22,15 @@ package de.adesso.dtmg.util;
 import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
-import de.adesso.dtmg.export.java.treeMethod.*;
+import com.sun.codemodel.JCodeModel;
+import de.adesso.dtmg.export.java.ClassDescription;
+import de.adesso.dtmg.export.java.Visitor;
+import de.adesso.dtmg.export.java.treemethod.*;
 import de.adesso.dtmg.io.DtEntity;
+import de.adesso.dtmg.io.builder.ActionDeclTableViewModelListBuilder;
+import de.adesso.dtmg.io.builder.ConditionDeclTableViewModelListBuilder;
+import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
+import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
 import javafx.collections.ObservableList;
 import org.testng.annotations.Test;
 
@@ -55,10 +62,10 @@ public class Test001 {
     };
 
     final Comparator<List<DtCell>> ruleConditionsComparator = (l, r) -> {
-        if(l.size()!=r.size()) throw new IllegalStateException();
+        if (l.size() != r.size()) throw new IllegalStateException();
         Iterator<DtCell> li = l.iterator();
         Iterator<DtCell> ri = r.iterator();
-        while(li.hasNext()) {
+        while (li.hasNext()) {
             DtCell cl = li.next();
             DtCell cr = ri.next();
             if (cl.typeOf(DtCellType.I) || cr.typeOf(DtCellType.I))
@@ -77,7 +84,33 @@ public class Test001 {
         return (p);
     };
 
+    static void printTo(DtNode n) {
+        if (null == n) return;
+        final String s = Strings.padStart(String.valueOf(n.getConditionIndex()), 3 * n.getConditionIndex(), '.');
+        System.out.println(n);
+        printTo(n.yes);
+        printTo(n.no);
+    }
 
+    static void emitCode(DtNode top) {
+        System.out.println("public abstract class Rules implements Runnable {");
+
+        System.out.println("public void run() {");
+
+        Visitor<DtNode> v = new SimpleVisitor();
+        TreeSet<String> actionNames = Sets.newTreeSet();
+        TreeSet<String> conditionNames = Sets.newTreeSet();
+        top.accept(v, actionNames, conditionNames);
+
+        System.out.println("}");
+
+        String conTpl = "protected abstract boolean %s();";
+        conditionNames.forEach(n -> System.out.println(String.format(conTpl, n)));
+        String actTpl = "protected abstract void %s();";
+        actionNames.forEach(n -> System.out.println(String.format(actTpl, n)));
+
+        System.out.println("}");
+    }
 
     @Test
     public void testPermutations() {
@@ -127,30 +160,30 @@ public class Test001 {
         });
 
         UnaryOperator<List<List<DtCell>>> transpose =
-            m -> range(0, m.get(0).size())
-                    .mapToObj(r -> range(0, m.size())
-                        .mapToObj(c -> m.get(c).get(r))
-                        .collect(toList()))
-                    .collect(toList());
+                m -> range(0, m.get(0).size())
+                        .mapToObj(r -> range(0, m.size())
+                                .mapToObj(c -> m.get(c).get(r))
+                                .collect(toList()))
+                        .collect(toList());
 
         final ObservableList<ObservableList<String>> condefs = ObservableList2DBuilder.observable2DOf(
                 "N,N,-,Y," +
-                "N,Y,N,Y," +
-                "Y,-,N,-"
+                        "N,Y,N,Y," +
+                        "Y,-,N,-"
         ).dim(3, 4).build();
 
         Dump.dumpTableItems("ORIGINAL", condefs);
         List<List<DtCell>> cells = translate.apply(condefs);
-        Dump.dumpTableItems("Cells",cells);
+        Dump.dumpTableItems("Cells", cells);
 
 
         // optimizing sort
         cells = cells.stream().sorted(countDontCaresComparator).collect(Collectors.toList());
-        Dump.dumpTableItems("countDontCaresComparator",cells);
+        Dump.dumpTableItems("countDontCaresComparator", cells);
         cells = transpose.apply(cells);
         cells = cells.stream().sorted(ruleConditionsComparator).collect(Collectors.toList());
         cells = transpose.apply(cells);
-        Dump.dumpTableItems("ruleConditionsComparator",cells);
+        Dump.dumpTableItems("ruleConditionsComparator", cells);
 
         // split yes/no
 
@@ -166,37 +199,81 @@ public class Test001 {
         );
 
 
-        Dump.dumpTableItems("Y Branch",transpose.apply(map.get(DtCellType.Y)));
-        Dump.dumpTableItems("N Branch",transpose.apply(map.get(DtCellType.N)));
+        Dump.dumpTableItems("Y Branch", transpose.apply(map.get(DtCellType.Y)));
+        Dump.dumpTableItems("N Branch", transpose.apply(map.get(DtCellType.N)));
 
 
     }
 
     @Test
     public void testDecompose() {
+
+        ObservableList<ConditionDeclTableViewModel> condecls = new ConditionDeclTableViewModelListBuilder()
+                .addTableViewModelWithLfdNbr("C01").withExpression("A")
+                .withDocumentation("This is the condition A")
+                .withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("C02").withExpression("B")
+                .withDocumentation("This is the condition B")
+                .withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("C03").withExpression("C")
+                .withDocumentation("This is the condition C")
+                .withIndicators("Y,N")
+                .build();
+
+
+        ObservableList<ActionDeclTableViewModel> actdecls = new ActionDeclTableViewModelListBuilder()
+                .addTableViewModelWithLfdNbr("A01").withExpression("A1")
+                .withDocumentation("This is the action A1")
+                .withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("A02").withExpression("A2")
+                .withDocumentation("This is the action A2")
+                .withIndicators("Y,N")
+                .addTableViewModelWithLfdNbr("A03").withExpression("A3")
+                .withDocumentation("This is the action A3")
+                .withIndicators("Y,N")
+                .build();
+
+
+        final ObservableList<ObservableList<String>> actdefs = ObservableList2DBuilder.observable2DOf(
+                "X,X,X,-," +
+                        "X,X,-,X," +
+                        "X,-,X,X"
+        ).dim(3, 4).build();
+
+
         final ObservableList<ObservableList<String>> condefs = ObservableList2DBuilder.observable2DOf(
-                        "N,N,-,Y," +
+                "N,N,-,Y," +
                         "N,Y,N,Y," +
                         "Y,-,N,-"
         ).dim(3, 4).build();
         Dump.dumpTableItems("ORIGINAL", condefs);
 
-        DtEntity dtEntity = DtEntityStub.createForConditionDefinitions(condefs);
+        DtEntity dtEntity = DtEntityStub.createFor(actdecls, actdefs, condecls, condefs);
 
-        DtNode top = new DecomposeOptimized().apply(dtEntity);
+        //emitCode(top);
 
-        System.out.println("top = " + top);
+        ClassDescription cd = ClassDescription.newBuilder()
+                .classname("Sample")
+                //.modifier(Modifier.PUBLIC , Modifier.ABSTRACT)
+                .packagename("de.adesso.dtmg.export.java.treeMethod")
+                .sourceroot("./")
+                .build();
 
-        emitCode(top);
+        TreeMethodConfiguration cfg = TreeMethodConfiguration.newBuilder()
+                .classDescription(cd)
+                .decisionTable(dtEntity)
+                .useOptimization(cd.isOptimized())
+                .build();
 
-    }
+        //JBlock jmBody = jmRun.body();
 
-    static void printTo(DtNode n) {
-        if(null == n) return;
-        final String s = Strings.padStart(String.valueOf(n.getConditionIndex()), 3 * n.getConditionIndex(), '.');
-        System.out.println(n);
-        printTo(n.yes);
-        printTo(n.no);
+        try {
+            JCodeModel jCodeModel = new TreeMethodCodeGenerator().apply(cfg);
+            jCodeModel.build(new ConsoleCodeWriter());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Test
@@ -213,31 +290,6 @@ public class Test001 {
             return 0;
         }).collect(Collectors.toList()).forEach(System.out::println);
     }
-
-
-    static void emitCode(DtNode top) {
-        System.out.println("public abstract class Rules implements Runnable {");
-
-        System.out.println("public void run() {");
-
-        Visitor<DtNode> v = new SimpleVisitor();
-        TreeSet<String> actionNames = Sets.newTreeSet();
-        TreeSet<String> conditionNames = Sets.newTreeSet();
-        top.accept(v, actionNames, conditionNames);
-
-        System.out.println("}");
-
-        String conTpl = "protected abstract boolean %s();";
-        conditionNames.forEach(n -> System.out.println(String.format(conTpl, n)));
-        String actTpl = "protected abstract void %s();";
-        actionNames.forEach(n -> System.out.println(String.format(actTpl, n)));
-
-        System.out.println("}");
-    }
-
-
-
-
 
 
 }

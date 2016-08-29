@@ -58,7 +58,7 @@ public final class DtFunctions {
     public static final String QMARK = "?";
     public static final String DASH = "-";
     public static final String RULE_HEADER = "R%02d";
-    public static final String   ELSE_RULE_HEADER = "ELSE";
+    public static final String ELSE_RULE_HEADER = "ELSE";
     public static final Supplier<String> QMARK_SUPPLIER = () -> QMARK;
     public static final Supplier<String> DASH_SUPPLIER = () -> DASH;
 
@@ -228,9 +228,9 @@ public final class DtFunctions {
     }
 
     public static <T extends DeclarationTableViewModel> void doInsertRowsWithElseRule(TableView<T> declarations,
-                                                                          TableView<ObservableList<String>> definitions,
-                                                                          OptionalInt value,
-                                                                          Supplier<T> defaultDecl, Supplier<String> defaultDefValue, Supplier<String> rowHeaderTemplate) {
+                                                                                      TableView<ObservableList<String>> definitions,
+                                                                                      OptionalInt value,
+                                                                                      Supplier<T> defaultDecl, Supplier<String> defaultDefValue, Supplier<String> rowHeaderTemplate) {
 
         OptionalInt index = determineRowIndices(declarations, definitions, value);
 
@@ -316,7 +316,7 @@ public final class DtFunctions {
             final int c2Idx = determineNextIndex(direction, c1Idx, conditionTable.getColumns().size());
             ObservableList<ObservableList<String>> conditionDefinitions = conditionTable.getItems();
 
-            if(isSwappingAllowed(conditionDefinitions, c2Idx)) {
+            if (isSwappingAllowed(conditionDefinitions, c2Idx)) {
                 ObservableList<ObservableList<String>> actionDefinitions = actionTable.getItems();
 
                 List<List<String>> newConditionDefns = List2DFunctions.swapColumnsAt(adapt(conditionDefinitions), c1Idx, c2Idx);
@@ -357,7 +357,6 @@ public final class DtFunctions {
         }
 
     }
-
 
 
     public static <T, U> OptionalInt determineColumnIndex(TableView<T> tableView0, TableView<U> tableView1, OptionalInt externalIndex) {
@@ -482,8 +481,8 @@ public final class DtFunctions {
     }
 
     public static <S extends DeclarationTableViewModel> TableColumn<S, String> createExpressionTableColumn(String columnName, String propertyName, int prefWidth,
-                                                               int minWidth, int maxWidth, boolean resizable,
-                                                               Pos alignment,final String prefix, EventHandler<TableColumn.CellEditEvent<S, String>> value) {
+                                                                                                           int minWidth, int maxWidth, boolean resizable,
+                                                                                                           Pos alignment, final String prefix, EventHandler<TableColumn.CellEditEvent<S, String>> value) {
         TableColumn<S, String> col = new TableColumn<>(columnName);
         col.setMinWidth(minWidth);
         col.setPrefWidth(prefWidth);

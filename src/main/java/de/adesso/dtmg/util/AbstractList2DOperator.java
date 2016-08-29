@@ -34,7 +34,7 @@ public abstract class AbstractList2DOperator implements UnaryOperator<List<Strin
         this.positions = new int[]{pos};
     }
 
-    public AbstractList2DOperator(int...pos) {
-        this.positions = Arrays.copyOf(pos,pos.length);
+    public AbstractList2DOperator(int... pos) {
+        this.positions = Arrays.copyOf(pos, pos.length);
     }
 }

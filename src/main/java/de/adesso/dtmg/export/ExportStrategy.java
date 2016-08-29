@@ -27,8 +27,8 @@ import java.net.URI;
  * Created by mmoehler on 06.08.16.
  */
 public interface ExportStrategy<O extends Serializable> {
-        @Nonnull
-        String extension();
+    @Nonnull
+    String extension();
 
-        void export(@Nonnull O o, @Nonnull URI target);
+    void export(@Nonnull O o, @Nonnull URI target);
 }

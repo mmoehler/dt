@@ -30,7 +30,8 @@ public interface PersistenceStrategy<O extends Serializable> {
     @Nonnull
     String extension();
 
-    @Nonnull O read(@Nonnull URI source);
+    @Nonnull
+    O read(@Nonnull URI source);
 
     void write(@Nonnull O o, @Nonnull URI target);
 

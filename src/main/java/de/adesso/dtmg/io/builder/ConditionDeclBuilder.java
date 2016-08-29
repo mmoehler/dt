@@ -45,7 +45,7 @@ public class ConditionDeclBuilder<C> extends AbstractSubBuilder<ConditionDecl, C
         return this;
     }
 
-    public ConditionDeclBuilder<C> withdocumentation(String documentation) {
+    public ConditionDeclBuilder<C> withDocumentation(String documentation) {
         this.documentation = documentation;
         return this;
     }

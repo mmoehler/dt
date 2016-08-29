@@ -35,14 +35,14 @@ public class Root extends Model {
         this.child20 = child20;
     }
 
-    public static Builder newBuilder() {
-        return new Builder();
-    }
-
     private Root(Builder builder) {
         super(builder.name);
         this.child10 = builder.child10;
         this.child20 = builder.child20;
+    }
+
+    public static Builder newBuilder() {
+        return new Builder();
     }
 
     @Override
@@ -50,7 +50,7 @@ public class Root extends Model {
         String s0 = "Root300[" + getName() + ']';
         String s1 = '\t' + String.valueOf(child10);
         String s2 = '\t' + String.valueOf(child20);
-        return Joiner.on('\n').join(s0,s1,s2);
+        return Joiner.on('\n').join(s0, s1, s2);
     }
 
     static class Builder {

@@ -26,7 +26,7 @@ import java.util.Optional;
  * Created by moehler on 25.08.2016.
  */
 public enum DtCellType {
-    Y("Y",1), N("N",2), I("-",4);
+    Y("Y", 1), N("N", 2), I("-", 4);
 
     final String code;
     final int weight;

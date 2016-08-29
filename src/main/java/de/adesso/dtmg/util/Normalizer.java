@@ -132,11 +132,11 @@ public enum Normalizer {
         }
         m.appendTail(sb);
         String ret = sb.toString();
-        if(ret.startsWith(prefix)) {
+        if (ret.startsWith(prefix)) {
             return ret;
         }
         char[] c = ret.toCharArray();
-        c[0]+=32;
+        c[0] += 32;
         return (prefix + ret);
     }
 }

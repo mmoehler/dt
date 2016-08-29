@@ -40,12 +40,34 @@ import static de.adesso.dtmg.util.MoreCollectors.toSingleObject;
 public class ConsolidateConditions implements Function<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>> {
     public static final List<String> POSSIBLE_INDICATORS = Arrays.asList("Y", "N");
 
+    private ConsolidateConditions() {
+    }
+
     public static ConsolidateConditions consolidateConditions() {
         return new ConsolidateConditions();
     }
 
+    protected static LinkedListMultimap<List<String>, Integer> determineCountOfDuplicateRules(ObservableList<ObservableList<String>> step01Cols) {
+        LinkedListMultimap<List<String>, Integer> counter = LinkedListMultimap.create();
+        IntStream.range(0, step01Cols.size()).forEach(j -> counter.put(step01Cols.get(j), j));
+        // remove all entries with values size is 1
+        for (Iterator<Map.Entry<List<String>, Collection<Integer>>> it = counter.asMap().entrySet().iterator(); it.hasNext(); )
+            if (it.next().getValue().size() == 1)
+                it.remove();
+        return counter;
+    }
 
-    private ConsolidateConditions() {
+    protected static List<Integer> determineIndicesOfDashedIndicators(ObservableList<ObservableList<String>> conditions, int row) {
+        return IntStream.range(0, conditions.get(row).size())
+                .filter(i -> conditions.get(row).get(i).equals("-"))
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    protected static List<Boolean> rowsWithAllPossibleIndicators(ObservableList<ObservableList<String>> conditions) {
+        return IntStream.range(0, conditions.size())
+                .mapToObj(i -> (conditions.get(i).containsAll(POSSIBLE_INDICATORS)))
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -117,7 +139,7 @@ public class ConsolidateConditions implements Function<ObservableList<Observable
         //noinspection unchecked
         final ObservableList<ObservableList<String>>[] conditionRows = new ObservableList[]{r};
 
-        if(!indicesOfDashedIndicators.isEmpty()) {
+        if (!indicesOfDashedIndicators.isEmpty()) {
 
             conditionRows[0] = indicesOfDashedIndicators.stream()
                     .sorted((a, b) -> b - a)
@@ -155,29 +177,6 @@ public class ConsolidateConditions implements Function<ObservableList<Observable
                                 merged.addAll(b);
                             return merged;
                         })));
-    }
-
-    protected static LinkedListMultimap<List<String>, Integer> determineCountOfDuplicateRules(ObservableList<ObservableList<String>> step01Cols) {
-        LinkedListMultimap<List<String>, Integer> counter = LinkedListMultimap.create();
-        IntStream.range(0, step01Cols.size()).forEach(j -> counter.put(step01Cols.get(j), j));
-        // remove all entries with values size is 1
-        for (Iterator<Map.Entry<List<String>, Collection<Integer>>> it = counter.asMap().entrySet().iterator(); it.hasNext(); )
-            if (it.next().getValue().size() == 1)
-                it.remove();
-        return counter;
-    }
-
-    protected static List<Integer> determineIndicesOfDashedIndicators(ObservableList<ObservableList<String>> conditions, int row) {
-        return IntStream.range(0, conditions.get(row).size())
-                .filter(i -> conditions.get(row).get(i).equals("-"))
-                .boxed()
-                .collect(Collectors.toList());
-    }
-
-    protected static List<Boolean> rowsWithAllPossibleIndicators(ObservableList<ObservableList<String>> conditions) {
-        return IntStream.range(0, conditions.size())
-                .mapToObj(i -> (conditions.get(i).containsAll(POSSIBLE_INDICATORS)))
-                .collect(Collectors.toList());
     }
 
     protected void updateRowsWithAllPossibleIndicators(int row, List<Boolean> completeness, ObservableList<ObservableList<String>> conditions) {

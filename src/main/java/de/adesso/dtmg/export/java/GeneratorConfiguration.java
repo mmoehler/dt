@@ -21,7 +21,6 @@ package de.adesso.dtmg.export.java;
 
 import com.sun.codemodel.JMethod;
 import com.sun.codemodel.JStatement;
-import de.adesso.dtmg.export.java.ClassDescription;
 import de.adesso.dtmg.io.DtEntity;
 
 import java.util.HashMap;
@@ -32,15 +31,10 @@ import java.util.Map;
  * Created by mmoehler on 29.08.16.
  */
 public class GeneratorConfiguration {
-    private final Map<String,JMethod> stubs = new HashMap<>();
+    private final Map<String, JMethod> stubs = new HashMap<>();
     private final LinkedList<JStatement> stack = new LinkedList<>();
     protected ClassDescription classDescription;
     protected DtEntity decisionTable;
-
-    public GeneratorConfiguration() {
-        decisionTable = builder.decisionTable;
-        classDescription = builder.classDescription;
-    }
 
     public ClassDescription getClassDescription() {
         return classDescription;

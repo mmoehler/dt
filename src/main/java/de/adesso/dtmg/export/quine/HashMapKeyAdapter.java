@@ -30,12 +30,12 @@ import java.util.function.Supplier;
 public class HashMapKeyAdapter implements Supplier<Tuple2<List<Integer>, String>> {
     private final Tuple2<List<Integer>, String> adaptee;
 
-    public static HashMapKeyAdapter adapt(Tuple2<List<Integer>, String> adaptee) {
-        return new HashMapKeyAdapter(adaptee);
-    }
-
     private HashMapKeyAdapter(Tuple2<List<Integer>, String> adaptee) {
         this.adaptee = adaptee;
+    }
+
+    public static HashMapKeyAdapter adapt(Tuple2<List<Integer>, String> adaptee) {
+        return new HashMapKeyAdapter(adaptee);
     }
 
     @Override

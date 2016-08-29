@@ -28,7 +28,9 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+        <!--
         <JAVA_HOME_8>C:\Java\1.8.0_77</JAVA_HOME_8>
+        -->
     </properties>
 
     <dependencyManagement>
@@ -148,7 +150,9 @@
                 <version>3.5.1</version>
                 <configuration>
                     <verbose>false</verbose>
+                    <!--
                     <executable>${JAVA_HOME_8}/bin/javac</executable>
+                    -->
                     <compilerVersion>1.8</compilerVersion>
                     <source>1.8</source>
                     <target>1.8</target>

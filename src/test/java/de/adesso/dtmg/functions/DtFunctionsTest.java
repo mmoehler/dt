@@ -42,11 +42,11 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
+import static de.adesso.dtmg.functions.fixtures.DtFunctionsTestData.*;
 import static de.adesso.dtmg.util.DtFunctions.*;
 import static de.adesso.dtmg.util.DtFunctions.fullExpandConditions;
 import static de.adesso.dtmg.util.MoreCollectors.toObservableList;
 import static de.adesso.dtmg.util.ObservableList2DFunctions.insertColumn;
-import static de.adesso.dtmg.functions.fixtures.DtFunctionsTestData.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.testng.Assert.assertEquals;
@@ -362,7 +362,7 @@ public class DtFunctionsTest {
         final OptionalInt index = determineColumnIndex(conditionDefTab, actionDefTab, OptionalInt.empty());
 
         assertTrue(index.isPresent());
-        assertEquals(index.getAsInt(),3);
+        assertEquals(index.getAsInt(), 3);
 
         if (index.isPresent()) {
             ObservableList<ObservableList<String>> tmp = conditionDefTab.getItems();
@@ -595,7 +595,7 @@ public class DtFunctionsTest {
         TableView<ObservableList<String>> conditionDefTab = definitionsTableViewBuilder()
                 .dim(3, 4)
                 .data(
-                                "N,N,N,N," +
+                        "N,N,N,N," +
                                 "N,N,N,N," +
                                 "N,N,N,N")
                 .withSelectionAt(1, 2)
@@ -604,21 +604,20 @@ public class DtFunctionsTest {
 
         List<String> rplcol = ListBuilder.ofList("-,-,-").build();
 
-        doReplaceRuleConditions(conditionDefTab.getItems(),OptionalInt.of(2),rplcol);
+        doReplaceRuleConditions(conditionDefTab.getItems(), OptionalInt.of(2), rplcol);
 
         TableView<ObservableList<String>> expectedDefTab = definitionsTableViewBuilder()
                 .dim(2, 4)
                 .data(
                         "N,N,-,N," +
-                        "N,N,-,N," +
-                        "N,N,-,N")
+                                "N,N,-,N," +
+                                "N,N,-,N")
                 .build();
 
         dumpTableItems("DEFN AFTER", conditionDefTab);
 
         assertEquals(conditionDefTab.getItems(), expectedDefTab.getItems());
     }
-
 
 
     @Test

@@ -25,7 +25,6 @@ import com.google.common.base.Strings;
 import com.google.common.collect.Lists;
 import de.adesso.dtmg.export.quine.parser.ExpParser;
 import de.adesso.dtmg.util.List2DFunctions;
-import de.adesso.dtmg.util.Permutation;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 
@@ -42,7 +41,6 @@ import java.util.stream.StreamSupport;
  */
 public class QuineMcCluskey implements Function<String, String> {
 
-    final static Tuple2<List<Integer>, String> EMPY_COMB_RESULT = Tuple.of(null, null);
     public static final int CHR_1 = 49;
     public static final char CHR_DASH = '-';
     public static final String EMPTY_STRING = "";
@@ -50,6 +48,7 @@ public class QuineMcCluskey implements Function<String, String> {
     public static final char CHR_0 = '0';
     public static final char CHR_ASTERICS = '!';
     public static final char CHR_A = 'a';
+    final static Tuple2<List<Integer>, String> EMPY_COMB_RESULT = Tuple.of(null, null);
 
     @Override
     public String apply(String maxTerm) {

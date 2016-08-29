@@ -31,7 +31,7 @@ import java.util.function.BiConsumer;
 /**
  * Created by moehler on 23.05.2016.
  */
-public class DecisionTable implements BiConsumer<ObservableList<String>,ObservableList<String>>{
+public class DecisionTable implements BiConsumer<ObservableList<String>, ObservableList<String>> {
     private final Tuple4<
             ObservableList<ConditionDecl>,
             ObservableList<ActionDecl>,
@@ -48,7 +48,7 @@ public class DecisionTable implements BiConsumer<ObservableList<String>,Observab
     }
 
     private DecisionTable(Builder builder) {
-        if(null == builder.dtEntity) {
+        if (null == builder.dtEntity) {
             this.data = Tuple.of(builder.conditionDecls, builder.actionDecls, builder.conditionDefs, builder.actionDefs);
         } else {
             final DtEntity dtEntity = builder.dtEntity;

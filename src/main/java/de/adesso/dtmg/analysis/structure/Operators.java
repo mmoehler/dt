@@ -42,11 +42,11 @@ public final class Operators {
     }
 
     public static Function<Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>>,
-            Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>>> consolidateRules(){
+            Tuple2<ObservableList<ObservableList<String>>, ObservableList<ObservableList<String>>>> consolidateRules() {
         return new RuleConsolidator();
     }
 
-    public static Function<Tuple2<List<List<String>>, List<List<String>>>, Tuple2<List<List<String>>, List<List<String>>>> rejectDupplicateRules(){
+    public static Function<Tuple2<List<List<String>>, List<List<String>>>, Tuple2<List<List<String>>, List<List<String>>>> rejectDupplicateRules() {
         return new DuplicateRulesRejector();
     }
 

@@ -50,7 +50,7 @@ public class TestObservableList2DValueChanged {
 
 
         ObservableList<ObservableList<String>> l = FXCollections.observableArrayList();
-        IntStream.range(0,10).forEach(i -> {
+        IntStream.range(0, 10).forEach(i -> {
 
             ObservableList<String> ii = FXCollections.observableArrayList();
             ii.addListener(inner);
@@ -68,7 +68,7 @@ public class TestObservableList2DValueChanged {
         }
 
         for (int i = 0; i < 10; i++) {
-            l.get(i).set(i,"1");
+            l.get(i).set(i, "1");
         }
 
     }

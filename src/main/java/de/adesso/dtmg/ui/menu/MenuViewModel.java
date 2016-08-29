@@ -80,6 +80,14 @@ public class MenuViewModel implements ViewModel {
     @Inject
     private Event<DocumentDeclarationEvent> documentDeclarationEvent;
 
+    @Inject
+    private Event<GenerateUsingLineMaskEvent> generateUsingLineMaskEvent;
+    @Inject
+    private Event<GenerateUsingVeinottEvent> generateUsingVeinottEvent;
+    @Inject
+    private Event<GenerateUsingStraightScanEvent> generateUsingStraightScanEvent;
+    @Inject
+    private Event<GenerateUsingTreeMethodEvent> generateUsingTreeMethodEvent;
 
 
     private RecentItems recentItems;
@@ -87,10 +95,11 @@ public class MenuViewModel implements ViewModel {
     @InjectScope
     private RuleScope mdScope;
 
+
     public void initialize() {
         consolidateRules.bind(mdScope.consolidateRulesProperty());
         elseRuleSet.bind(mdScope.elseRuleProperty());
-        recentItems =  new RecentItems(10, Preferences.userRoot().node("dtmg/recent.files"));
+        recentItems = new RecentItems(10, Preferences.userRoot().node("dtmg/recent.files"));
         mdScope.recentItems(recentItems);
     }
 
@@ -233,5 +242,21 @@ public class MenuViewModel implements ViewModel {
 
     public void documentDeclaration() {
         documentDeclarationEvent.fire(new DocumentDeclarationEvent());
+    }
+
+    public void generateUsingLineMask() {
+        generateUsingLineMaskEvent.fire(new GenerateUsingLineMaskEvent());
+    }
+
+    public void generateUsingVeinott() {
+        generateUsingVeinottEvent.fire(new GenerateUsingVeinottEvent());
+    }
+
+    public void generateUsingStraightScan() {
+        generateUsingStraightScanEvent.fire(new GenerateUsingStraightScanEvent());
+    }
+
+    public void generateUsingTreeMethod() {
+        generateUsingTreeMethodEvent.fire(new GenerateUsingTreeMethodEvent());
     }
 }

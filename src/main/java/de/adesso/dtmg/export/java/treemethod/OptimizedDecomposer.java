@@ -40,13 +40,13 @@ import static java.util.stream.IntStream.range;
 /**
  * Created by moehler on 26.08.2016.
  */
-public class OptimizedDecomposer implements Function<DtEntity,DtNode> {
+public class OptimizedDecomposer implements Function<DtEntity, DtNode> {
 
     final Comparator<List<DtCell>> ruleConditionsComparator = (l, r) -> {
-        if(l.size()!=r.size()) throw new IllegalStateException();
+        if (l.size() != r.size()) throw new IllegalStateException();
         Iterator<DtCell> li = l.iterator();
         Iterator<DtCell> ri = r.iterator();
-        while(li.hasNext()) {
+        while (li.hasNext()) {
             DtCell cl = li.next();
             DtCell cr = ri.next();
             if (cl.typeOf(DtCellType.I) || cr.typeOf(DtCellType.I))
@@ -102,11 +102,12 @@ public class OptimizedDecomposer implements Function<DtEntity,DtNode> {
 
     final Predicate<List<List<DtCell>>> hasValues = (c) -> c.stream().filter(l -> !l.isEmpty()).findFirst().isPresent();
 
-    final Function<DtNode,DtNode> decompose = x -> {
+    final Function<DtNode, DtNode> decompose = x -> {
         BiFunction<BiFunction, DtNode, DtNode> internal =
                 (func, node) -> {
                     List<List<DtCell>> cells = node.data;
                     cells = optimize.apply(cells);
+
                     node.data = cells;
                     node.conditionIndex = cells.get(0).get(0).row();
                     cells = transpose.apply(cells);
@@ -117,14 +118,15 @@ public class OptimizedDecomposer implements Function<DtEntity,DtNode> {
                                             .collect(Collectors.toList()), Collectors.toList())
                             )
                     );
-                    if(grouped.containsKey(DtCellType.Y) && hasValues.test(grouped.get(DtCellType.Y))) {
+                    if (grouped.containsKey(DtCellType.Y) && hasValues.test(grouped.get(DtCellType.Y))) {
                         List<List<DtCell>> yesCells = transpose.apply(grouped.get(DtCellType.Y));
-                        node.yes = (DtNode)func.apply(func, DtNode.newBuilder().data(yesCells).build());
+                        node.yes = (DtNode) func.apply(func, DtNode.newBuilder().data(yesCells).build());
                     }
-                    if(grouped.containsKey(DtCellType.N) && hasValues.test(grouped.get(DtCellType.N))) {
+                    if (grouped.containsKey(DtCellType.N) && hasValues.test(grouped.get(DtCellType.N))) {
                         List<List<DtCell>> noCells = transpose.apply(grouped.get(DtCellType.N));
-                        node.no = (DtNode)func.apply(func, DtNode.newBuilder().data(noCells).build());
+                        node.no = (DtNode) func.apply(func, DtNode.newBuilder().data(noCells).build());
                     }
+
                     return node;
                 };
         return internal.apply(internal, x);
@@ -133,6 +135,7 @@ public class OptimizedDecomposer implements Function<DtEntity,DtNode> {
     @Override
     public DtNode apply(DtEntity entity) {
         List<List<DtCell>> cells = translate.apply(entity.getConditionDefinitions());
-        return decompose.apply(DtNode.newBuilder().data(cells).build());
+        DtNode dtNode = decompose.apply(DtNode.newBuilder().data(cells).build());
+        return dtNode;
     }
 }

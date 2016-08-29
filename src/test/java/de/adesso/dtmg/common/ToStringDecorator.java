@@ -28,13 +28,13 @@ public class ToStringDecorator<T> implements Stringable {
     private final T delegate;
     private final Function<T, String> transformer;
 
-    public static <O> Stringable decorate(O t, Function<O, String> f) {
-        return new ToStringDecorator(t,f);
-    }
-
     private ToStringDecorator(T delegate, Function<T, String> transformer) {
         this.delegate = delegate;
         this.transformer = transformer;
+    }
+
+    public static <O> Stringable decorate(O t, Function<O, String> f) {
+        return new ToStringDecorator(t, f);
     }
 
     @Override

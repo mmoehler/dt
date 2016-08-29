@@ -12,6 +12,8 @@ public class RuleScope implements Scope {
 
     private final SimpleBooleanProperty consolidateRules = new SimpleBooleanProperty(true);
     private final SimpleBooleanProperty elseRuleSet = new SimpleBooleanProperty(false);
+    private Stage quineMcCluskeyDialog;
+    private RecentItems recentItems;
 
     public boolean getConsolidateRules() {
         return consolidateRules.get();
@@ -37,11 +39,14 @@ public class RuleScope implements Scope {
         return elseRuleSet;
     }
 
-    private Stage quineMcCluskeyDialog;
-    public Stage quineMcCluskeyDialog() { return quineMcCluskeyDialog; }
-    public void quineMcCluskeyDialog(Stage dialog) { quineMcCluskeyDialog=dialog; }
+    public Stage quineMcCluskeyDialog() {
+        return quineMcCluskeyDialog;
+    }
 
-    private RecentItems recentItems;
+    public void quineMcCluskeyDialog(Stage dialog) {
+        quineMcCluskeyDialog = dialog;
+    }
+
     public RecentItems recentItems() {
         return recentItems;
     }

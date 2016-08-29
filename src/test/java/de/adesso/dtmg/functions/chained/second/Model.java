@@ -43,7 +43,7 @@ public abstract class Model {
 
     @Override
     public String toString() {
-        return getClass().getSimpleName()+"{" +
+        return getClass().getSimpleName() + "{" +
                 "name='" + name + '\'' +
                 ", oid='" + oid + '\'' +
                 '}';

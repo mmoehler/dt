@@ -21,15 +21,15 @@ package de.adesso.dtmg.export.java;
 
 public abstract class Rules implements Runnable {
     public void run() {
-        if(_1()) {
-            if(_0()) {
+        if (_1()) {
+            if (_0()) {
                 X4();
             } else {
                 X2();
             }
         } else {
-            if(_2()) {
-                if(_0()) {
+            if (_2()) {
+                if (_0()) {
                     X5();
                 } else {
                     X1();
@@ -39,12 +39,20 @@ public abstract class Rules implements Runnable {
             }
         }
     }
+
     protected abstract boolean _0();
+
     protected abstract boolean _1();
+
     protected abstract boolean _2();
+
     protected abstract void X1();
+
     protected abstract void X2();
+
     protected abstract void X3();
+
     protected abstract void X4();
+
     protected abstract void X5();
 }

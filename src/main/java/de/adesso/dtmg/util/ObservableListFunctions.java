@@ -32,6 +32,9 @@ import java.util.function.Function;
  * Created by mmoehler ofList 20.02.16.
  */
 public final class ObservableListFunctions {
+    private ObservableListFunctions() {
+    }
+
     /**
      * take n, applied to a list xs, returns the prefix of xs of length n, or xs itself if n > length xs:
      */
@@ -71,8 +74,8 @@ public final class ObservableListFunctions {
         return ol.get(0);
     }
 
-    public static <E> Function<ObservableList<E>,E> head() {
-        return l  -> head(l);
+    public static <E> Function<ObservableList<E>, E> head() {
+        return l -> head(l);
     }
 
     /**
@@ -83,8 +86,8 @@ public final class ObservableListFunctions {
         return drop(ol, 1);
     }
 
-    public static <E> Function<ObservableList<E>,ObservableList<E>> tail() {
-        return l  -> tail(l);
+    public static <E> Function<ObservableList<E>, ObservableList<E>> tail() {
+        return l -> tail(l);
     }
 
     /**
@@ -95,8 +98,8 @@ public final class ObservableListFunctions {
         return ol.get(ol.size() - 1);
     }
 
-    public static <E> Function<ObservableList<E>,E> last() {
-        return l  -> last(l);
+    public static <E> Function<ObservableList<E>, E> last() {
+        return l -> last(l);
     }
 
     /**
@@ -107,11 +110,8 @@ public final class ObservableListFunctions {
         return take(ol, ol.size() - 1);
     }
 
-    public static <E> Function<ObservableList<E>,ObservableList<E>> init() {
-        return l  -> init(l);
-    }
-
-    private ObservableListFunctions() {
+    public static <E> Function<ObservableList<E>, ObservableList<E>> init() {
+        return l -> init(l);
     }
 }
 

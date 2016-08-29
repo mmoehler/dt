@@ -77,50 +77,12 @@ public class Actions {
                 }).collect(Collectors.toList());
                 return List2DBuilder.matrixOf(processed).dim(processed.size(), 1).build();
             };
-
-    enum Indicator {
-        Y("Y", 0), N("N", 1), D("-", 2);
-
-        final int index;
-        final String code;
-
-        Indicator(String code, int index) {
-            this.code = code;
-            this.index = index;
-        }
-
-        static Indicator from(String code) {
-            return Arrays.stream(Indicator.values())
-                    .filter(e -> e.code.equals(code))
-                    .findFirst()
-                    .orElseThrow(exceptionSupplier("Unknown code < %s >!", code));
-        }
-
-        public String code() {
-            return code;
-        }
-
-        public int index() {
-            return index;
-        }
-    }
-
-    private static Supplier<IllegalStateException> exceptionSupplier(String message) {
-        return () -> new IllegalStateException(message);
-    }
-
-    private static Supplier<IllegalStateException> exceptionSupplier(String format, Object...args) {
-        return () -> new IllegalStateException(String.format(format, args));
-    }
-
-
     static Indicator ProcessingRules[][] = {
                   /*  Y    N    D    */
             /*Y*/ {Indicator.Y, null, Indicator.Y,},
             /*N*/ {null, Indicator.N, Indicator.N,},
             /*D*/ {Indicator.N, Indicator.Y, Indicator.D}
     };
-
     public static BiFunction<List<String>, List<String>, List<List<String>>> A5 =
             (rf, ri) -> {
                 System.out.println(String.format("A5 invoked with %s, %s!", rf, ri));
@@ -152,6 +114,13 @@ public class Actions {
                 return result;
             };
 
+    private static Supplier<IllegalStateException> exceptionSupplier(String message) {
+        return () -> new IllegalStateException(message);
+    }
+
+    private static Supplier<IllegalStateException> exceptionSupplier(String format, Object... args) {
+        return () -> new IllegalStateException(String.format(format, args));
+    }
 
     private static Function<Tuple2<Indicator, Indicator>, List<String>> dashSecondOrSameIndicators(int dashCount, int dashesSeen) {
         return (t) -> IntStream.range(0, dashCount)
@@ -168,6 +137,33 @@ public class Actions {
     private static String minus(Indicator l, Indicator r) {
         Optional<Indicator> optional = Optional.ofNullable(ProcessingRules[l.index][r.index]);
         return optional.orElseThrow(exceptionSupplier("Illegal combination of - Subtrahed: %s and Minuend: %s!", l, r)).code();
+    }
+
+    enum Indicator {
+        Y("Y", 0), N("N", 1), D("-", 2);
+
+        final int index;
+        final String code;
+
+        Indicator(String code, int index) {
+            this.code = code;
+            this.index = index;
+        }
+
+        static Indicator from(String code) {
+            return Arrays.stream(Indicator.values())
+                    .filter(e -> e.code.equals(code))
+                    .findFirst()
+                    .orElseThrow(exceptionSupplier("Unknown code < %s >!", code));
+        }
+
+        public String code() {
+            return code;
+        }
+
+        public int index() {
+            return index;
+        }
     }
 
 }

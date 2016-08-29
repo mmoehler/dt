@@ -35,10 +35,6 @@ public class ConditionDecl extends Declaration {
         setPossibleIndicators(builder.possibleIndicators);
     }
 
-    public static ConditionDecl of(@Nonnull List<String> data) {
-        return new ConditionDecl(data);
-    }
-
     public ConditionDecl() {
         super();
     }
@@ -49,6 +45,10 @@ public class ConditionDecl extends Declaration {
 
     protected ConditionDecl(@Nonnull List<String> data) {
         super(data);
+    }
+
+    public static ConditionDecl of(@Nonnull List<String> data) {
+        return new ConditionDecl(data);
     }
 
     public static Builder newBuilder() {

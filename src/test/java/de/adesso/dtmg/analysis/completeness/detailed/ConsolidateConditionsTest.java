@@ -48,19 +48,19 @@ public class ConsolidateConditionsTest {
     @Test
     public void testDetermineCountOfDuplicateRules() throws Exception {
         ObservableList2DBuilder input = ObservableList2DBuilder.observable2DOf("Y,-,N,N,Y,-,N,N").dim(4, 2);
-        Map<List<String>,List<Integer>> expected = Maps.newHashMap();
-        expected.put(Lists.newArrayList("Y","-"), Lists.newArrayList(0,2));
-        expected.put(Lists.newArrayList("N","N"), Lists.newArrayList(1,3));
+        Map<List<String>, List<Integer>> expected = Maps.newHashMap();
+        expected.put(Lists.newArrayList("Y", "-"), Lists.newArrayList(0, 2));
+        expected.put(Lists.newArrayList("N", "N"), Lists.newArrayList(1, 3));
         final LinkedListMultimap<List<String>, Integer> actual = ConsolidateConditions.determineCountOfDuplicateRules(input.build());
-        Assert.assertEquals(actual.asMap(),expected);
+        Assert.assertEquals(actual.asMap(), expected);
     }
 
     @Test
     public void testDetermineIndicesOfDashedIndicators() throws Exception {
         ObservableList2DBuilder input = ObservableList2DBuilder.observable2DOf("Y,-,N,N,Y,N,N,-").dim(4, 2);
         List<Integer> expected = Lists.newArrayList(1);
-        List<Integer> actual = ConsolidateConditions.determineIndicesOfDashedIndicators(input.build(),3);
-        Assert.assertEquals(actual,expected);
+        List<Integer> actual = ConsolidateConditions.determineIndicesOfDashedIndicators(input.build(), 3);
+        Assert.assertEquals(actual, expected);
 
     }
 
@@ -69,7 +69,7 @@ public class ConsolidateConditionsTest {
         ObservableList2DBuilder input = ObservableList2DBuilder.observable2DOf("Y,Y,N,N,Y,N,N,N").dim(4, 2);
         List<Boolean> expected = Lists.newArrayList(false, false, true, false);
         List<Boolean> actual = ConsolidateConditions.rowsWithAllPossibleIndicators(input.build());
-        Assert.assertEquals(actual,expected);
+        Assert.assertEquals(actual, expected);
     }
 
     @Test
@@ -86,7 +86,7 @@ public class ConsolidateConditionsTest {
     public void testCleanupConditions() throws Exception {
         ObservableList2DBuilder input = ObservableList2DBuilder.observable2DOf("Y,Y,N,N,Y,N,Y,N").dim(2, 4);
         final ObservableList<ObservableList<String>> actual =
-                consolidateConditions().cleanupConditions(input.build(),0, Collections.emptyList());
+                consolidateConditions().cleanupConditions(input.build(), 0, Collections.emptyList());
         System.out.println("actual = " + actual);
 
     }

@@ -40,7 +40,7 @@ public class Dimension {
         return new Builder(parent, callback);
     }
 
-    public static class Builder extends AbstractNestable<Array2D.Builder, Dimension>{
+    public static class Builder extends AbstractNestable<Array2D.Builder, Dimension> {
         private int rows;
         private int columns;
 

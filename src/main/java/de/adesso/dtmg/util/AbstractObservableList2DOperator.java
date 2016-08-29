@@ -35,7 +35,7 @@ public abstract class AbstractObservableList2DOperator implements UnaryOperator<
         this.positions = new int[]{pos};
     }
 
-    public AbstractObservableList2DOperator(int...pos) {
-        this.positions = Arrays.copyOf(pos,pos.length);
+    public AbstractObservableList2DOperator(int... pos) {
+        this.positions = Arrays.copyOf(pos, pos.length);
     }
 }

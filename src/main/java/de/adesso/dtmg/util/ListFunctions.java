@@ -41,8 +41,8 @@ public class ListFunctions {
             final ListMultimap<List<String>, Integer> tmp =
                     Multimaps.newListMultimap(new HashMap<List<String>, Collection<Integer>>(), () -> new LinkedList<Integer>());
 
-            IntStream.range(0,actions.size()).forEach(i -> tmp.put(actions.get(i), i));
-            tmp.asMap().entrySet().removeIf(entry -> entry.getValue().size()<2);
+            IntStream.range(0, actions.size()).forEach(i -> tmp.put(actions.get(i), i));
+            tmp.asMap().entrySet().removeIf(entry -> entry.getValue().size() < 2);
 
             return tmp.asMap().values().stream()
                     .map(o -> o.stream()

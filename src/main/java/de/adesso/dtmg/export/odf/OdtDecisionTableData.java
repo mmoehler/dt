@@ -36,11 +36,6 @@ public class OdtDecisionTableData {
     public static final Object NO_ARG = new Object();
     private String[][] data;
 
-    public String[][] getData() {
-        return data;
-    }
-
-
     // --
     private OdtDecisionTableData(Builder builder) {
         String[] colheader = concat(builder.conditionDeclsHeader, builder.conditionDefsHeader);
@@ -54,15 +49,29 @@ public class OdtDecisionTableData {
             actions[i] = concat(builder.actionDecls[i], builder.actionDefs[i]);
         }
 
-        this.data = new String[conditions.length+actions.length+2][];
-        System.arraycopy(conditions,0,this.data,1,conditions.length);
-        System.arraycopy(actions,0,this.data,conditions.length+2, actions.length);
+        this.data = new String[conditions.length + actions.length + 2][];
+        System.arraycopy(conditions, 0, this.data, 1, conditions.length);
+        System.arraycopy(actions, 0, this.data, conditions.length + 2, actions.length);
         this.data[0] = colheader;
-        this.data[conditions.length+1] = actionsHeader;
+        this.data[conditions.length + 1] = actionsHeader;
     }
 
     public static Builder newBuilder() {
         return new Builder();
+    }
+
+    static String[][] concat(String[][] data) {
+        return Arrays.stream(data).map(a -> Arrays.copyOf(a, a.length)).toArray(String[][]::new);
+    }
+
+    static <T> T[] concat(T[] left, T[] right) {
+        T[] copyOf = Arrays.copyOf(left, left.length + right.length);
+        System.arraycopy(right, 0, copyOf, left.length, right.length);
+        return copyOf;
+    }
+
+    public String[][] getData() {
+        return data;
     }
 
     public static final class Builder {
@@ -86,10 +95,23 @@ public class OdtDecisionTableData {
         private Builder() {
         }
 
+        @SafeVarargs
+        static <E> E[] newArray(int length, E... array) {
+            return Arrays.copyOf(array, length);
+        }
+
+        static boolean hasElseRule(ObservableList<String> def) {
+            return STR_E.equals(def.get(def.size() - 1));
+        }
+
+        static void setElseRuleHeader(String[] header) {
+            header[header.length - 1] = STR_ELSE;
+        }
+
         public Builder conditionDefs(ObservableList<ObservableList<String>> val) {
             conditionDefs = array2D.apply(val);
-            conditionDefsHeader = IntStream.range(0, val.get(0).size()).mapToObj(i -> String.format("R%02d", (i+1))).toArray(String[]::new);
-            if(hasElseRule(val.get(0))) {
+            conditionDefsHeader = IntStream.range(0, val.get(0).size()).mapToObj(i -> String.format("R%02d", (i + 1))).toArray(String[]::new);
+            if (hasElseRule(val.get(0))) {
                 setElseRuleHeader(conditionDefsHeader);
             }
             return this;
@@ -111,6 +133,8 @@ public class OdtDecisionTableData {
             return this;
         }
 
+        // -- private stuff -----------------------------------------
+
         public Builder actionDecls(ObservableList<ActionDeclTableViewModel> val) {
             Function<ActionDecl, String> f[] = newArray(3,
                     x -> x.getLfdNr(),
@@ -130,8 +154,8 @@ public class OdtDecisionTableData {
 
         public Builder actionDefs(ObservableList<ObservableList<String>> val) {
             actionDefs = array2D.apply(val);
-            actionDefsHeader = IntStream.range(0, val.get(0).size()).mapToObj(i -> String.format("R%02d", (i+1))).toArray(String[]::new);
-            if(hasElseRule(val.get(0))) {
+            actionDefsHeader = IntStream.range(0, val.get(0).size()).mapToObj(i -> String.format("R%02d", (i + 1))).toArray(String[]::new);
+            if (hasElseRule(val.get(0))) {
                 setElseRuleHeader(actionDefsHeader);
             }
             return this;
@@ -140,31 +164,6 @@ public class OdtDecisionTableData {
         public OdtDecisionTableData build() {
             return new OdtDecisionTableData(this);
         }
-
-        // -- private stuff -----------------------------------------
-
-        @SafeVarargs
-        static <E> E[] newArray(int length, E... array) {
-            return Arrays.copyOf(array, length);
-        }
-
-        static boolean hasElseRule(ObservableList<String> def) {
-            return STR_E.equals(def.get(def.size() - 1));
-        }
-
-        static void setElseRuleHeader(String[] header) {
-            header[header.length-1]=STR_ELSE;
-        }
-    }
-
-    static String[][] concat(String[][] data) {
-        return Arrays.stream(data).map(a -> Arrays.copyOf(a, a.length)).toArray(String[][]::new);
-    }
-
-    static <T> T[] concat(T[] left, T[] right) {
-        T[] copyOf = Arrays.copyOf(left, left.length + right.length);
-        System.arraycopy(right,0,copyOf,left.length,right.length);
-        return copyOf;
     }
 
 }

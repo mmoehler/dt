@@ -25,6 +25,8 @@ import com.sun.codemodel.*;
 import de.adesso.dtmg.util.Dump;
 import de.adesso.dtmg.util.List2DBuilder;
 import de.adesso.dtmg.util.List2DFunctions;
+import de.adesso.dtmg.util.RandomDefinitions;
+import org.testng.annotations.Test;
 
 import javax.annotation.Generated;
 import java.io.File;
@@ -85,7 +87,8 @@ public class ForFutureUse {
 
     @Test
     public void testEmit() throws Exception {
-        RandomDefinitions.Builder builder = RandomDefinitions.newBuilder().cols(5).rows(3).indicators(() -> new String[]{"Y", "N", "-"}).transpose();
+        RandomDefinitions.Builder builder = RandomDefinitions
+                .newBuilder().cols(5).rows(3).indicators(() -> new String[]{"Y", "N", "-"}).transpose();
         List<List<String>> definitions = builder.build().get();
 
         Dump.dumpTableItems("ORIGINAL DT", List2DFunctions.transpose(definitions));

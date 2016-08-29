@@ -37,6 +37,30 @@ import static java.lang.Math.pow;
  * Created by moehler on 28.07.2016.
  */
 public class ExpParser {
+    private static int[] indicesOf(char[] array, char target) {
+        ArrayList<Integer> l = Lists.newArrayList();
+        for (int index = indexOf(array, target, 0, array.length);
+             index >= 0;
+             index = indexOf(array, target, index + 1, array.length)) {
+            l.add(index);
+        }
+        return Ints.toArray(l);
+    }
+
+    private static int indexOf(
+            char[] array, char target, int start, int end) {
+        for (int i = start; i < end; i++) {
+            if (array[i] == target) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    public static IntStream cycle(final int period) {
+        return IntStream.iterate(0, i -> i + 1).map(idx -> (int) (idx / pow(2, period) % 2));
+    }
+
     public List<String> parse(String exp) {
         final int countVars = (int) exp.chars()
                 .filter(c -> Character.isLetter(c))
@@ -74,7 +98,7 @@ public class ExpParser {
 
         int[] pos = indicesOf(r, '-');
 
-        if(0 == pos.length) {
+        if (0 == pos.length) {
             return Lists.newArrayList(String.valueOf(r));
         }
 
@@ -94,7 +118,7 @@ public class ExpParser {
         for (int j = 0; j < pow(2, countDashes); j++) {
             Iterator<Iterator<Integer>> itP = Arrays.stream(intF).iterator();
             char[] r0 = new char[cVars];
-            for (int i = (r.length-1); i >= 0; i--) {
+            for (int i = (r.length - 1); i >= 0; i--) {
                 boolean contains = Ints.contains(pos, i);
                 r0[i] = (contains)
                         ? c(itP.next().next())
@@ -104,29 +128,5 @@ public class ExpParser {
         }
 
         return ret;
-    }
-
-    private static int[] indicesOf(char[] array, char target) {
-        ArrayList<Integer> l = Lists.newArrayList();
-        for (int index = indexOf(array, target, 0, array.length);
-             index >= 0;
-             index = indexOf(array, target, index + 1, array.length)) {
-            l.add(index);
-        }
-        return Ints.toArray(l);
-    }
-
-    private static int indexOf(
-            char[] array, char target, int start, int end) {
-        for (int i = start; i < end; i++) {
-            if (array[i] == target) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    public static IntStream cycle(final int period) {
-        return IntStream.iterate(0, i -> i + 1).map(idx -> (int) (idx / pow(2, period) % 2));
     }
 }

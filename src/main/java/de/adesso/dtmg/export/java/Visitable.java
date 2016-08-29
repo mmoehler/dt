@@ -19,13 +19,11 @@
 
 package de.adesso.dtmg.export.java;
 
-import de.adesso.dtmg.export.java.Visitor;
-
 /**
  * Created by mmoehler on 10.06.16.
  */
 public interface Visitable<T extends Visitor> {
-    default void accept(T visitor, Object...args) {
+    default void accept(T visitor, Object... args) {
         visitor.visit(this, args);
     }
 }

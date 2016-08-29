@@ -19,16 +19,17 @@
 
 package de.adesso.dtmg.functions.fixtures;
 
-import de.adesso.dtmg.util.List2DBuilder;
 import de.adesso.dtmg.functions.chained.first.AbstractSubBuilder;
 import de.adesso.dtmg.functions.chained.first.Callback;
+import de.adesso.dtmg.util.List2DBuilder;
 import javafx.collections.ObservableList;
 
 import static de.adesso.dtmg.util.List2DBuilder.observable;
 
 /**
  * Created by mmoehler ofList 06.03.16.
-public  */
+ * public
+ */
 public class DefinitionsTableViewDataBuilder<C> extends AbstractSubBuilder<ObservableList<ObservableList<String>>, C> {
     private final int rows;
     private final int cols;

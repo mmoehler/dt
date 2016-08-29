@@ -87,7 +87,7 @@ public class HorizontalAsciiPersistenceStrategy extends AbstractPersistenceStrat
             }
             for (; ; ) {
                 l = lr.readLine(); // 10000
-                if (null==l) break;
+                if (null == l) break;
                 String[] s2 = l.split("");
                 Iterator<ObservableList<String>> it = actionDefns.iterator();
                 Arrays.stream(s2)
@@ -163,7 +163,7 @@ public class HorizontalAsciiPersistenceStrategy extends AbstractPersistenceStrat
     }
 
     private boolean readElseRuleInfo(String s) {
-        if(null == s) return false;
+        if (null == s) return false;
         String[] info = s.split(":");
         Preconditions.checkPositionIndexes(0, 1, 2);
         Preconditions.checkArgument("E".equals(info[0]), String.format("Illegal Else rule info -> %s", s));

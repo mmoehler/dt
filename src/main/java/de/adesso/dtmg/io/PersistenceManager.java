@@ -27,6 +27,8 @@ import java.net.URI;
  * Created by mmoehler ofList 01.04.16.
  */
 public interface PersistenceManager<O extends Serializable> {
-    @Nonnull O read(@Nonnull URI source);
+    @Nonnull
+    O read(@Nonnull URI source);
+
     void write(@Nonnull O o, @Nonnull URI target);
 }

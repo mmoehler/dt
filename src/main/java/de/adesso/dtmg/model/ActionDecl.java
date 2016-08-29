@@ -11,15 +11,11 @@ public class ActionDecl extends Declaration {
         super();
     }
 
-    public static ActionDecl of(@Nonnull List<String> data) {
-        return new ActionDecl(data);
-    }
-
     protected ActionDecl(@Nonnull List<String> data) {
         super(data);
     }
 
-    public ActionDecl(String lfdNr, String expression, String possibleIndicators, String   documentation) {
+    public ActionDecl(String lfdNr, String expression, String possibleIndicators, String documentation) {
         super(lfdNr, expression, possibleIndicators, documentation);
     }
 
@@ -28,6 +24,10 @@ public class ActionDecl extends Declaration {
         setDocumentation(builder.documentation);
         setLfdNr(builder.lfdNr);
         setPossibleIndicators(builder.possibleIndicators);
+    }
+
+    public static ActionDecl of(@Nonnull List<String> data) {
+        return new ActionDecl(data);
     }
 
     public static Builder newBuilder() {

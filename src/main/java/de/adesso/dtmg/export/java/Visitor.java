@@ -19,8 +19,6 @@
 
 package de.adesso.dtmg.export.java;
 
-import de.adesso.dtmg.export.java.treemethod.Visitable;
-
 /**
  * Created by mmoehler on 10.06.16.
  */

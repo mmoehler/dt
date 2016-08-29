@@ -19,10 +19,10 @@
 
 package de.adesso.dtmg.functions;
 
-import de.adesso.dtmg.util.List2DFunctions;
-import de.adesso.dtmg.util.ListFunctions;
 import de.adesso.dtmg.util.List2DBuilder;
+import de.adesso.dtmg.util.List2DFunctions;
 import de.adesso.dtmg.util.ListBuilder;
+import de.adesso.dtmg.util.ListFunctions;
 import javafx.collections.FXCollections;
 import org.testng.annotations.Test;
 

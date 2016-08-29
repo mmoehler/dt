@@ -21,12 +21,12 @@ package de.adesso.dtmg.io.strategy;
 
 import com.google.common.base.Splitter;
 import com.google.common.base.Strings;
-import de.adesso.dtmg.util.MoreCollectors;
 import de.adesso.dtmg.io.DtEntity;
 import de.adesso.dtmg.model.ActionDecl;
 import de.adesso.dtmg.model.ConditionDecl;
 import de.adesso.dtmg.ui.action.ActionDeclTableViewModel;
 import de.adesso.dtmg.ui.condition.ConditionDeclTableViewModel;
+import de.adesso.dtmg.util.MoreCollectors;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import sun.net.www.ParseUtil;
@@ -74,10 +74,10 @@ public class ZIppedCsvPersistenceStrategy extends AbstractPersistenceStrategy<Dt
     }
 
     private List<String> mig(List<String> data) {
-        if(data.size()<4) {
+        if (data.size() < 4) {
             List<String> ret = new ArrayList<>(4);
             ret.addAll(data);
-            for (int i = 0; i < (4-data.size()); i++) {
+            for (int i = 0; i < (4 - data.size()); i++) {
                 ret.add("");
             }
             return Collections.unmodifiableList(ret);
@@ -97,11 +97,11 @@ public class ZIppedCsvPersistenceStrategy extends AbstractPersistenceStrategy<Dt
 
         final Path path = Paths.get(source);
         URI p = path.toUri();
-        URI uri = URI.create( STR_PROTOCOL_JAR + p );
+        URI uri = URI.create(STR_PROTOCOL_JAR + p);
 
         Map<String, String> env = new HashMap<>();
         env.put(STR_READ, STR_FALSE);
-        try ( FileSystem zipfs = FileSystems.newFileSystem( uri, env ) ) {
+        try (FileSystem zipfs = FileSystems.newFileSystem(uri, env)) {
 
             Callable<ObservableList<ConditionDeclTableViewModel>> readConditionDecls = () ->
                     Files.readAllLines(zipfs.getPath(String.format(TPL_001_S_D, 1))).stream().map(csv2conditionDecl).collect(MoreCollectors.toObservableList());
@@ -122,10 +122,10 @@ public class ZIppedCsvPersistenceStrategy extends AbstractPersistenceStrategy<Dt
             Future<ObservableList<ObservableList<String>>> adefnFuture = pool.submit(readActionDefns);
 
             return new DtEntity(
-                    cdeclFuture.get(1L,TimeUnit.SECONDS),
-                    cdefnFuture.get(1L,TimeUnit.SECONDS),
-                    adeclFuture.get(1L,TimeUnit.SECONDS),
-                    adefnFuture.get(1L,TimeUnit.SECONDS)
+                    cdeclFuture.get(1L, TimeUnit.SECONDS),
+                    cdefnFuture.get(1L, TimeUnit.SECONDS),
+                    adeclFuture.get(1L, TimeUnit.SECONDS),
+                    adefnFuture.get(1L, TimeUnit.SECONDS)
             );
 
         } catch (IllegalStateException e) {
@@ -147,7 +147,7 @@ public class ZIppedCsvPersistenceStrategy extends AbstractPersistenceStrategy<Dt
                 .reduce((l, r) -> ifNull(l, STR_DASH) + STR_SEMICOLON + ifNull(r, STR_DASH)).get();
 
         Function<ActionDeclTableViewModel, String> actionDecl2csv = (m) -> m.getModel().asList().stream()
-                .reduce((l, r) -> ifNull(l," ") + STR_SEMICOLON + ifNull(r," ")).get();
+                .reduce((l, r) -> ifNull(l, " ") + STR_SEMICOLON + ifNull(r, " ")).get();
 
         Function<ObservableList<String>, String> definitions2csv = (s) -> s.stream()
                 .reduce((l, r) -> ifNull(l, STR_DASH) + STR_SEMICOLON + ifNull(r, STR_DASH)).get();
@@ -155,11 +155,11 @@ public class ZIppedCsvPersistenceStrategy extends AbstractPersistenceStrategy<Dt
 
         final Path path = Paths.get(ParseUtil.decode(target.getPath()));
         URI p = path.toUri();
-        URI uri = URI.create( STR_PROTOCOL_JAR + p );
+        URI uri = URI.create(STR_PROTOCOL_JAR + p);
 
         Map<String, String> env = new HashMap<>();
         env.put(STR_CREATE, STR_TRUE);
-        try ( FileSystem zipfs = FileSystems.newFileSystem( uri, env ) ) {
+        try (FileSystem zipfs = FileSystems.newFileSystem(uri, env)) {
 
             Runnable runnables[] = new Runnable[]{
                     () -> {
@@ -181,7 +181,7 @@ public class ZIppedCsvPersistenceStrategy extends AbstractPersistenceStrategy<Dt
                     () -> {
                         List<String> lines = dtEntity.getConditionDefinitions().stream().map(definitions2csv).collect(Collectors.toList());
                         try {
-                            Files.write( zipfs.getPath( String.format(TPL_001_S_D, 3) ), lines, Charset.forName(ZIppedCsvPersistenceStrategy.STR_UTF_8), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+                            Files.write(zipfs.getPath(String.format(TPL_001_S_D, 3)), lines, Charset.forName(ZIppedCsvPersistenceStrategy.STR_UTF_8), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
                         } catch (IOException e) {
                             throw new IllegalStateException(e);
                         }
@@ -189,7 +189,7 @@ public class ZIppedCsvPersistenceStrategy extends AbstractPersistenceStrategy<Dt
                     () -> {
                         List<String> lines = dtEntity.getActionDefinitions().stream().map(definitions2csv).collect(Collectors.toList());
                         try {
-                            Files.write( zipfs.getPath( String.format(TPL_001_S_D, 4) ), lines, Charset.forName(ZIppedCsvPersistenceStrategy.STR_UTF_8), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
+                            Files.write(zipfs.getPath(String.format(TPL_001_S_D, 4)), lines, Charset.forName(ZIppedCsvPersistenceStrategy.STR_UTF_8), StandardOpenOption.CREATE, StandardOpenOption.WRITE);
                         } catch (IOException e) {
                             throw new IllegalStateException(e);
                         }

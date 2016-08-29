@@ -22,7 +22,8 @@ package de.adesso.dtmg.util;
 /**
  * Created by moehler on 12.05.2016.
  */
-public interface Nestable<P,R> {
+public interface Nestable<P, R> {
     P done();
+
     R build();
 }

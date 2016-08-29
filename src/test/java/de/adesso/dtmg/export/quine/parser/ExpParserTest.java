@@ -34,6 +34,17 @@ import static java.lang.Math.pow;
  */
 public class ExpParserTest {
 
+    public static boolean contains(int[] a, int i) {
+        for (int j = 0; j < a.length; j++) {
+            if (a[j] == i) return true;
+        }
+        return false;
+    }
+
+    public static IntStream cycle(final int period) {
+        return IntStream.iterate(0, i -> i + 1).map(idx -> (int) (idx / pow(2, period) % 2));
+    }
+
     @Test
     public void testParse() throws Exception {
         PrimitiveIterator.OfInt it0 = cycle(0).iterator();
@@ -47,19 +58,19 @@ public class ExpParserTest {
 
     @Test
     public void testIndexOf() {
-        int[] pos = {0,3};
-        HashSet<Integer> set = Sets.newHashSet(0,3);
+        int[] pos = {0, 3};
+        HashSet<Integer> set = Sets.newHashSet(0, 3);
         char[] r = "-33-".toCharArray();
         char[] r0 = new char[4];
         Iterator<Integer> intF[] = new Iterator[pos.length];
         for (int i = 0; i < pos.length; i++) {
             intF[i] = cycle(i).iterator();
         }
-        for (int ii = 0; ii < Math.pow(2,pos.length); ii++) {
+        for (int ii = 0; ii < Math.pow(2, pos.length); ii++) {
 
 
             Iterator<Iterator<Integer>> itP = Arrays.stream(intF).iterator();
-            for (int i = (4-1); i >= 0; i--) {
+            for (int i = (4 - 1); i >= 0; i--) {
                 boolean contains = contains(pos, i);
                 r0[i] = (contains)
                         ? c(itP.next().next())
@@ -70,21 +81,10 @@ public class ExpParserTest {
         }
     }
 
-    public static boolean contains(int[] a, int i) {
-        for (int j = 0; j < a.length; j++) {
-            if(a[j]==i) return true;
-        }
-        return false;
-    }
-
-    public static IntStream cycle(final int period) {
-        return IntStream.iterate(0, i -> i + 1).map(idx -> (int) (idx / pow(2, period) % 2));
-    }
-
     @Test
     public void testDenormalize() throws Exception {
         String exp = "-10-";
-        List<String> list = new ExpParser().denormalizeTerm(exp.toCharArray(), new int[]{0,3},4);
+        List<String> list = new ExpParser().denormalizeTerm(exp.toCharArray(), new int[]{0, 3}, 4);
         Dump.dumpList1DItems("Denormalized Terms", list);
     }
 }

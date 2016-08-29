@@ -19,6 +19,8 @@
 
 package de.adesso.dtmg.export.java.treemethod;
 
+import de.adesso.dtmg.export.java.Visitable;
+
 import javax.annotation.Nonnull;
 import java.util.List;
 
@@ -51,6 +53,10 @@ public class DtNode implements Visitable {
         return builder;
     }
 
+    public boolean isLeaf() {
+        return (null == yes && null == no);
+    }
+
     public boolean isDontCare() {
         return data.stream().flatMap(l -> l.stream()).allMatch(n -> n.typeOf(DtCellType.I));
     }
@@ -61,10 +67,10 @@ public class DtNode implements Visitable {
 
     @Override
     public String toString() {
-        return "DtNode{" +
+        return "DtNode{ col=" + ((null != data && !data.isEmpty()) ? data.get(0).get(0).col() : -1) +
                 ", conditionIndex=" + getConditionIndex() +
-                ", yes=" + ((null==yes) ? "<?>" : yes) +
-                ", no=" + ((null==no) ? "<?>" : no) +
+                ", yes=" + ((null == yes) ? "<?>" : yes) +
+                ", no=" + ((null == no) ? "<?>" : no) +
                 '}';
     }
 

@@ -26,10 +26,6 @@ public class Child20 extends Model {
 //    private final Child21 child21;
 //    private final Child22 child22;
 
-    public static Builder newBuilder() {
-        return new Builder();
-    }
-
     public Child20(String name, Child21 child21, Child22 child22) {
         super(name);
 //        this.child21 = child21;
@@ -42,6 +38,9 @@ public class Child20 extends Model {
 //        this.child22 = builder.child22;
     }
 
+    public static Builder newBuilder() {
+        return new Builder();
+    }
 
     public static class Builder extends NestedBuilder<Root.Builder, Child20> {
         private String name;

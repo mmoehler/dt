@@ -79,8 +79,6 @@ public class EditorDialog implements FxmlView<EditorDialogModel> {
     }
 
 
-
-
     public void editorOnCancel(ActionEvent actionEvent) {
         this.showDialog.close();
     }

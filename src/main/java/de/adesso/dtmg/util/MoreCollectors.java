@@ -51,7 +51,7 @@ public class MoreCollectors {
 
 
     public static <T> Collector<T, ImmutableList.Builder<T>, ImmutableList<T>> toImmutableList() {
-        return new CollectorImpl<>((Supplier<ImmutableList.Builder<T>>)ImmutableList::builder, (builder, t) -> builder.add(t),
+        return new CollectorImpl<>((Supplier<ImmutableList.Builder<T>>) ImmutableList::builder, (builder, t) -> builder.add(t),
                 (left, right) -> {
                     left.addAll(right.build());
                     return left;

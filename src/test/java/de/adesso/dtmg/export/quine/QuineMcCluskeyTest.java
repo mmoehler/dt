@@ -21,7 +21,6 @@ package de.adesso.dtmg.export.quine;
 
 import com.google.common.collect.Lists;
 import de.adesso.dtmg.util.Dump;
-import de.adesso.dtmg.util.Permutation;
 import de.adesso.dtmg.util.tuple.Tuple;
 import de.adesso.dtmg.util.tuple.Tuple2;
 import org.testng.annotations.BeforeMethod;
@@ -61,7 +60,7 @@ public class QuineMcCluskeyTest {
 
     @Test
     public void testDeterminePrimeImplicants() throws Exception {
-        Map<HashMapKeyAdapter,Boolean> processedTermsCache = new HashMap<>();
+        Map<HashMapKeyAdapter, Boolean> processedTermsCache = new HashMap<>();
 
         //final List<String> terms = f.parseExpression("!a*!b*!c*!d + !a*!b*!c*!d + a*!b*c*d + a*!b*c*!d + !a*b*c*d + !a*b*c*!d + !a*!b*c*d");
         //final List<String> terms = f.parseExpression("!a*!b*!c*!d + !a*b*!c*d + !a*b*c*!d + !a*b*c*d +a*!b*!c*d + a*!b*c*!d + a*b*!c*d + a*b*c*!d + a*b*c*d");
@@ -90,7 +89,7 @@ public class QuineMcCluskeyTest {
         int rows = (int) Math.pow(2, cols);
 
         for (int i = 0; i < rows; i++) {
-            final int k = (i/4 % 2) ;
+            final int k = (i / 4 % 2);
             System.out.println(k);
         }
     }
@@ -106,13 +105,13 @@ public class QuineMcCluskeyTest {
 
         for (int c = cols - 1; c >= 0; c--) {
             final int k = c;
-            Function<Integer, Character> f0 = (r) -> c((int)(r/Math.pow(2,k) % 2));
+            Function<Integer, Character> f0 = (r) -> c((int) (r / Math.pow(2, k) % 2));
             for (int r = 0; r < rows; r++) {
                 data[r][c] = f0.apply(r);
             }
         }
 
-        for(char[] d : data) {
+        for (char[] d : data) {
             System.out.println(Arrays.toString(d));
         }
 
@@ -124,9 +123,9 @@ public class QuineMcCluskeyTest {
 
         final ArrayList<String> left = Lists.newArrayList("001", "002", "003", "004", "005", "006", "007", "008", "009");
         final ArrayList<String> right = Lists.newArrayList("MT", "KT", "ST", "MF", "KF", "SF");
-        Permutation<String,String> p = new Permutation<>(right,left);
+        Permutation<String, String> p = new Permutation<>(right, left);
         final Iterator<Pair<String, String>> it = p.iterator();
-        while(it.hasNext())
+        while (it.hasNext())
             System.out.println(it.next());
 
     }

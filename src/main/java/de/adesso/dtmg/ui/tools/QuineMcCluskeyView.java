@@ -36,21 +36,15 @@ import java.util.function.Function;
  */
 public class QuineMcCluskeyView implements FxmlView<QuineMcCluskeyViewModel> {
 
+    private final Function<String, String> quineMcCluskeyOptimizer = new QuineMcCluskey();
     @InjectViewModel
     private QuineMcCluskeyViewModel viewModel;
-
     @FXML
     private TextArea txtInput;
-
     @FXML
     private TextArea txtOutput;
-
     @Inject
     private Stage primaryStage;
-
-    private final Function<String,String> quineMcCluskeyOptimizer = new QuineMcCluskey();
-
-
 
     public void doClose(ActionEvent actionEvent) {
         viewModel.doClose();
@@ -59,25 +53,24 @@ public class QuineMcCluskeyView implements FxmlView<QuineMcCluskeyViewModel> {
     public void doOptimze(ActionEvent actionEvent) {
         txtOutput.setEditable(false);
         final String expression = txtInput.getText();
-        if(Strings.isNullOrEmpty(expression)) {
+        if (Strings.isNullOrEmpty(expression)) {
             txtOutput.setStyle("-fx-text-fill: #ff0000; -fx-font-family: courier;");
             //txtOutput.addEventFilter(MouseEvent.ANY, MouseEvent::consume);
             txtOutput.setText("It will not work like that!!\n"
-                    +"For your formula definition use the following BNF:\n"
-                    +"<orExpr>   ::= <andExpr> | <andExpr> '+' <orExpr>\n"
-                    +"<andExpr>  ::= <var> | <var> ('*')? <andExpr>\n"
-                    +"<var>      ::= ('!')?[a..z]\n"
-                    +"\n"
-                    +"Sample-01 : !a!b!c!d + !acd + ab!c + ab!d + bcd\n"
-                    +"Sample-02 : !a*!b*!c*!d + !a*c*d + a*b*!c + a*b*!d + b*c*d\n"
-                    +"\n"
-                    +"Now try again.");
+                    + "For your formula definition use the following BNF:\n"
+                    + "<orExpr>   ::= <andExpr> | <andExpr> '+' <orExpr>\n"
+                    + "<andExpr>  ::= <var> | <var> ('*')? <andExpr>\n"
+                    + "<var>      ::= ('!')?[a..z]\n"
+                    + "\n"
+                    + "Sample-01 : !a!b!c!d + !acd + ab!c + ab!d + bcd\n"
+                    + "Sample-02 : !a*!b*!c*!d + !a*c*d + a*b*!c + a*b*!d + b*c*d\n"
+                    + "\n"
+                    + "Now try again.");
         } else {
             final String optimized = quineMcCluskeyOptimizer.apply(expression);
             txtOutput.setStyle("-fx-text-fill: black;");
             txtOutput.setText(optimized);
         }
-
 
 
     }

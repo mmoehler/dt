@@ -24,5 +24,5 @@ import java.io.Serializable;
 /**
  * Created by mmoehler on 06.08.16.
  */
-public abstract class AbstractExportStrategy<O extends Serializable> implements ExportStrategy<O>{
+public abstract class AbstractExportStrategy<O extends Serializable> implements ExportStrategy<O> {
 }

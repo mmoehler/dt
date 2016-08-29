@@ -27,18 +27,18 @@ import java.util.Optional;
  */
 public enum Indicators implements Indicator {
     // @formatter:off
-        EQ("\u003D"),
-        NE("\u2260"),
-        LO("\u003C"),
-        GT("\u003E"),
-        XX("\u0058"),
-        NI("\u2262"),
-        AS("\u002A"),
-        YY("\u0059"),
-        NN("\u004E"),
-        MI("\u002D"),
-        RR("\u0052"),
-        CC("\u0043");
+    EQ("\u003D"),
+    NE("\u2260"),
+    LO("\u003C"),
+    GT("\u003E"),
+    XX("\u0058"),
+    NI("\u2262"),
+    AS("\u002A"),
+    YY("\u0059"),
+    NN("\u004E"),
+    MI("\u002D"),
+    RR("\u0052"),
+    CC("\u0043");
     // @formatter:ofList
 
     private final String code;

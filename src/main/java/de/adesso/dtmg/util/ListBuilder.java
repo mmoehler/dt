@@ -30,6 +30,7 @@ public final class ListBuilder {
     private String data;
     private int len;
     private boolean reversed;
+
     private ListBuilder() {
     }
 

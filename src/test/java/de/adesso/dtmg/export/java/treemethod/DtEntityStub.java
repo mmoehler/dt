@@ -34,30 +34,28 @@ public class DtEntityStub extends DtEntity {
     public static ObservableList<ActionDeclTableViewModel> EMPTY_ADECL = FXCollections.emptyObservableList();
     public static ObservableList<ConditionDeclTableViewModel> EMPTY_CDECL = FXCollections.emptyObservableList();
 
+    public DtEntityStub(ObservableList<ConditionDeclTableViewModel> conditionDeclarations, ObservableList<ObservableList<String>> conditionDefinitions, ObservableList<ActionDeclTableViewModel> actionDeclarations, ObservableList<ObservableList<String>> actionDefinitions) {
+        super(conditionDeclarations, conditionDefinitions, actionDeclarations, actionDefinitions);
+    }
+
     public static DtEntity createForActionDefinitions(ObservableList<ObservableList<String>> actionDefinitions) {
-        return new DtEntityStub(EMPTY_CDECL,EMPTY_DEFS,EMPTY_ADECL,actionDefinitions);
+        return new DtEntityStub(EMPTY_CDECL, EMPTY_DEFS, EMPTY_ADECL, actionDefinitions);
     }
 
     public static DtEntity createForActions(ObservableList<ActionDeclTableViewModel> actionDeclarations, ObservableList<ObservableList<String>> actionDefinitions) {
-        return new DtEntityStub(EMPTY_CDECL,EMPTY_DEFS,actionDeclarations,actionDefinitions);
+        return new DtEntityStub(EMPTY_CDECL, EMPTY_DEFS, actionDeclarations, actionDefinitions);
     }
 
     public static DtEntity createForConditions(ObservableList<ConditionDeclTableViewModel> conditionDeclarations, ObservableList<ObservableList<String>> conditionDefinitions) {
-        return new DtEntityStub(conditionDeclarations, conditionDefinitions, EMPTY_ADECL,EMPTY_DEFS);
+        return new DtEntityStub(conditionDeclarations, conditionDefinitions, EMPTY_ADECL, EMPTY_DEFS);
     }
-
 
     public static DtEntity createForConditionDefinitions(ObservableList<ObservableList<String>> conditionDefinitions) {
-        return new DtEntityStub(EMPTY_CDECL,conditionDefinitions,EMPTY_ADECL,EMPTY_DEFS);
+        return new DtEntityStub(EMPTY_CDECL, conditionDefinitions, EMPTY_ADECL, EMPTY_DEFS);
     }
 
-
-    public static DtEntity createFor(ObservableList<ActionDeclTableViewModel> actionDeclarations,ObservableList<ObservableList<String>> actionDefinitions,
+    public static DtEntity createFor(ObservableList<ActionDeclTableViewModel> actionDeclarations, ObservableList<ObservableList<String>> actionDefinitions,
                                      ObservableList<ConditionDeclTableViewModel> conditionDeclarations, ObservableList<ObservableList<String>> conditionDefinitions) {
-        return new DtEntityStub(conditionDeclarations,conditionDefinitions,actionDeclarations,actionDefinitions);
-    }
-
-    public DtEntityStub(ObservableList<ConditionDeclTableViewModel> conditionDeclarations, ObservableList<ObservableList<String>> conditionDefinitions, ObservableList<ActionDeclTableViewModel> actionDeclarations, ObservableList<ObservableList<String>> actionDefinitions) {
-        super(conditionDeclarations, conditionDefinitions, actionDeclarations, actionDefinitions);
+        return new DtEntityStub(conditionDeclarations, conditionDefinitions, actionDeclarations, actionDefinitions);
     }
 }
