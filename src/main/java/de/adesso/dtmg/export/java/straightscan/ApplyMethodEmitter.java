@@ -19,6 +19,7 @@
 
 package de.adesso.dtmg.export.java.straightscan;
 
+import com.google.common.base.Joiner;
 import com.google.common.collect.Iterators;
 import com.sun.codemodel.*;
 import de.adesso.dtmg.export.java.treemethod.TreeMethodConfiguration;
@@ -32,8 +33,7 @@ import javafx.collections.ObservableList;
 import java.util.Deque;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Optional;
-import java.util.function.Consumer;
+import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
@@ -43,7 +43,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * Created by mmoehler on 20
  * .08.16.
  */
-public class ApplyMethodEmitter implements Consumer<TreeMethodConfiguration> {
+public class ApplyMethodEmitter implements BiConsumer<TreeMethodConfiguration, JVar> {
 
     public static final String VALUE = "value";
     public static final String OTHERWISE = "otherwise";
@@ -89,25 +89,18 @@ public class ApplyMethodEmitter implements Consumer<TreeMethodConfiguration> {
 
 
     @Override
-    public void accept(TreeMethodConfiguration cfg) {
+    public void accept(TreeMethodConfiguration cfg, JVar result) {
         checkNotNull(cfg, "Missing expected TreeMethodConfiguration item!");
         Deque<JStatement> stack = cfg.stack();
-
         Iterator<List<Tuple2<Boolean, JMethod>>> conditionIndex = makeConditionIndex(cfg);
         Iterator<List<JMethod>> actionIndex = makeActionIndex(cfg);
-
         JBlock jBlock = (JBlock) stack.peek();
         while (conditionIndex.hasNext() && actionIndex.hasNext()) {
-            /**
-             JTypeVar typeVar02;
-             JVar generalRetVal = jBlock.decl(JExpr.r(typeVar02), "result", JExpr._null()));
-             */
-            jBlock._if(emitLogicalExpression(conditionIndex.next()))._then();
-            /** .add(JVar.)*/
-            emitActionExpressions(actionIndex.next()).forEach(i -> jBlock.add(i));
+            JBlock __then = jBlock._if(emitLogicalExpression(conditionIndex.next()))._then();
+            emitActionExpressions(actionIndex.next()).forEach(i -> __then.add(i));
+            __then._return(result);
         }
-
-        jBlock._return(JExpr._null());
+        jBlock._return(result);
     }
 
     /**
@@ -119,12 +112,13 @@ public class ApplyMethodEmitter implements Consumer<TreeMethodConfiguration> {
      */
 
     private JExpression emitLogicalExpression(List<Tuple2<Boolean, JMethod>> conditionOps) {
-        Optional<JExpression> value = conditionOps.stream().map(t -> {
-            JExpression ret = JExpr.invoke(t._2()).arg(JExpr.ref("value"));
-            return (t._1()) ? ret : ret.not();
-        }).reduce((l, r) -> (null == l) ? r : l.cand(r));
-        if (value.isPresent()) {
-            return value.get();
+        List<String> expressions = conditionOps.stream().map(t -> {
+            String ret = String.format("%s(%s)", t._2().name(), VALUE);
+            return (t._1()) ? ret : '!'+ret;
+        }).collect(Collectors.toList());
+        if(!expressions.isEmpty()) {
+            String joined = Joiner.on("\n&& ").skipNulls().join(expressions);
+            return JExpr.direct(joined);
         }
         throw new IllegalStateException("IMPLEMENTATION-ERROR: Missing expected condition(s)!!");
     }

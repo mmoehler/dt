@@ -31,6 +31,8 @@ public class TreeMethodConfiguration extends GeneratorConfiguration {
 
     private TreeMethodConfiguration(Builder builder) {
         super();
+        classDescription = builder.classDescription;
+        decisionTable = builder.decisionTable;
         useOptimization = builder.useOptimization;
     }
 

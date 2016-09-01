@@ -71,7 +71,10 @@ public class StraightScanCodeGenerator implements GeneratorStrategy<TreeMethodCo
         cfg.stubs().putAll(actionStubs);
 
         JMethod jmApply = emitApplyMethodDecl(jc, jTypeVar01, jTypeVar02);
+        JVar result = jmApply.body().decl(jTypeVar02, "result", JExpr._null());
+
         cfg.stack().push(jmApply.body());
+        new ApplyMethodEmitter().accept(cfg, result);
 
         /**
 
@@ -110,20 +113,7 @@ public class StraightScanCodeGenerator implements GeneratorStrategy<TreeMethodCo
             jMethod.javadoc().addReturn().add("R as the result of the processing.");
             return jMethod;
         }).collect(Collectors.toMap(JMethod::name, Function.identity()));
-        final JMethod otherwise = emitOtherwise(jc, jTypeVar01, jTypeVar02);
-        operations.put(otherwise.name(), otherwise);
         return operations;
-    }
-
-    private JMethod emitOtherwise(JDefinedClass jc, JTypeVar jTypeVar01, JTypeVar jTypeVar02) {
-        JMethod jMethod = jc.method(JMod.PROTECTED | JMod.ABSTRACT, jTypeVar02, OTHERWISE);
-        JVar param = jMethod.param(jTypeVar01, VALUE);
-        String jdoc = "This operation can be used to implement the behaviour, which should be executed if no rule matches the given input.";
-        jdoc = (Strings.isNullOrEmpty(jdoc)) ? TODO_METHOD_DOC : jdoc;
-        jMethod.javadoc().add(jdoc);
-        jMethod.javadoc().addParam(param).add("A <code>T</code> as input of this method.");
-        jMethod.javadoc().addReturn().add("R as the result of the processing.");
-        return jMethod;
     }
 
     private JMethod emitApplyMethodDecl(JDefinedClass jc, JTypeVar jTypeVar01, JTypeVar jTypeVar02) {

@@ -49,7 +49,14 @@ public class ClassDescriptionDialog extends Dialog<ClassDescription> {
     public ClassDescriptionDialog() throws IOException {
         dialogPane = FXMLLoader.load(getClass().getResource("ClassDescriptionView.fxml"));
         dialogPane.getButtonTypes().addAll(
-                ButtonType.CANCEL, ButtonType.OK);
+                ButtonType.OK, ButtonType.CANCEL);
+
+        /*
+        FadeTransition ft = new FadeTransition(Duration.millis(1000), dialogPane);
+        ft.setFromValue(0.0);
+        ft.setToValue(0.97);
+        ft.play();
+*/
 
         sourceRootButton = (Button) dialogPane.lookup("#sourceRootButton");
         sourceRootField = (TextField) dialogPane.lookup("#sourceRootField");
@@ -59,6 +66,7 @@ public class ClassDescriptionDialog extends Dialog<ClassDescription> {
         okButton = (Button) dialogPane.lookupButton(ButtonType.OK);
 
         initializeControls();
+
     }
 
 

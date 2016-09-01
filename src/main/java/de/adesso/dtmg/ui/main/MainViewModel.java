@@ -12,6 +12,7 @@ import de.adesso.dtmg.events.*;
 import de.adesso.dtmg.exception.ExceptionHandler;
 import de.adesso.dtmg.export.ExportManager;
 import de.adesso.dtmg.export.java.ClassDescription;
+import de.adesso.dtmg.export.java.straightscan.StraightScanCodeGenerator;
 import de.adesso.dtmg.export.java.treemethod.ConsoleCodeWriter;
 import de.adesso.dtmg.export.java.treemethod.TreeMethodCodeGenerator;
 import de.adesso.dtmg.export.java.treemethod.TreeMethodConfiguration;
@@ -538,6 +539,17 @@ public class MainViewModel implements ViewModel {
 
             new TreeMethodCodeGenerator().apply(cfg).build(new ConsoleCodeWriter());
         }
+    }
 
+    public void handleGenerateUsingStraightScan(Optional<ClassDescription> classDescription) throws Exception {
+        if (classDescription.isPresent()) {
+            TreeMethodConfiguration cfg = TreeMethodConfiguration.newBuilder()
+                    .classDescription(classDescription.get())
+                    .decisionTable(this.data)
+                    .useOptimization(classDescription.get().isOptimized())
+                    .build();
+
+            new StraightScanCodeGenerator().apply(cfg).build(new ConsoleCodeWriter());
+        }
     }
 }

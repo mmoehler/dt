@@ -239,6 +239,14 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
     }
 
     private void generateUsingStraightScan(String s, Object... objects) {
+        try {
+            ClassDescriptionDialog dialog = new ClassDescriptionDialog();
+            Optional<ClassDescription> classDescription = dialog.showAndWait();
+            viewModel.handleGenerateUsingStraightScan(classDescription);
+        } catch (Exception e) {
+            exceptionHandler.showAndWaitAlert(e);
+            return;
+        }
     }
 
     private void generateUsingVeinott(String s, Object... objects) {
@@ -253,7 +261,6 @@ public class MainView extends DtView implements FxmlView<MainViewModel> {
             exceptionHandler.showAndWaitAlert(e);
             return;
         }
-
     }
 
     private void doConsolidateRules(String s, Object... objects) {
